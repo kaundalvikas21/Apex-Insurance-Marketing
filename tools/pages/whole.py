@@ -346,7 +346,7 @@ def body():
 <!-- Trust strip, within one viewport of both CTAs. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 trust-strip">
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
       <span class="inline-flex items-center gap-2 text-navy font-semibold">
         {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
       </span>
@@ -355,6 +355,9 @@ def body():
       </span>
       <span class="inline-flex items-center gap-2">
         {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
+      </span>
+      <span class="inline-flex items-center gap-2">
+        {icon("shield-check", 18, "shrink-0")}Your details are never sold to other agencies
       </span>
     </div>
   </div>
@@ -689,7 +692,7 @@ def body():
      ================================================================== -->
 <section class="section-tight band">
   <div class="container-ax">
-    <div class="reveal max-w-3xl">{byline}</div>
+    <div class="reveal">{byline}</div>
   </div>
 </section>
 

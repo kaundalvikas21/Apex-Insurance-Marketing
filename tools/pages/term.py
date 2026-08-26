@@ -324,24 +324,30 @@ def quote_form(form_id, form_name, id_prefix):
 
 def body():
     term_cards = "".join(f"""
-        <label class="choice reveal !flex-none">
+        <label class="choice reveal">
           <input type="radio" name="term-length-explainer" value="{key}"{" checked" if key == "20" else ""}>
           <span class="!min-h-[64px] !text-h4 !font-semibold">{label}</span>
         </label>""" for key, label, _, _ in TERM_LENGTHS)
 
     term_panels = "".join(f"""
         <div data-panel="{key}"{"" if key == "20" else " hidden"}>
-          <h3 class="text-h3 !font-display !font-bold">{label}</h3>
-          <p class="mt-4 text-slate">{fits}</p>
-          <p class="mt-4 text-sm text-muted">{caveat}</p>
-          <button type="button" class="btn-row mt-6" data-prefill='{{"term_length":"{key}"}}'
-                  data-prefill-target="term-quote-form">Quote a {label.replace(" years", " year")} term {icon("arrow-right", 16)}</button>
+          <div class="grid lg:grid-cols-12 gap-8 lg:gap-10">
+            <div class="lg:col-span-6">
+              <h3 class="text-h3 !font-display !font-bold">{label}</h3>
+              <p class="mt-4 text-slate">{fits}</p>
+            </div>
+            <div class="lg:col-span-5 lg:col-start-8 flex flex-col">
+              <p class="text-sm font-semibold text-navy">Worth knowing</p>
+              <p class="mt-2 text-sm text-muted">{caveat}</p>
+              <button type="button" class="btn-row mt-6 self-start" data-prefill='{{"term_length":"{key}"}}'
+                      data-prefill-target="term-quote-form">Quote a {label.replace(" years", " year")} term {icon("arrow-right", 16)}</button>
+            </div>
+          </div>
         </div>""" for key, label, fits, caveat in TERM_LENGTHS)
 
-    band_media = C.picture("term-band", "100vw",
-                           cls="media media-band media-wipe media-parallax !rounded-none",
-                           img_cls="media-img")
-    underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 30vw, 92vw",
+    home_media = C.figure("term-home", "(min-width: 1024px) 38vw, 92vw",
+                          cls="reveal", parallax=True)
+    underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 36vw, 92vw",
                                   cls="reveal mt-8", parallax=True)
     spokes = C.spoke_module(
         "Explore term life insurance",
@@ -400,7 +406,7 @@ def body():
 <!-- Trust strip, within one viewport of the form CTA. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 trust-strip">
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
       <span class="inline-flex items-center gap-2 text-navy font-semibold">
         {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
       </span>
@@ -417,27 +423,30 @@ def body():
   </div>
 </section>
 
-<!-- Editorial band. Purely atmospheric, so the alt text is empty and the
-     image is hidden from assistive tech rather than narrated. -->
-<section aria-hidden="true">
-  {band_media}
-</section>
-
 <!-- =====================================================================
      2. WHAT IT COVERS, AND WHO IT DOES NOT SUIT.
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What term life insurance covers</h2>
-      <p class="reveal mt-5 text-lead text-slate">
-        Term life pays a lump sum to the people you name if you die during a fixed number of years.
-        It builds no cash value and it ends when the term does, which is exactly why it costs so
-        much less than permanent coverage.
-      </p>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-7">
+        <h2 class="reveal text-h2">What term life insurance covers</h2>
+        <p class="reveal mt-5 text-lead text-slate">
+          Term life pays a lump sum to the people you name if you die during a fixed number of
+          years. It builds no cash value and it ends when the term does, which is exactly why it
+          costs so much less than permanent coverage.
+        </p>
+        <p class="reveal mt-5 text-slate">
+          For most households the fixed number of years is not arbitrary. It is the years left on
+          the mortgage, or the years until the youngest child is independent, whichever runs longer.
+        </p>
+      </div>
+      <div class="lg:col-span-5">
+        {home_media}
+      </div>
     </div>
 
-    <div class="mt-12 grid lg:grid-cols-2 gap-8">
+    <div class="mt-14 grid lg:grid-cols-2 gap-8">
       <div class="reveal card">
         <div class="flex items-center gap-3">
           {icon("circle-check", 24, "shrink-0 text-green")}
@@ -488,11 +497,11 @@ def body():
     <div class="mt-10" data-panels="term-lengths">
       <fieldset>
         <legend class="sr-only">Choose a term length</legend>
-        <div class="choice-row max-w-2xl">{term_cards}
+        <div class="choice-row">{term_cards}
         </div>
       </fieldset>
 
-      <div class="mt-8 card max-w-3xl">{term_panels}
+      <div class="mt-8 card">{term_panels}
       </div>
     </div>
   </div>
@@ -527,7 +536,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
-      <div class="lg:col-span-4">
+      <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">How underwriting works</h2>
           <p class="reveal mt-5 text-slate">
@@ -535,14 +544,10 @@ def body():
             process, including the part where you wait.
           </p>
           {underwriting_media}
-          <p class="reveal mt-5 text-sm text-muted">
-            Nothing is owed and no coverage is in force until the policy is issued, delivered, and
-            the first premium is paid.
-          </p>
         </div>
       </div>
 
-      <div class="lg:col-span-7 lg:col-start-6">
+      <div class="lg:col-span-7">
         <ol class="reveal relative border-l border-rule pl-8 grid gap-8">
           <li class="relative">
             <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
@@ -575,6 +580,11 @@ def body():
             <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in money. You can accept, ask us to shop it elsewhere, or walk away.</p>
           </li>
         </ol>
+
+        <p class="reveal mt-8 pt-6 border-t border-rule text-sm text-muted">
+          Nothing is owed and no coverage is in force until the policy is issued, delivered, and the
+          first premium is paid.
+        </p>
       </div>
     </div>
   </div>
@@ -585,7 +595,7 @@ def body():
      ================================================================== -->
 <section class="section-tight">
   <div class="container-ax">
-    <div class="reveal card max-w-4xl flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+    <div class="reveal card flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
       <div class="grow">
         <h2 class="text-h3 !font-display !font-bold">Would rather skip the exam?</h2>
         <p class="mt-3 text-slate">
@@ -691,7 +701,7 @@ def body():
      ================================================================== -->
 <section class="section-tight band">
   <div class="container-ax">
-    <div class="reveal max-w-3xl">{byline}</div>
+    <div class="reveal">{byline}</div>
   </div>
 </section>
 

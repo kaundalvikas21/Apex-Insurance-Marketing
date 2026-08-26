@@ -16,7 +16,7 @@ licensed photography. See REPLACE-BEFORE-LAUNCH.md.
 |---|---|---|---|---|
 | `home-hero` | [photo-1761839258803-21515f43190c](https://images.unsplash.com/photo-1761839258803-21515f43190c) | 4:3 | 480, 800, 1200 | An older man and two children preparing food together at a kitchen counter. |
 | `home-independence` | [photo-1635859890085-ec8cb5466806](https://images.unsplash.com/photo-1635859890085-ec8cb5466806) | 3:2 | 640, 1024, 1440 | _decorative, empty alt_ |
-| `term-band` | [photo-1760229090663-fe14715d4efe](https://images.unsplash.com/photo-1760229090663-fe14715d4efe) | 21:9 | 800, 1440, 2000 | _decorative, empty alt_ |
+| `term-home` | [photo-1760229090663-fe14715d4efe](https://images.unsplash.com/photo-1760229090663-fe14715d4efe) | 3:2 | 520, 800, 1100 | A two storey house behind mature trees. |
 | `term-underwriting` | [photo-1631815584191-0ed1723f0ead](https://images.unsplash.com/photo-1631815584191-0ed1723f0ead) | 4:3 | 520, 800, 1100 | A blood pressure cuff being fitted to someone's upper arm during a routine check. |
 | `whole-permanence` | [photo-1601041597271-71988152f98b](https://images.unsplash.com/photo-1601041597271-71988152f98b) | 3:2 | 640, 1024, 1440 | The front porch and door of an older brick house. |
 | `whole-acceptance` | [photo-1624889229800-7ca4c6c0d52b](https://images.unsplash.com/photo-1624889229800-7ca4c6c0d52b) | 16:9 | 480, 760, 1040 | _decorative, empty alt_ |
@@ -31,7 +31,7 @@ Each page's share card reuses the slot below at 1200x630.
 | Page | Slot |
 |---|---|
 | `/` | `home-hero` |
-| `/term-life-insurance/` | `term-band` |
+| `/term-life-insurance/` | `term-home` |
 | `/whole-life-insurance/` | `whole-permanence` |
 | `/final-expense-insurance/` | `fe-quiet` |
 | `/contact/` | `contact-desk` |

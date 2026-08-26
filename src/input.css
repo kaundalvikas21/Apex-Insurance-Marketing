@@ -866,9 +866,6 @@
 
   .media-tall  { aspect-ratio: 4 / 5; }
   .media-wide  { aspect-ratio: 3 / 2; }
-  /* Capped: a 21:9 band is 617px tall at 1440 and swamps the sections
-     around it. object-fit keeps the crop honest as it tightens. */
-  .media-band  { aspect-ratio: 21 / 9; max-height: 400px; }
   .media-strip { aspect-ratio: 16 / 9; }
   .media-square-ish { aspect-ratio: 4 / 3; }
 

@@ -376,30 +376,48 @@ def crumbs(trail):
 
 
 def byline():
-    """Spec section 09.5. Appears on every hub."""
+    """Spec section 09.5. Appears on every hub.
+
+    Two columns at full container width. As a single narrow card it left an
+    identical 368px dead gutter on all three hubs; as two columns the row is
+    full and each column still breaks at a readable measure.
+    """
     return f"""<div class="card">
-      <div class="flex items-start gap-5">
-        <!-- [REAL AGENT PHOTO REQUIRED]
-             This slot stays a placeholder on purpose. A stock photograph here
-             would present a stranger as the named licensed agent, which is the
-             same fabrication as an invented testimonial. See MASTER.md s7. -->
-        <div class="avatar-slot shrink-0" aria-hidden="true">
-          {icon("user-check", 26)}
-          <span>Agent<br>photo</span>
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+
+        <div class="lg:col-span-5 flex items-start gap-5">
+          <!-- [REAL AGENT PHOTO REQUIRED]
+               This slot stays a placeholder on purpose. A stock photograph here
+               would present a stranger as the named licensed agent, which is the
+               same fabrication as an invented testimonial. See MASTER.md s7. -->
+          <div class="avatar-slot shrink-0" aria-hidden="true">
+            {icon("user-check", 26)}
+            <span>Agent<br>photo</span>
+          </div>
+          <div>
+            <!-- Spec section 09.5 requires this exact construction:
+                 "Written by [Agent Name], Licensed Agent, Reviewed [date]". -->
+            <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
+            <p class="mt-3 text-micro text-muted">
+              Reviewed {REVIEW_DATE}<br>
+              Licensed in {STATES} states<br>
+              National Producer Number {NPN}
+            </p>
+          </div>
         </div>
-        <div>
-      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
-      </div>
-      <p class="mt-2 text-sm text-muted">
-        Reviewed {REVIEW_DATE} &#183; Licensed in {STATES} states &#183; National Producer Number {NPN}
-      </p>
-      <p class="mt-4 text-sm text-slate">
-        This page is written and kept current by a licensed agent who places these policies. Where
-        a figure comes from a carrier rate card, the card and its date are named on the page. Where
-        something depends on your state or your health, we say so instead of rounding it off.
-      </p>
-      <a class="link-static mt-4 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
+
+        <div class="lg:col-span-7">
+          <p class="text-slate">
+            This page is written and kept current by a licensed agent who places these policies.
+            Where a figure comes from a carrier rate card, the card and its date are named on the
+            page. Where something depends on your state or your health, we say so instead of
+            rounding it off.
+          </p>
+          <p class="mt-4 text-slate">
+            If you find something here that is out of date or wrong, tell us and we will correct it
+            and change the review date. That is the whole point of printing one.
+          </p>
+          <a class="link-static mt-5 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
         </div>
       </div>
     </div>"""

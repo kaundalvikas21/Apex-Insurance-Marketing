@@ -99,6 +99,16 @@ paragraph runs past three sentences.
 
 ## 3. Grid and spacing
 
+### The row rule
+A block may be narrow **only if something else occupies the rest of its row.** A 768px card alone
+in a 1200px container is not restraint, it is 432px of nothing, and it looks like a bug because it
+is one. The fix is never to stretch text to a 110-character measure; it is to compose the row as
+two columns that each keep a 60 to 68 character measure.
+
+Enforced by the layout audit: no section may leave more than 20% of its content row empty on the
+right, and no two-column row may differ in column height by more than 250px.
+
+
 Swiss 12 column. Container `max-width: 1200px`, gutter 24px, 32px at 1024 and up. **Declared in
 px, not rem**, so the final-expense type bump cannot widen the grid: every page shares one grid.
 Breakpoints tested: **375 / 768 / 1024 / 1440**.

@@ -189,9 +189,8 @@ def rate_table():
 
 def body():
     # No parallax and no wipe: this page is exempt from transform-based motion.
-    quiet_media = C.figure("fe-quiet", "(min-width: 1024px) 38vw, 92vw", cls="reveal")
-    hands_media = C.figure("fe-hands", "(min-width: 1024px) 62vw, 92vw",
-                           cls="reveal mt-12 max-w-4xl")
+    quiet_media = C.figure("fe-quiet", "(min-width: 1024px) 52vw, 92vw", cls="reveal mt-10")
+    hands_media = C.figure("fe-hands", "(min-width: 1024px) 44vw, 92vw", cls="reveal mt-10")
     call_band_1 = call_band(
         "Would you rather just ask someone?",
         "A licensed agent can answer the health questions with you and tell you what you qualify for.",
@@ -219,30 +218,29 @@ def body():
      because a 72 year old landing here from search wants to know what this
      is before they are asked to dial anything.
      ================================================================== -->
-<section class="pt-6 pb-14 md:pb-16">
+<section class="pt-4 md:pt-6 pb-14 md:pb-16">
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("Final Expense Insurance", None)])}
 
-    <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="mt-5 md:mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
 
       <div class="lg:col-span-7">
         <h1 class="reveal text-h1">Final Expense Insurance</h1>
-        <p class="reveal mt-6 text-lead text-slate">
+        <p class="reveal mt-4 md:mt-6 text-lead text-slate">
           Final expense insurance is a small whole life policy that pays cash to your family when
           you die. They use it for the funeral, the burial or cremation, and the bills that arrive
           afterwards.
         </p>
-        <p class="reveal mt-4 text-lead text-slate">
-          There is no medical exam. You answer health questions instead, the premium never goes up,
-          and the coverage does not expire.
-        </p>
-
-        <div class="reveal mt-8">
+        <div class="reveal mt-6">
           {C.phone_link("fe_hero_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
           <p class="mt-4 text-lead text-navy font-semibold">
             Speak to a licensed agent. Most calls take about fifteen minutes.
           </p>
           <p class="mt-2 text-slate">{C.HOURS}</p>
+          <p class="mt-5 text-lead text-slate">
+            There is no medical exam. You answer health questions instead, the premium never goes
+            up, and the coverage does not expire.
+          </p>
         </div>
 
         <div class="reveal mt-8 pt-8 border-t border-rule">
@@ -265,6 +263,26 @@ def body():
             </li>
           </ul>
         </div>
+
+        <div class="reveal mt-8 pt-8 border-t border-rule">
+          <h2 class="text-h4">What happens when you get in touch</h2>
+          <ol class="mt-4 grid gap-3">
+            <li class="flex items-start gap-3">
+              <span class="text-navy font-semibold tnum shrink-0">1.</span>
+              <span>A licensed agent picks up, or reads your form. Not a call centre.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-navy font-semibold tnum shrink-0">2.</span>
+              <span>We ask the health questions and compare our carriers with you.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-navy font-semibold tnum shrink-0">3.</span>
+              <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, in your own time.</span>
+            </li>
+          </ol>
+        </div>
+
+        {quiet_media}
       </div>
 
       <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
@@ -335,14 +353,6 @@ def body():
 
             <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
 
-            <div class="mt-5 pt-5 border-t border-rule">
-              <p class="text-sm font-semibold text-navy">What happens after you send this</p>
-              <ol class="mt-2 grid gap-1.5 text-sm text-muted">
-                <li>1. A licensed agent reads it, not a call centre.</li>
-                <li>2. We call you within {C.SLA}.</li>
-                <li>3. We ask health questions and compare our carriers with you on the call.</li>
-              </ol>
-            </div>
           </form>
 
           <div id="fe-hero-success" class="success">
@@ -369,7 +379,7 @@ def body():
 <!-- Trust strip. Within one viewport of the hero phone CTA. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center gap-x-8 gap-y-3">
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
       <span class="inline-flex items-center gap-2 text-navy font-semibold">
         {icon("shield-check", 22, "shrink-0")}Licensed in {C.STATES} states
       </span>
@@ -378,6 +388,9 @@ def body():
       </span>
       <span class="inline-flex items-center gap-2 text-slate">
         {icon("building", 22, "shrink-0")}{C.YEARS} years placing life insurance
+      </span>
+      <span class="inline-flex items-center gap-2 text-slate">
+        {icon("shield-check", 22, "shrink-0")}Your details are never sold on
       </span>
     </div>
   </div>
@@ -476,8 +489,7 @@ def body():
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
-        {quiet_media}
-        <div class="reveal card mt-8">
+        <div class="reveal card">
           <h3 class="text-h3 !font-display !font-bold">The kind of thing you will be asked</h3>
           <ul class="mt-5 grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
@@ -664,7 +676,7 @@ def body():
       </p>
     </div>
 
-    <div class="mt-10 grid md:grid-cols-2 gap-6 max-w-4xl">
+    <div class="mt-10 grid md:grid-cols-2 gap-6">
       <div class="reveal card flex items-start gap-4">
         {icon("file-text", 26, "shrink-0 text-navy mt-1")}
         <div>
@@ -694,8 +706,6 @@ def body():
         </div>
       </div>
     </div>
-
-    {hands_media}
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       Many carriers give a decision on the call. Some take a few days. Either way you will know
@@ -735,7 +745,7 @@ def body():
      ================================================================== -->
 <section class="section-tight band">
   <div class="container-ax">
-    <div class="reveal max-w-3xl">
+    <div class="reveal">
       {byline}
     </div>
   </div>
@@ -762,6 +772,17 @@ def body():
           You will reach a licensed agent, not a call centre queue and not a lead form that gets
           sold on to six other agencies.
         </p>
+
+        <div class="mt-8 pt-8 border-t border-rule">
+          <h3 class="text-h4">What you will know by the end of the call</h3>
+          <ul class="mt-4 grid gap-3">
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
+          </ul>
+        </div>
+
+        {hands_media}
       </div>
 
       <div class="reveal">

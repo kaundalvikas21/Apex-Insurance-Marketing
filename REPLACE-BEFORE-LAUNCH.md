@@ -174,3 +174,9 @@ then rebuild. The build fails if an em-dash reaches the rendered output.
 
 Design tokens are documented in `design-system/MASTER.md` and implemented in `src/input.css`.
 If the two ever disagree, MASTER.md is the spec.
+
+**Layout rule, enforced by test.** A block may be narrow only if something else occupies the rest
+of its row. One 768px card in a 1200px container with 432px of nothing beside it is a defect, not
+whitespace. The audit fails any section that leaves more than 20% of its content row empty on the
+right, or any two-column row whose columns differ in height by more than 250px. Run it before
+shipping a layout change.

@@ -86,20 +86,6 @@ def body():
           </ul>
         </div>
 
-        <div class="reveal mt-8 card">
-          <div class="flex items-start gap-3">
-            {icon("shield-check", 24, "shrink-0 text-navy mt-0.5")}
-            <div>
-              <h2 class="text-h4">Licensed and independent</h2>
-              <p class="mt-3 text-slate">
-                {C.BRAND} is a licensed independent insurance agency, licensed in {C.STATES}
-                states, National Producer Number {C.NPN}. We are appointed with multiple carriers
-                and we are not owned by any of them.
-              </p>
-              <a class="link-static mt-4 inline-block text-sm" href="/about/licensing/">See our licensing by state</a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- RIGHT: the form. -->
@@ -206,6 +192,28 @@ def body():
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Licence disclosure as a full-width strip. It was the bottom card of a
+     column before, which both buried it and unbalanced the hero. -->
+<section class="section-tight border-y border-rule bg-surface">
+  <div class="container-ax">
+    <div class="reveal grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <div class="lg:col-span-5 flex items-start gap-3">
+        {icon("shield-check", 26, "shrink-0 text-navy mt-1")}
+        <h2 class="text-h3 !font-display !font-bold">Licensed, and independent of every carrier</h2>
+      </div>
+      <div class="lg:col-span-7">
+        <p class="text-slate">
+          {C.BRAND} is a licensed independent insurance agency, licensed in {C.STATES} states,
+          National Producer Number {C.NPN}. We are appointed with multiple carriers and we are not
+          owned by any of them, which is what lets us take your application somewhere else when the
+          first carrier prices your health history badly.
+        </p>
+        <a class="link-static mt-4 inline-block text-sm" href="/about/licensing/">See our licensing by state</a>
       </div>
     </div>
   </div>

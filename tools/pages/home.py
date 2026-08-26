@@ -141,7 +141,7 @@ HERO = f"""
 <!-- Trust strip, directly beneath the hero CTAs and inside the same viewport. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 trust-strip">
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
       <span class="inline-flex items-center gap-2 text-navy font-semibold">
         {icon("shield-check", 18, "shrink-0 text-navy")}Licensed in {C.STATES} states
       </span>

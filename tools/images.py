@@ -39,9 +39,11 @@ IMAGES = {
     "home-independence": (
         "1635859890085-ec8cb5466806", (3, 2), [640, 1024, 1440], "center",
         ""),  # decorative: sits behind copy in the navy band
-    "term-band": (
-        "1760229090663-fe14715d4efe", (21, 9), [800, 1440, 2000], "center",
-        ""),  # decorative: a house and trees, purely atmospheric
+    # Sits beside the copy about mortgages and children at home, so it is
+    # doing work rather than decorating a gap. 3:2, not a 21:9 band.
+    "term-home": (
+        "1760229090663-fe14715d4efe", (3, 2), [520, 800, 1100], "center",
+        "A two storey house behind mature trees."),
     "term-underwriting": (
         "1631815584191-0ed1723f0ead", (4, 3), [520, 800, 1100], "center",
         "A blood pressure cuff being fitted to someone's upper arm during a routine check."),
@@ -65,7 +67,7 @@ IMAGES = {
 # Open Graph share image per page: which manifest entry to use.
 OG_FOR_PAGE = {
     "/": "home-hero",
-    "/term-life-insurance/": "term-band",
+    "/term-life-insurance/": "term-home",
     "/whole-life-insurance/": "whole-permanence",
     "/final-expense-insurance/": "fe-quiet",
     "/contact/": "contact-desk",
