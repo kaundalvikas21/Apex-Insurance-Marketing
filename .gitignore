@@ -26,3 +26,7 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Python bytecode from the page assembler
+__pycache__/
+*.pyc

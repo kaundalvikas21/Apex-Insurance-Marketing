@@ -1,0 +1,369 @@
+# -*- coding: utf-8 -*-
+"""Site-wide constants and shared chrome for Apex Insurance Marketing.
+
+Every placeholder value lives here so REPLACE-BEFORE-LAUNCH.md has one
+address to point at. Nothing invented is presented as verified fact.
+"""
+import json
+from icons import icon
+
+# --- PLACEHOLDERS. See REPLACE-BEFORE-LAUNCH.md -----------------------------
+PHONE_DISPLAY = "(555) 018-0199"          # [PLACEHOLDER PHONE]
+PHONE_TEL     = "+15550180199"            # [PLACEHOLDER PHONE]
+HOURS         = "Mon to Fri, 8am to 7pm CT · Sat 9am to 2pm CT"   # [SET REAL HOURS]
+STATES        = "[X]"                     # [PLACEHOLDER STATE COUNT]
+NPN           = "[NPN]"                   # [PLACEHOLDER NATIONAL PRODUCER NUMBER]
+YEARS         = "[X]"                     # [PLACEHOLDER YEARS IN BUSINESS]
+AGENT_NAME    = "[Agent Name]"            # [PLACEHOLDER AGENT]
+AGENT_TITLE   = "Licensed Life Insurance Agent"
+REVIEW_DATE   = "[DATE]"                  # [PLACEHOLDER REVIEW DATE]
+RATES_DATE    = "[DATE]"                  # [PLACEHOLDER RATE CARD DATE]
+SLA           = "[X business hours]"      # [SET HONEST SLA]
+DOMAIN        = "https://www.apexinsurancemarketing.com"
+
+BRAND = "Apex Insurance Marketing, LLC"
+
+NAV = [
+    ("/term-life-insurance/",          "Term Life Insurance"),
+    ("/whole-life-insurance/",         "Whole Life Insurance"),
+    ("/final-expense-insurance/",      "Final Expense Insurance"),
+    ("/contact/",                      "Contact"),
+]
+
+
+def phone_link(location, cls="", label=None, size=20, wrap_num=True):
+    """Click-to-call. data-cta-location feeds the GA4 call_click event."""
+    text = label if label else PHONE_DISPLAY
+    num = ('<span class="tnum">%s</span>' % text) if wrap_num else text
+    return ('<a href="tel:%s" data-cta-location="%s" class="%s">%s%s</a>'
+            % (PHONE_TEL, location, cls, icon("phone", size, "shrink-0"), num))
+
+
+# ---------------------------------------------------------------------------
+# HEADER
+# ---------------------------------------------------------------------------
+def header(active):
+    links = "".join(
+        '<a class="nav-link" href="%s"%s>%s</a>'
+        % (href, ' aria-current="page"' if href == active else "", label)
+        for href, label in NAV
+    )
+    panel_links = "".join(
+        '<a class="block py-3 text-white text-base font-medium border-b border-white/12" href="%s"%s>%s</a>'
+        % (href, ' aria-current="page"' if href == active else "", label)
+        for href, label in NAV
+    )
+    return f"""<a class="skip-link" href="#main">Skip to main content</a>
+<div data-header-sentinel aria-hidden="true" style="height:1px"></div>
+
+<header class="site-header on-navy" data-header>
+  <div class="container-ax">
+    <div class="header-inner">
+
+      <a href="/" class="shrink-0 rounded-[2px]" aria-label="{BRAND}, home">
+        <span class="wordmark">Apex</span>
+        <span class="wordmark-sub">Insurance Marketing</span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-7 ml-5 xl:ml-10" aria-label="Primary">
+        {links}
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2 sm:gap-3">
+        <!-- Click-to-call is present at every desktop width. Below 1280 the
+             number itself does not fit beside four product-name nav links,
+             so the label shortens rather than the CTA disappearing. -->
+        {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-white text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-white/80 transition-colors", "Call")}
+        {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-white text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-white/80 transition-colors")}
+        <a href="/contact/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-5">Get a Free Quote</a>
+        <a href="tel:{PHONE_TEL}" data-cta-location="header_mobile"
+           class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-white rounded-[2px]">
+          <span class="sr-only">Call {PHONE_DISPLAY}</span>
+          {icon("phone", 24)}
+        </a>
+        <button type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav"
+                class="lg:hidden inline-flex items-center justify-center w-12 h-12 -mr-2 text-white rounded-[2px]">
+          <span class="sr-only">Open menu</span>
+          {icon("menu", 24)}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-nav" data-nav-panel hidden class="lg:hidden border-t border-white/15 bg-navy">
+    <div class="container-ax py-4">
+      <nav aria-label="Primary, mobile">{panel_links}</nav>
+      <div class="mt-5 grid gap-3">
+        {phone_link("header_mobile_panel", "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)}
+        <a href="/contact/" class="btn btn-cta btn-block">Get a Free Quote</a>
+      </div>
+    </div>
+  </div>
+</header>"""
+
+
+# ---------------------------------------------------------------------------
+# FOOTER
+# Note on internal linking: the footer deliberately does NOT repeat the three
+# hub links or /contact/. Those live in the primary nav. Spec section 07
+# requires one link per target per page.
+# ---------------------------------------------------------------------------
+def footer():
+    company = [
+        ("/about/",          "About Apex"),
+        ("/about/agents/",   "Our licensed agents"),
+        ("/about/licensing/", "Licensing and appointments"),
+    ]
+    legal = [
+        ("/legal/privacy/",    "Privacy policy"),
+        ("/legal/terms/",      "Terms of use"),
+        ("/legal/disclaimer/", "Disclaimer"),
+    ]
+    def col(title, items):
+        rows = "".join('<li><a class="footer-link" href="%s">%s</a></li>' % (h, t) for h, t in items)
+        return (f'<div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] '
+                f'!font-sans">{title}</h2><ul class="mt-4 grid gap-2.5">{rows}</ul></div>')
+
+    return f"""<footer class="site-footer band-navy on-navy">
+  <div class="container-ax py-16 lg:py-20">
+
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+
+      <div class="lg:col-span-4">
+        <span class="wordmark">Apex</span>
+        <span class="wordmark-sub">Insurance Marketing</span>
+        <p class="mt-5 text-sm text-white/78 max-w-sm">
+          An independent life insurance agency. We are appointed with multiple carriers,
+          which means we compare them for you instead of selling you one company's product.
+        </p>
+        <div class="mt-6">
+          {phone_link("footer", "btn btn-ghost", "Call " + PHONE_DISPLAY)}
+          <p class="mt-3 text-micro text-white/66">{HOURS}</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3 lg:col-start-6">{col("Company", company)}</div>
+      <div class="lg:col-span-3">{col("Legal", legal)}</div>
+    </div>
+
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/70 max-w-4xl">
+      <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
+      <p>
+        {BRAND} is a licensed independent insurance agency. Licensed in {STATES} states.
+        National Producer Number {NPN}. Agency license numbers by state are listed on our
+        <a class="link-static" href="/about/licensing/">licensing page</a>.
+      </p>
+      <p>
+        {BRAND} is not affiliated with, endorsed by, or sponsored by any government agency,
+        including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
+      </p>
+      <p>
+        Policies are issued by third party insurance carriers. Coverage, availability, premiums,
+        riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
+        the claims paying ability of the issuing carrier. Content on this site is general
+        information, not insurance, tax, or legal advice, and is not an offer of coverage.
+      </p>
+      <p>&#169; 2026 {BRAND}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>"""
+
+
+# ---------------------------------------------------------------------------
+# SCHEMA
+# ---------------------------------------------------------------------------
+def org_schema():
+    """Organization + InsuranceAgency, sitewide, linked by @id."""
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": DOMAIN + "/#organization",
+                "name": BRAND,
+                "alternateName": "Apex Insurance Marketing",
+                "url": DOMAIN + "/",
+                "telephone": PHONE_TEL,
+                "description": ("Independent, licensed life insurance agency helping consumers "
+                                "compare term life, whole life, and final expense coverage from "
+                                "multiple appointed carriers."),
+                "areaServed": {"@type": "Country", "name": "United States"},
+                "contactPoint": [{
+                    "@type": "ContactPoint",
+                    "telephone": PHONE_TEL,
+                    "contactType": "sales",
+                    "areaServed": "US",
+                    "availableLanguage": "English"
+                }]
+            },
+            {
+                "@type": "InsuranceAgency",
+                "@id": DOMAIN + "/#agency",
+                "name": BRAND,
+                "url": DOMAIN + "/",
+                "telephone": PHONE_TEL,
+                "parentOrganization": {"@id": DOMAIN + "/#organization"},
+                "knowsAbout": ["Term life insurance", "Whole life insurance",
+                               "Final expense insurance", "Burial insurance"],
+                # [PLACEHOLDER] Replace with the real business address before launch.
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "[STREET ADDRESS]",
+                    "addressLocality": "[CITY]",
+                    "addressRegion": "[STATE]",
+                    "postalCode": "[ZIP]",
+                    "addressCountry": "US"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": DOMAIN + "/#website",
+                "url": DOMAIN + "/",
+                "name": BRAND,
+                "publisher": {"@id": DOMAIN + "/#organization"}
+            }
+        ]
+    }
+
+
+def breadcrumbs(trail):
+    """trail: [(name, path)] including Home. Path None for the current page."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            dict({"@type": "ListItem", "position": i + 1, "name": name},
+                 **({"item": DOMAIN + path} if path else {}))
+            for i, (name, path) in enumerate(trail)
+        ]
+    }
+
+
+def faq_schema(items):
+    """items: [(question, answer_plaintext)]"""
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in items
+        ]
+    }
+
+
+def person_schema(page_url):
+    """Person stub for the agent byline. Fill in before launch."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": DOMAIN + "/about/agents/#agent",
+        "name": AGENT_NAME,
+        "jobTitle": AGENT_TITLE,
+        "url": DOMAIN + "/about/agents/",
+        "worksFor": {"@id": DOMAIN + "/#organization"},
+        # [PLACEHOLDER] Add real credentials, state license numbers, and years licensed.
+        "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Resident Life Insurance Producer License",
+            "recognizedBy": {"@type": "Organization", "name": "[STATE] Department of Insurance"}
+        },
+        "mainEntityOfPage": DOMAIN + page_url
+    }
+
+
+def jsonld(*objs):
+    return "\n".join(
+        '<script type="application/ld+json">%s</script>' % json.dumps(o, indent=None, separators=(",", ":"))
+        for o in objs
+    )
+
+
+# ---------------------------------------------------------------------------
+# SHARED PAGE PARTS (hubs and contact)
+# ---------------------------------------------------------------------------
+STATES_LIST = [
+    ("AL","Alabama"),("AK","Alaska"),("AZ","Arizona"),("AR","Arkansas"),("CA","California"),
+    ("CO","Colorado"),("CT","Connecticut"),("DE","Delaware"),("DC","District of Columbia"),
+    ("FL","Florida"),("GA","Georgia"),("HI","Hawaii"),("ID","Idaho"),("IL","Illinois"),
+    ("IN","Indiana"),("IA","Iowa"),("KS","Kansas"),("KY","Kentucky"),("LA","Louisiana"),
+    ("ME","Maine"),("MD","Maryland"),("MA","Massachusetts"),("MI","Michigan"),("MN","Minnesota"),
+    ("MS","Mississippi"),("MO","Missouri"),("MT","Montana"),("NE","Nebraska"),("NV","Nevada"),
+    ("NH","New Hampshire"),("NJ","New Jersey"),("NM","New Mexico"),("NY","New York"),
+    ("NC","North Carolina"),("ND","North Dakota"),("OH","Ohio"),("OK","Oklahoma"),("OR","Oregon"),
+    ("PA","Pennsylvania"),("RI","Rhode Island"),("SC","South Carolina"),("SD","South Dakota"),
+    ("TN","Tennessee"),("TX","Texas"),("UT","Utah"),("VT","Vermont"),("VA","Virginia"),
+    ("WA","Washington"),("WV","West Virginia"),("WI","Wisconsin"),("WY","Wyoming"),
+]
+
+
+def state_options():
+    # [PLACEHOLDER] Trim this list to the states the agency is actually
+    # licensed in before launch. Offering a state we cannot write in wastes
+    # the visitor's time and ours.
+    return "".join('<option value="%s">%s</option>' % (a, n) for a, n in STATES_LIST)
+
+
+def crumbs(trail):
+    """Visible breadcrumb. trail: [(name, path or None)]."""
+    sep = icon("chevron-right", 14, "text-muted shrink-0")
+    parts = []
+    for i, (name, path) in enumerate(trail):
+        if i:
+            parts.append(sep)
+        if path:
+            parts.append('<a href="%s">%s</a>' % (path, name))
+        else:
+            parts.append('<span aria-current="page">%s</span>' % name)
+    return ('<nav class="crumbs" aria-label="Breadcrumb"><ol class="contents">%s</ol></nav>'
+            % "".join('<li class="contents" aria-hidden="true">%s</li>' % p if p.startswith('<svg')
+                      else '<li class="contents">%s</li>' % p
+                      for p in parts))
+
+
+def byline():
+    """Spec section 09.5. Appears on every hub."""
+    return f"""<div class="card">
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
+      </div>
+      <p class="mt-2 text-sm text-muted">
+        Reviewed {REVIEW_DATE} &#183; Licensed in {STATES} states &#183; National Producer Number {NPN}
+      </p>
+      <p class="mt-4 text-sm text-slate">
+        This page is written and kept current by a licensed agent who places these policies. Where
+        a figure comes from a carrier rate card, the card and its date are named on the page. Where
+        something depends on your state or your health, we say so instead of rounding it off.
+      </p>
+      <a class="link-static mt-4 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
+    </div>"""
+
+
+def spoke_module(heading, intro, spokes):
+    """Visible in-page module linking DOWN to every spoke in the silo.
+    spokes: [(href, anchor_text, one_line_description)]"""
+    items = "".join(f"""
+        <li class="reveal">
+          <a href="{href}" class="flex flex-col h-full p-5 bg-surface border border-rule rounded-[2px] transition-colors hover:border-navy focus-visible:border-navy">
+            <span class="text-h4 text-navy">{text}</span>
+            <span class="mt-2 text-sm text-muted">{desc}</span>
+          </a>
+        </li>""" for href, text, desc in spokes)
+    return f"""<section class="section band">
+  <div class="container-ax">
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">{heading}</h2>
+      <p class="reveal mt-5 text-slate">{intro}</p>
+    </div>
+    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger>{items}
+    </ul>
+  </div>
+</section>"""
+
+
+def rates_flag(what):
+    """Visible placeholder notice for any rate component. Rule 6."""
+    return (f'<p class="flag">[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED] '
+            f'The {what} below are structural placeholders. No premium shown here is a real, quoted, '
+            f'or offered rate. Populate from current carrier rate cards and update the date line '
+            f'before this page goes live.</p>')
