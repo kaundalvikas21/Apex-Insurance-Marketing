@@ -1,0 +1,28 @@
+# Claude Code local config (contains MCP API keys)
+.mcp.json
+.claude/
+.agents/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*credentials*.json
+*secret*
+id_rsa*
+
+# Dependencies / build
+node_modules/
+dist/
+build/
+.next/
+.vercel/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
