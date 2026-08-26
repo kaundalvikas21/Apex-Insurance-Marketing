@@ -82,12 +82,11 @@ RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band"
                (16, 9): "media-strip", (4, 3): "media-square-ish"}
 
 
-def figure(name, sizes, caption=None, cls="", eager=False, parallax=False, wipe=False):
-    """Editorial image block. Motion classes are opt-in per placement and are
-    inert inside .fe main, which is exempt from transform-based motion."""
+def figure(name, sizes, caption=None, cls="", eager=False, duotone=False):
+    """Editorial image block. duotone=True is the home hero only: forest lifted
+    into the shadows, cream capped into the highlights. See MASTER.md s8."""
     ratio = RATIO_CLASS[images.IMAGES[name][1]]
-    motion = " ".join(x for x in ("media", ratio, "media-parallax" if parallax else "",
-                                  "media-wipe" if wipe else "") if x)
+    motion = " ".join(x for x in ("media", ratio, "media-duotone" if duotone else "") if x)
     cap = ('<figcaption class="mt-3 text-micro text-muted">%s</figcaption>' % caption) if caption else ""
     return ('<figure class="%s">%s%s</figure>'
             % (cls, picture(name, sizes, cls=motion, img_cls="media-img", eager=eager), cap))
@@ -103,18 +102,18 @@ def header(active):
         for href, label in NAV
     )
     panel_links = "".join(
-        '<a class="block py-3 text-white text-base font-medium border-b border-white/12" href="%s"%s>%s</a>'
+        '<a class="block py-3 text-base font-medium border-b border-rule" href="%s"%s>%s</a>'
         % (href, ' aria-current="page"' if href == active else "", label)
         for href, label in NAV
     )
     return f"""<a class="skip-link" href="#main">Skip to main content</a>
 <div data-header-sentinel aria-hidden="true" style="height:1px"></div>
 
-<header class="site-header on-navy" data-header>
+<header class="site-header" data-header>
   <div class="container-ax">
     <div class="header-inner">
 
-      <a href="/" class="shrink-0 rounded-[2px]" aria-label="{BRAND}, home">
+      <a href="/" class="shrink-0 inline-flex flex-col justify-center min-h-[48px] rounded-ui" aria-label="{BRAND}, home">
         <span class="wordmark">Apex</span>
         <span class="wordmark-sub">Insurance Marketing</span>
       </a>
@@ -127,16 +126,16 @@ def header(active):
         <!-- Click-to-call is present at every desktop width. Below 1280 the
              number itself does not fit beside four product-name nav links,
              so the label shortens rather than the CTA disappearing. -->
-        {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-white text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-white/80 transition-colors", "Call")}
-        {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-white text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-white/80 transition-colors")}
+        {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-forest text-sm font-semibold whitespace-nowrap rounded-ui hover:text-forest-700 transition-colors", "Call")}
+        {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-forest text-sm font-semibold whitespace-nowrap rounded-ui hover:text-forest-700 transition-colors")}
         <a href="/contact/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-5">Get a Free Quote</a>
         <a href="tel:{PHONE_TEL}" data-cta-location="header_mobile"
-           class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-white rounded-[2px]">
+           class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-forest rounded-ui">
           <span class="sr-only">Call {PHONE_DISPLAY}</span>
           {icon("phone", 24)}
         </a>
         <button type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav"
-                class="lg:hidden inline-flex items-center justify-center w-12 h-12 -mr-2 text-white rounded-[2px]">
+                class="lg:hidden inline-flex items-center justify-center w-12 h-12 -mr-2 text-forest rounded-ui">
           <span class="sr-only">Open menu</span>
           {icon("menu", 24)}
         </button>
@@ -144,7 +143,7 @@ def header(active):
     </div>
   </div>
 
-  <div id="site-nav" data-nav-panel hidden class="lg:hidden border-t border-white/15 bg-navy">
+  <div id="site-nav" data-nav-panel hidden class="lg:hidden nav-panel">
     <div class="container-ax py-4">
       <nav aria-label="Primary, mobile">{panel_links}</nav>
       <div class="mt-5 grid gap-3">
@@ -178,7 +177,7 @@ def footer():
         return (f'<div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] '
                 f'!font-sans">{title}</h2><ul class="mt-4 grid gap-2.5">{rows}</ul></div>')
 
-    return f"""<footer class="site-footer band-navy on-navy">
+    return f"""<footer class="site-footer band-forest on-forest">
   <div class="container-ax py-16 lg:py-20">
 
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
@@ -186,13 +185,13 @@ def footer():
       <div class="lg:col-span-4">
         <span class="wordmark">Apex</span>
         <span class="wordmark-sub">Insurance Marketing</span>
-        <p class="mt-5 text-sm text-white/78 max-w-sm">
+        <p class="mt-5 text-sm text-white/80 max-w-sm">
           An independent life insurance agency. We are appointed with multiple carriers,
           which means we compare them for you instead of selling you one company's product.
         </p>
         <div class="mt-6">
           {phone_link("footer", "btn btn-ghost", "Call " + PHONE_DISPLAY)}
-          <p class="mt-3 text-micro text-white/66">{HOURS}</p>
+          <p class="mt-3 text-micro text-white/70">{HOURS}</p>
         </div>
       </div>
 
@@ -200,7 +199,7 @@ def footer():
       <div class="lg:col-span-3">{col("Legal", legal)}</div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/70 max-w-4xl">
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
       <p>
         {BRAND} is a licensed independent insurance agency. Licensed in {STATES} states.
@@ -397,7 +396,7 @@ def byline():
           <div>
             <!-- Spec section 09.5 requires this exact construction:
                  "Written by [Agent Name], Licensed Agent, Reviewed [date]". -->
-            <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
+            <p class="text-h3-serif">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
             <p class="mt-3 text-micro text-muted">
               Reviewed {REVIEW_DATE}<br>
               Licensed in {STATES} states<br>
@@ -407,13 +406,13 @@ def byline():
         </div>
 
         <div class="lg:col-span-7">
-          <p class="text-slate">
+          <p class="text-ink">
             This page is written and kept current by a licensed agent who places these policies.
             Where a figure comes from a carrier rate card, the card and its date are named on the
             page. Where something depends on your state or your health, we say so instead of
             rounding it off.
           </p>
-          <p class="mt-4 text-slate">
+          <p class="mt-4 text-ink">
             If you find something here that is out of date or wrong, tell us and we will correct it
             and change the review date. That is the whole point of printing one.
           </p>
@@ -428,8 +427,8 @@ def spoke_module(heading, intro, spokes):
     spokes: [(href, anchor_text, one_line_description)]"""
     items = "".join(f"""
         <li class="reveal">
-          <a href="{href}" class="flex flex-col h-full p-5 bg-surface border border-rule rounded-[2px] transition-colors hover:border-navy focus-visible:border-navy">
-            <span class="text-h4 text-navy">{text}</span>
+          <a href="{href}" class="tile">
+            <span class="text-h4 text-forest">{text}</span>
             <span class="mt-2 text-sm text-muted">{desc}</span>
           </a>
         </li>""" for href, text, desc in spokes)
@@ -437,12 +436,24 @@ def spoke_module(heading, intro, spokes):
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">{heading}</h2>
-      <p class="reveal mt-5 text-slate">{intro}</p>
+      <p class="reveal mt-5 text-ink">{intro}</p>
     </div>
-    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger>{items}
+    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-spoke-module data-stagger>{items}
     </ul>
   </div>
 </section>"""
+
+
+def step(n, title, body, note=None):
+    """Numbered step. A sage disc carries the numeral instead of a ruled header."""
+    extra = ('<p class="mt-3 text-sm text-muted">%s</p>' % note) if note else ""
+    return f"""<div class="reveal">
+        <div class="flex items-center gap-4">
+          <span class="step-num">{n}</span>
+          <h3 class="text-h4">{title}</h3>
+        </div>
+        <p class="mt-5 text-ink">{body}</p>{extra}
+      </div>"""
 
 
 def rates_flag(what):

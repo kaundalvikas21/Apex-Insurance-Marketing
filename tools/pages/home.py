@@ -63,12 +63,12 @@ def schema():
 
 
 # ---------------------------------------------------------------------------
-def _path_card(kind, label, headline, fit, body, cta_html, tone=""):
+def _path_card(kind, label, headline, fit, body, cta_html):
     return f"""
-        <div class="reveal flex flex-col h-full pt-6 lg:pt-0 lg:pl-8 border-t lg:border-t-0 lg:border-l border-rule first:border-t-0 first:pt-0 first:lg:pl-0 first:lg:border-l-0">
+        <div class="reveal card flex flex-col h-full">
           <p class="text-sm font-medium text-muted">{label}</p>
-          <h2 class="mt-1 text-h3 !font-display !font-bold">{headline}</h2>
-          <p class="mt-3 text-sm text-slate">{fit} <span class="text-muted">{body}</span></p>
+          <h2 class="mt-1 text-h3-serif">{headline}</h2>
+          <p class="mt-3 text-sm text-ink">{fit} <span class="text-muted">{body}</span></p>
           <div class="mt-6 lg:mt-auto lg:pt-6">{cta_html}</div>
         </div>"""
 
@@ -79,7 +79,7 @@ def body():
 
 # LCP candidate: the one eager image on this page.
 hero_media = C.figure("home-hero", "(min-width: 1024px) 38vw, 92vw",
-                      cls="reveal", eager=True, parallax=True)
+                      cls="reveal", eager=True, duotone=True)
 
 
 HERO = f"""
@@ -93,7 +93,8 @@ HERO = f"""
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
       <div class="lg:col-span-7">
         <h1 class="reveal text-h1">Cover the people who depend on you.</h1>
-        <p class="reveal mt-4 text-lead text-slate max-w-xl">
+        <p class="reveal mt-4 ital-line max-w-xl">Honest guidance for the people you love most.</p>
+        <p class="reveal mt-4 text-lead text-ink max-w-xl">
           Apex is an independent, licensed life insurance agency. We compare multiple carriers and
           tell you plainly what fits your family.
         </p>
@@ -109,7 +110,7 @@ HERO = f"""
       </div>
     </div>
 
-    <div class="mt-10 lg:mt-12 grid lg:grid-cols-3 gap-8 lg:gap-0" data-stagger>
+    <div class="mt-10 lg:mt-12 grid lg:grid-cols-3 gap-6" data-stagger>
       {_path_card(
         "term", "Coverage for a set period",
         "Term life insurance",
@@ -142,8 +143,8 @@ HERO = f"""
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
     <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 18, "shrink-0 text-navy")}Licensed in {C.STATES} states
+      <span class="inline-flex items-center gap-2 text-forest font-semibold">
+        {icon("shield-check", 18, "shrink-0 text-forest")}Licensed in {C.STATES} states
       </span>
       <span class="inline-flex items-center gap-2">
         {icon("scale", 18, "shrink-0")}Independent. We work for you, not for one carrier.
@@ -177,7 +178,7 @@ def _acc(q, a):
     cannot be broken by a JavaScript error on a YMYL page."""
     return ('<details class="acc" name="home-faq">'
             '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
+            '<div class="acc-body"><p class="text-ink">%s</p></div>'
             '</details>') % (q, icon("plus", 22), a)
 
 
@@ -192,7 +193,7 @@ REST = """
 
       <div class="lg:col-span-4">
         <h2 class="reveal text-h2">Not sure which one you need?</h2>
-        <p class="reveal mt-5 text-slate">
+        <p class="reveal mt-5 text-ink">
           Three questions, about thirty seconds. No email address, no phone number, and nothing is
           submitted anywhere. You get a recommendation and a link, and you are free to ignore both.
         </p>
@@ -208,7 +209,7 @@ REST = """
           <p data-triage-progress class="text-sm font-medium text-muted"></p>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">What is the money mainly for?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3-serif">What is the money mainly for?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Replacing my income while my family still depends on it</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:1">Leaving something behind no matter when I die</button>
@@ -217,7 +218,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">How old are you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3-serif">How old are you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Under 45</button>
               <button type="button" class="triage-opt" data-score="term:2,whole:2">45 to 59</button>
@@ -226,7 +227,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">Which matters more to you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3-serif">Which matters more to you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3,final:1">The lowest premium for the most coverage</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:2">Coverage that cannot expire or be cancelled</button>
@@ -238,8 +239,8 @@ REST = """
                this page is linked twice. See spec section 07. -->
           <div data-triage-result="term" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Start with term life insurance</h3>
-            <p class="mt-4 text-slate">
+            <h3 class="mt-1 text-h3-serif">Start with term life insurance</h3>
+            <p class="mt-4 text-ink">
               You are describing a temporary obligation with a large price tag. Term buys the most
               coverage per dollar for exactly as long as that obligation lasts, then it ends. If the
               need turns out to be permanent, most term policies can be converted later without a
@@ -253,8 +254,8 @@ REST = """
 
           <div data-triage-result="whole" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Look at whole life insurance</h3>
-            <p class="mt-4 text-slate">
+            <h3 class="mt-1 text-h3-serif">Look at whole life insurance</h3>
+            <p class="mt-4 text-ink">
               You want the policy to still be there whenever it is needed, which term cannot promise.
               Whole life costs considerably more per dollar of death benefit, so the honest next step
               is a written illustration you can read at your own pace, not a rushed application.
@@ -267,8 +268,8 @@ REST = """
 
           <div data-triage-result="final" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Final expense insurance is probably the fit</h3>
-            <p class="mt-4 text-slate">
+            <h3 class="mt-1 text-h3-serif">Final expense insurance is probably the fit</h3>
+            <p class="mt-4 text-ink">
               You need a smaller policy, issued on health questions rather than a medical exam, that
               pays quickly and covers a funeral and the bills around it. This is almost always
               faster to arrange by phone than by form.
@@ -296,56 +297,14 @@ REST = """
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How working with us actually goes</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Three steps. None of them obligates you to buy anything, and you can stop after any one
         of them.
       </p>
     </div>
 
     <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
-          <h3 class="text-h4">Tell us the basics</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          Your age, your state, whether you use tobacco, roughly what you are trying to cover, and
-          the broad strokes of your health. About five minutes by phone or by form.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          We do not ask for a Social Security number or run a credit check in order to quote you.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
-          <h3 class="text-h4">We compare our carriers</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          We run your details against the carriers we are appointed with and come back with what
-          each one is likely to offer, including the ones that would decline you.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          Same day for most quotes. If a carrier needs more detail before it will commit, we say so
-          rather than guessing on its behalf.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
-          <h3 class="text-h4">You apply, if it fits</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          We submit the application and stay with it through underwriting. If the carrier comes back
-          with a different rate class than we quoted, you hear it from us before you accept anything.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          Simplified issue policies can be approved the same day. Fully underwritten policies
-          usually take three to six weeks.
-        </p>
-      </div>
+      {steps_how}
     </div>
   </div>
 </section>
@@ -353,15 +312,7 @@ REST = """
 <!-- =====================================================================
      INDEPENDENCE + COMMISSION DISCLOSURE. Plain English, on purpose.
      ================================================================== -->
-<section class="section band-navy on-navy relative isolate overflow-hidden">
-
-  <!-- Decorative plate. Duotoned to navy so a colour photograph cannot
-       introduce a second accent, and scrimmed to a measured contrast ratio
-       rather than an eyeballed opacity. See MASTER.md section 8. -->
-  <div class="absolute inset-0 -z-10 media media-duotone media-scrim !rounded-none" aria-hidden="true">
-    {independence_media}
-  </div>
-
+<section class="section band-forest on-forest">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8">
 
@@ -388,7 +339,7 @@ REST = """
       </div>
 
       <div class="lg:col-span-4 lg:col-start-9">
-        <div class="reveal border border-white/25 bg-navy/70 backdrop-blur-sm p-6 lg:p-8">
+        <div class="reveal card">
           <p class="text-sm text-white/70">Written and reviewed by</p>
           <p class="mt-2 text-h4 text-white">{agent}</p>
           <p class="mt-1 text-sm text-white/70">{agent_title}</p>
@@ -403,7 +354,7 @@ REST = """
              The slot is designed and wired. It stays hidden until real,
              attributable, consented reviews exist. Remove the hidden
              attribute and populate data-reviews-list at that point. -->
-        <div class="reveal mt-6 border border-dashed border-white/25 p-6" data-reviews-slot hidden>
+        <div class="reveal mt-6 rounded-card border border-dashed border-white/30 p-6" data-reviews-slot hidden>
           <p class="text-sm text-white/70">What clients say</p>
           <div data-reviews-list></div>
         </div>
@@ -420,7 +371,7 @@ REST = """
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">The three products, side by side</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Most people only ever need one of these. The differences that actually decide it are in
         this table.
       </p>
@@ -502,7 +453,7 @@ REST = """
 
       <div class="lg:col-span-4">
         <h2 class="reveal text-h2">Common questions</h2>
-        <p class="reveal mt-5 text-slate">
+        <p class="reveal mt-5 text-ink">
           The six we are asked most often, answered the way we would answer them on the phone.
         </p>
         <p class="reveal mt-6 text-sm text-muted">
@@ -521,13 +472,13 @@ REST = """
 <!-- =====================================================================
      FINAL CTA, split by intent. Spec section 01.8.
      ================================================================== -->
-<section class="section-tight border-t border-rule">
+<section class="section-tight">
   <div class="container-ax">
-    <div class="grid md:grid-cols-2">
+    <div class="grid md:grid-cols-2 gap-6" data-stagger>
 
-      <div class="reveal md:pr-10 lg:pr-16">
-        <h2 class="text-h3 !font-display !font-bold">Ready for quotes</h2>
-        <p class="mt-3 text-slate max-w-md">
+      <div class="reveal card">
+        <h2 class="text-h3-serif">Ready for quotes</h2>
+        <p class="mt-3 text-ink max-w-md">
           Send us the basics and a licensed agent comes back with what our carriers will actually
           offer you, usually the same business day.
         </p>
@@ -535,9 +486,9 @@ REST = """
         <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
       </div>
 
-      <div class="reveal mt-10 pt-10 border-t border-rule md:mt-0 md:pt-0 md:border-t-0 md:border-l md:pl-10 lg:pl-16">
-        <h2 class="text-h3 !font-display !font-bold">Prefer to talk</h2>
-        <p class="mt-3 text-slate max-w-md">
+      <div class="reveal card">
+        <h2 class="text-h3-serif">Prefer to talk</h2>
+        <p class="mt-3 text-ink max-w-md">
           Most of these questions are faster to answer out loud. You will reach a licensed agent,
           not a queue.
         </p>
@@ -552,9 +503,23 @@ REST = """
 
 def rest():
     return REST.format(
-        independence_media=C.picture(
-            "home-independence", "100vw",
-            cls="w-full h-full", img_cls="media-img"),
+        steps_how="".join([
+            C.step(1, "Tell us the basics",
+                   "Your age, your state, whether you use tobacco, roughly what you are trying to cover, "
+                   "and the broad strokes of your health. About five minutes by phone or by form.",
+                   "We do not ask for a Social Security number or run a credit check in order to quote you."),
+            C.step(2, "We compare our carriers",
+                   "We run your details against the carriers we are appointed with and come back with what "
+                   "each one is likely to offer, including the ones that would decline you.",
+                   "Same day for most quotes. If a carrier needs more detail before it will commit, we say "
+                   "so rather than guessing on its behalf."),
+            C.step(3, "You apply, if it fits",
+                   "We submit the application and stay with it through underwriting. If the carrier comes "
+                   "back with a different rate class than we quoted, you hear it from us before you accept "
+                   "anything.",
+                   "Simplified issue policies can be approved the same day. Fully underwritten policies "
+                   "usually take three to six weeks."),
+        ]),
         call_triage=C.phone_link("triage_result_final", "btn btn-call", "Call " + C.PHONE_DISPLAY),
         call_table=C.phone_link("compare_table_final", "btn-row", "Call about final expense"),
         call_faq=C.phone_link("faq_inline", "btn btn-ghost", "Call " + C.PHONE_DISPLAY),

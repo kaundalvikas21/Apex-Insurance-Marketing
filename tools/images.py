@@ -31,14 +31,10 @@ FORMATS = ("avif", "webp")
 IMAGES = {
     # 4:3 with a centre crop is the only framing that keeps all three people.
     # Entropy and a portrait ratio both cut the grandfather out entirely.
+    # Rendered duotone (forest and cream) on the home hero. See MASTER.md s8.
     "home-hero": (
         "1761839258803-21515f43190c", (4, 3), [480, 800, 1200], "center",
         "An older man and two children preparing food together at a kitchen counter."),
-    # Hands over spread paperwork, shot dark. The comparison work this section
-    # describes, and dark enough that the scrim has an easy job.
-    "home-independence": (
-        "1635859890085-ec8cb5466806", (3, 2), [640, 1024, 1440], "center",
-        ""),  # decorative: sits behind copy in the navy band
     # Sits beside the copy about mortgages and children at home, so it is
     # doing work rather than decorating a gap. 3:2, not a 21:9 band.
     "term-home": (

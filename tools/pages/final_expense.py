@@ -97,18 +97,23 @@ def schema():
 
 
 # --- Repeating phone band. Spec: after every second section. ---------------
-def call_band(heading, sub, where):
+def call_band(heading, sub, where, dark=False):
+    """A lifted call panel on a sage band. dark=True makes it the page's one
+    forest band (the third repeat)."""
+    section = "section-tight band-forest on-forest" if dark else "section-tight band"
+    sub_cls = "text-white/85" if dark else "text-ink"
+    hours_cls = "text-white/75" if dark else "text-muted"
     return f"""
-<section class="section-tight band-navy on-navy">
+<section class="{section}">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <h2 class="reveal text-h3 !font-display !font-bold text-white">{heading}</h2>
-        <p class="reveal mt-3 text-white/85">{sub}</p>
+    <div class="reveal call-panel">
+      <div>
+        <h2 class="text-h3-serif">{heading}</h2>
+        <p class="mt-3 {sub_cls}">{sub}</p>
       </div>
-      <div class="lg:col-span-5 reveal">
-        {C.phone_link(where, "btn btn-call btn-xl btn-block !bg-white !text-navy", "Call " + C.PHONE_DISPLAY, 26)}
-        <p class="mt-3 text-sm text-white/75 text-center">{C.HOURS}</p>
+      <div>
+        {C.phone_link(where, "btn btn-call btn-xl btn-block", "Call " + C.PHONE_DISPLAY, 26)}
+        <p class="mt-3 text-sm {hours_cls} text-center">{C.HOURS}</p>
       </div>
     </div>
   </div>
@@ -118,7 +123,7 @@ def call_band(heading, sub, where):
 def _acc(q, a):
     return ('<details class="acc" name="fe-faq">'
             '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
+            '<div class="acc-body"><p class="text-ink">%s</p></div>'
             '</details>') % (q, icon("plus", 24), a)
 
 
@@ -202,7 +207,7 @@ def body():
     call_band_3 = call_band(
         "Ready to apply?",
         "One call, about fifteen minutes, and most carriers give a decision while you are on the phone.",
-        "fe_repeat_3")
+        "fe_repeat_3", dark=True)
     spokes = C.spoke_module(
         "Explore final expense insurance",
         "The nine questions people ask most often about this coverage, each answered in full on "
@@ -226,18 +231,18 @@ def body():
 
       <div class="lg:col-span-7">
         <h1 class="reveal text-h1">Final Expense Insurance</h1>
-        <p class="reveal mt-4 md:mt-6 text-lead text-slate">
+        <p class="reveal mt-4 md:mt-6 text-lead text-ink">
           Final expense insurance is a small whole life policy that pays cash to your family when
           you die. They use it for the funeral, the burial or cremation, and the bills that arrive
           afterwards.
         </p>
         <div class="reveal mt-6">
           {C.phone_link("fe_hero_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
-          <p class="mt-4 text-lead text-navy font-semibold">
+          <p class="mt-4 text-lead text-forest font-semibold">
             Speak to a licensed agent. Most calls take about fifteen minutes.
           </p>
-          <p class="mt-2 text-slate">{C.HOURS}</p>
-          <p class="mt-5 text-lead text-slate">
+          <p class="mt-2 text-ink">{C.HOURS}</p>
+          <p class="mt-5 text-lead text-ink">
             There is no medical exam. You answer health questions instead, the premium never goes
             up, and the coverage does not expire.
           </p>
@@ -246,19 +251,19 @@ def body():
         <div class="reveal mt-8 pt-8 border-t border-rule">
           <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-4">
             <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
+              {icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}
               <span>No medical exam, ever</span>
             </li>
             <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
+              {icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}
               <span>Ages 50 to 85 accepted</span>
             </li>
             <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
+              {icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}
               <span>Premium locked for life</span>
             </li>
             <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
+              {icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}
               <span>Independent. We compare carriers</span>
             </li>
           </ul>
@@ -268,15 +273,15 @@ def body():
           <h2 class="text-h4">What happens when you get in touch</h2>
           <ol class="mt-4 grid gap-3">
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">1.</span>
+              <span class="text-forest font-semibold tnum shrink-0">1.</span>
               <span>A licensed agent picks up, or reads your form. Not a call centre.</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">2.</span>
+              <span class="text-forest font-semibold tnum shrink-0">2.</span>
               <span>We ask the health questions and compare our carriers with you.</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">3.</span>
+              <span class="text-forest font-semibold tnum shrink-0">3.</span>
               <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, in your own time.</span>
             </li>
           </ol>
@@ -288,8 +293,8 @@ def body():
       <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Prefer we call you?</h2>
-          <p class="mt-3 text-slate">
+          <h2 class="text-h3-serif">Prefer we call you?</h2>
+          <p class="mt-3 text-ink">
             Leave four details and a licensed agent will call you back.
           </p>
 
@@ -357,10 +362,10 @@ def body():
 
           <div id="fe-hero-success" class="success">
             <div class="flex items-start gap-3">
-              {icon("circle-check", 32, "shrink-0 text-green")}
+              {icon("circle-check", 32, "shrink-0 text-moss")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">We have your details</h3>
-                <p class="mt-3 text-slate">
+                <h3 class="text-h3-serif">We have your details</h3>
+                <p class="mt-3 text-ink">
                   A licensed agent will call you within {C.SLA}. If you would rather not wait,
                   call us now and we can do it in one go.
                 </p>
@@ -380,16 +385,16 @@ def body():
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
     <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
+      <span class="inline-flex items-center gap-2 text-forest font-semibold">
         {icon("shield-check", 22, "shrink-0")}Licensed in {C.STATES} states
       </span>
-      <span class="inline-flex items-center gap-2 text-slate">
+      <span class="inline-flex items-center gap-2 text-ink">
         {icon("scale", 22, "shrink-0")}Independent. We work for you, not for one carrier.
       </span>
-      <span class="inline-flex items-center gap-2 text-slate">
+      <span class="inline-flex items-center gap-2 text-ink">
         {icon("building", 22, "shrink-0")}{C.YEARS} years placing life insurance
       </span>
-      <span class="inline-flex items-center gap-2 text-slate">
+      <span class="inline-flex items-center gap-2 text-ink">
         {icon("shield-check", 22, "shrink-0")}Your details are never sold on
       </span>
     </div>
@@ -403,35 +408,35 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How much coverage people usually buy</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Final expense policies run from about $2,000 to about $50,000. Most people buy somewhere in
         the middle, because they are covering a funeral rather than replacing an income.
       </p>
     </div>
 
     <div class="reveal mt-10 card">
-      <div class="flex items-baseline justify-between text-sm font-semibold text-navy tnum">
+      <div class="flex items-baseline justify-between text-sm font-semibold text-forest tnum">
         <span>$2,000</span>
         <span>$50,000</span>
       </div>
-      <div class="mt-3 h-4 w-full bg-navy-050 border border-rule rounded-[2px] overflow-hidden">
-        <div class="h-full bg-navy" style="margin-left:12%;width:34%"></div>
+      <div class="mt-3 h-4 w-full bg-sage rounded-full overflow-hidden">
+        <div class="h-full bg-forest rounded-full" style="margin-left:12%;width:34%"></div>
       </div>
-      <p class="mt-3 text-sm text-navy font-semibold">
+      <p class="mt-3 text-sm text-forest font-semibold">
         The shaded band is roughly $8,000 to $20,000, where most policies we place land.
       </p>
       <div class="mt-8 pt-8 border-t border-rule grid sm:grid-cols-3 gap-6">
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$2,000 to $8,000</p>
-          <p class="mt-2 text-slate">Cremation, a simple service, and a few outstanding bills.</p>
+          <p class="text-h3-serif text-forest tnum">$2,000 to $8,000</p>
+          <p class="mt-2 text-ink">Cremation, a simple service, and a few outstanding bills.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$8,000 to $20,000</p>
-          <p class="mt-2 text-slate">A traditional burial with a service, plus room for the bills that follow.</p>
+          <p class="text-h3-serif text-forest tnum">$8,000 to $20,000</p>
+          <p class="mt-2 text-ink">A traditional burial with a service, plus room for the bills that follow.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$20,000 to $50,000</p>
-          <p class="mt-2 text-slate">A funeral plus something left over for a spouse or an adult child.</p>
+          <p class="text-h3-serif text-forest tnum">$20,000 to $50,000</p>
+          <p class="mt-2 text-ink">A funeral plus something left over for a spouse or an adult child.</p>
         </div>
       </div>
     </div>
@@ -451,7 +456,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What it costs by age</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Age is the biggest factor in the price, and it moves against you every year. Health,
         tobacco use, your state, and the carrier decide the rest.
       </p>
@@ -475,12 +480,12 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-6">
         <h2 class="reveal text-h2">No medical exam. Health questions instead.</h2>
-        <p class="reveal mt-6 text-slate">
+        <p class="reveal mt-6 text-ink">
           Nobody comes to your house. There is no blood draw and no urine sample. The application
           asks a list of yes or no health questions, and an agent can go through them with you on
           the phone in a few minutes.
         </p>
-        <p class="reveal mt-4 text-slate">
+        <p class="reveal mt-4 text-ink">
           The carrier does check two things electronically: your prescription history and a shared
           medical information database. So answer the questions honestly. An answer that does not
           match those records can delay your policy, or give the carrier grounds to refuse a claim
@@ -490,12 +495,12 @@ def body():
 
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h3 !font-display !font-bold">The kind of thing you will be asked</h3>
+          <h3 class="text-h3-serif">The kind of thing you will be asked</h3>
           <ul class="mt-5 grid gap-4">
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Are you in a nursing home or receiving hospice care?</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you been treated for cancer, heart failure, or kidney disease?</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Do you use oxygen equipment to help you breathe?</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Are you in a nursing home or receiving hospice care?</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Have you been treated for cancer, heart failure, or kidney disease?</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Do you use oxygen equipment to help you breathe?</span></li>
           </ul>
           <p class="mt-6 text-sm text-muted">
             A yes does not automatically mean no. It usually means a different carrier or a
@@ -516,7 +521,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Waiting periods, said plainly</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Some of these policies pay in full from the first day. Some do not. Which one you are
         offered depends on your health, and you should know which you are signing before you sign it.
       </p>
@@ -525,10 +530,10 @@ def body():
     <div class="mt-10 grid md:grid-cols-3 gap-6">
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("circle-check", 26, "shrink-0 text-green")}
+          {icon("circle-check", 26, "shrink-0 text-moss")}
           <h3 class="text-h4">Level benefit</h3>
         </div>
-        <p class="mt-4 text-slate">
+        <p class="mt-4 text-ink">
           No waiting period. The full amount is payable from day one, whatever the cause.
         </p>
         <p class="mt-4 text-sm text-muted">
@@ -538,10 +543,10 @@ def body():
 
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("hourglass", 26, "shrink-0 text-navy")}
+          {icon("hourglass", 26, "shrink-0 text-forest")}
           <h3 class="text-h4">Graded benefit</h3>
         </div>
-        <p class="mt-4 text-slate">
+        <p class="mt-4 text-ink">
           Pays a percentage of the benefit if you die of natural causes in the first two or three
           years, rising each year until the full amount applies.
         </p>
@@ -552,10 +557,10 @@ def body():
 
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("circle-alert", 26, "shrink-0 text-navy")}
+          {icon("circle-alert", 26, "shrink-0 text-forest")}
           <h3 class="text-h4">Guaranteed issue</h3>
         </div>
-        <p class="mt-4 text-slate">
+        <p class="mt-4 text-ink">
           No health questions at all, and nobody is turned down. In exchange there is a two or three
           year waiting period, and the premium is the highest of the three.
         </p>
@@ -566,7 +571,7 @@ def body():
       </div>
     </div>
 
-    <p class="reveal mt-8 text-slate max-w-3xl">
+    <p class="reveal mt-8 text-ink max-w-3xl">
       If an agent will not tell you plainly which of these three you are being sold, that is worth
       noticing. We tell you before the application goes in, in writing if you want it that way.
     </p>
@@ -580,7 +585,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How this differs from term and whole life</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for
         a different job.
       </p>
@@ -608,7 +613,7 @@ def body():
       </table>
     </div>
 
-    <p class="reveal mt-6 text-slate max-w-3xl">
+    <p class="reveal mt-6 text-ink max-w-3xl">
       If you are under 60 and in good health and you want a larger amount, look at
       <a class="link" href="/term-life-insurance/">term life insurance</a> first. It buys far more
       coverage for the same money, and we will tell you so on the phone.
@@ -626,12 +631,12 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">Who qualifies</h2>
-        <p class="reveal mt-6 text-slate">
+        <p class="reveal mt-6 text-ink">
           Almost everyone between 50 and 85 can get a final expense policy of some kind. Health
           decides the price and whether there is a waiting period, not usually whether you can be
           covered at all.
         </p>
-        <p class="reveal mt-4 text-slate">
+        <p class="reveal mt-4 text-ink">
           Carriers rate the same condition very differently from each other. That is the whole
           practical argument for applying through an independent agency instead of to one company
           and taking its answer as final.
@@ -641,16 +646,16 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         <dl class="reveal grid gap-6">
           <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Usually accepted at level rates</dt>
-            <dd class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</dd>
+            <dt class="text-h4 text-forest">Usually accepted at level rates</dt>
+            <dd class="mt-2 text-ink">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</dd>
           </div>
           <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Often a graded benefit</dt>
-            <dd class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</dd>
+            <dt class="text-h4 text-forest">Often a graded benefit</dt>
+            <dd class="mt-2 text-ink">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</dd>
           </div>
           <div>
-            <dt class="text-h4 text-navy">Usually guaranteed issue</dt>
-            <dd class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</dd>
+            <dt class="text-h4 text-forest">Usually guaranteed issue</dt>
+            <dd class="mt-2 text-ink">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</dd>
           </div>
         </dl>
         <p class="reveal mt-6 text-sm text-muted">
@@ -670,7 +675,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How to apply. One call, about fifteen minutes.</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         There is no paperwork to post and nothing to print. Have these four things nearby and the
         call goes quickly.
       </p>
@@ -678,36 +683,36 @@ def body():
 
     <div class="mt-10 grid md:grid-cols-2 gap-6">
       <div class="reveal card flex items-start gap-4">
-        {icon("file-text", 26, "shrink-0 text-navy mt-1")}
+        {icon("file-text", 26, "shrink-0 text-forest mt-1")}
         <div>
           <h3 class="text-h4">Your date of birth and address</h3>
-          <p class="mt-2 text-slate">Exactly as they appear on your driver licence or state ID.</p>
+          <p class="mt-2 text-ink">Exactly as they appear on your driver licence or state ID.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("stethoscope", 26, "shrink-0 text-navy mt-1")}
+        {icon("stethoscope", 26, "shrink-0 text-forest mt-1")}
         <div>
           <h3 class="text-h4">Your medications</h3>
-          <p class="mt-2 text-slate">The bottles are easiest. Names and doses are what the carrier asks for.</p>
+          <p class="mt-2 text-ink">The bottles are easiest. Names and doses are what the carrier asks for.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("users", 26, "shrink-0 text-navy mt-1")}
+        {icon("users", 26, "shrink-0 text-forest mt-1")}
         <div>
           <h3 class="text-h4">Your beneficiary</h3>
-          <p class="mt-2 text-slate">The full name and date of birth of whoever should receive the money.</p>
+          <p class="mt-2 text-ink">The full name and date of birth of whoever should receive the money.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("banknote", 26, "shrink-0 text-navy mt-1")}
+        {icon("banknote", 26, "shrink-0 text-forest mt-1")}
         <div>
           <h3 class="text-h4">Your bank details</h3>
-          <p class="mt-2 text-slate">Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.</p>
+          <p class="mt-2 text-ink">Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.</p>
         </div>
       </div>
     </div>
 
-    <p class="reveal mt-8 text-slate max-w-3xl">
+    <p class="reveal mt-8 text-ink max-w-3xl">
       Many carriers give a decision on the call. Some take a few days. Either way you will know
       what you have been offered, including any waiting period, before you agree to anything.
     </p>
@@ -726,7 +731,7 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
         <h2 class="reveal text-h2">Questions people ask us</h2>
-        <p class="reveal mt-5 text-slate">
+        <p class="reveal mt-5 text-ink">
           If yours is not here, ask it on the phone. There is no script.
         </p>
         <div class="reveal mt-6">
@@ -760,14 +765,14 @@ def body():
 
       <div class="reveal">
         <h2 class="text-h2">Talk it through</h2>
-        <p class="mt-5 text-slate">
+        <p class="mt-5 text-ink">
           Fifteen minutes on the phone will tell you what you qualify for, what it costs, and
           whether there is a waiting period. No obligation to buy at the end of it.
         </p>
         <div class="mt-8">
           {C.phone_link("fe_final_primary", "btn btn-call btn-xl btn-block", "Call " + C.PHONE_DISPLAY, 28)}
         </div>
-        <p class="mt-4 text-slate">{C.HOURS}</p>
+        <p class="mt-4 text-ink">{C.HOURS}</p>
         <p class="mt-6 text-sm text-muted">
           You will reach a licensed agent, not a call centre queue and not a lead form that gets
           sold on to six other agencies.
@@ -776,9 +781,9 @@ def body():
         <div class="mt-8 pt-8 border-t border-rule">
           <h3 class="text-h4">What you will know by the end of the call</h3>
           <ul class="mt-4 grid gap-3">
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-moss mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
           </ul>
         </div>
 
@@ -787,8 +792,8 @@ def body():
 
       <div class="reveal">
         <div class="panel">
-          <h2 class="text-h3 !font-display !font-bold">Or leave your number</h2>
-          <p class="mt-3 text-slate">Four details. We call you back.</p>
+          <h2 class="text-h3-serif">Or leave your number</h2>
+          <p class="mt-3 text-ink">Four details. We call you back.</p>
 
           <form class="mt-6" data-ax-form data-silo="final-expense"
                 data-form-name="fe_footer_callback" data-success-target="fe-footer-success" novalidate>
@@ -846,10 +851,10 @@ def body():
 
           <div id="fe-footer-success" class="success">
             <div class="flex items-start gap-3">
-              {icon("circle-check", 32, "shrink-0 text-green")}
+              {icon("circle-check", 32, "shrink-0 text-moss")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">We have your details</h3>
-                <p class="mt-3 text-slate">A licensed agent will call you within {C.SLA}.</p>
+                <h3 class="text-h3-serif">We have your details</h3>
+                <p class="mt-3 text-ink">A licensed agent will call you within {C.SLA}.</p>
                 <div class="mt-5">
                   {C.phone_link("fe_footer_success", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY, 22)}
                 </div>

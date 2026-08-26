@@ -76,7 +76,7 @@ guidelines have been checked. Each strip carries a `[PLACEHOLDER ...]` comment.
 
 ## 4b. Photography
 
-Nine photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
+Eight photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
 `assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
 `tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
 
@@ -85,7 +85,7 @@ Nine photographs, all from Unsplash, all downloaded and served locally from `ass
 1. **Model releases.** The Unsplash Licence permits commercial use without attribution, but it does
    **not** convey a model release for identifiable people, and it does not clear trademarks visible
    in a frame. Five of the nine images show identifiable people:
-   `home-hero`, `home-independence`, `term-underwriting`, `fe-quiet`, `fe-hands`.
+   `home-hero`, `term-underwriting`, `fe-quiet`, `fe-hands`.
    Have counsel confirm the exposure is acceptable for an insurance advertiser in your states, or
    replace them with owned or Getty/Stocksy licensed photography.
 2. **They are stock.** Other sites use these exact frames. Commissioned photography of the real
@@ -152,11 +152,13 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
 - **Consent / analytics.** Decide whether GA4 needs a consent banner in your states before adding it.
 - **`/thank-you/`** is stubbed and `noindex`. Forms currently render a success state in place. If
   you switch to a redirect, point it here.
-- **Motion.** `MOTION_INTENSITY` is 5. Scroll-driven effects use `animation-timeline: view()`
-  behind `@supports`, and browsers without it fall back to the IntersectionObserver reveal, so
-  nothing breaks and nothing is required. The final-expense page is deliberately exempt from every
-  transform-based effect for accessibility reasons documented in MASTER.md section 4. If a future
+- **Motion.** `MOTION_INTENSITY` is 4: IntersectionObserver reveals with a spring curve, card
+  lift on hover, and nothing scroll-linked. No animation library. The final-expense page is
+  deliberately fades-only for accessibility reasons documented in MASTER.md section 4. If a future
   edit adds motion there, that exemption is the thing being overridden, not a styling preference.
+- **Fonts.** Cormorant Garamond (500, 600, 500 italic) and Montserrat (variable) are self-hosted
+  latin subsets in `assets/fonts/`, fetched once from Google Fonts. Nothing loads from a third
+  party at runtime. Both are SIL Open Font Licence.
 
 ---
 
@@ -172,8 +174,11 @@ The committed `.html` files are the deliverable. `tools/` exists so the header, 
 boilerplate are authored once instead of six times: edit `tools/chrome.py` or `tools/pages/*.py`,
 then rebuild. The build fails if an em-dash reaches the rendered output.
 
-Design tokens are documented in `design-system/MASTER.md` and implemented in `src/input.css`.
-If the two ever disagree, MASTER.md is the spec.
+Design tokens are documented in `design-system/MASTER.md` (Variation 2, "Family Counsel") with
+per-page overrides in `design-system/pages/`, and implemented in `src/input.css`. If the two ever
+disagree, MASTER.md is the spec. Two contrast corrections against the brief's named palette are
+recorded in MASTER.md section 1 and must not be reverted: secondary text is `#6E5F50`, not the
+brief's taupe, and CTA labels are `#10241F`, not forest, because both original pairs fail WCAG AA.
 
 **Layout rule, enforced by test.** A block may be narrow only if something else occupies the rest
 of its row. One 768px card in a 1200px container with 432px of nothing beside it is a defect, not

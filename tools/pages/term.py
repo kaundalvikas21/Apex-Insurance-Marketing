@@ -112,7 +112,7 @@ def schema():
 def _acc(q, a):
     return ('<details class="acc" name="term-faq">'
             '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
+            '<div class="acc-body"><p class="text-ink">%s</p></div>'
             '</details>') % (q, icon("plus", 22), a)
 
 
@@ -140,7 +140,7 @@ def rate_table():
     return f"""
     <div data-panels="term-rates">
 
-      <div class="mt-8 grid sm:grid-cols-3 gap-6 max-w-3xl">
+      <div class="mt-8 grid sm:grid-cols-[7fr_4fr_4fr] gap-6 max-w-3xl">
         {toggle("Term length", "term-rate-length", [("20", "20 years"), ("10", "10 years"), ("30", "30 years")], "term_length")}
         {toggle("Sex", "term-rate-sex", [("female", "Female"), ("male", "Male")], "sex")}
         {toggle("Tobacco", "term-rate-tobacco", [("no", "No"), ("yes", "Yes")], "tobacco")}
@@ -306,10 +306,10 @@ def quote_form(form_id, form_name, id_prefix):
 
         <div id="{id_prefix}-success" class="success">
           <div class="flex items-start gap-3">
-            {icon("circle-check", 30, "shrink-0 text-green")}
+            {icon("circle-check", 30, "shrink-0 text-moss")}
             <div>
-              <h3 class="text-h3 !font-display !font-bold">Got it</h3>
-              <p class="mt-3 text-slate">
+              <h3 class="text-h3-serif">Got it</h3>
+              <p class="mt-3 text-ink">
                 A licensed agent is comparing our appointed carriers for your age, state, and
                 coverage amount now. You will hear from us within {C.SLA}, and the quote comes with
                 the carrier names on it, not just a number.
@@ -333,11 +333,11 @@ def body():
         <div data-panel="{key}"{"" if key == "20" else " hidden"}>
           <div class="grid lg:grid-cols-12 gap-8 lg:gap-10">
             <div class="lg:col-span-6">
-              <h3 class="text-h3 !font-display !font-bold">{label}</h3>
-              <p class="mt-4 text-slate">{fits}</p>
+              <h3 class="text-h3-serif">{label}</h3>
+              <p class="mt-4 text-ink">{fits}</p>
             </div>
             <div class="lg:col-span-5 lg:col-start-8 flex flex-col">
-              <p class="text-sm font-semibold text-navy">Worth knowing</p>
+              <p class="text-sm font-semibold text-forest">Worth knowing</p>
               <p class="mt-2 text-sm text-muted">{caveat}</p>
               <button type="button" class="btn-row mt-6 self-start" data-prefill='{{"term_length":"{key}"}}'
                       data-prefill-target="term-quote-form">Quote a {label.replace(" years", " year")} term {icon("arrow-right", 16)}</button>
@@ -346,9 +346,9 @@ def body():
         </div>""" for key, label, fits, caveat in TERM_LENGTHS)
 
     home_media = C.figure("term-home", "(min-width: 1024px) 38vw, 92vw",
-                          cls="reveal", parallax=True)
+                          cls="reveal")
     underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 36vw, 92vw",
-                                  cls="reveal mt-8", parallax=True)
+                                  cls="reveal mt-8")
     spokes = C.spoke_module(
         "Explore term life insurance",
         "Eleven pages covering the parts of term life that need more than a paragraph.",
@@ -369,21 +369,22 @@ def body():
 
       <div class="lg:col-span-6">
         <h1 class="reveal text-h1">Term Life Insurance</h1>
-        <p class="reveal mt-5 text-lead text-slate max-w-xl">
+        <p class="reveal mt-4 ital-line max-w-xl">For the years when a mortgage and young children are counting on you.</p>
+        <p class="reveal mt-5 text-lead text-ink max-w-xl">
           The most coverage per dollar, for exactly as long as your family needs it. We compare our
           appointed carriers and show you the real numbers, including the carrier names.
         </p>
 
         <ul class="reveal mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">10, 15, 20, and 30 year terms</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Many applicants skip the medical exam</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Premium locked for the whole term</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Independent. We compare, we do not push one carrier</span></li>
+          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-moss mt-1")}<span class="text-sm">10, 15, 20, and 30 year terms</span></li>
+          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-moss mt-1")}<span class="text-sm">Many applicants skip the medical exam</span></li>
+          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-moss mt-1")}<span class="text-sm">Premium locked for the whole term</span></li>
+          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-moss mt-1")}<span class="text-sm">Independent. We compare, we do not push one carrier</span></li>
         </ul>
 
         <div class="reveal mt-8 pt-8 border-t border-rule">
-          <p class="text-sm font-semibold text-navy">What happens after you submit</p>
-          <ol class="mt-3 grid gap-2 text-sm text-slate">
+          <p class="text-sm font-semibold text-forest">What happens after you submit</p>
+          <ol class="mt-3 grid gap-2 text-sm text-ink">
             <li>1. A licensed agent reads it. No automated quote engine, no lead broker.</li>
             <li>2. We run your details past our appointed carriers.</li>
             <li>3. We come back within {C.SLA} with named carriers and real premiums.</li>
@@ -394,7 +395,7 @@ def body():
 
       <div class="lg:col-span-5 lg:col-start-8" id="quote">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Get your term life quotes</h2>
+          <h2 class="text-h3-serif">Get your term life quotes</h2>
           <p class="mt-2 text-sm text-muted">Six questions, about ninety seconds.</p>
           {quote_form("term-quote-form", "term_hero_quote", "th")}
         </div>
@@ -407,7 +408,7 @@ def body():
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
     <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
+      <span class="inline-flex items-center gap-2 text-forest font-semibold">
         {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
       </span>
       <span class="inline-flex items-center gap-2">
@@ -431,12 +432,12 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
       <div class="lg:col-span-7">
         <h2 class="reveal text-h2">What term life insurance covers</h2>
-        <p class="reveal mt-5 text-lead text-slate">
+        <p class="reveal mt-5 text-lead text-ink">
           Term life pays a lump sum to the people you name if you die during a fixed number of
           years. It builds no cash value and it ends when the term does, which is exactly why it
           costs so much less than permanent coverage.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <p class="reveal mt-5 text-ink">
           For most households the fixed number of years is not arbitrary. It is the years left on
           the mortgage, or the years until the youngest child is independent, whichever runs longer.
         </p>
@@ -449,29 +450,29 @@ def body():
     <div class="mt-14 grid lg:grid-cols-2 gap-8">
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("circle-check", 24, "shrink-0 text-green")}
-          <h3 class="text-h3 !font-display !font-bold">Who term life fits</h3>
+          {icon("circle-check", 24, "shrink-0 text-moss")}
+          <h3 class="text-h3-serif">Who term life fits</h3>
         </div>
         <ul class="mt-6 grid gap-4">
-          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>You have a mortgage, or children who are not yet independent, or both.</span></li>
-          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>Someone would struggle financially if your income stopped.</span></li>
-          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>You want the largest death benefit your budget will stretch to.</span></li>
-          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>The need has a foreseeable end date, even a distant one.</span></li>
+          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-moss mt-1")}<span>You have a mortgage, or children who are not yet independent, or both.</span></li>
+          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-moss mt-1")}<span>Someone would struggle financially if your income stopped.</span></li>
+          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-moss mt-1")}<span>You want the largest death benefit your budget will stretch to.</span></li>
+          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-moss mt-1")}<span>The need has a foreseeable end date, even a distant one.</span></li>
         </ul>
       </div>
 
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("circle-x", 24, "shrink-0 text-navy")}
-          <h3 class="text-h3 !font-display !font-bold">When to look at something else</h3>
+          {icon("circle-x", 24, "shrink-0 text-forest")}
+          <h3 class="text-h3-serif">When to look at something else</h3>
         </div>
         <ul class="mt-6 grid gap-4">
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You want coverage that cannot expire, for estate or legacy reasons.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You are supporting a dependent who will need help for their whole life.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You want a guaranteed cash value you can borrow against.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You are over 65 and mainly want to cover a funeral.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-forest mt-1")}<span>You want coverage that cannot expire, for estate or legacy reasons.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-forest mt-1")}<span>You are supporting a dependent who will need help for their whole life.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-forest mt-1")}<span>You want a guaranteed cash value you can borrow against.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-forest mt-1")}<span>You are over 65 and mainly want to cover a funeral.</span></li>
         </ul>
-        <p class="mt-6 text-sm text-slate">
+        <p class="mt-6 text-sm text-ink">
           The first three point toward
           <a class="link" href="/compare/term-vs-whole-life-insurance/">a comparison of term and whole life</a>.
           The last one points toward
@@ -489,7 +490,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How long should the term be?</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Match the term to the obligation. Pick a length to see who it suits and where it goes wrong.
       </p>
     </div>
@@ -514,7 +515,7 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What term life insurance costs</h2>
-      <p class="reveal mt-5 text-slate">
+      <p class="reveal mt-5 text-ink">
         Age, sex, tobacco use, term length, and coverage amount set the shape of the price. Your
         health and build set the rest, and only the carrier can decide that.
       </p>
@@ -539,7 +540,7 @@ def body():
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">How underwriting works</h2>
-          <p class="reveal mt-5 text-slate">
+          <p class="reveal mt-5 text-ink">
             Underwriting is the carrier deciding what risk you are and pricing it. Here is the whole
             process, including the part where you wait.
           </p>
@@ -550,34 +551,34 @@ def body():
       <div class="lg:col-span-7">
         <ol class="reveal relative border-l border-rule pl-8 grid gap-8">
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-forest rounded-full ring-4 ring-sage"></span>
             <p class="text-sm font-semibold text-muted">Day 1</p>
             <h3 class="mt-1 text-h4">Application</h3>
-            <p class="mt-2 text-slate">We complete it with you, by phone or electronically. Twenty to thirty minutes, including the health and lifestyle questions.</p>
+            <p class="mt-2 text-ink">We complete it with you, by phone or electronically. Twenty to thirty minutes, including the health and lifestyle questions.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-forest rounded-full ring-4 ring-sage"></span>
             <p class="text-sm font-semibold text-muted">Day 1 to 5</p>
             <h3 class="mt-1 text-h4">Phone interview and database checks</h3>
-            <p class="mt-2 text-slate">The carrier confirms your answers and pulls your prescription history, motor vehicle record, and medical information database file.</p>
+            <p class="mt-2 text-ink">The carrier confirms your answers and pulls your prescription history, motor vehicle record, and medical information database file.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-forest rounded-full ring-4 ring-sage"></span>
             <p class="text-sm font-semibold text-muted">Day 3 to 10, if required</p>
             <h3 class="mt-1 text-h4">The medical exam</h3>
-            <p class="mt-2 text-slate">A paramedical examiner comes to your home or office. Height, weight, blood pressure, a blood sample, and a urine sample. Around twenty minutes. It is free and you do not arrange it yourself.</p>
+            <p class="mt-2 text-ink">A paramedical examiner comes to your home or office. Height, weight, blood pressure, a blood sample, and a urine sample. Around twenty minutes. It is free and you do not arrange it yourself.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-forest rounded-full ring-4 ring-sage"></span>
             <p class="text-sm font-semibold text-muted">Week 2 to 5</p>
             <h3 class="mt-1 text-h4">Medical records and review</h3>
-            <p class="mt-2 text-slate">This is the slow part, and it is your doctor's office rather than the carrier. An underwriter then assigns a rate class.</p>
+            <p class="mt-2 text-ink">This is the slow part, and it is your doctor's office rather than the carrier. An underwriter then assigns a rate class.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-forest rounded-full ring-4 ring-sage"></span>
             <p class="text-sm font-semibold text-muted">Week 3 to 6</p>
             <h3 class="mt-1 text-h4">Offer, and your decision</h3>
-            <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in money. You can accept, ask us to shop it elsewhere, or walk away.</p>
+            <p class="mt-2 text-ink">If the rate class is worse than we quoted, we say so and tell you what it means in money. You can accept, ask us to shop it elsewhere, or walk away.</p>
           </li>
         </ol>
 
@@ -597,8 +598,8 @@ def body():
   <div class="container-ax">
     <div class="reveal card flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
       <div class="grow">
-        <h2 class="text-h3 !font-display !font-bold">Would rather skip the exam?</h2>
-        <p class="mt-3 text-slate">
+        <h2 class="text-h3-serif">Would rather skip the exam?</h2>
+        <p class="mt-3 text-ink">
           Several of our carriers can issue term coverage with no paramedical exam for healthy
           applicants, often with a decision in days rather than weeks. It usually costs a little
           more, and the coverage limits are lower. Sometimes that trade is worth it.
@@ -612,12 +613,12 @@ def body():
 <!-- =====================================================================
      7. CARRIERS.
      ================================================================== -->
-<section class="section-tight band">
+<section class="section-tight band-forest on-forest">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h3 !font-display !font-bold">Carriers we are appointed with</h2>
-        <p class="reveal mt-3 text-slate">
+        <h2 class="reveal text-h3-serif">Carriers we are appointed with</h2>
+        <p class="reveal mt-3 text-white/85">
           We hold appointments with multiple carriers, so a decline from one is the start of the
           conversation rather than the end of it.
         </p>
@@ -646,30 +647,12 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How to apply</h2>
-      <p class="reveal mt-5 text-slate">Three steps, and you can stop after any of them.</p>
+      <p class="reveal mt-5 text-ink">Three steps, and you can stop after any of them.</p>
     </div>
     <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
-          <h3 class="text-h4">Send the six answers</h3>
-        </div>
-        <p class="mt-5 text-slate">The form at the top of this page, or a phone call if you would rather talk it through. No Social Security number at this stage.</p>
-      </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
-          <h3 class="text-h4">Review named quotes</h3>
-        </div>
-        <p class="mt-5 text-slate">You get carrier names, premiums, term lengths, and the conversion terms, so you can compare them against anything else you have been shown.</p>
-      </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
-          <h3 class="text-h4">Apply and go through underwriting</h3>
-        </div>
-        <p class="mt-5 text-slate">We complete the application with you and stay with it until the policy is issued or the carrier says no. Either way you hear it from us.</p>
-      </div>
+      {C.step(1, "Send the six answers", "The form at the top of this page, or a phone call if you would rather talk it through. No Social Security number at this stage.")}
+      {C.step(2, "Review named quotes", "You get carrier names, premiums, term lengths, and the conversion terms, so you can compare them against anything else you have been shown.")}
+      {C.step(3, "Apply and go through underwriting", "We complete the application with you and stay with it until the policy is issued or the carrier says no. Either way you hear it from us.")}
     </div>
   </div>
 </section>
@@ -684,7 +667,7 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
         <h2 class="reveal text-h2">Term life questions</h2>
-        <p class="reveal mt-5 text-slate">Nine things people ask before they apply.</p>
+        <p class="reveal mt-5 text-ink">Nine things people ask before they apply.</p>
         <p class="reveal mt-6 text-sm text-muted">
           If yours is not here, put it in the form and we will answer it in the reply.
         </p>
@@ -713,7 +696,7 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5 reveal">
         <h2 class="text-h2">Get your quotes</h2>
-        <p class="mt-5 text-slate">
+        <p class="mt-5 text-ink">
           Six answers, about ninety seconds, and a licensed agent comes back with named carriers
           and real premiums. Nothing is sold on and nobody else calls you.
         </p>
@@ -724,7 +707,7 @@ def body():
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <div class="panel">
-          <h3 class="text-h3 !font-display !font-bold">Start your quote</h3>
+          <h3 class="text-h3-serif">Start your quote</h3>
           {quote_form("term-quote-form-footer", "term_footer_quote", "tf")}
         </div>
       </div>
