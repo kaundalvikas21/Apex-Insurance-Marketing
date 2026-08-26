@@ -338,6 +338,11 @@ def body():
                   data-prefill-target="term-quote-form">Quote a {label.replace(" years", " year")} term {icon("arrow-right", 16)}</button>
         </div>""" for key, label, fits, caveat in TERM_LENGTHS)
 
+    band_media = C.picture("term-band", "100vw",
+                           cls="media media-band media-wipe media-parallax !rounded-none",
+                           img_cls="media-img")
+    underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 30vw, 92vw",
+                                  cls="reveal mt-8", parallax=True)
     spokes = C.spoke_module(
         "Explore term life insurance",
         "Eleven pages covering the parts of term life that need more than a paragraph.",
@@ -410,6 +415,12 @@ def body():
       </span>
     </div>
   </div>
+</section>
+
+<!-- Editorial band. Purely atmospheric, so the alt text is empty and the
+     image is hidden from assistive tech rather than narrated. -->
+<section aria-hidden="true">
+  {band_media}
 </section>
 
 <!-- =====================================================================
@@ -517,15 +528,18 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">How underwriting works</h2>
-        <p class="reveal mt-5 text-slate">
-          Underwriting is the carrier deciding what risk you are and pricing it. Here is the whole
-          process, including the part where you wait.
-        </p>
-        <p class="reveal mt-5 text-sm text-muted">
-          Nothing is owed and no coverage is in force until the policy is issued, delivered, and
-          the first premium is paid.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">How underwriting works</h2>
+          <p class="reveal mt-5 text-slate">
+            Underwriting is the carrier deciding what risk you are and pricing it. Here is the whole
+            process, including the part where you wait.
+          </p>
+          {underwriting_media}
+          <p class="reveal mt-5 text-sm text-muted">
+            Nothing is owed and no coverage is in force until the policy is issued, delivered, and
+            the first premium is paid.
+          </p>
+        </div>
       </div>
 
       <div class="lg:col-span-7 lg:col-start-6">

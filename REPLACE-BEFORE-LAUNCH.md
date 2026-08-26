@@ -74,6 +74,36 @@ Two logo strips (`/` and `/term-life-insurance/`) render six dashed `Carrier log
 Do not put a carrier mark on the site until the appointment is active **and** that carrier's brand
 guidelines have been checked. Each strip carries a `[PLACEHOLDER ...]` comment.
 
+## 4b. Photography
+
+Nine photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
+`assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
+`tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
+
+**These are placeholders too.** Two things need doing before launch:
+
+1. **Model releases.** The Unsplash Licence permits commercial use without attribution, but it does
+   **not** convey a model release for identifiable people, and it does not clear trademarks visible
+   in a frame. Five of the nine images show identifiable people:
+   `home-hero`, `home-independence`, `term-underwriting`, `fe-quiet`, `fe-hands`.
+   Have counsel confirm the exposure is acceptable for an insurance advertiser in your states, or
+   replace them with owned or Getty/Stocksy licensed photography.
+2. **They are stock.** Other sites use these exact frames. Commissioned photography of the real
+   agency is the upgrade, and the layout will take it without changes as long as the aspect ratios
+   in `tools/images.py` are preserved.
+
+Art direction, if you are replacing them: documentary, no eye contact with the camera, no posed
+joy. See `design-system/MASTER.md` section 8. The two rules with no exceptions:
+
+- **No photograph of a person beside the agent byline.** That slot is a marked placeholder on every
+  hub (`.avatar-slot`, "[REAL AGENT PHOTO REQUIRED]") and must be filled with a photograph of the
+  actual named licensed agent or left as a placeholder. A stock face there presents a stranger as
+  your agent.
+- **No image captioned or positioned to imply the person shown is a customer.**
+
+Open Graph share cards (`assets/img/og-*.jpg`) are derived from the same photographs and inherit
+the same obligations.
+
 ## 5. Reviews
 
 The testimonial slot on the home page is designed, wired, and **hidden**. It is marked
@@ -122,12 +152,18 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
 - **Consent / analytics.** Decide whether GA4 needs a consent banner in your states before adding it.
 - **`/thank-you/`** is stubbed and `noindex`. Forms currently render a success state in place. If
   you switch to a redirect, point it here.
+- **Motion.** `MOTION_INTENSITY` is 5. Scroll-driven effects use `animation-timeline: view()`
+  behind `@supports`, and browsers without it fall back to the IntersectionObserver reveal, so
+  nothing breaks and nothing is required. The final-expense page is deliberately exempt from every
+  transform-based effect for accessibility reasons documented in MASTER.md section 4. If a future
+  edit adds motion there, that exemption is the thing being overridden, not a styling preference.
 
 ---
 
 ## 8. Editing the site
 
 ```bash
+python3 tools/images.py --fetch                          # download images (idempotent, skips existing)
 python3 tools/build.py                                   # regenerate all six HTML pages
 npx tailwindcss -i ./src/input.css -o ./assets/site.css --minify   # or: npm run build:css
 ```

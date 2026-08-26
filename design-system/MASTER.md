@@ -5,7 +5,7 @@
 institutional language, leaning toward Tailwind v4 tokens + Libre Caslon Text display + Inter UI,
 with reveal-only motion.
 
-**Dials:** `DESIGN_VARIANCE: 4` · `MOTION_INTENSITY: 3` · `VISUAL_DENSITY: 5`
+**Dials:** `DESIGN_VARIANCE: 4` · `MOTION_INTENSITY: 5` · `VISUAL_DENSITY: 5`
 
 Single source of truth for the five-page build. `src/input.css` implements every token here; if the
 two disagree, this file is wrong and gets updated, not the other way around.
@@ -116,24 +116,43 @@ corner is the institutional signal. No `rounded-full` anywhere except the step-p
 
 ---
 
-## 4. Motion (MOTION_INTENSITY 3)
+## 4. Motion (MOTION_INTENSITY 5)
 
-| Pattern | Spec |
-|---|---|
-| Section reveal | opacity 0 to 1 + translateY 12px to 0, 480ms `cubic-bezier(.22,1,.36,1)` |
-| Stagger | 60ms per child, capped at 6 children |
-| Link underline | grows from left, 180ms ease-out |
-| CTA hover | translateY(-2px) + shadow, 180ms |
-| Accordion | native `<details>`, 200ms on the panel |
-| Form step change | 240ms crossfade, focus moves to the first field of the new step |
+Implemented as CSS scroll-driven animations (`animation-timeline: view()`) behind `@supports`,
+with the `IntersectionObserver` reveal as the fallback for browsers without it. No animation
+library is loaded, and there is no `scroll` listener anywhere in the codebase.
 
-Trigger with `IntersectionObserver` only. No `scroll` listeners anywhere in the codebase.
+| Pattern | Spec | Applies to |
+|---|---|---|
+| Section reveal | opacity 0 to 1 + translateY 14px to 0, 520ms `cubic-bezier(.22,1,.36,1)` | Every section |
+| Stagger | 60ms per child, capped at 6 | Lists, card rows, spoke grids |
+| Image parallax | translateY 8% across the viewport pass, scroll-linked | Editorial images only, never text |
+| Mask wipe | `clip-path` inset 12% to 0 + scale 1.06 to 1, on entry | Full-bleed band images |
+| Row cascade | 34ms per row, opacity + translateY 6px | Rate and comparison table rows |
+| Sticky column | `position: sticky` on the narrow column | Long two-column sections |
+| Link underline | grows from left, 180ms ease-out | Body links |
+| CTA hover | translateY(-2px) + shadow, 180ms | Buttons |
+| Accordion | height via `interpolate-size: allow-keywords`, 240ms | FAQ |
+| Chart draw-on | `stroke-dashoffset`, 1.4s | Cash-value chart |
+| Form step change | 240ms crossfade, focus moves to the first field | Term multi-step form |
 
-`prefers-reduced-motion: reduce` collapses everything to opacity-only at 1ms, and reveals are
-forced visible so no content can be trapped invisible.
+**Deliberately absent.** Animated counters: every figure on the site is a `[X]` placeholder, so a
+counter would tick up to nothing. Scroll-progress bar: reads as a scroll cue, which section 7 bans.
+Pinned scroll-scrubbed sequences: intensity 7 behaviour, rejected as wrong for a trust-first
+financial page.
 
-**Final-expense page:** reveal is opacity-only with no translate, no stagger, and no CTA lift.
-Motion on a page built for 60 to 85 year olds is a liability, not a delight.
+### Reduced motion
+`prefers-reduced-motion: reduce` collapses everything to opacity at 1ms, disables parallax, mask
+wipes, cascades, and CTA lift, and forces every reveal visible so no content can be trapped
+invisible.
+
+### Final-expense exemption
+`.fe main` opts out of every transform-based pattern: opacity-only reveals, no translate, no
+stagger, no parallax, no mask wipe, no row cascade, no CTA lift. Images on that page are static.
+
+This is an accessibility decision, not a stylistic one. Vestibular sensitivity and low vision both
+rise sharply in the 60 to 85 band this page is built for, and the spec calls senior accessibility
+conversion work here. Motion that delights a 35 year old buying term costs conversions on this page.
 
 ---
 
@@ -182,9 +201,64 @@ buttons. Reveal-only motion.
 
 No purple or pink gradients. No neon. No dark mode. No emoji as icons. No section-number eyebrows
 (`01 / Coverage`). No scroll cues. No centered-everything pages. No Fraunces. No drop shadows on
-content cards. No `rounded-2xl` soft-SaaS corners. No stock-photo smiling families as decoration.
+content cards. No `rounded-2xl` soft-SaaS corners.
 No em-dash anywhere in rendered copy: use a comma, a colon, a period, or a middot separator.
 `tools/build.py` fails the build if one appears, entity forms included.
 No invented rates, reviews, carrier names, or dollar claims.
 
+**Photography.** The earlier blanket ban on "stock-photo smiling families" now targets the cliche
+rather than photography itself. Posed joy at the camera is still banned. See section 8 for what
+replaces it, and for the two rules that have no exceptions:
+
+1. **No photograph of a person beside the agent byline.** Presenting a stranger as
+   "[Agent Name], Licensed Agent" fabricates a person, which is the same failure as the invented
+   testimonials already banned above. Bylines use a marked placeholder avatar.
+2. **No image captioned or positioned to imply the person shown is a customer.**
+
 Eyebrow budget per page: `ceil(sectionCount / 3)`.
+
+---
+
+## 8. Imagery
+
+### Art direction
+Documentary, no eye contact with the camera. Hands, backs, thresholds, kitchen tables, a window,
+a porch. Specific and quiet, the register of a photo essay rather than a brochure. If a frame
+could carry the caption "happy family enjoys peace of mind," it is the wrong frame.
+
+Photographs here are atmospheric. None of them evidences anything, so none may be positioned to
+suggest it does: no photo beside a testimonial, a rate, a claim statistic, or the agent byline.
+
+### Sourcing and licensing
+Unsplash, downloaded and served locally. Nothing hotlinks at runtime. The Unsplash Licence permits
+commercial use without attribution but does **not** convey a model release, so identifiable people
+must be cleared or replaced before launch. `assets/img/CREDITS.md` records every file, and
+`REPLACE-BEFORE-LAUNCH.md` tracks the swap.
+
+The manifest lives in `tools/images.py`. `python3 tools/images.py --fetch` is idempotent.
+
+### Delivery
+The Unsplash CDN resizes and encodes, so this project needs no image-processing dependency.
+Every slot ships **AVIF and WebP at three widths**. WebP covers every browser that matters, so
+there is no JPEG tier except the Open Graph cards, which need it for crawler compatibility.
+
+| Rule | Why |
+|---|---|
+| `<picture>` with AVIF, then WebP, then `<img>` | AVIF is roughly 40% smaller; WebP catches the rest |
+| explicit `width` and `height` on every `<img>` | Reserves the box, so images cannot cause layout shift |
+| `sizes` matched to the real column width per breakpoint | Stops mobile downloading a desktop-width file |
+| exactly one `loading="eager"` + `fetchpriority="high"` per page | The LCP candidate. Everything else is `loading="lazy"` `decoding="async"` |
+| descriptive `alt`, or `alt=""` when decorative | An image the adjacent copy already explains should be silent to a screen reader, not narrated twice |
+
+### Placement
+Restrained on purpose at `VISUAL_DENSITY 5`: nine images across five pages. Layout alternates
+image-left and image-right so no two adjacent image sections repeat.
+
+No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
+the FAQ accordions, the spoke grids, or any byline. Those either already carry a visual or would be
+actively worse with decoration.
+
+### Text over photography
+Only one image sits under text: the independence band on the home page. It is darkened with a navy
+scrim to a measured contrast ratio rather than an eyeballed opacity, and the result is verified in
+the contrast pass like any other text on the site.

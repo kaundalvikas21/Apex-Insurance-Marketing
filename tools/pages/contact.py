@@ -25,6 +25,9 @@ def schema():
 
 
 def body():
+    desk_media = C.figure("contact-desk", "(min-width: 1024px) 38vw, 92vw",
+                          cls="reveal", parallax=True)
+
     return f"""
 <section class="pt-6 pb-14 md:pb-16">
   <div class="container-ax">
@@ -43,7 +46,9 @@ def body():
       <!-- LEFT: phone first, then what actually happens on the call. -->
       <div class="lg:col-span-5">
 
-        <div class="reveal card">
+        {desk_media}
+
+        <div class="reveal card mt-8">
           <h2 class="text-h3 !font-display !font-bold">Call us</h2>
           <div class="mt-5">
             {C.phone_link("contact_primary", "btn btn-call btn-block !min-h-[64px] !text-lead", C.PHONE_DISPLAY, 24)}

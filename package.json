@@ -4,6 +4,7 @@
   "private": true,
   "description": "Apex Insurance Marketing, LLC — static marketing site (home, three product hubs, contact).",
   "scripts": {
+    "build": "python3 tools/images.py --fetch && python3 tools/build.py && npm run build:css",
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/site.css --minify",
     "dev:css": "tailwindcss -i ./src/input.css -o ./assets/site.css --watch",
     "serve": "python3 -m http.server 8080"

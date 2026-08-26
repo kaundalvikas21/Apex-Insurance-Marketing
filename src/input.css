@@ -838,3 +838,186 @@
   .js .reveal .chart-fade, .js .reveal.is-in .chart-fade,
   .js .reveal .chart-fade-early, .js .reveal.is-in .chart-fade-early { opacity: 1; }
 }
+
+/* ============================================================================
+   IMAGERY + MOTION  (MOTION_INTENSITY 5)
+   Scroll-driven where the browser supports it, IntersectionObserver reveal
+   everywhere else. No animation library, no scroll listener.
+   See design-system/MASTER.md sections 4 and 8.
+   ========================================================================= */
+@layer components {
+
+  /* --- Media -------------------------------------------------------------
+     The wrapper clips; the image inside is what moves. Keeping transform off
+     the clipping box means parallax can never leak past the frame. */
+  .media {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-ax);
+    background-color: var(--color-navy-050);
+  }
+  .media-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media-tall  { aspect-ratio: 4 / 5; }
+  .media-wide  { aspect-ratio: 3 / 2; }
+  /* Capped: a 21:9 band is 617px tall at 1440 and swamps the sections
+     around it. object-fit keeps the crop honest as it tightens. */
+  .media-band  { aspect-ratio: 21 / 9; max-height: 400px; }
+  .media-strip { aspect-ratio: 16 / 9; }
+  .media-square-ish { aspect-ratio: 4 / 3; }
+
+  /* Hairline inset. A 1px rule at 12% black reads as a printed plate edge and
+     stops a light image from bleeding into the warm-white ground. */
+  .media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(10 37 64 / 0.12);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Text over photography. One place only: the home independence band.
+     A flat navy scrim, not a blend mode, so the composite is predictable and
+     provable. Alpha 0.72 means that even if every pixel of the photograph were
+     pure white, white body copy would still sit above 5.5:1. The actual plate
+     is a dark clinical frame, so the real figure is far higher. Verified by
+     sampling rendered pixels, not by eye. */
+  .media-scrim::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgb(10 37 64 / 0.72);
+  }
+
+  /* Desaturate so a colour photograph cannot introduce a second accent into a
+     palette that allows exactly one. */
+  .media-duotone { background-color: var(--color-navy); }
+  .media-duotone .media-img { filter: grayscale(1) contrast(1.06); }
+
+  .avatar-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 84px;
+    height: 84px;
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-ax);
+    color: var(--color-muted);
+    font-size: var(--text-micro);
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+  }
+}
+
+/* --- Scroll-driven layer ---------------------------------------------------
+   Everything here is progressive enhancement. Without `animation-timeline`
+   the images are simply static and correctly composed; the IO reveal still
+   handles section entrances. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    .media-parallax .media-img {
+      animation: ax-parallax linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+      /* Overscale so the travel never exposes an edge. */
+      height: 118%;
+      position: absolute;
+      inset: 0;
+      margin: auto;
+    }
+
+    .media-wipe {
+      animation: ax-wipe linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 26%;
+    }
+  }
+}
+
+@keyframes ax-parallax {
+  from { transform: translateY(-8%); }
+  to   { transform: translateY(8%); }
+}
+@keyframes ax-wipe {
+  from { clip-path: inset(12% 0 12% 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* --- Table row cascade --------------------------------------------------- */
+.js .rate-table tbody tr.reveal-row,
+.js .compare-table tbody tr.reveal-row { opacity: 0; }
+.js .rate-table tbody tr.reveal-row.is-in,
+.js .compare-table tbody tr.reveal-row.is-in {
+  opacity: 1;
+  animation: ax-row-in .42s var(--ease-ax) both;
+  animation-delay: var(--row-delay, 0ms);
+}
+@keyframes ax-row-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Sticky column ------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .sticky-col { position: sticky; top: 7rem; }
+}
+
+/* --- Accordion height ---------------------------------------------------- */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    .acc { interpolate-size: allow-keywords; }
+    .acc::details-content {
+      block-size: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: block-size .24s var(--ease-ax), content-visibility .24s allow-discrete,
+                  opacity .2s ease-out;
+    }
+    .acc[open]::details-content { block-size: auto; opacity: 1; }
+  }
+}
+
+/* ============================================================================
+   FINAL-EXPENSE EXEMPTION
+   Accessibility decision, not a stylistic one. See MASTER.md section 4.
+   ========================================================================= */
+.fe main .media-parallax .media-img {
+  animation: none !important;
+  position: static;
+  height: 100%;
+}
+.fe main .media-wipe { animation: none !important; clip-path: none; }
+.fe main .reveal-row { opacity: 1 !important; animation: none !important; }
+.fe main .sticky-col { position: static; }
+
+/* ============================================================================
+   REDUCED MOTION — parallax, wipe, and cascade all collapse.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .media-parallax .media-img {
+    animation: none !important;
+    position: static;
+    height: 100%;
+    transform: none !important;
+  }
+  .media-wipe { animation: none !important; clip-path: none !important; }
+  .js .rate-table tbody tr.reveal-row,
+  .js .compare-table tbody tr.reveal-row { opacity: 1 !important; animation: none !important; }
+}
+
+@media print {
+  .media-parallax .media-img { position: static; height: auto; transform: none !important; }
+  .media-duotone .media-img { filter: none; mix-blend-mode: normal; opacity: 1; }
+}

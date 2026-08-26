@@ -19,6 +19,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "pages"))
 
 import chrome  # noqa: E402
+import images  # noqa: E402
 
 PAGES = ["home", "final_expense", "term", "whole", "contact", "thank_you"]
 
@@ -44,7 +45,11 @@ TEMPLATE = """<!doctype html>
 <meta property="og:title" content="{og_title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{domain}{path}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{domain}{og_image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{og_title}">
+<meta name="twitter:card" content="summary_large_image">
 
 {schema}
 </head>
@@ -81,6 +86,7 @@ def build(name):
         og_title=esc(getattr(mod, "OG_TITLE", mod.TITLE)),
         domain=chrome.DOMAIN,
         path=mod.PATH,
+        og_image="/assets/img/og-%s.jpg" % images.OG_FOR_PAGE[mod.PATH],
         robots=('<meta name="robots" content="%s">\n' % robots) if robots else "",
         schema=chrome.jsonld(*mod.schema()),
         silo_attr=(' data-silo="%s"' % silo) if silo else "",

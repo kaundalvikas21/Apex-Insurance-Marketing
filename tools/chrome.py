@@ -5,6 +5,8 @@ Every placeholder value lives here so REPLACE-BEFORE-LAUNCH.md has one
 address to point at. Nothing invented is presented as verified fact.
 """
 import json
+
+import images
 from icons import icon
 
 # --- PLACEHOLDERS. See REPLACE-BEFORE-LAUNCH.md -----------------------------
@@ -37,6 +39,58 @@ def phone_link(location, cls="", label=None, size=20, wrap_num=True):
     num = ('<span class="tnum">%s</span>' % text) if wrap_num else text
     return ('<a href="tel:%s" data-cta-location="%s" class="%s">%s%s</a>'
             % (PHONE_TEL, location, cls, icon("phone", size, "shrink-0"), num))
+
+
+# ---------------------------------------------------------------------------
+# IMAGERY
+# See design-system/MASTER.md section 8. Manifest lives in tools/images.py.
+# ---------------------------------------------------------------------------
+def picture(name, sizes, cls="", img_cls="", eager=False, ratio_cls="", alt=None):
+    """<picture> with AVIF then WebP then <img>.
+
+    Every <img> carries explicit width and height so the box is reserved before
+    the bytes arrive and the image cannot shift the layout. `sizes` must match
+    the real rendered column width per breakpoint, or mobile downloads a
+    desktop file for nothing.
+
+    eager=True marks the one LCP candidate on a page. Everything else is lazy.
+    """
+    spec = images.IMAGES[name]
+    widths = spec[2]
+    text = spec[4] if alt is None else alt
+    largest = widths[-1]
+    w, h = largest, images.height_for(name, largest)
+
+    def srcset(fmt):
+        return ", ".join("/assets/img/%s-%d.%s %dw" % (name, x, fmt, x) for x in widths)
+
+    loading = ('loading="eager" fetchpriority="high"' if eager
+               else 'loading="lazy" decoding="async"')
+    # A decorative image is hidden from assistive tech rather than announced as
+    # an unnamed graphic.
+    a11y = 'alt=""' if not text else 'alt="%s"' % text.replace('"', "&quot;")
+
+    return f"""<picture class="{cls}">
+      <source type="image/avif" srcset="{srcset('avif')}" sizes="{sizes}">
+      <source type="image/webp" srcset="{srcset('webp')}" sizes="{sizes}">
+      <img src="/assets/img/{name}-{widths[0]}.webp" width="{w}" height="{h}"
+           {a11y} {loading} class="{img_cls}">
+    </picture>"""
+
+
+RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band",
+               (16, 9): "media-strip", (4, 3): "media-square-ish"}
+
+
+def figure(name, sizes, caption=None, cls="", eager=False, parallax=False, wipe=False):
+    """Editorial image block. Motion classes are opt-in per placement and are
+    inert inside .fe main, which is exempt from transform-based motion."""
+    ratio = RATIO_CLASS[images.IMAGES[name][1]]
+    motion = " ".join(x for x in ("media", ratio, "media-parallax" if parallax else "",
+                                  "media-wipe" if wipe else "") if x)
+    cap = ('<figcaption class="mt-3 text-micro text-muted">%s</figcaption>' % caption) if caption else ""
+    return ('<figure class="%s">%s%s</figure>'
+            % (cls, picture(name, sizes, cls=motion, img_cls="media-img", eager=eager), cap))
 
 
 # ---------------------------------------------------------------------------
@@ -324,6 +378,16 @@ def crumbs(trail):
 def byline():
     """Spec section 09.5. Appears on every hub."""
     return f"""<div class="card">
+      <div class="flex items-start gap-5">
+        <!-- [REAL AGENT PHOTO REQUIRED]
+             This slot stays a placeholder on purpose. A stock photograph here
+             would present a stranger as the named licensed agent, which is the
+             same fabrication as an invented testimonial. See MASTER.md s7. -->
+        <div class="avatar-slot shrink-0" aria-hidden="true">
+          {icon("user-check", 26)}
+          <span>Agent<br>photo</span>
+        </div>
+        <div>
       <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
       </div>
@@ -336,6 +400,8 @@ def byline():
         something depends on your state or your health, we say so instead of rounding it off.
       </p>
       <a class="link-static mt-4 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
+        </div>
+      </div>
     </div>"""
 
 

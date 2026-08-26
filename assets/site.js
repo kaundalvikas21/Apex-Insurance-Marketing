@@ -129,6 +129,37 @@
   })();
 
   /* ------------------------------------------------------------------------
+     4b. TABLE ROW CASCADE
+     Rate and comparison tables build a row at a time. The class is added here
+     rather than in the HTML so the tables are fully opaque with JS off, which
+     matters more on a page of premiums than the animation does.
+     --------------------------------------------------------------------- */
+  (function rowCascade() {
+    var tables = $$('.rate-table tbody, .compare-table tbody');
+    if (!tables.length) return;
+
+    var senior = document.documentElement.classList.contains('fe');
+    if (senior || reduceMotion || !('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        $$('tr', entry.target).forEach(function (row, i) {
+          row.style.setProperty('--row-delay', Math.min(i, 9) * 34 + 'ms');
+          row.classList.add('is-in');
+        });
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+
+    tables.forEach(function (body) {
+      if (body.hidden) return;
+      $$('tr', body).forEach(function (row) { row.classList.add('reveal-row'); });
+      io.observe(body);
+    });
+  })();
+
+  /* ------------------------------------------------------------------------
      5. FORMS
      Every form: hidden source_url + silo + form_name, inline validation on
      blur, TCPA gate, GA4 form_start / form_submit, designed success state.

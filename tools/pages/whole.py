@@ -271,6 +271,10 @@ def cash_value_chart():
 
 
 def body():
+    permanence_media = C.figure("whole-permanence", "(min-width: 1024px) 38vw, 92vw",
+                                cls="reveal mt-8", parallax=True)
+    acceptance_media = C.picture("whole-acceptance", "(min-width: 1024px) 38vw, 92vw",
+                                 cls="media media-strip !rounded-none", img_cls="media-img")
     spokes = C.spoke_module(
         "Explore whole life insurance",
         "Nine pages covering the parts of whole life that need more than a paragraph.",
@@ -364,6 +368,7 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">What makes it permanent</h2>
+        {permanence_media}
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <p class="reveal text-lead text-slate">
@@ -637,7 +642,9 @@ def body():
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
-        <div class="reveal card">
+        <div class="reveal card !p-0 overflow-hidden">
+          {acceptance_media}
+          <div class="p-6 md:p-8">
           <h3 class="text-h4">If you cannot qualify</h3>
           <p class="mt-3 text-slate">
             Guaranteed acceptance whole life asks no health questions and turns nobody down within
@@ -649,6 +656,7 @@ def body():
             consider rather than the first, and any agent who leads with it is not working for you.
           </p>
           <a class="btn btn-ghost mt-6" href="/whole-life-insurance/guaranteed-acceptance/#who-it-is-for">Guaranteed acceptance whole life</a>
+          </div>
         </div>
       </div>
     </div>

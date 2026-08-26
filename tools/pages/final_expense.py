@@ -188,6 +188,10 @@ def rate_table():
 
 
 def body():
+    # No parallax and no wipe: this page is exempt from transform-based motion.
+    quiet_media = C.figure("fe-quiet", "(min-width: 1024px) 38vw, 92vw", cls="reveal")
+    hands_media = C.figure("fe-hands", "(min-width: 1024px) 62vw, 92vw",
+                           cls="reveal mt-12 max-w-4xl")
     call_band_1 = call_band(
         "Would you rather just ask someone?",
         "A licensed agent can answer the health questions with you and tell you what you qualify for.",
@@ -472,7 +476,8 @@ def body():
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
-        <div class="reveal card">
+        {quiet_media}
+        <div class="reveal card mt-8">
           <h3 class="text-h3 !font-display !font-bold">The kind of thing you will be asked</h3>
           <ul class="mt-5 grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
@@ -689,6 +694,8 @@ def body():
         </div>
       </div>
     </div>
+
+    {hands_media}
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       Many carriers give a decision on the call. Some take a few days. Either way you will know

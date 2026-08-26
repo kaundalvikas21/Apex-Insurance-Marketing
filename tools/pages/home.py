@@ -77,6 +77,11 @@ def body():
     return HERO + rest()
 
 
+# LCP candidate: the one eager image on this page.
+hero_media = C.figure("home-hero", "(min-width: 1024px) 38vw, 92vw",
+                      cls="reveal", eager=True, parallax=True)
+
+
 HERO = f"""
 <!-- =====================================================================
      HERO. Triage, not pitch. Three paths, each carrying its own silo's
@@ -85,17 +90,23 @@ HERO = f"""
 <section class="section-tight pt-10 md:pt-12 lg:pt-14">
   <div class="container-ax">
 
-    <div class="max-w-3xl">
-      <h1 class="reveal text-h1">Cover the people who depend on you.</h1>
-      <p class="reveal mt-4 text-lead text-slate max-w-xl">
-        Apex is an independent, licensed life insurance agency. We compare multiple carriers and
-        tell you plainly what fits your family.
-      </p>
-      <p class="reveal mt-4 text-sm text-muted">
-        Not sure which of the three you need?
-        <a class="link" href="#triage">Answer three questions</a>
-        and we will point you to the right one.
-      </p>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-7">
+        <h1 class="reveal text-h1">Cover the people who depend on you.</h1>
+        <p class="reveal mt-4 text-lead text-slate max-w-xl">
+          Apex is an independent, licensed life insurance agency. We compare multiple carriers and
+          tell you plainly what fits your family.
+        </p>
+        <p class="reveal mt-4 text-sm text-muted">
+          Not sure which of the three you need?
+          <a class="link" href="#triage">Answer three questions</a>
+          and we will point you to the right one.
+        </p>
+      </div>
+
+      <div class="lg:col-span-5 lg:col-start-8">
+        {hero_media}
+      </div>
     </div>
 
     <div class="mt-10 lg:mt-12 grid lg:grid-cols-3 gap-8 lg:gap-0" data-stagger>
@@ -342,7 +353,15 @@ REST = """
 <!-- =====================================================================
      INDEPENDENCE + COMMISSION DISCLOSURE. Plain English, on purpose.
      ================================================================== -->
-<section class="section band-navy on-navy">
+<section class="section band-navy on-navy relative isolate overflow-hidden">
+
+  <!-- Decorative plate. Duotoned to navy so a colour photograph cannot
+       introduce a second accent, and scrimmed to a measured contrast ratio
+       rather than an eyeballed opacity. See MASTER.md section 8. -->
+  <div class="absolute inset-0 -z-10 media media-duotone media-scrim !rounded-none" aria-hidden="true">
+    {independence_media}
+  </div>
+
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8">
 
@@ -369,7 +388,7 @@ REST = """
       </div>
 
       <div class="lg:col-span-4 lg:col-start-9">
-        <div class="reveal border border-white/20 p-6 lg:p-8">
+        <div class="reveal border border-white/25 bg-navy/70 backdrop-blur-sm p-6 lg:p-8">
           <p class="text-sm text-white/70">Written and reviewed by</p>
           <p class="mt-2 text-h4 text-white">{agent}</p>
           <p class="mt-1 text-sm text-white/70">{agent_title}</p>
@@ -533,6 +552,9 @@ REST = """
 
 def rest():
     return REST.format(
+        independence_media=C.picture(
+            "home-independence", "100vw",
+            cls="w-full h-full", img_cls="media-img"),
         call_triage=C.phone_link("triage_result_final", "btn btn-call", "Call " + C.PHONE_DISPLAY),
         call_table=C.phone_link("compare_table_final", "btn-row", "Call about final expense"),
         call_faq=C.phone_link("faq_inline", "btn btn-ghost", "Call " + C.PHONE_DISPLAY),
