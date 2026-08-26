@@ -82,14 +82,14 @@ RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band"
                (16, 9): "media-strip", (4, 3): "media-square-ish"}
 
 
-def figure(name, sizes, caption=None, cls="", eager=False, glow=False):
-    """Editorial image block. glow=True paints the soft blue ambient glow
-    behind the plate. No scroll-linked motion in this variation."""
+def figure(name, sizes, caption=None, cls="", eager=False):
+    """Editorial image block. Static frame with a plate-edge hairline; the
+    page-level motion in this variation is reveal, stack, and marquee."""
     ratio = RATIO_CLASS[images.IMAGES[name][1]]
-    media = "media " + ratio
+    motion = "media " + ratio
     cap = ('<figcaption class="mt-3 text-micro text-muted">%s</figcaption>' % caption) if caption else ""
-    return ('<figure class="%s%s">%s%s</figure>'
-            % (cls, " glow" if glow else "", picture(name, sizes, cls=media, img_cls="media-img", eager=eager), cap))
+    return ('<figure class="%s">%s%s</figure>'
+            % (cls, picture(name, sizes, cls=motion, img_cls="media-img", eager=eager), cap))
 
 
 # ---------------------------------------------------------------------------
@@ -113,12 +113,12 @@ def header(active):
   <div class="container-ax">
     <div class="header-inner">
 
-      <a href="/" class="shrink-0 rounded-lg" aria-label="{BRAND}, home">
+      <a href="/" class="shrink-0 rounded-[2px]" aria-label="{BRAND}, home">
         <span class="wordmark">Apex</span>
         <span class="wordmark-sub">Insurance Marketing</span>
       </a>
 
-      <nav class="hidden lg:flex items-center gap-3 xl:gap-7 ml-4 xl:ml-10" aria-label="Primary">
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-7 ml-5 xl:ml-10" aria-label="Primary">
         {links}
       </nav>
 
@@ -126,16 +126,16 @@ def header(active):
         <!-- Click-to-call is present at every desktop width. Below 1280 the
              number itself does not fit beside four product-name nav links,
              so the label shortens rather than the CTA disappearing. -->
-        {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors", "Call")}
-        {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors")}
-        <a href="/contact/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a Free Quote</a>
+        {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-ink text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-navy transition-colors", "Call")}
+        {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-ink text-sm font-semibold whitespace-nowrap rounded-[2px] hover:text-navy transition-colors")}
+        <a href="/contact/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-5" data-magnetic>Get a Free Quote</a>
         <a href="tel:{PHONE_TEL}" data-cta-location="header_mobile"
-           class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-navy rounded-lg">
+           class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-ink rounded-[2px]">
           <span class="sr-only">Call {PHONE_DISPLAY}</span>
           {icon("phone", 24)}
         </a>
         <button type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav"
-                class="lg:hidden inline-flex items-center justify-center w-12 h-12 -mr-2 text-navy rounded-lg">
+                class="lg:hidden inline-flex items-center justify-center w-12 h-12 -mr-2 text-ink rounded-[2px]">
           <span class="sr-only">Open menu</span>
           {icon("menu", 24)}
         </button>
@@ -177,7 +177,7 @@ def footer():
         return (f'<div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] '
                 f'!font-sans">{title}</h2><ul class="mt-4 grid gap-2.5">{rows}</ul></div>')
 
-    return f"""<footer class="site-footer band-navy on-navy">
+    return f"""<footer class="site-footer on-navy">
   <div class="container-ax py-16 lg:py-20">
 
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
@@ -381,7 +381,7 @@ def byline():
     identical 368px dead gutter on all three hubs; as two columns the row is
     full and each column still breaks at a readable measure.
     """
-    return f"""<div class="card">
+    return f"""<div class="card" id="byline">
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
 
         <div class="lg:col-span-5 flex items-start gap-5">
@@ -428,7 +428,10 @@ def spoke_module(heading, intro, spokes):
     items = "".join(f"""
         <li class="reveal">
           <a href="{href}" class="tile">
-            <span class="text-h4 text-ink">{text}</span>
+            <span class="flex items-start justify-between gap-3">
+              <span class="text-h4 text-ink">{text}</span>
+              <span class="tile-arrow shrink-0 mt-1 text-ink">{icon("arrow-right", 18)}</span>
+            </span>
             <span class="mt-2 text-sm text-muted">{desc}</span>
           </a>
         </li>""" for href, text, desc in spokes)
@@ -444,35 +447,106 @@ def spoke_module(heading, intro, spokes):
 </section>"""
 
 
-def step(n, title, body, note=None):
-    """Numbered step. Numeral in the display face, tabular."""
-    extra = ('<p class="mt-2 text-micro text-muted">%s</p>' % note) if note else ""
-    return f"""<div class="reveal flex items-start gap-4">
-      <span class="step-num tnum" aria-hidden="true">{n}</span>
-      <div>
-        <h3 class="text-h4">{title}</h3>
-        <p class="mt-2 text-slate">{body}</p>{extra}
-      </div>
-    </div>"""
-
-
-def stat(value, label, prefix="", suffix="", count=True, cls=""):
-    """A figure with a label. `value` must be a spec figure (10, 30, 2000,
-    50000, 15), never a placeholder. count=False renders it static, which is
-    also what html.fe and reduced motion get regardless."""
-    text = "%s%s%s" % (prefix, format(value, ",") if isinstance(value, int) else value, suffix)
-    attrs = ""
-    if count and isinstance(value, int):
-        attrs = ' data-count="%d"' % value
-        if prefix: attrs += ' data-count-prefix="%s"' % prefix
-        if suffix: attrs += ' data-count-suffix="%s"' % suffix
-    return (f'<div class="stat {cls}"><span class="stat-value"{attrs}>{text}</span>'
-            f'<span class="stat-label">{label}</span></div>')
-
-
 def rates_flag(what):
     """Visible placeholder notice for any rate component. Rule 6."""
     return (f'<p class="flag">[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED] '
             f'The {what} below are structural placeholders. No premium shown here is a real, quoted, '
             f'or offered rate. Populate from current carrier rate cards and update the date line '
             f'before this page goes live.</p>')
+
+
+# ---------------------------------------------------------------------------
+# VARIATION 4 COMPONENTS
+# ---------------------------------------------------------------------------
+def eyebrow(text, cls=""):
+    """Uppercase micro-label. Names the topic; never numbers the section."""
+    return '<span class="eyebrow %s">%s</span>' % (cls, text)
+
+
+def step(n, title, body, note=None):
+    """Numbered step. Copy-preserving seam for stacks and flat step rows."""
+    extra = ('<p class="mt-3 text-sm text-muted">%s</p>' % note) if note else ""
+    return f"""<div class="reveal flex items-start gap-5">
+      <span class="step-num tnum" aria-hidden="true">{n}</span>
+      <div class="min-w-0">
+        <h3 class="text-h4 !font-sans">{title}</h3>
+        <p class="mt-3 text-slate">{body}</p>
+        {extra}
+      </div>
+    </div>"""
+
+
+def stack(steps):
+    """Sticky-stack storytelling. steps: [(title, body, note|None), ...].
+
+    Card i is pinned while card i+1 arrives; it scales and dims on card
+    i+1's view timeline because a stuck element's own timeline stalls.
+    The timeline names are inline so the `animation` shorthand in the
+    stylesheet cannot reset them. Without animation-timeline support the
+    cards simply overlap, which still reads as a deck. Under reduced motion
+    and inside .fe main the cards are a plain list.
+    """
+    n = len(steps)
+    scope = ", ".join("--stack-%d" % i for i in range(1, n + 1))
+    cards = []
+    for i, (title, body, note) in enumerate(steps, 1):
+        tl = "--stack-i:%d;view-timeline-name:--stack-%d;" % (i - 1, i)
+        if i < n:
+            tl += "animation-timeline:--stack-%d;" % (i + 1)
+        extra = ('<p class="mt-4 text-sm text-muted measure-tight">%s</p>' % note) if note else ""
+        cards.append(f"""
+      <li class="stack-card" style="{tl}">
+        <div class="grid gap-6 md:grid-cols-12 md:gap-8 items-start">
+          <div class="md:col-span-3"><span class="stack-num tnum" aria-hidden="true">{i:02d}</span>
+            <span class="sr-only">Step {i}</span></div>
+          <div class="md:col-span-9 col-rule">
+            <h3 class="text-h3">{title}</h3>
+            <p class="mt-5 text-lead text-slate measure-tight">{body}</p>
+            {extra}
+          </div>
+        </div>
+      </li>""")
+    return '<ol class="stack" style="timeline-scope:%s">%s\n    </ol>' % (scope, "".join(cards))
+
+
+def marquee(static=False):
+    """Carrier logo strip. Exactly one marquee per page; pausable; a static
+    wrapped row under reduced motion and on the senior page."""
+    # [PLACEHOLDER: CARRIER LOGOS] Do not display a carrier mark until the
+    # appointment with that carrier is active and the mark is licensed for
+    # use. Six slots, unlabeled on purpose.
+    slots = "".join('<div class="logo-slot">Carrier logo<br>[placeholder]</div>' for _ in range(6))
+    cls = "marquee marquee-static" if static else "marquee"
+    toggle = "" if static else f"""
+      <button type="button" class="marquee-toggle" data-marquee-toggle aria-pressed="false">
+        <span class="sr-only">Pause carrier logo animation</span>
+        <span class="ico-pause">{icon("pause", 18)}</span><span class="ico-play">{icon("play", 18)}</span>
+      </button>"""
+    return f"""<div class="{cls}" data-marquee aria-label="Appointed carriers">
+      <div class="marquee-track">
+        <div class="marquee-group">{slots}</div>
+        <div class="marquee-group" aria-hidden="true">{slots}</div>
+      </div>{toggle}
+    </div>"""
+
+
+def byline_compact():
+    """Byline near the top of every hub. Links to the full block in-page so
+    /about/agents/ is still linked exactly once per page."""
+    return (f'<a class="link-static" href="#byline">Written by {AGENT_NAME}, {AGENT_TITLE}</a>'
+            f'<span class="text-muted"> &#183; Reviewed {REVIEW_DATE}</span>')
+
+
+def rail(byline=True, static_marquee=False):
+    """Above-the-fold trust rail: licensing line, independence statement,
+    years in business, byline, carrier strip. Sits under every hero CTA."""
+    by = f'<p class="mt-4 text-sm">{byline_compact()}</p>' if byline else ""
+    return f"""<div class="rail">
+      <div class="rail-items">
+        <span>{icon("shield-check", 18, "shrink-0 mt-0.5 text-ink")}<span>Licensed in <strong>{STATES} states</strong> &#183; NPN {NPN}</span></span>
+        <span>{icon("scale", 18, "shrink-0 mt-0.5 text-ink")}<span><strong>Independent.</strong> We work for you, not one carrier.</span></span>
+        <span>{icon("building", 18, "shrink-0 mt-0.5 text-ink")}<span><strong>{YEARS} years</strong> placing policies</span></span>
+      </div>
+      {by}
+      <div class="mt-5">{marquee(static=static_marquee)}</div>
+    </div>"""

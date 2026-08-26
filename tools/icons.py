@@ -7,6 +7,8 @@ PATHS = {
   "plus": '<path d="M5 12h14"/><path d="M12 5v14"/>',
   "chevron-right": '<path d="m9 18 6-6-6-6"/>',
   "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  "pause": '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>',
+  "play": '<polygon points="6 3 20 12 6 21 6 3"/>',
   "arrow-down": '<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>',
   "check": '<path d="M20 6 9 17l-5-5"/>',
   "circle-check": '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',

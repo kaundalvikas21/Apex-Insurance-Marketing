@@ -70,13 +70,17 @@ Also replace `[CARRIER RATE CARD NAME AND EDITION]` in the source line under eac
 
 ## 4. Carrier logos
 
-Two logo strips (`/` and `/term-life-insurance/`) render six dashed `Carrier logo N` slots.
-Do not put a carrier mark on the site until the appointment is active **and** that carrier's brand
-guidelines have been checked. Each strip carries a `[PLACEHOLDER ...]` comment.
+Every page carries a carrier strip in the hero trust rail (`chrome.marquee()`: a pausable marquee,
+a static wrapped row on the final-expense page and under reduced motion), and the term hub has a
+second, static row. All render six dashed `Carrier logo [placeholder]` slots. Do not put a carrier
+mark on the site until the appointment is active **and** that carrier's brand guidelines have been
+checked. The helper carries a `[PLACEHOLDER ...]` comment.
 
 ## 4b. Photography
 
 Nine photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
+Variation 4 places six of them (fewer, larger frames): `home-independence`, `term-underwriting`,
+and `whole-acceptance` are fetched but not placed, and are marked as such in the manifest.
 `assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
 `tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
 
@@ -152,17 +156,18 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
 - **Consent / analytics.** Decide whether GA4 needs a consent banner in your states before adding it.
 - **`/thank-you/`** is stubbed and `noindex`. Forms currently render a success state in place. If
   you switch to a redirect, point it here.
-- **Motion.** `MOTION_INTENSITY` is 5: IntersectionObserver reveal, 40ms bento stagger, count-up
-  on spec figures (`[data-count]`, final value already in the HTML), chart draw-in. No scroll-linked
-  layer and no animation library. The final-expense page is deliberately exempt from every one of
-  these for accessibility reasons documented in MASTER.md section 4. If a future edit adds motion
-  there, that exemption is the thing being overridden, not a styling preference.
-- **Count-up figures.** Only spec figures carry `data-count` (10/15/20/30 years, $2,000,000,
-  40 years, 15 minutes). When `STATES` and `YEARS` get real values, do **not** add `data-count` to
-  them without checking the number is one you are happy to see animate on a trust page.
-- **Fonts.** Space Grotesk (variable 300 to 700) and Inter (variable) are self-hosted latin subsets
-  in `assets/fonts/`, both under the SIL Open Font License, fetched once from Google Fonts. No
-  runtime request leaves the domain for type.
+- **Motion.** `MOTION_INTENSITY` is 5, with no animation library and no scroll listener. The home
+  hero headline is a CSS keyframe line reveal; the "how we work" and "how to apply" sections are a
+  `position: sticky` deck whose scale and dim run on CSS scroll-driven animations behind
+  `@supports (animation-timeline: view())` (browsers without it get a plain sticky overlap); the
+  carrier strip is a CSS marquee with a Pause button; the primary CTAs have a small pointer-follow
+  on fine pointers only. Everything collapses under `prefers-reduced-motion`. The final-expense
+  page is deliberately exempt from every one of these for accessibility reasons documented in
+  MASTER.md section 4. If a future edit adds motion there, that exemption is the thing being
+  overridden, not a styling preference.
+- **Fonts.** Fraunces (variable, optical size 9 to 144, weight 300 to 900) and Inter Tight
+  (variable, 100 to 900) are self-hosted latin subsets in `assets/fonts/`, both under the SIL Open
+  Font License, fetched once from Google Fonts. No runtime request leaves the domain for type.
 
 ---
 

@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-"""HOME — brand and triage. Spec section 01.
+"""HOME, brand and triage. Spec section 01.
 
 Job of this page: route three very different visitors to the right silo
 without pitching a product. It links to hubs, never to spokes.
+
+Variation 4 "Modern Independent": oversized serif headline with a kinetic
+line reveal (this hero only), asymmetric 12 column splits with visible
+column rules, trust rail above the fold, sticky-stack "how we work", one
+navy section (independence and commission disclosure).
 """
 from icons import icon
 import chrome as C
@@ -55,6 +60,23 @@ FAQ = [
      "never pay Apex a fee."),
 ]
 
+STEPS = [
+    ("Tell us the basics",
+     "Your age, your state, whether you use tobacco, roughly what you are trying to cover, and "
+     "the broad strokes of your health. About five minutes by phone or by form.",
+     "We do not ask for a Social Security number or run a credit check in order to quote you."),
+    ("We compare our carriers",
+     "We run your details against the carriers we are appointed with and come back with what "
+     "each one is likely to offer, including the ones that would decline you.",
+     "Same day for most quotes. If a carrier needs more detail before it will commit, we say so "
+     "rather than guessing on its behalf."),
+    ("You apply, if it fits",
+     "We submit the application and stay with it through underwriting. If the carrier comes back "
+     "with a different rate class than we quoted, you hear it from us before you accept anything.",
+     "Simplified issue policies can be approved the same day. Fully underwritten policies "
+     "usually take three to six weeks."),
+]
+
 
 def schema():
     return [C.org_schema(),
@@ -63,15 +85,13 @@ def schema():
 
 
 # ---------------------------------------------------------------------------
-def _path_card(label, headline, fig, fit, body, cta_html, tone=""):
-    """One product path. `fig` is a spec figure shown as a pill, never a rate."""
+def _path_card(label, headline, fit, body, cta_html, span):
+    """One product path. Widths are asymmetric on purpose (5 / 4 / 3 of 12):
+    term carries the most traffic and the longest fit statement."""
     return f"""
-        <div class="reveal bento-cell bento-2 card-hover {tone}">
-          <div class="flex items-center justify-between gap-3">
-            <p class="text-sm font-medium text-muted">{label}</p>
-            <span class="pill">{fig}</span>
-          </div>
-          <h2 class="mt-2 text-h3 !font-display !font-semibold">{headline}</h2>
+        <div class="reveal flex flex-col h-full pt-6 lg:pt-0 {span} lg:pl-8 border-t lg:border-t-0 lg:border-l border-rule first:border-t-0 first:pt-0 first:lg:pl-0 first:lg:border-l-0">
+          <p class="text-sm font-medium text-muted">{label}</p>
+          <h2 class="mt-2 text-h3">{headline}</h2>
           <p class="mt-3 text-sm text-slate">{fit} <span class="text-muted">{body}</span></p>
           <div class="mt-6 lg:mt-auto lg:pt-6">{cta_html}</div>
         </div>"""
@@ -82,22 +102,26 @@ def body():
 
 
 # LCP candidate: the one eager image on this page.
-hero_media = C.figure("home-hero", "(min-width: 1024px) 38vw, 92vw",
-                      cls="reveal", eager=True, glow=True)
+hero_media = C.figure("home-hero", "(min-width: 1024px) 38vw, 92vw", eager=True)
 
 
 HERO = f"""
 <!-- =====================================================================
      HERO. Triage, not pitch. Three paths, each carrying its own silo's
-     CTA weighting per spec section 09.
+     CTA weighting per spec section 09. Trust rail directly beneath, inside
+     the first viewport.
      ================================================================== -->
-<section class="section-tight pt-10 md:pt-12 lg:pt-14 glow">
+<section class="section-tight pt-10 md:pt-12 lg:pt-16">
   <div class="container-ax">
 
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-x-8 lg:gap-y-12 items-end">
       <div class="lg:col-span-7">
-        <h1 class="reveal text-h1">Cover the people who depend on you.</h1>
-        <p class="reveal mt-4 text-lead text-slate max-w-xl">
+        {C.eyebrow("Independent, licensed life insurance agency")}
+        <h1 class="kinetic text-display mt-5">
+          <span class="line" style="--i:0"><span>Cover the people</span></span>
+          <span class="line" style="--i:1"><span>who <span class="u-key">depend</span> on you.</span></span>
+        </h1>
+        <p class="reveal mt-7 text-lead text-slate max-w-xl">
           Apex is an independent, licensed life insurance agency. We compare multiple carriers and
           tell you plainly what fits your family.
         </p>
@@ -108,70 +132,47 @@ HERO = f"""
         </p>
       </div>
 
-      <div class="lg:col-span-5 lg:col-start-8">
+      <!-- On phones the image follows the trust rail, so licensing and the
+           carrier strip stay inside the first screen. -->
+      <div class="order-last lg:order-none lg:col-span-5">
         {hero_media}
+      </div>
+
+      <!-- Trust rail: licensing, independence, years, carrier strip. -->
+      <div class="lg:col-span-12 min-w-0 reveal">
+        {C.rail(byline=False)}
       </div>
     </div>
 
-    <div class="mt-10 lg:mt-12 bento" data-stagger="40">
+    <div class="mt-12 lg:mt-14 grid lg:grid-cols-12 gap-8 lg:gap-0" data-stagger="70">
       {_path_card(
         "Coverage for a set period",
-        "Term life insurance", "10 to 30 years",
+        "Term life insurance",
         "Best if you want the largest death benefit for the lowest premium while you still have a mortgage or children at home.",
         "Typically ages 30 to 55. Coverage for 10, 15, 20, or 30 years.",
-        '<a href="/term-life-insurance/" class="btn btn-cta btn-block">Get term life quotes</a>'
-        '<p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>')}
+        '<a href="/term-life-insurance/" class="btn btn-cta btn-block" data-magnetic>Get term life quotes</a>'
+        '<p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>',
+        "lg:col-span-5")}
       {_path_card(
         "Lifetime coverage plus cash value",
-        "Whole life insurance", "For life",
+        "Whole life insurance",
         "Best if you want coverage that never expires, a premium that never rises, and a guaranteed cash value you can borrow against.",
         "Typically ages 40 to 65. Coverage for life.",
         '<div class="grid gap-2">'
         '<a href="/whole-life-insurance/" class="btn btn-cta btn-block">Explore whole life</a>'
         + C.phone_link("home_hero_whole", "btn btn-ghost btn-block", "Talk to an agent")
         + '</div><p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>',
-        tone="bento-cell-tint")}
+        "lg:col-span-4")}
       {_path_card(
         "Cover funeral costs, ages 50 to 85",
-        "Final expense insurance", "$2,000 to $50,000",
+        "Final expense insurance",
         "Best if you want a smaller policy that covers a funeral and final bills, with health questions instead of a medical exam.",
         "Most people set this up over the phone in about fifteen minutes.",
         C.phone_link("home_hero_final", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY)
-        + f'<p class="mt-3 text-micro text-muted">{C.HOURS}</p>')}
+        + f'<p class="mt-3 text-micro text-muted">{C.HOURS}</p>',
+        "lg:col-span-3")}
     </div>
 
-  </div>
-</section>
-
-<!-- Trust strip, directly beneath the hero CTAs and inside the same viewport. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 18, "shrink-0 text-navy")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("scale", 18, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-    </div>
-
-    <div class="mt-6 pt-6 border-t border-rule">
-      <p class="text-micro font-semibold uppercase tracking-[0.1em] text-muted">Carriers we are appointed with</p>
-      <!-- [PLACEHOLDER - REPLACE WITH APPOINTED CARRIER LOGOS. Do not display a
-           carrier mark until the appointment is active and the carrier's brand
-           guidelines have been checked.] -->
-      <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div class="logo-slot">Carrier logo 1</div>
-        <div class="logo-slot">Carrier logo 2</div>
-        <div class="logo-slot">Carrier logo 3</div>
-        <div class="logo-slot">Carrier logo 4</div>
-        <div class="logo-slot">Carrier logo 5</div>
-        <div class="logo-slot">Carrier logo 6</div>
-      </div>
-    </div>
   </div>
 </section>
 """
@@ -191,7 +192,7 @@ REST = """
      TRIAGE. Three questions, no email wall. Scores live in the markup next
      to the copy they belong to.
      ================================================================== -->
-<section id="triage" class="section band">
+<section id="triage" class="section band border-y border-rule">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
@@ -213,7 +214,7 @@ REST = """
           <p data-triage-progress class="text-sm font-medium text-muted"></p>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">What is the money mainly for?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3">What is the money mainly for?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Replacing my income while my family still depends on it</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:1">Leaving something behind no matter when I die</button>
@@ -222,7 +223,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">How old are you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3">How old are you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Under 45</button>
               <button type="button" class="triage-opt" data-score="term:2,whole:2">45 to 59</button>
@@ -231,7 +232,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">Which matters more to you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3">Which matters more to you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3,final:1">The lowest premium for the most coverage</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:2">Coverage that cannot expire or be cancelled</button>
@@ -243,7 +244,7 @@ REST = """
                this page is linked twice. See spec section 07. -->
           <div data-triage-result="term" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-semibold">Start with term life insurance</h3>
+            <h3 class="mt-1 text-h3">Start with term life insurance</h3>
             <p class="mt-4 text-slate">
               You are describing a temporary obligation with a large price tag. Term buys the most
               coverage per dollar for exactly as long as that obligation lasts, then it ends. If the
@@ -258,7 +259,7 @@ REST = """
 
           <div data-triage-result="whole" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-semibold">Look at whole life insurance</h3>
+            <h3 class="mt-1 text-h3">Look at whole life insurance</h3>
             <p class="mt-4 text-slate">
               You want the policy to still be there whenever it is needed, which term cannot promise.
               Whole life costs considerably more per dollar of death benefit, so the honest next step
@@ -272,7 +273,7 @@ REST = """
 
           <div data-triage-result="final" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-semibold">Final expense insurance is probably the fit</h3>
+            <h3 class="mt-1 text-h3">Final expense insurance is probably the fit</h3>
             <p class="mt-4 text-slate">
               You need a smaller policy, issued on health questions rather than a medical exam, that
               pays quickly and covers a funeral and the bills around it. This is almost always
@@ -296,41 +297,44 @@ REST = """
 
 <!-- =====================================================================
      HOW WE WORK. Honest expectation setting, not a funnel diagram.
+     Sticky-stack: the heading column pins while the three cards stack.
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">How working with us actually goes</h2>
-      <p class="reveal mt-5 text-slate">
-        Three steps. None of them obligates you to buy anything, and you can stop after any one
-        of them.
-      </p>
-    </div>
-
-    <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      {step1}
-      {step2}
-      {step3}
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-4 sticky-col">
+        {eyebrow_how}
+        <h2 class="reveal mt-4 text-h2">How working with us actually goes</h2>
+        <p class="reveal mt-5 text-slate">
+          Three steps. None of them obligates you to buy anything, and you can stop after any one
+          of them.
+        </p>
+      </div>
+      <div class="lg:col-span-8">
+        {stack}
+      </div>
     </div>
   </div>
 </section>
 
 <!-- =====================================================================
      INDEPENDENCE + COMMISSION DISCLOSURE. Plain English, on purpose.
+     The one navy section on this page.
      ================================================================== -->
 <section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8">
 
       <div class="lg:col-span-7">
-        <h2 class="reveal text-h2">Why it matters that we are independent</h2>
+        {eyebrow_why}
+        <h2 class="reveal mt-4 text-h2">Why it matters that we are independent</h2>
         <p class="reveal mt-6 text-lead text-white/88">
           A captive agent works for one insurance company and can only sell you that company's
           products. We are appointed with several, so when one carrier prices your health history
           badly, we can take the same application somewhere that treats it better.
         </p>
 
-        <h3 class="reveal mt-10 text-h4 text-white">How we get paid, in plain English</h3>
+        <h3 class="reveal mt-10 text-h4 !font-sans text-white">How we get paid, in plain English</h3>
         <p class="reveal mt-4 text-white/82">
           The carrier pays us a commission out of your premium when a policy is issued. You never
           pay Apex a fee, and buying through us does not raise your premium, because life insurance
@@ -344,10 +348,10 @@ REST = """
         </p>
       </div>
 
-      <div class="lg:col-span-4 lg:col-start-9">
-        <div class="reveal border border-white/20 bg-white/8 rounded-[12px] p-6 lg:p-8">
+      <div class="lg:col-span-4 lg:col-start-9 col-rule">
+        <div class="reveal">
           <p class="text-sm text-white/70">Written and reviewed by</p>
-          <p class="mt-2 text-h4 text-white">{agent}</p>
+          <p class="mt-2 text-h4 !font-sans text-white">{agent}</p>
           <p class="mt-1 text-sm text-white/70">{agent_title}</p>
           <p class="mt-5 text-sm text-white/82">
             Every page on this site is written or reviewed by a licensed agent before it is
@@ -360,7 +364,7 @@ REST = """
              The slot is designed and wired. It stays hidden until real,
              attributable, consented reviews exist. Remove the hidden
              attribute and populate data-reviews-list at that point. -->
-        <div class="reveal mt-6 border border-dashed border-white/25 rounded-[12px] p-6" data-reviews-slot hidden>
+        <div class="reveal mt-8 border border-dashed border-white/25 p-6" data-reviews-slot hidden>
           <p class="text-sm text-white/70">What clients say</p>
           <div data-reviews-list></div>
         </div>
@@ -375,88 +379,76 @@ REST = """
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The three products, side by side</h2>
-      <p class="reveal mt-5 text-slate">
-        Most people only ever need one of these. The differences that actually decide it are in
-        this table.
-      </p>
+    <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-end">
+      <div class="lg:col-span-7">
+        <h2 class="reveal text-h2">The three products, side by side</h2>
+      </div>
+      <div class="lg:col-span-5 col-rule">
+        <p class="reveal text-slate">
+          Most people only ever need one of these. The differences that actually decide it are in
+          this table.
+        </p>
+      </div>
     </div>
 
-    <div class="mt-10 bento" data-stagger="40">
-
-      <div class="reveal bento-cell bento-2">
-        <p class="eyebrow">Term life</p>
-        <div class="mt-4">{stat_term}</div>
-        <p class="mt-4 text-sm text-slate">The largest death benefit per dollar, for exactly as long as the mortgage or the children need it.</p>
-        <div class="mt-5 lg:mt-auto lg:pt-5"><a class="btn-row" href="/term-life-insurance/#rates">Term rates by age {arrow}</a></div>
-      </div>
-
-      <div class="reveal bento-cell bento-2 bento-cell-tint">
-        <p class="eyebrow">Whole life</p>
-        <div class="mt-4">{stat_whole}</div>
-        <p class="mt-4 text-sm text-slate">Never expires, premium never rises, and a guaranteed cash value builds behind it. Costs considerably more.</p>
-        <div class="mt-5 lg:mt-auto lg:pt-5"><a class="btn-row" href="/whole-life-insurance/#cash-value">How cash value builds {arrow}</a></div>
-      </div>
-
-      <div class="reveal bento-cell bento-2 bento-cell-blue">
-        <p class="eyebrow">Final expense</p>
-        <div class="mt-4">{stat_final}</div>
-        <p class="mt-4 text-sm text-white/85">A smaller policy for a funeral and final bills. Health questions, no exam, usually arranged on one call.</p>
-        <div class="mt-5 lg:mt-auto lg:pt-5">{call_table}</div>
-      </div>
-
-      <div class="reveal bento-6 table-scroll table-signature">
-        <table class="compare-table" style="min-width:46rem">
-          <caption class="sr-only">Comparison of term life, whole life, and final expense insurance</caption>
-          <thead>
-            <tr>
-              <th scope="col"><span class="sr-only">Feature</span></th>
-              <th scope="col">Term life</th>
-              <th scope="col">Whole life</th>
-              <th scope="col">Final expense</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">How long it lasts</th>
-              <td>10, 15, 20, or 30 years</td>
-              <td>Your whole life</td>
-              <td>Your whole life</td>
-            </tr>
-            <tr>
-              <th scope="row">Typical coverage</th>
-              <td class="tnum">$100,000 to $2,000,000</td>
-              <td class="tnum">$25,000 to $500,000</td>
-              <td class="tnum">$2,000 to $50,000</td>
-            </tr>
-            <tr>
-              <th scope="row">Medical exam</th>
-              <td>Often, sometimes waived</td>
-              <td>Usually</td>
-              <td>No. Health questions only</td>
-            </tr>
-            <tr>
-              <th scope="row">Builds cash value</th>
-              <td>No</td>
-              <td>Yes, guaranteed</td>
-              <td>Yes, modest</td>
-            </tr>
-            <tr>
-              <th scope="row">Premium over time</th>
-              <td>Level during the term, then rises steeply</td>
-              <td>Level for life</td>
-              <td>Level for life</td>
-            </tr>
-            <tr>
-              <th scope="row">Who it usually suits</th>
-              <td>Ages 30 to 55 with a mortgage or children at home</td>
-              <td>Ages 40 to 65 with a lifelong need or an estate to settle</td>
-              <td>Ages 50 to 85 covering a funeral</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="reveal mt-10 table-scroll">
+      <table class="compare-table" style="min-width:46rem">
+        <caption class="sr-only">Comparison of term life, whole life, and final expense insurance</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">Feature</span></th>
+            <th scope="col">Term life</th>
+            <th scope="col">Whole life</th>
+            <th scope="col">Final expense</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">How long it lasts</th>
+            <td>10, 15, 20, or 30 years</td>
+            <td>Your whole life</td>
+            <td>Your whole life</td>
+          </tr>
+          <tr>
+            <th scope="row">Typical coverage</th>
+            <td class="tnum">$100,000 to $2,000,000</td>
+            <td class="tnum">$25,000 to $500,000</td>
+            <td class="tnum">$2,000 to $50,000</td>
+          </tr>
+          <tr>
+            <th scope="row">Medical exam</th>
+            <td>Often, sometimes waived</td>
+            <td>Usually</td>
+            <td>No. Health questions only</td>
+          </tr>
+          <tr>
+            <th scope="row">Builds cash value</th>
+            <td>No</td>
+            <td>Yes, guaranteed</td>
+            <td>Yes, modest</td>
+          </tr>
+          <tr>
+            <th scope="row">Premium over time</th>
+            <td>Level during the term, then rises steeply</td>
+            <td>Level for life</td>
+            <td>Level for life</td>
+          </tr>
+          <tr>
+            <th scope="row">Who it usually suits</th>
+            <td>Ages 30 to 55 with a mortgage or children at home</td>
+            <td>Ages 40 to 65 with a lifelong need or an estate to settle</td>
+            <td>Ages 50 to 85 covering a funeral</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td><a class="btn-row" href="/term-life-insurance/#rates">Term rates by age</a></td>
+            <td><a class="btn-row" href="/whole-life-insurance/#cash-value">How cash value builds</a></td>
+            <td>{call_table}</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
 
     <p class="reveal mt-5 text-micro text-muted max-w-3xl">
@@ -469,7 +461,7 @@ REST = """
 <!-- =====================================================================
      FAQ. Native details elements, plus FAQPage schema in the head.
      ================================================================== -->
-<section class="section band">
+<section class="section band border-y border-rule">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
@@ -494,22 +486,22 @@ REST = """
 <!-- =====================================================================
      FINAL CTA, split by intent. Spec section 01.8.
      ================================================================== -->
-<section class="section-tight border-t border-rule glow">
+<section class="section-tight">
   <div class="container-ax">
-    <div class="grid md:grid-cols-2 gap-6" data-stagger="40">
+    <div class="grid lg:grid-cols-12">
 
-      <div class="reveal card card-hover">
-        <h2 class="text-h3 !font-display !font-semibold">Ready for quotes</h2>
-        <p class="mt-3 text-slate max-w-md">
+      <div class="reveal lg:col-span-7 lg:pr-16">
+        <h2 class="text-h2">Ready for quotes</h2>
+        <p class="mt-4 text-slate max-w-md">
           Send us the basics and a licensed agent comes back with what our carriers will actually
           offer you, usually the same business day.
         </p>
-        <a class="btn btn-cta mt-6" href="/contact/">Get a free quote</a>
+        <a class="btn btn-cta mt-6" href="/contact/" data-magnetic>Get a free quote</a>
         <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
       </div>
 
-      <div class="reveal card card-hover">
-        <h2 class="text-h3 !font-display !font-semibold">Prefer to talk</h2>
+      <div class="reveal mt-10 pt-10 border-t border-rule lg:mt-0 lg:pt-0 lg:border-t-0 lg:col-span-5 col-rule">
+        <h2 class="text-h3">Prefer to talk</h2>
         <p class="mt-3 text-slate max-w-md">
           Most of these questions are faster to answer out loud. You will reach a licensed agent,
           not a queue.
@@ -525,26 +517,11 @@ REST = """
 
 def rest():
     return REST.format(
-        step1=C.step(1, "Tell us the basics",
-            "Your age, your state, whether you use tobacco, roughly what you are trying to cover, and "
-            "the broad strokes of your health. About five minutes by phone or by form.",
-            "We do not ask for a Social Security number or run a credit check in order to quote you."),
-        step2=C.step(2, "We compare our carriers",
-            "We run your details against the carriers we are appointed with and come back with what "
-            "each one is likely to offer, including the ones that would decline you.",
-            "Same day for most quotes. If a carrier needs more detail before it will commit, we say so "
-            "rather than guessing on its behalf."),
-        step3=C.step(3, "You apply, if it fits",
-            "We submit the application and stay with it through underwriting. If the carrier comes back "
-            "with a different rate class than we quoted, you hear it from us before you accept anything.",
-            "Simplified issue policies can be approved the same day. Fully underwritten policies "
-            "usually take three to six weeks."),
-        stat_term=C.stat(30, "years, the longest level term", suffix=" yrs"),
-        stat_whole=C.stat("Lifelong", "coverage and a level premium"),
-        stat_final=C.stat(15, "minutes on the phone, typically", suffix=" min"),
-        arrow=icon("arrow-right", 16),
+        eyebrow_how=C.eyebrow("How we work", "reveal"),
+        eyebrow_why=C.eyebrow("Why independent", "reveal"),
+        stack=C.stack(STEPS),
         call_triage=C.phone_link("triage_result_final", "btn btn-call", "Call " + C.PHONE_DISPLAY),
-        call_table=C.phone_link("compare_bento_final", "btn btn-ghost btn-block", "Call about final expense"),
+        call_table=C.phone_link("compare_table_final", "btn-row", "Call about final expense"),
         call_faq=C.phone_link("faq_inline", "btn btn-ghost", "Call " + C.PHONE_DISPLAY),
         call_final=C.phone_link("final_cta_split", "btn btn-call mt-6", "Call " + C.PHONE_DISPLAY),
         agent=C.AGENT_NAME,

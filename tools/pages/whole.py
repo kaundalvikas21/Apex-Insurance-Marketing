@@ -166,7 +166,7 @@ def quote_form():
           </div>
 
           <p id="wl-illustration-note" data-prefill-note hidden
-             class="flag !bg-navy-050 !border-navy !text-navy mb-4">
+             class="flag !bg-cream !border-ink !text-ink mb-4">
             {icon("file-text", 16, "inline-block align-text-bottom mr-1")}
             You have asked for a full illustration. We will send the guaranteed and non guaranteed
             columns side by side, with the carrier named.
@@ -195,7 +195,7 @@ def quote_form():
           <div class="flex items-start gap-3">
             {icon("circle-check", 30, "shrink-0 text-green")}
             <div>
-              <h3 class="text-h3 !font-display !font-semibold">Got it</h3>
+              <h3 class="text-h3">Got it</h3>
               <p class="mt-3 text-slate">
                 A licensed agent is putting your comparison together now. You will get named
                 carriers, the guaranteed numbers, and where a figure is an assumption rather than a
@@ -213,7 +213,7 @@ def cash_value_chart():
     """Shape only. No numbers on the value axis, because a number there would
     be a projection, and we do not have carrier data to project from."""
     return """
-      <figure class="reveal bento-cell bento-4">
+      <figure class="reveal card">
         <figcaption class="text-h4">What the first forty years usually look like</figcaption>
         <p class="mt-2 text-sm text-muted">
           Cash value starts behind what you have paid in, catches up somewhere in the second
@@ -240,8 +240,8 @@ def cash_value_chart():
 
           <g class="chart-fade">
             <line class="chart-marker" x1="330" y1="20" x2="330" y2="260"></line>
-            <circle cx="330" cy="172" r="4.5" fill="#0A1F44"></circle>
-            <text class="chart-label" x="338" y="36" font-weight="600" fill="#0A1F44">Crossover</text>
+            <circle cx="330" cy="172" r="4.5" fill="#16181D"></circle>
+            <text class="chart-label" x="338" y="36" font-weight="600" fill="#16181D">Crossover</text>
           </g>
 
           <text class="chart-label" x="56"  y="280" text-anchor="middle">Year 0</text>
@@ -257,7 +257,7 @@ def cash_value_chart():
             <span class="w-7 border-t-2 border-dashed border-muted"></span>Total premiums paid
           </span>
           <span class="inline-flex items-center gap-2 text-sm">
-            <span class="w-7 border-t-2 border-navy-700"></span>Guaranteed cash value
+            <span class="w-7 border-t-2 border-navy"></span>Guaranteed cash value
           </span>
         </div>
 
@@ -272,9 +272,8 @@ def cash_value_chart():
 
 def body():
     permanence_media = C.figure("whole-permanence", "(min-width: 1024px) 38vw, 92vw",
-                                cls="reveal mt-8", glow=True)
-    acceptance_media = C.picture("whole-acceptance", "(min-width: 1024px) 38vw, 92vw",
-                                 cls="media media-strip !rounded-none", img_cls="media-img")
+                                cls="reveal mt-8")
+    # whole-acceptance is fetched but not placed in Variation 4.
     spokes = C.spoke_module(
         "Explore whole life insurance",
         "Nine pages covering the parts of whole life that need more than a paragraph.",
@@ -287,12 +286,13 @@ def body():
      HERO. Dual CTA at genuine parity: the form panel and the call panel are
      the same width, the same height, and the same optical weight.
      ================================================================== -->
-<section class="pt-6 pb-14 md:pb-16 glow">
+<section class="pt-6 pb-14 md:pb-16">
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("Whole Life Insurance", None)])}
 
     <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">Whole Life Insurance</h1>
+      {C.eyebrow("Lifetime coverage plus cash value", "reveal")}
+      <h1 class="reveal mt-4 text-h1">Whole Life Insurance</h1>
       <p class="reveal mt-5 text-lead text-slate">
         Coverage that does not expire, a premium that does not rise, and a cash value that is
         guaranteed in the contract. It costs considerably more than term, and this page explains
@@ -300,16 +300,21 @@ def body():
       </p>
     </div>
 
+    <!-- Trust rail above the two panels so it sits inside the first viewport. -->
+    <div class="mt-8 reveal">
+      {C.rail()}
+    </div>
+
     <div class="mt-10 grid lg:grid-cols-2 gap-6 items-stretch" id="quote">
 
       <div class="panel reveal flex flex-col">
-        <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
+        <h2 class="text-h3">Compare quotes</h2>
         <p class="mt-2 text-sm text-muted">Five questions. A licensed agent replies within {C.SLA}.</p>
         {quote_form()}
       </div>
 
       <div class="panel reveal flex flex-col">
-        <h2 class="text-h3 !font-display !font-semibold">Or talk to a licensed agent</h2>
+        <h2 class="text-h3">Or talk to a licensed agent</h2>
         <p class="mt-2 text-sm text-muted">
           Whole life has more moving parts than term. Most people find it faster to ask.
         </p>
@@ -326,7 +331,7 @@ def body():
         </ul>
 
         <div class="mt-auto pt-8">
-          <p class="text-sm font-semibold text-navy">Want the full numbers in writing?</p>
+          <p class="text-sm font-semibold text-ink">Want the full numbers in writing?</p>
           <p class="mt-2 text-sm text-muted">
             An illustration shows the guaranteed and non guaranteed columns year by year for the
             whole life of the policy.
@@ -339,26 +344,6 @@ def body():
           </button>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust strip, within one viewport of both CTAs. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("scale", 18, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("shield-check", 18, "shrink-0")}Your details are never sold to other agencies
-      </span>
     </div>
   </div>
 </section>
@@ -404,10 +389,10 @@ def body():
       </p>
     </div>
 
-    <div class="mt-10 bento" data-stagger="40">
-      <div class="reveal bento-cell bento-2">
+    <div class="mt-10 pt-10 rule-ink grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x md:divide-rule" data-stagger="80">
+      <div class="reveal md:pr-8">
         <div class="flex items-center gap-3">
-          {icon("shield-check", 26, "shrink-0 text-navy-700")}
+          {icon("shield-check", 26, "shrink-0 text-green")}
           <h3 class="text-h4">The death benefit</h3>
         </div>
         <p class="mt-4 text-slate">
@@ -415,19 +400,19 @@ def body():
           cannot cancel the policy because your health changed.
         </p>
       </div>
-      <div class="reveal bento-cell bento-2 bento-cell-blue">
+      <div class="reveal md:px-8">
         <div class="flex items-center gap-3">
-          {icon("banknote", 26, "shrink-0 text-white")}
+          {icon("banknote", 26, "shrink-0 text-green")}
           <h3 class="text-h4">The premium</h3>
         </div>
-        <p class="mt-4 text-white/85">
+        <p class="mt-4 text-slate">
           Fixed at the age you buy it and level for life. It does not rise with age, with inflation,
           or after a diagnosis.
         </p>
       </div>
-      <div class="reveal bento-cell bento-2 bento-cell-tint">
+      <div class="reveal md:pl-8">
         <div class="flex items-center gap-3">
-          {icon("trending-up", 26, "shrink-0 text-navy-700")}
+          {icon("trending-up", 26, "shrink-0 text-green")}
           <h3 class="text-h4">The cash value</h3>
         </div>
         <p class="mt-4 text-slate">
@@ -447,33 +432,29 @@ def body():
 <!-- =====================================================================
      4. HOW CASH VALUE BUILDS.
      ================================================================== -->
-<section id="cash-value" class="section glow">
+<section id="cash-value" class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">How cash value builds</h2>
-      <p class="reveal mt-5 text-slate">
-        Slowly at first, and that surprises people. In the first two or three years there is
-        often little or no cash value at all, because the carrier's costs of putting the policy
-        on the books come out first. After that it compounds at the guaranteed rate, and the gap
-        between what you have paid and what the policy is worth narrows, then reverses.
-      </p>
-    </div>
-
-    <div class="mt-10 bento" data-stagger="40">
-      {cash_value_chart()}
-
-      <div class="reveal bento-cell bento-2 bento-cell-tint">
-        <p class="eyebrow">Read before you buy</p>
-        <div class="mt-4">{C.stat(40, "policy years on the chart", suffix=" yrs")}</div>
-        <p class="mt-4 text-slate">
-          A whole life contract is measured in decades. The single most important thing to
-          understand before buying is the early years: a policy surrendered in year three usually
-          returns less than was paid into it.
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-4">
+        {C.eyebrow("How it grows", "reveal")}
+        <h2 class="reveal mt-4 text-h2">How cash value builds</h2>
+        <p class="reveal mt-5 text-slate">
+          Slowly at first, and that surprises people. In the first two or three years there is
+          often little or no cash value at all, because the carrier's costs of putting the policy
+          on the books come out first.
         </p>
-        <p class="mt-auto pt-5 text-sm text-muted">
-          Ask for a carrier illustration with the guaranteed column shown separately, then read
-          only that column.
+        <p class="reveal mt-5 text-slate">
+          After that it compounds at the guaranteed rate, and the gap between what you have paid
+          and what the policy is worth narrows, then reverses.
         </p>
+        <p class="reveal mt-5 text-sm text-muted">
+          This is the single most important thing to understand before buying. A policy surrendered
+          in year three usually returns less than was paid into it.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 lg:col-start-6">
+        {cash_value_chart()}
       </div>
     </div>
   </div>
@@ -482,36 +463,36 @@ def body():
 <!-- =====================================================================
      5. DIVIDENDS.
      ================================================================== -->
-<section class="section band">
+<section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-6">
         <h2 class="reveal text-h2">Dividends and participating policies</h2>
-        <p class="reveal mt-6 text-slate">
+        <p class="reveal mt-6 text-white/85">
           A participating policy from a mutual carrier may pay an annual dividend. It is not
           investment income. It is a return of part of the premium, paid when the company's actual
           mortality, expense, and investment results come in better than the conservative
           assumptions built into the price.
         </p>
-        <p class="reveal mt-4 text-slate">
+        <p class="reveal mt-4 text-white/85">
           You can usually take a dividend in cash, use it to reduce the premium, leave it to
           accumulate at interest, or buy paid up additions, which is small blocks of extra
           permanent coverage that themselves build cash value.
         </p>
       </div>
 
-      <div class="lg:col-span-5 lg:col-start-8">
-        <div class="reveal card border-navy">
+      <div class="lg:col-span-5 lg:col-start-8 col-rule">
+        <div class="reveal">
           <div class="flex items-start gap-3">
-            {icon("circle-alert", 26, "shrink-0 text-navy mt-0.5")}
+            {icon("circle-alert", 26, "shrink-0 text-white mt-0.5")}
             <div>
-              <h3 class="text-h4">Dividends are not guaranteed</h3>
-              <p class="mt-3 text-slate">
+              <h3 class="text-h3">Dividends are not guaranteed</h3>
+              <p class="mt-3 text-white/85">
                 Not this year, not next year, not ever. Several mutual carriers have paid one every
                 year for more than a century, and that record is genuinely meaningful, and it is
                 still not a promise.
               </p>
-              <p class="mt-4 text-slate">
+              <p class="mt-4 text-white/85">
                 When you read an illustration, find the guaranteed column. That is what you are
                 actually entitled to. Every other column is an assumption about a dividend scale
                 that can change.
@@ -541,7 +522,7 @@ def body():
       {C.rates_flag("premium comparisons")}
     </div>
 
-    <div class="reveal mt-8 table-scroll table-signature">
+    <div class="reveal mt-8 table-scroll">
       <table class="compare-table" style="min-width:44rem">
         <caption class="sr-only">Whole life insurance compared with 20 year term life insurance</caption>
         <thead>
@@ -563,8 +544,7 @@ def body():
     </div>
 
     <p class="reveal mt-4 text-micro text-muted max-w-3xl">
-      <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
-      Source: [CARRIER RATE CARD NAME AND EDITION].
+      Rates last updated: {C.RATES_DATE}. Source: [CARRIER RATE CARD NAME AND EDITION].
     </p>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
@@ -585,19 +565,20 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Who whole life actually suits</h2>
+      {C.eyebrow("The honest fit", "reveal")}
+      <h2 class="reveal mt-4 text-h2">Who whole life actually suits</h2>
       <p class="reveal mt-5 text-slate">
         Both halves of this matter equally. If you are on the right hand side, we will say so on
         the phone, and we will say it even though term pays us less.
       </p>
     </div>
 
-    <div class="mt-10 grid lg:grid-cols-2 gap-6">
+    <div class="mt-10 pt-10 rule-ink grid lg:grid-cols-2 gap-10 lg:gap-0">
 
-      <div class="reveal card card-hover h-full">
+      <div class="reveal lg:pr-10">
         <div class="flex items-center gap-3 pb-4 border-b border-rule">
           {icon("circle-check", 26, "shrink-0 text-green")}
-          <h3 class="text-h3 !font-display !font-semibold">It genuinely suits you if</h3>
+          <h3 class="text-h3">It genuinely suits you if</h3>
         </div>
         <ul class="mt-6 grid gap-5">
           <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>You are supporting a dependent with a disability who will need help for their whole life.</span></li>
@@ -608,17 +589,17 @@ def body():
         </ul>
       </div>
 
-      <div class="reveal card card-hover h-full">
+      <div class="reveal col-rule">
         <div class="flex items-center gap-3 pb-4 border-b border-rule">
-          {icon("circle-x", 26, "shrink-0 text-navy")}
-          <h3 class="text-h3 !font-display !font-semibold">It does not suit you if</h3>
+          {icon("circle-x", 26, "shrink-0 text-ink")}
+          <h3 class="text-h3">It does not suit you if</h3>
         </div>
         <ul class="mt-6 grid gap-5">
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>Your main need is replacing income while the children are at home. Term does that for a fraction of the cost.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>The premium would be a stretch. A policy you cannot sustain and surrender in year three usually returns less than you paid in.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You have an employer match you are not taking, or high interest debt. Both beat this comfortably.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You were sold it as an investment or a tax free retirement plan. It is insurance with a savings component, priced as such.</span></li>
-          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You need the largest possible death benefit on a fixed budget. Nothing beats term on that measure.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-ink mt-1")}<span>Your main need is replacing income while the children are at home. Term does that for a fraction of the cost.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-ink mt-1")}<span>The premium would be a stretch. A policy you cannot sustain and surrender in year three usually returns less than you paid in.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-ink mt-1")}<span>You have an employer match you are not taking, or high interest debt. Both beat this comfortably.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-ink mt-1")}<span>You were sold it as an investment or a tax free retirement plan. It is insurance with a savings component, priced as such.</span></li>
+          <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-ink mt-1")}<span>You need the largest possible death benefit on a fixed budget. Nothing beats term on that measure.</span></li>
         </ul>
         <p class="mt-6 text-sm text-slate">
           If more than one of these describes you, start with
@@ -651,9 +632,8 @@ def body():
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
-        <div class="reveal card !p-0 overflow-hidden">
-          {acceptance_media}
-          <div class="p-6 md:p-8">
+        <div class="reveal card">
+          <div>
           <h3 class="text-h4">If you cannot qualify</h3>
           <p class="mt-3 text-slate">
             Guaranteed acceptance whole life asks no health questions and turns nobody down within
@@ -705,11 +685,11 @@ def body():
 <!-- =====================================================================
      12. FINAL SPLIT CTA, at parity again.
      ================================================================== -->
-<section class="section-tight border-t border-rule glow">
+<section class="section-tight border-t border-rule">
   <div class="container-ax">
-    <div class="grid md:grid-cols-2 gap-6" data-stagger="40">
-      <div class="reveal card card-hover">
-        <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
+    <div class="grid md:grid-cols-2">
+      <div class="reveal md:pr-10 lg:pr-16">
+        <h2 class="text-h3">Compare quotes</h2>
         <p class="mt-3 text-slate max-w-md">
           Five answers at the top of this page and a licensed agent comes back with named carriers
           and the guaranteed numbers.
@@ -718,8 +698,8 @@ def body():
         <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
       </div>
 
-      <div class="reveal card card-hover">
-        <h2 class="text-h3 !font-display !font-semibold">Talk it through</h2>
+      <div class="reveal mt-10 pt-10 border-t border-rule md:mt-0 md:pt-0 md:border-t-0 md:border-l md:pl-10 lg:pl-16">
+        <h2 class="text-h3">Talk it through</h2>
         <p class="mt-3 text-slate max-w-md">
           Whole life has more moving parts than term, and most of them are easier to explain out
           loud than to read.

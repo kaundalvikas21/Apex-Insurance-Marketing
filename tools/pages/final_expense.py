@@ -99,16 +99,16 @@ def schema():
 # --- Repeating phone band. Spec: after every second section. ---------------
 def call_band(heading, sub, where):
     return f"""
-<section class="section-tight band-navy on-navy">
+<section class="section-tight bg-surface border-y-2 border-ink">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7">
-        <h2 class="reveal text-h3 !font-display !font-semibold text-white">{heading}</h2>
-        <p class="reveal mt-3 text-white/85">{sub}</p>
+        <h2 class="reveal text-h3">{heading}</h2>
+        <p class="reveal mt-3 text-slate">{sub}</p>
       </div>
       <div class="lg:col-span-5 reveal">
-        {C.phone_link(where, "btn btn-call btn-xl btn-block !bg-white !text-navy", "Call " + C.PHONE_DISPLAY, 26)}
-        <p class="mt-3 text-sm text-white/75 text-center">{C.HOURS}</p>
+        {C.phone_link(where, "btn btn-call btn-xl btn-block", "Call " + C.PHONE_DISPLAY, 26)}
+        <p class="mt-3 text-sm text-muted text-center">{C.HOURS}</p>
       </div>
     </div>
   </div>
@@ -124,8 +124,8 @@ def _acc(q, a):
 
 # --- Rate table -----------------------------------------------------------
 AGE_BANDS = ["50 to 54", "55 to 59", "60 to 64", "65 to 69", "70 to 74", "75 to 79", "80 to 85"]
-# Three columns at most on this page (senior readability). The full coverage
-# range is described in the scale above the table.
+# Two coverage columns plus the age column: three columns is the most this
+# audience should have to scan. The row's call CTA lives inside the age cell.
 COVERAGE_COLS = ["$10,000", "$25,000"]
 
 
@@ -133,8 +133,6 @@ def rate_rows(sex):
     rows = []
     for band in AGE_BANDS:
         cells = "".join('<td class="tnum">$--</td>' for _ in COVERAGE_COLS)
-        # The row-level call CTA sits under the age label so the table stays at
-        # three columns.
         call = C.phone_link("rate_table_" + sex, "btn-row mt-2", "Get this quoted", 18)
         rows.append(f'<tr><th scope="row"><span class="block">{band}</span>{call}</th>{cells}</tr>')
     return "\n            ".join(rows)
@@ -144,7 +142,7 @@ def rate_table():
     heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in COVERAGE_COLS)
     return f"""
       <div data-panels="fe-rates">
-      <div class="reveal mt-8 flex flex-wrap items-end gap-6">
+      <div class="mt-8 flex flex-wrap items-end gap-6">
         <fieldset>
           <legend class="field-label">Show premiums for</legend>
           <div class="choice-row">
@@ -161,7 +159,7 @@ def rate_table():
         <p class="text-sm text-muted">Non tobacco, level benefit. Tobacco rates are higher.</p>
       </div>
 
-      <div class="reveal mt-6 table-scroll table-signature">
+      <div class="reveal mt-6 table-scroll">
         <table class="rate-table" style="min-width:0">
           <caption>
             Monthly premium by age band and coverage amount.
@@ -184,9 +182,8 @@ def rate_table():
 
       </div>
 
-      <p class="reveal mt-4 text-sm text-muted">
-        <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
-        Source: [CARRIER RATE CARD NAME AND EDITION].
+      <p class="mt-4 text-sm text-muted">
+        Rates last updated: {C.RATES_DATE}. Source: [CARRIER RATE CARD NAME AND EDITION].
         Premiums vary by carrier, state, health, and tobacco use, and are not an offer of coverage.
       </p>"""
 
@@ -237,7 +234,7 @@ def body():
         </p>
         <div class="reveal mt-6">
           {C.phone_link("fe_hero_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
-          <p class="mt-4 text-lead text-navy font-semibold">
+          <p class="mt-4 text-lead text-ink font-semibold">
             Speak to a licensed agent. Most calls take about fifteen minutes.
           </p>
           <p class="mt-2 text-slate">{C.HOURS}</p>
@@ -245,6 +242,11 @@ def body():
             There is no medical exam. You answer health questions instead, the premium never goes
             up, and the coverage does not expire.
           </p>
+        </div>
+
+        <!-- Trust rail. Static carrier row: no marquee on this page. -->
+        <div class="reveal mt-8 min-w-0">
+          {C.rail(static_marquee=True)}
         </div>
 
         <div class="reveal mt-8 pt-8 border-t border-rule">
@@ -272,15 +274,15 @@ def body():
           <h2 class="text-h4">What happens when you get in touch</h2>
           <ol class="mt-4 grid gap-3">
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">1.</span>
+              <span class="text-ink font-semibold tnum shrink-0">1.</span>
               <span>A licensed agent picks up, or reads your form. Not a call centre.</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">2.</span>
+              <span class="text-ink font-semibold tnum shrink-0">2.</span>
               <span>We ask the health questions and compare our carriers with you.</span>
             </li>
             <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">3.</span>
+              <span class="text-ink font-semibold tnum shrink-0">3.</span>
               <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, in your own time.</span>
             </li>
           </ol>
@@ -292,7 +294,7 @@ def body():
       <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-semibold">Prefer we call you?</h2>
+          <h2 class="text-h3">Prefer we call you?</h2>
           <p class="mt-3 text-slate">
             Leave four details and a licensed agent will call you back.
           </p>
@@ -363,7 +365,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
+                <h3 class="text-h3">We have your details</h3>
                 <p class="mt-3 text-slate">
                   A licensed agent will call you within {C.SLA}. If you would rather not wait,
                   call us now and we can do it in one go.
@@ -376,26 +378,6 @@ def body():
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust strip. Within one viewport of the hero phone CTA. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 22, "shrink-0")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("scale", 22, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("building", 22, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("shield-check", 22, "shrink-0")}Your details are never sold on
-      </span>
     </div>
   </div>
 </section>
@@ -414,27 +396,27 @@ def body():
     </div>
 
     <div class="reveal mt-10 card">
-      <div class="flex items-baseline justify-between text-sm font-semibold text-navy tnum">
+      <div class="flex items-baseline justify-between text-sm font-semibold text-ink tnum">
         <span>$2,000</span>
         <span>$50,000</span>
       </div>
-      <div class="mt-3 h-4 w-full bg-navy-050 border border-rule rounded-full overflow-hidden">
-        <div class="h-full bg-navy-700 rounded-full" style="margin-left:12%;width:34%"></div>
+      <div class="mt-3 h-4 w-full bg-cream border border-rule rounded-[2px] overflow-hidden">
+        <div class="h-full bg-ink" style="margin-left:12%;width:34%"></div>
       </div>
-      <p class="mt-3 text-sm text-navy font-semibold">
+      <p class="mt-3 text-sm text-ink font-semibold">
         The shaded band is roughly $8,000 to $20,000, where most policies we place land.
       </p>
       <div class="mt-8 pt-8 border-t border-rule grid sm:grid-cols-3 gap-6">
         <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$2,000 to $8,000</p>
+          <p class="text-h3 text-ink tnum">$2,000 to $8,000</p>
           <p class="mt-2 text-slate">Cremation, a simple service, and a few outstanding bills.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$8,000 to $20,000</p>
+          <p class="text-h3 text-ink tnum">$8,000 to $20,000</p>
           <p class="mt-2 text-slate">A traditional burial with a service, plus room for the bills that follow.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$20,000 to $50,000</p>
+          <p class="text-h3 text-ink tnum">$20,000 to $50,000</p>
           <p class="mt-2 text-slate">A funeral plus something left over for a spouse or an adult child.</p>
         </div>
       </div>
@@ -465,9 +447,7 @@ def body():
       {C.rates_flag("premiums")}
     </div>
 
-    <div>
-      {rate_table()}
-    </div>
+    {rate_table()}
   </div>
 </section>
 
@@ -494,7 +474,7 @@ def body():
 
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h3 !font-display !font-semibold">The kind of thing you will be asked</h3>
+          <h3 class="text-h3">The kind of thing you will be asked</h3>
           <ul class="mt-5 grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Are you in a nursing home or receiving hospice care?</span></li>
@@ -542,7 +522,7 @@ def body():
 
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("hourglass", 26, "shrink-0 text-navy")}
+          {icon("hourglass", 26, "shrink-0 text-ink")}
           <h3 class="text-h4">Graded benefit</h3>
         </div>
         <p class="mt-4 text-slate">
@@ -556,7 +536,7 @@ def body():
 
       <div class="reveal card">
         <div class="flex items-center gap-3">
-          {icon("circle-alert", 26, "shrink-0 text-navy")}
+          {icon("circle-alert", 26, "shrink-0 text-ink")}
           <h3 class="text-h4">Guaranteed issue</h3>
         </div>
         <p class="mt-4 text-slate">
@@ -590,11 +570,11 @@ def body():
       </p>
     </div>
 
-    <div class="reveal mt-10 table-scroll table-signature">
-      <!-- Three columns, one per product. Each fact is a group row above its
-           three cells, so the table never needs a fourth column. -->
+    <div class="reveal mt-10 table-scroll">
       <table class="compare-table" style="min-width:0">
         <caption class="sr-only">Final expense compared with term life and whole life insurance</caption>
+        <!-- Three columns, no more: each fact is a label row above its three
+             cells, so the table fits this audience without a fourth column. -->
         <thead>
           <tr>
             <th scope="col">Final expense</th>
@@ -652,15 +632,15 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         <dl class="reveal grid gap-6">
           <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Usually accepted at level rates</dt>
+            <dt class="text-h4 text-ink">Usually accepted at level rates</dt>
             <dd class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</dd>
           </div>
           <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Often a graded benefit</dt>
+            <dt class="text-h4 text-ink">Often a graded benefit</dt>
             <dd class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</dd>
           </div>
           <div>
-            <dt class="text-h4 text-navy">Usually guaranteed issue</dt>
+            <dt class="text-h4 text-ink">Usually guaranteed issue</dt>
             <dd class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</dd>
           </div>
         </dl>
@@ -689,28 +669,28 @@ def body():
 
     <div class="mt-10 grid md:grid-cols-2 gap-6">
       <div class="reveal card flex items-start gap-4">
-        {icon("file-text", 26, "shrink-0 text-navy mt-1")}
+        {icon("file-text", 26, "shrink-0 text-ink mt-1")}
         <div>
           <h3 class="text-h4">Your date of birth and address</h3>
           <p class="mt-2 text-slate">Exactly as they appear on your driver licence or state ID.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("stethoscope", 26, "shrink-0 text-navy mt-1")}
+        {icon("stethoscope", 26, "shrink-0 text-ink mt-1")}
         <div>
           <h3 class="text-h4">Your medications</h3>
           <p class="mt-2 text-slate">The bottles are easiest. Names and doses are what the carrier asks for.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("users", 26, "shrink-0 text-navy mt-1")}
+        {icon("users", 26, "shrink-0 text-ink mt-1")}
         <div>
           <h3 class="text-h4">Your beneficiary</h3>
           <p class="mt-2 text-slate">The full name and date of birth of whoever should receive the money.</p>
         </div>
       </div>
       <div class="reveal card flex items-start gap-4">
-        {icon("banknote", 26, "shrink-0 text-navy mt-1")}
+        {icon("banknote", 26, "shrink-0 text-ink mt-1")}
         <div>
           <h3 class="text-h4">Your bank details</h3>
           <p class="mt-2 text-slate">Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.</p>
@@ -765,31 +745,31 @@ def body():
 <!-- =====================================================================
      12. FINAL: phone CTA and the short form, side by side.
      ================================================================== -->
-<section class="section">
+<section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
       <div class="reveal">
         <h2 class="text-h2">Talk it through</h2>
-        <p class="mt-5 text-slate">
+        <p class="mt-5 text-white/88">
           Fifteen minutes on the phone will tell you what you qualify for, what it costs, and
           whether there is a waiting period. No obligation to buy at the end of it.
         </p>
         <div class="mt-8">
           {C.phone_link("fe_final_primary", "btn btn-call btn-xl btn-block", "Call " + C.PHONE_DISPLAY, 28)}
         </div>
-        <p class="mt-4 text-slate">{C.HOURS}</p>
-        <p class="mt-6 text-sm text-muted">
+        <p class="mt-4 text-white/88">{C.HOURS}</p>
+        <p class="mt-6 text-sm text-white/75">
           You will reach a licensed agent, not a call centre queue and not a lead form that gets
           sold on to six other agencies.
         </p>
 
-        <div class="mt-8 pt-8 border-t border-rule">
+        <div class="mt-8 pt-8 border-t border-white/25">
           <h3 class="text-h4">What you will know by the end of the call</h3>
           <ul class="mt-4 grid gap-3">
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-white mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-white mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-white mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
           </ul>
         </div>
 
@@ -798,7 +778,7 @@ def body():
 
       <div class="reveal">
         <div class="panel">
-          <h2 class="text-h3 !font-display !font-semibold">Or leave your number</h2>
+          <h2 class="text-h3">Or leave your number</h2>
           <p class="mt-3 text-slate">Four details. We call you back.</p>
 
           <form class="mt-6" data-ax-form data-silo="final-expense"
@@ -859,7 +839,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
+                <h3 class="text-h3">We have your details</h3>
                 <p class="mt-3 text-slate">A licensed agent will call you within {C.SLA}.</p>
                 <div class="mt-5">
                   {C.phone_link("fe_footer_success", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY, 22)}

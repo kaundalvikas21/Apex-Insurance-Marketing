@@ -34,20 +34,20 @@ def body():
       </div>
 
       <div class="mt-12 card">
-        <h2 class="text-h3 !font-display !font-semibold">What happens now</h2>
+        <h2 class="text-h3">What happens now</h2>
         <ol class="mt-6 grid gap-5">
           <li class="flex items-start gap-3">
-            {icon("user-check", 22, "shrink-0 text-navy mt-1")}
+            {icon("user-check", 22, "shrink-0 text-ink mt-1")}
             <span>A licensed agent reads what you sent. Not a receptionist, and not an
             automated quote engine.</span>
           </li>
           <li class="flex items-start gap-3">
-            {icon("search", 22, "shrink-0 text-navy mt-1")}
+            {icon("search", 22, "shrink-0 text-ink mt-1")}
             <span>We check your details against the carriers we are appointed with, including
             the ones that would decline, so the comparison is honest.</span>
           </li>
           <li class="flex items-start gap-3">
-            {icon("phone", 22, "shrink-0 text-navy mt-1")}
+            {icon("phone", 22, "shrink-0 text-ink mt-1")}
             <span>We contact you within {C.SLA} with named carriers and real numbers. Nobody
             else calls you, because your details go nowhere else.</span>
           </li>

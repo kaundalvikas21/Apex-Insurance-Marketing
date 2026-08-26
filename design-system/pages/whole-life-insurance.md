@@ -1,15 +1,16 @@
-# Page override: Whole Life Insurance hub (`/whole-life-insurance/`)
-Inherits `design-system/MASTER.md`. Only deviations are listed.
+# Page override: Whole Life Insurance (/whole-life-insurance/)
+Inherits design-system/MASTER.md. Only deviations are listed.
 
-- **CTA weighting:** parity. Two `.panel`s of equal width and height: the five-field form and the
-  call panel with the tertiary "Request an illustration" button. `.glow` behind the hero.
-- **Three guarantees:** three-cell bento, white / blue / tinted, 40ms stagger.
-- **Cash value:** intro copy at reading width, then a bento: the chart figure as `.bento-4`
-  (draw-in kept from Variation 1, value line in bright blue, fill at 10% blue) beside a tinted
-  `.bento-2` stat (`40 yrs`, counts up) that carries the "read before you buy" warning.
-- **Cost against term:** `.table-signature` comparison, `$--` premium rows, dated `.pill`.
-- **Who it suits / does not suit:** two equal `.card.card-hover` columns. Neither is subordinate.
-- **Final CTA:** two hover cards at parity, `.glow`.
-- Layout families in order: hero + two panels, strip, split, bento, bento + chart, prose + card,
-  table, card pair, split + media card, tile grid, accordion, byline, card pair. Eyebrow budget 4,
-  used 1.
+- Dual CTA at genuine parity: two `.panel`s of equal width and height, orange on both the form
+  submit and the phone button (same accent, same weight), tertiary "Request an illustration" as a
+  ghost button. Trust rail with the compact byline spans beneath.
+- Three guarantees are ruled columns (`divide-x`) under a 2px Ink rule, not cards.
+- Cash-value chart keeps its `.flag` disclaimer; value line and marker recoloured navy / Ink.
+- The one navy section is dividends, with "not guaranteed" as a col-ruled column at equal weight.
+- Suits / does-not-suit is a 6/6 ruled split under a 2px Ink rule with equal type: the strongest
+  E-E-A-T signal on the page keeps equal prominence.
+- Guaranteed-acceptance card drops its photograph.
+- Layout families in order: stacked hero + dual panels + rail / split with image / ruled trio /
+  split + chart card / navy split / table / ruled pair / split + card / tile grid / split
+  accordion / byline card / split CTA.
+- Eyebrow budget 4, used 3 (hero, how it grows, the honest fit).
