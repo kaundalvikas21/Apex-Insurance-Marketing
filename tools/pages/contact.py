@@ -25,8 +25,7 @@ def schema():
 
 
 def body():
-    desk_media = C.figure("contact-desk", "(min-width: 1024px) 38vw, 92vw",
-                          cls="reveal", parallax=True)
+    desk_media = C.figure("contact-desk", "(min-width: 1024px) 38vw, 92vw", cls="reveal")
 
     return f"""
 <section class="pt-6 pb-14 md:pb-16">
@@ -34,7 +33,8 @@ def body():
     {C.crumbs([("Home", "/"), ("Contact", None)])}
 
     <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">Contact Apex</h1>
+      {C.eyebrow("Talk to a licensed agent", "reveal")}
+      <h1 class="reveal mt-4 text-h1">Contact Apex</h1>
       <p class="reveal mt-5 text-lead text-slate">
         You will reach a licensed agent. Not a call centre, not a lead form that gets sold on to
         six other agencies, and not a chatbot pretending to be a person.
@@ -46,10 +46,8 @@ def body():
       <!-- LEFT: phone first, then what actually happens on the call. -->
       <div class="lg:col-span-5">
 
-        {desk_media}
-
-        <div class="reveal card mt-8">
-          <h2 class="text-h3 !font-display !font-bold">Call us</h2>
+        <div class="reveal pt-6 rule-ink">
+          <h2 class="text-h3">Call us</h2>
           <div class="mt-5">
             {C.phone_link("contact_primary", "btn btn-call btn-block !min-h-[64px] !text-lead", C.PHONE_DISPLAY, 24)}
           </div>
@@ -59,39 +57,45 @@ def body():
           </p>
         </div>
 
-        <div class="reveal mt-8">
-          <h2 class="text-h3 !font-display !font-bold">What to expect on the call</h2>
+        <div class="mt-8 min-w-0 reveal">
+          {C.rail(byline=False)}
+        </div>
+
+        <div class="reveal mt-10">
+          <h2 class="text-h3">What to expect on the call</h2>
           <ul class="mt-6 grid gap-5">
             <li class="flex items-start gap-3">
-              {icon("clock", 22, "shrink-0 text-navy mt-1")}
+              {icon("clock", 22, "shrink-0 text-ink mt-1")}
               <div>
-                <p class="font-semibold text-navy">Ten to twenty minutes</p>
+                <p class="font-semibold text-ink">Ten to twenty minutes</p>
                 <p class="mt-1 text-slate">Longer if you want to work through the numbers, shorter if you already know what you want.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
-              {icon("list-checks", 22, "shrink-0 text-navy mt-1")}
+              {icon("list-checks", 22, "shrink-0 text-ink mt-1")}
               <div>
-                <p class="font-semibold text-navy">Questions, then options</p>
+                <p class="font-semibold text-ink">Questions, then options</p>
                 <p class="mt-1 text-slate">Your age, state, health, and what you are trying to cover. No Social Security number and no credit check to get a quote.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
-              {icon("handshake", 22, "shrink-0 text-navy mt-1")}
+              {icon("handshake", 22, "shrink-0 text-ink mt-1")}
               <div>
-                <p class="font-semibold text-navy">No pressure to decide on the call</p>
+                <p class="font-semibold text-ink">No pressure to decide on the call</p>
                 <p class="mt-1 text-slate">If the honest answer is that you do not need what you called about, we will say so.</p>
               </div>
             </li>
           </ul>
         </div>
 
+        <div class="mt-10">{desk_media}</div>
+
       </div>
 
       <!-- RIGHT: the form. -->
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Send us a message</h2>
+          <h2 class="text-h3">Send us a message</h2>
           <p class="mt-2 text-sm text-muted">
             A licensed agent reads every one of these. We reply within {C.SLA}.
           </p>
@@ -179,7 +183,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">Message received</h3>
+                <h3 class="text-h3">Message received</h3>
                 <p class="mt-3 text-slate">
                   A licensed agent will read it and get back to you within {C.SLA}. If it is
                   urgent, calling is faster.
@@ -199,15 +203,15 @@ def body():
 
 <!-- Licence disclosure as a full-width strip. It was the bottom card of a
      column before, which both buried it and unbalanced the hero. -->
-<section class="section-tight border-y border-rule bg-surface">
+<section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="reveal grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
       <div class="lg:col-span-5 flex items-start gap-3">
-        {icon("shield-check", 26, "shrink-0 text-navy mt-1")}
-        <h2 class="text-h3 !font-display !font-bold">Licensed, and independent of every carrier</h2>
+        {icon("shield-check", 26, "shrink-0 text-white mt-2")}
+        <h2 class="text-h2">Licensed, and independent of every carrier</h2>
       </div>
-      <div class="lg:col-span-7">
-        <p class="text-slate">
+      <div class="lg:col-span-7 col-rule">
+        <p class="text-white/85">
           {C.BRAND} is a licensed independent insurance agency, licensed in {C.STATES} states,
           National Producer Number {C.NPN}. We are appointed with multiple carriers and we are not
           owned by any of them, which is what lets us take your application somewhere else when the
@@ -222,22 +226,22 @@ def body():
 <!-- =====================================================================
      WHAT HAPPENS NEXT.
      ================================================================== -->
-<section class="section-tight band">
+<section class="section-tight band border-y border-rule">
   <div class="container-ax">
     <h2 class="reveal text-h2">What happens next</h2>
-    <div class="mt-10 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
+    <div class="mt-10 pt-10 rule-ink grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x md:divide-rule" data-stagger="80">
+      <div class="reveal md:px-8 md:first:pl-0 md:last:pr-0">
+        <div class="flex items-center gap-3">
+          <span class="step-num tnum" aria-hidden="true">1</span>
           <h3 class="text-h4">You send it</h3>
         </div>
         <p class="mt-5 text-slate">
           Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker.
         </p>
       </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
+      <div class="reveal md:px-8 md:first:pl-0 md:last:pr-0">
+        <div class="flex items-center gap-3">
+          <span class="step-num tnum" aria-hidden="true">2</span>
           <h3 class="text-h4">A licensed agent reads it</h3>
         </div>
         <p class="mt-5 text-slate">
@@ -245,9 +249,9 @@ def body():
           taking a message.
         </p>
       </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
+      <div class="reveal md:px-8 md:first:pl-0 md:last:pr-0">
+        <div class="flex items-center gap-3">
+          <span class="step-num tnum" aria-hidden="true">3</span>
           <h3 class="text-h4">We contact you</h3>
         </div>
         <p class="mt-5 text-slate">

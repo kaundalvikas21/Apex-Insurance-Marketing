@@ -36,6 +36,7 @@ IMAGES = {
         "An older man and two children preparing food together at a kitchen counter."),
     # Hands over spread paperwork, shot dark. The comparison work this section
     # describes, and dark enough that the scrim has an easy job.
+    # Fetched but not placed in Variation 4 (fewer, larger frames).
     "home-independence": (
         "1635859890085-ec8cb5466806", (3, 2), [640, 1024, 1440], "center",
         ""),  # decorative: sits behind copy in the navy band
@@ -44,12 +45,14 @@ IMAGES = {
     "term-home": (
         "1760229090663-fe14715d4efe", (3, 2), [520, 800, 1100], "center",
         "A two storey house behind mature trees."),
+    # Fetched but not placed in Variation 4 (fewer, larger frames).
     "term-underwriting": (
         "1631815584191-0ed1723f0ead", (4, 3), [520, 800, 1100], "center",
         "A blood pressure cuff being fitted to someone's upper arm during a routine check."),
     "whole-permanence": (
         "1601041597271-71988152f98b", (3, 2), [640, 1024, 1440], "center",
         "The front porch and door of an older brick house."),
+    # Fetched but not placed in Variation 4 (fewer, larger frames).
     "whole-acceptance": (
         "1624889229800-7ca4c6c0d52b", (16, 9), [480, 760, 1040], "center",
         ""),  # decorative: chairs outside a house at dusk
