@@ -63,11 +63,15 @@ def schema():
 
 
 # ---------------------------------------------------------------------------
-def _path_card(kind, label, headline, fit, body, cta_html, tone=""):
+def _path_card(label, headline, fig, fit, body, cta_html, tone=""):
+    """One product path. `fig` is a spec figure shown as a pill, never a rate."""
     return f"""
-        <div class="reveal flex flex-col h-full pt-6 lg:pt-0 lg:pl-8 border-t lg:border-t-0 lg:border-l border-rule first:border-t-0 first:pt-0 first:lg:pl-0 first:lg:border-l-0">
-          <p class="text-sm font-medium text-muted">{label}</p>
-          <h2 class="mt-1 text-h3 !font-display !font-bold">{headline}</h2>
+        <div class="reveal bento-cell bento-2 card-hover {tone}">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-sm font-medium text-muted">{label}</p>
+            <span class="pill">{fig}</span>
+          </div>
+          <h2 class="mt-2 text-h3 !font-display !font-semibold">{headline}</h2>
           <p class="mt-3 text-sm text-slate">{fit} <span class="text-muted">{body}</span></p>
           <div class="mt-6 lg:mt-auto lg:pt-6">{cta_html}</div>
         </div>"""
@@ -79,7 +83,7 @@ def body():
 
 # LCP candidate: the one eager image on this page.
 hero_media = C.figure("home-hero", "(min-width: 1024px) 38vw, 92vw",
-                      cls="reveal", eager=True, parallax=True)
+                      cls="reveal", eager=True, glow=True)
 
 
 HERO = f"""
@@ -87,7 +91,7 @@ HERO = f"""
      HERO. Triage, not pitch. Three paths, each carrying its own silo's
      CTA weighting per spec section 09.
      ================================================================== -->
-<section class="section-tight pt-10 md:pt-12 lg:pt-14">
+<section class="section-tight pt-10 md:pt-12 lg:pt-14 glow">
   <div class="container-ax">
 
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
@@ -109,26 +113,27 @@ HERO = f"""
       </div>
     </div>
 
-    <div class="mt-10 lg:mt-12 grid lg:grid-cols-3 gap-8 lg:gap-0" data-stagger>
+    <div class="mt-10 lg:mt-12 bento" data-stagger="40">
       {_path_card(
-        "term", "Coverage for a set period",
-        "Term life insurance",
+        "Coverage for a set period",
+        "Term life insurance", "10 to 30 years",
         "Best if you want the largest death benefit for the lowest premium while you still have a mortgage or children at home.",
         "Typically ages 30 to 55. Coverage for 10, 15, 20, or 30 years.",
         '<a href="/term-life-insurance/" class="btn btn-cta btn-block">Get term life quotes</a>'
         '<p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>')}
       {_path_card(
-        "whole", "Lifetime coverage plus cash value",
-        "Whole life insurance",
+        "Lifetime coverage plus cash value",
+        "Whole life insurance", "For life",
         "Best if you want coverage that never expires, a premium that never rises, and a guaranteed cash value you can borrow against.",
         "Typically ages 40 to 65. Coverage for life.",
         '<div class="grid gap-2">'
         '<a href="/whole-life-insurance/" class="btn btn-cta btn-block">Explore whole life</a>'
         + C.phone_link("home_hero_whole", "btn btn-ghost btn-block", "Talk to an agent")
-        + '</div><p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>')}
+        + '</div><p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>',
+        tone="bento-cell-tint")}
       {_path_card(
-        "final", "Cover funeral costs, ages 50 to 85",
-        "Final expense insurance",
+        "Cover funeral costs, ages 50 to 85",
+        "Final expense insurance", "$2,000 to $50,000",
         "Best if you want a smaller policy that covers a funeral and final bills, with health questions instead of a medical exam.",
         "Most people set this up over the phone in about fifteen minutes.",
         C.phone_link("home_hero_final", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY)
@@ -208,7 +213,7 @@ REST = """
           <p data-triage-progress class="text-sm font-medium text-muted"></p>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">What is the money mainly for?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">What is the money mainly for?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Replacing my income while my family still depends on it</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:1">Leaving something behind no matter when I die</button>
@@ -217,7 +222,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">How old are you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">How old are you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3">Under 45</button>
               <button type="button" class="triage-opt" data-score="term:2,whole:2">45 to 59</button>
@@ -226,7 +231,7 @@ REST = """
           </div>
 
           <div data-triage-q hidden>
-            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-bold">Which matters more to you?</h3>
+            <h3 data-triage-heading class="mt-2 text-h3 !font-display !font-semibold">Which matters more to you?</h3>
             <div class="mt-6 grid gap-2.5">
               <button type="button" class="triage-opt" data-score="term:3,final:1">The lowest premium for the most coverage</button>
               <button type="button" class="triage-opt" data-score="whole:3,final:2">Coverage that cannot expire or be cancelled</button>
@@ -238,7 +243,7 @@ REST = """
                this page is linked twice. See spec section 07. -->
           <div data-triage-result="term" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Start with term life insurance</h3>
+            <h3 class="mt-1 text-h3 !font-display !font-semibold">Start with term life insurance</h3>
             <p class="mt-4 text-slate">
               You are describing a temporary obligation with a large price tag. Term buys the most
               coverage per dollar for exactly as long as that obligation lasts, then it ends. If the
@@ -253,7 +258,7 @@ REST = """
 
           <div data-triage-result="whole" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Look at whole life insurance</h3>
+            <h3 class="mt-1 text-h3 !font-display !font-semibold">Look at whole life insurance</h3>
             <p class="mt-4 text-slate">
               You want the policy to still be there whenever it is needed, which term cannot promise.
               Whole life costs considerably more per dollar of death benefit, so the honest next step
@@ -267,7 +272,7 @@ REST = """
 
           <div data-triage-result="final" hidden>
             <p class="text-sm text-muted">Based on your answers</p>
-            <h3 class="mt-1 text-h3 !font-display !font-bold">Final expense insurance is probably the fit</h3>
+            <h3 class="mt-1 text-h3 !font-display !font-semibold">Final expense insurance is probably the fit</h3>
             <p class="mt-4 text-slate">
               You need a smaller policy, issued on health questions rather than a medical exam, that
               pays quickly and covers a funeral and the bills around it. This is almost always
@@ -303,49 +308,9 @@ REST = """
     </div>
 
     <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
-          <h3 class="text-h4">Tell us the basics</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          Your age, your state, whether you use tobacco, roughly what you are trying to cover, and
-          the broad strokes of your health. About five minutes by phone or by form.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          We do not ask for a Social Security number or run a credit check in order to quote you.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
-          <h3 class="text-h4">We compare our carriers</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          We run your details against the carriers we are appointed with and come back with what
-          each one is likely to offer, including the ones that would decline you.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          Same day for most quotes. If a carrier needs more detail before it will commit, we say so
-          rather than guessing on its behalf.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
-          <h3 class="text-h4">You apply, if it fits</h3>
-        </div>
-        <p class="mt-5 text-slate">
-          We submit the application and stay with it through underwriting. If the carrier comes back
-          with a different rate class than we quoted, you hear it from us before you accept anything.
-        </p>
-        <p class="mt-3 text-sm text-muted">
-          Simplified issue policies can be approved the same day. Fully underwritten policies
-          usually take three to six weeks.
-        </p>
-      </div>
+      {step1}
+      {step2}
+      {step3}
     </div>
   </div>
 </section>
@@ -353,15 +318,7 @@ REST = """
 <!-- =====================================================================
      INDEPENDENCE + COMMISSION DISCLOSURE. Plain English, on purpose.
      ================================================================== -->
-<section class="section band-navy on-navy relative isolate overflow-hidden">
-
-  <!-- Decorative plate. Duotoned to navy so a colour photograph cannot
-       introduce a second accent, and scrimmed to a measured contrast ratio
-       rather than an eyeballed opacity. See MASTER.md section 8. -->
-  <div class="absolute inset-0 -z-10 media media-duotone media-scrim !rounded-none" aria-hidden="true">
-    {independence_media}
-  </div>
-
+<section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8">
 
@@ -388,7 +345,7 @@ REST = """
       </div>
 
       <div class="lg:col-span-4 lg:col-start-9">
-        <div class="reveal border border-white/25 bg-navy/70 backdrop-blur-sm p-6 lg:p-8">
+        <div class="reveal border border-white/20 bg-white/8 rounded-[12px] p-6 lg:p-8">
           <p class="text-sm text-white/70">Written and reviewed by</p>
           <p class="mt-2 text-h4 text-white">{agent}</p>
           <p class="mt-1 text-sm text-white/70">{agent_title}</p>
@@ -403,7 +360,7 @@ REST = """
              The slot is designed and wired. It stays hidden until real,
              attributable, consented reviews exist. Remove the hidden
              attribute and populate data-reviews-list at that point. -->
-        <div class="reveal mt-6 border border-dashed border-white/25 p-6" data-reviews-slot hidden>
+        <div class="reveal mt-6 border border-dashed border-white/25 rounded-[12px] p-6" data-reviews-slot hidden>
           <p class="text-sm text-white/70">What clients say</p>
           <div data-reviews-list></div>
         </div>
@@ -426,64 +383,80 @@ REST = """
       </p>
     </div>
 
-    <div class="reveal mt-10 table-scroll">
-      <table class="compare-table" style="min-width:46rem">
-        <caption class="sr-only">Comparison of term life, whole life, and final expense insurance</caption>
-        <thead>
-          <tr>
-            <th scope="col"><span class="sr-only">Feature</span></th>
-            <th scope="col">Term life</th>
-            <th scope="col">Whole life</th>
-            <th scope="col">Final expense</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">How long it lasts</th>
-            <td>10, 15, 20, or 30 years</td>
-            <td>Your whole life</td>
-            <td>Your whole life</td>
-          </tr>
-          <tr>
-            <th scope="row">Typical coverage</th>
-            <td class="tnum">$100,000 to $2,000,000</td>
-            <td class="tnum">$25,000 to $500,000</td>
-            <td class="tnum">$2,000 to $50,000</td>
-          </tr>
-          <tr>
-            <th scope="row">Medical exam</th>
-            <td>Often, sometimes waived</td>
-            <td>Usually</td>
-            <td>No. Health questions only</td>
-          </tr>
-          <tr>
-            <th scope="row">Builds cash value</th>
-            <td>No</td>
-            <td>Yes, guaranteed</td>
-            <td>Yes, modest</td>
-          </tr>
-          <tr>
-            <th scope="row">Premium over time</th>
-            <td>Level during the term, then rises steeply</td>
-            <td>Level for life</td>
-            <td>Level for life</td>
-          </tr>
-          <tr>
-            <th scope="row">Who it usually suits</th>
-            <td>Ages 30 to 55 with a mortgage or children at home</td>
-            <td>Ages 40 to 65 with a lifelong need or an estate to settle</td>
-            <td>Ages 50 to 85 covering a funeral</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td><a class="btn-row" href="/term-life-insurance/#rates">Term rates by age</a></td>
-            <td><a class="btn-row" href="/whole-life-insurance/#cash-value">How cash value builds</a></td>
-            <td>{call_table}</td>
-          </tr>
-        </tfoot>
-      </table>
+    <div class="mt-10 bento" data-stagger="40">
+
+      <div class="reveal bento-cell bento-2">
+        <p class="eyebrow">Term life</p>
+        <div class="mt-4">{stat_term}</div>
+        <p class="mt-4 text-sm text-slate">The largest death benefit per dollar, for exactly as long as the mortgage or the children need it.</p>
+        <div class="mt-5 lg:mt-auto lg:pt-5"><a class="btn-row" href="/term-life-insurance/#rates">Term rates by age {arrow}</a></div>
+      </div>
+
+      <div class="reveal bento-cell bento-2 bento-cell-tint">
+        <p class="eyebrow">Whole life</p>
+        <div class="mt-4">{stat_whole}</div>
+        <p class="mt-4 text-sm text-slate">Never expires, premium never rises, and a guaranteed cash value builds behind it. Costs considerably more.</p>
+        <div class="mt-5 lg:mt-auto lg:pt-5"><a class="btn-row" href="/whole-life-insurance/#cash-value">How cash value builds {arrow}</a></div>
+      </div>
+
+      <div class="reveal bento-cell bento-2 bento-cell-blue">
+        <p class="eyebrow">Final expense</p>
+        <div class="mt-4">{stat_final}</div>
+        <p class="mt-4 text-sm text-white/85">A smaller policy for a funeral and final bills. Health questions, no exam, usually arranged on one call.</p>
+        <div class="mt-5 lg:mt-auto lg:pt-5">{call_table}</div>
+      </div>
+
+      <div class="reveal bento-6 table-scroll table-signature">
+        <table class="compare-table" style="min-width:46rem">
+          <caption class="sr-only">Comparison of term life, whole life, and final expense insurance</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Feature</span></th>
+              <th scope="col">Term life</th>
+              <th scope="col">Whole life</th>
+              <th scope="col">Final expense</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">How long it lasts</th>
+              <td>10, 15, 20, or 30 years</td>
+              <td>Your whole life</td>
+              <td>Your whole life</td>
+            </tr>
+            <tr>
+              <th scope="row">Typical coverage</th>
+              <td class="tnum">$100,000 to $2,000,000</td>
+              <td class="tnum">$25,000 to $500,000</td>
+              <td class="tnum">$2,000 to $50,000</td>
+            </tr>
+            <tr>
+              <th scope="row">Medical exam</th>
+              <td>Often, sometimes waived</td>
+              <td>Usually</td>
+              <td>No. Health questions only</td>
+            </tr>
+            <tr>
+              <th scope="row">Builds cash value</th>
+              <td>No</td>
+              <td>Yes, guaranteed</td>
+              <td>Yes, modest</td>
+            </tr>
+            <tr>
+              <th scope="row">Premium over time</th>
+              <td>Level during the term, then rises steeply</td>
+              <td>Level for life</td>
+              <td>Level for life</td>
+            </tr>
+            <tr>
+              <th scope="row">Who it usually suits</th>
+              <td>Ages 30 to 55 with a mortgage or children at home</td>
+              <td>Ages 40 to 65 with a lifelong need or an estate to settle</td>
+              <td>Ages 50 to 85 covering a funeral</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <p class="reveal mt-5 text-micro text-muted max-w-3xl">
@@ -521,12 +494,12 @@ REST = """
 <!-- =====================================================================
      FINAL CTA, split by intent. Spec section 01.8.
      ================================================================== -->
-<section class="section-tight border-t border-rule">
+<section class="section-tight border-t border-rule glow">
   <div class="container-ax">
-    <div class="grid md:grid-cols-2">
+    <div class="grid md:grid-cols-2 gap-6" data-stagger="40">
 
-      <div class="reveal md:pr-10 lg:pr-16">
-        <h2 class="text-h3 !font-display !font-bold">Ready for quotes</h2>
+      <div class="reveal card card-hover">
+        <h2 class="text-h3 !font-display !font-semibold">Ready for quotes</h2>
         <p class="mt-3 text-slate max-w-md">
           Send us the basics and a licensed agent comes back with what our carriers will actually
           offer you, usually the same business day.
@@ -535,8 +508,8 @@ REST = """
         <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
       </div>
 
-      <div class="reveal mt-10 pt-10 border-t border-rule md:mt-0 md:pt-0 md:border-t-0 md:border-l md:pl-10 lg:pl-16">
-        <h2 class="text-h3 !font-display !font-bold">Prefer to talk</h2>
+      <div class="reveal card card-hover">
+        <h2 class="text-h3 !font-display !font-semibold">Prefer to talk</h2>
         <p class="mt-3 text-slate max-w-md">
           Most of these questions are faster to answer out loud. You will reach a licensed agent,
           not a queue.
@@ -552,11 +525,26 @@ REST = """
 
 def rest():
     return REST.format(
-        independence_media=C.picture(
-            "home-independence", "100vw",
-            cls="w-full h-full", img_cls="media-img"),
+        step1=C.step(1, "Tell us the basics",
+            "Your age, your state, whether you use tobacco, roughly what you are trying to cover, and "
+            "the broad strokes of your health. About five minutes by phone or by form.",
+            "We do not ask for a Social Security number or run a credit check in order to quote you."),
+        step2=C.step(2, "We compare our carriers",
+            "We run your details against the carriers we are appointed with and come back with what "
+            "each one is likely to offer, including the ones that would decline you.",
+            "Same day for most quotes. If a carrier needs more detail before it will commit, we say so "
+            "rather than guessing on its behalf."),
+        step3=C.step(3, "You apply, if it fits",
+            "We submit the application and stay with it through underwriting. If the carrier comes back "
+            "with a different rate class than we quoted, you hear it from us before you accept anything.",
+            "Simplified issue policies can be approved the same day. Fully underwritten policies "
+            "usually take three to six weeks."),
+        stat_term=C.stat(30, "years, the longest level term", suffix=" yrs"),
+        stat_whole=C.stat("Lifelong", "coverage and a level premium"),
+        stat_final=C.stat(15, "minutes on the phone, typically", suffix=" min"),
+        arrow=icon("arrow-right", 16),
         call_triage=C.phone_link("triage_result_final", "btn btn-call", "Call " + C.PHONE_DISPLAY),
-        call_table=C.phone_link("compare_table_final", "btn-row", "Call about final expense"),
+        call_table=C.phone_link("compare_bento_final", "btn btn-ghost btn-block", "Call about final expense"),
         call_faq=C.phone_link("faq_inline", "btn btn-ghost", "Call " + C.PHONE_DISPLAY),
         call_final=C.phone_link("final_cta_split", "btn btn-call mt-6", "Call " + C.PHONE_DISPLAY),
         agent=C.AGENT_NAME,

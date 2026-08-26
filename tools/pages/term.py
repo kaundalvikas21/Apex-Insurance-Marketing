@@ -140,7 +140,7 @@ def rate_table():
     return f"""
     <div data-panels="term-rates">
 
-      <div class="mt-8 grid sm:grid-cols-3 gap-6 max-w-3xl">
+      <div class="reveal mt-8 grid sm:grid-cols-[7fr_4fr_4fr] gap-6 max-w-3xl">
         {toggle("Term length", "term-rate-length", [("20", "20 years"), ("10", "10 years"), ("30", "30 years")], "term_length")}
         {toggle("Sex", "term-rate-sex", [("female", "Female"), ("male", "Male")], "sex")}
         {toggle("Tobacco", "term-rate-tobacco", [("no", "No"), ("yes", "Yes")], "tobacco")}
@@ -152,7 +152,10 @@ def rate_table():
            and have the toggles above rewrite them. Until then the toggles
            update the caption only, and nothing on this page can be mistaken
            for a real quoted premium. -->
-      <div class="mt-8 table-scroll">
+      <!-- .reveal sits on the scroll container itself. A transformed wrapper
+           around a scrolling table leaks the table's width into the page
+           until the section reveals. -->
+      <div class="reveal mt-8 table-scroll table-signature">
         <table class="rate-table" style="min-width:48rem">
           <caption>
             Monthly premium by age band and coverage amount.
@@ -172,8 +175,9 @@ def rate_table():
       </div>
     </div>
 
-    <p class="mt-4 text-micro text-muted max-w-3xl">
-      Rates last updated: {C.RATES_DATE}. Source: [CARRIER RATE CARD NAME AND EDITION].
+    <p class="reveal mt-4 text-micro text-muted max-w-3xl">
+      <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
+      Source: [CARRIER RATE CARD NAME AND EDITION].
       Premiums vary by carrier, state, health, build, family history, and tobacco use. A rate table
       is an illustration of shape, not an offer of coverage. Your rate class is decided by the
       carrier after underwriting.
@@ -308,7 +312,7 @@ def quote_form(form_id, form_name, id_prefix):
           <div class="flex items-start gap-3">
             {icon("circle-check", 30, "shrink-0 text-green")}
             <div>
-              <h3 class="text-h3 !font-display !font-bold">Got it</h3>
+              <h3 class="text-h3 !font-display !font-semibold">Got it</h3>
               <p class="mt-3 text-slate">
                 A licensed agent is comparing our appointed carriers for your age, state, and
                 coverage amount now. You will hear from us within {C.SLA}, and the quote comes with
@@ -324,16 +328,19 @@ def quote_form(form_id, form_name, id_prefix):
 
 def body():
     term_cards = "".join(f"""
-        <label class="choice reveal">
+        <label class="choice reveal !min-w-0">
           <input type="radio" name="term-length-explainer" value="{key}"{" checked" if key == "20" else ""}>
-          <span class="!min-h-[64px] !text-h4 !font-semibold">{label}</span>
+          <span class="!min-h-[112px] !flex-col !items-start !gap-1 !p-5 !rounded-[12px]">
+            <span class="stat-value" data-count="{key}">{key}</span>
+            <span class="text-sm">year term</span>
+          </span>
         </label>""" for key, label, _, _ in TERM_LENGTHS)
 
     term_panels = "".join(f"""
         <div data-panel="{key}"{"" if key == "20" else " hidden"}>
           <div class="grid lg:grid-cols-12 gap-8 lg:gap-10">
             <div class="lg:col-span-6">
-              <h3 class="text-h3 !font-display !font-bold">{label}</h3>
+              <h3 class="text-h3 !font-display !font-semibold">{label}</h3>
               <p class="mt-4 text-slate">{fits}</p>
             </div>
             <div class="lg:col-span-5 lg:col-start-8 flex flex-col">
@@ -346,9 +353,9 @@ def body():
         </div>""" for key, label, fits, caveat in TERM_LENGTHS)
 
     home_media = C.figure("term-home", "(min-width: 1024px) 38vw, 92vw",
-                          cls="reveal", parallax=True)
+                          cls="reveal", glow=True)
     underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 36vw, 92vw",
-                                  cls="reveal mt-8", parallax=True)
+                                  cls="reveal mt-8")
     spokes = C.spoke_module(
         "Explore term life insurance",
         "Eleven pages covering the parts of term life that need more than a paragraph.",
@@ -361,7 +368,7 @@ def body():
      HERO. Form weighted per spec section 09. The quote form is the hero's
      right column and is above the fold from 1024 up.
      ================================================================== -->
-<section class="pt-6 pb-14 md:pb-16">
+<section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("Term Life Insurance", None)])}
 
@@ -394,7 +401,7 @@ def body():
 
       <div class="lg:col-span-5 lg:col-start-8" id="quote">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Get your term life quotes</h2>
+          <h2 class="text-h3 !font-display !font-semibold">Get your term life quotes</h2>
           <p class="mt-2 text-sm text-muted">Six questions, about ninety seconds.</p>
           {quote_form("term-quote-form", "term_hero_quote", "th")}
         </div>
@@ -446,11 +453,21 @@ def body():
       </div>
     </div>
 
-    <div class="mt-14 grid lg:grid-cols-2 gap-8">
-      <div class="reveal card">
+    <div class="mt-14 bento" data-stagger="40">
+      <div class="reveal bento-cell bento-2 bento-cell-blue">
+        <p class="eyebrow">Coverage range</p>
+        <div class="mt-4">{C.stat(2000000, "typical top of the range our carriers write", prefix="$")}</div>
+        <p class="mt-4 text-sm text-white/85">
+          From $100,000 up. The premium difference between $500,000 and $750,000 is usually smaller
+          than people expect, which is why buying too little is the common mistake.
+        </p>
+        <p class="mt-auto pt-5 text-micro text-white/70">Ranges vary by carrier, state, age, and health. Not an offer of coverage.</p>
+      </div>
+
+      <div class="reveal bento-cell bento-2">
         <div class="flex items-center gap-3">
           {icon("circle-check", 24, "shrink-0 text-green")}
-          <h3 class="text-h3 !font-display !font-bold">Who term life fits</h3>
+          <h3 class="text-h3 !font-display !font-semibold">Who term life fits</h3>
         </div>
         <ul class="mt-6 grid gap-4">
           <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>You have a mortgage, or children who are not yet independent, or both.</span></li>
@@ -460,10 +477,10 @@ def body():
         </ul>
       </div>
 
-      <div class="reveal card">
+      <div class="reveal bento-cell bento-2">
         <div class="flex items-center gap-3">
           {icon("circle-x", 24, "shrink-0 text-navy")}
-          <h3 class="text-h3 !font-display !font-bold">When to look at something else</h3>
+          <h3 class="text-h3 !font-display !font-semibold">When to look at something else</h3>
         </div>
         <ul class="mt-6 grid gap-4">
           <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You want coverage that cannot expire, for estate or legacy reasons.</span></li>
@@ -497,7 +514,7 @@ def body():
     <div class="mt-10" data-panels="term-lengths">
       <fieldset>
         <legend class="sr-only">Choose a term length</legend>
-        <div class="choice-row">{term_cards}
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-stagger="40">{term_cards}
         </div>
       </fieldset>
 
@@ -524,7 +541,7 @@ def body():
       {C.rates_flag("premiums")}
     </div>
 
-    <div class="reveal">
+    <div>
       {rate_table()}
     </div>
   </div>
@@ -550,31 +567,31 @@ def body():
       <div class="lg:col-span-7">
         <ol class="reveal relative border-l border-rule pl-8 grid gap-8">
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Day 1</p>
             <h3 class="mt-1 text-h4">Application</h3>
             <p class="mt-2 text-slate">We complete it with you, by phone or electronically. Twenty to thirty minutes, including the health and lifestyle questions.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Day 1 to 5</p>
             <h3 class="mt-1 text-h4">Phone interview and database checks</h3>
             <p class="mt-2 text-slate">The carrier confirms your answers and pulls your prescription history, motor vehicle record, and medical information database file.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Day 3 to 10, if required</p>
             <h3 class="mt-1 text-h4">The medical exam</h3>
             <p class="mt-2 text-slate">A paramedical examiner comes to your home or office. Height, weight, blood pressure, a blood sample, and a urine sample. Around twenty minutes. It is free and you do not arrange it yourself.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Week 2 to 5</p>
             <h3 class="mt-1 text-h4">Medical records and review</h3>
             <p class="mt-2 text-slate">This is the slow part, and it is your doctor's office rather than the carrier. An underwriter then assigns a rate class.</p>
           </li>
           <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy rounded-full ring-4 ring-navy-050"></span>
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Week 3 to 6</p>
             <h3 class="mt-1 text-h4">Offer, and your decision</h3>
             <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in money. You can accept, ask us to shop it elsewhere, or walk away.</p>
@@ -593,12 +610,12 @@ def body():
 <!-- =====================================================================
      6. NO EXAM TEASER.
      ================================================================== -->
-<section class="section-tight">
+<section class="section-tight band-navy on-navy">
   <div class="container-ax">
-    <div class="reveal card flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+    <div class="reveal flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
       <div class="grow">
-        <h2 class="text-h3 !font-display !font-bold">Would rather skip the exam?</h2>
-        <p class="mt-3 text-slate">
+        <h2 class="text-h3 !font-display !font-semibold">Would rather skip the exam?</h2>
+        <p class="mt-3 text-white/85 max-w-2xl">
           Several of our carriers can issue term coverage with no paramedical exam for healthy
           applicants, often with a decision in days rather than weeks. It usually costs a little
           more, and the coverage limits are lower. Sometimes that trade is worth it.
@@ -612,11 +629,11 @@ def body():
 <!-- =====================================================================
      7. CARRIERS.
      ================================================================== -->
-<section class="section-tight band">
+<section class="section-tight band-surface border-b border-rule">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h3 !font-display !font-bold">Carriers we are appointed with</h2>
+        <h2 class="reveal text-h3 !font-display !font-semibold">Carriers we are appointed with</h2>
         <p class="reveal mt-3 text-slate">
           We hold appointments with multiple carriers, so a decline from one is the start of the
           conversation rather than the end of it.
@@ -649,27 +666,9 @@ def body():
       <p class="reveal mt-5 text-slate">Three steps, and you can stop after any of them.</p>
     </div>
     <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
-          <h3 class="text-h4">Send the six answers</h3>
-        </div>
-        <p class="mt-5 text-slate">The form at the top of this page, or a phone call if you would rather talk it through. No Social Security number at this stage.</p>
-      </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
-          <h3 class="text-h4">Review named quotes</h3>
-        </div>
-        <p class="mt-5 text-slate">You get carrier names, premiums, term lengths, and the conversion terms, so you can compare them against anything else you have been shown.</p>
-      </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
-          <h3 class="text-h4">Apply and go through underwriting</h3>
-        </div>
-        <p class="mt-5 text-slate">We complete the application with you and stay with it until the policy is issued or the carrier says no. Either way you hear it from us.</p>
-      </div>
+      {C.step(1, "Send the six answers", "The form at the top of this page, or a phone call if you would rather talk it through. No Social Security number at this stage.")}
+      {C.step(2, "Review named quotes", "You get carrier names, premiums, term lengths, and the conversion terms, so you can compare them against anything else you have been shown.")}
+      {C.step(3, "Apply and go through underwriting", "We complete the application with you and stay with it until the policy is issued or the carrier says no. Either way you hear it from us.")}
     </div>
   </div>
 </section>
@@ -708,7 +707,7 @@ def body():
 <!-- =====================================================================
      12. FINAL FORM CTA.
      ================================================================== -->
-<section class="section">
+<section class="section glow">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5 reveal">
@@ -724,7 +723,7 @@ def body():
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <div class="panel">
-          <h3 class="text-h3 !font-display !font-bold">Start your quote</h3>
+          <h3 class="text-h3 !font-display !font-semibold">Start your quote</h3>
           {quote_form("term-quote-form-footer", "term_footer_quote", "tf")}
         </div>
       </div>

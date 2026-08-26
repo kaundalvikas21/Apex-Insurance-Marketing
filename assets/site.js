@@ -111,16 +111,40 @@
 
     // Stagger children of a [data-stagger] container, capped at 6 so a long
     // list never waits half a second for its last item.
+    // data-stagger="40" sets the step in ms; bento grids use 40, lists 60.
     $$('[data-stagger]').forEach(function (group) {
+      var step = parseInt(group.getAttribute('data-stagger'), 10) || 60;
       $$('.reveal', group).forEach(function (el, i) {
-        el.style.setProperty('--reveal-delay', Math.min(i, 5) * 60 + 'ms');
+        el.style.setProperty('--reveal-delay', Math.min(i, 5) * step + 'ms');
       });
     });
+
+    // Count-up. The final figure is already in the HTML, so with JS off, in
+    // print, under reduced motion, and on the final-expense page (html.fe)
+    // the number simply sits there. Only spec figures carry data-count.
+    var senior = document.documentElement.classList.contains('fe');
+    function countUp(el) {
+      var end = parseFloat(el.getAttribute('data-count'));
+      if (senior || isNaN(end)) return;
+      var pre = el.getAttribute('data-count-prefix') || '';
+      var suf = el.getAttribute('data-count-suffix') || '';
+      var t0 = null;
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / 900, 1);
+        p = 1 - Math.pow(1 - p, 3);
+        el.textContent = pre + Math.round(end * p).toLocaleString('en-US') + suf;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-in');
+        if (entry.target.hasAttribute('data-count')) countUp(entry.target);
+        $$('[data-count]', entry.target).forEach(countUp);
         io.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });

@@ -34,7 +34,7 @@ def body():
       </div>
 
       <div class="mt-12 card">
-        <h2 class="text-h3 !font-display !font-bold">What happens now</h2>
+        <h2 class="text-h3 !font-display !font-semibold">What happens now</h2>
         <ol class="mt-6 grid gap-5">
           <li class="flex items-start gap-3">
             {icon("user-check", 22, "shrink-0 text-navy mt-1")}

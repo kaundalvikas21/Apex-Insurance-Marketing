@@ -36,6 +36,7 @@ IMAGES = {
         "An older man and two children preparing food together at a kitchen counter."),
     # Hands over spread paperwork, shot dark. The comparison work this section
     # describes, and dark enough that the scrim has an easy job.
+    # Fetched but not placed in Variation 3: the independence band has no photo under its text.
     "home-independence": (
         "1635859890085-ec8cb5466806", (3, 2), [640, 1024, 1440], "center",
         ""),  # decorative: sits behind copy in the navy band

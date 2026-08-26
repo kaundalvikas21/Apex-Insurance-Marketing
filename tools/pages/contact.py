@@ -26,10 +26,10 @@ def schema():
 
 def body():
     desk_media = C.figure("contact-desk", "(min-width: 1024px) 38vw, 92vw",
-                          cls="reveal", parallax=True)
+                          cls="reveal", glow=True)
 
     return f"""
-<section class="pt-6 pb-14 md:pb-16">
+<section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("Contact", None)])}
 
@@ -49,7 +49,7 @@ def body():
         {desk_media}
 
         <div class="reveal card mt-8">
-          <h2 class="text-h3 !font-display !font-bold">Call us</h2>
+          <h2 class="text-h3 !font-display !font-semibold">Call us</h2>
           <div class="mt-5">
             {C.phone_link("contact_primary", "btn btn-call btn-block !min-h-[64px] !text-lead", C.PHONE_DISPLAY, 24)}
           </div>
@@ -60,7 +60,7 @@ def body():
         </div>
 
         <div class="reveal mt-8">
-          <h2 class="text-h3 !font-display !font-bold">What to expect on the call</h2>
+          <h2 class="text-h3 !font-display !font-semibold">What to expect on the call</h2>
           <ul class="mt-6 grid gap-5">
             <li class="flex items-start gap-3">
               {icon("clock", 22, "shrink-0 text-navy mt-1")}
@@ -91,7 +91,7 @@ def body():
       <!-- RIGHT: the form. -->
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Send us a message</h2>
+          <h2 class="text-h3 !font-display !font-semibold">Send us a message</h2>
           <p class="mt-2 text-sm text-muted">
             A licensed agent reads every one of these. We reply within {C.SLA}.
           </p>
@@ -179,7 +179,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">Message received</h3>
+                <h3 class="text-h3 !font-display !font-semibold">Message received</h3>
                 <p class="mt-3 text-slate">
                   A licensed agent will read it and get back to you within {C.SLA}. If it is
                   urgent, calling is faster.
@@ -204,7 +204,7 @@ def body():
     <div class="reveal grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
       <div class="lg:col-span-5 flex items-start gap-3">
         {icon("shield-check", 26, "shrink-0 text-navy mt-1")}
-        <h2 class="text-h3 !font-display !font-bold">Licensed, and independent of every carrier</h2>
+        <h2 class="text-h3 !font-display !font-semibold">Licensed, and independent of every carrier</h2>
       </div>
       <div class="lg:col-span-7">
         <p class="text-slate">
@@ -225,35 +225,29 @@ def body():
 <section class="section-tight band">
   <div class="container-ax">
     <h2 class="reveal text-h2">What happens next</h2>
-    <div class="mt-10 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">1</span>
-          <h3 class="text-h4">You send it</h3>
-        </div>
-        <p class="mt-5 text-slate">
+    <div class="mt-10 bento" data-stagger="40">
+      <div class="reveal bento-cell bento-2">
+        <span class="step-num tnum" aria-hidden="true">1</span>
+        <h3 class="mt-4 text-h4">You send it</h3>
+        <p class="mt-2 text-slate">
           Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker.
         </p>
       </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">2</span>
-          <h3 class="text-h4">A licensed agent reads it</h3>
-        </div>
-        <p class="mt-5 text-slate">
+      <div class="reveal bento-cell bento-2 bento-cell-tint">
+        <span class="step-num tnum" aria-hidden="true">2</span>
+        <h3 class="mt-4 text-h4">A licensed agent reads it</h3>
+        <p class="mt-2 text-slate">
           A person, with a licence number, who can actually place the policy. Not a receptionist
           taking a message.
         </p>
       </div>
-      <div class="reveal">
-        <div class="flex items-baseline gap-3 pb-4 border-b border-navy">
-          <span class="text-h3 !font-display !font-bold text-navy tnum">3</span>
-          <h3 class="text-h4">We contact you</h3>
-        </div>
-        <p class="mt-5 text-slate">
+      <div class="reveal bento-cell bento-2 bento-cell-blue">
+        <span class="step-num tnum" aria-hidden="true">3</span>
+        <h3 class="mt-4 text-h4">We contact you</h3>
+        <p class="mt-2 text-white/85">
           Within {C.SLA}, by whichever of phone or email you seem to prefer.
         </p>
-        <p class="mt-3 text-sm text-muted">
+        <p class="mt-3 text-sm text-white/70">
           <!-- [SET HONEST SLA] Replace with the response time the agency can
                actually hold to, including on a Friday afternoon. -->
           If we are going to be slower than that, we will tell you rather than let it drift.

@@ -152,11 +152,17 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
 - **Consent / analytics.** Decide whether GA4 needs a consent banner in your states before adding it.
 - **`/thank-you/`** is stubbed and `noindex`. Forms currently render a success state in place. If
   you switch to a redirect, point it here.
-- **Motion.** `MOTION_INTENSITY` is 5. Scroll-driven effects use `animation-timeline: view()`
-  behind `@supports`, and browsers without it fall back to the IntersectionObserver reveal, so
-  nothing breaks and nothing is required. The final-expense page is deliberately exempt from every
-  transform-based effect for accessibility reasons documented in MASTER.md section 4. If a future
-  edit adds motion there, that exemption is the thing being overridden, not a styling preference.
+- **Motion.** `MOTION_INTENSITY` is 5: IntersectionObserver reveal, 40ms bento stagger, count-up
+  on spec figures (`[data-count]`, final value already in the HTML), chart draw-in. No scroll-linked
+  layer and no animation library. The final-expense page is deliberately exempt from every one of
+  these for accessibility reasons documented in MASTER.md section 4. If a future edit adds motion
+  there, that exemption is the thing being overridden, not a styling preference.
+- **Count-up figures.** Only spec figures carry `data-count` (10/15/20/30 years, $2,000,000,
+  40 years, 15 minutes). When `STATES` and `YEARS` get real values, do **not** add `data-count` to
+  them without checking the number is one you are happy to see animate on a trust page.
+- **Fonts.** Space Grotesk (variable 300 to 700) and Inter (variable) are self-hosted latin subsets
+  in `assets/fonts/`, both under the SIL Open Font License, fetched once from Google Fonts. No
+  runtime request leaves the domain for type.
 
 ---
 

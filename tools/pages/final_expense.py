@@ -103,7 +103,7 @@ def call_band(heading, sub, where):
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7">
-        <h2 class="reveal text-h3 !font-display !font-bold text-white">{heading}</h2>
+        <h2 class="reveal text-h3 !font-display !font-semibold text-white">{heading}</h2>
         <p class="reveal mt-3 text-white/85">{sub}</p>
       </div>
       <div class="lg:col-span-5 reveal">
@@ -124,15 +124,19 @@ def _acc(q, a):
 
 # --- Rate table -----------------------------------------------------------
 AGE_BANDS = ["50 to 54", "55 to 59", "60 to 64", "65 to 69", "70 to 74", "75 to 79", "80 to 85"]
-COVERAGE_COLS = ["$5,000", "$10,000", "$15,000", "$25,000"]
+# Three columns at most on this page (senior readability). The full coverage
+# range is described in the scale above the table.
+COVERAGE_COLS = ["$10,000", "$25,000"]
 
 
 def rate_rows(sex):
     rows = []
     for band in AGE_BANDS:
         cells = "".join('<td class="tnum">$--</td>' for _ in COVERAGE_COLS)
-        call = C.phone_link("rate_table_" + sex, "btn-row", "Get this quoted", 18)
-        rows.append(f'<tr><th scope="row">{band}</th>{cells}<td>{call}</td></tr>')
+        # The row-level call CTA sits under the age label so the table stays at
+        # three columns.
+        call = C.phone_link("rate_table_" + sex, "btn-row mt-2", "Get this quoted", 18)
+        rows.append(f'<tr><th scope="row"><span class="block">{band}</span>{call}</th>{cells}</tr>')
     return "\n            ".join(rows)
 
 
@@ -140,7 +144,7 @@ def rate_table():
     heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in COVERAGE_COLS)
     return f"""
       <div data-panels="fe-rates">
-      <div class="mt-8 flex flex-wrap items-end gap-6">
+      <div class="reveal mt-8 flex flex-wrap items-end gap-6">
         <fieldset>
           <legend class="field-label">Show premiums for</legend>
           <div class="choice-row">
@@ -157,8 +161,8 @@ def rate_table():
         <p class="text-sm text-muted">Non tobacco, level benefit. Tobacco rates are higher.</p>
       </div>
 
-      <div class="mt-6 table-scroll">
-        <table class="rate-table" style="min-width:46rem">
+      <div class="reveal mt-6 table-scroll table-signature">
+        <table class="rate-table" style="min-width:0">
           <caption>
             Monthly premium by age band and coverage amount.
             <span data-panel-caption>Showing female.</span>
@@ -167,7 +171,6 @@ def rate_table():
             <tr>
               <th scope="col">Age at application</th>
               {heads}
-              <th scope="col"><span class="sr-only">Get a quote</span></th>
             </tr>
           </thead>
           <tbody data-panel="female">
@@ -181,8 +184,9 @@ def rate_table():
 
       </div>
 
-      <p class="mt-4 text-sm text-muted">
-        Rates last updated: {C.RATES_DATE}. Source: [CARRIER RATE CARD NAME AND EDITION].
+      <p class="reveal mt-4 text-sm text-muted">
+        <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
+        Source: [CARRIER RATE CARD NAME AND EDITION].
         Premiums vary by carrier, state, health, and tobacco use, and are not an offer of coverage.
       </p>"""
 
@@ -288,7 +292,7 @@ def body():
       <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-bold">Prefer we call you?</h2>
+          <h2 class="text-h3 !font-display !font-semibold">Prefer we call you?</h2>
           <p class="mt-3 text-slate">
             Leave four details and a licensed agent will call you back.
           </p>
@@ -359,7 +363,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">We have your details</h3>
+                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
                 <p class="mt-3 text-slate">
                   A licensed agent will call you within {C.SLA}. If you would rather not wait,
                   call us now and we can do it in one go.
@@ -414,23 +418,23 @@ def body():
         <span>$2,000</span>
         <span>$50,000</span>
       </div>
-      <div class="mt-3 h-4 w-full bg-navy-050 border border-rule rounded-[2px] overflow-hidden">
-        <div class="h-full bg-navy" style="margin-left:12%;width:34%"></div>
+      <div class="mt-3 h-4 w-full bg-navy-050 border border-rule rounded-full overflow-hidden">
+        <div class="h-full bg-navy-700 rounded-full" style="margin-left:12%;width:34%"></div>
       </div>
       <p class="mt-3 text-sm text-navy font-semibold">
         The shaded band is roughly $8,000 to $20,000, where most policies we place land.
       </p>
       <div class="mt-8 pt-8 border-t border-rule grid sm:grid-cols-3 gap-6">
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$2,000 to $8,000</p>
+          <p class="text-h3 !font-display !font-semibold text-navy tnum">$2,000 to $8,000</p>
           <p class="mt-2 text-slate">Cremation, a simple service, and a few outstanding bills.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$8,000 to $20,000</p>
+          <p class="text-h3 !font-display !font-semibold text-navy tnum">$8,000 to $20,000</p>
           <p class="mt-2 text-slate">A traditional burial with a service, plus room for the bills that follow.</p>
         </div>
         <div>
-          <p class="text-h3 !font-display !font-bold text-navy tnum">$20,000 to $50,000</p>
+          <p class="text-h3 !font-display !font-semibold text-navy tnum">$20,000 to $50,000</p>
           <p class="mt-2 text-slate">A funeral plus something left over for a spouse or an adult child.</p>
         </div>
       </div>
@@ -461,7 +465,7 @@ def body():
       {C.rates_flag("premiums")}
     </div>
 
-    <div class="reveal">
+    <div>
       {rate_table()}
     </div>
   </div>
@@ -490,7 +494,7 @@ def body():
 
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h3 !font-display !font-bold">The kind of thing you will be asked</h3>
+          <h3 class="text-h3 !font-display !font-semibold">The kind of thing you will be asked</h3>
           <ul class="mt-5 grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Are you in a nursing home or receiving hospice care?</span></li>
@@ -586,24 +590,31 @@ def body():
       </p>
     </div>
 
-    <div class="reveal mt-10 table-scroll">
-      <table class="compare-table" style="min-width:46rem">
+    <div class="reveal mt-10 table-scroll table-signature">
+      <!-- Three columns, one per product. Each fact is a group row above its
+           three cells, so the table never needs a fourth column. -->
+      <table class="compare-table" style="min-width:0">
         <caption class="sr-only">Final expense compared with term life and whole life insurance</caption>
         <thead>
           <tr>
-            <th scope="col"><span class="sr-only">Feature</span></th>
             <th scope="col">Final expense</th>
             <th scope="col">Term life</th>
             <th scope="col">Whole life</th>
           </tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Typical coverage</th><td class="tnum">$2,000 to $50,000</td><td class="tnum">$100,000 and up</td><td class="tnum">$25,000 and up</td></tr>
-          <tr><th scope="row">Medical exam</th><td>Never</td><td>Often</td><td>Usually</td></tr>
-          <tr><th scope="row">Typical age</th><td>50 to 85</td><td>30 to 55</td><td>40 to 65</td></tr>
-          <tr><th scope="row">How long it lasts</th><td>For life</td><td>10 to 30 years</td><td>For life</td></tr>
-          <tr><th scope="row">What it is for</th><td>A funeral and final bills</td><td>Replacing income</td><td>A lifelong need or an estate</td></tr>
-          <tr><th scope="row">Time to get covered</th><td>Often the same day</td><td>Three to six weeks</td><td>Three to six weeks</td></tr>
+          <tr><th scope="rowgroup" colspan="3">Typical coverage</th></tr>
+          <tr><td class="tnum">$2,000 to $50,000</td><td class="tnum">$100,000 and up</td><td class="tnum">$25,000 and up</td></tr>
+          <tr><th scope="rowgroup" colspan="3">Medical exam</th></tr>
+          <tr><td>Never</td><td>Often</td><td>Usually</td></tr>
+          <tr><th scope="rowgroup" colspan="3">Typical age</th></tr>
+          <tr><td>50 to 85</td><td>30 to 55</td><td>40 to 65</td></tr>
+          <tr><th scope="rowgroup" colspan="3">How long it lasts</th></tr>
+          <tr><td>For life</td><td>10 to 30 years</td><td>For life</td></tr>
+          <tr><th scope="rowgroup" colspan="3">What it is for</th></tr>
+          <tr><td>A funeral and final bills</td><td>Replacing income</td><td>A lifelong need or an estate</td></tr>
+          <tr><th scope="rowgroup" colspan="3">Time to get covered</th></tr>
+          <tr><td>Often the same day</td><td>Three to six weeks</td><td>Three to six weeks</td></tr>
         </tbody>
       </table>
     </div>
@@ -787,7 +798,7 @@ def body():
 
       <div class="reveal">
         <div class="panel">
-          <h2 class="text-h3 !font-display !font-bold">Or leave your number</h2>
+          <h2 class="text-h3 !font-display !font-semibold">Or leave your number</h2>
           <p class="mt-3 text-slate">Four details. We call you back.</p>
 
           <form class="mt-6" data-ax-form data-silo="final-expense"
@@ -848,7 +859,7 @@ def body():
             <div class="flex items-start gap-3">
               {icon("circle-check", 32, "shrink-0 text-green")}
               <div>
-                <h3 class="text-h3 !font-display !font-bold">We have your details</h3>
+                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
                 <p class="mt-3 text-slate">A licensed agent will call you within {C.SLA}.</p>
                 <div class="mt-5">
                   {C.phone_link("fe_footer_success", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY, 22)}
