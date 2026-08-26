@@ -1,0 +1,300 @@
+# Apex Insurance Marketing — Design System
+## Variation 3: "Transparent Numbers" (Data-Forward Clarity + Bento)
+
+**Design read:** the same trust-first consumer insurance hub for three age cohorts, read this time
+as a page of numbers rather than a page of prose. Light, data-forward clarity: crisp white cards on
+a cool near-white field, soft blue ambient glows, bento grids wherever a section is fact-dense, and
+tables as the visual signature (the spec is table-heavy: rate charts, comparisons, cost-by-age, so
+the tables are designed rather than tolerated). Space Grotesk display over Inter body, tabular
+numerals everywhere, self-hosted.
+
+**Dials:** `DESIGN_VARIANCE: 5` · `MOTION_INTENSITY: 5` · `VISUAL_DENSITY: 6`
+
+**Skill precedence, as briefed:** ui-ux-pro-max wins on structure, accessibility, and the finance
+anti-patterns (no purple or pink gradients, no neon, no dark mode); design-taste-frontend wins on
+layout discipline (bento cell count, adjacency, eyebrow budget, hero economy); the spec's compliance
+rules win over both. The brief's font choice (Space Grotesk + Inter) and Lucide icons override the
+skills' generic font and icon bans.
+
+Single source of truth for the six-page build. `src/input.css` implements every token here; if the
+two disagree, this file is wrong and gets updated, not the other way around.
+
+**Decisions carried from the client conversation, not to be reverted:**
+- Rate and cost cells stay `$--`. No invented premium, even a marked one, because a marked fake
+  number still gets screenshotted. Tables get their weight from structure, controls, and type.
+- Photography is Variation 1's set, used in fewer slots (five of the nine): home hero, term
+  "what it covers", term underwriting, whole "what makes it permanent", whole guaranteed
+  acceptance, final expense (two), contact. No scrim, no duotone, no photo under text.
+
+---
+
+## 1. Palette
+
+| Token | Hex | Role |
+|---|---|---|
+| `--color-navy` | `#0B3B8C` | Deep Blue. Dark bands, nav text, links, phone CTA fill, blue bento cell. |
+| `--color-navy-700` | `#1E6AE1` | Bright Blue. Icons, strokes, focus ring, chart value line, progress fill. Text only at 18px and up. |
+| `--color-navy-050` | `#E8F0FC` | Table header fill, tinted bento cell, tinted band, pills. |
+| `--color-ink` | `#0A1F44` | Headlines, stat figures, and the amber CTA label. |
+| `--color-slate` | `#334155` | Body text. |
+| `--color-muted` | `#5B6B82` | Secondary text, captions, stat labels. |
+| `--color-cream` | `#F4F7FB` | Page field (cool near-white). |
+| `--color-surface` | `#FFFFFF` | Cards, bento cells, panels, table rows. |
+| `--color-gold` | `#F5A623` | Amber. **CTA ONLY.** |
+| `--color-gold-700` | `#DC941B` | CTA hover. |
+| `--color-green` | `#1F7A5C` | Positive / included states (check icons, success). |
+| `--color-rule` | `#D9E2EF` | 1px borders, row rules. |
+| `--color-border-strong` | `#7B8CA0` | Form input borders (3:1 per WCAG 1.4.11). |
+| `--color-flag` | `#8A6D1F` | Placeholder / pending-review notice text. |
+
+### The amber rule (non-negotiable)
+Amber appears in exactly three CSS rules: `.btn-cta`, `.btn-cta:hover`, and `.skip-link`. Nowhere
+else. Not on icons, not on pills, not on chart lines, not on hover states of non-CTA elements.
+Verified by `grep -o "var(--color-gold" assets/site.css | wc -l` = 3.
+
+### Verified contrast pairs (computed, not eyeballed)
+| Pair | Ratio | Verdict |
+|---|---|---|
+| **Ink on amber** (primary CTA label) | **8.0:1** | AAA |
+| Ink on amber-700 (CTA hover) | 6.4:1 | AA |
+| White on amber | 2.0:1 | **Fails. Never used.** |
+| Slate on white / on field | 10.4:1 / 9.6:1 | AAA |
+| Slate on navy-050 (tinted cell) | 9.0:1 | AAA |
+| Muted on white / on field / on navy-050 | 5.4:1 / 5.1:1 | AA |
+| Ink on white / on navy-050 | 16.3:1 / 14.2:1 | AAA |
+| Navy on white / on field | 10.4:1 / 9.7:1 | AAA |
+| Navy-700 on white / on field | 5.0:1 / 4.7:1 | AA (used at 18px+ and for non-text only) |
+| Navy-700 on navy-050 | 4.3:1 | **Fails for small text.** Eyebrows are navy, not navy-700, for this reason. |
+| White on navy (bands, blue cells, phone CTA) | 10.4:1 | AAA |
+| White at 80% on navy (footer legal) | 6.5:1 | AA |
+| Flag on flag-050 | 4.5:1 | AA |
+| Border-strong on white | 3.4:1 | Passes 1.4.11 for inputs |
+
+Primary CTA is **ink text on amber fill**, never white on amber.
+
+### Focus
+Default focus ring: 3px bright blue, 2px offset, 4px radius. On navy surfaces (`.on-navy`,
+`.bento-cell-blue`) the ring flips to white. A checked segmented choice gets an ink ring so the
+ring is visible against its own navy fill. Never `outline: none` without a replacement.
+
+---
+
+## 2. Typography
+
+Self-hosted latin-subset woff2 in `/assets/fonts/`, `font-display: swap`. No Google Fonts request:
+one fewer third party on pages that collect PII, and one fewer render-blocking origin.
+
+- **Display / H1 / H2 / stat figures / table heads / eyebrows:** Space Grotesk (variable 300 to
+  700, used at 600). A geometric grotesque with a slightly technical voice: reads as a well-made
+  statement, which is the register a page of numbers wants. Not Fraunces, not Inter-for-everything.
+- **Body / UI / H3 and below:** Inter (variable 100 to 900).
+- **Tabular numerals everywhere.** `font-variant-numeric: tabular-nums` is set on `body`, not per
+  table, because every figure on this site ends up in a column or beside another figure sooner or
+  later, and proportional digits jitter. Both faces carry the `tnum` feature.
+
+### Ramp (base 16px)
+| Token | Size | Line height | Face |
+|---|---|---|---|
+| `text-display` | clamp 2.5rem to 3.75rem | 1.02 | Space Grotesk 600 |
+| `text-h1` | clamp 2.25rem to 3.25rem | 1.06 | Space Grotesk 600 |
+| `text-h2` | clamp 1.75rem to 2.5rem | 1.12 | Space Grotesk 600 |
+| `text-h3` | 1.375rem | 1.3 | Inter 600 (Space Grotesk where marked `!font-display`) |
+| `text-h4` | 1.125rem | 1.4 | Inter 600 |
+| `text-lead` | 1.1875rem | 1.6 | Inter 400 |
+| `text-body` | 1rem | 1.65 | Inter 400 |
+| `text-sm` | 0.875rem | 1.55 | Inter 400 |
+| `text-micro` | 0.8125rem | 1.5 | Inter 500 |
+
+`.stat-value` is `text-h2` in Space Grotesk at line-height 1; `.stat-value-lg` is `text-display`.
+Measure caps at 68ch for body copy, 20ch for display headlines.
+
+### Final-expense override
+`<html class="fe">` redefines the type tokens **on `main`**, not on `html`. Inside the page content
+the ramp moves up a notch: body 18px, lead 21px, h3 24px, and the `sm` and `micro` steps collapse
+into the body size so nothing on that page renders below 18px. **Inter throughout on that page**:
+headings, stat figures, table heads, and step numerals all drop the display face, because the
+display face is a style choice and this page does not make style choices.
+
+Scoping to `main` keeps the shared header and footer at the sitewide scale. Minimum tap target
+rises to 56px, paragraph max-width drops to 58ch, tables stay at three columns.
+
+---
+
+## 3. Grid and spacing
+
+### The row rule
+A block may be narrow **only if something else occupies the rest of its row.** No section may
+leave more than 20% of its content row empty on the right, and no two-column row may differ in
+column height by more than 250px.
+
+Swiss 12 column. Container `max-width: 1200px`, gutter 24px, 32px at 1024 and up. **Declared in
+px, not rem**, so the final-expense type bump cannot widen the grid. Breakpoints tested:
+**375 / 768 / 1024 / 1440**.
+
+Spacing scale (4px base): `4 8 12 16 24 32 40 48 64 80 96 128`.
+Section rhythm at `VISUAL_DENSITY 6`: `py-18` mobile, `py-24` at 768, `py-26` at 1024. A notch
+tighter than Variation 1 because the sections carry more structure and less air.
+
+### Bento
+`.bento` is a six-track grid with a 16px gap. Cells span 2, 3, 4, or 6 tracks (`.bento-2` etc.),
+collapse to two-up at 768 and one-up below. **Exactly as many cells as there is real content**: a
+three-item section is three `.bento-2` cells, a chart section is a `.bento-4` chart beside a
+`.bento-2` stat. No grid is padded with a blank tile, and no grid exceeds six cells. At least one
+cell in every grid carries visual variation: `.bento-cell-tint` (navy-050) or `.bento-cell-blue`
+(navy fill, white text), so a grid is never six white cards in a row.
+
+### Surfaces
+One shadow system, blue-tinted so it reads as ambient light rather than dirt:
+`--shadow-card` on cards, cells, tiles, and signature tables; `--shadow-panel` on the hero form
+panels; `--shadow-lift` on hover. Every card also keeps a 1px `--color-rule` border so it still has
+an edge on a white-on-white screen.
+
+Corner radius: **two values.** `12px` on cards, cells, tables, and media; `8px` on buttons, inputs,
+choices, and pills-that-are-not-pills. Pills and step numerals are `999px`. Nothing else.
+
+### Glow
+`.glow` paints two soft radial blue gradients behind a section (`::before`, `z-index: -1`,
+`pointer-events: none`, horizontally clipped to the section so it can never widen the page). It is
+used on the hero of every page except final expense, and on at most one more section per page.
+Decorative only; every text surface still sits on a solid card or the solid field.
+
+### Glass
+Exactly one glass surface: the sticky header, and only once it is stuck. `rgb(255 255 255 / .86)`
+plus `backdrop-filter: blur(10px)` and a 1px rule. It is solid white before scrolling, solid white
+under `prefers-reduced-transparency`, and solid white where `backdrop-filter` is unsupported. Nav
+text is slate and navy on that surface and was measured against the lightest hero pixel.
+
+---
+
+## 4. Motion (MOTION_INTENSITY 5)
+
+`IntersectionObserver` reveal for everything; no scroll-linked layer, no animation library, no
+`scroll` listener anywhere in the codebase. Variation 1's parallax and mask-wipe layer was removed,
+not disabled.
+
+| Pattern | Spec | Applies to |
+|---|---|---|
+| Section reveal | opacity 0 to 1 + translateY 12px to 0, 480ms `cubic-bezier(.22,1,.36,1)` | Every section |
+| Stagger | `data-stagger` step in ms, capped at 6 children: **40ms on bento grids**, 60ms on lists | Bento grids, card rows, spoke grids |
+| **Count-up** | `[data-count]` figures count from 0 to the value over 900ms, cubic ease-out, `Intl` formatted with prefix and suffix | Stat figures that are **spec figures** (10 / 15 / 20 / 30 years, $2,000,000, 40 years, 15 minutes). Never a `[X]` placeholder, never a rate. |
+| Row cascade | 34ms per row, opacity + translateY 6px | Rate and comparison table rows |
+| Chart draw-in | `stroke-dashoffset`, 1.4s, fill and marker fade after | Cash-value chart |
+| Card lift | translateY(-3px) + `--shadow-lift` + blue border, 220ms | `.card-hover`, `.tile` |
+| CTA hover | translateY(-2px) + tinted shadow, 180ms | Buttons |
+| Link underline | grows from left, 180ms ease-out | Body links |
+| Accordion | height via `interpolate-size: allow-keywords`, 240ms | FAQ |
+| Form step change | 240ms crossfade, focus moves to the first field | Term multi-step form |
+
+The count-up target is written into the HTML, so with JavaScript off, in print, and before the
+observer fires the figure is simply there. Nothing ticks up to a placeholder.
+
+**Deliberately absent.** Scroll-progress bar (a scroll cue). Pinned scroll-scrubbed sequences.
+Parallax. Marquees.
+
+### Reduced motion
+`prefers-reduced-motion: reduce` collapses everything to opacity at 1ms, disables lift and
+cascade, draws the chart fully, leaves every count-up at its final value, and forces every reveal
+visible so no content can be trapped invisible. Verified in the browser: zero hidden reveals.
+
+### Final-expense exemption
+`.fe main` opts out of every pattern above except the opacity reveal: no translate, no stagger, no
+count-up (`countUp()` returns early on `html.fe`), no row cascade, no lift, no glow, no chart.
+Static, calm, large. This is an accessibility decision, not a stylistic one.
+
+---
+
+## 5. Component contracts
+
+| Component | Contract |
+|---|---|
+| `.btn-cta` | Amber fill, ink text, 600 weight, min-height 48px, 8px radius. The only amber thing. |
+| `.btn-call` | Navy fill, white text, phone icon, min-height 48px. `.btn-xl` 64/72px for final expense. |
+| `.btn-ghost` | White fill, navy text, 1px navy rule. Tertiary only. |
+| `.btn-row` | Row-level action inside tables and cells, 44px, navy outline. 48px inside `.fe main`. |
+| `.card` / `.bento-cell` | White fill, 1px rule, 12px radius, `--shadow-card`, 24 to 32px pad. `.bento-cell-tint` and `.bento-cell-blue` are the variation cells. |
+| `.panel` | The hero form panels. `--shadow-panel`. |
+| `.stat` | `.stat-value` (display face, tabular) over `.stat-label` (muted). Holds `data-count` only when the figure is a spec figure. Rendered by `chrome.stat()`. |
+| `.pill` | Navy-050 chip for dated lines ("Rates last updated") and column tags. Never amber. |
+| `.table-signature` | Modifier on `.table-scroll`: card shadow, so the table reads as the section's object. |
+| `.rate-table` / `.compare-table` | Tabular nums, navy-050 header in the display face, **one rule per row boundary** (top border on every row after the first, never top and bottom), first column sticky on phones. `th[colspan]` renders as a group row (final expense comparison). |
+| `.acc` | Each `<details>` is its own card row; hover and open states lift it. Native keyboard behavior. |
+| `.field` | Label above input, 48px input, border-strong, blue focus ring. The error line is **always in the layout** and only toggles `visibility`. |
+| `.site-header` | Solid white; glass only when `.is-stuck`. Wordmark navy, nav slate with a bright-blue underline. |
+| `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
+
+Icons: **Lucide only**, inlined as SVG, 1.5px stroke, 20px or 24px, `aria-hidden="true"` with the
+meaning carried by adjacent text.
+
+---
+
+## 6. Per-page overrides
+
+See `design-system/pages/*.md` for the full per-page notes. In brief:
+
+**Home.** Triage, not pitch. Hero: h1, lead, one link line, photo, and the three product paths as
+a three-cell bento (middle cell tinted). The comparison section is a four-cell bento: three product
+stat cells (white, tinted, blue) over a full-width signature comparison table.
+
+**Term hub.** Form-weighted; the three-step form is the hero's right panel. "What it covers" ends
+in a three-cell bento led by a blue coverage-range stat. Term lengths are four segmented stat cells
+(`10 / 15 / 20 / 30`) that count up and drive the explainer panel. The rate table is the page's
+signature object, with its toggles above it and a dated pill beneath.
+
+**Whole-life hub.** Dual CTA at parity. The three guarantees are a white / blue / tinted bento.
+The cash-value chart sits in a `.bento-4` beside a tinted `.bento-2` stat (40 years). Section 7b
+("who this does not suit") keeps identical prominence to 7a.
+
+**Final-expense hub.** Phone-first, Inter throughout, static. Cost table cut to three columns
+(`Age | $10,000 | $25,000`) with the row-level call CTA inside the age cell. The three-product
+comparison is a three-column table with group rows so it never needs a fourth column.
+
+**Contact.** Split layout; "what happens next" is a three-cell bento (white, tinted, blue).
+
+---
+
+## 7. Banned
+
+No purple or pink gradients. No neon. No dark mode. No emoji as icons. No section-number eyebrows
+(`01 / Coverage`). No scroll cues. No centered-everything pages. No Fraunces. No amber outside the
+three CTA rules. No `border-top` plus `border-bottom` on the same table row. No bento cell without
+content. No count-up on a placeholder or a rate. No glass except the stuck header.
+No em-dash anywhere in rendered copy: use a comma, a colon, a period, or a middot separator.
+`tools/build.py` fails the build if one appears, entity forms included.
+No invented rates, reviews, carrier names, or dollar claims. Rate cells are `$--` by decision.
+
+**Photography.** Posed joy at the camera is banned. Two rules with no exceptions:
+
+1. **No photograph of a person beside the agent byline.** Bylines use a marked placeholder avatar.
+2. **No image captioned or positioned to imply the person shown is a customer.**
+
+Eyebrow budget per page: `ceil(sectionCount / 3)`. Eyebrows are navy, display face, and used only
+inside bento cells to name the cell.
+
+---
+
+## 8. Imagery
+
+### Art direction
+Documentary, no eye contact with the camera. Hands, backs, thresholds, kitchen tables, a window,
+a porch. Photographs here are atmospheric and evidence nothing, so none may be positioned to
+suggest it does: no photo beside a testimonial, a rate, a claim statistic, or the agent byline.
+
+### Sourcing and licensing
+Unsplash, downloaded and served locally. Nothing hotlinks at runtime. The Unsplash Licence does
+**not** convey a model release, so identifiable people must be cleared or replaced before launch.
+`assets/img/CREDITS.md` records every file; `REPLACE-BEFORE-LAUNCH.md` tracks the swap. The
+manifest lives in `tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
+
+### Delivery
+`<picture>` with AVIF, then WebP, then `<img>`; explicit `width` and `height`; `sizes` matched to
+the real column; exactly one `loading="eager"` + `fetchpriority="high"` per page; descriptive
+`alt` or `alt=""` when decorative.
+
+### Placement at `VISUAL_DENSITY 6`
+Eight placements across five pages, all in 12px-radius plates with a 1px inset hairline, some
+with the blue `.glow` behind them. The `home-independence` slot is no longer placed: the
+independence band is a solid navy band with no photo under its text, so there is no text over
+photography anywhere on the site and nothing to scrim.
+
+No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
+the FAQ accordions, the spoke grids, or any byline.
