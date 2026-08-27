@@ -62,6 +62,28 @@ IMAGES = {
     "contact-desk": (
         "1631651693480-97f1132e333d", (3, 2), [560, 900, 1240], "center",
         "A pen and printed forms laid out on a wooden table."),
+
+    # --- Hub banners ------------------------------------------------------
+    # One per product hub, full bleed under the hero. 21:9 and wider widths
+    # than every other slot because these are the only 100vw images on the
+    # site. None of the three shows a person, which keeps the model-release
+    # list in REPLACE-BEFORE-LAUNCH.md at the five it already carries.
+    # Ordinary street, ordinary weather. The mortgage-and-children years the
+    # term copy is about, without a family in frame to imply a customer.
+    "term-banner": (
+        "1572523473094-46c0d60ceb29", (21, 9), [800, 1400, 2000], "center",
+        "A residential street corner of two storey houses under an overcast autumn sky."),
+    # The back of a house someone has held for a long time. Reads as duration,
+    # which is the whole life argument, without reaching for the lone-oak
+    # cliche that section 8 rules out.
+    "whole-banner": (
+        "1776025808938-dec3b01391ea", (21, 9), [800, 1400, 2000], "center",
+        "A back garden enclosed by a wooden fence, with mature evergreens behind it."),
+    # An empty table in late light. Quiet, domestic, and nobody in it: the
+    # room the money is for, not a depiction of grief.
+    "fe-banner": (
+        "1537407684649-8a13dbf548f2", (21, 9), [800, 1400, 2000], "center",
+        "An empty dining table and chairs beside a window in late afternoon light."),
 }
 
 # Open Graph share image per page: which manifest entry to use.

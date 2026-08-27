@@ -261,14 +261,61 @@ there is no JPEG tier except the Open Graph cards, which need it for crawler com
 | descriptive `alt`, or `alt=""` when decorative | An image the adjacent copy already explains should be silent to a screen reader, not narrated twice |
 
 ### Placement
-Restrained on purpose at `VISUAL_DENSITY 5`: nine images across five pages. Layout alternates
+Restrained on purpose at `VISUAL_DENSITY 5`: twelve images across five pages. Layout alternates
 image-left and image-right so no two adjacent image sections repeat.
+
+Each product hub carries one **statement band** between its hero and its trust strip, rendered by
+`chrome.hub_banner()`. The photograph is a ground, not a subject: duotoned to navy, scrimmed, and
+carrying one display line plus a supporting line and a single action. It is a statement band rather
+than a decorative plate on purpose. A wordless 420px slab is the "hero image that does nothing"
+anti-pattern: it pushes the trust strip down and earns nothing back.
+
+Four constraints hold it in place:
+
+- **Lazy, never eager.** It is below the fold on desktop and must not outbid the hero form for LCP.
+  All three hubs still spend zero of their one-eager-image budget.
+- **No transform-based motion.** `.fe main` is exempt from transforms, so a static band is the one
+  treatment that renders identically on all three hubs.
+- **The statement is a `<p>`, not an `<h2>`.** It is a statement, not a section heading, and should
+  not enter the document outline as one. That means the display font has to be asked for explicitly
+  (`!font-display !font-bold`), because it arrives via the `h2` element selector.
+- **The action fills the right of the row.** Without it the band is a wide statement with a third of
+  the grid empty beside it, which is the dead-space defect. Measured row fill is 89% at 1440.
 
 No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
 the FAQ accordions, the spoke grids, or any byline. Those either already carry a visual or would be
 actively worse with decoration.
 
 ### Text over photography
-Only one image sits under text: the independence band on the home page. It is darkened with a navy
-scrim to a measured contrast ratio rather than an eyeballed opacity, and the result is verified in
-the contrast pass like any other text on the site.
+Four images sit under text: the independence band on the home page, and the statement band on each
+of the three product hubs. Every one of them uses the same plate, and no other treatment is
+permitted:
+
+```
+.media .media-duotone .media-scrim   on an absolutely positioned, aria-hidden plate
+```
+
+The rule is not "at most one band", it is **one scrim, proven**. `media-duotone` desaturates so a
+colour photograph cannot introduce a second accent into a palette that allows exactly one, and
+`media-scrim` is a flat navy at alpha 0.72, not a blend mode, so the composite is predictable and
+provable rather than eyeballed.
+
+Alt text on these plates is forced empty at the call site even though the manifest carries a
+description, because the photograph is now behind copy and would otherwise be narrated as competing
+content. The manifest keeps the description for `CREDITS.md`.
+
+**Measured, not estimated.** Sampled from the delivered bitmaps by reproducing the CSS pipeline
+(`grayscale(1) contrast(1.06)`, then the 0.72 navy composite) on canvas and taking the brightest
+pixel on each plate. All three hubs hit a pure-white source pixel, so these are true floors, not
+averages:
+
+| Element | Alpha | Worst ratio | Needs |
+|---|---|---|---|
+| Statement line | white 100% | **6.29:1** | 4.5 |
+| Supporting line, 19px | white 88% | **5.32:1** | 4.5 |
+| Action label | white 100% | **6.29:1** | 4.5 |
+| Ghost action border | white 55% | **3.15:1** | 3.0 (non-text) |
+
+The ghost border is the tight one. Do not lower that alpha, and do not put a ghost button on an
+unscrimmed photograph. On the final-expense band the action is a call button, which takes
+`!bg-white !text-navy`: plain `.btn-call` is navy on navy and effectively disappears.

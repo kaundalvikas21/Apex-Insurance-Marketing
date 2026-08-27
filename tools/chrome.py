@@ -93,6 +93,55 @@ def figure(name, sizes, caption=None, cls="", eager=False, parallax=False, wipe=
             % (cls, picture(name, sizes, cls=motion, img_cls="media-img", eager=eager), cap))
 
 
+def hub_banner(name, headline, support, action):
+    """Statement band. Sits between a hub hero and its trust strip.
+
+    The photograph is a ground, not a subject: duotoned to navy so it cannot
+    introduce a second accent, then scrimmed at the same measured alpha as the
+    home independence band. The statement is the point of the band, which is
+    why this is not a bare decorative plate. See MASTER.md section 8.
+
+    Two structural notes. The plate is aria-hidden and the alt is forced empty
+    at the call site, because the manifest alt describes a photograph that is
+    now behind text and would be narrated as competing content. And the band
+    stays lazy: it is below the fold on desktop and must not outbid the hero
+    form for LCP.
+
+    `action` fills the right of the row, so the band is not a wide statement
+    with a third of the grid empty beside it.
+    """
+    return """<!-- =====================================================================
+     HUB STATEMENT BAND. Duotoned to navy so a colour photograph cannot
+     introduce a second accent, and scrimmed to a measured contrast ratio
+     rather than an eyeballed opacity. See MASTER.md section 8.
+     ================================================================== -->
+<section class="section band-navy on-navy relative isolate overflow-hidden">
+
+  <div class="absolute inset-0 -z-10 media media-duotone media-scrim !rounded-none" aria-hidden="true">
+    %s
+  </div>
+
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-end">
+
+      <div class="lg:col-span-7">
+        <!-- A <p>, not an <h2>: this is a statement, not a section heading, and
+             it should not enter the document outline as one. The display font
+             comes from the h2 element selector, so it has to be asked for. -->
+        <p class="reveal text-h2 !font-display !font-bold">%s</p>
+        <p class="reveal mt-6 text-lead text-white/88">%s</p>
+      </div>
+
+      <div class="reveal lg:col-span-4 lg:col-start-9">
+        %s
+      </div>
+
+    </div>
+  </div>
+</section>""" % (picture(name, "100vw", cls="w-full h-full", img_cls="media-img", alt=""),
+                 headline, support, action)
+
+
 # ---------------------------------------------------------------------------
 # HEADER
 # ---------------------------------------------------------------------------

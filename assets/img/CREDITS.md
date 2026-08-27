@@ -23,6 +23,9 @@ licensed photography. See REPLACE-BEFORE-LAUNCH.md.
 | `fe-quiet` | [photo-1762126242240-cafa01fb1351](https://images.unsplash.com/photo-1762126242240-cafa01fb1351) | 3:2 | 640, 1024, 1440 | A person sitting in an armchair looking out through a large window. |
 | `fe-hands` | [photo-1775049728396-d641f91f6c62](https://images.unsplash.com/photo-1775049728396-d641f91f6c62) | 16:9 | 640, 1024, 1440 | An older person's hands resting one over the other. |
 | `contact-desk` | [photo-1631651693480-97f1132e333d](https://images.unsplash.com/photo-1631651693480-97f1132e333d) | 3:2 | 560, 900, 1240 | A pen and printed forms laid out on a wooden table. |
+| `term-banner` | [photo-1572523473094-46c0d60ceb29](https://images.unsplash.com/photo-1572523473094-46c0d60ceb29) | 21:9 | 800, 1400, 2000 | A residential street corner of two storey houses under an overcast autumn sky. |
+| `whole-banner` | [photo-1776025808938-dec3b01391ea](https://images.unsplash.com/photo-1776025808938-dec3b01391ea) | 21:9 | 800, 1400, 2000 | A back garden enclosed by a wooden fence, with mature evergreens behind it. |
+| `fe-banner` | [photo-1537407684649-8a13dbf548f2](https://images.unsplash.com/photo-1537407684649-8a13dbf548f2) | 21:9 | 800, 1400, 2000 | An empty dining table and chairs beside a window in late afternoon light. |
 
 ## Open Graph
 

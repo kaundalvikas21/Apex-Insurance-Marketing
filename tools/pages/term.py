@@ -345,6 +345,15 @@ def body():
           </div>
         </div>""" for key, label, fits, caveat in TERM_LENGTHS)
 
+    banner = C.hub_banner(
+        "term-banner",
+        "The years a mortgage and a child at home overlap.",
+        "That overlap is the window term life is priced for. It ends when the term does, which "
+        "is exactly why it costs a fraction of permanent cover.",
+        # ponytail: points at #quote, not #rates, because every premium cell is
+        # still "$--". Revert to #rates the day real rate cards land.
+        '<a class="btn btn-ghost btn-wrap" href="#quote"'
+        ' data-cta-location="term_banner">Get term life quotes</a>')
     home_media = C.figure("term-home", "(min-width: 1024px) 38vw, 92vw",
                           cls="reveal", parallax=True)
     underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 36vw, 92vw",
@@ -402,6 +411,8 @@ def body():
     </div>
   </div>
 </section>
+
+{banner}
 
 <!-- Trust strip, within one viewport of the form CTA. -->
 <section class="border-y border-rule bg-surface">

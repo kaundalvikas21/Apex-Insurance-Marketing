@@ -189,6 +189,13 @@ def rate_table():
 
 def body():
     # No parallax and no wipe: this page is exempt from transform-based motion.
+    banner = C.hub_banner(
+        "fe-banner",
+        "So the funeral is not paid for out of savings.",
+        "A small whole life policy that pays cash to the people you name. There is no medical "
+        "exam, and the premium never goes up.",
+        C.phone_link("fe_banner", "btn btn-call btn-wrap !bg-white !text-navy",
+                     "Call " + C.PHONE_DISPLAY))
     quiet_media = C.figure("fe-quiet", "(min-width: 1024px) 52vw, 92vw", cls="reveal mt-10")
     hands_media = C.figure("fe-hands", "(min-width: 1024px) 44vw, 92vw", cls="reveal mt-10")
     call_band_1 = call_band(
@@ -375,6 +382,8 @@ def body():
     </div>
   </div>
 </section>
+
+{banner}
 
 <!-- Trust strip. Within one viewport of the hero phone CTA. -->
 <section class="border-y border-rule bg-surface">

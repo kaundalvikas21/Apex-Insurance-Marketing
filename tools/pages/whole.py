@@ -271,6 +271,14 @@ def cash_value_chart():
 
 
 def body():
+    banner = C.hub_banner(
+        "whole-banner",
+        "Term life rents. Whole life buys.",
+        "It does not expire, the premium does not rise, and the cash value is guaranteed in the "
+        "contract. It also costs considerably more, which is why this page spends as much time "
+        "on when not to buy it.",
+        '<a class="btn btn-ghost btn-wrap" href="#cash-value"'
+        ' data-cta-location="whole_banner">How the cash value works</a>')
     permanence_media = C.figure("whole-permanence", "(min-width: 1024px) 38vw, 92vw",
                                 cls="reveal mt-8", parallax=True)
     acceptance_media = C.picture("whole-acceptance", "(min-width: 1024px) 38vw, 92vw",
@@ -342,6 +350,8 @@ def body():
     </div>
   </div>
 </section>
+
+{banner}
 
 <!-- Trust strip, within one viewport of both CTAs. -->
 <section class="border-y border-rule bg-surface">

@@ -248,6 +248,41 @@
   </div>
 </section>
 
+<!-- =====================================================================
+     HUB STATEMENT BAND. Duotoned to navy so a colour photograph cannot
+     introduce a second accent, and scrimmed to a measured contrast ratio
+     rather than an eyeballed opacity. See MASTER.md section 8.
+     ================================================================== -->
+<section class="section band-navy on-navy relative isolate overflow-hidden">
+
+  <div class="absolute inset-0 -z-10 media media-duotone media-scrim !rounded-none" aria-hidden="true">
+    <picture class="w-full h-full">
+      <source type="image/avif" srcset="/assets/img/whole-banner-800.avif 800w, /assets/img/whole-banner-1400.avif 1400w, /assets/img/whole-banner-2000.avif 2000w" sizes="100vw">
+      <source type="image/webp" srcset="/assets/img/whole-banner-800.webp 800w, /assets/img/whole-banner-1400.webp 1400w, /assets/img/whole-banner-2000.webp 2000w" sizes="100vw">
+      <img src="/assets/img/whole-banner-800.webp" width="2000" height="857"
+           alt="" loading="lazy" decoding="async" class="media-img">
+    </picture>
+  </div>
+
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-end">
+
+      <div class="lg:col-span-7">
+        <!-- A <p>, not an <h2>: this is a statement, not a section heading, and
+             it should not enter the document outline as one. The display font
+             comes from the h2 element selector, so it has to be asked for. -->
+        <p class="reveal text-h2 !font-display !font-bold">Term life rents. Whole life buys.</p>
+        <p class="reveal mt-6 text-lead text-white/88">It does not expire, the premium does not rise, and the cash value is guaranteed in the contract. It also costs considerably more, which is why this page spends as much time on when not to buy it.</p>
+      </div>
+
+      <div class="reveal lg:col-span-4 lg:col-start-9">
+        <a class="btn btn-ghost btn-wrap" href="#cash-value" data-cta-location="whole_banner">How the cash value works</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Trust strip, within one viewport of both CTAs. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">

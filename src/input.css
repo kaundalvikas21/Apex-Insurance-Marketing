@@ -869,6 +869,11 @@
   .media-strip { aspect-ratio: 16 / 9; }
   .media-square-ish { aspect-ratio: 4 / 3; }
 
+  /* chrome.RATIO_CLASS maps 21:9 here. The hub banners are 21:9 but render as
+     absolutely positioned plates, so nothing uses this today; it exists so
+     figure() cannot be handed a 21:9 image and silently collapse it. */
+  .media-band { aspect-ratio: 21 / 9; }
+
   /* Hairline inset. A 1px rule at 12% black reads as a printed plate edge and
      stops a light image from bleeding into the warm-white ground. */
   .media::after {

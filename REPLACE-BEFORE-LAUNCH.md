@@ -52,6 +52,12 @@ copy that pattern once real data exists.
 
 Also replace `[CARRIER RATE CARD NAME AND EDITION]` in the source line under each table.
 
+**When real rates land, repoint the term statement band.** Its CTA currently reads
+"Get term life quotes" and links to `#quote`, because `#rates` is still 21 cells of `$--` and
+sending a visitor there is a promise the page cannot keep. Price transparency is the strongest
+answer to the main term-life objection, so the day the rate card is real, change that CTA back to
+`#rates` ("See what it costs at your age") in `tools/pages/term.py`.
+
 ---
 
 ## 3. Legal and compliance
@@ -76,7 +82,7 @@ guidelines have been checked. Each strip carries a `[PLACEHOLDER ...]` comment.
 
 ## 4b. Photography
 
-Nine photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
+Twelve photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
 `assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
 `tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
 
@@ -84,10 +90,12 @@ Nine photographs, all from Unsplash, all downloaded and served locally from `ass
 
 1. **Model releases.** The Unsplash Licence permits commercial use without attribution, but it does
    **not** convey a model release for identifiable people, and it does not clear trademarks visible
-   in a frame. Five of the nine images show identifiable people:
+   in a frame. Five of the twelve images show identifiable people:
    `home-hero`, `home-independence`, `term-underwriting`, `fe-quiet`, `fe-hands`.
    Have counsel confirm the exposure is acceptable for an insurance advertiser in your states, or
    replace them with owned or Getty/Stocksy licensed photography.
+   The three hub banners (`term-banner`, `whole-banner`, `fe-banner`) were chosen with no person
+   in frame precisely so this list did not get longer. Keep it that way if you swap them.
 2. **They are stock.** Other sites use these exact frames. Commissioned photography of the real
    agency is the upgrade, and the layout will take it without changes as long as the aspect ratios
    in `tools/images.py` are preserved.
