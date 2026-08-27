@@ -383,8 +383,6 @@ def body():
   </div>
 </section>
 
-{banner}
-
 <!-- Trust strip. Within one viewport of the hero phone CTA. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
@@ -404,6 +402,8 @@ def body():
     </div>
   </div>
 </section>
+
+{banner}
 
 <!-- =====================================================================
      2. COVERAGE AMOUNTS as a simple visual scale.

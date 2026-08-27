@@ -351,8 +351,6 @@ def body():
   </div>
 </section>
 
-{banner}
-
 <!-- Trust strip, within one viewport of both CTAs. -->
 <section class="border-y border-rule bg-surface">
   <div class="container-ax py-6">
@@ -372,6 +370,8 @@ def body():
     </div>
   </div>
 </section>
+
+{banner}
 
 <!-- =====================================================================
      2. WHAT MAKES IT PERMANENT.

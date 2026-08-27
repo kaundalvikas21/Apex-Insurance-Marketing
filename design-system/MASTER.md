@@ -264,13 +264,20 @@ there is no JPEG tier except the Open Graph cards, which need it for crawler com
 Restrained on purpose at `VISUAL_DENSITY 5`: twelve images across five pages. Layout alternates
 image-left and image-right so no two adjacent image sections repeat.
 
-Each product hub carries one **statement band** between its hero and its trust strip, rendered by
-`chrome.hub_banner()`. The photograph is a ground, not a subject: duotoned to navy, scrimmed, and
-carrying one display line plus a supporting line and a single action. It is a statement band rather
-than a decorative plate on purpose. A wordless 420px slab is the "hero image that does nothing"
-anti-pattern: it pushes the trust strip down and earns nothing back.
+Each product hub carries one **statement band**, rendered by `chrome.hub_banner()`. The photograph
+is a ground, not a subject: duotoned to navy, scrimmed, and carrying one display line plus a
+supporting line and a single action. It is a statement band rather than a decorative plate on
+purpose. A wordless 420px slab is the "hero image that does nothing" anti-pattern: it costs scroll
+depth and earns nothing back.
 
-Four constraints hold it in place:
+**It goes after the trust strip, never before it.** The first build put it between the hero and the
+trust strip and pushed the gap from the hero CTA to the proof from 232px to 665px on term at 1440,
+and from 124px to 615px at 390. The trust strip is friction reduction and is deliberately placed
+within one viewport of the CTA; a 450px band does not belong between a lead form and the reason to
+trust it. Below the strip the band reads as the transition into the body content instead, and the
+measured gap returns to its original value on every hub.
+
+Five constraints hold it in place:
 
 - **Lazy, never eager.** It is below the fold on desktop and must not outbid the hero form for LCP.
   All three hubs still spend zero of their one-eager-image budget.
@@ -281,6 +288,8 @@ Four constraints hold it in place:
   (`!font-display !font-bold`), because it arrives via the `h2` element selector.
 - **The action fills the right of the row.** Without it the band is a wide statement with a third of
   the grid empty beside it, which is the dead-space defect. Measured row fill is 89% at 1440.
+- **The action carries a `data-cta-location`.** It is a conversion element, and an untracked CTA is
+  one you cannot optimise. `phone_link()` adds the attribute for you; a hand-written `<a>` does not.
 
 No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
 the FAQ accordions, the spoke grids, or any byline. Those either already carry a visual or would be
