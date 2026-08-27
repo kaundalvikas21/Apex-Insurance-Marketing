@@ -275,6 +275,19 @@ def body():
                                 cls="reveal mt-8", glow=True)
     acceptance_media = C.picture("whole-acceptance", "(min-width: 1024px) 38vw, 92vw",
                                  cls="media media-strip !rounded-none", img_cls="media-img")
+    # Mid-page banner, placed after the cash value proof and before the
+    # who-it-suits split, at roughly 60% scroll depth.
+    legacy_band = C.banner(
+        "whole-band",
+        "The number does not move for the rest of your life",
+        "The premium is fixed, the death benefit is guaranteed, and the cash value is contractual. "
+        "Tell us your age and what you want it to do, and a licensed agent comes back with named "
+        "carriers and the guaranteed columns, not an illustration.",
+        '<a class="btn btn-cta btn-block" href="#quote" data-cta-location="whole_band">'
+        'Get my whole life quotes</a>'
+        + C.phone_link("whole_band", "btn btn-ghost btn-block mt-3",
+                       "Call " + C.PHONE_DISPLAY, 20),
+        eyebrow="Guaranteed, not projected")
     spokes = C.spoke_module(
         "Explore whole life insurance",
         "Nine pages covering the parts of whole life that need more than a paragraph.",
@@ -576,6 +589,8 @@ def body():
     </p>
   </div>
 </section>
+
+{legacy_band}
 
 <!-- =====================================================================
      7. WHO IT SUITS AND WHO IT DOES NOT.

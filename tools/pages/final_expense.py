@@ -97,7 +97,15 @@ def schema():
 
 
 # --- Repeating phone band. Spec: after every second section. ---------------
-def call_band(heading, sub, where):
+def call_band(heading, sub, where, photo=None):
+    # photo= turns the flat navy band into a photographed banner. Used once,
+    # on the middle band: three photo bands on one page would stop reading as
+    # a break and start reading as wallpaper.
+    if photo:
+        return C.banner(photo, heading, sub,
+                        C.phone_link(where, "btn btn-call btn-xl btn-block !bg-white !text-navy",
+                                     "Call " + C.PHONE_DISPLAY, 26)
+                        + '<p class="mt-3 text-sm text-white/75 text-center">%s</p>' % C.HOURS)
     return f"""
 <section class="section-tight band-navy on-navy">
   <div class="container-ax">
@@ -202,10 +210,15 @@ def body():
     call_band_2 = call_band(
         "Not sure which of the three you need?",
         "Tell us your age and what you are trying to cover, and we will say so plainly.",
-        "fe_repeat_2")
+        "fe_repeat_2", photo="fe-band")
+    # Sits directly under "How to apply. One call, about fifteen minutes." Its
+    # copy deliberately does not restate that heading: the section above has
+    # already covered the how, so this band only removes the last reason to
+    # put the call off.
     call_band_3 = call_band(
-        "Ready to apply?",
-        "One call, about fifteen minutes, and most carriers give a decision while you are on the phone.",
+        "You do not need anything ready to start",
+        "Nothing to print, nothing to post, no exam to book. If one of the four things above is "
+        "missing, call anyway and we will work around it.",
         "fe_repeat_3")
     spokes = C.spoke_module(
         "Explore final expense insurance",

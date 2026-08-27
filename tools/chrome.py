@@ -78,6 +78,41 @@ def picture(name, sizes, cls="", img_cls="", eager=False, ratio_cls="", alt=None
     </picture>"""
 
 
+def banner(name, heading, sub, cta_html, eyebrow=None):
+    """Full-bleed photo band carrying one heading and one CTA.
+
+    CRO placement rules, and the reason this is not a hero image:
+      * Never above the fold. The top of a service page belongs to the H1 and
+        the quote form; a banner there pushes the form down and costs form
+        starts.
+      * Never between the hero CTA and the trust strip. Measured on this site
+        at 433 to 491px of added gap, which breaks the proximity the strip is
+        there to provide.
+      * It sits at roughly 55 to 70 percent scroll depth, after the page has
+        made its case, as the second conversion ask for a reader who is now
+        warm. Height comes from the copy, not from a 21:9 box, so the band
+        costs about one screen third rather than a full screen.
+
+    The photograph is decorative and is scrimmed. All meaning lives in the
+    text, which is why every band image carries empty alt.
+    """
+    eye = ('<p class="eyebrow">%s</p>' % eyebrow) if eyebrow else ""
+    return f"""
+<section class="banner-band on-navy">
+  {picture(name, "100vw", cls="banner-media", img_cls="banner-img")}
+  <div class="container-ax banner-content section-tight">
+    <div class="reveal grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+      <div class="lg:col-span-7">
+        {eye}
+        <p class="text-h2 !font-display !font-bold text-white">{heading}</p>
+        <p class="mt-4 text-white/85 max-w-2xl">{sub}</p>
+      </div>
+      <div class="lg:col-span-4 lg:col-start-9">{cta_html}</div>
+    </div>
+  </div>
+</section>"""
+
+
 RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band",
                (16, 9): "media-strip", (4, 3): "media-square-ish"}
 

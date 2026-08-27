@@ -60,6 +60,18 @@ IMAGES = {
     "fe-hands": (
         "1775049728396-d641f91f6c62", (16, 9), [640, 1024, 1440], "center",
         "An older person's hands resting one over the other."),
+    # --- Mid-page banner bands (21:9). CRO: these are conversion re-asks, not
+    # heroes. Each reuses a photo that appears on no other section of the same
+    # page, so nothing repeats within one scroll.
+    "term-band": (
+        "1635859890085-ec8cb5466806", (21, 9), [800, 1440, 1920], "center",
+        ""),  # decorative: hands over spread paperwork, sits behind band copy
+    "whole-band": (
+        "1761839258803-21515f43190c", (21, 9), [800, 1440, 1920], "center",
+        ""),  # decorative: an older man and two children at a kitchen counter
+    "fe-band": (
+        "1631651693480-97f1132e333d", (21, 9), [800, 1440, 1920], "center",
+        ""),  # decorative: a pen and printed forms on a wooden table
     "contact-desk": (
         "1631651693480-97f1132e333d", (3, 2), [560, 900, 1240], "center",
         "A pen and printed forms laid out on a wooden table."),

@@ -22,6 +22,9 @@ licensed photography. See REPLACE-BEFORE-LAUNCH.md.
 | `whole-acceptance` | [photo-1624889229800-7ca4c6c0d52b](https://images.unsplash.com/photo-1624889229800-7ca4c6c0d52b) | 16:9 | 480, 760, 1040 | _decorative, empty alt_ |
 | `fe-quiet` | [photo-1762126242240-cafa01fb1351](https://images.unsplash.com/photo-1762126242240-cafa01fb1351) | 3:2 | 640, 1024, 1440 | A person sitting in an armchair looking out through a large window. |
 | `fe-hands` | [photo-1775049728396-d641f91f6c62](https://images.unsplash.com/photo-1775049728396-d641f91f6c62) | 16:9 | 640, 1024, 1440 | An older person's hands resting one over the other. |
+| `term-band` | [photo-1635859890085-ec8cb5466806](https://images.unsplash.com/photo-1635859890085-ec8cb5466806) | 21:9 | 800, 1440, 1920 | _decorative, empty alt_ |
+| `whole-band` | [photo-1761839258803-21515f43190c](https://images.unsplash.com/photo-1761839258803-21515f43190c) | 21:9 | 800, 1440, 1920 | _decorative, empty alt_ |
+| `fe-band` | [photo-1631651693480-97f1132e333d](https://images.unsplash.com/photo-1631651693480-97f1132e333d) | 21:9 | 800, 1440, 1920 | _decorative, empty alt_ |
 | `contact-desk` | [photo-1631651693480-97f1132e333d](https://images.unsplash.com/photo-1631651693480-97f1132e333d) | 3:2 | 560, 900, 1240 | A pen and printed forms laid out on a wooden table. |
 
 ## Open Graph

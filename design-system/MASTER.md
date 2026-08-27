@@ -292,9 +292,34 @@ the real column; exactly one `loading="eager"` + `fetchpriority="high"` per page
 
 ### Placement at `VISUAL_DENSITY 6`
 Eight placements across five pages, all in 12px-radius plates with a 1px inset hairline, some
-with the blue `.glow` behind them. The `home-independence` slot is no longer placed: the
-independence band is a solid navy band with no photo under its text, so there is no text over
-photography anywhere on the site and nothing to scrim.
+with the blue `.glow` behind them.
 
 No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
 the FAQ accordions, the spoke grids, or any byline.
+
+### Banner bands (`.banner-band`, one per product hub)
+
+The only text-over-photography on the site. Each product hub carries exactly one, built by
+`chrome.banner()`: full-bleed photo, navy scrim, one heading, one paragraph, one primary CTA with
+one secondary beneath it.
+
+Placement is a CRO rule, not a taste call:
+
+* **Never above the fold.** The top of a hub belongs to the H1 and the quote form. A banner there
+  pushes the form down and costs form starts.
+* **Never between the hero CTA and the trust strip.** Measured on this site at 433 to 491px of
+  added gap, which destroys the proximity the strip exists to provide.
+* **At roughly 55 to 70 percent scroll depth**, replacing what was already a flat navy CTA band, so
+  the page gains a photograph without gaining a section. Term takes the no-exam band, whole life
+  takes a new band after the cash-value proof, final expense takes the middle of its three call
+  bands. One photo band per page: three would read as wallpaper rather than as a break.
+* **Height comes from the copy, not from the 21:9 crop.** A true 21:9 band at 1440 is 617px of
+  scroll for one sentence.
+
+Scrim: `linear-gradient(100deg, rgb(6 33 79 / .95), .90 at 52%, .74)`, flat at `.92` below 1024
+where the copy crosses the whole frame. It hangs off `.banner-media::after`, not off
+`.banner-band::before` — a `::before` on the band is its first child and paints *under* the
+`<picture>`, which leaves bright photographs unscrimmed and the white copy unreadable.
+
+Every banner photo is decorative and carries empty `alt`. All meaning is in the text. No banner
+photo repeats a photo used elsewhere on the same page.

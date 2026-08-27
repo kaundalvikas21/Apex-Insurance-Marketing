@@ -356,6 +356,19 @@ def body():
                           cls="reveal", glow=True)
     underwriting_media = C.figure("term-underwriting", "(min-width: 1024px) 36vw, 92vw",
                                   cls="reveal mt-8")
+    # Mid-page banner, roughly 60% scroll depth. Photographed rather than flat
+    # navy so the second ask reads as a break, not as another content block.
+    no_exam_band = C.banner(
+        "term-band",
+        "Would rather skip the exam?",
+        "Several of our carriers can issue term coverage with no paramedical exam for healthy "
+        "applicants, often with a decision in days rather than weeks. It usually costs a little "
+        "more, and the coverage limits are lower. Sometimes that trade is worth it.",
+        '<a class="btn btn-cta btn-block" href="#quote" data-cta-location="term_band">'
+        'Get my term quotes</a>'
+        '<a class="btn btn-ghost btn-block mt-3" href="/term-life-insurance/no-medical-exam/#who-qualifies">'
+        'No medical exam term life</a>',
+        eyebrow="No medical exam")
     spokes = C.spoke_module(
         "Explore term life insurance",
         "Eleven pages covering the parts of term life that need more than a paragraph.",
@@ -610,21 +623,7 @@ def body():
 <!-- =====================================================================
      6. NO EXAM TEASER.
      ================================================================== -->
-<section class="section-tight band-navy on-navy">
-  <div class="container-ax">
-    <div class="reveal flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-      <div class="grow">
-        <h2 class="text-h3 !font-display !font-semibold">Would rather skip the exam?</h2>
-        <p class="mt-3 text-white/85 max-w-2xl">
-          Several of our carriers can issue term coverage with no paramedical exam for healthy
-          applicants, often with a decision in days rather than weeks. It usually costs a little
-          more, and the coverage limits are lower. Sometimes that trade is worth it.
-        </p>
-      </div>
-      <a class="btn btn-ghost shrink-0" href="/term-life-insurance/no-medical-exam/#who-qualifies">No medical exam term life</a>
-    </div>
-  </div>
-</section>
+{no_exam_band}
 
 <!-- =====================================================================
      7. CARRIERS.

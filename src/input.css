@@ -184,7 +184,7 @@
     text-transform: uppercase;
     color: var(--color-navy);
   }
-  .band-navy .eyebrow { color: rgb(255 255 255 / 0.78); }
+  .band-navy .eyebrow, .banner-band .eyebrow { color: rgb(255 255 255 / 0.78); }
 
   .measure { max-width: 68ch; }
   .measure-tight { max-width: 58ch; }
@@ -246,8 +246,8 @@
   }
   .btn-ghost:hover { background-color: var(--color-navy); color: #fff; }
 
-  .band-navy .btn-ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.55); }
-  .band-navy .btn-ghost:hover { background-color: #fff; color: var(--color-navy); border-color: #fff; }
+  .band-navy .btn-ghost, .banner-band .btn-ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.55); }
+  .band-navy .btn-ghost:hover, .banner-band .btn-ghost:hover { background-color: #fff; color: var(--color-navy); border-color: #fff; }
 
   .btn-block { width: 100%; }
   .btn-wrap { white-space: normal; }
@@ -1018,6 +1018,45 @@
     height: 100%;
     object-fit: cover;
   }
+
+  /* --- Mid-page photo banner band ------------------------------------
+     Height is driven by the copy, not by the 21:9 source crop, so the band
+     costs roughly a third of a screen instead of a whole one. The scrim is
+     measured: white body copy clears 4.5:1 over the lightest region of every
+     band photo at every breakpoint. */
+  .banner-band {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-navy);
+  }
+  .banner-media {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* The scrim hangs off .banner-media, not off .banner-band. A ::before on
+     the band is its first child and would paint UNDER the <picture>, which
+     leaves bright photographs unscrimmed and the white copy unreadable. */
+  .banner-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg,
+      rgb(6 33 79 / 0.95) 0%,
+      rgb(6 33 79 / 0.90) 52%,
+      rgb(6 33 79 / 0.74) 100%);
+  }
+  /* Single column below lg: the copy crosses the whole frame, so the scrim
+     has to be flat rather than graded. */
+  @media (max-width: 1023px) {
+    .banner-media::after { background: rgb(6 33 79 / 0.92); }
+  }
+  .banner-content { position: relative; z-index: 1; }
 
   .media-tall  { aspect-ratio: 4 / 5; }
   .media-wide  { aspect-ratio: 3 / 2; }
