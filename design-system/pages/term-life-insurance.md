@@ -10,5 +10,4 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
 - **Rate table:** `[PLACEHOLDER]` cells, dated source line, row-level "Quote this" buttons that
   prefill the hero form and jump to the first empty step.
 - **Underwriting timeline:** sticky left column with the photograph, five soft-dotted steps right.
-- **The forest band** is the carriers strip (logo placeholders on raised forest-700 slots).
 - **Final form CTA** repeats the same three-step form in a `.panel`.

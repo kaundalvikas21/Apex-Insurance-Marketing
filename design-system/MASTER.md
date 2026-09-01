@@ -142,7 +142,7 @@ Section rhythm: `py-20` mobile, `py-28` at 768, `py-32` at 1024. Bands keep the 
 | Radius | Token | Applies to |
 |---|---|---|
 | **24px** | `--radius-card` | Cards, panels, tables, media, the mobile nav panel |
-| **16px** | `--radius-ui` | Buttons, inputs, selects, choice chips, accordion items, spoke tiles, logo slots, flags |
+| **16px** | `--radius-ui` | Buttons, inputs, selects, choice chips, accordion items, spoke tiles, flags |
 | **999px** | `rounded-full` | Progress segments, step-number discs, the nested icon disc inside buttons, the coverage scale |
 
 Nothing else. No `rounded-[2px]`, no mixed radii on one component.
