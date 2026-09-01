@@ -76,9 +76,10 @@ answer to the main term-life objection, so the day the rate card is real, change
 
 ## 4. Carrier logos
 
-Two logo strips (`/` and `/term-life-insurance/`) render six dashed `Carrier logo N` slots.
-Do not put a carrier mark on the site until the appointment is active **and** that carrier's brand
-guidelines have been checked. Each strip carries a `[PLACEHOLDER ...]` comment.
+The site displays no carrier marks, and no placeholder slots for them. Do not add a carrier logo,
+name, or mark to any page until that appointment is active **and** that carrier's brand guidelines
+have been checked. The footer's "appointed with multiple carriers" language makes no named or
+numeric claim and is fine as-is.
 
 ## 4b. Photography
 
