@@ -784,22 +784,6 @@
   }
   .footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
-  /* --- Carrier logo placeholder ---------------------------------------- */
-  .logo-slot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 56px;
-    padding: 0.75rem 1rem;
-    border: 1px dashed var(--color-border-strong);
-    border-radius: var(--radius-sm);
-    background-color: var(--color-surface);
-    font-size: var(--text-micro);
-    font-weight: 500;
-    color: var(--color-muted);
-    text-align: center;
-  }
-
   /* --- Reveal ----------------------------------------------------------- */
   .js .reveal { opacity: 0; transform: translateY(12px); }
   .js .reveal.is-in {

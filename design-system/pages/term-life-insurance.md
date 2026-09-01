@@ -12,7 +12,7 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
 - **Rates:** `.table-signature`. Toggles above (7fr 4fr 4fr), `$--` cells by decision, `[PLACEHOLDER]`
   flag above, dated `.pill` beneath. `.reveal` sits on the scroll container, never on a wrapper
   around it (a transformed wrapper leaks the table's width into the page until it reveals).
-- **No-exam teaser:** navy band. **Carriers:** white strip directly after it.
+- **No-exam teaser:** navy band.
 - **How to apply:** `chrome.step()` trio.
 - Layout families in order: hero + panel, strip, split + bento, selector + card, table, timeline,
-  navy band, strip, step trio, tile grid, accordion, byline, split + panel. Eyebrow budget 4, used 1.
+  navy band, step trio, tile grid, accordion, byline, split + panel. Eyebrow budget 4, used 1.

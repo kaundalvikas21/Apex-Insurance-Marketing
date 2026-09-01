@@ -157,21 +157,6 @@ HERO = f"""
         {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
       </span>
     </div>
-
-    <div class="mt-6 pt-6 border-t border-rule">
-      <p class="text-micro font-semibold uppercase tracking-[0.1em] text-muted">Carriers we are appointed with</p>
-      <!-- [PLACEHOLDER - REPLACE WITH APPOINTED CARRIER LOGOS. Do not display a
-           carrier mark until the appointment is active and the carrier's brand
-           guidelines have been checked.] -->
-      <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div class="logo-slot">Carrier logo 1</div>
-        <div class="logo-slot">Carrier logo 2</div>
-        <div class="logo-slot">Carrier logo 3</div>
-        <div class="logo-slot">Carrier logo 4</div>
-        <div class="logo-slot">Carrier logo 5</div>
-        <div class="logo-slot">Carrier logo 6</div>
-      </div>
-    </div>
   </div>
 </section>
 """
