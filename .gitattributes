@@ -1,0 +1,9 @@
+# The repo lives on a OneDrive-synced Windows path mounted into WSL, so editors
+# and the sync client keep rewriting source files as CRLF. Normalise on the way
+# into git so that churn never lands in a diff again.
+* text=auto eol=lf
+
+*.jpg   binary
+*.avif  binary
+*.webp  binary
+*.woff2 binary
