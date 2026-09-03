@@ -39,13 +39,6 @@ DOMAIN = "https://www.apexinsurancemarketing.com"
 # typo in a link to a real spoke would pass the crawl silently. Deleting a line
 # here is how a page graduates.
 UNBUILT = frozenset([
-    "/term-life-insurance/10-year-term/",
-    "/term-life-insurance/return-of-premium/",
-    "/whole-life-insurance/dividends/",
-    "/whole-life-insurance/is-it-worth-it/",
-    "/final-expense-insurance/what-is-final-expense-insurance/",
-    "/final-expense-insurance/for-parents/",
-    "/final-expense-insurance/cremation-insurance/",
     # P1 money pages: registered in build.py PAGES, modules not yet written.
     # They belong here for the same reason as everything above, and listing
     # them is what lets a genuine typo in a link fail the crawl again.

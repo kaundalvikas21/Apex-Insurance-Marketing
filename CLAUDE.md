@@ -61,6 +61,10 @@ def body():   return "...html..."
 Optional: `OG_TITLE`, `ROBOTS`, `HTML_CLASS` (`"fe"` switches the whole page to the senior
 accessibility mode).
 
+A full `python3 tools/build.py` also writes `sitemap.xml` from `PAGES`, skipping modules that are
+not written yet, anything with a `noindex` `ROBOTS` value, and anything in `SITEMAP_EXCLUDE`.
+Building a single page does not regenerate it.
+
 Adding a page = write the module + add its name to `PAGES` in `tools/build.py` + add its `PATH` to
 `OG_FOR_PAGE` in `tools/images.py`. **Omitting the `OG_FOR_PAGE` entry raises `KeyError` at build
 time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk.
@@ -78,6 +82,13 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
   Every helper takes `indent`, the column its block sits at in the caller's f-string.
 - `tools/icons.py` — inlined Lucide paths. A name not in the dict is a build-time `KeyError`.
   Copy path data verbatim from lucide-static.
+- `tools/pages/compare.py` — the T5 comparison body, shared by every `/compare/` page.
+  `render()` fixes the section order (answer, table, cost, wins, checklist, two-path CTA, FAQ,
+  byline) and takes only copy. `table()`, `checklist()`, and `two_path()` are also usable on their
+  own; `whole_worth_it.py` borrows `checklist()`.
+- `tools/pages/term_length.py` — the shared lean body for the 20 and 30 year term spokes. The 10
+  year page deliberately does **not** use it: it is the only measured length and carries its own
+  renewal-schedule table.
 - `tools/images.py` — the image manifest and `OG_FOR_PAGE`. The Unsplash CDN does the resizing, so
   there is no sharp/Pillow dependency.
 
@@ -182,6 +193,22 @@ duplicate: both are required, one by `check.py` and one by the linking rules.
   other. `chrome.acc()` takes the group as an argument for this reason.
 - `.rate-table` has `min-width: 40rem`. A narrow table needs an inline
   `style="min-width:26rem"` override, which is the existing house workaround.
+- **A page's URL is decided by whatever already links to it, not by the brief.** Two P3 paths
+  differ from their brief (`/whole-life-insurance/is-it-worth-it/`,
+  `/final-expense-insurance/cremation-insurance/`) because five built pages already pointed at the
+  shorter forms. Grep for the path in `tools/pages/` before choosing one.
+- **The hub link counts twice and that is fine; a second link to anything else does not.** The
+  breadcrumb plus the mandated first-150-words up-link is the one accepted duplicate. Any other
+  target appearing in both a body paragraph and the page's spoke module is a rule 4 violation, and
+  the fix is to give the module slot to a sibling that has no link yet, not to delete the
+  contextual one.
+- **`chrome.prose()` takes no `id`.** To give a section an anchor, put an empty
+  `<div id="..." class="sr-only" aria-hidden="true"></div>` immediately **above** the call, never
+  below it, or the jump lands past the heading.
+- **Mixed quoting in a `page_hero()` lead is the fastest way to a `SyntaxError`.** The lead is a
+  multi-line implicit concatenation containing both `"` (HTML attributes) and `'` (apostrophes).
+  Lift it to a module-level `LEAD = (...)` constant and use double quotes on the lines with
+  apostrophes.
 - `collect()` uses `input.matches(':disabled')`, not `.disabled`, so controls inside a
   `<fieldset disabled>` are correctly skipped. Do not "fix" this.
 - `.field-error` holds an icon plus a `<span>`; JS writes into the span so the icon survives.

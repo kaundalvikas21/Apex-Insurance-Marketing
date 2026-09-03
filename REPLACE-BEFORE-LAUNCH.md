@@ -65,13 +65,17 @@ Also replace `[CARRIER RATE CARD NAME AND EDITION]` in the source line under eac
 
 ### 2b. Placeholder tables that are not premiums
 
-Two further tables are structural placeholders about **availability** rather than price. They carry
-their own flags and their own dated lines, and they are not covered by the rate card swap above.
+Four further tables are structural placeholders. The first two are about **availability** rather
+than price; the last two are premium tables added in P3 and ARE covered by the rate card swap in
+section 2, but are listed here because neither is a standard `chrome.rate_chart()` grid and so
+neither will be caught by looking for one.
 
 | Page | Table | Fill from | Marked |
 |---|---|---|---|
 | `/term-life-insurance/for-seniors/` | Term lengths commonly issued at ages 60 to 85 | The real issue age and term availability grid, by carrier and state | `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER ISSUE AGE GRID]` |
 | `/whole-life-insurance/calculator/` | No table; the page states on its face that it cannot compute a premium or a cash value | Optional: a dated premium range once rate cards are loaded | `[PLACEHOLDER: NO CARRIER RATE CARDS LOADED]` |
+| `/term-life-insurance/10-year-term/` | Renewal schedule: what the premium does in policy years 11 to 15 | The annually renewable term rate scale for the issue age, per carrier. Renewal provisions differ by carrier and state, and some policies do not renew at all | `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED]` |
+| `/term-life-insurance/return-of-premium/` | Standard 30 year term vs return of premium at the same death benefit: premium, total paid, refund, net cost | Both rate cards for the same issue age and class, plus the carrier's surrender schedule for the year 15 refund row | `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED]` |
 
 ### 2c. Two flags that are deliberate and must NOT be "fixed"
 
@@ -179,7 +183,7 @@ fabricated review expressed in structured data, and it is the form search engine
 
 ## 6. Placeholder links
 
-Fourteen paths do not exist yet. All are in the spoke modules or in contextual body links.
+Seven paths do not exist yet. All are in the spoke modules or in contextual body links.
 
 **P1 money pages, registered in `PAGES` but not yet written:**
 
@@ -188,13 +192,6 @@ Fourteen paths do not exist yet. All are in the spoke modules or in contextual b
   `/whole-life-insurance/guaranteed-acceptance/`
 - `/final-expense-insurance/burial-insurance/`, `/final-expense-insurance/quotes/`,
   `/final-expense-insurance/cost/`
-
-**P3 spokes, not yet scheduled:**
-
-- `/term-life-insurance/10-year-term/`, `/term-life-insurance/return-of-premium/`
-- `/whole-life-insurance/dividends/`, `/whole-life-insurance/is-it-worth-it/`
-- `/final-expense-insurance/what-is-final-expense-insurance/`,
-  `/final-expense-insurance/for-parents/`, `/final-expense-insurance/cremation-insurance/`
 
 `python3 tools/check.py` crawls every internal link in the built output and fails on anything
 broken that is **not** in its `UNBUILT` set, so removing a line from that set is how a page
@@ -216,15 +213,30 @@ graduates. This section and that set are meant to be edited in the same commit.
 `/final-expense-insurance/for-seniors/`, `/final-expense-insurance/no-waiting-period/`,
 `/final-expense-insurance/funeral-insurance/`.
 
-**Two contextual links still point at section anchors on spoke pages that do not exist yet.**
-Create these anchors when the spoke is built, or the link will land at the top of the page. The
+**Built in the P3 layer:** `/term-life-insurance/10-year-term/`,
+`/term-life-insurance/return-of-premium/`, `/whole-life-insurance/dividends/`,
+`/whole-life-insurance/is-it-worth-it/`,
+`/final-expense-insurance/what-is-final-expense-insurance/`,
+`/final-expense-insurance/for-parents/`, `/final-expense-insurance/cremation-insurance/`,
+`/compare/whole-life-vs-universal-life/`, `/compare/burial-insurance-vs-life-insurance/`.
+
+Two URLs differ from the P3 brief and match what the already-built pages link to, which is the
+binding constraint: `/whole-life-insurance/is-it-worth-it/` (brief said
+`is-whole-life-insurance-worth-it`) and `/final-expense-insurance/cremation-insurance/` (brief said
+`cremation`). Five built pages already pointed at the shorter forms.
+
+**One contextual link still points at a section anchor on a spoke page that does not exist yet.**
+Create the anchor when that spoke is built, or the link will land at the top of the page. The
 link crawl in `check.py` strips the fragment, so it cannot catch a missing anchor: this table is
 the only guard.
 
 | Link on | Target |
 |---|---|
-| Whole life hub, dividends card | `/whole-life-insurance/dividends/#how-they-are-declared` |
 | Whole life hub, guaranteed acceptance card | `/whole-life-insurance/guaranteed-acceptance/#who-it-is-for` |
+
+Resolved in P3: the whole life hub's dividends card points at
+`/whole-life-insurance/dividends/#how-they-are-declared`, and that anchor now exists immediately
+above the "How a dividend is declared" section of the built page. Do not rename it.
 
 Resolved in P2: the term hub's no-exam teaser points at
 `/term-life-insurance/no-medical-exam/#who-qualifies`, and that anchor now exists on the routes
@@ -272,6 +284,22 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
 - **Count-up figures.** Only spec figures carry `data-count` (10/15/20/30 years, $2,000,000,
   40 years, 15 minutes). When `STATES` and `YEARS` get real values, do **not** add `data-count` to
   them without checking the number is one you are happy to see animate on a trust page.
+- **`sitemap.xml`** is generated by `tools/build.py` on a full build (not on a single-page build)
+  from `PAGES`. A page is omitted if its module is not written yet, if it carries a `noindex`
+  `ROBOTS` value (`/thank-you/`, `/404.html`), or if its path is in `SITEMAP_EXCLUDE`. There is no
+  `robots.txt` yet; add one pointing at the sitemap when the domain is settled.
+- **`/compare/whole-life-vs-universal-life/` is built but held back.** Spec section 05 makes this
+  page conditional on Apex actually being able to place universal life, because a page that ranks
+  for a product we cannot write generates leads that cannot be served. Until the appointments are
+  confirmed it is in `SITEMAP_EXCLUDE`, nothing on the site links to it, and its universal life CTA
+  goes to `/contact/` rather than a quote form. To publish: confirm the appointments, delete the
+  `[CONFIRM UL CARRIER APPOINTMENTS BEFORE PUBLISHING]` comment in
+  `tools/pages/compare_whole_vs_ul.py`, remove the path from `SITEMAP_EXCLUDE`, add the contextual
+  link from `/whole-life-insurance/`, and point the universal life CTA somewhere real.
+- **`/compare/burial-insurance-vs-life-insurance/` currently has one inbound link**, from
+  `/final-expense-insurance/what-is-final-expense-insurance/`. Its job is routing confused traffic,
+  so it wants a second from the final expense hub's spoke module. That is a one-line change to an
+  approved page and was deliberately left for sign-off rather than made here.
 - **Fonts.** Space Grotesk (variable 300 to 700) and Inter (variable) are self-hosted latin subsets
   in `assets/fonts/`, both under the SIL Open Font License, fetched once from Google Fonts. No
   runtime request leaves the domain for type.

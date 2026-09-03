@@ -17,7 +17,7 @@ rules win over both. The brief's font choice (Space Grotesk + Inter) and Lucide 
 skills' generic font and icon bans.
 
 Single source of truth for the build: five approved pages, the P0 trust layer, the P1 money
-pages, and the P2 cluster pages, thirty three in all. `src/input.css` implements every token
+pages, the P2 cluster pages, and the P3 support layer, forty two in all. `src/input.css` implements every token
 here; if the two disagree, this file is wrong and gets updated, not the other way around.
 
 **Decisions carried from the client conversation, not to be reverted:**
@@ -226,7 +226,11 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
 | `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. |
 | `chrome.qa()` | One heading-and-paragraph pair inside a `prose()` column. Used where a page absorbs a secondary search intent as an H3 rather than a page. |
-| `chrome.byline_section()` | The byline in its own band. Closes every editorial page. |
+| `chrome.byline_section()` | The byline in its own band. Closes every editorial page. Placed directly under the hero as well on `/whole-life-insurance/is-it-worth-it/`. |
+| `compare.render()` | T5's whole body. Section order is fixed, only the copy is passed in. |
+| `compare.table()` | The side-by-side `.compare-table` inside `.table-scroll.table-signature`. A row with an empty cell list becomes a `th[colspan]` group row. |
+| `compare.checklist()` | Lucide `check` plus a statement per row, `data-stagger="40"`. Statements the reader answers about themselves, never a scored quiz: a quiz needs a threshold and there is no honest one. |
+| `compare.two_path()` | T5's close. One card per product, both `.btn-cta`, each routing into that product's own silo. |
 
 Icons: **Lucide only**, inlined as SVG, 1.5px stroke, 20px or 24px, `aria-hidden="true"` with the
 meaning carried by adjacent text.
@@ -292,6 +296,30 @@ They inherit this file without deviation except where a page doc exists (`term-n
 6. **Every table is a placeholder about price or a statement about behaviour**, never a mix. A
    behaviour table (underwriting routes, what a waiting period pays) carries no `$--` and no rate
    flag; a price table carries both, plus the dated pill.
+
+**P3 support pages.** Seven objection and E-E-A-T spokes on T4, plus two neutral compare pages on
+T5. The T4 seven inherit the six rules above without exception. Three deviations are recorded as
+page docs (`whole-is-it-worth-it`, `fe-for-parents`, `compare`), and they exist because on these
+pages the layout is carrying an editorial position:
+
+- `/whole-life-insurance/is-it-worth-it/` puts `chrome.byline_section()` **directly under the
+  hero** as well as ending without one, has no amber anywhere, and orders "who it is not for"
+  before "who it is for". A page arguing the case against the thing we sell has to show who is
+  making the argument before the argument, and leading with the case for would make it a sales page
+  with a balanced headline.
+- `/final-expense-insurance/for-parents/` is the only final expense page that does **not** set
+  `HTML_CLASS = "fe"`, and the only one that is form weighted. Both follow from the buyer being the
+  adult child rather than the insured. The calm register is kept; the type scale is not.
+- The two `/compare/` pages set `SILO = "compare"` and `ACTIVE = "/"`. No silo owns them, which is
+  what makes them the one legal cross-silo route under spec s07 rule 3.
+
+**T5, the comparison template** (`tools/pages/compare.py`). Section order is fixed by the spec and
+is not parameterised: hero carrying the answer in three sentences, side-by-side `.compare-table` as
+the signature object, worked cost over time, where each one wins as a two-cell bento, decision
+checklist, two-path CTA, FAQ, byline. A row in the table with an empty cell list renders as a
+`th[colspan]` group row. Both buttons in `compare.two_path()` are `.btn-cta`: on a neutral page,
+giving one the amber and the other a ghost outline is a recommendation disguised as a layout
+decision, and readers can tell.
 
 **Per-silo CTA weighting on the spokes.** Term is form first, except `/for-seniors/` which is phone
 first. Whole life is form and phone at parity with an illustration request as the tertiary ask,

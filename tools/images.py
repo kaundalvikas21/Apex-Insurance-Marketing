@@ -127,6 +127,18 @@ OG_FOR_PAGE = {
     "/final-expense-insurance/for-seniors/": "fe-quiet",
     "/final-expense-insurance/no-waiting-period/": "fe-quiet",
     "/final-expense-insurance/funeral-insurance/": "fe-quiet",
+    # P3 support pages. Same reasoning again: the photography set is fixed at
+    # Variation 1's, so each page shares its silo's share card. The two compare
+    # pages are neutral and take the home card rather than either silo's.
+    "/term-life-insurance/10-year-term/": "term-home",
+    "/term-life-insurance/return-of-premium/": "term-home",
+    "/whole-life-insurance/dividends/": "whole-permanence",
+    "/whole-life-insurance/is-it-worth-it/": "whole-permanence",
+    "/final-expense-insurance/what-is-final-expense-insurance/": "fe-quiet",
+    "/final-expense-insurance/for-parents/": "fe-quiet",
+    "/final-expense-insurance/cremation-insurance/": "fe-quiet",
+    "/compare/whole-life-vs-universal-life/": "home-hero",
+    "/compare/burial-insurance-vs-life-insurance/": "home-hero",
 }
 OG_SIZE = (1200, 630)
 

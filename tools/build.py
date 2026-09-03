@@ -40,7 +40,22 @@ PAGES = [
     "term_20_year", "term_30_year", "term_no_exam",
     "whole_what_is", "whole_calculator", "whole_for_seniors", "whole_cash_value",
     "fe_for_seniors", "fe_no_waiting_period", "fe_funeral_insurance",
+    # P3 support pages (spec s02/s03/s04 objection and E-E-A-T spokes, template
+    # T4, plus the two neutral compare pages on T5).
+    "term_10_year", "term_rop",
+    "whole_dividends", "whole_worth_it",
+    "fe_what_is", "fe_for_parents", "fe_cremation",
+    "compare_whole_vs_ul", "compare_burial_vs_life",
 ]
+
+# Paths kept out of sitemap.xml. A noindex page does not belong in a sitemap,
+# and /compare/whole-life-vs-universal-life/ is held back by a spec condition:
+# it is published only once UL carrier appointments are confirmed. Removing a
+# line here is how a page enters the sitemap.
+SITEMAP_EXCLUDE = frozenset([
+    "/compare/whole-life-vs-universal-life/",   # [CONFIRM UL APPOINTMENTS, spec s05]
+])
+
 
 TEMPLATE = """<!doctype html>
 <html lang="en"{html_class}>
@@ -128,6 +143,33 @@ def build(name):
     return mod.OUT, len(out)
 
 
+def sitemap():
+    """Every indexable built page, one <url> each.
+
+    A page is excluded if it carries a noindex ROBOTS value (/thank-you/, the
+    404) or if its path is in SITEMAP_EXCLUDE. Nothing else is filtered: a page
+    that is built and indexable belongs here.
+    """
+    urls = []
+    for name in PAGES:
+        try:
+            mod = importlib.import_module(name)
+        except ModuleNotFoundError:
+            continue
+        if "noindex" in (getattr(mod, "ROBOTS", "") or ""):
+            continue
+        if mod.PATH in SITEMAP_EXCLUDE or mod.PATH.endswith(".html"):
+            continue
+        urls.append("  <url><loc>%s%s</loc></url>" % (chrome.DOMAIN, mod.PATH))
+
+    doc = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(urls) + "\n</urlset>\n")
+    with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(doc)
+    return len(urls)
+
+
 if __name__ == "__main__":
     wanted = sys.argv[1:] or PAGES
     for name in wanted:
@@ -137,3 +179,6 @@ if __name__ == "__main__":
             print("  skip   %s (not written yet)" % name)
             continue
         print("  build  %-46s %6.1f KB" % (path, size / 1024.0))
+
+    if not sys.argv[1:]:
+        print("\n  sitemap.xml    %d urls" % sitemap())
