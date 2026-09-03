@@ -8,7 +8,7 @@ tables as the visual signature (the spec is table-heavy: rate charts, comparison
 the tables are designed rather than tolerated). Space Grotesk display over Inter body, tabular
 numerals everywhere, self-hosted.
 
-**Dials:** `DESIGN_VARIANCE: 5` · `MOTION_INTENSITY: 5` · `VISUAL_DENSITY: 6`
+**Dials:** `DESIGN_VARIANCE: 5` · `MOTION_INTENSITY: 5` · `VISUAL_DENSITY: 7`
 
 **Skill precedence, as briefed:** ui-ux-pro-max wins on structure, accessibility, and the finance
 anti-patterns (no purple or pink gradients, no neon, no dark mode); design-taste-frontend wins on
@@ -23,9 +23,12 @@ here; if the two disagree, this file is wrong and gets updated, not the other wa
 **Decisions carried from the client conversation, not to be reverted:**
 - Rate and cost cells stay `$--`. No invented premium, even a marked one, because a marked fake
   number still gets screenshotted. Tables get their weight from structure, controls, and type.
-- Photography is Variation 1's set, used in fewer slots (five of the nine): home hero, term
-  "what it covers", term underwriting, whole "what makes it permanent", whole guaranteed
-  acceptance, final expense (two), contact. No scrim, no duotone, no photo under text.
+- Photography began as Variation 1's set in eight slots across five pages. **Superseded:** the
+  client asked for photography on every page, so the manifest is twenty six slots and twenty nine
+  of the forty two pages carry one. The art direction did not move, and section 8 lists the
+  thirteen pages that still carry none and why. Fourteen slots were added; none contains a person.
+- No duotone. Photography under text is confined to the three `.banner-band` hubs, which are
+  scrimmed and are the only text-over-photography on the site.
 
 ---
 
@@ -133,7 +136,7 @@ px, not rem**, so the final-expense type bump cannot widen the grid. Breakpoints
 **375 / 768 / 1024 / 1440**.
 
 Spacing scale (4px base): `4 8 12 16 24 32 40 48 64 80 96 128`.
-Section rhythm at `VISUAL_DENSITY 6`: `py-18` mobile, `py-24` at 768, `py-26` at 1024. A notch
+Section rhythm at `VISUAL_DENSITY 7`: `py-18` mobile, `py-24` at 768, `py-26` at 1024. A notch
 tighter than Variation 1 because the sections carry more structure and less air.
 
 ### Bento
@@ -224,7 +227,10 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
 | `chrome.page_hero()` | T4's top: breadcrumb, one H1, and the answer in the first two sentences. The lead is HTML because it carries the mandated hub up-link. `glow=False` on every final-expense page. |
 | `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
-| `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. |
+| `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. `media=` puts a figure under the lead and `sticky=` (default on) parks the column, which is how the left side stops leaving a dead half-row. Sticky needs no fe branching: `.fe main .sticky-col` is already static. |
+| `chrome.page_hero()` `media=` | Splits the hero into 6 / 5-from-8 and carries the page's one eager image. Absent it, the hero is the unchanged `max-w-3xl` single column. |
+| `chrome.faq_section()` `center=` | Default on. An accordion has no second column, so the block is centred rather than stranding 40% of the row. Heading text is centred; the question rows stay left aligned. |
+| `.sticky-col` | Goes on an **inner div** inside a full-height grid item, and the grid must not be `items-start`. On the grid item itself under `items-start` the column is content height and never travels. |
 | `chrome.qa()` | One heading-and-paragraph pair inside a `prose()` column. Used where a page absorbs a secondary search intent as an H3 rather than a page. |
 | `chrome.byline_section()` | The byline in its own band. Closes every editorial page. Placed directly under the hero as well on `/whole-life-insurance/is-it-worth-it/`. |
 | `compare.render()` | T5's whole body. Section order is fixed, only the copy is passed in. |
@@ -332,7 +338,8 @@ amber at all. Final expense is phone first throughout, with the four-field
 ## 7. Banned
 
 No purple or pink gradients. No neon. No dark mode. No emoji as icons. No section-number eyebrows
-(`01 / Coverage`). No scroll cues. No centered-everything pages. No Fraunces. No amber outside the
+(`01 / Coverage`). No scroll cues. No centered-everything pages: one centred section, such as the
+FAQ block, is not a centred page and is not what this bans. No Fraunces. No amber outside the
 three CTA rules. No `border-top` plus `border-bottom` on the same table row. No bento cell without
 content. No count-up on a placeholder or a rate. No glass except the stuck header.
 No em-dash anywhere in rendered copy: use a comma, a colon, a period, or a middot separator.
@@ -367,12 +374,30 @@ manifest lives in `tools/images.py`; `python3 tools/images.py --fetch` is idempo
 the real column; exactly one `loading="eager"` + `fetchpriority="high"` per page; descriptive
 `alt` or `alt=""` when decorative.
 
-### Placement at `VISUAL_DENSITY 6`
-Eight placements across five pages, all in 12px-radius plates with a 1px inset hairline, some
-with the blue `.glow` behind them.
+### Placement at `VISUAL_DENSITY 7`
+Twenty nine of the forty two pages carry a photograph, all in 12px-radius plates with a 1px inset
+hairline, some with the blue `.glow` behind them. A T4 page carries **at most two**: the hero
+figure, which is that page's one eager image, and one rail figure in a `prose()` left column.
 
 No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
-the FAQ accordions, the spoke grids, or any byline.
+the FAQ accordions, the spoke grids, or any byline. **A hero counts as near** when one of those is
+the section immediately below it, which is why the quote, rates and calculator pages have no hero
+photograph.
+
+**The thirteen pages with no photograph.** Each is a decision, and each should stay one:
+
+| Page | Why |
+|---|---|
+| term quotes, term rates, both calculators | a form, a rate table or the calculator sits directly under the hero |
+| get-a-quote, about/licensing | ruled out by their own page docs |
+| about/reviews | a page about testimonials, and no photo goes beside one |
+| about/agents/&lt;slug&gt; | leads with the marked placeholder avatar; section 7 rule 1 |
+| legal privacy, terms, disclaimer, 404, thank-you | utility pages |
+
+None of them is left with a dead row: they close it with the `.sticky-col` rail instead.
+
+**No photo is placed twice on one page.** `tools/check.py` enforces that, the one-eager-image
+rule, and the row rule in section 3.
 
 ### Banner bands (`.banner-band`, one per product hub)
 

@@ -110,18 +110,30 @@ numeric claim and is fine as-is.
 
 ## 4b. Photography
 
-Nine photographs, all from Unsplash, all downloaded and served locally from `assets/img/`.
+Twenty six slots, all from Unsplash, all downloaded and served locally from `assets/img/`.
 `assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
 `tools/images.py`; `python3 tools/images.py --fetch` is idempotent.
+
+Twelve slots are the original set. **Fourteen were added** when photography was extended from five
+pages to twenty nine. Every one of the fourteen was viewed before its alt text was written, and
+**none of them contains a person**, which keeps the clearance work below confined to the original
+twelve.
 
 **These are placeholders too.** Two things need doing before launch:
 
 1. **Model releases.** The Unsplash Licence permits commercial use without attribution, but it does
    **not** convey a model release for identifiable people, and it does not clear trademarks visible
-   in a frame. Five of the nine images show identifiable people:
+   in a frame. **Five slots show identifiable people, and all five are from the original twelve:**
    `home-hero`, `home-independence`, `term-underwriting`, `fe-quiet`, `fe-hands`.
    Have counsel confirm the exposure is acceptable for an insurance advertiser in your states, or
    replace them with owned or Getty/Stocksy licensed photography.
+
+   The fourteen added slots (`term-desk`, `term-window`, `term-table`, `term-notebook`,
+   `whole-ledger`, `whole-arbor`, `whole-porch`, `fe-chairs`, `fe-kitchen`, `fe-letters`,
+   `fe-garden-door`, `fe-path`, `compare-garden`, `about-desk`) show rooms, tables, paths and
+   doors. No faces, so no model release is in question for them. Check them for visible trademarks
+   and for legible handwriting: `fe-letters` and `whole-ledger` both show writing, and it should be
+   confirmed as illegible or replaced.
 2. **They are stock.** Other sites use these exact frames. Commissioned photography of the real
    agency is the upgrade, and the layout will take it without changes as long as the aspect ratios
    in `tools/images.py` are preserved.
@@ -137,6 +149,10 @@ joy. See `design-system/MASTER.md` section 8. The two rules with no exceptions:
 
 Open Graph share cards (`assets/img/og-*.jpg`) are derived from the same photographs and inherit
 the same obligations.
+
+**Thirteen pages deliberately carry no photograph.** They are listed with their reasons in
+`design-system/MASTER.md` section 8. Do not "finish the job" by adding images to them: each one is
+either a form, a rate table, a testimonial page, the agent avatar slot, or a utility page.
 
 ---
 

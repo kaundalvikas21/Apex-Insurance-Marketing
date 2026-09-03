@@ -202,6 +202,22 @@ duplicate: both are required, one by `check.py` and one by the linking rules.
   target appearing in both a body paragraph and the page's spoke module is a rule 4 violation, and
   the fix is to give the module slot to a sibling that has no link yet, not to delete the
   contextual one.
+- **`.sticky-col` needs an inner div and a stretching grid.** On the grid item itself under
+  `items-start` the column is content height, so sticky has nowhere to travel and silently does
+  nothing. It goes on a div *inside* the `lg:col-span-5` item, and the grid drops `items-start`.
+  It also needs **no final expense branching**: `.fe main .sticky-col` is already `position:
+  static`, so passing `sticky=True` everywhere gives fe pages the static column for free.
+- **No image beside a rate table**, a comparison table, the cash-value chart, a FAQ accordion, a
+  spoke grid, the triage widget, or a byline (MASTER.md section 8). A hero counts as beside one
+  when that section is directly below it, which is why the quote, rates and calculator pages take
+  no hero photograph and use the sticky rail instead.
+- **Do not hand-roll `prose()`'s grid.** A `lg:col-span-5` holding only an `<h2>` beside a
+  `lg:col-span-6 lg:col-start-7` is the dead half-row that `check.py` now fails on. Call
+  `chrome.prose()` and pass `intro=`, `media=`, or both.
+- **`tools/images.py` alt text describes what was actually seen.** Look at a photograph before
+  writing its alt and before choosing its slot. A caption copied from a search result is not
+  evidence of what is in the frame, and on this site a wrong one is a compliance problem, not a
+  typo.
 - **`chrome.prose()` takes no `id`.** To give a section an anchor, put an empty
   `<div id="..." class="sr-only" aria-hidden="true"></div>` immediately **above** the call, never
   below it, or the jump lands past the heading.
