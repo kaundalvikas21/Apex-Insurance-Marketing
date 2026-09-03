@@ -65,6 +65,25 @@ FAQ = [
 ]
 
 
+WAITING_PERIOD = """<p class="reveal text-slate">
+        A waiting period is the first stretch of a policy, almost always two years, during which
+        the carrier will not pay the full death benefit if death is caused by illness. Instead it
+        returns the premiums you paid, usually with interest added. Death from an accident is
+        normally covered in full from the first day.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        Carriers use it for one reason. Final expense underwriting is a short list of questions
+        and a prescription check rather than an exam, so when a carrier cannot get comfortable
+        with the answers, the waiting period is what lets it say yes instead of no. Without it,
+        the honest alternative for those applicants would be a decline.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        That is worth holding onto. A waiting period is not a penalty aimed at you, and it is not
+        evidence that you have been sold something bad. It is the mechanism that keeps coverage
+        available to people who would otherwise have none.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -95,34 +114,10 @@ def body():
      arriving here have been told they need one and do not know what it
      means.
      ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a waiting period is, and why carriers use one</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          A waiting period is the first stretch of a policy, almost always two years, during which
-          the carrier will not pay the full death benefit if death is caused by illness. Instead it
-          returns the premiums you paid, usually with interest added. Death from an accident is
-          normally covered in full from the first day.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          Carriers use it for one reason. Final expense underwriting is a short list of questions
-          and a prescription check rather than an exam, so when a carrier cannot get comfortable
-          with the answers, the waiting period is what lets it say yes instead of no. Without it,
-          the honest alternative for those applicants would be a decline.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          That is worth holding onto. A waiting period is not a penalty aimed at you, and it is not
-          evidence that you have been sold something bad. It is the mechanism that keeps coverage
-          available to people who would otherwise have none.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("What a waiting period is, and why carriers use one", WAITING_PERIOD,
+         intro="What it is, why it exists, and why its existence is not evidence that "
+               "you have been sold something bad.",
+         media=C.figure("fe-path", C.MEDIA_SIZES))}
 
 
 <!-- =====================================================================

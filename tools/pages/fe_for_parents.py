@@ -148,6 +148,28 @@ SIBLINGS = [
 ]
 
 
+SHARING_COST = """<p class="reveal text-slate">
+        One policy with one owner is almost always simpler than several small policies, one per
+        sibling. Pick the sibling who will be dealing with the funeral director, make them the
+        owner and the beneficiary, and settle in writing between yourselves who contributes what
+        and what happens to any money left over after the funeral is paid for.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        Write it down even though it feels excessive. The policy will probably pay out fifteen or
+        twenty years from now, in a week when nobody is at their best, and a short note agreed
+        while everyone is calm is worth a great deal then.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        Naming the estate as beneficiary instead, to be split automatically, is the tempting
+        shortcut and it is usually a mistake: it can tie the money up in probate for months, and
+        the funeral bill arrives in days. Premiums by age and coverage amount are on
+        <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
+        costs</a>, and if you would rather start in writing than on a call, the
+        <a class="link" href="/final-expense-insurance/quotes/">final expense quote page</a>
+        takes the same details.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -264,37 +286,10 @@ def body():
          cls="section band")}
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">If several of you are sharing the cost</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          One policy with one owner is almost always simpler than several small policies, one per
-          sibling. Pick the sibling who will be dealing with the funeral director, make them the
-          owner and the beneficiary, and settle in writing between yourselves who contributes what
-          and what happens to any money left over after the funeral is paid for.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          Write it down even though it feels excessive. The policy will probably pay out fifteen or
-          twenty years from now, in a week when nobody is at their best, and a short note agreed
-          while everyone is calm is worth a great deal then.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          Naming the estate as beneficiary instead, to be split automatically, is the tempting
-          shortcut and it is usually a mistake: it can tie the money up in probate for months, and
-          the funeral bill arrives in days. Premiums by age and coverage amount are on
-          <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
-          costs</a>, and if you would rather start in writing than on a call, the
-          <a class="link" href="/final-expense-insurance/quotes/">final expense quote page</a>
-          takes the same details.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("If several of you are sharing the cost", SHARING_COST,
+         intro="Splitting the premium between siblings is common and workable. How you "
+               "structure it decides whether it stays workable.",
+         media=C.figure("fe-kitchen", C.MEDIA_SIZES))}
 
 
 {C.spoke_module("Related pages in final expense",

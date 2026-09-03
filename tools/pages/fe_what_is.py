@@ -124,6 +124,26 @@ SIBLINGS = [
 ]
 
 
+SIZING_IT = """<p class="text-slate">
+        Start with what a funeral actually costs where you live, not with a national figure.
+        Funeral homes are required to give you a general price list if you ask for one, and two
+        calls will give you a real number for your area rather than an average that describes
+        nowhere.
+      </p>
+      <p class="mt-5 text-slate">
+        Then add a margin for the bills that arrive afterwards: the medical balances, the last
+        utility accounts, and the certified copies and filings a death generates. Most people
+        land somewhere between ten and twenty thousand dollars, but the number that matters is
+        yours.
+      </p>
+      <p class="mt-5 text-slate">
+        The premium for each amount is set out on
+        <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
+        costs</a>, by age band and coverage amount, with the carrier rate card and its date named
+        on the page.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -223,35 +243,10 @@ def body():
     phone_first=True, fe=True)}
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="text-h2">How much coverage to buy</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="text-slate">
-          Start with what a funeral actually costs where you live, not with a national figure.
-          Funeral homes are required to give you a general price list if you ask for one, and two
-          calls will give you a real number for your area rather than an average that describes
-          nowhere.
-        </p>
-        <p class="mt-5 text-slate">
-          Then add a margin for the bills that arrive afterwards: the medical balances, the last
-          utility accounts, and the certified copies and filings a death generates. Most people
-          land somewhere between ten and twenty thousand dollars, but the number that matters is
-          yours.
-        </p>
-        <p class="mt-5 text-slate">
-          The premium for each amount is set out on
-          <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
-          costs</a>, by age band and coverage amount, with the carrier rate card and its date named
-          on the page.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("How much coverage to buy", SIZING_IT,
+         intro="Three steps, in this order. The first one is the only one most people "
+               "skip, and it is the one that decides the number.",
+         media=C.figure("fe-chairs", C.MEDIA_SIZES))}
 
 
 {C.spoke_module("Related pages in final expense",

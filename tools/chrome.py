@@ -134,6 +134,11 @@ def banner(name, heading, sub, cta_html, eyebrow=None):
 RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band",
                (16, 9): "media-strip", (4, 3): "media-square-ish"}
 
+# A media slot in a 5-of-12 column: 5/12 of a 1200px container is 500px, which
+# is 38vw at 1320 and above. Authored once so a page cannot quietly ship a
+# `sizes` that makes phones download the desktop file.
+MEDIA_SIZES = "(min-width: 1024px) 38vw, 92vw"
+
 
 def figure(name, sizes, caption=None, cls="", eager=False, glow=False):
     """Editorial image block. glow=True paints the soft blue ambient glow

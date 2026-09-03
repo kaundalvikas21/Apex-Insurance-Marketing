@@ -110,6 +110,26 @@ RENEWAL_ROWS = [
 ]
 
 
+TEN_YEAR_COST = """<p class="reveal text-slate">
+        Ten years is the cheapest level term a carrier will normally write, because it is the
+        least risk it is taking. What moves the number after that is your age today and whether
+        you use tobacco, then health class, coverage amount, sex, and state, in roughly that
+        order. The term length itself is rarely the largest factor, which is exactly why buying
+        the shortest one is a smaller saving than it appears.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        Rather than reprint a slice of it here, the full grid lives on one page and is kept
+        current in one place: <a class="link" href="/term-life-insurance/rates/">term life
+        insurance rates by age</a>, with a term length toggle and a button on every row that
+        carries the numbers into a quote form.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        If the amount rather than the length is the open question, the
+        <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
+        that out first and shows its arithmetic while it does.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -245,35 +265,8 @@ def body():
     "term_10y_mid", "/term-life-insurance/quotes/", "Get term life quotes")}
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a 10 year term costs</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          Ten years is the cheapest level term a carrier will normally write, because it is the
-          least risk it is taking. What moves the number after that is your age today and whether
-          you use tobacco, then health class, coverage amount, sex, and state, in roughly that
-          order. The term length itself is rarely the largest factor, which is exactly why buying
-          the shortest one is a smaller saving than it appears.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          Rather than reprint a slice of it here, the full grid lives on one page and is kept
-          current in one place: <a class="link" href="/term-life-insurance/rates/">term life
-          insurance rates by age</a>, with a term length toggle and a button on every row that
-          carries the numbers into a quote form.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          If the amount rather than the length is the open question, the
-          <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
-          that out first and shows its arithmetic while it does.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("What a 10 year term costs", TEN_YEAR_COST,
+         intro="What actually moves the number, and where the full grid is kept current.")}
 
 
 {C.spoke_module("Related pages in term life",

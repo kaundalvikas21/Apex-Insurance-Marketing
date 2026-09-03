@@ -165,6 +165,30 @@ SIBLINGS = [
 ]
 
 
+WORTH_COST = """<p class="reveal text-slate">
+        The honest version of the cost comparison is a large multiple, not a small markup: for the
+        same death benefit at the same age, whole life costs several times what term costs, and
+        the multiple grows with the length of term you compare against. That is the number that
+        decides this for most people, and it is the reason the answer at the top of this page is
+        what it is.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        We are not printing a specific multiple, and we are not printing a projected return for
+        the money you would have saved. Whichever numbers we picked would be doing the arguing,
+        and we would be picking them knowing which way we wanted the comparison to fall. The
+        figures that mean anything are the ones on
+        <a class="link" href="/whole-life-insurance/rates/">whole life rates by age</a> and
+        <a class="link" href="/term-life-insurance/">term life insurance</a> rate cards for your
+        own age and health, quoted side by side.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        If you want that comparison run, we will run it and show you both, including in the cases
+        where it makes the whole life policy look bad. There is a
+        <a class="link" href="/compare/term-vs-whole-life-insurance/">detailed comparison of term
+        and whole life</a> if you want the structural version first.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -241,39 +265,9 @@ def body():
          cls="section band")}
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What it costs, and why we will not print a number</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          The honest version of the cost comparison is a large multiple, not a small markup: for the
-          same death benefit at the same age, whole life costs several times what term costs, and
-          the multiple grows with the length of term you compare against. That is the number that
-          decides this for most people, and it is the reason the answer at the top of this page is
-          what it is.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          We are not printing a specific multiple, and we are not printing a projected return for
-          the money you would have saved. Whichever numbers we picked would be doing the arguing,
-          and we would be picking them knowing which way we wanted the comparison to fall. The
-          figures that mean anything are the ones on
-          <a class="link" href="/whole-life-insurance/rates/">whole life rates by age</a> and
-          <a class="link" href="/term-life-insurance/">term life insurance</a> rate cards for your
-          own age and health, quoted side by side.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          If you want that comparison run, we will run it and show you both, including in the cases
-          where it makes the whole life policy look bad. There is a
-          <a class="link" href="/compare/term-vs-whole-life-insurance/">detailed comparison of term
-          and whole life</a> if you want the structural version first.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("What it costs, and why we will not print a number", WORTH_COST,
+         intro="The comparison that decides this for most people, and why there is no dollar "
+               "figure on this page.")}
 
 
 <section class="section band">

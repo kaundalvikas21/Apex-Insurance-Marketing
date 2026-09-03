@@ -109,6 +109,25 @@ SIBLINGS = [
 ]
 
 
+TELL_THEM = """<p class="text-slate">
+        Tell whoever you are naming as beneficiary that the policy exists, roughly what it is
+        for, and where the paperwork is. A policy nobody knows about is a policy nobody claims,
+        and this is by some distance the commonest way final expense coverage fails to do its
+        job.
+      </p>
+      <p class="mt-5 text-slate">
+        Tell them you want a cremation, too, and that the policy is sized for one. It is an
+        uncomfortable conversation and it takes about four minutes, and it is the difference
+        between your family knowing what you wanted and guessing at it in the worst week of their
+        lives.
+      </p>
+      <p class="mt-5 text-slate">
+        Premiums by age and coverage amount are on
+        <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
+        costs</a>, with the carrier rate card and its date named on the page.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -180,34 +199,10 @@ def body():
     phone_first=True, fe=True)}
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="text-h2">Before you buy anything</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="text-slate">
-          Tell whoever you are naming as beneficiary that the policy exists, roughly what it is
-          for, and where the paperwork is. A policy nobody knows about is a policy nobody claims,
-          and this is by some distance the commonest way final expense coverage fails to do its
-          job.
-        </p>
-        <p class="mt-5 text-slate">
-          Tell them you want a cremation, too, and that the policy is sized for one. It is an
-          uncomfortable conversation and it takes about four minutes, and it is the difference
-          between your family knowing what you wanted and guessing at it in the worst week of their
-          lives.
-        </p>
-        <p class="mt-5 text-slate">
-          Premiums by age and coverage amount are on
-          <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
-          costs</a>, with the carrier rate card and its date named on the page.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("Before you buy anything", TELL_THEM,
+         intro="Two conversations, both short. Both are easier now than they will be "
+               "for the people who have to guess.",
+         media=C.figure("fe-letters", C.MEDIA_SIZES))}
 
 
 {C.spoke_module("Related pages in final expense",

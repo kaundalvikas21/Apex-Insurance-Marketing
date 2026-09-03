@@ -35,6 +35,26 @@ FAQ = [
 ]
 
 
+WHY_EXISTS = """<p class="reveal text-slate">
+        To be found by people shopping for life insurance, and to earn the call. We are not
+        neutral about that and pretending otherwise would be the first dishonest thing on the
+        page.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        What follows from it is the standard we hold the writing to. Every page is written or
+        reviewed by a licensed agent who places these policies. Where a figure comes from a
+        carrier rate card, the card and its date are named. Where the answer depends on your
+        state, your age, or your health, we say so instead of rounding it into a promise. We do
+        not publish invented premiums, invented reviews, or carrier claims we cannot source,
+        because a number that turns out to be decoration costs more trust than it ever buys.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        If you find something here that is out of date or wrong, tell us. We will correct it and
+        change the review date on the page.
+      </p>
+      <a class="reveal link-static mt-6 inline-block text-sm" href="/about/reviews/">How we handle reviews and testimonials</a>"""
+
+
 def schema():
     return [C.org_schema(),
             C.breadcrumbs([("Home", "/"), ("About", None)]),
@@ -258,35 +278,9 @@ def body():
 <!-- =====================================================================
      WHY THIS CONTENT EXISTS. Google's third question, answered directly.
      ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Why this site exists</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          To be found by people shopping for life insurance, and to earn the call. We are not
-          neutral about that and pretending otherwise would be the first dishonest thing on the
-          page.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          What follows from it is the standard we hold the writing to. Every page is written or
-          reviewed by a licensed agent who places these policies. Where a figure comes from a
-          carrier rate card, the card and its date are named. Where the answer depends on your
-          state, your age, or your health, we say so instead of rounding it into a promise. We do
-          not publish invented premiums, invented reviews, or carrier claims we cannot source,
-          because a number that turns out to be decoration costs more trust than it ever buys.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          If you find something here that is out of date or wrong, tell us. We will correct it and
-          change the review date on the page.
-        </p>
-        <a class="reveal link-static mt-6 inline-block text-sm" href="/about/reviews/">How we handle reviews and testimonials</a>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("Why this site exists", WHY_EXISTS,
+         intro="The commercial answer first, then the standard that follows from it.",
+         media=C.figure("about-desk", C.MEDIA_SIZES))}
 
 
 <!-- =====================================================================

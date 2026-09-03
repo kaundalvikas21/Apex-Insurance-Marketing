@@ -82,6 +82,24 @@ FAQ = [
 ]
 
 
+FUNERAL_COST = """<p class="reveal text-slate">
+        Four things decide the premium: your age when the policy is issued, the amount of
+        coverage, whether you use tobacco, and your answers to the health questions. It is fixed
+        for life from that point, so the age in that list is the age you buy at, not the age you
+        reach.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        The full picture by age lives on one page and is kept current in one place:
+        <a class="link" href="/final-expense-insurance/cost/">final expense insurance cost</a>.
+      </p>
+      <p class="reveal mt-5 text-slate">
+        If you have been told you need a waiting period, or you want to know whether you can
+        avoid one, read
+        <a class="link" href="/final-expense-insurance/no-waiting-period/">burial insurance with
+        no waiting period</a> before you apply anywhere.
+      </p>"""
+
+
 def schema():
     return [C.org_schema(), C.breadcrumbs(TRAIL), C.faq_schema(FAQ), C.person_schema(PATH)]
 
@@ -218,33 +236,8 @@ def body():
 <!-- =====================================================================
      COST. Routed rather than duplicated: this page is lean by design.
      ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What it costs</h2>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
-          Four things decide the premium: your age when the policy is issued, the amount of
-          coverage, whether you use tobacco, and your answers to the health questions. It is fixed
-          for life from that point, so the age in that list is the age you buy at, not the age you
-          reach.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          The full picture by age lives on one page and is kept current in one place:
-          <a class="link" href="/final-expense-insurance/cost/">final expense insurance cost</a>.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          If you have been told you need a waiting period, or you want to know whether you can
-          avoid one, read
-          <a class="link" href="/final-expense-insurance/no-waiting-period/">burial insurance with
-          no waiting period</a> before you apply anywhere.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.prose("What it costs", FUNERAL_COST,
+         intro="What the premium depends on, and where the figures by age are kept.")}
 
 
 <!-- =====================================================================

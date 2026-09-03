@@ -80,9 +80,12 @@ def render(years, h1, lead, fits, dates_intro, dates, cost_note, faq, siblings,
 
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a {years} year term costs</h2>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">What a {years} year term costs</h2>
+          <p class="reveal mt-5 text-slate">What moves the number for a {years} year policy, and where the full grid is kept current.</p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <p class="reveal text-slate">{cost_note}</p>

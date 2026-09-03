@@ -111,9 +111,12 @@ def body():
 
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a licence does and does not tell you</h2>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">What a licence does and does not tell you</h2>
+          <p class="reveal mt-5 text-slate">A licence is a floor rather than a recommendation. Both halves of that are worth knowing.</p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7 bento" data-stagger="40">
         <div class="reveal bento-cell bento-3">
