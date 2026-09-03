@@ -29,34 +29,26 @@ from html.parser import HTMLParser
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://www.apexinsurancemarketing.com"
 
-# The spokes still to be written. The hubs link down to them on purpose, so
-# those links are expected to be dead until each one is built.
+# Paths that are linked to but not yet built. EMPTY, and it should stay that
+# way: every internal link on the site now resolves to a built file.
+#
+# It is kept rather than deleted because it is the mechanism by which a page is
+# allowed to be linked before it exists. Add a path here in the same commit
+# that adds the link, and delete it in the commit that builds the page.
 # REPLACE-BEFORE-LAUNCH.md section 6 is the human readable register of the same
 # list; the two are meant to be edited together. Anything NOT named here is a
 # genuine broken link and fails the check.
 #
-# This is an explicit set rather than a prefix pattern. A pattern like
+# Always an explicit set, never a prefix pattern. A pattern like
 # "term-life-insurance/.+" also swallows the pages that HAVE been built, so a
-# typo in a link to a real spoke would pass the crawl silently. Deleting a line
-# here is how a page graduates.
+# typo in a link to a real spoke would pass the crawl silently.
 # A 5-of-12 column whose entire content is one heading, sitting beside the
 # 6-of-12 content column. See check_page for why this is a failure.
 DEAD_ROW = re.compile(
     r'<div class="lg:col-span-5">\s*(<h2[^>]*>.*?</h2>)\s*</div>\s*'
     r'<div class="lg:col-span-6 lg:col-start-7', re.S)
 
-UNBUILT = frozenset([
-    # P1 money pages: registered in build.py PAGES, modules not yet written.
-    # They belong here for the same reason as everything above, and listing
-    # them is what lets a genuine typo in a link fail the crawl again.
-    "/whole-life-insurance/quotes/",
-    "/whole-life-insurance/rates/",
-    "/whole-life-insurance/guaranteed-acceptance/",
-    "/final-expense-insurance/burial-insurance/",
-    "/final-expense-insurance/quotes/",
-    "/final-expense-insurance/cost/",
-    "/compare/term-vs-whole-life-insurance/",
-])
+UNBUILT = frozenset([])
 
 problems = []
 notes = []

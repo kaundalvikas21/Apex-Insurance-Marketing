@@ -41,7 +41,7 @@ Also in `chrome.py`:
 
 ## 2. Rate tables
 
-**Seven** tables ship with `$--` in every premium cell and a visible
+**Twelve** tables ship with `$--` in every premium cell and a visible
 `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED]` banner above them.
 **No invented premium appears anywhere on this site**, which is deliberate: a marked fake number
 still gets screenshotted.
@@ -55,6 +55,11 @@ still gets screenshotted.
 | `/term-life-insurance/quotes/` | `chrome.rate_chart()` | T1's sample table, shown before the form rather than after it. |
 | `/term-life-insurance/rates/` | `chrome.rate_chart()` | 10 age bands x 5 coverage columns. Toggles for term length, sex, tobacco. Row-level prefill buttons. |
 | `/whole-life-insurance/for-seniors/` | `chrome.rate_chart()` | 5 age bands x 3 coverage columns. Toggle for sex. Row-level **click-to-call**, because that page is phone weighted. |
+| `/whole-life-insurance/quotes/` | `chrome.rate_chart()` | T1's sample table, shown below the form and not gated. 6 age bands x 4 coverage columns. Toggles for sex and tobacco. Row-level prefill buttons. |
+| `/whole-life-insurance/rates/` | `chrome.rate_chart()` | 10 age bands x 5 coverage columns. Toggles for sex and tobacco. Row-level prefill buttons. Coverage columns must stay identical to `whole.quote_form()`'s coverage select. |
+| `/whole-life-insurance/guaranteed-acceptance/` | `chrome.rate_chart()` | 7 age bands x 3 coverage columns. Toggle for sex, no tobacco split (the product does not ask). Row-level **click-to-call**. |
+| `/final-expense-insurance/quotes/` | `chrome.rate_chart()` | T1's sample table, not gated. 6 age bands x 2 coverage columns. Row-level **click-to-call** inside the age cell, which is how the fe pages stay at three columns. |
+| `/final-expense-insurance/cost/` | `chrome.rate_chart()` | The silo's canonical cost grid: 7 age bands x 2 coverage columns. Six built pages route their cost question here, so this is the one to populate first. Row-level **click-to-call**. |
 
 **Integration point.** In every `chrome.rate_chart()` table the toggles currently update the
 caption only, and there is a marked comment in `tools/chrome.py` where a dataset keyed by
@@ -79,8 +84,8 @@ neither will be caught by looking for one.
 
 ### 2c. Two flags that are deliberate and must NOT be "fixed"
 
-- `/final-expense-insurance/funeral-insurance/` carries `[NO AVERAGE PUBLISHED, ON PURPOSE]`. We do
-  not print an average funeral cost. Figures in this category are national survey averages that
+- `/final-expense-insurance/funeral-insurance/` and `/final-expense-insurance/burial-insurance/` both
+  carry `[NO AVERAGE PUBLISHED, ON PURPOSE]`. We do not print an average funeral or burial cost. Figures in this category are national survey averages that
   describe no particular funeral. Do not replace this with a number from a survey we cannot cite.
 - `/whole-life-insurance/cash-value/` carries `[GENERAL INFORMATION ONLY]` over its tax section.
   That is a permanent caveat, not a placeholder. It stays after launch.
@@ -199,26 +204,24 @@ fabricated review expressed in structured data, and it is the form search engine
 
 ## 6. Placeholder links
 
-Seven paths do not exist yet. All are in the spoke modules or in contextual body links.
-
-**P1 money pages, registered in `PAGES` but not yet written:**
-
-- `/compare/term-vs-whole-life-insurance/`
-- `/whole-life-insurance/quotes/`, `/whole-life-insurance/rates/`,
-  `/whole-life-insurance/guaranteed-acceptance/`
-- `/final-expense-insurance/burial-insurance/`, `/final-expense-insurance/quotes/`,
-  `/final-expense-insurance/cost/`
+**None. Every internal link on the site resolves to a built page.** `check.py`'s `UNBUILT` set is
+empty, which is what proves it: the crawl now fails on any broken internal link with nothing
+exempted.
 
 `python3 tools/check.py` crawls every internal link in the built output and fails on anything
-broken that is **not** in its `UNBUILT` set, so removing a line from that set is how a page
-graduates. This section and that set are meant to be edited in the same commit.
+broken that is **not** in its `UNBUILT` set. Adding a path to that set is how a link is allowed to
+exist before its page does; removing it is how a page graduates. This section and that set are
+meant to be edited in the same commit, in both directions.
 
 **Built in the P0 layer** (previously on this list): `/about/`, `/about/agents/`,
 `/about/agents/first-last/`, `/about/licensing/`, `/about/carriers/`, `/about/reviews/`,
 `/get-a-quote/`, `/legal/privacy/`, `/legal/terms/`, `/legal/disclaimer/`, `/404.html`.
 
 **Built in the P1 layer:** `/term-life-insurance/quotes/`, `/term-life-insurance/rates/`,
-`/term-life-insurance/calculator/`.
+`/term-life-insurance/calculator/`, `/whole-life-insurance/quotes/`,
+`/whole-life-insurance/rates/`, `/whole-life-insurance/guaranteed-acceptance/`,
+`/final-expense-insurance/burial-insurance/`, `/final-expense-insurance/quotes/`,
+`/final-expense-insurance/cost/`, `/compare/term-vs-whole-life-insurance/`.
 
 **Built in the P2 layer:** `/term-life-insurance/what-is-term-life-insurance/`,
 `/term-life-insurance/for-seniors/`, `/term-life-insurance/level-term/`,
@@ -241,14 +244,13 @@ binding constraint: `/whole-life-insurance/is-it-worth-it/` (brief said
 `is-whole-life-insurance-worth-it`) and `/final-expense-insurance/cremation-insurance/` (brief said
 `cremation`). Five built pages already pointed at the shorter forms.
 
-**One contextual link still points at a section anchor on a spoke page that does not exist yet.**
-Create the anchor when that spoke is built, or the link will land at the top of the page. The
-link crawl in `check.py` strips the fragment, so it cannot catch a missing anchor: this table is
-the only guard.
+**No contextual link points at an anchor that does not exist.** The link crawl in `check.py`
+strips the fragment, so it cannot catch a missing anchor: this section is the only guard, and any
+new deep link must be added to the resolved list below in the commit that creates it.
 
-| Link on | Target |
-|---|---|
-| Whole life hub, guaranteed acceptance card | `/whole-life-insurance/guaranteed-acceptance/#who-it-is-for` |
+Resolved in the P1 completion pass: the whole life hub's guaranteed acceptance card points at
+`/whole-life-insurance/guaranteed-acceptance/#who-it-is-for`, and that anchor now exists as an
+`sr-only` div immediately above the "Who it is for" section of the built page. Do not rename it.
 
 Resolved in P3: the whole life hub's dividends card points at
 `/whole-life-insurance/dividends/#how-they-are-declared`, and that anchor now exists immediately
