@@ -162,7 +162,8 @@ def body():
     '<a class="link" href="/term-life-insurance/">term life insurance</a> most carriers sell, and '
     'it suits one specific situation: an obligation with a known end date inside the next decade. '
     'Outside that situation it is usually the wrong purchase, not because it is a bad product but '
-    'because of what happens in year eleven. This page is mostly about year eleven.')}
+    'because of what happens in year eleven. This page is mostly about year eleven.',
+    media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
 
 
 <section class="pb-14 md:pb-16">

@@ -162,7 +162,8 @@ def body():
     'cremation instead of a burial. Because a cremation costs materially less, the policy is '
     'smaller and the premium is lower, and the single most useful thing this page can do is stop '
     'you buying more coverage than you actually need.',
-    extra=hero_cta, glow=False)}
+    extra=hero_cta, glow=False,
+    media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 
 
 <section class="section">

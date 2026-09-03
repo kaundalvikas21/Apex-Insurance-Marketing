@@ -99,7 +99,8 @@ def body():
     'years, and most stop issuing new term somewhere between seventy five and eighty. This page '
     'says plainly what is still available, what it costs, and when a small permanent policy is the '
     'better buy.',
-    extra=hero_cta)}
+    extra=hero_cta,
+    media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

@@ -95,7 +95,8 @@ def body():
     'in year one. Nearly every '
     '<a class="link" href="/term-life-insurance/">term life insurance</a> policy sold today is '
     'level term, so the word is less a product choice than a description of what you are already '
-    'being quoted. What matters is what happens the day the level period ends.')}
+    'being quoted. What matters is what happens the day the level period ends.',
+    media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

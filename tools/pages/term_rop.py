@@ -183,7 +183,8 @@ def body():
     'are still alive at the end of the term, the carrier refunds the premiums you paid. The '
     'coverage is identical to a standard policy of the same size and length, the premium is '
     'substantially higher, and the refund carries no interest. We rarely recommend it, and this '
-    'page explains the arithmetic behind that rather than asking you to take it on trust.')}
+    'page explains the arithmetic behind that rather than asking you to take it on trust.',
+    media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
 
 
 {C.prose("How it actually works", mechanics,

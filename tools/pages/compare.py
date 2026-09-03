@@ -131,7 +131,8 @@ def render(trail, h1, lead, table_heading, table_intro, table_caption, table_col
     note = ('<p class="reveal mt-4 text-micro text-muted max-w-3xl">%s</p>' % table_note
             ) if table_note else ""
     return f"""{prologue}
-{C.page_hero(trail, h1, lead)}
+{C.page_hero(trail, h1, lead,
+    media=C.figure("compare-garden", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

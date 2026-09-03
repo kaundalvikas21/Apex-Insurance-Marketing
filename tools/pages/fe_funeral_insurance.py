@@ -134,7 +134,8 @@ def body():
     'one contract, no medical exam. The one thing worth knowing before you read further is that '
     'it is insurance rather than a pre-paid funeral plan, and those two are genuinely different '
     'things.',
-    extra=hero_cta, glow=False)}
+    extra=hero_cta, glow=False,
+    media=C.figure("fe-kitchen", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

@@ -106,7 +106,8 @@ def body():
     'what happens if the answer turns out to be no. All of this is '
     '<a class="link" href="/final-expense-insurance/">final expense insurance</a>, sold under the '
     'name burial insurance.',
-    extra=hero_cta, glow=False)}
+    extra=hero_cta, glow=False,
+    media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

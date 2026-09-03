@@ -67,13 +67,16 @@ def body():
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("About", "/about/"), ("Carriers", None)])}
 
-    <div class="mt-8 max-w-3xl">
+    <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-6">
       <h1 class="reveal text-h1">The carriers we compare</h1>
       <p class="reveal mt-5 text-lead text-slate">
         We are appointed with <span class="tnum">{C.CARRIERS}</span> life insurance carriers and
         owned by none of them. That is the entire mechanism behind a comparison: an agency that
         answers to one carrier can only ever recommend that carrier.
       </p>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">{C.figure("contact-desk", C.MEDIA_SIZES, eager=True)}</div>
     </div>
 
     <div class="mt-12 bento" data-stagger="40">

@@ -147,7 +147,8 @@ def body():
 {C.page_hero(
     TRAIL,
     "Dividend-Paying Whole Life Insurance Explained",
-    LEAD)}
+    LEAD,
+    media=C.figure("whole-arbor", C.MEDIA_SIZES, eager=True))}
 
 
 <section class="pb-14 md:pb-16">

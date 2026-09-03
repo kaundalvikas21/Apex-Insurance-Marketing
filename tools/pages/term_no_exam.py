@@ -116,7 +116,8 @@ def body():
     'weeks. That is real, and it is not the whole story: there are three different ways to skip '
     'the exam and they cost very different amounts. This page tells you which one you are likely '
     'to be offered and what it will cost you.',
-    extra=hero_cta)}
+    extra=hero_cta,
+    media=C.figure("term-underwriting", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

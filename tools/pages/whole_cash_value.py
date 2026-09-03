@@ -107,7 +107,8 @@ def body():
     '<a class="link" href="/whole-life-insurance/">whole life insurance</a> charges a level '
     'premium for a risk that rises every year, so the early overpayment has to be held somewhere. '
     'It is a real asset with real constraints, and most of what is written about it oversells one '
-    'and ignores the other.')}
+    'and ignores the other.',
+    media=C.figure("whole-ledger", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

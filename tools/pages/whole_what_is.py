@@ -100,7 +100,8 @@ def body():
     'three guarantees are the entire product, and they are why '
     '<a class="link" href="/whole-life-insurance/">whole life insurance</a> costs several times '
     'what the same death benefit costs as term. Whether that is worth paying depends on whether '
-    'you have a need that never ends.')}
+    'you have a need that never ends.',
+    media=C.figure("whole-ledger", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

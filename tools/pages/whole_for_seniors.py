@@ -120,7 +120,8 @@ def body():
     'questions rather than an exam, and a few ask nothing at all. This page covers what you are '
     'likely to be accepted for, what it costs, and the point at which a smaller policy is the '
     'better buy.',
-    extra=hero_cta)}
+    extra=hero_cta,
+    media=C.figure("whole-porch", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

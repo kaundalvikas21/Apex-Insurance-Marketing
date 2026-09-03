@@ -81,13 +81,16 @@ def body():
   <div class="container-ax">
     {C.crumbs([("Home", "/"), ("About", "/about/"), ("Our agents", None)])}
 
-    <div class="mt-8 max-w-3xl">
+    <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-6">
       <h1 class="reveal text-h1">Our licensed agents</h1>
       <p class="reveal mt-5 text-lead text-slate">
         Every agent below holds an individual state licence, and every licence number is published
         on their profile so you can check it with your state's department of insurance instead of
         taking our word for it.
       </p>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">{C.figure("about-desk", C.MEDIA_SIZES, eager=True)}</div>
     </div>
 
     <div class="reveal mt-8 max-w-3xl">

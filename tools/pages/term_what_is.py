@@ -96,7 +96,8 @@ def body():
     'the whole period, and when the period ends the coverage ends with it. That last part is the '
     'trade, and it is why '
     '<a class="link" href="/term-life-insurance/">term life insurance</a> costs a fraction of '
-    'anything permanent.')}
+    'anything permanent.',
+    media=C.figure("term-notebook", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

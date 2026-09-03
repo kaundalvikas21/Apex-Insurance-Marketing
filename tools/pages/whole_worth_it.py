@@ -221,7 +221,8 @@ def body():
     'end date, unused room in a retirement account, or a real chance of giving the policy up early. '
     'For a smaller number of households it is genuinely the right product, for reasons that have '
     'nothing to do with returns. This page is about telling those two groups apart, and we sell '
-    'the product, which is a conflict of interest you should hold in mind while reading it.')}
+    'the product, which is a conflict of interest you should hold in mind while reading it.',
+    media=C.figure("whole-porch", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

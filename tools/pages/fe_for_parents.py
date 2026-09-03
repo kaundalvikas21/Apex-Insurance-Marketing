@@ -202,7 +202,8 @@ def body():
     'your parent has to know about it and sign the application themselves, because a policy taken '
     'out without them is void and would not pay. Beyond that, the decisions are who owns it, who '
     'receives the money, and who pays the premium, and this page is about getting all three right '
-    'before you apply.')}
+    'before you apply.',
+    media=C.figure("fe-chairs", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

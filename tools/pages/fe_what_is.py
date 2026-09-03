@@ -181,7 +181,8 @@ def body():
     'fixed for life, and the coverage never expires. It is the same thing sold under the names '
     'burial insurance and funeral insurance, and it is all '
     '<a class="link" href="/final-expense-insurance/">final expense insurance</a>.',
-    extra=hero_cta, glow=False)}
+    extra=hero_cta, glow=False,
+    media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 
 
 <section class="section">

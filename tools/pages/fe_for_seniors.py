@@ -99,7 +99,8 @@ def body():
     'eighty five, because it is not your age that decides what you can buy, it is your health '
     'answers. Everything on this page is <a class="link" '
     'href="/final-expense-insurance/">final expense insurance</a>.',
-    extra=hero_cta, glow=False)}
+    extra=hero_cta, glow=False,
+    media=C.figure("fe-chairs", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- =====================================================================

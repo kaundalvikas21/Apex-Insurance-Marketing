@@ -52,7 +52,8 @@ def render(years, h1, lead, fits, dates_intro, dates, cost_note, faq, siblings,
 {VALIDATE_NOTE}
 
 {C.page_hero([("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
-              ("%d year term" % years, None)], h1, lead)}
+              ("%d year term" % years, None)], h1, lead,
+    media=C.figure("term-desk", C.MEDIA_SIZES, eager=True))}
 
 
 <!-- Who it fits. Three cells, no more: this page is lean by design. -->
