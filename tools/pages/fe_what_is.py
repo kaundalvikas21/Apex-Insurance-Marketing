@@ -232,7 +232,8 @@ def body():
 
 {C.prose("What it is not", nots,
          intro="Four things this product gets confused with. Two of them are sold hard by people "
-               "who rely on the confusion.")}
+               "who rely on the confusion.",
+         media=C.figure("fe-kitchen", C.MEDIA_SIZES))}
 
 
 {C.inline_cta(

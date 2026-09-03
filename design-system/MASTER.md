@@ -379,6 +379,10 @@ Twenty nine of the forty two pages carry a photograph, all in 12px-radius plates
 hairline, some with the blue `.glow` behind them. A T4 page carries **at most two**: the hero
 figure, which is that page's one eager image, and one rail figure in a `prose()` left column.
 
+**A final expense page may carry three.** `.fe main .sticky-col` is `position: static`, so an fe
+page cannot close a dead half-row with the rail the way every other page does, and it spends a
+photograph instead. That is the whole cost of the fe motion exemption, and it is worth paying.
+
 No image goes near the triage widget, any rate table, the comparison tables, the cash-value chart,
 the FAQ accordions, the spoke grids, or any byline. **A hero counts as near** when one of those is
 the section immediately below it, which is why the quote, rates and calculator pages have no hero

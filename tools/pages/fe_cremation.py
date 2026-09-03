@@ -187,7 +187,8 @@ def body():
                "varies enough between one part of the country and another that a national average "
                "would point you at the wrong number, and this is a case where fifteen minutes of "
                "your own research beats anything we could publish.",
-         cls="section band")}
+         cls="section band",
+         media=C.figure("fe-path", C.MEDIA_SIZES))}
 
 
 {C.inline_cta(
