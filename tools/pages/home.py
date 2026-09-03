@@ -163,12 +163,7 @@ HERO = f"""
 
 
 def _acc(q, a):
-    """Native <details>. Keyboard and screen-reader behavior comes free and
-    cannot be broken by a JavaScript error on a YMYL page."""
-    return ('<details class="acc" name="home-faq">'
-            '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
-            '</details>') % (q, icon("plus", 22), a)
+    return C.acc(q, a, "home-faq")
 
 
 REST = """

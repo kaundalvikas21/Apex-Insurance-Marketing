@@ -85,6 +85,20 @@ OG_FOR_PAGE = {
     "/final-expense-insurance/": "fe-quiet",
     "/contact/": "contact-desk",
     "/thank-you/": "contact-desk",
+    # P0 layer. These pages reuse the existing set rather than adding photography:
+    # an about or legal page has no documentary photograph to earn, and a share
+    # card is not a reason to fetch one.
+    "/get-a-quote/": "contact-desk",
+    "/about/": "home-hero",
+    "/about/agents/": "contact-desk",
+    "/about/agents/first-last/": "contact-desk",
+    "/about/licensing/": "contact-desk",
+    "/about/carriers/": "contact-desk",
+    "/about/reviews/": "contact-desk",
+    "/legal/privacy/": "contact-desk",
+    "/legal/terms/": "contact-desk",
+    "/legal/disclaimer/": "contact-desk",
+    "/404.html": "home-hero",
 }
 OG_SIZE = (1200, 630)
 

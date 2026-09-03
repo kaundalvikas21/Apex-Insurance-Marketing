@@ -16,7 +16,7 @@ layout discipline (bento cell count, adjacency, eyebrow budget, hero economy); t
 rules win over both. The brief's font choice (Space Grotesk + Inter) and Lucide icons override the
 skills' generic font and icon bans.
 
-Single source of truth for the six-page build. `src/input.css` implements every token here; if the
+Single source of truth for the build (five approved pages plus the P0 layer, seventeen in all). `src/input.css` implements every token here; if the
 two disagree, this file is wrong and gets updated, not the other way around.
 
 **Decisions carried from the client conversation, not to be reverted:**
@@ -249,6 +249,16 @@ The cash-value chart sits in a `.bento-4` beside a tinted `.bento-2` stat (40 ye
 comparison is a three-column table with group rows so it never needs a fourth column.
 
 **Contact.** Split layout; "what happens next" is a three-cell bento (white, tinted, blue).
+
+**P0 pages.** The trust and conversion layer: `/about/` and its four children, `/get-a-quote/`,
+the three `/legal/` documents, `/thank-you/`, and `/404.html`. They inherit this file without
+deviation except where a page doc exists (`get-a-quote`, `about-agent-profile`, `about-licensing`,
+`legal`). Three rules run across all of them. Placeholder trust figures render with
+`C.stat(..., count=False)`, because section 4 bans count-up on a number we do not have and every
+figure on `/about/` is one. Placeholder tables (licensing, carriers, the agent's licences) put the
+`.flag` above the table, so a reader meets the notice before the number. And `/about/reviews/`
+emits no `AggregateRating` while the review count is zero: an aggregate rating over no reviews is
+a fabricated review expressed in structured data.
 
 ---
 

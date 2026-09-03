@@ -22,8 +22,26 @@ REVIEW_DATE   = "[DATE]"                  # [PLACEHOLDER REVIEW DATE]
 RATES_DATE    = "[DATE]"                  # [PLACEHOLDER RATE CARD DATE]
 SLA           = "[X business hours]"      # [SET HONEST SLA]
 DOMAIN        = "https://www.apexinsurancemarketing.com"
+FOUNDED       = "[YEAR]"                  # [PLACEHOLDER YEAR FOUNDED]
+CARRIERS      = "[X]"                     # [PLACEHOLDER APPOINTED CARRIER COUNT]
+STREET        = "[STREET ADDRESS]"        # [PLACEHOLDER BUSINESS ADDRESS]
+CITY          = "[CITY]"                  # [PLACEHOLDER BUSINESS ADDRESS]
+REGION        = "[STATE]"                 # [PLACEHOLDER BUSINESS ADDRESS]
+POSTCODE      = "[ZIP]"                   # [PLACEHOLDER BUSINESS ADDRESS]
+# The agent profile every byline points its author node at. One profile page
+# exists as a template; add a module per real agent and give each its own slug.
+AGENT_SLUG    = "first-last"              # [PLACEHOLDER AGENT PROFILE SLUG]
 
 BRAND = "Apex Insurance Marketing, LLC"
+
+# The three legal documents cross-link to each other, which is the one place on
+# the site where sideways linking between non-silo pages is correct: someone
+# reading the privacy policy is often looking for the disclaimer.
+LEGAL_SIBLINGS = [
+    ("/legal/privacy/", "Privacy policy", "What we collect, why, and the rights you have over it."),
+    ("/legal/terms/", "Terms of use", "The terms you accept by using this site."),
+    ("/legal/disclaimer/", "Disclaimer", "What this site is, and what it is not."),
+]
 
 NAV = [
     ("/term-life-insurance/",          "Term Life Insurance"),
@@ -163,7 +181,7 @@ def header(active):
              so the label shortens rather than the CTA disappearing. -->
         {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors", "Call")}
         {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors")}
-        <a href="/contact/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a Free Quote</a>
+        <a href="/get-a-quote/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a Free Quote</a>
         <a href="tel:{PHONE_TEL}" data-cta-location="header_mobile"
            class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-navy rounded-lg">
           <span class="sr-only">Call {PHONE_DISPLAY}</span>
@@ -183,7 +201,7 @@ def header(active):
       <nav aria-label="Primary, mobile">{panel_links}</nav>
       <div class="mt-5 grid gap-3">
         {phone_link("header_mobile_panel", "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)}
-        <a href="/contact/" class="btn btn-cta btn-block">Get a Free Quote</a>
+        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a Free Quote</a>
       </div>
     </div>
   </div>
@@ -296,10 +314,10 @@ def org_schema():
                 # [PLACEHOLDER] Replace with the real business address before launch.
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "[STREET ADDRESS]",
-                    "addressLocality": "[CITY]",
-                    "addressRegion": "[STATE]",
-                    "postalCode": "[ZIP]",
+                    "streetAddress": STREET,
+                    "addressLocality": CITY,
+                    "addressRegion": REGION,
+                    "postalCode": POSTCODE,
                     "addressCountry": "US"
                 }
             },
@@ -341,14 +359,19 @@ def faq_schema(items):
 
 
 def person_schema(page_url):
-    """Person stub for the agent byline. Fill in before launch."""
+    """Person node for the agent byline.
+
+    @id points at the agent's own profile page, which is the reference target
+    every article byline resolves to. Pointing it at the index would make four
+    pages assert an author that is not a person.
+    """
     return {
         "@context": "https://schema.org",
         "@type": "Person",
-        "@id": DOMAIN + "/about/agents/#agent",
+        "@id": DOMAIN + "/about/agents/" + AGENT_SLUG + "/#person",
         "name": AGENT_NAME,
         "jobTitle": AGENT_TITLE,
-        "url": DOMAIN + "/about/agents/",
+        "url": DOMAIN + "/about/agents/" + AGENT_SLUG + "/",
         "worksFor": {"@id": DOMAIN + "/#organization"},
         # [PLACEHOLDER] Add real credentials, state license numbers, and years licensed.
         "hasCredential": {
@@ -396,13 +419,18 @@ def crumbs(trail):
     """Visible breadcrumb. trail: [(name, path or None)]."""
     sep = icon("chevron-right", 14, "text-muted shrink-0")
     parts = []
+    last = len(trail) - 1
     for i, (name, path) in enumerate(trail):
         if i:
             parts.append(sep)
         if path:
             parts.append('<a href="%s">%s</a>' % (path, name))
         else:
-            parts.append('<span aria-current="page">%s</span>' % name)
+            # aria-current marks the current page, so only the final crumb can
+            # carry it. An unlinked intermediate crumb (a section with no index
+            # page) is plain text.
+            parts.append('<span%s>%s</span>'
+                         % (' aria-current="page"' if i == last else "", name))
     return ('<nav class="crumbs" aria-label="Breadcrumb"><ol class="contents">%s</ol></nav>'
             % "".join('<li class="contents" aria-hidden="true">%s</li>' % p if p.startswith('<svg')
                       else '<li class="contents">%s</li>' % p
@@ -457,6 +485,39 @@ def byline():
     </div>"""
 
 
+def acc(q, a, group, size=22):
+    """One FAQ row. Native <details>, so keyboard and screen-reader behaviour
+    comes free and cannot be broken by a JavaScript error on a YMYL page.
+
+    `group` is the <details name> that makes the set single-open. It must be
+    unique per page, or two accordions on one page close each other.
+    Final expense passes size=24 with the rest of its larger scale.
+    """
+    return ('<details class="acc" name="%s">'
+            '<summary>%s<span class="acc-icon">%s</span></summary>'
+            '<div class="acc-body"><p class="text-slate">%s</p></div>'
+            '</details>') % (group, q, icon("plus", size), a)
+
+
+def faq_section(heading, items, group, intro=None, size=22, cls="section"):
+    """Heading plus accordion list. `items` is [(question, answer_html)] and is
+    the same list that should be passed to faq_schema(), so the visible copy and
+    the structured data can never disagree."""
+    rows = "\n      ".join(acc(q, a, group, size) for q, a in items)
+    lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">{heading}</h2>
+      {lead}
+    </div>
+    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+      {rows}
+    </div>
+  </div>
+</section>"""
+
+
 def spoke_module(heading, intro, spokes):
     """Visible in-page module linking DOWN to every spoke in the silo.
     spokes: [(href, anchor_text, one_line_description)]"""
@@ -505,9 +566,85 @@ def stat(value, label, prefix="", suffix="", count=True, cls=""):
             f'<span class="stat-label">{label}</span></div>')
 
 
+def legal_doc(heading, standfirst, sections, updated=None):
+    """The shared /legal/ page body: a sticky table of contents beside numbered
+    sections at a readable measure.
+
+    `sections` is [(id, title, body_html)]. Every section gets an id so a
+    section can be linked to directly, which is what people actually do with a
+    privacy policy: they arrive looking for one clause.
+
+    Legal copy on this site is [PENDING LEGAL REVIEW] and says so on the page
+    rather than only in a comment. A policy a visitor cannot rely on should not
+    look like one they can.
+    """
+    toc = "".join('<li><a class="footer-link !text-slate hover:!text-navy" href="#%s">'
+                  '<span class="tnum">%d.</span> %s</a></li>' % (sid, i + 1, title)
+                  for i, (sid, title, _body) in enumerate(sections))
+    blocks = "".join(f"""
+        <section id="{sid}" class="scroll-mt-28 pt-10 first:pt-0">
+          <h2 class="text-h3 !font-display !font-semibold">
+            <span class="tnum text-muted">{i + 1}.</span> {title}
+          </h2>
+          <div class="mt-4 grid gap-4 text-slate">{bodyhtml}</div>
+        </section>""" for i, (sid, title, bodyhtml) in enumerate(sections))
+
+    return f"""
+<section class="pt-6 pb-14 md:pb-16">
+  <div class="container-ax">
+    {crumbs([("Home", "/"), (heading, None)])}
+
+    <div class="mt-8 max-w-3xl">
+      <h1 class="text-h1">{heading}</h1>
+      <p class="mt-5 text-lead text-slate">{standfirst}</p>
+      <p class="mt-5">
+        <span class="pill mr-2">Last updated: {updated or REVIEW_DATE}</span>
+        <span class="text-micro text-muted">{BRAND}</span>
+      </p>
+    </div>
+
+    <div class="mt-8 max-w-3xl">
+      {flag("This document is template copy and has not been reviewed by counsel. It must be "
+            "replaced with language approved for the states the agency is licensed in, covering "
+            "TCPA consent, CCPA and state privacy rights, and the agency's actual data practices, "
+            "before this site goes live.", "PENDING LEGAL REVIEW")}
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+
+      <nav class="lg:col-span-3 sticky-col" aria-label="On this page">
+        <h2 class="text-micro font-semibold uppercase tracking-[0.12em] text-muted">On this page</h2>
+        <ul class="mt-4 grid gap-2.5 text-sm">{toc}</ul>
+      </nav>
+
+      <div class="lg:col-span-8 lg:col-start-5 measure grid divide-y divide-rule">{blocks}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-tight band">
+  <div class="container-ax">
+    <div class="grid md:grid-cols-3 gap-4">
+      {"".join('<a class="tile" href="%s"><span class="text-h4 text-ink">%s</span>'
+               '<span class="mt-2 text-sm text-muted">%s</span></a>' % t for t in LEGAL_SIBLINGS
+               if t[1] != heading)}
+    </div>
+  </div>
+</section>"""
+
+
+def flag(text, token="PLACEHOLDER"):
+    """Visible placeholder notice. MASTER.md s5: a flag renders on the page, not
+    only in an HTML comment, because the person who has to replace it is usually
+    looking at the page rather than the source."""
+    return '<p class="flag">[%s] %s</p>' % (token, text)
+
+
 def rates_flag(what):
     """Visible placeholder notice for any rate component. Rule 6."""
-    return (f'<p class="flag">[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED] '
-            f'The {what} below are structural placeholders. No premium shown here is a real, quoted, '
-            f'or offered rate. Populate from current carrier rate cards and update the date line '
-            f'before this page goes live.</p>')
+    return flag(f'The {what} below are structural placeholders. No premium shown here is a real, '
+                f'quoted, or offered rate. Populate from current carrier rate cards and update the '
+                f'date line before this page goes live.',
+                "PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED")

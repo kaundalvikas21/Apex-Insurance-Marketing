@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
-"""THANK YOU stub. Noindex. Kept minimal on purpose: it is a confirmation
-page, not a place to sell anything else."""
+"""THANK YOU. Noindex. A confirmation page, not a place to sell anything else,
+so the only additions to it are things the visitor needs before the call:
+what to have ready, and a way out that is not the browser back button.
+
+It stays deliberately short. The three product links at the end exist because a
+confirmation page with one link to the home page is a dead end for anyone who
+landed here still unsure which product they asked about.
+"""
 from icons import icon
 import chrome as C
 
@@ -62,9 +68,55 @@ def body():
         </div>
       </div>
 
-      <p class="mt-10 text-sm text-muted">
-        <a class="link" href="/">Back to the home page</a>
-      </p>
+      <!-- WHAT TO HAVE READY. The call goes faster and the quote comes back
+           more accurate when these are to hand. Nothing here is a document we
+           need sent; it is all things the agent will simply ask. -->
+      <div class="mt-8 card">
+        <h2 class="text-h3 !font-display !font-semibold">What to have ready for the call</h2>
+        <p class="mt-3 text-slate">
+          None of this needs sending anywhere. It just makes the call shorter, and it is the
+          difference between a rough number and one you can rely on.
+        </p>
+        <ul class="mt-6 grid gap-5">
+          {"".join('''<li class="flex items-start gap-3">%s
+            <div>
+              <p class="font-semibold text-navy">%s</p>
+              <p class="mt-1 text-slate">%s</p>
+            </div>
+          </li>''' % (icon(ico, 22, "shrink-0 text-navy mt-1"), h, b) for ico, h, b in [
+            ("calculator", "Roughly what you are trying to cover",
+             "A mortgage balance, years of income, childcare, a funeral. An approximate number is fine; the agent will help you sharpen it."),
+            ("stethoscope", "Any conditions and medications",
+             "Names of prescriptions and rough dates of diagnosis. This is what decides which carriers will take you, and it is better said up front than found in underwriting."),
+            ("users", "Family history, if you know it",
+             "Parents or siblings with heart disease or cancer before 60. Several carriers rate this and several do not, which is exactly the kind of difference comparing finds."),
+            ("file-text", "Any policy you already have",
+             "Through work or bought privately. Sometimes the right answer is to keep what you have and add to it rather than replace it."),
+          ])}
+        </ul>
+        <p class="mt-6 text-micro text-muted">
+          You will not be asked for a Social Security number, bank details, or a payment card on
+          this call.
+        </p>
+      </div>
+
+      <!-- No dead end. Three routes back in, one per product, plus home. -->
+      <div class="mt-8">
+        <h2 class="text-h4">While you wait</h2>
+        <ul class="mt-4 grid sm:grid-cols-3 gap-4">
+          {"".join('''<li><a href="%s" class="tile">
+            <span class="text-h4 text-ink">%s</span>
+            <span class="mt-2 text-sm text-muted">%s</span>
+          </a></li>''' % t for t in [
+            ("/term-life-insurance/", "Term life", "How term is priced, and what happens when it ends."),
+            ("/whole-life-insurance/", "Whole life", "The three guarantees, and the cash value question."),
+            ("/final-expense-insurance/", "Final expense", "What it covers, and the waiting period to check for."),
+          ])}
+        </ul>
+        <p class="mt-6 text-sm text-muted">
+          <a class="link" href="/">Back to the home page</a>
+        </p>
+      </div>
     </div>
   </div>
 </section>

@@ -21,7 +21,15 @@ sys.path.insert(0, os.path.join(HERE, "pages"))
 import chrome  # noqa: E402
 import images  # noqa: E402
 
-PAGES = ["home", "final_expense", "term", "whole", "contact", "thank_you"]
+PAGES = [
+    # The five approved pages, plus the P0 trust and conversion layer (spec s06).
+    "home", "final_expense", "term", "whole", "contact",
+    "get_a_quote", "thank_you",
+    "about", "about_agents", "about_agent_profile",
+    "about_licensing", "about_carriers", "about_reviews",
+    "legal_privacy", "legal_terms", "legal_disclaimer",
+    "not_found",
+]
 
 TEMPLATE = """<!doctype html>
 <html lang="en"{html_class}>

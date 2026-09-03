@@ -23,12 +23,19 @@ through all six pages.
 | `RATES_DATE` | `[DATE]` | Date of the carrier rate cards the tables are built from. |
 | `SLA` | `[X business hours]` | **[SET HONEST SLA]** The response time you can hold to on a Friday afternoon, not the best case. |
 | `DOMAIN` | apexinsurancemarketing.com | The live domain. Feeds canonicals, Open Graph, and schema `@id`s. |
+| `FOUNDED` | `[YEAR]` | Year the agency was founded. Shown on `/about/`. Same honesty rule as `YEARS`. |
+| `CARRIERS` | `[X]` | Number of carriers with a current, signed appointment. Not carriers in progress. |
+| `STREET` / `CITY` / `REGION` / `POSTCODE` | `[STREET ADDRESS]` etc. | The principal office address. Feeds both `/about/` and the `InsuranceAgency` schema, which now read the same constants. |
+| `AGENT_SLUG` | `first-last` | URL slug of the agent profile every byline's `Person` node points at. Must match a built profile module. |
 
 Also in `chrome.py`:
-- **`org_schema()` postal address** is `[STREET ADDRESS]` / `[CITY]` / `[STATE]` / `[ZIP]`.
+- **`org_schema()` postal address** now reads the `STREET` / `CITY` / `REGION` / `POSTCODE`
+  constants above, so the address is written once and used by both the schema and `/about/`.
 - **`state_options()`** currently lists all 50 states plus DC. Trim it to the states the agency is
   actually licensed in. Offering a state you cannot write in wastes the visitor's time and yours.
 - **`person_schema()`** carries a credential stub. Add real licence numbers and years licensed.
+  Its `@id` is now `/about/agents/<AGENT_SLUG>/#person`, so every byline's author node resolves to
+  a real profile page rather than to the index.
 
 ---
 
@@ -105,11 +112,46 @@ joy. See `design-system/MASTER.md` section 8. The two rules with no exceptions:
 Open Graph share cards (`assets/img/og-*.jpg`) are derived from the same photographs and inherit
 the same obligations.
 
+---
+
+## 4c. The P0 placeholder tables
+
+Three tables ship as structure with placeholder rows. Each renders a visible `.flag` **above** the
+table, so a reader meets the notice before the numbers. Populate them from real records and delete
+every row you do not use: a row left in place asserts something untrue.
+
+| Page | Table | Fill from | Marked |
+|---|---|---|---|
+| `/about/licensing/` | State, agency licence number, type, lines | The agency's current licence records | `[PLACEHOLDER LICENCE TABLE]` |
+| `/about/carriers/` | Carrier, appointed for, states | Signed, current carrier appointments only | `[PLACEHOLDER CARRIER LIST]` |
+| `/about/agents/first-last/` | State, agent licence number, type, lines | Each agent's own producer licences | `[PLACEHOLDER LICENCE NUMBERS]` |
+
+Also placeholder in the P0 layer:
+
+- **`/about/agents/`** ships three identical placeholder agent cards, marked
+  `[PLACEHOLDER ROSTER]` on the page. Replace with the real roster: one card and one profile module
+  per licensed agent. Never ship a roster larger than the licensed team.
+- **`/about/agents/first-last/`** is a template, marked `[PLACEHOLDER AGENT PROFILE]`. Copy
+  `tools/pages/about_agent_profile.py` per agent, change the `AGENT` dict, give each a unique slug,
+  and add each module to `PAGES` in `tools/build.py`.
+- **`/about/`** carries `FOUNDED`, `NPN`, and the office address in a definition list, flagged as a
+  block. Its three trust figures use `count=False` so a placeholder never animates.
+- **`/get-a-quote/`** carries a fourth `$--` rate table, subject to section 2 above. It is
+  deliberately **not** gated behind the form.
+- **No carrier logos anywhere.** Removed sitewide in commit `5fa6bfc`: a carrier mark implies an
+  affiliation and an endorsement that an appointment does not grant. Carrier names in text only.
+
 ## 5. Reviews
 
 The testimonial slot on the home page is designed, wired, and **hidden**. It is marked
 `[REAL ATTRIBUTABLE REVIEWS ONLY - DO NOT FABRICATE]`. To use it, populate `data-reviews-list` and
 remove the `hidden` attribute. Zero invented testimonials ship.
+
+`/about/reviews/` is the same decision at page scale. It ships with a real designed empty state and
+two hidden slots (`data-reviews-aggregate`, `data-reviews-slot`) ready for a Google Business
+Profile feed. **Its `schema()` deliberately emits no `AggregateRating` and no `Review` nodes.** Add
+them only when there is a real rating and a real count: an aggregate rating over zero reviews is a
+fabricated review expressed in structured data, and it is the form search engines penalise hardest.
 
 ---
 
@@ -117,10 +159,15 @@ remove the `hidden` attribute. Zero invented testimonials ship.
 
 These do not exist yet. All are in the spoke modules, the footer, or contextual body links.
 
-- `/about/`, `/about/agents/`, `/about/licensing/`
-- `/legal/privacy/`, `/legal/terms/`, `/legal/disclaimer/`
 - `/compare/term-vs-whole-life-insurance/`
 - 11 term spokes, 9 whole life spokes, 9 final expense spokes
+
+`python3 tools/check.py` crawls every internal link in the built output and fails on anything
+broken that is **not** on this list, so removing a line here is how a page graduates.
+
+**Built in the P0 layer** (previously on this list): `/about/`, `/about/agents/`,
+`/about/agents/first-last/`, `/about/licensing/`, `/about/carriers/`, `/about/reviews/`,
+`/get-a-quote/`, `/legal/privacy/`, `/legal/terms/`, `/legal/disclaimer/`, `/404.html`.
 
 **Three contextual links point at section anchors on spoke pages that do not exist yet.** Create
 these anchors when the spoke is built, or the link will land at the top of the page:
@@ -151,8 +198,20 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
   Note: `form_submit` deliberately carries **no personal data** into the dataLayer, only
   `form_name`, `silo`, `page_path`, and `source_url`. Keep it that way.
 - **Consent / analytics.** Decide whether GA4 needs a consent banner in your states before adding it.
-- **`/thank-you/`** is stubbed and `noindex`. Forms currently render a success state in place. If
-  you switch to a redirect, point it here.
+- **`/thank-you/`** is `noindex` and now carries the "what to have ready" block and routes back to
+  all three hubs. Forms render a designed success state **in place**; that was a deliberate choice,
+  and `/get-a-quote/`'s success panel links on to `/thank-you/` rather than redirecting. If you do
+  switch to a redirect, point it here and note that the in-place panel is what GA4's `form_submit`
+  currently fires against.
+- **Header CTA.** "Get a Free Quote" in the header and the mobile panel points at `/get-a-quote/`,
+  not `/contact/`. The nav itself is still hubs plus Contact only (spec section 07 rule 6).
+- **`/404.html`** is written to the site root, which Netlify, Cloudflare Pages, and GitHub Pages all
+  pick up without configuration. On a host that expects something else, re-point `OUT` in
+  `tools/pages/not_found.py`.
+- **Legal copy** in all three `/legal/` documents is template text carrying a visible
+  `[PENDING LEGAL REVIEW]` flag. It is structurally complete, covering TCPA consent, carrier
+  sharing, and CCPA / state privacy rights, but the wording is not counsel-approved. The governing
+  law, arbitration, and limitation-of-liability sections are explicitly left for counsel to draft.
 - **Motion.** `MOTION_INTENSITY` is 5: IntersectionObserver reveal, 40ms bento stagger, count-up
   on spec figures (`[data-count]`, final value already in the HTML), chart draw-in. No scroll-linked
   layer and no animation library. The final-expense page is deliberately exempt from every one of

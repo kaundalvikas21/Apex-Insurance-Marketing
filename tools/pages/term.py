@@ -6,6 +6,8 @@ Click-to-call is present but secondary: it lives in the sticky header.
 """
 from icons import icon
 import chrome as C
+import forms as F
+from forms import ERR
 
 PATH = "/term-life-insurance/"
 OUT = "term-life-insurance/index.html"
@@ -110,10 +112,7 @@ def schema():
 
 
 def _acc(q, a):
-    return ('<details class="acc" name="term-faq">'
-            '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
-            '</details>') % (q, icon("plus", 22), a)
+    return C.acc(q, a, "term-faq")
 
 
 def rate_table():
@@ -184,20 +183,17 @@ def rate_table():
     </p>"""
 
 
+TERM_LENGTH_FIELD = '''<!-- Set by the rate table's "quote this" buttons. -->
+<input type="hidden" name="term_length" value="">'''
+
+
 def quote_form(form_id, form_name, id_prefix):
     """Three steps, six fields, progress indicator, TCPA on the final step."""
     return f"""
         <form id="{form_id}" class="mt-6" data-ax-form data-steps data-silo="term-life"
               data-form-name="{form_name}" data-success-target="{id_prefix}-success" novalidate>
 
-          <input type="hidden" name="source_url" value="">
-          <input type="hidden" name="silo" value="">
-          <input type="hidden" name="form_name" value="">
-          <!-- Set by the rate table's "quote this" buttons. -->
-          <input type="hidden" name="term_length" value="">
-          <div aria-hidden="true" style="position:absolute;left:-9999px">
-            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
-          </div>
+          {F.scaffold(TERM_LENGTH_FIELD, 10)}
 
           <div class="progress-track" aria-hidden="true">
             <span class="progress-seg is-done" data-progress-seg></span>
@@ -216,7 +212,7 @@ def quote_form(form_id, form_name, id_prefix):
               <input class="input" id="{id_prefix}-age" name="age" type="text" inputmode="numeric"
                      autocomplete="off" required data-validate="age"
                      data-error="Enter an age between 18 and 85.">
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <button type="button" class="btn btn-cta btn-block" data-step-next>Continue</button>
           </fieldset>
@@ -232,7 +228,7 @@ def quote_form(form_id, form_name, id_prefix):
                 <label class="choice"><input type="radio" name="sex" value="female" required><span>Female</span></label>
                 <label class="choice"><input type="radio" name="sex" value="male" required><span>Male</span></label>
               </div>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field">
               <label class="field-label" for="{id_prefix}-state">What state do you live in?</label>
@@ -241,7 +237,7 @@ def quote_form(form_id, form_name, id_prefix):
                 <option value="">Choose your state</option>
                 {C.state_options()}
               </select>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="flex gap-3">
               <button type="button" class="btn btn-ghost" data-step-back>Back</button>
@@ -265,7 +261,7 @@ def quote_form(form_id, form_name, id_prefix):
                 <option value="2000000">$2,000,000 or more</option>
                 <option value="unsure">Not sure yet</option>
               </select>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field" data-error="Let us know either way.">
               <span class="field-label" id="{id_prefix}-tob-label">Have you used tobacco or nicotine in the last 12 months?</span>
@@ -273,34 +269,22 @@ def quote_form(form_id, form_name, id_prefix):
                 <label class="choice"><input type="radio" name="tobacco" value="no" required><span>No</span></label>
                 <label class="choice"><input type="radio" name="tobacco" value="yes" required><span>Yes</span></label>
               </div>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field">
               <label class="field-label" for="{id_prefix}-phone">Best number to reach you</label>
               <input class="input" id="{id_prefix}-phone" name="phone" type="tel" autocomplete="tel"
                      required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
 
-            <!-- TCPA consent. Separate, unchecked, immediately above submit.
-                 [PENDING LEGAL REVIEW] Wording must be approved by counsel and
-                 matched to current TCPA one-to-one consent rules before launch. -->
-            <div class="consent">
-              <input type="checkbox" id="{id_prefix}-consent" name="tcpa_consent" value="yes" data-consent>
-              <label class="consent-text" for="{id_prefix}-consent">
-                I agree that {C.BRAND} may call and text me at the number above about life
-                insurance, including with an automatic telephone dialing system or a prerecorded
-                voice. I understand this consent is not a condition of purchase and that message
-                and data rates may apply.
-              </label>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
-            </div>
+            {F.consent_block(id_prefix, C.BRAND, 12)}
 
             <div class="flex gap-3">
               <button type="button" class="btn btn-ghost" data-step-back>Back</button>
               <button type="submit" class="btn btn-cta grow">See my quotes</button>
             </div>
-            <p class="field-error" data-form-error><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+            <p class="field-error" data-form-error>{ERR}<span></span></p>
           </fieldset>
 
           <p class="mt-4 text-micro text-muted">

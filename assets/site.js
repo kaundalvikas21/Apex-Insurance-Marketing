@@ -285,7 +285,11 @@
     var ok = true;
 
     inputs.forEach(function (input) {
-      if (input.type === 'hidden' || input.disabled) return;
+      // :disabled, not .disabled. The IDL property reflects only the element's
+      // own attribute, so a control inside <fieldset disabled> reports false
+      // and would be validated even though the browser will never submit it.
+      // The pseudo-class matches the computed state, which is what we mean.
+      if (input.type === 'hidden' || input.matches(':disabled')) return;
       if (input.type === 'checkbox') return;          // consent handled separately
       if (input.type === 'radio') { radioNames[input.name] = true; return; }
       if (!validateField(input)) ok = false;
@@ -454,26 +458,71 @@
      and screen-reader users are never left behind at the top of the form.
      --------------------------------------------------------------------- */
   $$('[data-steps]').forEach(function (form) {
-    var steps = $$('[data-step]', form);
+    var allSteps = $$('[data-step]', form);
     var segments = $$('[data-progress-seg]', form);
     var label = $('[data-progress-label]', form);
-    if (steps.length < 2) return;
+    var branchInputs = $$('[data-step-branch]', form);
+    if (allSteps.length < 2) return;
 
     var index = 0;
 
+    // A branching form (the master quote page) holds the steps for all three
+    // products at once and disables the branches that do not apply. A disabled
+    // <fieldset> is the native tool for exactly this: collect() already skips
+    // disabled inputs and FormData already drops them, so neither validation
+    // nor the submitted payload has to know that branches exist.
+    function steps() {
+      return allSteps.filter(function (step) { return !step.disabled; });
+    }
+
+    function selectBranch(value) {
+      allSteps.forEach(function (step) {
+        var owner = step.getAttribute('data-step-for');
+        if (owner) step.disabled = owner !== value;
+      });
+    }
+
+    function branchChosen() {
+      return !branchInputs.length || branchInputs.some(function (r) { return r.checked; });
+    }
+
     function render(focusFirst) {
-      steps.forEach(function (step, i) { step.classList.toggle('is-active', i === index); });
-      segments.forEach(function (seg, i) { seg.classList.toggle('is-done', i <= index); });
-      if (label) label.textContent = 'Step ' + (index + 1) + ' of ' + steps.length;
+      var live = steps();
+      if (index > live.length - 1) index = live.length - 1;
+
+      allSteps.forEach(function (step) { step.classList.remove('is-active'); });
+      live.forEach(function (step, i) { step.classList.toggle('is-active', i === index); });
+      segments.forEach(function (seg, i) {
+        // Segments are authored for the longest branch. Once a product is
+        // picked, a shorter branch hides the spare ones rather than showing
+        // progress against a total that does not apply. Before that the full
+        // set stays visible, so the bar does not visibly grow on first choice.
+        seg.hidden = branchChosen() && i >= live.length;
+        seg.classList.toggle('is-done', i <= index);
+      });
+      // Before a product is picked the total is genuinely not known yet, so the
+      // label does not invent one.
+      if (label) {
+        label.textContent = branchChosen()
+          ? 'Step ' + (index + 1) + ' of ' + live.length
+          : 'Step ' + (index + 1);
+      }
 
       if (focusFirst) {
         // preventScroll: the visitor clicked Continue inside the form, so the
         // form is already in view. Letting focus() scroll yanks the page and
         // moves the Back button out from under the pointer.
-        var target = $('input:not([type="hidden"]), select', steps[index]);
+        var target = $('input:not([type="hidden"]), select', live[index]);
         if (target) target.focus({ preventScroll: true });
       }
     }
+
+    // Picking a product re-derives the step list underneath the current step.
+    form.addEventListener('change', function (e) {
+      if (!e.target.matches('[data-step-branch]')) return;
+      selectBranch(e.target.value);
+      render(false);
+    });
 
     form.addEventListener('click', function (e) {
       var next = e.target.closest('[data-step-next]');
@@ -481,12 +530,13 @@
 
       if (next) {
         e.preventDefault();
-        if (!collect(steps[index], form)) {
-          var bad = firstInvalid(steps[index]);
+        var live = steps();
+        if (!collect(live[index], form)) {
+          var bad = firstInvalid(live[index]);
           if (bad && bad.focus) bad.focus();
           return;
         }
-        if (index < steps.length - 1) { index++; render(true); }
+        if (index < live.length - 1) { index++; render(true); }
       }
 
       if (back) {
@@ -499,17 +549,19 @@
     form.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter') return;
       if (e.target.tagName === 'TEXTAREA') return;
-      if (index === steps.length - 1) return;
+      var live = steps();
+      if (index === live.length - 1) return;
       e.preventDefault();
-      var nextBtn = $('[data-step-next]', steps[index]);
+      var nextBtn = $('[data-step-next]', live[index]);
       if (nextBtn) nextBtn.click();
     });
 
     // Jump to the first step that still has an empty required field. Used
     // after a rate-table prefill.
     form.axGoToFirstGap = function () {
-      for (var i = 0; i < steps.length; i++) {
-        var empty = $$('input[required], select[required]', steps[i]).some(function (el) {
+      var live = steps();
+      for (var i = 0; i < live.length; i++) {
+        var empty = $$('input[required], select[required]', live[i]).some(function (el) {
           if (el.type === 'radio') {
             return !$$('input[name="' + el.name + '"]', form).some(function (r) { return r.checked; });
           }
@@ -517,9 +569,16 @@
         });
         if (empty) { index = i; render(true); return; }
       }
-      index = steps.length - 1;
+      index = live.length - 1;
       render(true);
     };
+
+    // Honour a branch the browser restored on back-navigation, and otherwise
+    // start with every branch disabled so only the shared steps are live.
+    if (branchInputs.length) {
+      var preset = branchInputs.filter(function (r) { return r.checked; })[0];
+      selectBranch(preset ? preset.value : null);
+    }
 
     render(false);
   });

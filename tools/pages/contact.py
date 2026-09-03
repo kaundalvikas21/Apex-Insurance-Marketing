@@ -6,6 +6,7 @@ scroll past a form, and someone who would rather write should not have to hunt.
 """
 from icons import icon
 import chrome as C
+import forms as F
 
 PATH = "/contact/"
 OUT = "contact/index.html"
@@ -99,12 +100,7 @@ def body():
           <form class="mt-6" data-ax-form data-silo="contact"
                 data-form-name="contact_general" data-success-target="contact-success" novalidate>
 
-            <input type="hidden" name="source_url" value="">
-            <input type="hidden" name="silo" value="">
-            <input type="hidden" name="form_name" value="">
-            <div aria-hidden="true" style="position:absolute;left:-9999px">
-              <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
-            </div>
+            {F.scaffold(indent=12)}
 
             <div class="field">
               <label class="field-label" for="ct-name">Your name</label>
@@ -151,19 +147,7 @@ def body():
               <p class="field-error">{ERR}<span></span></p>
             </div>
 
-            <!-- TCPA consent. Separate, unchecked, immediately above submit.
-                 [PENDING LEGAL REVIEW] Wording must be approved by counsel and
-                 matched to current TCPA one-to-one consent rules before launch. -->
-            <div class="consent">
-              <input type="checkbox" id="ct-consent" name="tcpa_consent" value="yes" data-consent>
-              <label class="consent-text" for="ct-consent">
-                I agree that {C.BRAND} may call and text me at the number above about life
-                insurance, including with an automatic telephone dialing system or a prerecorded
-                voice. I understand this consent is not a condition of purchase and that message
-                and data rates may apply.
-              </label>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
+            {F.consent_block("ct", C.BRAND, 12)}
 
             <button type="submit" class="btn btn-cta btn-block">Send message</button>
             <p class="field-error" data-form-error>{ERR}<span></span></p>

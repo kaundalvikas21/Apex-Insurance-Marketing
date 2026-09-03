@@ -9,6 +9,8 @@ Primary CTA is the phone, repeated after every second section.
 """
 from icons import icon
 import chrome as C
+import forms as F
+from forms import ERR
 
 PATH = "/final-expense-insurance/"
 OUT = "final-expense-insurance/index.html"
@@ -124,10 +126,7 @@ def call_band(heading, sub, where, photo=None):
 
 
 def _acc(q, a):
-    return ('<details class="acc" name="fe-faq">'
-            '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
-            '</details>') % (q, icon("plus", 24), a)
+    return C.acc(q, a, "fe-faq", 24)
 
 
 # --- Rate table -----------------------------------------------------------
@@ -313,25 +312,20 @@ def body():
           <form class="mt-6" data-ax-form data-silo="final-expense"
                 data-form-name="fe_hero_callback" data-success-target="fe-hero-success" novalidate>
 
-            <input type="hidden" name="source_url" value="">
-            <input type="hidden" name="silo" value="">
-            <input type="hidden" name="form_name" value="">
-            <div aria-hidden="true" style="position:absolute;left:-9999px">
-              <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
-            </div>
+            {F.scaffold(indent=12)}
 
             <div class="field">
               <label class="field-label" for="fe-name">Your name</label>
               <input class="input" id="fe-name" name="name" type="text" autocomplete="name"
                      required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error" id="fe-name-err"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error" id="fe-name-err">{ERR}<span></span></p>
             </div>
 
             <div class="field">
               <label class="field-label" for="fe-age">Your age</label>
               <input class="input" id="fe-age" name="age" type="text" inputmode="numeric"
                      required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
-              <p class="field-error" id="fe-age-err"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error" id="fe-age-err">{ERR}<span></span></p>
             </div>
 
             <div class="field">
@@ -341,32 +335,20 @@ def body():
                 <option value="">Choose your state</option>
                 {C.state_options()}
               </select>
-              <p class="field-error" id="fe-state-err"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error" id="fe-state-err">{ERR}<span></span></p>
             </div>
 
             <div class="field">
               <label class="field-label" for="fe-phone">Your phone number</label>
               <input class="input" id="fe-phone" name="phone" type="tel" autocomplete="tel"
                      required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error" id="fe-phone-err"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error" id="fe-phone-err">{ERR}<span></span></p>
             </div>
 
-            <!-- TCPA consent. Separate, unchecked, immediately above submit.
-                 [PENDING LEGAL REVIEW] Wording must be approved by counsel and
-                 matched to current TCPA one-to-one consent rules before launch. -->
-            <div class="consent">
-              <input type="checkbox" id="fe-consent" name="tcpa_consent" value="yes" data-consent>
-              <label class="consent-text" for="fe-consent">
-                I agree that {C.BRAND} may call and text me at the number above about life
-                insurance, including with an automatic telephone dialing system or a prerecorded
-                voice. I understand this consent is not a condition of purchase and that message
-                and data rates may apply.
-              </label>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
-            </div>
+            {F.consent_block("fe", C.BRAND, 12)}
 
             <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
-            <p class="field-error" data-form-error><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+            <p class="field-error" data-form-error>{ERR}<span></span></p>
 
             <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
 
@@ -817,24 +799,19 @@ def body():
           <form class="mt-6" data-ax-form data-silo="final-expense"
                 data-form-name="fe_footer_callback" data-success-target="fe-footer-success" novalidate>
 
-            <input type="hidden" name="source_url" value="">
-            <input type="hidden" name="silo" value="">
-            <input type="hidden" name="form_name" value="">
-            <div aria-hidden="true" style="position:absolute;left:-9999px">
-              <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
-            </div>
+            {F.scaffold(indent=12)}
 
             <div class="field">
               <label class="field-label" for="fe2-name">Your name</label>
               <input class="input" id="fe2-name" name="name" type="text" autocomplete="name"
                      required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field">
               <label class="field-label" for="fe2-age">Your age</label>
               <input class="input" id="fe2-age" name="age" type="text" inputmode="numeric"
                      required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field">
               <label class="field-label" for="fe2-state">Your state</label>
@@ -842,29 +819,19 @@ def body():
                 <option value="">Choose your state</option>
                 {C.state_options()}
               </select>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
             <div class="field">
               <label class="field-label" for="fe2-phone">Your phone number</label>
               <input class="input" id="fe2-phone" name="phone" type="tel" autocomplete="tel"
                      required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+              <p class="field-error">{ERR}<span></span></p>
             </div>
 
-            <!-- [PENDING LEGAL REVIEW] TCPA consent wording. -->
-            <div class="consent">
-              <input type="checkbox" id="fe2-consent" name="tcpa_consent" value="yes" data-consent>
-              <label class="consent-text" for="fe2-consent">
-                I agree that {C.BRAND} may call and text me at the number above about life
-                insurance, including with an automatic telephone dialing system or a prerecorded
-                voice. I understand this consent is not a condition of purchase and that message
-                and data rates may apply.
-              </label>
-              <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
-            </div>
+            {F.consent_block("fe2", C.BRAND, 12)}
 
             <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
-            <p class="field-error" data-form-error><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+            <p class="field-error" data-form-error>{ERR}<span></span></p>
             <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
           </form>
 

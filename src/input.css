@@ -518,6 +518,27 @@
   .choice input:checked + span .stat-value, .choice input:checked + span .text-sm { color: #fff; }
   .choice span .stat-value { transition: color .15s ease-out; }
 
+  /* A full-width stacked choice: a name plus a line explaining it, for options
+     that need describing rather than just naming (the master quote page's
+     product selector). Same control and same states, different shape.
+
+     The description uses .choice-note rather than a text-muted utility: the
+     utilities layer outranks this one, so a utility colour would survive the
+     navy checked fill and leave slate text on a navy tile. Same reason
+     .stat-value is handled by name above. */
+  .choice-col { display: grid; gap: 0.5rem; }
+  .choice-block > span {
+    /* .choice > span is a centred flex row, which lays the name and its
+       description side by side. A block choice stacks them instead. */
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding: 0.9375rem 1.125rem;
+  }
+  .choice-note { color: var(--color-muted); transition: color .15s ease-out; }
+  .choice input:checked + span .choice-note { color: rgb(255 255 255 / 0.85); }
+
   .consent {
     display: flex;
     align-items: flex-start;
@@ -1072,6 +1093,10 @@
     line-height: 1.15;
     text-align: center;
   }
+
+  /* The agent profile leads with the slot, so it gets the larger box. Same
+     dashed treatment: it must never read as a filled portrait. */
+  .avatar-slot-lg { width: 132px; height: 132px; gap: 6px; }
 }
 
 /* --- Table row cascade --------------------------------------------------- */

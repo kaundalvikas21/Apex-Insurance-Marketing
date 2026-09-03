@@ -11,6 +11,7 @@ column beside its opposite rather than a footnote under it.
 """
 from icons import icon
 import chrome as C
+import forms as F
 
 PATH = "/whole-life-insurance/"
 OUT = "whole-life-insurance/index.html"
@@ -90,13 +91,14 @@ def schema():
 
 
 def _acc(q, a):
-    return ('<details class="acc" name="wl-faq">'
-            '<summary>%s<span class="acc-icon">%s</span></summary>'
-            '<div class="acc-body"><p class="text-slate">%s</p></div>'
-            '</details>') % (q, icon("plus", 22), a)
+    return C.acc(q, a, "wl-faq")
 
 
 ERR = icon("circle-alert", 16, "shrink-0 mt-px")
+
+
+REQUEST_TYPE_FIELD = '''<!-- Flipped to "illustration" by the tertiary CTA below. -->
+<input type="hidden" name="request_type" value="quote">'''
 
 
 def quote_form():
@@ -105,14 +107,7 @@ def quote_form():
         <form id="wl-quote-form" class="mt-6" data-ax-form data-silo="whole-life"
               data-form-name="wl_hero_quote" data-success-target="wl-success" novalidate>
 
-          <input type="hidden" name="source_url" value="">
-          <input type="hidden" name="silo" value="">
-          <input type="hidden" name="form_name" value="">
-          <!-- Flipped to "illustration" by the tertiary CTA below. -->
-          <input type="hidden" name="request_type" value="quote">
-          <div aria-hidden="true" style="position:absolute;left:-9999px">
-            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
-          </div>
+          {F.scaffold(REQUEST_TYPE_FIELD, 10)}
 
           <div class="grid sm:grid-cols-2 gap-x-4">
             <div class="field">
@@ -172,19 +167,7 @@ def quote_form():
             columns side by side, with the carrier named.
           </p>
 
-          <!-- TCPA consent. Separate, unchecked, immediately above submit.
-               [PENDING LEGAL REVIEW] Wording must be approved by counsel and
-               matched to current TCPA one-to-one consent rules before launch. -->
-          <div class="consent">
-            <input type="checkbox" id="wl-consent" name="tcpa_consent" value="yes" data-consent>
-            <label class="consent-text" for="wl-consent">
-              I agree that {C.BRAND} may call and text me at the number above about life
-              insurance, including with an automatic telephone dialing system or a prerecorded
-              voice. I understand this consent is not a condition of purchase and that message
-              and data rates may apply.
-            </label>
-            <p class="field-error">{ERR}<span></span></p>
-          </div>
+          {F.consent_block("wl", C.BRAND, 10)}
 
           <button type="submit" class="btn btn-cta btn-block">Get whole life quotes</button>
           <p class="field-error" data-form-error>{ERR}<span></span></p>
