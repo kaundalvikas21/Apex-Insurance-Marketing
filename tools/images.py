@@ -99,6 +99,19 @@ OG_FOR_PAGE = {
     "/legal/terms/": "contact-desk",
     "/legal/disclaimer/": "contact-desk",
     "/404.html": "home-hero",
+    # P1 money pages. They reuse the existing set: MASTER.md section 8 fixes
+    # the photography at Variation 1's, and a share card is not a reason to
+    # fetch a tenth photograph.
+    "/term-life-insurance/quotes/": "term-home",
+    "/term-life-insurance/rates/": "term-home",
+    "/term-life-insurance/calculator/": "term-home",
+    "/whole-life-insurance/quotes/": "whole-permanence",
+    "/whole-life-insurance/rates/": "whole-permanence",
+    "/whole-life-insurance/guaranteed-acceptance/": "whole-permanence",
+    "/final-expense-insurance/burial-insurance/": "fe-quiet",
+    "/final-expense-insurance/quotes/": "fe-quiet",
+    "/final-expense-insurance/cost/": "fe-quiet",
+    "/compare/term-vs-whole-life-insurance/": "home-hero",
 }
 OG_SIZE = (1200, 630)
 

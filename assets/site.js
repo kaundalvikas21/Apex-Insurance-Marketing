@@ -11,7 +11,9 @@
      5. Form validation, TCPA gate, success state
      6. Multi-step forms
      7. Rate-table prefill
-     8. Triage widget
+     8. Panel groups
+     9. Triage widget
+    10. Coverage calculator
    ========================================================================== */
 (function () {
   'use strict';
@@ -622,7 +624,7 @@
       track('form_start', {
         form_name: form.getAttribute('data-form-name'),
         silo: form.getAttribute('data-silo'),
-        trigger: 'rate_table_prefill'
+        trigger: button.getAttribute('data-prefill-trigger') || 'rate_table_prefill'
       });
 
       // Some prefill buttons also change what the visitor is asking for
@@ -744,6 +746,119 @@
     });
 
     show(0, false);
+  })();
+
+  /* ------------------------------------------------------------------------
+     10. COVERAGE CALCULATOR (term spoke)
+     No email gate: every figure is derived and shown in the page, and the
+     derivation is the point.
+
+     The markup ships a worked example already filled in, so with JavaScript
+     off the page is a complete, readable derivation rather than a column of
+     zeros. This takes over from the first edit and deliberately does NOT
+     recompute on load, so the authored example and the live one can never
+     disagree on first paint.
+
+     Contract, all inside one [data-calc]:
+       [data-calc-field="..."]  income | years | debt | children | perchild |
+                                existing. Any input or select, read as a number.
+       [data-calc-out="..."]    EVERY match is written, so one figure can sit in
+                                the table, the headline, and the CTA label.
+       [data-calc-cta]          prefill button. Section 7 reads data-prefill at
+                                click time, so rewriting the attribute here is
+                                the whole bridge into the quote form.
+       [data-calc-enough]       shown instead of the CTA when the need is zero.
+     --------------------------------------------------------------------- */
+  (function calculator() {
+    var box = $('[data-calc]');
+    if (!box) return;
+
+    // Coverage on the quote form is a <select>. A value that is not one of its
+    // options sets the field to "" without complaining, so the recommendation
+    // has to land on this ladder. Rounding UP is also what an agent does:
+    // buying too little is the more common and more expensive mistake.
+    var LADDER = [100000, 250000, 500000, 750000, 1000000, 2000000];
+    var fired = false;
+
+    function num(role) {
+      var el = $('[data-calc-field="' + role + '"]', box);
+      if (!el) return 0;
+      // Strip $ and thousands separators: people type "80,000", and parseFloat
+      // would read that as 80. NaN > 0 is false, so a blank field reads as 0.
+      var n = parseFloat((el.value || '').replace(/[^0-9.]/g, ''));
+      return n > 0 ? n : 0;
+    }
+
+    function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    function put(role, text) {
+      $$('[data-calc-out="' + role + '"]', box).forEach(function (el) {
+        el.textContent = text;
+      });
+    }
+
+    function compute() {
+      var perYear = num('income');
+      var years = num('years');
+      var kids = num('children');
+      var perKid = num('perchild');
+      var income = perYear * years;
+      var debt = num('debt');
+      var education = kids * perKid;
+      var existing = num('existing');
+      var raw = income + debt + education - existing;
+
+      // The raw > 0 guard matters: without it the first rung always matches a
+      // negative need, and a household that is already over covered would be
+      // told to buy $100,000 instead of seeing the "you have enough" note.
+      var rounded = 0;
+      if (raw > 0) {
+        for (var i = 0; i < LADDER.length; i++) {
+          if (LADDER[i] >= raw) { rounded = LADDER[i]; break; }
+        }
+        // Above the top of the ladder the quote form's own option reads
+        // "$2,000,000 or more", so that is the honest answer.
+        if (!rounded) rounded = LADDER[LADDER.length - 1];
+      }
+
+      put('incomeyear', money(perYear));
+      put('years', String(years));
+      put('children', String(kids));
+      put('perchild', money(perKid));
+      put('income', money(income));
+      put('debt', money(debt));
+      put('education', money(education));
+      put('existing', money(existing));
+      put('raw', money(raw > 0 ? raw : 0));
+      put('rounded', money(rounded));
+
+      var cta = $('[data-calc-cta]', box);
+      var enough = $('[data-calc-enough]', box);
+      if (cta) {
+        cta.hidden = !rounded;
+        cta.setAttribute('data-prefill', '{"coverage":"' + rounded + '"}');
+      }
+      if (enough) enough.hidden = !!rounded;
+      return rounded;
+    }
+
+    box.addEventListener('input', compute);
+
+    // calculator_complete fires once, on the first finished edit that produces
+    // a figure, not on every keystroke. Income, debt, and dependants stay OUT
+    // of the dataLayer: the recommendation is the only number the marketing
+    // side needs, and the only one here that is not personal financial detail.
+    box.addEventListener('change', function () {
+      var rounded = compute();
+      if (fired || !rounded) return;
+      fired = true;
+      track('calculator_complete', {
+        calculator_name: box.getAttribute('data-calc') || 'unnamed_calculator',
+        coverage: rounded,
+        silo: document.body.getAttribute('data-silo') || 'site',
+        page_path: window.location.pathname
+      });
+    });
   })();
 
 })();

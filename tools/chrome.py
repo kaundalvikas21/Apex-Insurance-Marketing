@@ -648,3 +648,180 @@ def rates_flag(what):
                 f'quoted, or offered rate. Populate from current carrier rate cards and update the '
                 f'date line before this page goes live.',
                 "PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED")
+
+
+# ---------------------------------------------------------------------------
+# T2: THE RATE CHART
+# Generalised from the term hub's rate_table() so the three P1 rate pages
+# (term rates, whole life rates, final expense cost) share one implementation.
+#
+# The hubs deliberately keep their own copies. They are approved and signed
+# off, and refactoring them onto this would risk changing their rendered output
+# for no visible gain.
+#
+# Every cell is `$--` by decision (MASTER.md s7): no invented premium, even a
+# marked one, because a marked fake number still gets screenshotted. The
+# toggles therefore drive the caption only. When the carrier rate cards arrive,
+# populate the cells from a dataset keyed by (toggle state, age band, coverage)
+# and have the toggles rewrite them.
+# ---------------------------------------------------------------------------
+def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
+               prefill_target=None, cta_location="rate_row", min_width="0",
+               note=None, top_margin="mt-8", toggle_grid="flex flex-wrap items-end gap-6",
+               aside=None):
+    """One signature rate table with its toggles above and a dated line beneath.
+
+    cols      [column label]. Coverage amounts, already formatted.
+    rows      [(band_label, prefill_dict_or_None)].
+    toggles   [(legend, radio_name, [(value, label)], prefill_name_or_None)].
+              The first option of each is checked.
+    row_cta   None, "prefill", or "call".
+              "prefill" adds a trailing cell per row whose button writes the
+              row's numbers into `prefill_target` (site.js section 7), merging
+              in whatever the toggles above are currently set to.
+              "call" puts a click-to-call under the age label INSIDE the row
+              header, which is how the final expense pages stay at three
+              columns. Phone weighted silos use this.
+    aside     optional paragraph rendered beside the toggles.
+    """
+    def toggle(legend, name, options, prefill_name):
+        opts = "".join(
+            '<label class="choice"><input type="radio" name="%s" value="%s"%s%s>'
+            '<span>%s</span></label>'
+            % (name, value, " checked" if i == 0 else "",
+               (' data-prefill-name="%s"' % prefill_name) if prefill_name else "", label)
+            for i, (value, label) in enumerate(options))
+        return ('<fieldset><legend class="field-label">%s</legend>'
+                '<div class="choice-row">%s</div></fieldset>' % (legend, opts))
+
+    toggle_html = "".join(toggle(*t) for t in toggles)
+    if aside:
+        toggle_html += '<p class="text-sm text-muted">%s</p>' % aside
+
+    heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in cols)
+    if row_cta == "prefill":
+        heads += '<th scope="col"><span class="sr-only">Get a quote for this row</span></th>'
+
+    body_rows = []
+    for band, prefill in rows:
+        cells = "".join('<td class="tnum">$--</td>' for _ in cols)
+        if row_cta == "call":
+            # Under the age label, not in its own column: a fourth column would
+            # break the three column ceiling the senior pages are held to.
+            head = ('<th scope="row"><span class="block">%s</span>%s</th>'
+                    % (band, phone_link(cta_location, "btn-row mt-2", "Get this quoted", 18)))
+            body_rows.append("<tr>%s%s</tr>" % (head, cells))
+        elif row_cta == "prefill":
+            btn = ('<button type="button" class="btn-row" data-prefill=\'%s\' '
+                   'data-prefill-target="%s">Quote this %s</button>'
+                   % (json.dumps(prefill, separators=(",", ":")), prefill_target,
+                      icon("arrow-right", 16)))
+            body_rows.append('<tr><th scope="row">%s</th>%s<td>%s</td></tr>' % (band, cells, btn))
+        else:
+            body_rows.append('<tr><th scope="row">%s</th>%s</tr>' % (band, cells))
+    body = "\n            ".join(body_rows)
+
+    tail = note or ("Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, "
+                    "state, health, and tobacco use. A rate table is an illustration of shape, "
+                    "not an offer of coverage.")
+
+    return f"""
+    <div data-panels="{panels_id}">
+
+      <div class="reveal {top_margin} {toggle_grid}">
+        {toggle_html}
+      </div>
+
+      <!-- INTEGRATION POINT: every cell below is a structural placeholder.
+           Populate from the carrier rate cards keyed by (toggle state, age
+           band, coverage) and have the toggles above rewrite them. Until then
+           the toggles update the caption only, and nothing here can be
+           mistaken for a real quoted premium. -->
+      <!-- .reveal sits on the scroll container itself. A transformed wrapper
+           around a scrolling table leaks the table's width into the page
+           until the section reveals. -->
+      <div class="reveal mt-6 table-scroll table-signature">
+        <table class="rate-table" style="min-width:{min_width}">
+          <caption>
+            {caption}
+            <span data-panel-caption></span>
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Age at application</th>
+              {heads}
+            </tr>
+          </thead>
+          <tbody>
+            {body}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="reveal mt-4 text-micro text-muted max-w-3xl">
+      <span class="pill mr-2">Rates last updated: {RATES_DATE}</span>
+      {tail}
+    </p>"""
+
+
+# ---------------------------------------------------------------------------
+# T1: THE TWO MANDATED SECTIONS
+# Template T1 requires an honest post-submit expectation and a no-obligation /
+# data-handling statement before the FAQ. Both appear on all three quote pages,
+# so they are authored once here rather than three times.
+# ---------------------------------------------------------------------------
+def post_submit_section(steps, heading="What happens after you submit", intro=None,
+                        cls="section"):
+    """T1's honest call expectation. steps: [(title, body, note_or_None)]."""
+    lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    blocks = "".join(
+        ('<div class="mt-8">%s</div>' % step(i + 1, *s)) if i else step(i + 1, *s)
+        for i, s in enumerate(steps))
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-5">
+        <h2 class="reveal text-h2">{heading}</h2>
+        {lead}
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        {blocks}
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
+def no_obligation_section(short_version, no_obligation, stopping_contact,
+                          heading="What we do with what you send", cls="section band"):
+    """T1's data-handling block: the last real objection before the FAQ.
+
+    Three panes, because there are exactly three things a visitor wants to know
+    at this point: where their details go, what submitting commits them to, and
+    how to make it stop. The privacy policy link lives in the third pane, which
+    is the only place on a quote page that link is earned.
+    """
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-5">
+        <h2 class="reveal text-h2">{heading}</h2>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7 bento" data-stagger="40">
+        <div class="reveal bento-cell bento-cell-blue bento-6">
+          <p class="eyebrow text-white/80">The short version</p>
+          <p class="mt-3 text-white/90">{short_version}</p>
+        </div>
+        <div class="reveal bento-cell bento-3">
+          <p class="eyebrow">No obligation</p>
+          <p class="mt-3 text-slate">{no_obligation}</p>
+        </div>
+        <div class="reveal bento-cell bento-cell-tint bento-3">
+          <p class="eyebrow">Stopping contact</p>
+          <p class="mt-3 text-slate">{stopping_contact}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""

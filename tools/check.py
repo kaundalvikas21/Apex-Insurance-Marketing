@@ -28,14 +28,38 @@ from html.parser import HTMLParser
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://www.apexinsurancemarketing.com"
 
-# Spokes and compare pages are not built yet. The hubs link down to them on
-# purpose, so those links are expected to be dead until the spoke phase.
-# REPLACE-BEFORE-LAUNCH.md section 6 is the register. Anything NOT matching
-# this is a genuine broken link and fails the check.
-UNBUILT = re.compile(r"^/(compare/"
-                     r"|term-life-insurance/.+"
-                     r"|whole-life-insurance/.+"
-                     r"|final-expense-insurance/.+)")
+# The spokes still to be written. The hubs link down to them on purpose, so
+# those links are expected to be dead until each one is built.
+# REPLACE-BEFORE-LAUNCH.md section 6 is the human readable register of the same
+# list; the two are meant to be edited together. Anything NOT named here is a
+# genuine broken link and fails the check.
+#
+# This is an explicit set rather than a prefix pattern. A pattern like
+# "term-life-insurance/.+" also swallows the pages that HAVE been built, so a
+# typo in a link to a real spoke would pass the crawl silently. Deleting a line
+# here is how a page graduates.
+UNBUILT = frozenset([
+    "/term-life-insurance/what-is-term-life-insurance/",
+    "/term-life-insurance/for-seniors/",
+    "/term-life-insurance/level-term/",
+    "/term-life-insurance/10-year-term/",
+    "/term-life-insurance/20-year-term/",
+    "/term-life-insurance/30-year-term/",
+    "/term-life-insurance/no-medical-exam/",
+    "/term-life-insurance/return-of-premium/",
+    "/whole-life-insurance/calculator/",
+    "/whole-life-insurance/what-is-whole-life-insurance/",
+    "/whole-life-insurance/for-seniors/",
+    "/whole-life-insurance/cash-value/",
+    "/whole-life-insurance/dividends/",
+    "/whole-life-insurance/is-it-worth-it/",
+    "/final-expense-insurance/for-seniors/",
+    "/final-expense-insurance/no-waiting-period/",
+    "/final-expense-insurance/funeral-insurance/",
+    "/final-expense-insurance/what-is-final-expense-insurance/",
+    "/final-expense-insurance/for-parents/",
+    "/final-expense-insurance/cremation-insurance/",
+])
 
 problems = []
 notes = []
@@ -174,7 +198,7 @@ def check_page(rel, html, built):
     for href in set(re.findall(r'href="(/[^"#?]*)', html)):
         if href.startswith("/assets/"):
             continue
-        if UNBUILT.match(href):
+        if href in UNBUILT:
             continue
         target = href.lstrip("/")
         candidates = [target, os.path.join(target, "index.html")]

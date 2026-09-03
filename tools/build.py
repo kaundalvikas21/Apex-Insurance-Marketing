@@ -29,6 +29,11 @@ PAGES = [
     "about_licensing", "about_carriers", "about_reviews",
     "legal_privacy", "legal_terms", "legal_disclaimer",
     "not_found",
+    # P1 money pages (spec s02/s03/s04 spokes plus the neutral compare page).
+    "term_quotes", "term_rates", "term_calculator",
+    "whole_quotes", "whole_rates", "whole_guaranteed_acceptance",
+    "fe_burial_insurance", "fe_quotes", "fe_cost",
+    "compare_term_vs_whole",
 ]
 
 TEMPLATE = """<!doctype html>
