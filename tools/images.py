@@ -75,6 +75,72 @@ IMAGES = {
     "contact-desk": (
         "1631651693480-97f1132e333d", (3, 2), [560, 900, 1240], "center",
         "A pen and printed forms laid out on a wooden table."),
+
+    # --- VISUAL_DENSITY 7 -------------------------------------------------
+    # Fourteen slots added so every page carries photography rather than five.
+    # Same art direction as above and no relaxation of it: no eye contact, no
+    # posed joy, nobody who could be read as a client or an agent. Every one of
+    # these was viewed before its alt text was written, and the alt describes
+    # only what is literally in the frame.
+    #
+    # None of the fourteen contains a person. That is deliberate rather than
+    # incidental: these pages carry death benefits and health questions, and a
+    # stranger's face beside that copy is exactly what section 7 rules 1 and 2
+    # exist to prevent. Rooms, tables, paths and doors carry the same warmth
+    # and make no claim about anybody.
+
+    # Term. Desks and daylight: term is the silo people research at a table.
+    "term-desk": (
+        "1776161562542-e8bc41b3b78a", (4, 3), [520, 800, 1100], "center",
+        "A notepad, a pen, reading glasses, and binder clips on a wooden desk."),
+    "term-window": (
+        "1527377761-f99968ed8a7f", (3, 2), [520, 800, 1100], "center",
+        "Window light falling across a carpeted floor beside a wooden shutter."),
+    "term-table": (
+        "1614597445336-8a67e9314d91", (4, 3), [520, 800, 1100], "center",
+        "A kitchen island with stools, seen past a dining table."),
+    "term-notebook": (
+        "1620287920810-3f5b9746380c", (3, 2), [520, 800, 1100], "center",
+        "A closed journal and a pen resting on an open ruled notebook."),
+
+    # Whole life. Thresholds and things that stay put, because the product's
+    # whole claim is permanence.
+    "whole-ledger": (
+        "1772396867158-e26d9e6256b2", (3, 2), [520, 800, 1100], "center",
+        "An open notebook with handwriting and a pen on a dark wooden table."),
+    "whole-arbor": (
+        "1563714193017-5a5fb60bc02b", (4, 3), [520, 800, 1100], "center",
+        "A brick path leading through a vine covered wooden arbour into a garden."),
+    "whole-porch": (
+        "1590165609277-12902bf83876", (4, 3), [520, 800, 1100], "center",
+        "Two rocking chairs on the porch of a white clapboard house."),
+
+    # Final expense. Quiet, domestic, and never funereal. The register is calm
+    # rather than sombre: this silo's readers are being sold fear elsewhere.
+    "fe-chairs": (
+        "1765073505002-bd37f69b20ff", (4, 3), [520, 800, 1100], "center",
+        "Two wooden chairs on a timber porch in late afternoon light."),
+    "fe-kitchen": (
+        "1609210885099-6ba41569c6dc", (4, 3), [520, 800, 1100], "center",
+        "Hydrangeas in a glass jug on a kitchen worktop."),
+    "fe-letters": (
+        "1637597384611-0c33cef6ec03", (3, 2), [520, 800, 1100], "center",
+        "Several handwritten postcards laid overlapping on a dark surface."),
+    "fe-garden-door": (
+        "1544137171-9f5cf7b0fafa", (4, 3), [520, 800, 1100], "center",
+        "Wooden double doors on a white garden building, with roses on either side."),
+    "fe-path": (
+        "1579847621287-31060b612d1d", (3, 2), [520, 800, 1100], "center",
+        "A garden path between frosted borders on a winter morning."),
+
+    # Neutral. The compare pages belong to no silo, and /about/ is not a
+    # product page, so neither takes a silo's photograph.
+    "compare-garden": (
+        "1713383658268-6b9bd03beb19", (4, 3), [520, 800, 1100], "center",
+        "A tree and clipped shrubs in a green garden."),
+    "about-desk": (
+        "1761322572550-967ea8c0bfd9", (3, 2), [520, 800, 1100], "center",
+        "An open blank notebook, a pen, and two pencils on a wooden desk."),
 }
 
 # Open Graph share image per page: which manifest entry to use.
