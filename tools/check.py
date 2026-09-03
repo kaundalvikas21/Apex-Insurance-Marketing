@@ -19,6 +19,7 @@ have to click through, and the structural contract assets/site.js relies on:
 
     python3 tools/build.py && python3 tools/check.py
 """
+import collections
 import json
 import os
 import re
@@ -38,6 +39,12 @@ DOMAIN = "https://www.apexinsurancemarketing.com"
 # "term-life-insurance/.+" also swallows the pages that HAVE been built, so a
 # typo in a link to a real spoke would pass the crawl silently. Deleting a line
 # here is how a page graduates.
+# A 5-of-12 column whose entire content is one heading, sitting beside the
+# 6-of-12 content column. See check_page for why this is a failure.
+DEAD_ROW = re.compile(
+    r'<div class="lg:col-span-5">\s*(<h2[^>]*>.*?</h2>)\s*</div>\s*'
+    r'<div class="lg:col-span-6 lg:col-start-7', re.S)
+
 UNBUILT = frozenset([
     # P1 money pages: registered in build.py PAGES, modules not yet written.
     # They belong here for the same reason as everything above, and listing
@@ -135,6 +142,32 @@ def check_page(rel, html, built):
             fail(page, "em-dash present")
     if re.search(r"[\U0001F300-\U0001FAFF☀-➿]", html):
         fail(page, "emoji in markup; Lucide SVG only")
+
+    # --- layout: the row rule ---------------------------------------------
+    # MASTER.md section 3: a block may be narrow only if something else
+    # occupies the rest of its row. The shape that breaks it is a 5-of-12
+    # column holding nothing but a heading beside a full content column, which
+    # is what twelve hand-rolled sections used to do. chrome.prose() cannot
+    # produce it; only a hand-rolled copy of prose()'s grid can.
+    for m in DEAD_ROW.finditer(html):
+        head = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        fail(page, "dead half-row: %r fills 5 of 12 columns with only a heading. "
+                   "Give it a lead, a media= figure, or the sticky rail (chrome.prose)"
+             % head[:60])
+
+    # --- images -----------------------------------------------------------
+    # MASTER.md section 8: exactly one eager image per page. More than one and
+    # the browser has no LCP candidate to prioritise, which is the same as
+    # marking none.
+    eager = html.count('fetchpriority="high"')
+    if eager > 1:
+        fail(page, "%d eager images, expected at most 1" % eager)
+
+    # Section 8 again: no photo repeats within a single page.
+    placed = re.findall(r'<img src="/assets/img/([a-z0-9-]+?)-\d+\.\w+"', html)
+    for slot, n in collections.Counter(placed).items():
+        if n > 1:
+            fail(page, "photo %r placed %d times on one page" % (slot, n))
 
     # --- forms ------------------------------------------------------------
     p = Forms()
