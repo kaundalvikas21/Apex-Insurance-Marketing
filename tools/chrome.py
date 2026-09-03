@@ -63,7 +63,7 @@ def phone_link(location, cls="", label=None, size=20, wrap_num=True):
 # IMAGERY
 # See design-system/MASTER.md section 8. Manifest lives in tools/images.py.
 # ---------------------------------------------------------------------------
-def picture(name, sizes, cls="", img_cls="", eager=False, ratio_cls="", alt=None):
+def picture(name, sizes, cls="", img_cls="", eager=False, alt=None):
     """<picture> with AVIF then WebP then <img>.
 
     Every <img> carries explicit width and height so the box is reserved before
@@ -249,27 +249,29 @@ def footer():
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6">{col("Company", company)}</div>
-      <div class="lg:col-span-3">{col("Legal", legal)}</div>
+      <div class="lg:col-span-3 lg:col-start-10">{col("Legal", legal)}</div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         {BRAND} is a licensed independent insurance agency. Licensed in {STATES} states.
         National Producer Number {NPN}. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         {BRAND} is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 {BRAND}. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 {BRAND}. All rights reserved.</p>
     </div>
   </div>
 </footer>"""
@@ -499,19 +501,29 @@ def acc(q, a, group, size=22):
             '</details>') % (group, q, icon("plus", size), a)
 
 
-def faq_section(heading, items, group, intro=None, size=22, cls="section"):
+def faq_section(heading, items, group, intro=None, size=22, cls="section", center=True):
     """Heading plus accordion list. `items` is [(question, answer_html)] and is
     the same list that should be passed to faq_schema(), so the visible copy and
-    the structured data can never disagree."""
+    the structured data can never disagree.
+
+    An accordion has no second column and never will, so left aligning it in a
+    1200px container leaves 40 percent of the row empty, which MASTER.md
+    section 3 forbids. Centring the block is the fix. Only the heading is
+    centred text: the question rows stay left aligned, because centred rows in
+    a list are harder to scan. This is one centred section, not the centred
+    page section 7 bans.
+    """
     rows = "\n      ".join(acc(q, a, group, size) for q, a in items)
     lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    head_cls = "max-w-2xl mx-auto text-center" if center else "max-w-2xl"
+    list_cls = "max-w-3xl mx-auto" if center else "max-w-3xl"
     return f"""<section class="{cls}">
   <div class="container-ax">
-    <div class="max-w-2xl">
+    <div class="{head_cls}">
       <h2 class="reveal text-h2">{heading}</h2>
       {lead}
     </div>
-    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+    <div class="mt-10 grid gap-3 {list_cls}" data-stagger="60">
       {rows}
     </div>
   </div>
@@ -610,11 +622,13 @@ def legal_doc(heading, standfirst, sections, updated=None):
             "before this site goes live.", "PENDING LEGAL REVIEW")}
     </div>
 
-    <div class="mt-12 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+    <div class="mt-12 grid lg:grid-cols-12 gap-10 lg:gap-12">
 
-      <nav class="lg:col-span-3 sticky-col" aria-label="On this page">
-        <h2 class="text-micro font-semibold uppercase tracking-[0.12em] text-muted">On this page</h2>
-        <ul class="mt-4 grid gap-2.5 text-sm">{toc}</ul>
+      <nav class="lg:col-span-3" aria-label="On this page">
+        <div class="sticky-col">
+          <h2 class="text-micro font-semibold uppercase tracking-[0.12em] text-muted">On this page</h2>
+          <ul class="mt-4 grid gap-2.5 text-sm">{toc}</ul>
+        </div>
       </nav>
 
       <div class="lg:col-span-8 lg:col-start-5 measure grid divide-y divide-rule">{blocks}
@@ -772,18 +786,27 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
 # so they are authored once here rather than three times.
 # ---------------------------------------------------------------------------
 def post_submit_section(steps, heading="What happens after you submit", intro=None,
-                        cls="section"):
-    """T1's honest call expectation. steps: [(title, body, note_or_None)]."""
+                        cls="section", media=None, sticky=True):
+    """T1's honest call expectation. steps: [(title, body, note_or_None)].
+
+    `media` and `sticky` behave as in prose(): the left column must not leave a
+    dead half row beside a long step list.
+    """
     lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    art = ('<div class="reveal mt-8">%s</div>' % media) if media else ""
     blocks = "".join(
         ('<div class="mt-8">%s</div>' % step(i + 1, *s)) if i else step(i + 1, *s)
         for i, s in enumerate(steps))
+    inner = f"""<h2 class="reveal text-h2">{heading}</h2>
+        {lead}
+        {art}"""
+    col = ('<div class="sticky-col">%s</div>' % inner) if sticky else inner
+    align = "" if sticky else " items-start"
     return f"""<section class="{cls}">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8{align}">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">{heading}</h2>
-        {lead}
+        {col}
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         {blocks}
@@ -794,7 +817,8 @@ def post_submit_section(steps, heading="What happens after you submit", intro=No
 
 
 def no_obligation_section(short_version, no_obligation, stopping_contact,
-                          heading="What we do with what you send", cls="section band"):
+                          heading="What we do with what you send", cls="section band",
+                          intro=None, media=None, sticky=True):
     """T1's data-handling block: the last real objection before the FAQ.
 
     Three panes, because there are exactly three things a visitor wants to know
@@ -802,11 +826,18 @@ def no_obligation_section(short_version, no_obligation, stopping_contact,
     how to make it stop. The privacy policy link lives in the third pane, which
     is the only place on a quote page that link is earned.
     """
+    lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    art = ('<div class="reveal mt-8">%s</div>' % media) if media else ""
+    inner = f"""<h2 class="reveal text-h2">{heading}</h2>
+        {lead}
+        {art}"""
+    col = ('<div class="sticky-col">%s</div>' % inner) if sticky else inner
+    align = "" if sticky else " items-start"
     return f"""<section class="{cls}">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8{align}">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">{heading}</h2>
+        {col}
       </div>
       <div class="lg:col-span-6 lg:col-start-7 bento" data-stagger="40">
         <div class="reveal bento-cell bento-cell-blue bento-6">
@@ -833,7 +864,7 @@ def no_obligation_section(short_version, no_obligation, stopping_contact,
 # copied out of term_rates.py by hand, which is how a breadcrumb and an H1 drift
 # apart across a silo. Authored once here instead.
 # ---------------------------------------------------------------------------
-def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10"):
+def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None):
     """T4's top: breadcrumb, one H1, and the direct answer in the first two
     sentences.
 
@@ -847,15 +878,28 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10"):
     """
     g = " glow" if glow else ""
     ex = ("\n      " + extra) if extra else ""
+    copy = f"""<h1 class="reveal text-h1">{h1}</h1>
+      <p class="reveal mt-5 text-lead text-slate">{lead}</p>{ex}"""
+    if media:
+        # The hero photograph is the page's one eager image, so the block splits
+        # rather than sitting under the lead: the same 6 / 5-from-8 split the
+        # home hero already uses.
+        block = f"""<div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-6">
+        {copy}
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">{media}</div>
+    </div>"""
+    else:
+        block = f"""<div class="mt-8 max-w-3xl">
+      {copy}
+    </div>"""
     return f"""
 <section class="pt-6 {pb}{g}">
   <div class="container-ax">
     {crumbs(trail)}
 
-    <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">{h1}</h1>
-      <p class="reveal mt-5 text-lead text-slate">{lead}</p>{ex}
-    </div>
+    {block}
   </div>
 </section>"""
 
@@ -907,22 +951,45 @@ def byline_section(cls="section-tight band"):
 </section>"""
 
 
-def prose(heading, blocks, intro=None, cls="section", aside=None):
+def prose(heading, blocks, intro=None, cls="section", aside=None, media=None, sticky=True):
     """A structured explainer section: heading and optional lead on the left,
     the substance on the right. The two column split is what keeps a long
     informational page off a single centred column, which section 7 bans.
 
     `blocks` is finished HTML for the right hand column.
+
+    `media` is finished HTML, normally a figure(), placed under the lead. It is
+    what stops a short left column leaving a dead half row beside a long right
+    one, which MASTER.md section 3 forbids.
+
+    `sticky` parks the left column against the header while the right column
+    scrolls, which solves the same dead row where a photograph would sit beside
+    a rate table and section 8 bans one. It needs no final expense branching:
+    `.fe main .sticky-col` is already `position: static`, so an fe page takes
+    the static column and the image without a second code path.
+
+    Sticky only travels if the grid item is full height, so the rail goes on an
+    inner div and the grid drops `items-start`. `.sticky-col` on the grid item
+    itself under `items-start` is content height and never moves.
     """
     lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
     side = ('<div class="reveal mt-6 pt-6 border-t border-rule">%s</div>' % aside) if aside else ""
+    art = ('<div class="reveal mt-8">%s</div>' % media) if media else ""
+    inner = f"""<h2 class="reveal text-h2">{heading}</h2>
+        {lead}
+        {art}
+        {side}"""
+    if sticky:
+        col = '<div class="sticky-col">%s</div>' % inner
+        align = ""
+    else:
+        col = inner
+        align = " items-start"
     return f"""<section class="{cls}">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8{align}">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">{heading}</h2>
-        {lead}
-        {side}
+        {col}
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         {blocks}

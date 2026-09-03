@@ -338,10 +338,11 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What happens after you submit</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">What happens after you submit</h2>
         <p class="reveal mt-5 text-slate">Written out because "we will be in touch" is not an answer, and because the gap between what a form promises and what actually happens is where most of the distrust in this industry comes from.</p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal flex items-start gap-4">
@@ -496,9 +497,11 @@
 
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What we do with what you send</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">What we do with what you send</h2>
+        
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7 bento" data-stagger="40">
         <div class="reveal bento-cell bento-cell-blue bento-6">
@@ -521,11 +524,11 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
+    <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Before you start</h2>
       
     </div>
-    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+    <div class="mt-10 grid gap-3 max-w-3xl mx-auto" data-stagger="60">
       <details class="acc" name="term-quotes-faq"><summary>How long does it take to get a quote?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">The form takes about two minutes. A licensed agent calls you back within [X business hours] with named carriers and real premiums. If you would rather have it in writing first, say so on the call and we will email the comparison instead.</p></div></details>
       <details class="acc" name="term-quotes-faq"><summary>Is this a real quote or an estimate?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">What comes back from us is a quoted premium from a named carrier at an assumed rate class, which is as close to real as anything can be before underwriting. The final premium is set by the carrier after it reviews your health, your build, your family history, and in most states your driving record. We tell you which assumptions we used, so you can see what would move the number.</p></div></details>
       <details class="acc" name="term-quotes-faq"><summary>Do I have to buy anything?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. There is no fee for the quote and no policy until you sign an application and a carrier issues it. You can stop at any point, including after you have applied and been approved.</p></div></details>
@@ -555,27 +558,29 @@
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Company</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/about/">About Apex</a></li><li><a class="footer-link" href="/about/agents/">Our licensed agents</a></li><li><a class="footer-link" href="/about/licensing/">Licensing and appointments</a></li></ul></div></div>
-      <div class="lg:col-span-3"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
+      <div class="lg:col-span-3 lg:col-start-10"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is a licensed independent insurance agency. Licensed in [X] states.
         National Producer Number [NPN]. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>

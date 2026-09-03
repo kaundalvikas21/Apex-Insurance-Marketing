@@ -409,11 +409,11 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
+    <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Questions about funeral insurance</h2>
       
     </div>
-    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+    <div class="mt-10 grid gap-3 max-w-3xl mx-auto" data-stagger="60">
       <details class="acc" name="fe-funeral-faq"><summary>What is funeral insurance?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">It is a small whole life insurance policy bought to cover a funeral and the bills that follow. It is the same product sold under the names final expense insurance and burial insurance. There is no medical exam, only health questions, the premium never rises, and the coverage does not expire. The money is paid in cash to the person you name, not to a funeral home.</p></div></details>
       <details class="acc" name="fe-funeral-faq"><summary>How much funeral insurance do I need?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Enough to cover what your family would actually face, which depends on your state, on whether you want a burial or a cremation, and on what you would want included. We do not publish an average figure, because averages in this category are usually borrowed from surveys that do not describe any particular funeral. A better approach is to call two funeral homes near you and ask for their general price list, which they are required to give you, then insure that number plus a margin for the bills that arrive afterwards.</p></div></details>
       <details class="acc" name="fe-funeral-faq"><summary>Is funeral insurance worth it?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">It is worth it if your family would otherwise have to find the money quickly, from savings or from a credit card, at the worst possible moment. It is not worth it if you already have liquid savings set aside for this and the discipline to leave them alone, or if you already hold permanent life insurance that covers it. The honest test is whether the money would actually be there, in cash, within a week.</p></div></details>
@@ -488,27 +488,29 @@
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Company</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/about/">About Apex</a></li><li><a class="footer-link" href="/about/agents/">Our licensed agents</a></li><li><a class="footer-link" href="/about/licensing/">Licensing and appointments</a></li></ul></div></div>
-      <div class="lg:col-span-3"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
+      <div class="lg:col-span-3 lg:col-start-10"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is a licensed independent insurance agency. Licensed in [X] states.
         National Producer Number [NPN]. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>

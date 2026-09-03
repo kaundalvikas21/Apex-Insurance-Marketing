@@ -102,11 +102,12 @@
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What cash value actually is</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">What cash value actually is</h2>
         <p class="reveal mt-5 text-slate">Four facts, in the order that makes the rest of the page make sense.</p>
         
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal ">
@@ -274,11 +275,12 @@
      ================================================================== -->
 <section class="section band-surface">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Borrowing against the cash value</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">Borrowing against the cash value</h2>
         <p class="reveal mt-5 text-slate">A policy loan is not a withdrawal and it is not free money. It is a secured loan from the carrier, and the security is your own death benefit.</p>
         
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal flex items-start gap-4">
@@ -526,11 +528,11 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
+    <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Questions about whole life cash value</h2>
       
     </div>
-    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+    <div class="mt-10 grid gap-3 max-w-3xl mx-auto" data-stagger="60">
       <details class="acc" name="whole-cash-faq"><summary>How does cash value work in a whole life policy?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Your premium is level for life, which means in the early years you pay more than it costs the carrier to insure you. That excess, after acquisition costs and the cost of insurance, is credited to a cash value inside the policy and grows at a guaranteed rate set in the contract. You can borrow against it, or take it by surrendering the policy. On a standard whole life contract it is not paid in addition to the death benefit: it is the mechanism that lets the carrier promise a level premium for life.</p></div></details>
       <details class="acc" name="whole-cash-faq"><summary>How long before a whole life policy builds cash value?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Typically very little in the first two or three years and meaningful amounts from somewhere in the second decade, though it varies a great deal by carrier and by how the policy is designed. The reason is that first year costs, including underwriting, issue, and commission, come out before anything is credited. This is the single most important thing to understand before buying: whole life punishes early surrender severely, and a policy you might cancel in year four is a policy you should not buy.</p></div></details>
       <details class="acc" name="whole-cash-faq"><summary>Do you lose the cash value when you die?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">On a standard whole life policy, yes in the sense that your beneficiaries receive the death benefit rather than the death benefit plus the cash value. That is not the carrier keeping your money, it is the cash value having done its job of funding the benefit. Some carriers offer a rider or a policy design where the cash value is added to the death benefit, and it costs more. If that matters to you, ask for it explicitly, because it is not the default.</p></div></details>
@@ -606,27 +608,29 @@
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Company</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/about/">About Apex</a></li><li><a class="footer-link" href="/about/agents/">Our licensed agents</a></li><li><a class="footer-link" href="/about/licensing/">Licensing and appointments</a></li></ul></div></div>
-      <div class="lg:col-span-3"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
+      <div class="lg:col-span-3 lg:col-start-10"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is a licensed independent insurance agency. Licensed in [X] states.
         National Producer Number [NPN]. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>

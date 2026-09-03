@@ -256,11 +256,12 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to actually do it</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">How to actually do it</h2>
         <p class="reveal mt-5 text-slate">Four steps, in this order. Doing them out of order is what produces a wasted application or an awkward second conversation.</p>
         
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal flex items-start gap-4">
@@ -296,11 +297,12 @@
 
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to raise it without a row</h2>
+        <div class="sticky-col"><h2 class="reveal text-h2">How to raise it without a row</h2>
         <p class="reveal mt-5 text-slate">This is the part people find hard, and it is worth more than any product detail on this page. The conversation usually goes better than the version of it you are dreading.</p>
         
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal ">
@@ -405,11 +407,11 @@
 
 <section class="section">
   <div class="container-ax">
-    <div class="max-w-2xl">
+    <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Questions about insuring a parent</h2>
       
     </div>
-    <div class="mt-10 grid gap-3 max-w-3xl" data-stagger="60">
+    <div class="mt-10 grid gap-3 max-w-3xl mx-auto" data-stagger="60">
       <details class="acc" name="fe-parents-faq"><summary>Can I buy life insurance for my parent?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Yes, and it is common. You need two things: your parent's knowledge and signature, and an insurable interest, which as their child paying for a funeral you plainly have. What you cannot do is arrange it without them. They sign the application, they answer the health questions, and in most cases they speak to the agent or the carrier directly.</p></div></details>
       <details class="acc" name="fe-parents-faq"><summary>Can I buy life insurance for my parent without them knowing?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. Not through us, and not lawfully through anyone. An application requires the insured person's signature and their own answers to the health questions, and a policy obtained without them would be void, which means it would not pay at the point it was needed. Anyone who tells you otherwise is proposing insurance fraud.</p></div></details>
       <details class="acc" name="fe-parents-faq"><summary>Who should own the policy, me or my parent?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">If you are paying the premium, usually you. As owner you receive the notices, so the policy cannot lapse without your knowing, and you control the beneficiary designation. Your parent is still the insured and still has to consent to everything. If your parent is paying and wants control of it, they should own it. There is no single right answer, only a decision worth making deliberately rather than by default.</p></div></details>
@@ -486,27 +488,29 @@
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Company</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/about/">About Apex</a></li><li><a class="footer-link" href="/about/agents/">Our licensed agents</a></li><li><a class="footer-link" href="/about/licensing/">Licensing and appointments</a></li></ul></div></div>
-      <div class="lg:col-span-3"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
+      <div class="lg:col-span-3 lg:col-start-10"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is a licensed independent insurance agency. Licensed in [X] states.
         National Producer Number [NPN]. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>

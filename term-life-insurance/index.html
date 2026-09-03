@@ -1002,27 +1002,29 @@
       </div>
 
       <div class="lg:col-span-3 lg:col-start-6"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Company</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/about/">About Apex</a></li><li><a class="footer-link" href="/about/agents/">Our licensed agents</a></li><li><a class="footer-link" href="/about/licensing/">Licensing and appointments</a></li></ul></div></div>
-      <div class="lg:col-span-3"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
+      <div class="lg:col-span-3 lg:col-start-10"><div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] !font-sans">Legal</h2><ul class="mt-4 grid gap-2.5"><li><a class="footer-link" href="/legal/privacy/">Privacy policy</a></li><li><a class="footer-link" href="/legal/terms/">Terms of use</a></li><li><a class="footer-link" href="/legal/disclaimer/">Disclaimer</a></li></ul></div></div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/15 grid gap-4 text-micro leading-relaxed text-white/80 max-w-4xl">
+    <!-- The disclosures sit on the same 12 tracks as the columns above rather
+         than in a max-w-4xl block whose right edge lines up with nothing. -->
+    <div class="mt-14 pt-8 border-t border-white/15 grid gap-8 lg:grid-cols-12 lg:gap-8 text-micro leading-relaxed text-white/80">
       <!-- [PENDING LEGAL REVIEW] license disclosure wording -->
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is a licensed independent insurance agency. Licensed in [X] states.
         National Producer Number [NPN]. Agency license numbers by state are listed on our
         <a class="link-static" href="/about/licensing/">licensing page</a>.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Apex Insurance Marketing, LLC is not affiliated with, endorsed by, or sponsored by any government agency,
         including the Social Security Administration, Medicare, or the Department of Veterans Affairs.
       </p>
-      <p>
+      <p class="lg:col-span-4">
         Policies are issued by third party insurance carriers. Coverage, availability, premiums,
         riders, and benefits vary by carrier, state, age, and health. All guarantees are subject to
         the claims paying ability of the issuing carrier. Content on this site is general
         information, not insurance, tax, or legal advice, and is not an offer of coverage.
       </p>
-      <p>&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
+      <p class="lg:col-span-12">&#169; 2026 Apex Insurance Marketing, LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>
