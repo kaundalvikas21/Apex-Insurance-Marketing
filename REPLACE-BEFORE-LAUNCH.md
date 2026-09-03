@@ -41,7 +41,7 @@ Also in `chrome.py`:
 
 ## 2. Rate tables
 
-Three tables ship with `$--` in every premium cell and a visible
+**Seven** tables ship with `$--` in every premium cell and a visible
 `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER RATE CARDS, DATED]` banner above them.
 **No invented premium appears anywhere on this site**, which is deliberate: a marked fake number
 still gets screenshotted.
@@ -49,15 +49,37 @@ still gets screenshotted.
 | Page | Component | Shape |
 |---|---|---|
 | `/term-life-insurance/#rates` | `rate_table()` in `tools/pages/term.py` | 7 age bands x 3 coverage columns. Toggles for term length, sex, tobacco. |
-| `/final-expense-insurance/#costs` | `rate_table()` in `tools/pages/final_expense.py` | 7 age bands x 4 coverage columns. Toggle for sex. |
+| `/final-expense-insurance/#costs` | `rate_table()` in `tools/pages/final_expense.py` | 7 age bands x 2 coverage columns. Toggle for sex. |
 | `/whole-life-insurance/` cost section | inline in `tools/pages/whole.py` | Whole life against 20 year term at two ages. |
+| `/get-a-quote/` | inline | Sample rates, deliberately **not** gated behind the form. |
+| `/term-life-insurance/quotes/` | `chrome.rate_chart()` | T1's sample table, shown before the form rather than after it. |
+| `/term-life-insurance/rates/` | `chrome.rate_chart()` | 10 age bands x 5 coverage columns. Toggles for term length, sex, tobacco. Row-level prefill buttons. |
+| `/whole-life-insurance/for-seniors/` | `chrome.rate_chart()` | 5 age bands x 3 coverage columns. Toggle for sex. Row-level **click-to-call**, because that page is phone weighted. |
 
-**Term table integration point.** The toggles currently update the caption only. There is a marked
-comment in `term.py` where the dataset keyed by (term length, sex, tobacco, age band, coverage)
-should drive the cell values. The final-expense table already swaps a full `<tbody>` per sex, so
-copy that pattern once real data exists.
+**Integration point.** In every `chrome.rate_chart()` table the toggles currently update the
+caption only, and there is a marked comment in `tools/chrome.py` where a dataset keyed by
+(toggle state, age band, coverage) should drive the cell values. The final-expense table already
+swaps a full `<tbody>` per sex, so copy that pattern once real data exists.
 
 Also replace `[CARRIER RATE CARD NAME AND EDITION]` in the source line under each table.
+
+### 2b. Placeholder tables that are not premiums
+
+Two further tables are structural placeholders about **availability** rather than price. They carry
+their own flags and their own dated lines, and they are not covered by the rate card swap above.
+
+| Page | Table | Fill from | Marked |
+|---|---|---|---|
+| `/term-life-insurance/for-seniors/` | Term lengths commonly issued at ages 60 to 85 | The real issue age and term availability grid, by carrier and state | `[PLACEHOLDER: REPLACE WITH APPOINTED CARRIER ISSUE AGE GRID]` |
+| `/whole-life-insurance/calculator/` | No table; the page states on its face that it cannot compute a premium or a cash value | Optional: a dated premium range once rate cards are loaded | `[PLACEHOLDER: NO CARRIER RATE CARDS LOADED]` |
+
+### 2c. Two flags that are deliberate and must NOT be "fixed"
+
+- `/final-expense-insurance/funeral-insurance/` carries `[NO AVERAGE PUBLISHED, ON PURPOSE]`. We do
+  not print an average funeral cost. Figures in this category are national survey averages that
+  describe no particular funeral. Do not replace this with a number from a survey we cannot cite.
+- `/whole-life-insurance/cash-value/` carries `[GENERAL INFORMATION ONLY]` over its tax section.
+  That is a permanent caveat, not a placeholder. It stays after launch.
 
 ---
 
@@ -157,26 +179,56 @@ fabricated review expressed in structured data, and it is the form search engine
 
 ## 6. Placeholder links
 
-These do not exist yet. All are in the spoke modules, the footer, or contextual body links.
+Fourteen paths do not exist yet. All are in the spoke modules or in contextual body links.
+
+**P1 money pages, registered in `PAGES` but not yet written:**
 
 - `/compare/term-vs-whole-life-insurance/`
-- 11 term spokes, 9 whole life spokes, 9 final expense spokes
+- `/whole-life-insurance/quotes/`, `/whole-life-insurance/rates/`,
+  `/whole-life-insurance/guaranteed-acceptance/`
+- `/final-expense-insurance/burial-insurance/`, `/final-expense-insurance/quotes/`,
+  `/final-expense-insurance/cost/`
+
+**P3 spokes, not yet scheduled:**
+
+- `/term-life-insurance/10-year-term/`, `/term-life-insurance/return-of-premium/`
+- `/whole-life-insurance/dividends/`, `/whole-life-insurance/is-it-worth-it/`
+- `/final-expense-insurance/what-is-final-expense-insurance/`,
+  `/final-expense-insurance/for-parents/`, `/final-expense-insurance/cremation-insurance/`
 
 `python3 tools/check.py` crawls every internal link in the built output and fails on anything
-broken that is **not** on this list, so removing a line here is how a page graduates.
+broken that is **not** in its `UNBUILT` set, so removing a line from that set is how a page
+graduates. This section and that set are meant to be edited in the same commit.
 
 **Built in the P0 layer** (previously on this list): `/about/`, `/about/agents/`,
 `/about/agents/first-last/`, `/about/licensing/`, `/about/carriers/`, `/about/reviews/`,
 `/get-a-quote/`, `/legal/privacy/`, `/legal/terms/`, `/legal/disclaimer/`, `/404.html`.
 
-**Three contextual links point at section anchors on spoke pages that do not exist yet.** Create
-these anchors when the spoke is built, or the link will land at the top of the page:
+**Built in the P1 layer:** `/term-life-insurance/quotes/`, `/term-life-insurance/rates/`,
+`/term-life-insurance/calculator/`.
+
+**Built in the P2 layer:** `/term-life-insurance/what-is-term-life-insurance/`,
+`/term-life-insurance/for-seniors/`, `/term-life-insurance/level-term/`,
+`/term-life-insurance/20-year-term/`, `/term-life-insurance/30-year-term/`,
+`/term-life-insurance/no-medical-exam/`,
+`/whole-life-insurance/what-is-whole-life-insurance/`, `/whole-life-insurance/calculator/`,
+`/whole-life-insurance/for-seniors/`, `/whole-life-insurance/cash-value/`,
+`/final-expense-insurance/for-seniors/`, `/final-expense-insurance/no-waiting-period/`,
+`/final-expense-insurance/funeral-insurance/`.
+
+**Two contextual links still point at section anchors on spoke pages that do not exist yet.**
+Create these anchors when the spoke is built, or the link will land at the top of the page. The
+link crawl in `check.py` strips the fragment, so it cannot catch a missing anchor: this table is
+the only guard.
 
 | Link on | Target |
 |---|---|
-| Term hub, no-exam teaser | `/term-life-insurance/no-medical-exam/#who-qualifies` |
 | Whole life hub, dividends card | `/whole-life-insurance/dividends/#how-they-are-declared` |
 | Whole life hub, guaranteed acceptance card | `/whole-life-insurance/guaranteed-acceptance/#who-it-is-for` |
+
+Resolved in P2: the term hub's no-exam teaser points at
+`/term-life-insurance/no-medical-exam/#who-qualifies`, and that anchor now exists on the routes
+section of the built page.
 
 Those anchors exist because spec section 07 allows one link per target per page: the spoke module
 owns the canonical page link, so contextual teasers deep-link to the relevant section instead.

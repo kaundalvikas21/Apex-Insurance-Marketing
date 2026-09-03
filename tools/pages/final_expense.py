@@ -853,3 +853,83 @@ def body():
   </div>
 </section>
 """
+
+
+# --- The four field callback form ------------------------------------------
+# Extracted for the final expense SPOKES, which are phone first with a short
+# form as the secondary ask and would otherwise each hand-copy this block.
+# The hub keeps its own two inline copies: it is approved and signed off, and
+# refactoring it onto this would risk changing its rendered output for no
+# visible gain. Same reasoning as chrome.rate_chart() and the hubs' rate tables.
+def callback_form(prefix, form_name, heading="Prefer we call you?",
+                  intro="Leave four details and a licensed agent will call you back."):
+    """Four fields, one step, no scrolling inside the form.
+
+    `prefix` must be unique per page, not per site: it namespaces every id in
+    the block, including the TCPA consent checkbox and the success panel.
+    """
+    return f"""
+          <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
+          <p class="mt-3 text-slate">{intro}</p>
+
+          <form class="mt-6" data-ax-form data-silo="final-expense"
+                data-form-name="{form_name}" data-success-target="{prefix}-success" novalidate>
+
+            {F.scaffold(indent=12)}
+
+            <div class="field">
+              <label class="field-label" for="{prefix}-name">Your name</label>
+              <input class="input" id="{prefix}-name" name="name" type="text" autocomplete="name"
+                     required data-validate="name" data-error="Please tell us your name.">
+              <p class="field-error">{ERR}<span></span></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="{prefix}-age">Your age</label>
+              <input class="input" id="{prefix}-age" name="age" type="text" inputmode="numeric"
+                     required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
+              <p class="field-error">{ERR}<span></span></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="{prefix}-state">Your state</label>
+              <select class="select" id="{prefix}-state" name="state" required
+                      data-error="Please choose your state.">
+                <option value="">Choose your state</option>
+                {C.state_options()}
+              </select>
+              <p class="field-error">{ERR}<span></span></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="{prefix}-phone">Your phone number</label>
+              <input class="input" id="{prefix}-phone" name="phone" type="tel" autocomplete="tel"
+                     required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <p class="field-error">{ERR}<span></span></p>
+            </div>
+
+            {F.consent_block(prefix, C.BRAND, 12)}
+
+            <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
+            <p class="field-error" data-form-error>{ERR}<span></span></p>
+
+            <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
+
+          </form>
+
+          <div id="{prefix}-success" class="success">
+            <div class="flex items-start gap-3">
+              {icon("circle-check", 32, "shrink-0 text-green")}
+              <div>
+                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
+                <p class="mt-3 text-slate">
+                  A licensed agent will call you within {C.SLA}. If you would rather not wait,
+                  call us now and we can do it in one go.
+                </p>
+                <div class="mt-5">
+                  {C.phone_link(prefix + "_success", "btn btn-call btn-block",
+                                "Call " + C.PHONE_DISPLAY, 22)}
+                </div>
+              </div>
+            </div>
+          </div>"""

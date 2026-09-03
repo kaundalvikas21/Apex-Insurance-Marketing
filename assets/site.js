@@ -777,7 +777,11 @@
     // options sets the field to "" without complaining, so the recommendation
     // has to land on this ladder. Rounding UP is also what an agent does:
     // buying too little is the more common and more expensive mistake.
-    var LADDER = [100000, 250000, 500000, 750000, 1000000, 2000000];
+    // data-calc-ladder lets a second silo reuse this engine with its own
+    // coverage options. Whole life sells from $25,000; term does not.
+    var LADDER = (box.getAttribute('data-calc-ladder') ||
+                  '100000,250000,500000,750000,1000000,2000000')
+                 .split(',').map(Number);
     var fired = false;
 
     function num(role) {

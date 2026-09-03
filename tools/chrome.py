@@ -825,3 +825,117 @@ def no_obligation_section(short_version, no_obligation, stopping_contact,
     </div>
   </div>
 </section>"""
+
+
+# ---------------------------------------------------------------------------
+# T4: THE INFORMATIONAL / CLUSTER TEMPLATE
+# Thirteen P2 cluster pages share one top and one mid-page CTA. Both were being
+# copied out of term_rates.py by hand, which is how a breadcrumb and an H1 drift
+# apart across a silo. Authored once here instead.
+# ---------------------------------------------------------------------------
+def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10"):
+    """T4's top: breadcrumb, one H1, and the direct answer in the first two
+    sentences.
+
+    `lead` is HTML rather than text because it carries the mandated up-link to
+    the silo hub (spec s07 rule 1: first 150 words, exact anchor = the hub
+    term). Putting it in the lead is the only placement that satisfies both the
+    word count and "answer the question first".
+
+    glow=False on every final expense page: `.fe main` opts out of the ambient
+    glow along with the rest of the motion layer.
+    """
+    g = " glow" if glow else ""
+    ex = ("\n      " + extra) if extra else ""
+    return f"""
+<section class="pt-6 {pb}{g}">
+  <div class="container-ax">
+    {crumbs(trail)}
+
+    <div class="mt-8 max-w-3xl">
+      <h1 class="reveal text-h1">{h1}</h1>
+      <p class="reveal mt-5 text-lead text-slate">{lead}</p>{ex}
+    </div>
+  </div>
+</section>"""
+
+
+def inline_cta(heading, body, where, href, cta_label, phone_first=False,
+               cls="section-tight band", fe=False, note=None):
+    """T4's single mid-page CTA. One ask, offered two ways, never an interstitial.
+
+    `phone_first` decides which of the two carries the amber, per the per-silo
+    CTA weighting: term and whole life lead with the form, final expense and the
+    two senior spokes lead with the phone. Exactly one of these per
+    informational page, so the reader meets the ask once rather than being
+    interrupted by it.
+    """
+    if phone_first:
+        primary = phone_link(where, "btn btn-call btn-block" + (" btn-xl" if fe else ""),
+                             "Call " + PHONE_DISPLAY, 26 if fe else 20)
+        secondary = ('<a class="btn btn-ghost btn-block mt-3" href="%s">%s</a>'
+                     % (href, cta_label))
+    else:
+        primary = '<a class="btn btn-cta btn-block" href="%s">%s</a>' % (href, cta_label)
+        secondary = phone_link(where, "btn btn-ghost btn-block mt-3",
+                               "Or call " + PHONE_DISPLAY)
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="reveal card">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div class="lg:col-span-7">
+          <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
+          <p class="mt-3 text-slate">{body}</p>
+        </div>
+        <div class="lg:col-span-4 lg:col-start-9">
+          {primary}
+          {secondary}
+          <p class="mt-3 text-micro text-muted text-center">{note or HOURS}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
+def byline_section(cls="section-tight band"):
+    """The byline in its own band. Every editorial page ends with this."""
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="reveal">{byline()}</div>
+  </div>
+</section>"""
+
+
+def prose(heading, blocks, intro=None, cls="section", aside=None):
+    """A structured explainer section: heading and optional lead on the left,
+    the substance on the right. The two column split is what keeps a long
+    informational page off a single centred column, which section 7 bans.
+
+    `blocks` is finished HTML for the right hand column.
+    """
+    lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
+    side = ('<div class="reveal mt-6 pt-6 border-t border-rule">%s</div>' % aside) if aside else ""
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-5">
+        <h2 class="reveal text-h2">{heading}</h2>
+        {lead}
+        {side}
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        {blocks}
+      </div>
+    </div>
+  </div>
+</section>"""
+
+
+def qa(question, answer, cls=""):
+    """One heading-and-paragraph pair inside a prose() right column. Used where
+    a page absorbs a secondary search intent as an H3 rather than a page."""
+    return f"""<div class="reveal {cls}">
+        <h3 class="text-h4">{question}</h3>
+        <p class="mt-3 text-slate">{answer}</p>
+      </div>"""

@@ -16,8 +16,9 @@ layout discipline (bento cell count, adjacency, eyebrow budget, hero economy); t
 rules win over both. The brief's font choice (Space Grotesk + Inter) and Lucide icons override the
 skills' generic font and icon bans.
 
-Single source of truth for the build (five approved pages plus the P0 layer, seventeen in all). `src/input.css` implements every token here; if the
-two disagree, this file is wrong and gets updated, not the other way around.
+Single source of truth for the build: five approved pages, the P0 trust layer, the P1 money
+pages, and the P2 cluster pages, thirty three in all. `src/input.css` implements every token
+here; if the two disagree, this file is wrong and gets updated, not the other way around.
 
 **Decisions carried from the client conversation, not to be reverted:**
 - Rate and cost cells stay `$--`. No invented premium, even a marked one, because a marked fake
@@ -221,6 +222,11 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.field` | Label above input, 48px input, border-strong, blue focus ring. The error line is **always in the layout** and only toggles `visibility`. |
 | `.site-header` | Solid white; glass only when `.is-stuck`. Wordmark navy, nav slate with a bright-blue underline. |
 | `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
+| `chrome.page_hero()` | T4's top: breadcrumb, one H1, and the answer in the first two sentences. The lead is HTML because it carries the mandated hub up-link. `glow=False` on every final-expense page. |
+| `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
+| `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. |
+| `chrome.qa()` | One heading-and-paragraph pair inside a `prose()` column. Used where a page absorbs a secondary search intent as an H3 rather than a page. |
+| `chrome.byline_section()` | The byline in its own band. Closes every editorial page. |
 
 Icons: **Lucide only**, inlined as SVG, 1.5px stroke, 20px or 24px, `aria-hidden="true"` with the
 meaning carried by adjacent text.
@@ -259,6 +265,39 @@ figure on `/about/` is one. Placeholder tables (licensing, carriers, the agent's
 `.flag` above the table, so a reader meets the notice before the number. And `/about/reviews/`
 emits no `AggregateRating` while the review count is zero: an aggregate rating over no reviews is
 a fabricated review expressed in structured data.
+
+**P1 money pages.** `/term-life-insurance/quotes/`, `/rates/`, and `/calculator/`. T1 puts the
+form above the fold and the sample rate table **before** it, never behind it. T2 puts the chart
+first and hosts the quote form further down purely because row-level prefill needs a target in the
+same document. T3 ships its worked example already computed into the HTML, so with JavaScript off
+the derivation is complete rather than a column of zeros.
+
+**P2 cluster pages.** Thirteen informational spokes on T4, plus the whole life calculator on T3.
+They inherit this file without deviation except where a page doc exists (`term-no-medical-exam`,
+`whole-calculator`, `whole-cash-value`). Six rules run across all of them.
+
+1. **The answer is the first two sentences**, inside `chrome.page_hero()`, before any section. The
+   mandated hub up-link lives in that lead, which is the only placement that satisfies both spec
+   s07 rule 1 and "answer the question first".
+2. **One mid-page CTA**, `chrome.inline_cta()`, never an interstitial. The exception is
+   `/term-life-insurance/no-medical-exam/`, which the spec treats as near-money.
+3. **One link per target per page.** A page's spoke module may not repeat a target the body already
+   links. Where a contextual link and the module both want one page, the module keeps the canonical
+   bare link and the contextual one deep-links to an anchor. The breadcrumb plus the mandated
+   up-link is the one accepted duplicate.
+4. **The "does not suit" section matches its opposite in size.** Applied on the two what-is pages,
+   both seniors pages, and the cash value page.
+5. **A white card inside a `.band-navy` needs `!text-ink` on its heading.** `.band-navy h3` is a
+   descendant selector, so an unqualified heading there renders white on white.
+6. **Every table is a placeholder about price or a statement about behaviour**, never a mix. A
+   behaviour table (underwriting routes, what a waiting period pays) carries no `$--` and no rate
+   flag; a price table carries both, plus the dated pill.
+
+**Per-silo CTA weighting on the spokes.** Term is form first, except `/for-seniors/` which is phone
+first. Whole life is form and phone at parity with an illustration request as the tertiary ask,
+except `/for-seniors/` which is phone first and `/cash-value/` which is soft CTA only and carries no
+amber at all. Final expense is phone first throughout, with the four-field
+`final_expense.callback_form()` as the secondary.
 
 ---
 

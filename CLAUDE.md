@@ -169,6 +169,13 @@ duplicate: both are required, one by `check.py` and one by the linking rules.
 - **f-string braces.** Page `body()` methods are one big f-string. Inside a `{...}` replacement
   field the content is plain Python, so a dict literal is written `{"age": mid}`, **not** `{{...}}`
   — the doubled form builds a `set` of `dict` and raises `unhashable type`.
+- **A white card inside a `.band-navy` needs `!text-ink` on its heading.** `.band-navy h3` is a
+  descendant selector, so an unqualified `<h3>` on a light surface in a navy band renders white on
+  white. Paragraphs are fine because `.text-slate` sets colour explicitly; headings are not. Plain
+  `.text-ink` loses on specificity, so it has to be `!text-ink`.
+- **`check.py` strips the fragment when it crawls links**, so a contextual teaser pointing at
+  `/page/#anchor` passes even when the anchor does not exist. The table in
+  `REPLACE-BEFORE-LAUNCH.md` section 6 is the only guard for those.
 - **`.reveal` goes ON the `.table-scroll` element**, never on a wrapper around it. A transformed
   wrapper leaks the table's width into the page until the section reveals.
 - **`<details name=...>` accordion groups must be unique per page**, or two FAQ sets close each

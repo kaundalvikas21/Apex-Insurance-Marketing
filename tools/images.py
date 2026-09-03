@@ -112,6 +112,21 @@ OG_FOR_PAGE = {
     "/final-expense-insurance/quotes/": "fe-quiet",
     "/final-expense-insurance/cost/": "fe-quiet",
     "/compare/term-vs-whole-life-insurance/": "home-hero",
+    # P2 cluster pages. Same reasoning as P1: the photography set is fixed at
+    # Variation 1's, so each silo's cluster shares its hub's share card.
+    "/term-life-insurance/what-is-term-life-insurance/": "term-home",
+    "/term-life-insurance/for-seniors/": "term-home",
+    "/term-life-insurance/level-term/": "term-home",
+    "/term-life-insurance/20-year-term/": "term-home",
+    "/term-life-insurance/30-year-term/": "term-home",
+    "/term-life-insurance/no-medical-exam/": "term-home",
+    "/whole-life-insurance/what-is-whole-life-insurance/": "whole-permanence",
+    "/whole-life-insurance/calculator/": "whole-permanence",
+    "/whole-life-insurance/for-seniors/": "whole-permanence",
+    "/whole-life-insurance/cash-value/": "whole-permanence",
+    "/final-expense-insurance/for-seniors/": "fe-quiet",
+    "/final-expense-insurance/no-waiting-period/": "fe-quiet",
+    "/final-expense-insurance/funeral-insurance/": "fe-quiet",
 }
 OG_SIZE = (1200, 630)
 

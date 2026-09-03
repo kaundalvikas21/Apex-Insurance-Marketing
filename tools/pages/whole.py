@@ -101,25 +101,31 @@ REQUEST_TYPE_FIELD = '''<!-- Flipped to "illustration" by the tertiary CTA below
 <input type="hidden" name="request_type" value="quote">'''
 
 
-def quote_form():
-    """Five fields, one step. Equal partner to the phone CTA beside it."""
+def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl"):
+    """Five fields, one step. Equal partner to the phone CTA beside it.
+
+    Parameterised so the whole life spokes can host their own copy: two forms
+    posting the same data-form-name would make the GA4 form_submit event
+    useless for telling the hub apart from the calculator.
+    """
+    p = id_prefix
     return f"""
-        <form id="wl-quote-form" class="mt-6" data-ax-form data-silo="whole-life"
-              data-form-name="wl_hero_quote" data-success-target="wl-success" novalidate>
+        <form id="{form_id}" class="mt-6" data-ax-form data-silo="whole-life"
+              data-form-name="{form_name}" data-success-target="{p}-success" novalidate>
 
           {F.scaffold(REQUEST_TYPE_FIELD, 10)}
 
           <div class="grid sm:grid-cols-2 gap-x-4">
             <div class="field">
-              <label class="field-label" for="wl-age">Your age</label>
-              <input class="input" id="wl-age" name="age" type="text" inputmode="numeric"
+              <label class="field-label" for="{p}-age">Your age</label>
+              <input class="input" id="{p}-age" name="age" type="text" inputmode="numeric"
                      required data-validate="age" data-error="Enter an age between 18 and 85.">
               <p class="field-error">{ERR}<span></span></p>
             </div>
 
             <div class="field" data-error="Choose one so we can price it correctly.">
-              <span class="field-label" id="wl-sex-label">Sex</span>
-              <div class="choice-row" role="group" aria-labelledby="wl-sex-label">
+              <span class="field-label" id="{p}-sex-label">Sex</span>
+              <div class="choice-row" role="group" aria-labelledby="{p}-sex-label">
                 <label class="choice"><input type="radio" name="sex" value="female" required><span>Female</span></label>
                 <label class="choice"><input type="radio" name="sex" value="male" required><span>Male</span></label>
               </div>
@@ -128,8 +134,8 @@ def quote_form():
           </div>
 
           <div class="field">
-            <label class="field-label" for="wl-state">Your state</label>
-            <select class="select" id="wl-state" name="state" required data-error="Please choose your state.">
+            <label class="field-label" for="{p}-state">Your state</label>
+            <select class="select" id="{p}-state" name="state" required data-error="Please choose your state.">
               <option value="">Choose your state</option>
               {C.state_options()}
             </select>
@@ -137,10 +143,10 @@ def quote_form():
           </div>
 
           <div class="field">
-            <label class="field-label" for="wl-coverage">Coverage you have in mind
+            <label class="field-label" for="{p}-coverage">Coverage you have in mind
               <span class="field-hint block font-normal">A rough figure is fine. We will talk it through.</span>
             </label>
-            <select class="select" id="wl-coverage" name="coverage" required
+            <select class="select" id="{p}-coverage" name="coverage" required
                     data-error="Choose an amount, or pick the closest.">
               <option value="">Choose an amount</option>
               <option value="25000">$25,000</option>
@@ -154,27 +160,27 @@ def quote_form():
           </div>
 
           <div class="field">
-            <label class="field-label" for="wl-phone">Best number to reach you</label>
-            <input class="input" id="wl-phone" name="phone" type="tel" autocomplete="tel"
+            <label class="field-label" for="{p}-phone">Best number to reach you</label>
+            <input class="input" id="{p}-phone" name="phone" type="tel" autocomplete="tel"
                    required data-validate="phone" data-error="Enter a 10 digit phone number.">
             <p class="field-error">{ERR}<span></span></p>
           </div>
 
-          <p id="wl-illustration-note" data-prefill-note hidden
+          <p id="{p}-illustration-note" data-prefill-note hidden
              class="flag !bg-navy-050 !border-navy !text-navy mb-4">
             {icon("file-text", 16, "inline-block align-text-bottom mr-1")}
             You have asked for a full illustration. We will send the guaranteed and non guaranteed
             columns side by side, with the carrier named.
           </p>
 
-          {F.consent_block("wl", C.BRAND, 10)}
+          {F.consent_block(p, C.BRAND, 10)}
 
           <button type="submit" class="btn btn-cta btn-block">Get whole life quotes</button>
           <p class="field-error" data-form-error>{ERR}<span></span></p>
           <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
         </form>
 
-        <div id="wl-success" class="success">
+        <div id="{p}-success" class="success">
           <div class="flex items-start gap-3">
             {icon("circle-check", 30, "shrink-0 text-green")}
             <div>
@@ -185,7 +191,7 @@ def quote_form():
                 guarantee we will say so on the page it appears.
               </p>
               <div class="mt-5">
-                {C.phone_link("wl_success", "btn btn-call", "Or call " + C.PHONE_DISPLAY)}
+                {C.phone_link(p + "_success", "btn btn-call", "Or call " + C.PHONE_DISPLAY)}
               </div>
             </div>
           </div>

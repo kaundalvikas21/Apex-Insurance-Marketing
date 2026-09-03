@@ -34,6 +34,12 @@ PAGES = [
     "whole_quotes", "whole_rates", "whole_guaranteed_acceptance",
     "fe_burial_insurance", "fe_quotes", "fe_cost",
     "compare_term_vs_whole",
+    # P2 cluster pages (spec s02/s03/s04 informational spokes, template T4,
+    # plus the whole life calculator on T3).
+    "term_what_is", "term_for_seniors", "term_level",
+    "term_20_year", "term_30_year", "term_no_exam",
+    "whole_what_is", "whole_calculator", "whole_for_seniors", "whole_cash_value",
+    "fe_for_seniors", "fe_no_waiting_period", "fe_funeral_insurance",
 ]
 
 TEMPLATE = """<!doctype html>
