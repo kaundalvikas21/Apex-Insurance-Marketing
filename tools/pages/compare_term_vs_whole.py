@@ -164,7 +164,16 @@ FAQ = [
 ]
 
 COST_BLOCKS = """
-        <p class="reveal text-slate">
+        <div class="in-short reveal">
+          <p class="in-short-title">In short</p>
+          <ul>
+            <li>For the same death benefit at the same age, whole life costs several times what term costs.</li>
+            <li>We print no figures until real carrier rate cards are loaded.</li>
+            <li>Run any comparison to the same end date on both sides, or it is two different questions.</li>
+          </ul>
+        </div>
+        <h3 class="reveal mt-6 text-h4">Why there are no numbers here</h3>
+        <p class="reveal mt-3 text-slate">
           This is the point where a comparison page normally prints two premiums and a total.
           We are not going to, and the reason is not evasion.
         </p>
@@ -175,21 +184,27 @@ COST_BLOCKS = """
           <span class="tnum">$--</span> for the same reason, and it will stay that way until real
           rate cards are loaded rather than until it becomes inconvenient.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">The shape of the gap</h3>
+        <p class="reveal mt-3 text-slate">
           What is fair to say is the shape, and the shape is not subtle. For the same death
-          benefit at the same age, whole life costs several times what term costs. That gap is
+          benefit at the same age, whole life costs several times what term costs.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          That gap is
           large enough that it changes what you can afford to insure, which is the real decision
           underneath this page. It is also why the answer is so often term for the big temporary
           need and a small permanent policy beside it, rather than one product for everything.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Where the real figures will go</h3>
+        <p class="reveal mt-3 text-slate">
           When the rate cards land, the numbers will appear on the two pages that own them:
           <a class="link" href="/term-life-insurance/rates/">term life insurance rates by age</a>
           and <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates by
           age</a>. They are kept there rather than reprinted here so there is one place to update
           and one place to be wrong.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">A check for any comparison you are shown</h3>
+        <p class="reveal mt-3 text-slate">
           One thing worth adding to any cost comparison you are shown elsewhere: a term premium
           stops when the term does, and a whole life premium usually does not. Comparing thirty
           years of one against a lifetime of the other is comparing two different questions, and

@@ -129,18 +129,21 @@ SIZING = """<p class="reveal text-slate">
       </p>"""
 
 
-COST = """<p class="reveal text-slate">
+COST = """<h3 class="reveal text-h4">What decides the premium</h3>
+<p class="reveal mt-3 text-slate">
         Four things decide the premium: your age when the policy is issued, the amount of
         coverage, whether you use tobacco, and your answers to the health questions. It is fixed
         for life from that point, so the age in that list is the age you buy at, not the age you
         reach.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Where the figures by age are</h3>
+<p class="reveal mt-3 text-slate">
         The full picture by age lives on one page and is kept current in one place:
         <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
         costs</a>.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">If a waiting period has come up</h3>
+<p class="reveal mt-3 text-slate">
         If you have been told you need a waiting period, or you want to know whether you can avoid
         one, read
         <a class="link" href="/final-expense-insurance/no-waiting-period/">burial insurance with no

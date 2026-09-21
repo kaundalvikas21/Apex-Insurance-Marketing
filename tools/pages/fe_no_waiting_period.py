@@ -65,19 +65,30 @@ FAQ = [
 ]
 
 
-WAITING_PERIOD = """<p class="reveal text-slate">
+WAITING_PERIOD = """<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>A waiting period is the first stretch of a policy, almost always two years.</li>
+    <li>During it, death from illness returns your premiums, usually with interest. Accidental death is normally covered in full from the first day.</li>
+    <li>It is what lets a carrier say yes instead of no.</li>
+  </ul>
+</div>
+<h3 class="reveal mt-6 text-h4">What it is</h3>
+<p class="reveal mt-3 text-slate">
         A waiting period is the first stretch of a policy, almost always two years, during which
         the carrier will not pay the full death benefit if death is caused by illness. Instead it
         returns the premiums you paid, usually with interest added. Death from an accident is
         normally covered in full from the first day.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Why carriers use one</h3>
+<p class="reveal mt-3 text-slate">
         Carriers use it for one reason. Final expense underwriting is a short list of questions
         and a prescription check rather than an exam, so when a carrier cannot get comfortable
         with the answers, the waiting period is what lets it say yes instead of no. Without it,
         the honest alternative for those applicants would be a decline.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">What it is not</h3>
+<p class="reveal mt-3 text-slate">
         That is worth holding onto. A waiting period is not a penalty aimed at you, and it is not
         evidence that you have been sold something bad. It is the mechanism that keeps coverage
         available to people who would otherwise have none.

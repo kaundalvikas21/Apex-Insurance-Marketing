@@ -35,19 +35,20 @@ FAQ = [
 ]
 
 
-WHY_EXISTS = """<p class="reveal text-slate">
+WHY_EXISTS = f"""<p class="reveal text-slate">
         To be found by people shopping for life insurance, and to earn the call. We are not
         neutral about that and pretending otherwise would be the first dishonest thing on the
         page.
       </p>
       <p class="reveal mt-5 text-slate">
-        What follows from it is the standard we hold the writing to. Every page is written or
-        reviewed by a licensed agent who places these policies. Where a figure comes from a
-        carrier rate card, the card and its date are named. Where the answer depends on your
-        state, your age, or your health, we say so instead of rounding it into a promise. We do
-        not publish invented premiums, invented reviews, or carrier claims we cannot source,
-        because a number that turns out to be decoration costs more trust than it ever buys.
+        What follows from it is the standard we hold the writing to.
       </p>
+      <ul class="reveal mt-5 grid gap-3">
+        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Every page is written or reviewed by a licensed agent who places these policies.</span></li>
+        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Where a figure comes from a carrier rate card, the card and its date are named.</span></li>
+        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Where the answer depends on your state, your age, or your health, we say so instead of rounding it into a promise.</span></li>
+        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">We do not publish invented premiums, invented reviews, or carrier claims we cannot source, because a number that turns out to be decoration costs more trust than it ever buys.</span></li>
+      </ul>
       <p class="reveal mt-5 text-slate">
         If you find something here that is out of date or wrong, tell us. We will correct it and
         change the review date on the page.

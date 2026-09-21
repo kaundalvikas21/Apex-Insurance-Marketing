@@ -110,20 +110,23 @@ RENEWAL_ROWS = [
 ]
 
 
-TEN_YEAR_COST = """<p class="reveal text-slate">
+TEN_YEAR_COST = """<h3 class="reveal  text-h4">What moves the number</h3>
+<p class="reveal mt-3 text-slate">
         Ten years is the cheapest level term a carrier will normally write, because it is the
         least risk it is taking. What moves the number after that is your age today and whether
         you use tobacco, then health class, coverage amount, sex, and state, in roughly that
         order. The term length itself is rarely the largest factor, which is exactly why buying
         the shortest one is a smaller saving than it appears.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Where the full grid is kept</h3>
+<p class="reveal mt-3 text-slate">
         Rather than reprint a slice of it here, the full grid lives on one page and is kept
         current in one place: <a class="link" href="/term-life-insurance/rates/">term life
         insurance rates by age</a>, with a term length toggle and a button on every row that
         carries the numbers into a quote form.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Not sure of the amount?</h3>
+<p class="reveal mt-3 text-slate">
         If the amount rather than the length is the open question, the
         <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
         that out first and shows its arithmetic while it does.

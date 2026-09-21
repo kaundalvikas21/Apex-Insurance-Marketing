@@ -148,18 +148,29 @@ SIBLINGS = [
 ]
 
 
-SHARING_COST = """<p class="reveal text-slate">
+SHARING_COST = """<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>One policy with one owner is almost always simpler than one small policy per sibling.</li>
+    <li>Settle in writing who contributes what, and what happens to any money left over.</li>
+    <li>Naming the estate as beneficiary can tie the money up in probate for months. The funeral bill arrives in days.</li>
+  </ul>
+</div>
+<h3 class="reveal mt-6 text-h4">One policy, one owner</h3>
+<p class="reveal mt-3 text-slate">
         One policy with one owner is almost always simpler than several small policies, one per
         sibling. Pick the sibling who will be dealing with the funeral director, make them the
         owner and the beneficiary, and settle in writing between yourselves who contributes what
         and what happens to any money left over after the funeral is paid for.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Write it down</h3>
+<p class="reveal mt-3 text-slate">
         Write it down even though it feels excessive. The policy will probably pay out fifteen or
         twenty years from now, in a week when nobody is at their best, and a short note agreed
         while everyone is calm is worth a great deal then.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Do not name the estate</h3>
+<p class="reveal mt-3 text-slate">
         Naming the estate as beneficiary instead, to be split automatically, is the tempting
         shortcut and it is usually a mistake: it can tie the money up in probate for months, and
         the funeral bill arrives in days. Premiums by age and coverage amount are on

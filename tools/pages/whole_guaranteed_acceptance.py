@@ -149,20 +149,31 @@ def body():
 {C.prose(
     "What you are actually buying",
     """
-        <p class="reveal text-slate">
+        <div class="in-short reveal">
+          <p class="in-short-title">In short</p>
+          <ul>
+            <li>The premium is fixed, the death benefit does not shrink, and a guaranteed cash value builds slowly.</li>
+            <li>In the first two years it returns your money instead of paying a full claim. Accidental death is paid in full from the first day.</li>
+            <li>You pay more because the carrier is not allowed to look at you first, not because the coverage is better.</li>
+          </ul>
+        </div>
+        <h3 class="reveal mt-6 text-h4">Three ordinary guarantees</h3>
+        <p class="reveal mt-3 text-slate">
           A small permanent policy with three ordinary whole life guarantees and one unusual
           condition attached. The premium is fixed at issue and cannot be raised. The death
           benefit does not shrink as you age. A guaranteed cash value builds slowly in the
           background. None of that is different from any other whole life contract.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">One unusual condition</h3>
+        <p class="reveal mt-3 text-slate">
           The unusual condition is at the front. Because the carrier is accepting everyone who
           applies, including people who are already seriously ill, it cannot pay a full claim in
           the first two years without being used as a way of buying a payout on a known diagnosis.
           So it does not. For that window it returns your money instead, and accidental death is
           carved out and paid in full from the first day.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Why it costs more</h3>
+        <p class="reveal mt-3 text-slate">
           Everything that makes this product expensive follows from that one sentence. You are not
           paying more because the coverage is better. You are paying more because the carrier is
           not allowed to look at you first.

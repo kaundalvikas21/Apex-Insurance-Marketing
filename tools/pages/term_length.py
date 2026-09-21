@@ -90,14 +90,17 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
         </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">{cost_note}</p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal text-h4">What moves the number</h3>
+        <p class="reveal mt-3 text-slate">{cost_note}</p>
+        <h3 class="reveal mt-8 text-h4">Where the full grid is kept</h3>
+        <p class="reveal mt-3 text-slate">
           Rather than reprint a slice of it here, the full grid lives on one page and is kept
           current in one place: <a class="link" href="/term-life-insurance/rates/">term life
           insurance rates by age</a>, with a term length toggle and a button on every row that
           carries the numbers into a quote form.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Not sure of the amount?</h3>
+        <p class="reveal mt-3 text-slate">
           If you are not yet sure of the amount rather than the length, the
           <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
           that out first and shows the arithmetic while it does.

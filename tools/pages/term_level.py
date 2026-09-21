@@ -190,9 +190,12 @@ def body():
           surprises people. The renewal premium is set from your attained age and rises every year
           from there. It is a bridge for a few months while you sort something out, and treating it
           as a plan is how a household ends up paying many times over for coverage it could have
-          converted years earlier. If you already hold a term policy, find out today which year
-          your level period ends and when your conversion right expires. Those two dates are worth
-          more than any quote on this site.
+          converted years earlier.
+        </p>
+        <p class="mt-4 font-semibold text-navy">
+          If you already hold a term policy, find out today which year your level period ends and
+          when your conversion right expires. Those two dates are worth more than any quote on
+          this site.
         </p>
       </div>
     </div>

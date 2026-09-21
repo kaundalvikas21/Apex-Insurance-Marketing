@@ -181,22 +181,36 @@ def body():
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-slate">
+        <div class="in-short reveal">
+          <p class="in-short-title">In short</p>
+          <ul>
+            <li>A whole life dividend is closer to a refund than to a payout.</li>
+            <li>It comes from the gap between cautious pricing and what actually happened.</li>
+            <li>It is not a rate of return, and no honest person can tell you what next year's will be.</li>
+          </ul>
+        </div>
+        <h3 class="reveal mt-6 text-h4">Priced on cautious assumptions</h3>
+        <p class="reveal mt-3 text-slate">
           Whole life is priced on deliberately cautious assumptions. The carrier assumes people
           will die somewhat sooner than it really expects, that running the company will cost
           somewhat more, and that its investments will earn somewhat less. Those assumptions are
           built into a premium that is fixed for life, which means the carrier has to be able to
           keep its promise even if the pessimistic version comes true.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Where the surplus comes from</h3>
+        <p class="reveal mt-3 text-slate">
           Most years, the pessimistic version does not come true. The difference between what was
           assumed and what actually happened forms what the carrier calls a divisible surplus. A
           participating policy is one that is eligible to share in it, and your share of it is the
-          dividend. That is why it is generally treated for tax purposes as a return of premium
+          dividend.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          That is why it is generally treated for tax purposes as a return of premium
           rather than as income: it largely is your own money, returned because it turned out not
           to be needed.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">The two things people get wrong</h3>
+        <p class="reveal mt-3 text-slate">
           Two things follow from that description, and they are the two things people most often
           get wrong. A dividend is not a rate of return on your cash value, so comparing it to an
           investment yield compares two different kinds of number. And because it depends on

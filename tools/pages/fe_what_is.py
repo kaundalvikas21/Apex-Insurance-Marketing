@@ -124,19 +124,22 @@ SIBLINGS = [
 ]
 
 
-SIZING_IT = """<p class="text-slate">
+SIZING_IT = """<h3 class="reveal  text-h4">1. Price a funeral where you live</h3>
+<p class="mt-3 text-slate">
         Start with what a funeral actually costs where you live, not with a national figure.
         Funeral homes are required to give you a general price list if you ask for one, and two
         calls will give you a real number for your area rather than an average that describes
         nowhere.
       </p>
-      <p class="mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">2. Add a margin for the bills afterwards</h3>
+<p class="mt-3 text-slate">
         Then add a margin for the bills that arrive afterwards: the medical balances, the last
         utility accounts, and the certified copies and filings a death generates. Most people
         land somewhere between ten and twenty thousand dollars, but the number that matters is
         yours.
       </p>
-      <p class="mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">3. Check the premium for that amount</h3>
+<p class="mt-3 text-slate">
         The premium for each amount is set out on
         <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
         costs</a>, by age band and coverage amount, with the carrier rate card and its date named

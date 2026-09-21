@@ -147,27 +147,42 @@ def body():
         cost_intro="The honest answer is that the question is asked the wrong way round, and "
                    "answering it as asked is how people end up with the wrong policy.",
         cost_blocks="""
-        <p class="reveal text-slate">
+        <div class="in-short reveal">
+          <p class="in-short-title">In short</p>
+          <ul>
+            <li>Per month, a burial policy costs less, because it is a small fraction of the size.</li>
+            <li>Per thousand dollars of coverage, it costs noticeably more.</li>
+            <li>The real comparison is between two situations, not two premiums.</li>
+          </ul>
+        </div>
+        <h3 class="reveal mt-6 text-h4">Per month</h3>
+        <p class="reveal mt-3 text-slate">
           A burial policy costs less per month than a full sized policy, because it is a small
           fraction of the size. That is the comparison most people make, and on its own it is
           almost meaningless.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Per thousand dollars of coverage</h3>
+        <p class="reveal mt-3 text-slate">
           Per thousand dollars of coverage, a burial policy costs noticeably more. There is no
           medical exam, the underwriting is a short questionnaire, and the carrier prices that
           uncertainty in. You are paying a premium for convenience and for access, which is a
           reasonable thing to pay for when access is the constraint, and a poor thing to pay for
           when it is not.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">The comparison that matters</h3>
+        <p class="reveal mt-3 text-slate">
           So the real comparison is not between two premiums. It is between two situations. A
           household that still depends on an earner needs an amount of coverage that only a full
           sized policy provides, and buying three burial policies to get there would cost far more
-          than one term policy. A household where nobody depends on the income needs a funeral
+          than one term policy.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          A household where nobody depends on the income needs a funeral
           covered, and buying a large policy to do that means paying every month for coverage that
           is not doing anything.
         </p>
-        <p class="reveal mt-5 text-slate">
+        <h3 class="reveal mt-8 text-h4">Where the actual numbers are</h3>
+        <p class="reveal mt-3 text-slate">
           Both silos publish their own rate tables, with the carrier rate card and its date named
           on the page, so you can see the actual numbers rather than take that on trust:
           <a class="link" href="/final-expense-insurance/cost/">what final expense insurance

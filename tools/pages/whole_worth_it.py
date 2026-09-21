@@ -79,23 +79,30 @@ FOR = [
      "policies to people it does not describe."),
 ]
 
+# One claim per bullet. They were two 100 word paragraphs, which is a fair way
+# to hide five concessions and four rebuttals from anyone scanning.
 RIGHT_WRONG = [
-    ("What the critics get right",
-     "The cost per dollar of death benefit is several times that of term, and for a household with "
-     "temporary needs that is the whole ballgame. Early surrender is brutal and is not adequately "
-     "explained at the point of sale. Illustrations are routinely presented on their non "
-     "guaranteed columns. Commissions on these policies are large and front loaded, which is a "
-     "real conflict of interest and one you should assume is present in any conversation about "
-     "them, including this one. And &quot;buy term and invest the difference&quot; does beat whole "
-     "life for most people over most periods, provided the difference actually gets invested."),
-    ("What the critics get wrong",
-     "The comparison is usually run against an investor who never panics, never stops "
-     "contributing, and never pays tax on a rebalance, which describes very few real households. "
-     "The guaranteed cash value floor is treated as worthless when for some people it is the "
-     "reason the money survives a bad decade. Permanent needs are dismissed as edge cases when "
-     "they are ordinary in families with a dependent who will never be independent. And the "
-     "argument frequently assumes the buyer has retirement account room left, which is a fact "
-     "about the buyer rather than about the product."),
+    ("What the critics get right", "circle-check", [
+        "The cost per dollar of death benefit is several times that of term, and for a household "
+        "with temporary needs that is the whole ballgame.",
+        "Early surrender is brutal and is not adequately explained at the point of sale.",
+        "Illustrations are routinely presented on their non guaranteed columns.",
+        "Commissions on these policies are large and front loaded, which is a real conflict of "
+        "interest and one you should assume is present in any conversation about them, including "
+        "this one.",
+        "&quot;Buy term and invest the difference&quot; does beat whole life for most people over "
+        "most periods, provided the difference actually gets invested.",
+    ]),
+    ("What the critics get wrong", "circle-alert", [
+        "The comparison is usually run against an investor who never panics, never stops "
+        "contributing, and never pays tax on a rebalance, which describes very few real households.",
+        "The guaranteed cash value floor is treated as worthless when for some people it is the "
+        "reason the money survives a bad decade.",
+        "Permanent needs are dismissed as edge cases when they are ordinary in families with a "
+        "dependent who will never be independent.",
+        "The argument frequently assumes the buyer has retirement account room left, which is a "
+        "fact about the buyer rather than about the product.",
+    ]),
 ]
 
 CHECKS = [
@@ -165,23 +172,37 @@ SIBLINGS = [
 ]
 
 
-WORTH_COST = """<p class="reveal text-slate">
+WORTH_COST = """<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>For the same death benefit at the same age, whole life costs several times what term costs.</li>
+    <li>We print no multiple and no projected return, because whichever numbers we picked would be doing the arguing.</li>
+    <li>Ask, and we will quote both side by side for your own age and health.</li>
+  </ul>
+</div>
+<h3 class="reveal mt-6 text-h4">A large multiple, not a small markup</h3>
+<p class="reveal mt-3 text-slate">
         The honest version of the cost comparison is a large multiple, not a small markup: for the
         same death benefit at the same age, whole life costs several times what term costs, and
         the multiple grows with the length of term you compare against. That is the number that
         decides this for most people, and it is the reason the answer at the top of this page is
         what it is.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">Why no figure is printed</h3>
+<p class="reveal mt-3 text-slate">
         We are not printing a specific multiple, and we are not printing a projected return for
         the money you would have saved. Whichever numbers we picked would be doing the arguing,
-        and we would be picking them knowing which way we wanted the comparison to fall. The
+        and we would be picking them knowing which way we wanted the comparison to fall.
+      </p>
+      <p class="reveal mt-4 text-slate">
+        The
         figures that mean anything are the ones on
         <a class="link" href="/whole-life-insurance/rates/">whole life rates by age</a> and
         <a class="link" href="/term-life-insurance/">term life insurance</a> rate cards for your
         own age and health, quoted side by side.
       </p>
-      <p class="reveal mt-5 text-slate">
+      <h3 class="reveal mt-8 text-h4">We will run it for you</h3>
+<p class="reveal mt-3 text-slate">
         If you want that comparison run, we will run it and show you both, including in the cases
         where it makes the whole life policy look bad. There is a
         <a class="link" href="/compare/term-vs-whole-life-insurance/">detailed comparison of term
@@ -209,7 +230,12 @@ def body():
         <p class="mt-3 {'text-white/90' if navy else 'text-slate'}">{text}</p>
       </div>"""
 
-    rw = "".join(C.qa(h, b, "" if i == 0 else "mt-8") for i, (h, b) in enumerate(RIGHT_WRONG))
+    rw = "".join(
+        '<div class="reveal%s"><h3 class="text-h4">%s</h3><ul class="mt-4 grid gap-3">%s</ul></div>'
+        % ("" if i == 0 else " mt-10", h, "".join(
+            '<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
+            % (C.icon(ico, 20, "shrink-0 text-navy mt-1"), t) for t in points))
+        for i, (h, ico, points) in enumerate(RIGHT_WRONG))
 
     return f"""
 {C.page_hero(
