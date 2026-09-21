@@ -260,9 +260,10 @@ def body():
 </section>
 
 
-{C.prose("Check ten years against your own dates", date_rows,
-         intro="Three numbers decide this, and all three are things you can look up in about ten "
-               "minutes rather than estimate.")}
+{C.steps_section("Check ten years against your own dates",
+         "Three numbers decide this, and all three are things you can look up in about ten "
+               "minutes rather than estimate.",
+         DATES)}
 
 
 {C.inline_cta(

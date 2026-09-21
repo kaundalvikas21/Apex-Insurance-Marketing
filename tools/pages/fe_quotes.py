@@ -205,7 +205,7 @@ def body():
 ], intro="Written out because \"we will be in touch\" is not an answer, and because the gap "
          "between what a form promises and what actually happens is where most of the distrust "
          "in this industry comes from.",
-   media=C.figure("fe-path", C.MEDIA_SIZES))}
+   fe=True)}
 
 
 {C.ask_strip("Ready to talk?", "One call, about fifteen minutes.", C.phone_link("fe_quotes_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}

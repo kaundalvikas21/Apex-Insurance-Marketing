@@ -187,14 +187,12 @@ def body():
 </section>
 
 
-{C.prose("How to size it in two phone calls",
-         sizing,
-         intro="We are not printing a cremation cost figure on this page. What a cremation costs "
+{C.steps_section("How to size it in two phone calls",
+         "We are not printing a cremation cost figure on this page. What a cremation costs "
                "varies enough between one part of the country and another that a national average "
                "would point you at the wrong number, and this is a case where fifteen minutes of "
                "your own research beats anything we could publish.",
-         cls="section band",
-         media=C.figure("fe-path", C.MEDIA_SIZES))}
+         SIZING, cls="section band", fe=True)}
 
 
 {C.inline_cta(

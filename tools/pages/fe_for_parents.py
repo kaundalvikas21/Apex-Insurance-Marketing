@@ -288,9 +288,10 @@ def body():
 </section>
 
 
-{C.prose("How to actually do it", steps,
-         intro="Four steps, in this order. Doing them out of order is what produces a wasted "
-               "application or an awkward second conversation.")}
+{C.steps_section("How to actually do it",
+         "Four steps, in this order. Doing them out of order is what produces a wasted "
+               "application or an awkward second conversation.",
+         STEPS, cls="section")}
 
 
 {C.ask_strip("Would it help to talk it through first?", "A licensed agent can explain the rules before you raise it with your parent.", C.phone_link("fe_parents_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}

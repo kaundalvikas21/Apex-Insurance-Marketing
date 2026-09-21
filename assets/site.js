@@ -72,30 +72,36 @@
      --------------------------------------------------------------------- */
   (function mobileNav() {
     var toggle = $('[data-nav-toggle]');
-    var panel = $('[data-nav-panel]');
-    if (!toggle || !panel) return;
+    var drawer = $('[data-nav-panel]');
+    if (!toggle || !drawer || !drawer.showModal) return;
 
-    function setOpen(open) {
-      toggle.setAttribute('aria-expanded', String(open));
-      panel.hidden = !open;
-    }
+    function close() { if (drawer.open) drawer.close(); }
 
     toggle.addEventListener('click', function () {
-      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      if (drawer.open) { close(); return; }
+      drawer.showModal();                       // focus trap, Escape and backdrop are native
+      toggle.setAttribute('aria-expanded', 'true');
     });
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setOpen(false);
-        toggle.focus();
-      }
+    // One handler: the backdrop (a click on the <dialog> itself, outside its
+    // inner panel), the close button, and any link, so a same-page anchor does
+    // not leave the drawer open over the section it jumped to.
+    drawer.addEventListener('click', function (e) {
+      if (e.target === drawer || e.target.closest('[data-nav-close], a')) close();
     });
 
-    // Close when a nav link is followed, so the panel is not left open on
-    // same-page anchors.
-    panel.addEventListener('click', function (e) {
-      if (e.target.closest('a')) setOpen(false);
+    // Fires for Escape too. Focus goes back to the toggle explicitly: a dialog
+    // restores the previously focused element, and Safari never focuses a
+    // button on tap, so there would be nothing to restore.
+    drawer.addEventListener('close', function () {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus({ preventScroll: true });
     });
+
+    // Rotating a tablet or widening the window brings the desktop nav back.
+    var wide = window.matchMedia('(min-width: 1024px)');
+    var onWide = function () { if (wide.matches) close(); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide); else wide.addListener(onWide);
   })();
 
   // Desktop "Insurance" menu. It is a native <details>, so it opens without

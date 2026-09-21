@@ -241,12 +241,15 @@ def header(active):
         '<a class="nav-link" href="%s"%s>%s</a>' % (href, cur(href), label)
         for href, label in NAV
     )
-    row = '<a class="block py-3 text-ink text-base font-medium border-b border-rule" href="%s"%s>%s</a>'
-    panel_links = (
-        '<p class="pt-1 text-micro font-semibold uppercase tracking-[0.12em] text-muted">Insurance</p>'
-        + "".join(row % (href, cur(href), label + " Insurance") for href, label, _, _ in NAV_HUBS)
-        + "".join(row % (href, cur(href), label) for href, label in NAV)
-    )
+    # The mobile drawer reuses the mega menu's icon rows, so the two menus read
+    # as one system.
+    drawer_hubs = "".join(
+        '<a class="nav-dd-item" href="%s"%s><span class="nav-dd-icon" aria-hidden="true">%s</span>'
+        '<span><span class="nav-dd-title">%s Insurance</span><span class="nav-dd-desc">%s</span></span></a>'
+        % (href, cur(href), icon(ico, 20), label, desc) for href, label, desc, ico in NAV_HUBS)
+    drawer_links = "".join(
+        '<a class="nav-drawer-link" href="%s"%s>%s%s</a>' % (href, cur(href), label, icon("chevron-right", 18, "shrink-0 text-muted"))
+        for href, label in NAV)
     return f"""<a class="skip-link" href="#main">Skip to main content</a>
 <div data-header-sentinel aria-hidden="true" style="height:1px"></div>
 
@@ -284,15 +287,35 @@ def header(active):
     </div>
   </div>
 
-  <div id="site-nav" data-nav-panel hidden class="lg:hidden nav-panel">
-    <div class="container-ax py-4">
-      <nav aria-label="Primary, mobile">{panel_links}</nav>
-      <div class="mt-5 grid gap-3">
-        {phone_link("header_mobile_panel", "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)}
+  <!-- Mobile menu: a native <dialog> used as a side drawer. showModal() gives
+       the focus trap, Escape, the backdrop and an inert page for free; site.js
+       adds open, close on backdrop or link, and close when the screen widens. -->
+  <dialog id="site-nav" data-nav-panel class="nav-drawer" aria-label="Menu">
+    <div class="nav-drawer-inner">
+      <div class="nav-drawer-head">
+        <span><span class="wordmark">Apex</span><span class="wordmark-sub">Insurance Marketing</span></span>
+        <button type="button" data-nav-close class="nav-drawer-close" aria-label="Close menu">{icon("x", 24)}</button>
+      </div>
+
+      <nav aria-label="Primary, mobile" class="nav-drawer-nav">
+        <p class="nav-drawer-label">Insurance</p>
+        {drawer_hubs}
+        <div class="nav-drawer-links">{drawer_links}</div>
+      </nav>
+
+      <a class="nav-drawer-help" href="/#triage">
+        <span><span class="block font-semibold">Not sure which one fits?</span>
+        <span class="block text-sm opacity-85">Answer three quick questions.</span></span>
+        {icon("arrow-right", 20, "shrink-0")}
+      </a>
+
+      <div class="nav-drawer-foot">
         <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a Free Quote</a>
+        {phone_link("header_mobile_panel", "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)}
+        <p class="text-micro text-muted text-center">{HOURS}</p>
       </div>
     </div>
-  </div>
+  </dialog>
 </header>"""
 
 
@@ -690,7 +713,9 @@ def steps_section(heading, lead, items, cta=None, after="", cls="section", fe=Fa
     """The connected stepper: numbered nodes on a dashed rail, a cell under each.
     Home's "three simple steps", and "How to apply" on the hubs.
 
-    items: [(icon, chip_or_None, title, body)], three or four of them. Three
+    items: [(icon_or_None, chip_or_None, title, body)], three or four of them.
+    A plain (title, body) pair or a (title, body, note) triple is accepted too,
+    which is what the older step lists already hold. Three
     read white, tinted, blue so the last lands as the destination. Four, or
     any fe page, stay plain white: fe takes no bento tones, no stagger and no
     lift (MASTER.md, final expense exemption).
@@ -702,22 +727,29 @@ def steps_section(heading, lead, items, cta=None, after="", cls="section", fe=Fa
     """
     tones = ["", "bento-cell-tint", "bento-cell-blue"] if (len(items) == 3 and not fe) else [""] * len(items)
     cards = []
-    for n, ((ico, chip, title, body), tone) in enumerate(zip(items, tones), 1):
+    for n, (item, tone) in enumerate(zip(items, tones), 1):
+        note = None
+        if len(item) == 4:
+            ico, chip, title, body = item
+        else:
+            ico, chip, title, body, note = (None, None) + tuple(item) + ((None,) if len(item) == 2 else ())
         on_blue = tone == "bento-cell-blue"
         # A pill is navy-050, which is also the tinted cell's own colour.
         pill = ("pill !bg-white/15 !text-white" if on_blue
                 else "pill !bg-white" if tone == "bento-cell-tint" else "pill")
         chip_html = f'<span class="{pill}">{chip}</span>' if chip else ""
+        mark = icon(ico, 28, "text-white" if on_blue else "text-navy") if ico else ""
+        head = (f'<div class="flex items-center justify-between gap-3">{mark}{chip_html}</div>'
+                if (ico or chip) else "")
+        extra = (f'<p class="mt-3 text-micro {"text-white/70" if on_blue else "text-muted"}">{note}</p>'
+                 if note else "")
         cards.append(f"""
       <li class="reveal steps-item">
         <span class="step-num steps-node tnum" aria-hidden="true">{n}</span>
         <div class="bento-cell{"" if fe else " card-hover"} {tone}">
-          <div class="flex items-center justify-between gap-3">
-            {icon(ico, 28, "text-white" if on_blue else "text-navy")}
-            {chip_html}
-          </div>
-          <h3 class="mt-5 text-h4"><span class="sr-only">{label} {n}: </span>{title}</h3>
-          <p class="mt-2 {"text-white/85" if on_blue else "text-slate"}">{body}</p>
+          {head}
+          <h3 class="{"mt-5 " if head else ""}text-h4"><span class="sr-only">{label} {n}: </span>{title}</h3>
+          <p class="mt-2 {"text-white/85" if on_blue else "text-slate"}">{body}</p>{extra}
         </div>
       </li>""")
     strip = ""
@@ -966,34 +998,14 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
 # so they are authored once here rather than three times.
 # ---------------------------------------------------------------------------
 def post_submit_section(steps, heading="What happens after you submit", intro=None,
-                        cls="section", media=None, sticky=True):
+                        cls="section", media=None, sticky=True, fe=False):
     """T1's honest call expectation. steps: [(title, body, note_or_None)].
 
-    `media` and `sticky` behave as in prose(): the left column must not leave a
-    dead half row beside a long step list.
+    Renders as the connected stepper, like every other sequence on the site.
+    `media` and `sticky` belonged to the old two column list and are ignored;
+    they stay in the signature so no caller breaks.
     """
-    lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
-    art = ('<div class="reveal mt-8">%s</div>' % media) if media else ""
-    blocks = "".join(
-        ('<div class="mt-8">%s</div>' % step(i + 1, *s)) if i else step(i + 1, *s)
-        for i, s in enumerate(steps))
-    inner = f"""<h2 class="reveal text-h2">{heading}</h2>
-        {lead}
-        {art}"""
-    col = ('<div class="sticky-col">%s</div>' % inner) if sticky else inner
-    align = "" if sticky else " items-start"
-    return f"""<section class="{cls}">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8{align}">
-      <div class="lg:col-span-5">
-        {col}
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        {blocks}
-      </div>
-    </div>
-  </div>
-</section>"""
+    return steps_section(heading, intro or "", steps, cls=cls, fe=fe)
 
 
 def no_obligation_section(short_version, no_obligation, stopping_contact,

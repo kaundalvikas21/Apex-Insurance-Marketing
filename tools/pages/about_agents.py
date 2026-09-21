@@ -107,32 +107,13 @@ def body():
 </section>
 
 
-<section class="section band">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to check a licence</h2>
-        <p class="reveal mt-5 text-slate">
-          You do not have to trust a number printed on our own website, and you should not have
-          to. Every state publishes a lookup.
-        </p>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        {C.step(1, "Take the licence number from the agent's profile",
-                "Each profile lists the licence number per state, alongside the lines that licence authorises.")}
-        <div class="mt-8">
-          {C.step(2, "Search your state's department of insurance lookup",
-                  "Every state runs a public producer lookup. Search by licence number, or by the agent's name.")}
-        </div>
-        <div class="mt-8">
-          {C.step(3, "Check the status, the lines, and the state",
-                  "A licence can be active in one state and lapsed in another. If what you find does not match what we published, tell us and do not buy until it is resolved.")}
-        </div>
-        <a class="link-static mt-8 inline-block text-sm" href="/about/licensing/">Our agency licence numbers by state</a>
-      </div>
-    </div>
-  </div>
-</section>
+{C.steps_section("How to check a licence",
+    "You do not have to trust a number printed on our own website, and you should not have to. Every state publishes a lookup.",
+    [("Take the licence number from the agent's profile", "Each profile lists the licence number per state, alongside the lines that licence authorises."),
+     ("Search your state's department of insurance lookup", "Every state runs a public producer lookup. Search by licence number, or by the agent's name."),
+     ("Check the status, the lines, and the state", "A licence can be active in one state and lapsed in another. If what you find does not match what we published, tell us and do not buy until it is resolved.")],
+    after='<a class="link-static mt-8 inline-block text-sm" href="/about/licensing/">Our agency licence numbers by state</a>',
+    cls="section band")}
 
 
 <section class="section">

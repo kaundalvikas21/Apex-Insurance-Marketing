@@ -184,40 +184,19 @@ def body():
 <!-- =====================================================================
      WHAT HAPPENS NEXT.
      ================================================================== -->
-<section class="section-tight band">
-  <div class="container-ax">
-    <h2 class="reveal text-h2">What happens next</h2>
-    <div class="mt-10 bento" data-stagger="40">
-      <div class="reveal bento-cell bento-2">
-        <span class="step-num tnum" aria-hidden="true">1</span>
-        <h3 class="mt-4 text-h4">You send it</h3>
-        <p class="mt-2 text-slate">
-          Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker.
-        </p>
-      </div>
-      <div class="reveal bento-cell bento-2 bento-cell-tint">
-        <span class="step-num tnum" aria-hidden="true">2</span>
-        <h3 class="mt-4 text-h4">A licensed agent reads it</h3>
-        <p class="mt-2 text-slate">
-          A person, with a licence number, who can actually place the policy. Not a receptionist
-          taking a message.
-        </p>
-      </div>
-      <div class="reveal bento-cell bento-2 bento-cell-blue">
-        <span class="step-num tnum" aria-hidden="true">3</span>
-        <h3 class="mt-4 text-h4">We contact you</h3>
-        <p class="mt-2 text-white/85">
-          Within {C.SLA}, by whichever of phone or email you seem to prefer.
-        </p>
-        <p class="mt-3 text-sm text-white/70">
-          <!-- [SET HONEST SLA] Replace with the response time the agency can
-               actually hold to, including on a Friday afternoon. -->
-          If we are going to be slower than that, we will tell you rather than let it drift.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.steps_section("What happens next",
+    "Three things, in this order.",
+    [("mail", None, "You send it",
+      "Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker."),
+     ("user-check", None, "A licensed agent reads it",
+      "A person, with a licence number, who can actually place the policy. Not a receptionist "
+      "taking a message."),
+     # [SET HONEST SLA] Replace with the response time the agency can actually
+     # hold to, including on a Friday afternoon.
+     ("phone", None, "We contact you",
+      "Within " + C.SLA + ", by whichever of phone or email you seem to prefer. If we are going "
+      "to be slower than that, we will tell you rather than let it drift.")],
+    cls="section-tight band")}
 
 <!-- =====================================================================
      MINI FAQ.

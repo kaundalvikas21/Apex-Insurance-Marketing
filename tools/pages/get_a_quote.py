@@ -314,37 +314,13 @@ def body():
 <!-- =====================================================================
      WHAT HAPPENS AFTER SUBMIT. Honest call expectation, per T1.
      ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What happens after you submit</h2>
-        <p class="reveal mt-5 text-slate">
-          Written out because "we will be in touch" is not an answer, and because the gap between
-          what a form promises and what actually happens is where most of the distrust in this
-          industry comes from.
-        </p>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        {C.step(1, "You get one call, from one agency",
-                "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote engine, and not six agencies who bought your details, because we do not sell them.",
-                "If you would rather we emailed first, say so in the call and we will.")}
-        <div class="mt-8">
-          {C.step(2, "Ten to twenty minutes on the phone",
-                  "Enough to confirm what you sent, ask the two or three health questions that actually move a rate, and understand what you are trying to cover. Longer if you want to work through the numbers.")}
-        </div>
-        <div class="mt-8">
-          {C.step(3, "Named carriers and real premiums",
-                  "Carrier names, premiums, and the terms that matter, so you can compare them against anything else you have been shown. Including, where it applies, which carriers would decline you and why.")}
-        </div>
-        <div class="mt-8">
-          {C.step(4, "You decide, or you do not",
-                  "There is no policy until you sign an application and a carrier issues it. If you decide against it, you owe nothing and we stop contacting you when you ask.")}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+{C.steps_section("What happens after you submit",
+    'Written out because "we will be in touch" is not an answer, and because the gap between what a form promises and what actually happens is where most of the distrust in this industry comes from.',
+    [("You get one call, from one agency", "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote engine, and not six agencies who bought your details, because we do not sell them.", "If you would rather we emailed first, say so in the call and we will."),
+     ("Ten to twenty minutes on the phone", "Enough to confirm what you sent, ask the two or three health questions that actually move a rate, and understand what you are trying to cover. Longer if you want to work through the numbers."),
+     ("Named carriers and real premiums", "Carrier names, premiums, and the terms that matter, so you can compare them against anything else you have been shown. Including, where it applies, which carriers would decline you and why."),
+     ("You decide, or you do not", "There is no policy until you sign an application and a carrier issues it. If you decide against it, you owe nothing and we stop contacting you when you ask.")],
+    cls="section")}
 
 
 <!-- =====================================================================

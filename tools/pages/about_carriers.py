@@ -153,31 +153,12 @@ def body():
 </section>
 
 
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How an appointment actually works</h2>
-        <p class="reveal mt-5 text-slate">
-          Worth understanding, because it is the difference between a comparison and a sales pitch
-          with extra steps.
-        </p>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        {C.step(1, "The carrier authorises the agency",
-                "It vets us, contracts us, and files the appointment with the state. Until that is done we cannot quote or sell that carrier's products at all.")}
-        <div class="mt-8">
-          {C.step(2, "We quote across everyone we hold",
-                  "Your age, state, health, and coverage amount go to each appointed carrier's rate structure, and the answers come back different, because carriers price risk differently.")}
-        </div>
-        <div class="mt-8">
-          {C.step(3, "The carrier issues and pays the claim",
-                  "We place the policy; the carrier owns it. Your premium goes to them, your claim is paid by them, and the guarantees rest on their financial strength rather than on ours.")}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+{C.steps_section("How an appointment actually works",
+    "Worth understanding, because it is the difference between a comparison and a sales pitch with extra steps.",
+    [("The carrier authorises the agency", "It vets us, contracts us, and files the appointment with the state. Until that is done we cannot quote or sell that carrier's products at all."),
+     ("We quote across everyone we hold", "Your age, state, health, and coverage amount go to each appointed carrier's rate structure, and the answers come back different, because carriers price risk differently."),
+     ("The carrier issues and pays the claim", "We place the policy; the carrier owns it. Your premium goes to them, your claim is paid by them, and the guarantees rest on their financial strength rather than on ours.")],
+    cls="section")}
 
 
 <section class="section band">

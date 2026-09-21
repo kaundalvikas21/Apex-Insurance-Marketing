@@ -73,7 +73,7 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
 </section>
 
 
-{C.prose("Check it against your own dates", date_rows, intro=dates_intro, cls="section band")}
+{C.steps_section("Check it against your own dates", dates_intro, dates, cls="section band")}
 
 
 {C.inline_cta(cta_heading, cta_body, where, "/term-life-insurance/quotes/",

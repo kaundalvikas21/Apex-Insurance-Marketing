@@ -88,15 +88,20 @@ def body():
                "No jargon and no sales script. Ask anything, as many times as you need.", cls="mt-8"),
         intro="A fresh look at your life insurance, with no cost and no pressure.")
 
-    steps = C.post_submit_section(
-        [("Share your policy",
-          "Tell us the basics about the cover you have now. A recent statement helps, but it is not required.", None),
-         ("We review it with fresh eyes",
-          "A licensed agent checks how it fits your life today and explains it plainly, including any gaps or extra costs.", None),
-         ("Talk through options, only if you want to",
-          "If something could be better, we walk you through it. If not, you keep what you have.", None)],
-        heading="Three simple steps",
-        intro="No pressure at any of them.",
+    # The same connected stepper as the homepage and the hubs' "How to apply".
+    steps = C.steps_section(
+        "Three simple steps",
+        "No pressure at any of them.",
+        [("file-text", "A few minutes", "Share your policy",
+          "Tell us the basics about the cover you have now. A recent statement helps, but it is "
+          "not required."),
+         ("search", "We do the work", "We review it with fresh eyes",
+          "A licensed agent checks how it fits your life today and explains it plainly, including "
+          "any gaps or extra costs."),
+         ("circle-check", "Your decision", "Talk through options, only if you want to",
+          "If something could be better, we walk you through it. If not, you keep what you have.")],
+        cta=("Ready when you are.", "Free, no obligation, and nothing has to change.",
+             '<a href="#review-form" class="btn btn-cta">Request my free review</a>'),
         cls="section band")
 
     return f"""{C.page_hero(TRAIL, "Is your life insurance still right for you?", LEAD, extra=hero_cta,
