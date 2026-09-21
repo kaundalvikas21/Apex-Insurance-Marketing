@@ -27,14 +27,14 @@ SILO = "term-life"
 TITLE = "Return of Premium Term Life Insurance: Is It Worth It? | Apex"
 OG_TITLE = "Return of premium term life insurance"
 DESC = ("How return of premium term life works, what the refund costs you, and the few "
-        "situations where it is the right buy. An honest look, not a pitch.")
+        "situations where it is the right buy.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("Return of premium", None)]
 
 COST_ROWS = [
     ("Death benefit", "$500,000", "$500,000",
-     "Identical. This is the point people miss: you are not buying more coverage."),
+     "Identical. You are not buying more coverage."),
     ("Monthly premium", "$--", "$--",
      "The ROP premium is typically a large multiple of the standard one, not a small markup."),
     ("Total paid over 30 years", "$--", "$--",
@@ -76,7 +76,7 @@ FAQ = [
     ("Do you get all your money back with return of premium?",
      "Usually the base premiums, and usually only if you hold the policy for the full term. "
      "Policy fees, rider charges, and any modal payment loading are commonly excluded, so the "
-     "refund is normally a little less than everything you actually paid. The exact definition is "
+     "refund is normally a little less than everything you paid. The exact definition is "
      "in the policy, and it is worth reading the words rather than the brochure, because carriers "
      "differ on this."),
     ("What happens if I cancel a return of premium policy early?",
@@ -84,7 +84,7 @@ FAQ = [
      "schedule is unkind. A policy surrendered in the first several years commonly "
      "returns little or nothing. One surrendered halfway through the term commonly returns well "
      "under half the premiums paid. Since the higher premium is the reason people lapse these "
-     "policies, this is the risk that actually bites."),
+     "policies, this is the risk that bites."),
     ("Is the return of premium refund taxable?",
      "A refund of your own premiums is generally treated as a return of basis rather than income, "
      "so it is generally not taxable. The word generally matters: the treatment "
@@ -96,7 +96,7 @@ FAQ = [
      "the overwhelming majority of the households we work with, standard term at the right length "
      "and amount, with the difference in premium put anywhere at all, is the better decision. We "
      "will still quote it if you want it quoted, and we will show you both side by side so the "
-     "gap is visible rather than described."),
+     "gap is visible."),
 ]
 
 SIBLINGS = [
@@ -127,7 +127,7 @@ BEFORE_EITHER = """<h3 class="reveal text-h4">1. Settle the amount and the lengt
 <p class="reveal mt-3 text-slate">
         Then ask one question about yourself, honestly: if you bought the standard policy, where
         would the difference in premium go? If you can name the account, buy the standard policy.
-        If you cannot, return of premium may be the version of this decision you will actually
+        If you cannot, return of premium may be the version of this decision you will
         stick to. Sticking to it is worth more than being theoretically right.
       </p>"""
 
@@ -161,7 +161,7 @@ def body():
         C.qa("If you outlive the term, the carrier refunds the premiums",
              "Usually the base premiums, without interest, provided the policy was in force for "
              "the whole term. That refund is written into the contract at issue, so it is a known "
-             "number rather than a projection. It is also, precisely, your own money coming back "
+             "number rather than a projection. It is also your own money coming back "
              "to you after twenty or thirty years.", "mt-8"),
         C.qa("If you cancel early, you get a fraction of it",
              "The surrender schedule is set at issue and is heavily back loaded. A policy given up "
@@ -252,7 +252,7 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">What the refund costs you</h2>
         <p class="reveal mt-5 text-slate">
-          The honest objection to return of premium is not that the refund is fake. It is real and
+          The objection to return of premium is not that the refund is fake. It is real and
           it is contractual. The objection is what the extra premium was doing for thirty years
           while the carrier held it.
         </p>
@@ -262,7 +262,7 @@ def body():
           <p class="in-short-title">In short</p>
           <ul>
             <li>The refund is real and it is contractual.</li>
-            <li>Its true cost is whatever the extra premium would have done in an account you actually own.</li>
+            <li>Its true cost is whatever the extra premium would have done in an account you own.</li>
             <li>It comes back at face value, so after thirty years of rising prices it is worth less than what went in.</li>
           </ul>
         </div>
@@ -278,15 +278,14 @@ def body():
         <p class="reveal mt-3 text-slate">
           We are deliberately not putting a percentage on that here. Any rate of return we chose
           would do the arguing for us, and we know which way we
-          want the comparison to come out. Put your own number in, using an account you genuinely
+          want the comparison to come out. Put your own number in, using an account you
           hold, and the comparison becomes yours rather than ours.
         </p>
         <h3 class="reveal mt-8 text-h4">The refund does not keep up with prices</h3>
         <p class="reveal mt-3 text-slate">
           There is a second cost that is easier to overlook. Thirty years of dollars returned at
           face value are worth less than the dollars that went in, because prices move over thirty
-          years. That is not a criticism of the carrier; it is
-          simply what a repayment without interest is.
+          years. That is what a repayment without interest is.
         </p>
         <h3 class="reveal mt-8 text-h4">The one real benefit</h3>
         <p class="reveal mt-3 text-slate">
@@ -319,8 +318,8 @@ def body():
 {C.inline_cta(
     "See both quoted side by side",
     "Six questions, about two minutes. We will come back with a standard term premium and a return "
-    "of premium one for the same coverage, from named carriers. You see the gap as a number, "
-    "not an argument. No obligation, and no cost.",
+    "of premium one for the same coverage, from named carriers. You see the gap as a number. "
+    "No obligation, and no cost.",
     "term_rop_mid", "/term-life-insurance/quotes/", "Get both quotes")}
 
 
@@ -339,7 +338,7 @@ def body():
 
 
 {C.closing_band("term-band", "Price it both ways before you decide",
-    "Ask for a standard term quote and a return of premium quote side by side. The difference is the whole decision.",
+    "Ask for a standard term quote and a return of premium quote side by side.",
     "term_rop_close", silo="term")}
 
 {C.byline_section()}

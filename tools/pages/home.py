@@ -24,7 +24,7 @@ FAQ = [
      "to be paid if the income stopped: the mortgage balance, any other debt, the cost of raising "
      "children to adulthood, and a cushion for the surviving partner. A common starting point is "
      "ten to twelve times annual income, then adjusted up or down for savings, existing employer "
-     "coverage, and how long the dependents will actually need support. A licensed agent can walk "
+     "coverage, and how long the dependents will need support. A licensed agent can walk "
      "through the specific numbers with you at no cost."),
     ("What is the difference between term and whole life insurance?",
      "Term life covers you for a fixed number of years, usually 10 to 30, and pays a death benefit "
@@ -231,8 +231,8 @@ TRIAGE = f"""
     '<a class="btn btn-cta" href="/term-life-insurance/#quote">Get my term life quote</a>')}
 {_result("whole", "shield-check", "Look at whole life insurance",
     "You want the policy to still be there whenever it is needed, which term cannot promise. Whole "
-    "life costs considerably more per dollar of death benefit, so the honest next step is a written "
-    "illustration you can read at your own pace, not a rushed application.",
+    "life costs considerably more per dollar of death benefit, so the next step is a written "
+    "illustration you can read at your own pace.",
     '<a class="btn btn-cta" href="/whole-life-insurance/#quote">Get my whole life quote</a>')}
 {_result("final", "heart", "Final expense insurance is probably the fit",
     "You need a smaller policy, issued on health questions rather than a medical exam, that pays "
@@ -349,7 +349,7 @@ REST = """
       <div class="reveal card card-hover">
         <h2 class="text-h3 !font-display !font-semibold">Get a free quote online</h2>
         <p class="mt-3 text-slate max-w-md">
-          Send us the basics and a licensed agent comes back with what our carriers will actually
+          Send us the basics and a licensed agent comes back with what our carriers will
           offer you, usually the same business day.
         </p>
         <a class="btn btn-cta mt-6" href="/contact/">Get a free quote</a>

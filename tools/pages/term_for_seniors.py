@@ -44,13 +44,13 @@ FAQ = [
      "Usually yes, most commonly as a ten year term and sometimes fifteen, and the number of "
      "carriers willing to write it drops sharply. Whether it is a good idea is a separate "
      "question from whether it is possible. At seventy, a ten year term leaves you uninsured at "
-     "eighty, which is the age at which coverage is hardest to replace. If the need genuinely ends "
+     "eighty, which is the age at which coverage is hardest to replace. If the need ends "
      "within ten years, that is fine. If it does not, a small permanent policy usually serves you "
      "better even though the premium per thousand looks worse."),
     ("What is the oldest age you can buy term life insurance?",
      "Most carriers stop issuing new term somewhere between 75 and 80, and the few that go higher "
      "restrict it to short terms and modest face amounts. There is no single industry cutoff, "
-     "which is exactly why this is worth one phone call rather than an afternoon of comparison "
+     "which is why this is worth one phone call rather than an afternoon of comparison "
      "sites. We can tell you in a few minutes which of our appointed carriers will still write "
      "your age in your state."),
     ("Is term life insurance worth it for a senior?",
@@ -99,7 +99,7 @@ def body():
         'Premiums for <a class="link" href="/term-life-insurance/">term life '
         'insurance</a> rise steeply through this decade. The number of carriers willing '
         'to write you shrinks every few years, and most stop issuing new term somewhere '
-        'between seventy five and eighty. This page says plainly what is still available, '
+        'between seventy five and eighty. This page says what is still available, '
         'what it costs, and when a small permanent policy is the better buy.'),
     extra=hero_cta,
     media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
@@ -173,7 +173,7 @@ def body():
     + C.qa("A longer term compounds the same effect",
            "A twenty year term bought at sixty five is priced across ages sixty five to eighty "
            "five. The back half of that window is where nearly all the risk sits. That is the "
-           "real reason twenty and thirty year terms disappear from the grid above, rather than "
+           "reason twenty and thirty year terms disappear from the grid above, rather than "
            "any rule about how old you are.", "mt-8")
     + C.qa("Health class matters more than it used to",
            "At thirty five, the gap between preferred and standard is real but modest. At "
@@ -184,15 +184,15 @@ def body():
            "The same policy bought a year later costs more for its entire term. A year is also "
            "long enough for a diagnosis to change which carriers will take you at all. If you are "
            "going to buy, the cheapest day is the first one you are sure.", "mt-8"),
-    intro="Three forces, all pulling the same way. None of them is a sales tactic, and all of "
-          "them are visible in any carrier's rate card.",
+    intro="Three forces, all pulling the same way. All of them are visible in any carrier's "
+          "rate card.",
     cls="section band")}
 
 
 {C.inline_cta(
     "Fifteen minutes on the phone will settle this",
     "Tell a licensed agent your age, your state, and roughly what your health looks like. You will "
-    "get a straight answer about which carriers will write you and whether term is the right "
+    "get an answer about which carriers will write you and whether term is the right "
     "product, before you fill out anything.",
     "term_seniors_mid", "/term-life-insurance/quotes/", "Get my term life quote",
     phone_first=True)}

@@ -82,7 +82,7 @@ FAQ = [
      "Usually not at these ages. Most whole life sold after sixty five is simplified issue, which "
      "means health questions and a prescription check rather than an exam. Fully underwritten "
      "whole life with an exam is still available and is the cheapest per thousand if your health "
-     "supports it. It is worth asking rather than assuming."),
+     "supports it. It is worth asking."),
     ("What is the difference between whole life and final expense insurance?",
      "Final expense is whole life. It is the same contract type, sold in smaller face amounts, "
      "with simplified underwriting and marketing aimed at covering a funeral. The guarantees are "
@@ -93,7 +93,7 @@ FAQ = [
      "No. That is the defining feature of the product. The premium is calculated once, at issue, "
      "from your age and health at that point. It is guaranteed not to rise for as long as the "
      "policy is in force. This is the main reason people move from term to permanent coverage at "
-     "this age: the term renewal premium does rise, every single year."),
+     "this age: the term renewal premium does rise, every year."),
 ]
 
 
@@ -162,7 +162,7 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       Most people at these ages land in the middle column, and most people assume they belong in
-      the right hand one. That assumption is expensive. Guaranteed acceptance costs the most and
+      the right hand one. Guaranteed acceptance costs the most and
       carries a waiting period. It is worth reaching for only after the middle column has
       said no. The detail on that product is on
       <a class="link" href="/whole-life-insurance/guaranteed-acceptance/">guaranteed acceptance

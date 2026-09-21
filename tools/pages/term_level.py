@@ -164,14 +164,13 @@ def body():
         <h3 class="text-h4 text-white">The premium is locked</h3>
         <p class="mt-3 text-white/90">
           Contractually guaranteed for the full term on the products we quote. Not a current rate
-          that the carrier may revise, an actual guarantee in the contract.
+          that the carrier may revise, a guarantee in the contract.
         </p>
       </div>
       <div class="reveal bento-cell bento-2">
         <h3 class="text-h4">The death benefit is locked</h3>
         <p class="mt-3 text-slate">
-          The face amount does not erode, does not index, and does not reduce as you age. What you
-          bought is what gets paid.
+          The face amount does not erode, does not index, and does not reduce as you age.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
@@ -205,7 +204,7 @@ def body():
 {C.inline_cta(
     "Get a guaranteed level premium quoted",
     "We quote guaranteed level term by default and tell you the conversion deadline before you "
-    "buy, not fifteen years later. Six questions, and a licensed agent comes back with named "
+    "buy. Six questions, and a licensed agent comes back with named "
     "carriers.",
     "term_level_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
@@ -233,8 +232,7 @@ def body():
     + C.qa("Return of premium term",
            "Level term with a rider that refunds the premiums if you outlive the term. The refund "
            "is real, and so is the extra cost of the rider for every year you pay it. We will "
-           "quote it beside a plain level policy so you can see the difference rather than being "
-           "told about it.", "mt-8"),
+           "quote it beside a plain level policy so you can see the difference.", "mt-8"),
     intro="Three products share the word term and behave nothing alike. A fourth is level term "
           "with a rider added.")}
 
@@ -272,7 +270,7 @@ def body():
         <h3 class="text-h4 text-white">The guaranteed maximum premium</h3>
         <p class="mt-3 text-white/85">
           If there is a column of numbers rising after the level period, that is the renewal
-          schedule. It tells you exactly what year the policy stops being worth keeping.
+          schedule. It tells you what year the policy stops being worth keeping.
         </p>
       </div>
       <div class="reveal">

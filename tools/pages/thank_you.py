@@ -44,8 +44,7 @@ def body():
         <ol class="mt-6 grid gap-5">
           <li class="flex items-start gap-3">
             {icon("user-check", 22, "shrink-0 text-navy mt-1")}
-            <span>A licensed agent reads what you sent. Not a receptionist, and not an
-            automated quote engine.</span>
+            <span>A licensed agent reads what you sent.</span>
           </li>
           <li class="flex items-start gap-3">
             {icon("search", 22, "shrink-0 text-navy mt-1")}
@@ -89,7 +88,7 @@ def body():
             ("stethoscope", "Any conditions and medications",
              "Names of prescriptions and rough dates of diagnosis. This is what decides which carriers will take you, and it is better said up front than found later by the carrier."),
             ("users", "Family history, if you know it",
-             "Parents or siblings with heart disease or cancer before 60. Several carriers rate this and several do not, which is exactly the kind of difference comparing finds."),
+             "Parents or siblings with heart disease or cancer before 60. Several carriers rate this and several do not, which is the kind of difference comparing finds."),
             ("file-text", "Any policy you already have",
              "Through work or bought privately. Sometimes the right answer is to keep what you have and add to it rather than replace it."),
           ])}

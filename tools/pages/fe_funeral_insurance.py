@@ -62,7 +62,7 @@ FAQ = [
      "the coverage does not expire. The money is paid in cash to the person you name, not to a "
      "funeral home."),
     ("How much funeral insurance do I need?",
-     "Enough to cover what your family would actually face. That depends on your state, on "
+     "Enough to cover what your family would face. That depends on your state, on "
      "whether you want a burial or a cremation, and on what you would want included. We do not "
      "publish an average figure. Averages in this category are usually borrowed from "
      "surveys that do not describe any particular funeral. A better approach is to call two "
@@ -72,7 +72,7 @@ FAQ = [
      "It is worth it if your family would otherwise have to come up with the money quickly, from "
      "savings or from a credit card. It is not worth it if you already have savings set aside "
      "for this and will leave them alone, or if you already hold permanent life insurance that "
-     "covers it. The test is whether the money would actually be there, in cash, within a "
+     "covers it. The test is whether the money would be there, in cash, within a "
      "week."),
     ("Can I be turned down for funeral insurance?",
      "You can be declined for a policy that pays the full benefit from day one. In that case "

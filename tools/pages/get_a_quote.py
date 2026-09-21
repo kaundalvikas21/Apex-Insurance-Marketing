@@ -182,7 +182,7 @@ def quote_form():
             '''<p class="mt-3 text-slate">
                  A licensed agent is comparing our appointed carriers for what you told us. You
                  will hear from us within %s, and the quote comes back with the carrier names on
-                 it, not just a number.
+                 it.
                </p>''' % C.SLA,
             '''%s
                <a class="link text-sm ml-5" href="/thank-you/">What happens next</a>'''
@@ -236,7 +236,7 @@ def body():
                    % (icon("circle-check", 20, "shrink-0 mt-0.5 text-green"), t) for t in [
             "One licensed agent calls you once, not six agencies in ten minutes.",
             "Quotes come back with the carrier names on them, so you can check the comparison happened.",
-            "We tell you which carriers are likely to decline you before you apply, not after.",
+            "We tell you which carriers are likely to decline you before you apply.",
           ])}
         </ul>
 
@@ -302,7 +302,7 @@ def body():
             "Your Social Security number. That belongs on an application, not a quote.",
             "Your bank or card details. Nothing is charged, at any point, by us.",
             "A medical exam or a doctor's report to produce a quote.",
-            "Your full medical history. We ask about the conditions that actually move a rate.",
+            "Your full medical history. We ask about the conditions that move a rate.",
           ])}
         </ul>
       </div>
@@ -315,8 +315,8 @@ def body():
      WHAT HAPPENS AFTER SUBMIT. Honest call expectation, per T1.
      ================================================================== -->
 {C.steps_section("What happens after you submit",
-    '"We will be in touch" is not an answer. Here is what happens, in order.',
-    [("You get one call, from one agency", "A licensed agent from Apex, within " + C.SLA + ". Not a call center, not an automated quote engine, and not six agencies who bought your details. We do not sell them.", "If you would rather we emailed first, say so in the call and we will."),
+    'Four steps, in order.',
+    [("You get one call, from one agency", "A licensed agent from Apex, within " + C.SLA + ". We do not sell your details, so you do not get calls from six agencies who bought them.", "If you would rather we emailed first, say so in the call and we will."),
      ("Ten to twenty minutes on the phone", "Enough to confirm what you sent, ask the two or three health questions that move a rate, and understand what you are trying to cover. Longer if you want to work through the numbers."),
      ("Named carriers and real premiums", "Carrier names, premiums, and the terms that matter, so you can compare them against anything else you have been shown. Including, where it applies, which carriers would decline you and why."),
      ("You decide whether to apply", "There is no policy until you sign an application and a carrier issues it. If you decide against it, you owe nothing and we stop contacting you when you ask.")],
@@ -333,7 +333,7 @@ def body():
       <h2 class="reveal text-h2">Why two carriers quote you differently</h2>
       <p class="reveal mt-5 text-slate">
         The same person, on the same day, gets very different prices from different
-        carriers. That is not a mistake. It is the reason comparing is worth the call.
+        carriers. That is normal, and it is the reason comparing is worth the call.
       </p>
     </div>
 

@@ -58,7 +58,7 @@ DIFFERENCE = [
     ("The policy is otherwise identical", "There is no separate cremation insurance product. It "
      "is an ordinary final expense policy, sized for a cremation. Any agent presenting cremation "
      "insurance as its own special contract is describing a marketing name. Ask them what is "
-     "different about it. The answer is nothing."),
+     "different about it."),
     ("The money is not tied to the cremation", "It is a life insurance payment to a person you "
      "name. If they end up choosing a burial after all, or if the cremation costs less than you "
      "planned, they keep the difference. Nothing about the policy obliges anybody to cremate "
@@ -68,18 +68,18 @@ DIFFERENCE = [
 FAQ = [
     ("Is there such a thing as cremation insurance?",
      "Not as a separate contract. What is sold under that name is an ordinary final expense life "
-     "insurance policy sized for a cremation rather than a burial. That matters. Compare it "
+     "insurance policy sized for a cremation rather than a burial. Compare it "
      "against every other final expense policy on price and carrier. Do not treat it as a "
      "specialty product with its own rules."),
     ("How much insurance do I need for a cremation?",
-     "Less than you would need for a burial, and the honest answer for your area comes from two "
+     "Less than you would need for a burial, and the answer for your area comes from two "
      "phone calls rather than from a website. Ask two local funeral homes or crematories for their "
      "general price list, which they must provide. Add the death certificates, the urn if you "
      "want a specific one, and a margin for the bills that arrive afterward. Buy that amount."),
     ("Is cremation insurance cheaper than burial insurance?",
      "The premium is lower because the coverage amount is lower, not because the product is "
      "different. Per thousand dollars of coverage, the rate is the same. So the savings are real, "
-     "and they come entirely from buying a policy sized to what you actually plan to do."),
+     "and they come entirely from buying a policy sized to what you plan to do."),
     ("What if my family chooses a burial instead?",
      "They can. The policy pays a cash amount to the beneficiary you named, and nobody supervises "
      "how it is spent. If they choose a burial, they will have to come up with the difference. "
@@ -90,7 +90,7 @@ FAQ = [
      "prescription check rather than an exam, and most people are approved. Carriers disagree with "
      "each other about the same conditions, so if one declines, another may not. If no carrier "
      "will write a standard policy, guaranteed acceptance coverage with a waiting period is "
-     "normally still available. We will tell you plainly which of those you are looking at."),
+     "normally still available. We will tell you which of those you are looking at."),
 ]
 
 SIBLINGS = [

@@ -55,7 +55,7 @@ RULES = [
 
 STEPS = [
     ("Have the conversation before you get a quote",
-     "Not after. Your parent has to answer the health questions, and a quote based on "
+     "Your parent has to answer the health questions, and a quote based on "
      "your guesses about their medication is not a quote. Talking first also saves you from "
      "doing work you then have to undo."),
     ("Agree on the owner and the beneficiary",
@@ -97,7 +97,7 @@ CONVERSATION = [
 FAQ = [
     ("Can I buy life insurance for my parent?",
      "Yes, and it is common. You need two things: your parent's knowledge and signature, and an "
-     "insurable interest, which as their child paying for a funeral you plainly have. What you "
+     "insurable interest, which as their child paying for a funeral you have. What you "
      "cannot do is arrange it without them. They sign the application, they answer the health "
      "questions, and in most cases they speak to the agent or the carrier directly."),
     ("Can I buy life insurance for my parent without them knowing?",
@@ -128,7 +128,7 @@ FAQ = [
      "check rather than a medical exam, and most applicants are approved. Carriers disagree with "
      "each other about the same conditions, so a decline from one is not a decline from all. If no "
      "carrier will write a standard policy, guaranteed acceptance coverage with a waiting period "
-     "is normally still available. We will tell you plainly which of the two you are looking "
+     "is normally still available. We will tell you which of the two you are looking "
      "at rather than let you find out at claim time."),
 ]
 
@@ -236,7 +236,7 @@ def body():
               heading="Ask us what it would cost for your parent",
               intro="Leave four details and a licensed agent will call you. We will talk you "
                     "through the health questions and tell you which carriers treat your parent's "
-                    "situation best. We will say plainly if a waiting period is likely.")}
+                    "situation best. We will say if a waiting period is likely.")}
         </div>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">

@@ -42,7 +42,7 @@ FAQ = [
     ("How much does final expense insurance cost per month?",
      "It depends on four things: your age when the policy is issued, how much coverage you buy, "
      "whether you use tobacco, and your answers to the health questions. That is why this page is "
-     "a chart rather than a single figure. What is fair to say is the shape. The premium rises "
+     "a chart rather than a single figure. The premium rises "
      "steadily with age and rises sharply after about seventy five. It roughly tracks the "
      "coverage amount. Once it is set, it never moves again for as long as the policy is in "
      "force."),
@@ -50,7 +50,7 @@ FAQ = [
      "No. That is the defining feature of the product and the main reason people buy it at this "
      "age. The premium is calculated once, from your age and health at the time the policy is "
      "issued, and it is guaranteed not to rise. What rises is the price of buying a new policy "
-     "later, which is a different thing and is the real cost of waiting."),
+     "later, which is the cost of waiting."),
     ("Why is the price so much higher at 80 than at 60?",
      "Because the carrier is pricing the years between now and a claim, and at eighty there are "
      "fewer of them. It is the same coverage doing the same job, collected over a shorter time. "
@@ -60,15 +60,15 @@ FAQ = [
      "Commonly a meaningful step up in premium for the same coverage. You pay the "
      "difference for the rest of your life rather than for a term. Most carriers ask about the "
      "last twelve months. A few will reconsider the class after a documented period without "
-     "nicotine, which is worth asking about rather than assuming."),
+     "nicotine, which is worth asking about."),
     ("Can I lower the price I have been quoted?",
      "Usually, and there are five legitimate ways to try, all of them on this page. None of them "
      "involves leaving something off an application. Answering a health question wrongly is not a "
      "discount. It gives the carrier a reason to contest the claim, and the person who pays for "
      "that is your family."),
     ("Is it worth buying at 80?",
-     "Sometimes yes and sometimes no, and we will say which on the call rather than in a "
-     "brochure. It is worth it when your family would otherwise have to find the money quickly "
+     "Sometimes yes and sometimes no, and we will say which on the call. "
+     "It is worth it when your family would otherwise have to find the money quickly "
      "and the premium fits comfortably in your budget. It is not worth it when the premium would "
      "strain a fixed income. A policy that lapses at eighty five has cost you every "
      "payment and paid nothing back."),
@@ -85,7 +85,7 @@ LOWER = """<p class="reveal text-slate">
             carrier and a graded one at another. This usually makes the biggest difference, and it
             is the one thing you cannot do on your own.</li>
         <li class="reveal"><span class="font-semibold text-ink">Size the policy to the job.</span>
-            Work out what the funeral and the bills would actually come to and insure that, rather
+            Work out what the funeral and the bills would come to and insure that, rather
             than picking a round number. It usually lowers the premium more than a better health
             rating would.</li>
         <li class="reveal"><span class="font-semibold text-ink">Ask what each rider costs on its
@@ -94,9 +94,9 @@ LOWER = """<p class="reveal text-slate">
             for, you can probably drop it.</li>
         <li class="reveal"><span class="font-semibold text-ink">Pay annually if you can.</span>
             Most carriers charge a modal factor for monthly payment. Paying yearly, or even
-            quarterly, is a real discount rather than a sales tactic.</li>
+            quarterly, is a real discount.</li>
         <li class="reveal"><span class="font-semibold text-ink">Buy sooner rather than
-            later.</span> This is math, not a sales line. The premium is set by your age at
+            later.</span> The premium is set by your age at
             issue, so waiting a year means paying the price for an older age, for life.</li>
       </ul>
       <p class="reveal mt-8 text-slate">
@@ -284,7 +284,7 @@ def body():
         <h3 class="text-h4 text-white">Your medications are read together</h3>
         <p class="mt-3 text-white/85">
           Not one at a time. A combination can move you between offers even when no single item on
-          the list would. A chart cannot know any of it.
+          the list would.
         </p>
       </div>
     </div>

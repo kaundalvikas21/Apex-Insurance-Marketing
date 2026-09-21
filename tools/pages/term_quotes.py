@@ -98,7 +98,7 @@ def body():
 
         <ul class="reveal mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
           <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">About two minutes, six questions</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Multiple carriers compared, not one</span></li>
+          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Multiple carriers compared</span></li>
           <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">No fee, and no obligation to buy</span></li>
           <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">One agency calls you, not six</span></li>
         </ul>
@@ -194,7 +194,7 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Why term life quotes differ between carriers</h2>
       <p class="reveal mt-5 text-slate">
-        This is why an independent agency is worth using. Carriers do not share one price list.
+        Carriers do not share one price list.
         Each decides who it wants to insure, and they disagree.
       </p>
     </div>

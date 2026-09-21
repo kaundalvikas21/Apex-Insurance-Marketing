@@ -73,7 +73,7 @@ FOR = [
      "buying liquidity at a known price rather than growth."),
     ("The behavior case", "The forced structure is the feature, honestly assessed",
      "Some people accumulate reliably inside a contract with a bill attached and not at all "
-     "outside one. If that is genuinely true of you, and you can afford the premium for decades, "
+     "outside one. If that is true of you, and you can afford the premium for decades, "
      "the guaranteed component is worth more to you than a theoretically better outcome you would "
      "not have achieved. This argument is real, and it is also the one most often used to sell "
      "policies to people it does not describe."),
@@ -91,7 +91,7 @@ RIGHT_WRONG = [
         "interest, and one you should assume is present in any conversation about them, including "
         "this one.",
         "&quot;Buy term and invest the difference&quot; does beat whole life for most people over "
-        "most periods, provided the difference actually gets invested.",
+        "most periods, provided the difference gets invested.",
     ]),
     ("What the critics get wrong", "circle-alert", [
         "The comparison is usually run against an investor who never panics, never stops "
@@ -248,7 +248,7 @@ def body():
         'term. The majority of people who are pitched <a class="link" '
         'href="/whole-life-insurance/">whole life insurance</a> have a need with an end '
         'date, unused room in a retirement account, or a real chance of giving the policy '
-        'up early. For a smaller number of households it is genuinely the right product, '
+        'up early. For a smaller number of households it is the right product, '
         'for reasons that have nothing to do with returns. This page is about telling '
         'those two groups apart.'),
     extra=C.hero_cta("/whole-life-insurance/quotes/", "Get my whole life quote", cls="btn btn-ghost"),
@@ -349,7 +349,7 @@ def body():
                 "The mechanics behind the argument, and the numbers it turns on.", SIBLINGS)}
 
 
-{C.faq_section("Questions people actually ask about this", FAQ, "whole-worth-faq")}
+{C.faq_section("Questions people ask about this", FAQ, "whole-worth-faq")}
 
 
 {C.closing_band("whole-band", "Still undecided? That is a reasonable place to be",

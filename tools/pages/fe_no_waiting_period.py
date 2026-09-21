@@ -57,7 +57,7 @@ FAQ = [
      "treated and stable, including high blood pressure, controlled diabetes, and high "
      "cholesterol, frequently do not."),
     ("Is a policy with a waiting period still worth buying?",
-     "Often yes, if a full benefit policy is genuinely not available to you. The coverage is real, "
+     "Often yes, if a full benefit policy is not available to you. The coverage is real, "
      "the premium never rises, and accidental death is normally covered from day one. Buy one "
      "only after a licensed agent has checked whether a full benefit carrier would take "
      "you. The difference in what your family receives during those two years is the reason "
@@ -82,7 +82,7 @@ WAITING_PERIOD = """<div class="in-short reveal">
       </p>
       <h3 class="reveal mt-8 text-h4">Why carriers use one</h3>
 <p class="reveal mt-3 text-slate">
-        Carriers use it for one reason. Final expense insurance is decided from a short list of
+        Final expense insurance is decided from a short list of
         questions and a prescription check, not an exam. When a carrier is unsure about the
         answers, the waiting period lets it say yes instead of no. Without it, those applicants
         would be declined.
@@ -352,7 +352,7 @@ def body():
         <p class="reveal mt-5 text-slate">
           A licensed agent will ask the health questions and tell you which of our appointed
           carriers would issue you a policy that pays from day one. If none would, we will say so
-          and explain what is available instead. Either way you will know, rather than guess.
+          and explain what is available instead. Either way you will know.
         </p>
         <div class="reveal mt-8">
           {C.phone_link("fe_nowait_footer", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 26)}

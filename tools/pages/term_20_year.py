@@ -37,8 +37,8 @@ FAQ = [
      "no new health questions, and that right often expires before the term does."),
     ("Can I cancel a 20-year term policy early?",
      "Yes, at any time, by stopping payment or telling the carrier. There is no surrender charge "
-     "and no penalty, because a term policy has no cash value to surrender. You simply stop being "
-     "covered, so do not cancel one policy until the replacement is actually in force."),
+     "and no penalty, because a term policy has no cash value to surrender. You stop being "
+     "covered, so do not cancel one policy until the replacement is in force."),
 ]
 
 SIBLINGS = [

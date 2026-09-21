@@ -36,7 +36,7 @@ FAQ = [
      "The form takes about two minutes. A licensed agent calls you back within " + C.SLA +
      " with named carriers and real premiums. A full illustration is the document that shows "
      "the guaranteed and non guaranteed columns year by year. It takes longer because the "
-     "carrier produces it rather than us. Ask for one on the call and we will order it."),
+     "carrier produces it. Ask for one on the call and we will order it."),
     ("What is the difference between a quote and an illustration?",
      "A quote is a premium for a coverage amount. An illustration is the carrier's own multi page "
      "document showing what that policy does over its whole life. It shows the premium, "
@@ -139,9 +139,9 @@ def body():
           <p class="mt-3 text-micro text-muted">{C.HOURS}</p>
 
           <ul class="mt-8 pt-8 border-t border-rule grid gap-3">
-            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Guaranteed columns read to you first, not last</span></li>
-            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Multiple carriers compared, not one</span></li>
-            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">We will say plainly if term suits you better</span></li>
+            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Guaranteed columns read to you first</span></li>
+            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Multiple carriers compared</span></li>
+            <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">We will say if term suits you better</span></li>
             <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">No fee, and no obligation to buy</span></li>
           </ul>
         </div>
@@ -200,10 +200,10 @@ def body():
      "apart from anything projected. If a number in front of you is a projection, we will say "
      "so.", None),
     ("You decide whether to apply",
-     "There is no policy until you sign an application and a carrier issues it. If the honest "
-     "answer is that term suits you better, that is what we will tell you, and you owe nothing "
+     "There is no policy until you sign an application and a carrier issues it. If term "
+     "suits you better, that is what we will tell you, and you owe nothing "
      "either way.", None),
-], intro="Written out step by step, because \"we will be in touch\" is not an answer.")}
+], intro="Written out step by step.")}
 
 
 {C.ask_strip("Ready to start?", "Five questions, and one licensed agent replies.", '<a href="#wl-quotes-form" class="btn btn-cta">Back to the form</a>')}
@@ -217,7 +217,7 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Why whole life quotes differ between carriers</h2>
       <p class="reveal mt-5 text-slate">
-        This is the whole reason an independent agency is worth using on a permanent policy. Two
+        This is why an independent agency is worth using on a permanent policy. Two
         illustrations for the same person can look far apart. Most of that gap is in assumptions
         rather than in guarantees.
       </p>
@@ -272,7 +272,7 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Whole life premiums by age and coverage</h2>
       <p class="reveal mt-5 text-slate">
-        Shown before you fill anything in, not after. The structure below is what a real rate
+        Shown before you fill anything in. The structure below is what a real rate
         chart looks like; the numbers arrive when our carrier rate cards do.
       </p>
     </div>

@@ -165,7 +165,7 @@ def body():
         <div class="lg:col-span-6 lg:col-start-7">
           <h2 class="reveal text-h2">How the figure is worked out</h2>
           <p class="reveal mt-5 text-slate">
-            Here is the method. Every line below is one part of the sum, and it updates with
+            Every line below is one part of the sum, and it updates with
             your numbers.
           </p>
 
@@ -322,7 +322,7 @@ def body():
         <h3 class="text-h4">Whether some of this should be term</h3>
         <p class="mt-3 text-slate">
           Needs that end, such as a mortgage or years of income replacement, do not belong in a
-          permanent policy. The honest comparison is on
+          permanent policy. The comparison is on
           <a class="link" href="/compare/term-vs-whole-life-insurance/">term life against whole
           life</a>, including the cost of each over thirty years.
         </p>
@@ -377,7 +377,7 @@ def body():
      ("/whole-life-insurance/for-seniors/", "Whole life for seniors",
       "What is available after 65, and what it is for."),
      ("/whole-life-insurance/guaranteed-acceptance/", "Guaranteed acceptance",
-      "No health questions, and exactly what that costs."),
+      "No health questions, and what that costs."),
      ("/whole-life-insurance/is-it-worth-it/", "Is whole life worth it?",
       "The case for and against, side by side.")])}
 

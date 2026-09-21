@@ -59,7 +59,7 @@ DECLARED = [
      "distribution, and overhead all sit here. A carrier that is efficient in a given year has "
      "more surplus to divide than one that is not."),
     ("Investment experience",
-     "What the carrier's general account, mostly high grade bonds held to maturity, actually "
+     "What the carrier's general account, mostly high grade bonds held to maturity, "
      "earned against the rate it guaranteed. This is the component most sensitive to interest "
      "rates. It is why dividend scales across the industry moved with rates over "
      "the past two decades."),
@@ -111,7 +111,7 @@ SIBLINGS = [
     ("/whole-life-insurance/what-is-whole-life-insurance/", "What whole life insurance is",
      "The definition, the mechanics, and the fine print."),
     ("/whole-life-insurance/is-it-worth-it/", "Is whole life worth it?",
-     "The honest case for and against, side by side."),
+     "The case for and against, side by side."),
     ("/whole-life-insurance/calculator/", "Whole life calculator",
      "Size the permanent need, with the method shown."),
     ("/whole-life-insurance/for-seniors/", "Whole life for seniors",
@@ -185,14 +185,14 @@ def body():
           <p class="in-short-title">In short</p>
           <ul>
             <li>A whole life dividend is closer to a refund than to a payout.</li>
-            <li>It comes from the gap between cautious pricing and what actually happened.</li>
+            <li>It comes from the gap between cautious pricing and what happened.</li>
             <li>It is not a rate of return, and no honest person can tell you what next year's will be.</li>
           </ul>
         </div>
         <h3 class="reveal mt-6 text-h4">Priced on cautious assumptions</h3>
         <p class="reveal mt-3 text-slate">
           The carrier assumes people
-          will die somewhat sooner than it really expects, that running the company will cost
+          will die somewhat sooner than it expects, that running the company will cost
           somewhat more, and that its investments will earn somewhat less. Those assumptions are
           built into a premium that is fixed for life. The carrier has to be able to
           keep its promise even if the pessimistic version comes true.
@@ -200,7 +200,7 @@ def body():
         <h3 class="reveal mt-8 text-h4">Where the surplus comes from</h3>
         <p class="reveal mt-3 text-slate">
           Most years, the pessimistic version does not come true. The difference between what was
-          assumed and what actually happened forms what the carrier calls a divisible surplus. A
+          assumed and what happened forms what the carrier calls a divisible surplus. A
           participating policy is one that is eligible to share in it, and your share of it is the
           dividend.
         </p>
@@ -281,7 +281,7 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">How to read an illustration that shows dividends</h2>
         <p class="reveal mt-5 text-slate">
-          This is the single most useful skill on this page, and it takes about two minutes to
+          This is the most useful skill on this page, and it takes about two minutes to
           learn.
         </p>
       </div>
@@ -294,7 +294,7 @@ def body():
               "modeling convention rather than a forecast.")}
         {C.qa("Read the guaranteed columns first, and judge the policy on them",
               "If the policy only makes sense on the non guaranteed columns, it does not make "
-              "sense. This is the test, and it is the reason a good agent will hand you the "
+              "sense. It is the reason a good agent will hand you the "
               "illustration open at the guaranteed page.", "mt-8")}
         {C.qa("Check what dividend scale the illustration was run at",
               "It is printed on the illustration, usually in small type near the header or in the "

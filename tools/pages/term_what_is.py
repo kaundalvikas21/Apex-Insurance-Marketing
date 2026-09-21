@@ -35,8 +35,8 @@ FAQ = [
      "It is a contract with an insurance company that runs for a fixed number of years. You pay a "
      "premium every month or every year. If you die during those years, the company pays the "
      "people you named a lump sum, income tax free in almost every case. If you are still alive "
-     "when the years run out, the contract ends and nobody gets anything. That last sentence is "
-     "the part that makes it cheap."),
+     "when the years run out, the contract ends and nobody gets anything. That is what makes it "
+     "cheap."),
     ("How does term life insurance work if I die?",
      "Your beneficiary contacts the carrier and files a claim with a certified copy of the death "
      "certificate. The carrier verifies the policy was in force and that the application was "
@@ -125,7 +125,7 @@ def body():
            "You can stop paying at any time. There is no surrender charge, because there is "
            "nothing to surrender.")
     + '</div>',
-    intro="Four steps, in order. Nothing else happens in between.")}
+    intro="Four steps, in order.")}
 
 
 <!-- =====================================================================
@@ -169,8 +169,8 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What the death benefit pays for</h2>
       <p class="reveal mt-5 text-slate">
-        A death benefit is not a windfall. It replaces the money that stops coming in when you
-        die. Sizing it is subtraction, not a guess.
+        A death benefit replaces the money that stops coming in when you die. Sizing it is
+        subtraction.
       </p>
     </div>
 
@@ -209,7 +209,7 @@ def body():
 {C.inline_cta(
     "See what this costs for your age",
     "Answer six questions in about two minutes. A licensed agent sends you prices from named "
-    "carriers, not a range. It is free, and there is no obligation.",
+    "carriers. It is free, and there is no obligation.",
     "term_what_is_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
 
@@ -224,7 +224,7 @@ def body():
          "own, this is the correct outcome and not a loss. Stop paying and the policy lapses.")
     + C.qa("You can renew, expensively",
            "Almost every term policy is annually renewable after the level period, with no new "
-           "health questions. The price resets to your current age and then climbs every single "
+           "health questions. The price resets to your current age and then climbs every "
            "year. Treat it as a bridge of months, not a plan for years.", "mt-8")
     + C.qa("You can convert to a permanent policy",
            "Conversion turns some or all of the term coverage into a permanent policy with no new "
@@ -238,7 +238,7 @@ def body():
     intro="You have three options and a default. Most people take the default without "
           "deciding to.",
     aside='<p class="text-slate">Conversion deadlines are why we ask about them before you '
-          'buy, not after. Two policies at the same premium can carry very different conversion '
+          'buy. Two policies at the same premium can carry very different conversion '
           'rights, and the difference is invisible on a price comparison.</p>',
     cls="section band-surface")}
 
@@ -283,7 +283,7 @@ def body():
     </div>
 
     <p class="reveal mt-10 max-w-3xl text-white/85">
-      If a permanent policy might be the better fit, the honest way to decide is side by side:
+      If a permanent policy might be the better fit, the way to decide is side by side:
       <a class="link !text-white" href="/compare/term-vs-whole-life-insurance/">compare term life
       and whole life insurance</a>, including what each one costs over thirty years.
     </p>

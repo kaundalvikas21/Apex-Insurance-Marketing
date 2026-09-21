@@ -129,7 +129,7 @@ def body():
 
           <ul class="mt-8 pt-8 border-t border-rule grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-1")}<span>No medical exam, ever</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-1")}<span>Multiple carriers compared, not one</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-1")}<span>Multiple carriers compared</span></li>
             <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-1")}<span>One agency calls you, not six</span></li>
             <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-1")}<span>No fee, and no obligation to buy</span></li>
           </ul>
@@ -177,7 +177,7 @@ def body():
         </ul>
         <p class="reveal mt-6 text-slate">
           We do not ask for your Social Security number or your bank details to give you a quote.
-          Those are asked for on an application, after you have decided, and not before. Be
+          Those are asked for on an application, after you have decided. Be
           careful with anyone who asks for them first.
         </p>
       </div>
@@ -201,7 +201,7 @@ def body():
     ("You decide whether to apply",
      "There is no policy until you sign an application and a carrier issues it. If you decide "
      "against it, you owe nothing and we stop contacting you when you ask.", None),
-], intro="Written out step by step, because \"we will be in touch\" is not an answer.",
+], intro="Written out step by step.",
    fe=True)}
 
 
@@ -249,8 +249,8 @@ def body():
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      We are appointed with {C.CARRIERS} carriers and we do not have a favorite. That is
-      the only useful thing an agency can offer here: the comparison, with the names on it.
+      We are appointed with {C.CARRIERS} carriers and we do not have a favorite. What
+      an agency can offer here is the comparison, with the names on it.
     </p>
   </div>
 </section>
@@ -265,7 +265,7 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2">Sample final expense premiums by age</h2>
       <p class="reveal mt-5 text-slate">
-        Shown before you tell us anything, not after. The structure below is what a real cost
+        Shown before you tell us anything. The structure below is what a real cost
         chart looks like; the numbers arrive when our carrier rate cards do.
       </p>
       <div class="reveal mt-6">

@@ -88,16 +88,15 @@ FAQ = [
      "that follow it, not to replace an income or fund an estate."),
     ("Is guaranteed acceptance a rip off?",
      "It is expensive, and being sold one when a cheaper policy would have taken you is the "
-     "problem worth naming. The product itself is not dishonest. For someone who genuinely cannot "
+     "problem. The product itself is not dishonest. For someone who cannot "
      "be underwritten, it is the only permanent coverage available, and a small policy that "
-     "actually pays is better than an uninsured funeral. The failure is an agent who leads with "
+     "pays is better than an uninsured funeral. The failure is an agent who leads with "
      "it. Any agent who quotes you this before trying a simplified issue carrier is not working "
      "for you."),
     ("Can I be turned down because of my age?",
      "Yes. Age is the one thing that can make you ineligible, because every carrier sets an issue "
      "age band and stops writing outside it. Bands commonly run from around fifty to around "
-     "eighty five, and they vary by carrier and by state. That is a reason to ask early rather "
-     "than to assume."),
+     "eighty five, and they vary by carrier and by state. That is a reason to ask early."),
 ]
 
 
@@ -179,7 +178,7 @@ def body():
           not allowed to look at you first.
         </p>""",
     intro="No health questions, no exam, no prescription check, and no decline inside the issue "
-          "ages. Here is what that costs and what it buys.",
+          "ages.",
     media=C.figure("whole-arbor", C.MEDIA_SIZES))}
 
 
@@ -210,7 +209,7 @@ def body():
         </ul>
         <p class="reveal mt-6 text-slate">
           If none of those describe you, this is not your product yet. The order that protects you
-          is simple: fully underwritten first, simplified issue second, this third. Skipping to
+          is fully underwritten first, simplified issue second, this third. Skipping to
           the third because it is the easiest to buy is how people end up paying several times
           what they needed to. It also leaves a two year gap they did not know about.
         </p>
@@ -259,7 +258,7 @@ def body():
       Two years is the most common waiting period. Three exists, and so does a graded structure
       that pays a rising percentage instead of returning premiums. The differences are real money,
       and they are set out on the policy schedule rather than in the brochure. Comparing them across
-      carriers is the single most useful thing an agent can do for you on this product.
+      carriers is the most useful thing an agent can do for you on this product.
     </p>
   </div>
 </section>
@@ -301,7 +300,7 @@ def body():
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       Expect the cost per thousand of coverage to be the highest on this site, and expect the
-      available face amounts to be the smallest. Both are the same fact seen from two directions.
+      available face amounts to be the smallest.
       The wider grid for underwritten policies is on the
       <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates</a> page. The
       gap between the two is the price of not being asked any questions.
@@ -343,7 +342,7 @@ def body():
                   "Cash value in these policies is small and slow. Do not plan on borrowing from it.")}
         </div>
         <div class="mt-8">
-          {C.step(4, "What you actually need is a funeral covered",
+          {C.step(4, "What you need is a funeral covered",
                   "Then you are looking for a product built for that job, in that size, from "
                   "carriers who specialize in it. Same contract type, different market, and "
                   "usually a better price for the same face amount.")}
@@ -380,7 +379,7 @@ def body():
           with a short health questionnaire rather than with no questions at all.
         </p>
         <p class="reveal mt-5 text-white/85">
-          That distinction is worth money. A carrier that specializes in ten and fifteen thousand
+          A carrier that specializes in ten and fifteen thousand
           dollar policies and is willing to ask three questions will frequently beat a guaranteed
           acceptance premium by a wide margin. That is for the same face amount, with no waiting
           period at the front. You only find that out by being asked the questions.
@@ -391,7 +390,7 @@ def body():
           <h3 class="text-h4 !text-ink">Which type of policy to try first</h3>
           <p class="mt-3 text-slate">
             Fully underwritten first, because it is cheapest per thousand. Simplified issue second,
-            because it is where most people at these ages actually land. Guaranteed acceptance
+            because it is where most people at these ages land. Guaranteed acceptance
             third, and only after the first two have said no. We work that order out loud on the
             call so you can hear which door closed and why.
           </p>

@@ -126,7 +126,7 @@ SIBLINGS = [
 
 SIZING_IT = """<h3 class="reveal  text-h4">1. Price a funeral where you live</h3>
 <p class="mt-3 text-slate">
-        Start with what a funeral actually costs where you live, not with a national figure.
+        Start with what a funeral costs where you live, not with a national figure.
         Funeral homes are required to give you a general price list if you ask for one. Two
         calls will give you a real number for your area.
       </p>
@@ -241,7 +241,7 @@ def body():
 {C.inline_cta(
     "Ask a licensed agent what it would cost you",
     "One call, about fifteen minutes, and no commitment. We will ask your age, your state, and a "
-    "short list of health questions, then tell you what carriers would actually offer you. If we "
+    "short list of health questions, then tell you what carriers would offer you. If we "
     "think you do not need this, we will tell you that instead.",
     "fe_whatis_mid", "/final-expense-insurance/quotes/", "Or request a call back",
     phone_first=True, fe=True)}

@@ -38,7 +38,7 @@ FAQ = [
      "commission for doing so. It is not a partnership, an endorsement, or a rating of us by "
      "them. We are not owned by, affiliated with, or a subsidiary of any carrier on this page."),
     ("Are these all the carriers on the market?",
-     "No, and that is worth being blunt about. We can only quote carriers we hold an appointment "
+     "No. We can only quote carriers we hold an appointment "
      "with, so our comparison is a comparison of our shelf, not of the whole market. It is wider "
      "than a captive agent's shelf of one, and it is narrower than every carrier that exists."),
     ("How do you decide which carrier to recommend?",
@@ -65,7 +65,7 @@ def body():
     closing = C.closing_band(
         "term-band",
         "See what they quote for you",
-        "The carrier names come back on the quote, not just a number. That is how you "
+        "The carrier names come back on the quote. That is how you "
         "check the comparison happened.",
         "carriers_footer")
 
@@ -100,7 +100,7 @@ def body():
         <p class="eyebrow">What that buys you</p>
         <p class="mt-4 text-slate">
           One set of answers priced against several carriers at once, including the ones likely to
-          decline you. You find that out before you apply, not after. And an
+          decline you. You find that out before you apply. And an
           agent who can say a carrier is wrong for you without it costing them their job.
         </p>
       </div>

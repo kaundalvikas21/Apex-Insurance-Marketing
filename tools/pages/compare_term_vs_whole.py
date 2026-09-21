@@ -70,8 +70,7 @@ ROWS = [
       "normally returns less than you paid in."]),
     ("Can you borrow against it",
      ["No.",
-      "Yes, and an unpaid loan reduces the death benefit. A policy can collapse under one, which "
-      "is the failure mode worth knowing about."]),
+      "Yes, and an unpaid loan reduces the death benefit. A policy can collapse under one."]),
 
     ("How it goes wrong", []),
     ("The main failure mode",
@@ -94,7 +93,7 @@ WINS = [
      "buying far less of it than the need requires. That is the most common and most expensive "
      "mistake in this category.</p>"
      "<p class='mt-3'>Term is also what makes a large death benefit affordable at all. A young "
-     "family that needs a full income replaced can buy the amount it actually needs on term "
+     "family that needs a full income replaced can buy the amount it needs on term "
      "premiums and cannot on permanent ones. Being underinsured in a product with guarantees is "
      "worse than being fully insured in one without them.</p>"),
     ("Whole life wins", "When the need never ends or guarantees matter",
@@ -113,7 +112,7 @@ CHECKS = [
     "rest of this page is detail.",
     "Fill any tax advantaged account that has unused room before you consider permanent life "
     "insurance as a place to put money.",
-    "Work out the death benefit you actually need first, then the product. Choosing the product "
+    "Work out the death benefit you need first, then the product. Choosing the product "
     "first is how people end up with a permanent policy a third the size of the need it was "
     "bought for.",
     "If you are shown a whole life illustration, judge it on the guaranteed columns alone. If it "
@@ -129,35 +128,34 @@ FAQ = [
      "Neither is better in general. "
      "The question that decides it is whether your need has an end date. "
      "If you can name the year the need stops, term is almost always the right answer and the "
-     "cheaper one. If the need genuinely never ends, term will expire underneath it and permanent "
+     "cheaper one. If the need never ends, term will expire underneath it and permanent "
      "coverage is what the job requires."),
     ("Why is whole life so much more expensive than term?",
      "Because a term policy is priced on the chance you die during the term. Most people do "
      "not, so most term policies never pay a claim. A whole life policy is priced on the "
      "certainty that it will pay one eventually, plus the guaranteed cash value it is required to "
-     "build along the way. You are not paying more for the same thing, you are paying for a "
-     "different thing."),
+     "build along the way."),
     ("Can I convert term life insurance to whole life later?",
      "Usually yes, if the policy is convertible, and this is one of the most useful clauses in "
      "life insurance. Conversion lets you turn some or all of the coverage into a permanent "
      "policy without answering new health questions. That matters enormously if your health has "
      "changed. It has a deadline, commonly a stated age or a number of years, and missing it is "
-     "irreversible. Ask for the conversion terms in writing before you buy, not afterward."),
+     "irreversible. Ask for the conversion terms in writing before you buy."),
     ("Should I buy term and invest the difference?",
      "It is a sound strategy, and for most people it beats whole life on the math. It depends on "
-     "one condition: you actually invest the difference, every month, for "
+     "one condition: you invest the difference, every month, for "
      "decades, without touching it. Some people do. Many do not, and they end up with neither the "
      "investment nor the permanent coverage. Be honest about which one you are, because the "
      "answer changes the recommendation."),
     ("Can I have both term and whole life?",
-     "Yes, and for a lot of households it is the right structure rather than a compromise. A "
+     "Yes, and for a lot of households it is the right structure. A "
      "small permanent policy covers the part of the need that never goes away, and a large term "
      "policy covers the part that ends when the mortgage does. It usually costs less than "
      "insuring the whole need permanently and covers more than insuring it all on term."),
     ("Does whole life insurance ever make sense for a young person?",
-     "Sometimes, and the honest version is that it makes sense less often than it is sold. The "
+     "Sometimes, but it makes sense less often than it is sold. The "
      "clear cases are a lifelong dependent, a family business that needs funding whenever a death "
-     "happens, or a genuine need to lock insurability early where health history already suggests "
+     "happens, or a need to lock insurability early where health history already suggests "
      "that will be hard. Buying it in your twenties as a savings vehicle is the case that "
      "deserves the most skepticism, because the early years build very little and the money is "
      "hard to get back."),
@@ -175,7 +173,7 @@ COST_BLOCKS = """
         <h3 class="reveal mt-6 text-h4">Why there are no numbers here</h3>
         <p class="reveal mt-3 text-slate">
           This is the point where a comparison page normally prints two premiums and a total.
-          We are not going to, and the reason is not evasion.
+          We are not going to.
         </p>
         <p class="reveal mt-5 text-slate">
           We hold no carrier rate cards yet, so any figure here would be one we made up. A made up
@@ -191,7 +189,7 @@ COST_BLOCKS = """
         </p>
         <p class="reveal mt-4 text-slate">
           That gap is
-          large enough that it changes what you can afford to insure, which is the real decision
+          large enough that it changes what you can afford to insure, which is the decision
           underneath this page. It is also why the answer is so often term for the big temporary
           need and a small permanent policy beside it, rather than one product for everything.
         </p>
@@ -226,7 +224,7 @@ def body():
              'death benefit. What decides between them is '
              'whether your need has an end date you can name: if it does, '
              '<a class="link" href="/term-life-insurance/">term life insurance</a> is almost '
-             'always the answer, and if it genuinely does not, '
+             'always the answer, and if it does not, '
              '<a class="link" href="/whole-life-insurance/">whole life insurance</a> is what the '
              'job requires.',
         table_heading="Term vs whole life, side by side",

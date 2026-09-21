@@ -97,8 +97,7 @@ FAQ = [
      "Neither, in the abstract. They answer different questions. If someone depends on your income "
      "you need a policy sized to replace that income, and a burial policy will not do it. If "
      "nobody does, and the concern is a funeral bill landing on your children, a large policy is "
-     "more coverage than the situation calls for. You would be paying for it every month. The "
-     "question is not which is better but which describes your household."),
+     "more coverage than the situation calls for. You would be paying for it every month."),
     ("Is burial insurance more expensive than regular life insurance?",
      "Per thousand dollars of coverage, yes, usually noticeably so, because there is no medical "
      "exam and the carrier is accepting more uncertainty. In total monthly cost, no, because the "
@@ -108,14 +107,13 @@ FAQ = [
     ("Can I have both?",
      "Yes, and it is common. A term policy covering the years the family is dependent, with a "
      "small permanent policy underneath it that never expires, is a sensible structure. The "
-     "permanent one is still there after the term one ends, which is usually the point. Whether "
-     "it is worth doing depends on the premium for both together, which is a conversation rather "
-     "than a rule."),
+     "permanent one is still there after the term one ends. Whether "
+     "it is worth doing depends on the premium for both together."),
     ("Do I need burial insurance if I already have life insurance?",
      "Probably not, if the existing policy is large enough and will still be in force when you "
      "die. Two things catch people off guard: employer provided coverage usually ends with the job, and "
      "a term policy expires on a date, frequently before the funeral it was supposed to help pay "
-     "for. Check what you actually own and when it ends before buying anything else."),
+     "for. Check what you own and when it ends before buying anything else."),
 ]
 
 
@@ -170,7 +168,7 @@ def body():
         </p>
         <h3 class="reveal mt-8 text-h4">The comparison that matters</h3>
         <p class="reveal mt-3 text-slate">
-          So the real comparison is not between two premiums. It is between two situations. A
+          So the real comparison is between two situations. A
           household that still depends on an earner needs an amount of coverage that only a full
           sized policy provides. Buying three burial policies to get there would cost far more
           than one term policy.
@@ -189,8 +187,8 @@ def body():
           rates by age</a>.
         </p>""",
         wins_heading="Which one fits your situation",
-        wins_intro="One question decides this, and it is not about age, health, or budget. It is "
-                   "about whether anybody's monthly bills currently depend on your income.",
+        wins_intro="One question decides this: whether anybody's monthly bills currently depend "
+                   "on your income.",
         wins=WINS,
         checklist_heading="Six things to settle first",
         checklist_intro="Work through these before you speak to anybody, including us. Most of "

@@ -34,7 +34,7 @@ COVERAGE_COLS = ["$100,000", "$250,000", "$500,000", "$750,000", "$1,000,000"]
 
 FAQ = [
     ("What is the average cost of term life insurance?",
-     "There is no useful average, which is why this page is a chart rather than a number. Age, "
+     "There is no useful average. Age, "
      "term length, coverage amount, sex, tobacco use, and your health class each move the premium "
      "by more than any average would tell you. A healthy 30 year old and a healthy 55 year old "
      "buying the same policy are not in the same order of magnitude."),
@@ -190,8 +190,8 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">How to lower your term life rate</h2>
         <p class="reveal mt-5 text-slate">
-          All of these are legitimate. None involves leaving something off an application. That
-          is not a discount. It is a reason for a claim to be contested.
+          All of these are legitimate. None involves leaving something off an application, which
+          is a reason for a claim to be contested.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">

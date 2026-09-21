@@ -25,6 +25,6 @@ id prefix (`tnx`), the same pattern `/term-life-insurance/rates/` uses. Two reas
 three-routes section. `check.py` strips fragments when it crawls links, so nothing will catch this
 if the id is removed: see REPLACE-BEFORE-LAUNCH.md section 6.
 
-**Compliance.** Nothing on the page promises approval. The "what same day actually means" section
+**Compliance.** Nothing on the page promises approval. The "what same day means" section
 states that same day means a same-day decision, not always an approval and not always a yes, and
 that coverage starts when the policy is in force rather than at approval.

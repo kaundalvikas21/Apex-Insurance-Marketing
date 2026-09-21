@@ -62,7 +62,7 @@ FAQ = [
      "stays level for the rest of your life. What does change is the price of buying a new policy: "
      "every birthday you wait makes the same coverage cost more."),
     ("Is this the same as pre-paying at a funeral home?",
-     "No, and the difference matters. A pre-need contract is money paid to one funeral home for a "
+     "No. A pre-need contract is money paid to one funeral home for a "
      "named list of goods and services at that home. A final expense policy pays cash to the "
      "person you name as beneficiary, who can spend it at any funeral home, or on a headstone, "
      "unpaid medical bills, or anything else. If you move or change your mind, the policy moves "
@@ -562,7 +562,7 @@ def body():
           covered at all.
         </p>
         <p class="reveal mt-4 text-slate">
-          Carriers rate the same condition very differently from each other. That is the whole
+          Carriers rate the same condition very differently from each other. That is the
           practical argument for applying through an independent agency instead of to one company
           and taking its answer as final.
         </p>

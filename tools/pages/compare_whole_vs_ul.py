@@ -92,7 +92,7 @@ ROWS = [
     ("What protects you",
      ["The contract. There is nothing to monitor.",
       "An in force illustration (an updated projection of your policy) requested from the carrier every year or two, and acting on it. "
-      "This is real, ongoing work."]),
+      "This is ongoing work."]),
 ]
 
 WINS = [
@@ -100,14 +100,14 @@ WINS = [
      "<p>If the point of buying permanent coverage is that it is settled, whole life is the "
      "product that delivers that. The premium cannot rise, the cash value schedule is printed at "
      "issue, and there is nothing to review, monitor, or fund correctly for the next forty years. "
-     "You are paying for the absence of homework, and for some buyers that is precisely the "
+     "You are paying for the absence of homework, and for some buyers that is the "
      "thing worth paying for.</p>"
      "<p class='mt-3'>It is also the better answer when the coverage backs an obligation that "
      "cannot be allowed to fail: a special needs trust, a buy sell agreement, or an estate tax "
      "bill.</p>"),
     ("Universal life wins", "When you need a flexible premium",
      "<p>If your income is irregular, or the policy needs to absorb a bad year without lapsing, "
-     "the flexibility is genuinely valuable rather than a sales feature. Business owners with "
+     "the flexibility is valuable. Business owners with "
      "uneven cash flow and people funding a policy alongside a variable income are the clearest "
      "cases.</p>"
      "<p class='mt-3'>It can also be the cheaper route to a guaranteed death benefit where a no "
@@ -116,7 +116,7 @@ WINS = [
 ]
 
 CHECKS = [
-    "Say out loud whether you will actually request and read an in force illustration every year "
+    "Say out loud whether you will request and read an in force illustration every year "
     "or two for the next several decades. If not, universal life is carrying a risk you are not "
     "going to manage.",
     "Ask for the whole life illustration's guaranteed columns and judge the policy on those alone. "
@@ -139,13 +139,13 @@ FAQ = [
      "the cash value grows at a rate the carrier credits rather than a rate it promises. You are "
      "trading certainty for flexibility, and the trade is real in both directions."),
     ("Is universal life insurance a good idea?",
-     "It can be, for someone whose premium genuinely needs to move. It can also work where a no lapse guarantee "
+     "It can be, for someone whose premium needs to move. It can also work where a no lapse guarantee "
      "rider is used deliberately to buy a guaranteed death benefit at a lower cost than "
      "whole life. It is a poor idea for someone who buys it, files it, and never looks at it "
      "again. Unfortunately, that is how a large number of these policies have been sold. The "
      "product requires ongoing attention that whole life does not."),
     ("Can a universal life policy lapse even if I pay the premium?",
-     "Yes, and this is the most important sentence on this page. If the credited rate falls or the "
+     "Yes. If the credited rate falls or the "
      "internal cost of insurance rises faster than the illustration assumed, the account value can "
      "be consumed even while you pay what you were originally told to pay. The policy then asks "
      "for a much larger premium or lapses. Requesting an in force illustration from the carrier "
@@ -153,9 +153,8 @@ FAQ = [
     ("Which is cheaper, whole life or universal life?",
      "Universal life usually shows a lower initial premium for the same death benefit, which is "
      "much of its appeal. Whether it is cheaper over forty years depends on what the carrier "
-     "actually credits and charges over those forty years, and nobody knows that in advance. "
-     "Comparing the initial premiums is comparing one guaranteed number against one assumed one, "
-     "which is not a comparison."),
+     "credits and charges over those forty years, and nobody knows that in advance. "
+     "Comparing the initial premiums is comparing one guaranteed number against one assumed one."),
     ("Should I switch from whole life to universal life?",
      "Very rarely, and not without independent advice from someone who is not paid on the "
      "replacement. Surrendering an established whole life policy can lock in a loss and a "
@@ -228,7 +227,7 @@ def body():
           Insist on seeing the universal life policy illustrated twice:
           once at the current assumptions, and once at the guaranteed minimum credited rate with the
           maximum contractual cost of insurance. Carriers can produce both. The gap between those
-          two illustrations is the actual size of the decision you are making, and it is frequently
+          two illustrations is the size of the decision you are making, and it is frequently
           much larger than buyers expect.
         </p>
         <h3 class="reveal mt-8 text-h4">For whole life, read the guaranteed columns</h3>

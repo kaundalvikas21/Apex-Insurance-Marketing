@@ -34,8 +34,7 @@ FITS = [
      "people overpay for term."),
     ("The add-on case", "A layer on top of coverage you already have",
      "A ten year layer stacked on a longer policy costs less than increasing the longer policy, and "
-     "it ends on its own when the extra need does. This is the one case where ten years is "
-     "chosen rather than settled for."),
+     "it ends on its own when the extra need does."),
 ]
 
 DATES = [
@@ -47,7 +46,7 @@ DATES = [
      "Most people add two to three years to the number above. That is usually the difference "
      "between a ten year term being right and being one renewal short."),
     ("Over ten years? Price the longer term first",
-     "This is the step people skip. The premium difference between ten and twenty years at the "
+     "The premium difference between ten and twenty years at the "
      "same age is usually far smaller than the cost of having no coverage in year eleven. With "
      "the longer term you buy at today's age and health, not at year eleven's."),
 ]
@@ -66,7 +65,7 @@ FAQ = [
      "policies that right expires before the term does. Check the conversion deadline in your "
      "contract rather than assuming it runs the full ten years."),
     ("Is 10-year term life insurance worth it?",
-     "It is worth it when the need genuinely ends inside ten years, and it is a false economy "
+     "It is worth it when the need ends inside ten years, and it is a false economy "
      "when it does not. The trap is that a ten year term looks cheap next to a twenty when you "
      "buy it, and expensive next to it at renewal. By then you are ten years older and may "
      "have picked up a condition that changes your health class. If there is any real chance the "
@@ -79,8 +78,7 @@ FAQ = [
     ("Should I buy 10-year term or 20-year term?",
      "Count the years until the obligation ends, add the recovery time, and if the total is under "
      "ten a ten year term is right. If it is close to ten, buy the twenty. The extra premium is "
-     "known and small. The cost of being uninsurable in year eleven is unknown and large. It "
-     "is not a risk worth carrying to save a few dollars a month."),
+     "known and small. The cost of being uninsurable in year eleven is unknown and large."),
 ]
 
 SIBLINGS = [
@@ -162,8 +160,8 @@ def body():
     answer=(
         'That situation is an obligation with a known end date inside the next ten years. '
         'Outside it, ten years is usually the wrong length of <a class="link" '
-        'href="/term-life-insurance/">term life insurance</a> to buy. It is not a '
-        'bad product. The problem is what happens in year eleven, and this page is mostly '
+        'href="/term-life-insurance/">term life insurance</a> to buy. '
+        'The problem is what happens in year eleven, and this page is mostly '
         'about that.'),
     extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
@@ -265,8 +263,8 @@ def body():
 {C.inline_cta(
     "Price ten and twenty years side by side",
     "Six questions, about two minutes. A licensed agent comes back with premiums from named "
-    "carriers at both lengths, at a health class we can defend. You see the actual gap rather "
-    "than guess at it. No obligation, and no cost.",
+    "carriers at both lengths, at a health class we can defend. You see the gap between "
+    "the two. No obligation, and no cost.",
     "term_10y_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
 

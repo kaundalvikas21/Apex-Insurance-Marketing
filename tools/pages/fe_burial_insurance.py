@@ -44,7 +44,7 @@ TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/")
 BURIAL_COSTS = [
     ("Basic services fee",
      "The funeral home",
-     "Charged on every arrangement, burial or cremation. It is the one line nobody avoids."),
+     "Charged on every arrangement, burial or cremation."),
     ("Transfer, preparation, and viewing",
      "The funeral home",
      "Embalming is normally expected for an open casket viewing and is often skipped otherwise."),
@@ -74,7 +74,7 @@ FAQ = [
      "the coverage does not expire. The money is paid in cash to the person you name, so they can "
      "use it for the funeral home, the cemetery, or anything else."),
     ("How much burial insurance do I need?",
-     "Enough to cover what your family would actually face, which depends on your state, on the "
+     "Enough to cover what your family would face, which depends on your state, on the "
      "cemetery, and on what you would want. We do not publish an average. Averages here are "
      "national survey figures that describe no particular burial, and they routinely leave the "
      "cemetery out. Call one funeral home and one cemetery near you and ask each for its price "
@@ -88,8 +88,7 @@ FAQ = [
     ("Does burial insurance pay the funeral home directly?",
      "Only if you arrange for it to. By default the benefit is paid in cash to the beneficiary "
      "you name, and they decide what to do with it. Some people assign part of the benefit to a "
-     "funeral home so the bill is settled without the family having to advance the money. That is "
-     "a choice you make, not something the policy does on its own."),
+     "funeral home so the bill is settled without the family having to advance the money."),
     ("Can I be turned down for burial insurance?",
      "You can be declined for a policy that pays the full benefit from day one. In that case "
      "a graded policy or a guaranteed acceptance policy is normally still available. Outright "
@@ -124,7 +123,7 @@ SIZING = """<p class="reveal text-slate">
       </ul>
       <p class="reveal mt-6 text-slate">
         Two numbers you gathered yourself beat any average, because they are the numbers your
-        family will actually be handed.
+        family will be handed.
       </p>"""
 
 

@@ -41,15 +41,14 @@ FAQ = [
      "Yes. Most of our appointed carriers write to eighty five, and a few go higher. What narrows "
      "at eighty is the range of coverage amounts. Fewer carriers will pay the full "
      "benefit from day one rather than after a waiting period. Both of those depend on your health "
-     "answers rather than your age alone, which is why it is worth a call rather than an "
-     "assumption."),
+     "answers rather than your age alone, which is why it is worth a call."),
     ("Is there a medical exam?",
      "No. Final expense is health questions only, usually between five and fifteen of them, "
      "answered on a call. The carrier also checks your prescription history. There is no blood "
      "work, no urine sample, and nobody comes to your home."),
     ("How much coverage do most people buy?",
      "Enough to cover a funeral or cremation and the bills that arrive in the weeks afterward. "
-     "The right amount is the one your family would actually face, and it varies enormously by "
+     "The right amount is the one your family would face, and it varies enormously by "
      "state and by what you want. We will walk through the parts of that cost with you. We will "
      "not quote you a national average that may not resemble your area."),
     ("Will my premium or my coverage change as I get older?",
@@ -185,8 +184,7 @@ def body():
        "premiums plus interest if you die from illness in the first two years. It pays the full "
        "amount for an accident from day one.",
        "A waiting period is not a reason to give up. It is a reason to check whether a full "
-       "benefit carrier will still take you, which is a fifteen minute conversation rather than a "
-       "guess.",
+       "benefit carrier will still take you, which is a fifteen minute conversation.",
        "Coverage amounts are smaller at this age. For a funeral and final bills that is usually "
        "enough, and we would rather tell you the real limit before you apply than during it."],
       cls="section")}

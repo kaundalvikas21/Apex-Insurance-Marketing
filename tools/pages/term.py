@@ -35,14 +35,14 @@ FAQ = [
     ("What happens when the term ends?",
      "Coverage stops. Most policies allow you to keep it going year by year at an annually "
      "increasing rate. That becomes very expensive very quickly, and it is meant as a short "
-     "bridge rather than a plan. The better option, if it is available on your policy, is conversion: "
+     "bridge. The better option, if it is available on your policy, is conversion: "
      "converting some or all of the term into a permanent policy with no new medical exam."),
     ("Can I convert a term policy to permanent coverage later?",
      "Most term policies from the carriers we work with include a conversion privilege, usually "
      "until a set age or a set number of years into the term. It lets you convert without proving "
      "you are still insurable, which is valuable if your health changes. Conversion rules differ a "
      "lot between carriers, and we will tell you what a policy's conversion terms are before you "
-     "apply, not after."),
+     "apply."),
     ("Do I need a medical exam for term life insurance?",
      "Increasingly, no. Many carriers now use accelerated underwriting for healthy applicants "
      "under a certain age and coverage amount. It draws on prescription history, motor vehicle "
@@ -93,7 +93,7 @@ COVERAGE_COLS = [("$250,000", "250000"), ("$500,000", "500000"), ("$1,000,000", 
 
 TERM_LENGTHS = [
     ("10", "10 years", "A short, specific obligation: the last stretch of a mortgage, a business loan, or the years until a pension starts.",
-     "Cheapest per year of coverage, and the renewal rate at the end is steep. Only choose this if the need really ends."),
+     "Cheapest per year of coverage, and the renewal rate at the end is steep. Only choose this if the need ends then."),
     ("15", "15 years", "A mid length gap. Common for people who started a family later or refinanced part way through a mortgage.",
      "Often only slightly more than a 10 year term, and it buys five more years of certainty."),
     ("20", "20 years", "The most common choice. It covers a child from elementary school to leaving home, or most of a standard mortgage.",
@@ -240,7 +240,7 @@ def quote_form(form_id, form_name, id_prefix):
               <p class="mt-3 text-slate">
                 A licensed agent is comparing our appointed carriers for your age, state, and
                 coverage amount now. You will hear from us within {C.SLA}, and the quote comes with
-                the carrier names on it, not just a number.
+                the carrier names on it.
               </p>
               <div class="mt-5">
                 {C.phone_link("term_success", "btn btn-call", "Or call " + C.PHONE_DISPLAY)}

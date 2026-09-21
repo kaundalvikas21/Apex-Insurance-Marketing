@@ -66,7 +66,7 @@ FAQ = [
      "It is worth it when you have a need that does not expire and a budget that can carry a "
      "permanent premium without displacing something more important. It is poor value when it is "
      "bought instead of adequate term coverage, or as a substitute for retirement saving in an "
-     "account with better tax treatment and lower costs. The honest test is whether you would "
+     "account with better tax treatment and lower costs. The test is whether you would "
      "still want the policy if the cash value grew slowly, because on the guaranteed column, in "
      "the early years, it does."),
     ("What is the difference between whole life and term life insurance?",
@@ -123,7 +123,7 @@ def body():
            "build very little.")
     + '</div><div class="mt-8">' + C.step(3, "The cash value funds the later years",
            "As you age, the real cost of insuring you passes the premium you are paying. The "
-           "accumulated cash value covers the difference. This is the mechanism, and it is why on "
+           "accumulated cash value covers the difference. This is why on "
            "a standard policy the cash value is not paid on top of the death benefit.")
     + '</div><div class="mt-8">' + C.step(4, "The carrier pays whenever you die",
            "There is no term to outlive and no renewal to survive. As long as the premium has "
@@ -246,7 +246,7 @@ def body():
               to the markets, knowing what it costs.</li>
         </ul>
         <p class="mt-5 text-slate">
-          Every one of those needs is permanent. That is the only test that matters here.
+          Every one of those needs is permanent.
         </p>
       </div>
 
@@ -281,7 +281,7 @@ def body():
      ("/whole-life-insurance/calculator/", "Whole life calculator",
       "Size the permanent need before you price it."),
      ("/whole-life-insurance/for-seniors/", "Whole life for seniors",
-      "What is available after 65, and what it is actually for."),
+      "What is available after 65, and what it is for."),
      ("/whole-life-insurance/guaranteed-acceptance/", "Guaranteed acceptance",
       "No health questions, and exactly what that costs you."),
      ("/whole-life-insurance/dividends/", "Dividends explained",

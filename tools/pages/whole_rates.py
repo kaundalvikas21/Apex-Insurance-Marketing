@@ -48,10 +48,10 @@ ROW_COVERAGE = {"30 to 34": "250000", "35 to 39": "250000", "40 to 44": "250000"
 
 FAQ = [
     ("What is the average cost of whole life insurance?",
-     "There is no useful average, which is why this page is a chart rather than a number. Age, "
+     "There is no useful average. Age, "
      "coverage amount, sex, tobacco use, health class, and how long you intend to pay premiums "
-     "for each move the figure by more than any average would tell you. What is fair to say is "
-     "the shape. For the same death benefit, whole life costs several times what term costs. "
+     "for each move the figure by more than any average would tell you. "
+     "For the same death benefit, whole life costs several times what term costs. "
      "The policy is designed to still be in force on the day you die rather than to expire "
      "before it."),
     ("Why is whole life so much more expensive than term?",
@@ -74,7 +74,7 @@ FAQ = [
      "Commonly two to three times the premium for the same coverage. On a permanent policy "
      "you carry that difference for the rest of your life rather than for a term. Most carriers "
      "ask about the last twelve months. Some will reconsider the class after a documented period "
-     "without nicotine, which is worth asking about rather than assuming."),
+     "without nicotine, which is worth asking about."),
     ("Can I get whole life without answering health questions?",
      "Yes, through a guaranteed acceptance policy, and it is the most expensive way to buy a "
      "dollar of death benefit that we offer. It also carries a waiting period for natural causes. "
@@ -144,8 +144,8 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       The grid prices a policy you pay for as long as you live. A ten pay or twenty pay policy
-      compresses the same coverage into fewer, larger premiums. It is a different contract rather
-      than a different cell, so it is quoted rather than charted. Issue ages above this grid are
+      compresses the same coverage into fewer, larger premiums. It is a different contract,
+      so it is quoted rather than charted. Issue ages above this grid are
       routinely available and are covered on
       <a class="link" href="/whole-life-insurance/for-seniors/">whole life for seniors</a>. If your
       health would not pass a questionnaire at all, the relevant page is
@@ -223,8 +223,8 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         {C.step(1, "Ask whether the need is permanent",
                 "The largest saving available on this page is discovering that you needed twenty "
-                "years of coverage rather than lifelong coverage. That is not a rate reduction, it is a "
-                "different product, and it is the honest first question.")}
+                "years of coverage rather than lifelong coverage. That is a "
+                "different product, and it is the first question to ask.")}
         <div class="mt-8">
           {C.step(2, "Apply to a different carrier",
                   "The same health history can land two classes apart at two carriers, and on a "

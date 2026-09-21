@@ -79,7 +79,7 @@ def body():
     what = C.prose(
         "What is a free policy review?",
         C.qa("A checkup for coverage you already own",
-             "A licensed agent looks at how your policy works today, not how it was sold to you. "
+             "A licensed agent looks at how your policy works today. "
              "You find out what it covers, how long it lasts, and what it costs you.")
         + C.qa("Nothing has to change",
                "The review is there to give you a clear picture. If your policy is right for you, "

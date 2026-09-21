@@ -45,13 +45,13 @@ FAQ = [
      "reduces the death benefit by the outstanding balance if it is not repaid. A surrender ends "
      "the policy, and any gain above your cost basis is taxable. Taking too much out can also "
      "cause the policy to lapse, which can trigger a tax bill on gains you no longer have. Ask for "
-     "the numbers before you borrow, not after."),
+     "the numbers before you borrow."),
     ("What is a guaranteed acceptance policy?",
      "It is a whole life policy issued with no health questions and no exam, so nobody is turned "
      "down within the eligible ages. In exchange the coverage amount is small and the premium per "
      "dollar of coverage is the highest of any product we offer. There is also a two or three year "
      "waiting period for death from natural causes. It exists for people who cannot qualify any "
-     "other way, and it should be the last option considered, not the first."),
+     "other way, and it should be the last option considered."),
     ("Is whole life a good investment?",
      "It is not an investment, and treating it as one usually ends badly. It is insurance with a "
      "guaranteed savings component attached, priced accordingly. Cash value grows slowly in the "
@@ -59,7 +59,7 @@ FAQ = [
      "returns rather than a guaranteed death benefit, almost any comparison starts by asking "
      "whether you have filled your tax advantaged retirement accounts first."),
     ("What happens if I stop paying the premium?",
-     "You have options rather than an automatic loss. If there is enough cash value, the policy "
+     "You have options. If there is enough cash value, the policy "
      "can pay its own premium for a while. It can also convert to a smaller paid up policy that "
      "needs no further payments, or be surrendered for its cash value. In the first few years, when there "
      "is little or no cash value, stopping usually means losing the policy and what you paid in. "
@@ -79,7 +79,7 @@ SPOKES = [
     ("/whole-life-insurance/for-seniors/", "Whole life for seniors", "What is available after 65 and what it is for."),
     ("/whole-life-insurance/cash-value/", "How cash value works", "Growth, loans, surrender, and the tax treatment."),
     ("/whole-life-insurance/dividends/", "Dividends and participating policies", "How they are declared and why they are not guaranteed."),
-    ("/whole-life-insurance/is-it-worth-it/", "Is whole life worth it?", "The honest case for and against, side by side."),
+    ("/whole-life-insurance/is-it-worth-it/", "Is whole life worth it?", "The case for and against, side by side."),
 ]
 
 
@@ -275,7 +275,7 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2">Compare quotes or talk to an agent</h2>
       <p class="reveal mt-5 text-slate">
-        Whole life costs considerably more than term. This page explains exactly when that trade
+        Whole life costs considerably more than term. This page explains when that trade
         is worth making and when it is not, and a licensed agent will tell you the same.
       </p>
     </div>
@@ -336,14 +336,13 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         <p class="reveal text-lead text-slate">
           Term life covers you for a fixed number of years. Whole life is a contract for your
-          entire life. The carrier prices it knowing it will eventually pay out, because it will.
+          entire life. The carrier prices it knowing it will eventually pay out.
         </p>
         <p class="reveal mt-5 text-slate">
           To keep the premium level across fifty years instead of twenty, the carrier charges more
           than the cost of insuring you in the early years. In the later years it charges less. The
           surplus from the early years is held inside the policy, earns interest at a rate the
-          contract guarantees, and becomes the cash value. That is the whole mechanism. Everything
-          else on this page is a consequence of it.
+          contract guarantees, and becomes the cash value.
         </p>
       </div>
     </div>
@@ -623,7 +622,7 @@ def body():
           </p>
           <p class="mt-4 text-slate">
             It is a real answer for people who have no other one. It should be the last option you
-            consider rather than the first, and any agent who leads with it is not working for you.
+            consider, and any agent who leads with it is not working for you.
           </p>
           <a class="btn btn-ghost mt-6" href="/whole-life-insurance/guaranteed-acceptance/#who-it-is-for">Guaranteed acceptance whole life</a>
           </div>

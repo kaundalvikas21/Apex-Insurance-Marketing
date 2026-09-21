@@ -189,13 +189,12 @@ def body():
     [("mail", None, "You send it",
       "Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker."),
      ("user-check", None, "A licensed agent reads it",
-      "A person, with a license number, who can actually place the policy. Not a receptionist "
-      "taking a message."),
+      "A person, with a license number, who can place the policy."),
      # [SET HONEST SLA] Replace with the response time the agency can actually
      # hold to, including on a Friday afternoon.
      ("phone", None, "We contact you",
       "Within " + C.SLA + ", by phone or email, whichever you seem to prefer. If we are going "
-      "to be slower than that, we will tell you rather than let it drift.")],
+      "to be slower than that, we will tell you.")],
     cls="section-tight band")}
 
 <!-- =====================================================================

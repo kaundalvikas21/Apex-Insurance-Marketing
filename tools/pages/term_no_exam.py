@@ -54,7 +54,7 @@ ROUTES = [
      "The most per thousand of coverage of any life product, and a waiting period is normal."),
     ("Who it suits",
      "Healthy applicants under roughly sixty who would have passed the exam anyway.",
-     "People with a manageable condition, or who genuinely cannot face an exam.",
+     "People with a manageable condition, or who cannot face an exam.",
      "People who have been declined elsewhere, and who need a funeral covered rather than an "
      "income replaced."),
 ]
@@ -65,7 +65,7 @@ FAQ = [
      "than a special product. Accelerated underwriting programs check prescription, driving, "
      "and claims databases against a detailed application and waive the exam when the picture is "
      "consistent. You still answer full health questions, and the application is still a legal "
-     "declaration. What is skipped is the needle, not the honesty."),
+     "declaration."),
     ("Is no exam life insurance more expensive?",
      "It depends which of the three routes you take. Accelerated underwriting is normally priced "
      "at the same rate classes as a fully underwritten policy, so it costs nothing extra. "
@@ -77,7 +77,7 @@ FAQ = [
      "policy is issued, delivered, and the first premium is paid. Same day means a same day "
      "decision, not always a same day approval and not always a yes. If the algorithm cannot get "
      "comfortable, the application drops to full underwriting with an exam, which is not a decline "
-     "and simply takes longer."),
+     "and takes longer."),
     ("Will they still check my prescriptions and medical records?",
      "Almost certainly. Every route except guaranteed issue uses a prescription history check, and "
      "most use a motor vehicle record and the industry claims database. Some also pull electronic "
@@ -86,7 +86,7 @@ FAQ = [
     ("Should I take the exam if I am offered the choice?",
      "If you are in good health, usually yes. A paramedical exam is free and takes about twenty "
      "minutes at your home or office. It often lands you in a better rate class than an "
-     "algorithm will award without it. The exam is worth skipping when speed genuinely matters, "
+     "algorithm will award without it. The exam is worth skipping when speed matters, "
      "when a needle is a real obstacle for you, or when your readings on the day are likely to be "
      "worse than your record suggests."),
 ]
@@ -165,7 +165,7 @@ def body():
      immediate coverage is universal.
      ================================================================== -->
 {C.prose(
-    "What same day actually means",
+    "What same day means",
     C.step(1, "You complete the application",
            "Fifteen to twenty five minutes, on a call or online. Longer than the marketing "
            "suggests, because accelerated programs ask more questions rather than fewer: the "
@@ -229,7 +229,7 @@ def body():
               term than three weeks of waiting.</li>
           <li>Anyone over roughly sixty, where fully underwritten pricing is usually better and the
               accelerated programs thin out.</li>
-          <li>Anyone whose numbers have genuinely improved since their records were written: a
+          <li>Anyone whose numbers have improved since their records were written: a
               current reading beats an old prescription.</li>
           <li>Anyone who has been rated or declined before. A human underwriter can be argued with.
               An algorithm cannot.</li>

@@ -27,7 +27,7 @@ FAQ = [
      "being modest. The rates page lets you switch between both lengths, so you can read the "
      "difference for your own age."),
     ("Is a 30-year term worth it?",
-     "It is worth it when a need genuinely runs past twenty years: a new thirty year mortgage, a "
+     "It is worth it when a need runs past twenty years: a new thirty year mortgage, a "
      "child under about eight, or a partner much younger than you who would depend on your income. "
      "It is poor value when bought as insurance against uncertainty. You pay for a "
      "decade of coverage during which, in most households, nobody depends on the income anymore."),
@@ -35,7 +35,7 @@ FAQ = [
      "Most carriers stop offering thirty year terms somewhere in the mid fifties, because the "
      "policy would otherwise run into the mid eighties. Above that age the grid thins out quickly "
      "and the sensible options become a twenty or a fifteen. Availability varies by carrier and by "
-     "state, which is one phone call rather than an afternoon of research."),
+     "state, which takes one phone call to check."),
     ("Should I buy a 30-year term or two shorter policies?",
      "Layering, meaning a large twenty year policy alongside a smaller thirty year one, is often "
      "cheaper than a single thirty year policy for the whole amount. The part of your "
@@ -83,11 +83,11 @@ def body():
              "decision again at an age where it is more expensive."),
             ("The family case", "A child under about eight",
              "Thirty years takes a five year old to thirty five. That is longer than most "
-             "households need. So this case is really a child under eight plus a "
+             "households need. So this case is a child under eight plus a "
              "second reason, usually the mortgage or a partner who left work to raise them."),
             ("The age gap case", "A partner considerably younger than you",
-             "If your partner would depend on your income until their own retirement "
-             "rather than yours, measure the need from their age, not yours. This is the case "
+             "If your partner would depend on your income until their own retirement, "
+             "measure the need from their age, not yours. This is the case "
              "where a thirty year term is most often worth its price."),
         ],
         dates_intro="Thirty years is a long time to pay for, so the test is stricter than for a "

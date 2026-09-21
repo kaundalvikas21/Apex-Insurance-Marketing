@@ -37,10 +37,10 @@ FAQ = [
 
 WHY_EXISTS = f"""<p class="reveal text-slate">
         To be found by people shopping for life insurance, and to earn the call. We are not
-        neutral about that, and it would be dishonest to pretend otherwise.
+        neutral about that.
       </p>
       <p class="reveal mt-5 text-slate">
-        Here is the standard we hold the writing to.
+        The standard we hold the writing to:
       </p>
       <ul class="reveal mt-5 grid gap-3">
         <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Every page is written or reviewed by a licensed agent who places these policies.</span></li>
@@ -128,8 +128,8 @@ def body():
         <p class="eyebrow text-white/80">Experience</p>
         {C.stat(C.YEARS, "years placing life insurance", count=False, cls="mt-3")}
         <p class="mt-4 text-sm text-white/85">
-          Placing policies, not writing about them. The difference shows up when a carrier comes
-          back with a rating you were not expecting.
+          That experience shows up when a carrier comes back with a rating you were not
+          expecting.
         </p>
       </div>
     </div>
@@ -265,7 +265,7 @@ def body():
           "Tell you which carriers are likely to decline you, and why, before you apply.",
           "Complete the application with you and stay with it through underwriting until it is issued or refused.",
           "Explain what a policy does not cover, including graded and waiting period benefits.",
-          "Tell you when the honest answer is that you do not need what you called about.",
+          "Tell you when you do not need what you called about.",
         ])}
       </div>
       <div class="reveal card">

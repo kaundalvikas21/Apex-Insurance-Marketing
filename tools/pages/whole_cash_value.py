@@ -84,8 +84,8 @@ FAQ = [
      "For most households with a mortgage and young children, buying adequate term coverage first "
      "is not optional, it is the base case. A whole life premium that crowds out that coverage "
      "is the wrong trade. Whether to invest the difference or fund a permanent policy after that "
-     "is a genuine question with a real answer on both sides. It depends on your tax position, "
-     "your discipline, whether the need is actually permanent, and how much you value a guarantee "
+     "is a question with a real answer on both sides. It depends on your tax position, "
+     "your discipline, whether the need is permanent, and how much you value a guarantee "
      "over an expected return. Anyone who tells you one answer always wins is selling something."),
 ]
 
@@ -171,7 +171,7 @@ def body():
         </p>
         <p class="mt-4 text-slate">
           If you cannot see yourself holding the policy well past that point, this is not the right
-          product for you. We would rather say so here.
+          product for you.
         </p>
       </div>
     </div>
@@ -213,7 +213,7 @@ def body():
     </div>
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      When we send an illustration, we point at the guaranteed column first and say plainly which
+      When we send an illustration, we point at the guaranteed column first and say which
       figures are assumptions. How dividends are declared, and why a long record of paying them is
       still not a promise, is covered on
       <a class="link" href="/whole-life-insurance/dividends/">dividends and participating
@@ -231,7 +231,7 @@ def body():
     "Borrowing against the cash value",
     C.step(1, "You request a loan from the carrier",
            "No credit check, no approval, no stated purpose. The cash value is the collateral, and "
-           "the money usually arrives within days. This genuine flexibility is a large part of why "
+           "the money usually arrives within days. This flexibility is a large part of why "
            "people value the product.")
     + '<div class="mt-8">' + C.step(2, "Interest accrues from day one",
            "At a rate set in the contract, which may be fixed or variable. It is charged whether "
@@ -324,7 +324,7 @@ def body():
               "different tax, and one an estate attorney should look at where the amounts are "
               "large.")}
         {C.qa("Growth inside the policy",
-              "Generally not taxed as it accrues. This tax deferral is one of the genuine "
+              "Generally not taxed as it accrues. This tax deferral is one of the "
               "structural advantages of the product. It is also the feature most often "
               "oversold, because the growth being deferred is modest on the guaranteed column.",
               "mt-8")}
@@ -378,7 +378,7 @@ def body():
       <div class="reveal">
         <h3 class="text-h3 !font-display !font-semibold text-white">Where it is incomplete</h3>
         <ul class="mt-5 grid gap-4 text-white/85">
-          <li>It assumes the difference actually gets invested, every month, for thirty years,
+          <li>It assumes the difference gets invested, every month, for thirty years,
               without being spent. Measured behavior says most people do not do this, and a
               strategy that only works with perfect discipline should be priced accordingly.</li>
           <li>It compares an expected return with a guarantee as though they were the same kind of
