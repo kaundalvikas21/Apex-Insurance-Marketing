@@ -243,7 +243,7 @@ def body():
 
 
 <!-- =====================================================================
-     THE ASK. Phone first, with the four field form as the secondary.
+     THE ASK. Phone first, with the three field form as the secondary.
      ================================================================== -->
 <section class="section band-surface" id="talk">
   <div class="container-ax">

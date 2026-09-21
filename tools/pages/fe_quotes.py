@@ -4,7 +4,7 @@
 T1 says the form is the page. In this silo that is wrong, and the spec says so:
 final expense is phone weighted everywhere, and the buyer is 60 to 85. So the
 hero's primary action is a full width click-to-call at the fe button scale, and
-the four field callback form sits beside it as the secondary.
+the three field callback form sits beside it as the secondary.
 
 Everything else about T1 is kept, because the objections it answers are the
 same ones: what you need to hand, what actually happens after you press the
@@ -94,7 +94,7 @@ def body():
     return f"""
 <!-- =====================================================================
      HERO. T1 inverted for the silo's phone weighting: the call is the
-     primary action and the four field form is the secondary. No glow and
+     primary action and the three field form is the secondary. No glow and
      no photograph, per the fe rules and per T1.
      ================================================================== -->
 <section class="pt-6 pb-14 md:pb-16">
@@ -108,7 +108,7 @@ def body():
         One call takes about fifteen minutes. You will hear what
         <a class="link" href="/final-expense-insurance/">final expense insurance</a> would cost
         you and which carriers would accept you. There is no medical exam and no obligation. Or
-        leave four details in the form and a licensed agent will call you back.
+        leave three details in the form and a licensed agent will call you back.
       </p>
     </div>
 
@@ -141,7 +141,7 @@ def body():
           {FE.callback_form(
               "feq", "fe_quotes_page",
               heading="Or ask us to call you",
-              intro="Leave four details and a licensed agent will call you back within " +
+              intro="Leave three details and a licensed agent will call you back within " +
                     C.SLA + ". Nothing here is a credit check, and none of it affects your "
                     "credit score.")}
         </div>
@@ -313,5 +313,5 @@ def body():
 
 
 {C.closing_band("whole-band", "Ready when you are",
-    "One call, about fifteen minutes. Or leave four details and we call you.",
+    "One call, about fifteen minutes. Or leave three details and we call you.",
     "fe_quotes_close", silo="fe", phone_first=True, quote=("#quote", "Request a call back"))}"""

@@ -107,6 +107,8 @@ def call_band(heading, sub, where, photo=None):
         return C.banner(photo, heading, sub,
                         C.phone_link(where, "btn btn-call btn-xl btn-block !bg-white !text-navy",
                                      "Call " + C.PHONE_DISPLAY, 26)
+                        + '<a class="btn btn-ghost btn-block mt-3" href="#fe-quote">'
+                          'Get coverage now</a>'
                         + '<p class="mt-3 text-sm text-white/75 text-center">%s</p>' % C.HOURS)
     return f"""
 <section class="section-tight band-navy on-navy">
@@ -206,8 +208,9 @@ def body():
         "Final expense insurance, made simple.",
         "A small whole life policy for funeral costs and final bills. No medical exam, and the "
         "premium never goes up.",
-        extra='''<div class="reveal mt-8">
+        extra='''<div class="reveal mt-8 grid gap-3 max-w-md">
         %s
+        <a href="#fe-quote" class="btn btn-cta btn-xl btn-block">Get coverage now</a>
         <p class="mt-3 text-slate">%s</p>
       </div>''' % (C.phone_link("fe_hero_primary", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 28), C.HOURS),
         banner="fe-hero")
@@ -268,11 +271,11 @@ def body():
 {usps}
 
 <!-- =====================================================================
-     GET IN TOUCH. Phone first, with the four field call-back form as the
-     secondary. Moved out of the hero so the hero can stay one line and one
-     button.
+     GET IN TOUCH. Phone first, with the three field call-back form as the
+     secondary. Moved out of the hero, which now carries a second button that
+     jumps here.
      ================================================================== -->
-<section class="section band">
+<section id="fe-quote" class="section band">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
@@ -309,7 +312,7 @@ def body():
         </div>
       </div>
 
-      <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
+      <!-- Secondary CTA. Three fields, one step, no scrolling inside the form. -->
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
           {callback_form("fe_hero", "fe_hero_callback")}
@@ -686,7 +689,7 @@ def body():
 
       <div class="reveal">
         <div class="panel">
-          {callback_form("fe_footer", "fe_footer_callback", heading="Or leave your number", intro="Four details. We call you back.")}
+          {callback_form("fe_footer", "fe_footer_callback", heading="Or leave your number", intro="Three details. We call you back.")}
         </div>
       </div>
     </div>
@@ -695,15 +698,17 @@ def body():
 """
 
 
-# --- The four field callback form ------------------------------------------
+# --- The three field callback form -----------------------------------------
 # Extracted for the final expense SPOKES, which are phone first with a short
 # form as the secondary ask and would otherwise each hand-copy this block.
 # The hub uses it too, twice: its two inline copies were folded in during the
 # September 2026 forms pass, when every form changed shape anyway.
 def callback_form(prefix, form_name, heading="Prefer we call you?",
-                  intro="Leave four details and a licensed agent will call you back.",
+                  intro="Leave three details and a licensed agent will call you back.",
                   silo="final-expense", senior=True):
-    """Four fields in two rows, one step, no scrolling inside the form.
+    """Three fields, one step, no scrolling inside the form. The name went in
+    the September 2026 shortening pass: the agent asks for it in the first five
+    seconds of the call, so it was a field the form did not need to carry.
 
     `prefix` must be unique per page, not per site: it namespaces every id in
     the block, including the TCPA consent checkbox and the success panel.
@@ -712,13 +717,11 @@ def callback_form(prefix, form_name, heading="Prefer we call you?",
     policy review page, which takes any adult age rather than 50 to 85.
     """
     fields = (
-        F.row(F.text_field(prefix + "-name", "name", "Your name", autocomplete="name",
-                           validate="name", error="Please tell us your name."),
-              F.age_field(prefix + "-age", senior=senior))
-        + F.row(F.select_field(prefix + "-state", "state", "Your state",
-                               '<option value="">Choose your state</option>\n' + C.state_options(),
-                               error="Please choose your state."),
-                F.phone_field(prefix + "-phone", label="Your phone number")))
+        F.row(F.age_field(prefix + "-age", senior=senior),
+              F.select_field(prefix + "-state", "state", "Your state",
+                             '<option value="">Choose your state</option>\n' + C.state_options(),
+                             error="Please choose your state."))
+        + F.phone_field(prefix + "-phone", label="Your phone number"))
     return f"""
           <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
           <p class="mt-3 text-slate">{intro}</p>

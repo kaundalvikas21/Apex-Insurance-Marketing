@@ -194,9 +194,17 @@ COVERAGE_OPTIONS = [
 ]
 
 
-def quote_form(form_id, form_name, id_prefix):
-    """Two steps, six fields, paired. Step 1 is about the person, step 2 is the
-    cover and how to reach them, with the TCPA block above the submit."""
+def quote_form(form_id, form_name, id_prefix, coverage=True):
+    """Two steps. Step 1 is about the person, step 2 is how to reach them, with
+    the TCPA block above the submit.
+
+    `coverage=False` drops the coverage select, which is the September 2026
+    shortening: an agent can ask it on the call, and the field's own hint said
+    a rough figure was fine. It stays True only where a rate row or the
+    calculator prefills `coverage` into this form, because [data-prefill]
+    writes by field name and would silently drop the amount the visitor just
+    picked.
+    """
     p = id_prefix
     about = (
         F.row(F.age_field(p + "-age", label="How old are you?",
@@ -214,10 +222,13 @@ def quote_form(form_id, form_name, id_prefix):
                               error="Let us know either way."))
         + F.next_button())
     cover = (
-        F.row(F.select_field(p + "-coverage", "coverage", "How much coverage?", COVERAGE_OPTIONS,
-                             error="Choose a coverage amount, or pick the closest.",
-                             hint="A rough figure is fine."),
-              F.phone_field(p + "-phone", hint="One agent calls, once."))
+        (F.row(F.select_field(p + "-coverage", "coverage", "How much coverage?", COVERAGE_OPTIONS,
+                              error="Choose a coverage amount, or pick the closest.",
+                              hint="A rough figure is fine."),
+               F.phone_field(p + "-phone", hint="One agent calls, once."))
+         if coverage else
+         F.phone_field(p + "-phone", hint="One agent calls, once. We ask what you want to cover "
+                                          "on that call."))
         + F.consent_block(p, C.BRAND, 12)
         + F.submit_block("See my quotes", back=True))
     return f"""
@@ -229,7 +240,7 @@ def quote_form(form_id, form_name, id_prefix):
           {F.progress(2)}
 
           {F.step(1, "About you", about, first=True)}
-          {F.step(2, "Your coverage", cover)}
+          {F.step(2, "Your coverage" if coverage else "How to reach you", cover)}
         </form>
 
         <div id="{p}-success" class="success">
@@ -600,7 +611,7 @@ def body():
       <div class="lg:col-span-5 reveal">
         <h2 class="text-h2">Get your quotes</h2>
         <p class="mt-5 text-slate">
-          Six questions, about ninety seconds. A licensed agent replies with named carriers and
+          Five questions, about ninety seconds. A licensed agent replies with named carriers and
           real premiums. Your details are never sold, and nobody else calls you.
         </p>
         <p class="mt-6 text-sm text-muted">
@@ -611,7 +622,7 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <div class="panel">
           <h3 class="text-h3 !font-display !font-semibold">Start your quote</h3>
-          {quote_form("term-quote-form-footer", "term_footer_quote", "tf")}
+          {quote_form("term-quote-form-footer", "term_footer_quote", "tf", coverage=False)}
         </div>
       </div>
     </div>

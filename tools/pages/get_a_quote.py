@@ -9,9 +9,9 @@ and what do you do with my details.
 BRANCHING. Step 1 picks the product and the following steps adapt to that
 silo's shipped pattern:
 
-    term life       three-step, six fields   (matches the term hub)
-    whole life      single step, five fields (matches the whole life hub)
-    final expense   short, four fields       (matches the final expense hub)
+    term life       three-step, five fields  (matches the term hub)
+    whole life      single step, four fields (matches the whole life hub)
+    final expense   short, two fields        (matches the final expense hub)
 
 Mechanically the form holds every branch at once and disables the ones that do
 not apply. A disabled <fieldset> is native: collect() in site.js already skips
@@ -111,28 +111,16 @@ def quote_form():
                 F.radio_group("q-term-tob", "term_tobacco", "Tobacco in the last 12 months?",
                               [("no", "No"), ("yes", "Yes")], hint="Nicotine of any kind.",
                               error="Let us know either way."))
-        + F.select_field("q-term-coverage", "coverage", "How much coverage?", [
-            ("", "Choose an amount"), ("100000", "$100,000"), ("250000", "$250,000"),
-            ("500000", "$500,000"), ("750000", "$750,000"), ("1000000", "$1,000,000"),
-            ("2000000", "$2,000,000 or more"), ("unsure", "Not sure yet")],
-            error="Choose a coverage amount, or pick the closest.", hint="A rough figure is fine.")
         + F.next_button(back=True))
     whole = (
         F.row(F.age_field("q-wl-age"),
               F.select_field("q-wl-state", "state", "Your state", states,
                              error="Please choose your state."))
-        + F.row(F.radio_group("q-wl-sex", "wl_sex", "Sex on your birth certificate", sexes,
-                              error="Choose one so we can price it correctly."),
-                F.select_field("q-wl-coverage", "coverage", "How much coverage?", [
-                    ("", "Choose an amount"), ("25000", "$25,000"), ("50000", "$50,000"),
-                    ("100000", "$100,000"), ("250000", "$250,000"),
-                    ("500000", "$500,000 or more"), ("unsure", "Not sure yet")],
-                    error="Choose a coverage amount, or pick the closest."))
+        + F.radio_group("q-wl-sex", "wl_sex", "Sex on your birth certificate", sexes,
+                        error="Choose one so we can price it correctly.")
         + F.next_button(back=True))
     final = (
-        F.text_field("q-fe-name", "name", "Your name", autocomplete="name",
-                     validate="name", error="Please tell us your name.")
-        + F.row(F.age_field("q-fe-age"),
+        F.row(F.age_field("q-fe-age"),
                 F.select_field("q-fe-state", "state", "Your state", states,
                                error="Please choose your state."))
         + F.next_button(back=True))
@@ -289,7 +277,7 @@ def body():
             "Your age and the state you live in.",
             "Sex as shown on your birth certificate, because carriers rate it differently.",
             "Whether you have used tobacco or nicotine in the last 12 months.",
-            "Roughly how much coverage you want, or that you are not sure yet.",
+            "Roughly how much coverage you want. The agent asks that on the call.",
             "A phone number a licensed agent can reach you on.",
           ])}
         </ul>

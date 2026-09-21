@@ -101,28 +101,38 @@ REQUEST_TYPE_FIELD = '''<!-- Flipped to "illustration" by the tertiary CTA below
 <input type="hidden" name="request_type" value="quote">'''
 
 
-def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl"):
-    """Five fields, one step, three rows. Equal partner to the phone CTA beside it.
+def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl",
+               coverage=True):
+    """One step, two rows. Equal partner to the phone CTA beside it.
 
     Parameterised so the whole life spokes can host their own copy: two forms
     posting the same data-form-name would make the GA4 form_submit event
     useless for telling the hub apart from the calculator.
+
+    `coverage=False` drops the coverage select (September 2026 shortening). It
+    stays True only where a rate row or the calculator prefills `coverage` into
+    this form: [data-prefill] writes by field name, so without the field the
+    amount the visitor just picked is silently dropped.
     """
     p = id_prefix
+    state = F.select_field(p + "-state", "state", "Your state",
+                           '<option value="">Choose your state</option>\n' + C.state_options(),
+                           error="Please choose your state.")
+    phone = F.phone_field(p + "-phone", hint="One agent calls, once.")
     fields = (
         F.row(F.age_field(p + "-age"),
               F.radio_group(p + "-sex", "sex", "Sex", [("female", "Female"), ("male", "Male")],
                             error="Choose one so we can price it correctly."))
-        + F.row(F.select_field(p + "-state", "state", "Your state",
-                               '<option value="">Choose your state</option>\n' + C.state_options(),
-                               error="Please choose your state."),
-                F.select_field(p + "-coverage", "coverage", "Coverage in mind",
-                               [("", "Choose an amount"), ("25000", "$25,000"), ("50000", "$50,000"),
-                                ("100000", "$100,000"), ("250000", "$250,000"),
-                                ("500000", "$500,000 or more"), ("unsure", "Not sure yet")],
-                               error="Choose an amount, or pick the closest.",
-                               hint="A rough figure is fine."))
-        + F.phone_field(p + "-phone", hint="One agent calls, once."))
+        + (F.row(state,
+                 F.select_field(p + "-coverage", "coverage", "Coverage in mind",
+                                [("", "Choose an amount"), ("25000", "$25,000"),
+                                 ("50000", "$50,000"), ("100000", "$100,000"),
+                                 ("250000", "$250,000"), ("500000", "$500,000 or more"),
+                                 ("unsure", "Not sure yet")],
+                                error="Choose an amount, or pick the closest.",
+                                hint="A rough figure is fine."))
+           + phone
+           if coverage else F.row(state, phone)))
     return f"""
         <form id="{form_id}" class="mt-6" data-ax-form data-silo="whole-life"
               data-form-name="{form_name}" data-success-target="{p}-success" novalidate>
@@ -284,8 +294,8 @@ def body():
 
       <div class="panel reveal flex flex-col">
         <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
-        <p class="mt-2 text-sm text-muted">Five questions. A licensed agent replies within {C.SLA}.</p>
-        {quote_form()}
+        <p class="mt-2 text-sm text-muted">Four questions. A licensed agent replies within {C.SLA}.</p>
+        {quote_form(coverage=False)}
       </div>
 
       <div class="panel reveal flex flex-col">

@@ -104,8 +104,16 @@ def body():
              '<a href="#review-form" class="btn btn-cta">Request my free review</a>'),
         cls="section band")
 
+    usps = C.usp_strip([
+        ("scale", "Independent agency", "We compare carriers for you"),
+        ("user-check", "Unbiased opinion", "Many reviews end with: keep what you have"),
+        ("handshake", "Free, no obligation", "You never pay us a fee"),
+        ("clock", "Reply within " + C.SLA, "From a real person"),
+    ])
+
     return f"""{C.page_hero(TRAIL, "Is your life insurance still right for you?", LEAD, extra=hero_cta,
              banner="review-banner")}
+{usps}
 {what}
 
 <section class="section band">
@@ -156,7 +164,7 @@ def body():
         <div class="sticky-col">
           <h2 class="reveal text-h2">Request your free policy review</h2>
           <p class="reveal mt-5 text-slate">
-            Leave four details and a licensed agent will call you. Or skip the form and call us now.
+            Leave three details and a licensed agent will call you. Or skip the form and call us now.
           </p>
           <div class="reveal mt-6">{C.phone_link("policy_review_form", "btn btn-call", "Call " + C.PHONE_DISPLAY)}</div>
           <p class="reveal mt-3 text-micro text-muted">{C.HOURS}</p>
@@ -166,7 +174,7 @@ def body():
         <div class="reveal panel">
           {FE.callback_form("pr", "policy_review",
               heading="Tell us where to reach you",
-              intro="Four details. Nothing here is a credit check.",
+              intro="Three details. Nothing here is a credit check.",
               silo="site", senior=False)}
         </div>
       </div>

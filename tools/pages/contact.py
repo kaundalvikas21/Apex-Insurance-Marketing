@@ -26,14 +26,18 @@ def schema():
 
 
 def body():
-    # One h1, one line, one button. Calling is the fastest route, so the button
-    # is the phone; the form is the section under the strip.
+    # One h1, one line, two buttons: the client asked for a way to the form
+    # from the banner. Calling still leads and keeps the call styling; Send a
+    # message is an in page jump to the form panel below.
     hero = C.page_hero(
         [("Home", "/"), ("Contact", None)],
         "Talk to a licensed agent.",
         "Call us or send a message. Either way you reach a real licensed agent.",
         extra='''<div class="reveal mt-8">
-        %s
+        <div class="flex flex-wrap items-center gap-3">
+          %s
+          <a href="#contact-form" class="btn btn-cta">Send a message</a>
+        </div>
         <p class="mt-3 text-micro text-muted">%s</p>
       </div>''' % (C.phone_link("contact_hero", "btn btn-call", "Call " + C.PHONE_DISPLAY), C.HOURS),
         banner="contact-banner")
@@ -48,17 +52,10 @@ def body():
         F.row(F.text_field("ct-name", "name", "Your name", autocomplete="name", validate="name",
                            error="Please tell us your name."),
               F.phone_field("ct-phone", label="Phone"))
-        + F.row(F.text_field("ct-email", "email", "Email", type="email", autocomplete="email",
-                             validate="email", error="Enter a valid email address."),
-                F.select_field("ct-interest", "interest", "What is it about?",
-                               [("", "Choose one"), ("term-life", "Term life insurance"),
-                                ("whole-life", "Whole life insurance"),
-                                ("final-expense", "Final expense insurance"),
-                                ("not-sure", "I am not sure which I need"),
-                                ("existing-policy", "A policy I already have"),
-                                ("other", "Something else")],
-                               error="Pick the closest one. We can change it on the call."))
-        + F.textarea_field("ct-message", "message", "Anything else?",
+        + F.text_field("ct-email", "email", "Email", type="email", autocomplete="email",
+                       validate="email", error="Enter a valid email address.", required=False,
+                       hint="Optional. We reply by phone unless you ask us not to.")
+        + F.textarea_field("ct-message", "message", "What can we help with?",
                            hint="Optional. A health condition, a deadline, a quote from elsewhere."))
 
     return f"""
@@ -114,9 +111,10 @@ def body():
        </div>
       </div>
 
-      <!-- RIGHT: the form. -->
+      <!-- RIGHT: the form. The hero button jumps here, not to #message: on a
+           phone the section id lands on the call card above. -->
       <div class="lg:col-span-6 lg:col-start-7">
-        <div class="panel reveal">
+        <div id="contact-form" class="panel reveal">
           <h2 class="text-h3 !font-display !font-semibold">Send us a message</h2>
           <p class="mt-2 text-sm text-muted">
             A licensed agent reads every one of these. We reply within {C.SLA}.

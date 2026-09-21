@@ -254,7 +254,7 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">Find out which route you qualify for</h2>
         <p class="reveal mt-5 text-slate">
-          Six questions, about two minutes. A licensed agent comes back within {C.SLA} with the
+          Five questions, about two minutes. A licensed agent comes back within {C.SLA} with the
           carriers most likely to waive the exam for your age and health. You also get the price if
           they do not. We will tell you when taking the exam is the better deal.
         </p>
@@ -266,7 +266,7 @@ def body():
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="reveal panel">
-          {term.quote_form("term-noexam-quote-form", "term_no_exam_quote", "tnx")}
+          {term.quote_form("term-noexam-quote-form", "term_no_exam_quote", "tnx", coverage=False)}
         </div>
       </div>
     </div>

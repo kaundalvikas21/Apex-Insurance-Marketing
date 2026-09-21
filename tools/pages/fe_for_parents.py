@@ -234,7 +234,7 @@ def body():
           {FE.callback_form(
               "fe-parents", "fe_for_parents_callback",
               heading="Ask us what it would cost for your parent",
-              intro="Leave four details and a licensed agent will call you. We will talk you "
+              intro="Leave three details and a licensed agent will call you. We will talk you "
                     "through the health questions and tell you which carriers treat your parent's "
                     "situation best. We will say if a waiting period is likely.")}
         </div>

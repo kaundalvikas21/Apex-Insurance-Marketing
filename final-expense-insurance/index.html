@@ -108,8 +108,9 @@
       <div class="mt-8 lg:w-5/12">
         <h1 class="reveal text-h1">Final expense insurance, made simple.</h1>
       <p class="reveal mt-5 text-lead text-slate">A small whole life policy for funeral costs and final bills. No medical exam, and the premium never goes up.</p>
-      <div class="reveal mt-8">
+      <div class="reveal mt-8 grid gap-3 max-w-md">
         <a href="tel:+15550180199" data-cta-location="fe_hero_primary" class="btn btn-call btn-xl"><svg class="shrink-0" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a>
+        <a href="#fe-quote" class="btn btn-cta btn-xl btn-block">Get coverage now</a>
         <p class="mt-3 text-slate">Mon to Fri, 8am to 7pm CT · Sat 9am to 2pm CT</p>
       </div>
       </div>
@@ -149,11 +150,11 @@
 </section>
 
 <!-- =====================================================================
-     GET IN TOUCH. Phone first, with the four field call-back form as the
-     secondary. Moved out of the hero so the hero can stay one line and one
-     button.
+     GET IN TOUCH. Phone first, with the three field call-back form as the
+     secondary. Moved out of the hero, which now carries a second button that
+     jumps here.
      ================================================================== -->
-<section class="section band">
+<section id="fe-quote" class="section band">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
@@ -190,12 +191,12 @@
         </div>
       </div>
 
-      <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
+      <!-- Secondary CTA. Three fields, one step, no scrolling inside the form. -->
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
           
           <h2 class="text-h3 !font-display !font-semibold">Prefer we call you?</h2>
-          <p class="mt-3 text-slate">Leave four details and a licensed agent will call you back.</p>
+          <p class="mt-3 text-slate">Leave three details and a licensed agent will call you back.</p>
 
           <form class="mt-6" data-ax-form data-silo="final-expense"
                 data-form-name="fe_hero_callback" data-success-target="fe_hero-success" novalidate>
@@ -209,16 +210,10 @@
 
             <div class="field-row">
 <div class="field">
-              <label class="field-label" for="fe_hero-name">Your name</label>
-              <input class="input" id="fe_hero-name" name="name" type="text" autocomplete="name" required data-validate="name" data-error="Please tell us your name.">
-              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
-            </div>
-<div class="field">
               <label class="field-label" for="fe_hero-age">Your age</label>
               <input class="input" id="fe_hero-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-</div><div class="field-row">
 <div class="field">
               <label class="field-label" for="fe_hero-state">Your state</label>
               <select class="select" id="fe_hero-state" name="state" required data-error="Please choose your state.">
@@ -227,12 +222,11 @@
               </select>
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-<div class="field">
+</div><div class="field">
               <label class="field-label" for="fe_hero-phone">Your phone number</label>
               <input class="input" id="fe_hero-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-</div>
 
             <!-- TCPA consent. Separate, unchecked, immediately above submit.
                  [PENDING LEGAL REVIEW] Wording must be approved by counsel and
@@ -589,7 +583,7 @@
         <p class="text-h2 !font-display !font-bold text-white">Not sure which type of policy you need?</p>
         <p class="mt-4 text-white/85 max-w-2xl">Tell us your age and what you want to cover. We will tell you which one fits.</p>
       </div>
-      <div class="lg:col-span-4 lg:col-start-9"><a href="tel:+15550180199" data-cta-location="fe_repeat_2" class="btn btn-call btn-xl btn-block !bg-white !text-navy"><svg class="shrink-0" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a><p class="mt-3 text-sm text-white/75 text-center">Mon to Fri, 8am to 7pm CT · Sat 9am to 2pm CT</p></div>
+      <div class="lg:col-span-4 lg:col-start-9"><a href="tel:+15550180199" data-cta-location="fe_repeat_2" class="btn btn-call btn-xl btn-block !bg-white !text-navy"><svg class="shrink-0" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a><a class="btn btn-ghost btn-block mt-3" href="#fe-quote">Get coverage now</a><p class="mt-3 text-sm text-white/75 text-center">Mon to Fri, 8am to 7pm CT · Sat 9am to 2pm CT</p></div>
     </div>
   </div>
 </section>
@@ -907,7 +901,7 @@
         <div class="panel">
           
           <h2 class="text-h3 !font-display !font-semibold">Or leave your number</h2>
-          <p class="mt-3 text-slate">Four details. We call you back.</p>
+          <p class="mt-3 text-slate">Three details. We call you back.</p>
 
           <form class="mt-6" data-ax-form data-silo="final-expense"
                 data-form-name="fe_footer_callback" data-success-target="fe_footer-success" novalidate>
@@ -921,16 +915,10 @@
 
             <div class="field-row">
 <div class="field">
-              <label class="field-label" for="fe_footer-name">Your name</label>
-              <input class="input" id="fe_footer-name" name="name" type="text" autocomplete="name" required data-validate="name" data-error="Please tell us your name.">
-              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
-            </div>
-<div class="field">
               <label class="field-label" for="fe_footer-age">Your age</label>
               <input class="input" id="fe_footer-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-</div><div class="field-row">
 <div class="field">
               <label class="field-label" for="fe_footer-state">Your state</label>
               <select class="select" id="fe_footer-state" name="state" required data-error="Please choose your state.">
@@ -939,12 +927,11 @@
               </select>
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-<div class="field">
+</div><div class="field">
               <label class="field-label" for="fe_footer-phone">Your phone number</label>
               <input class="input" id="fe_footer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
-</div>
 
             <!-- TCPA consent. Separate, unchecked, immediately above submit.
                  [PENDING LEGAL REVIEW] Wording must be approved by counsel and

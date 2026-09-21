@@ -232,7 +232,7 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.nav-drawer` | The mobile menu, below 1024px. A native `<dialog>` that slides in from the right over a dimmed page (300ms, `@starting-style` in, `allow-discrete` out, none under reduced motion). Same icon rows as the mega menu, then the help-me-choose card, then Get a Free Quote and Call pinned to the bottom. Solid white, never glass. |
 | `.nav-dd` | The "Insurance" mega menu: a native `<details>`, solid white (never glass), two columns. Left, the three hubs as icon rows (the circle turns navy on hover). Right, one navy aside with the menu's only CTA, `.btn-cta` to `/#triage`, and a call link. 160ms fade and rise on open, off under reduced motion. Absent below 1024px, where the mobile panel lists the links flat. |
 | `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
-| `chrome.page_hero()` | The top of every hub and informational page: breadcrumb, one H1, one sentence (30 words at most), one button. `check.py` enforces it through `data-hero`. `answer=` renders the rest of the direct answer, with the mandated hub up-link, as its own block directly beneath. `short=False` is for the T5 compare pages only. `glow=False` on every final-expense page. |
+| `chrome.page_hero()` | The top of every hub and informational page: breadcrumb, one H1, one sentence (30 words at most), one button. `check.py` enforces it through `data-hero`, with one named exception: `check.py`'s `HERO_TWO_CTA` lets **contact** and the **final expense hub** carry two, a call button plus an in page jump to the form (client request, September 2026). Two is the ceiling and the set is closed. `answer=` renders the rest of the direct answer, with the mandated hub up-link, as its own block directly beneath. `short=False` is for the T5 compare pages only. `glow=False` on every final-expense page. |
 | `chrome.hero_cta()` | The hero's one amber button and micro line, for `page_hero(extra=)`. Phone first pages pass a `phone_link()` block instead. |
 | `chrome.steps_section()` | The connected stepper: filled navy `.steps-node` circles on a dashed rail (on top from 768px, down the left below), a cell under each, optional `.steps-cta` strip. Three items read white, tinted, blue so the last is the destination. Four items, or `fe=True`, stay plain white with no stagger and no lift, go four across only from 1024px, and keep the vertical rail between 768 and 1023 because a 2 x 2 grid breaks the line. Every genuine sequence on the site uses it (16 sections): home, free policy review, "How to apply" on two hubs, "What happens after you submit" on the three silo quote pages (`post_submit_section()` now delegates to it) and `/get-a-quote/`, the three "check it against your own dates" sections, contact, About agents and carriers, cremation and for-parents. Lists of reasons or parts ("How to lower a rate", "When not to buy this") are deliberately not steppers: a numbered rail would imply an order they do not have. |
 | `chrome.closing_band()` / `chrome.banner(inset=True)` | A page's final ask as a rounded photo card inside a pale section. **No page may end on a flat navy or edge to edge photo band**: directly on the navy footer it reads as part of the footer, and the pale margin under the card is the boundary. Used on `/get-a-quote/` and the five About pages. No people in the photograph on a reviews or an agent page. |
@@ -273,6 +273,8 @@ the triage widget, the FAQ, and the closing card pair. The comparison table live
 one sentence and one button over a full-bleed client-supplied photograph (`images.HERO_BANNERS`;
 behind the copy from 1024px, a 4:3 crop under it below that; no scrim, no glow), then `usp_strip()`, then the quote or contact section.
 The hero button points at that section, so the form is one click away rather than in the hero.
+Contact and the final expense hub carry two hero buttons: the call leads, and a second button ("Send a message", "Get coverage now")
+jumps to the form below (`#contact-form`, `#fe-quote`). Every other hero stays at one.
 
 **Term hub.** Form-weighted; the two-step form (About you, Your cover) is the first section under the strip, `#quote`. "What it covers" ends
 in a three-cell bento led by a blue coverage-range stat. Term lengths are four segmented stat cells
@@ -283,7 +285,7 @@ signature object, with its toggles above it and a dated pill beneath.
 The cash-value chart sits in a `.bento-4` beside a tinted `.bento-2` stat (40 years). Section 7b
 ("who this does not suit") keeps identical prominence to 7a.
 
-**Final-expense hub.** Phone-first (the hero's one button is `.btn-call.btn-xl`), Inter throughout, static. Cost table cut to three columns
+**Final-expense hub.** Phone-first (the call is the leading `.btn-call.btn-xl`, with "Get coverage now" stacked under it to `#fe-quote`), Inter throughout, static. Cost table cut to three columns
 (`Age | $10,000 | $25,000`) with the row-level call CTA inside the age cell. The three-product
 comparison is a three-column table with group rows so it never needs a fourth column.
 
@@ -312,7 +314,8 @@ They inherit this file without deviation except where a page doc exists (`term-n
 1. **The answer comes first, in two parts.** The hero lead is its first sentence. The rest goes in
    `page_hero(answer=)`, which renders directly under the hero and before any section, and carries
    the mandated hub up-link. That satisfies spec s07 rule 1 and "answer the question first" while
-   keeping the hero to one sentence. Every hero carries exactly one button, weighted per silo.
+   keeping the hero to one sentence. Every hero carries exactly one button, weighted per silo,
+   except the two pages in `check.py`'s `HERO_TWO_CTA`.
 2. **Asks, in a fixed set.** One hero button; one mid-page `chrome.inline_cta()`, never an
    interstitial; on a run of more than about 900 words with no button, one slim
    `chrome.ask_strip()` at the midpoint; a call line under the FAQ (`faq_section(ask=True)`); and
@@ -494,6 +497,8 @@ is accuquote.com: its sentence shapes, never its claims.
 | Illustration | Request a policy illustration |
 | Hub teaser | Learn about term life (etc.) |
 | Phone | Call `PHONE_DISPLAY` · Or call `PHONE_DISPLAY` |
+| Contact hero, to the form | Send a message |
+| Final expense hero and photo band, to the form | Get coverage now |
 
 A label that names a specific thing ("Quote a 20 year term", "Get quotes for $750,000 of
 coverage", "See if you qualify", "Help me choose", "Get both quotes") is not a duplicate and stays.

@@ -198,6 +198,8 @@ contextual text link is not.
 
 **Heroes are one h1, one sentence, one button.** `check.py` fails a `page_hero()` lead over 30
 words or a second `.btn`. The rest of the answer, and the hub up-link, go in `page_hero(answer=)`.
+The one exception is `check.py`'s `HERO_TWO_CTA` set: `/contact/` and `/final-expense-insurance/`
+carry the call button plus one in-page jump to the form. Two is the ceiling, and the set is closed.
 
 ## Gotchas that cost real time
 

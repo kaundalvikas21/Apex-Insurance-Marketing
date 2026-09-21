@@ -54,6 +54,12 @@ problems = []
 notes = []
 
 
+HERO_TWO_CTA = {
+    "contact/index.html",              # Call + Send a message
+    "final-expense-insurance/index.html",  # Call + Get coverage now
+}
+
+
 def fail(page, msg):
     problems.append("%s: %s" % (page, msg))
 
@@ -145,15 +151,20 @@ def check_page(rel, html, built):
     # produce it; only a hand-rolled copy of prose()'s grid can.
     # A page_hero() hero is one h1, one sentence, one button (client reframe,
     # September 2026). The rest of the answer goes in page_hero(answer=).
+    # HERO_TWO_CTA is the client's September 2026 exception: two pages whose
+    # job is "call us or write to us" carry the call button plus one in page
+    # jump to the form. It is a named set, not a raised limit, so the other
+    # forty eight heroes still fail on a second button.
     hero = re.search(r'<section[^>]*data-hero>(.*?)</section>', html, re.S)
     if hero:
         lead = re.search(r'<p class="[^"]*text-lead[^"]*">(.*?)</p>', hero.group(1), re.S)
         words = len(re.sub(r"<[^>]+>", "", lead.group(1)).split()) if lead else 0
         if words > 30:
             fail(page, "hero lead is %d words, at most 30. Move the rest to page_hero(answer=)" % words)
+        limit = 2 if page in HERO_TWO_CTA else 1
         buttons = len(re.findall(r'class="btn ', hero.group(1)))
-        if buttons > 1:
-            fail(page, "hero holds %d buttons, at most 1" % buttons)
+        if buttons > limit:
+            fail(page, "hero holds %d buttons, at most %d" % (buttons, limit))
 
     # A dark band as the last thing in <main> sits straight on the navy footer
     # and reads as part of it. Use chrome.closing_band() / banner(inset=True).
