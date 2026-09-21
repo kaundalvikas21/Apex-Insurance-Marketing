@@ -983,6 +983,28 @@
     transition: color .15s ease-out;
   }
   .footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  /* Back to top. Bottom right, above the safe area, under every dialog (those
+     are in the top layer). 48px, or 56px on a senior page. */
+  .to-top {
+    position: fixed; z-index: 40;
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 999px;
+    background-color: var(--color-navy);
+    color: #fff;
+    box-shadow: var(--shadow-lift);
+    transition: background-color .15s ease-out, transform .15s var(--ease-ax);
+  }
+  .to-top:hover { background-color: var(--color-navy-700); transform: translateY(-2px); }
+  main:focus { outline: none; }   /* focused by script after back to top; it is not a control */
+  .fe .to-top { width: 56px; height: 56px; }
+  .fe .to-top:hover { transform: none; }
+  @media (prefers-reduced-motion: no-preference) { .to-top:not([hidden]) { animation: nav-dd-in .2s var(--ease-ax); } }
+  @media (prefers-reduced-motion: reduce) { .to-top:hover { transform: none; } }
+  @media print { .to-top { display: none !important; } }
+
   .footer-social {
     display: inline-flex; align-items: center; justify-content: center;
     width: 44px; height: 44px;

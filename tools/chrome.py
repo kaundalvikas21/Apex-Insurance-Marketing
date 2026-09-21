@@ -42,6 +42,9 @@ SOCIAL = [
     ("instagram", "Instagram", "[INSTAGRAM URL]"),
 ]
 
+# The legal entity. Used in the licence disclosure, the TCPA consent wording and
+# schema, where the registered name is required. The LOGO reads "Apex Insurance"
+# by client request; do not shorten this to match it.
 BRAND = "Apex Insurance Marketing, LLC"
 
 # The three legal documents cross-link to each other, which is the one place on
@@ -267,9 +270,9 @@ def header(active):
   <div class="container-ax">
     <div class="header-inner">
 
-      <a href="/" class="shrink-0 rounded-lg" aria-label="{BRAND}, home">
+      <a href="/" class="shrink-0 rounded-lg" aria-label="Apex Insurance, home">
         <span class="wordmark">Apex</span>
-        <span class="wordmark-sub">Insurance Marketing</span>
+        <span class="wordmark-sub">Insurance</span>
       </a>
 
       <nav class="hidden lg:flex items-center gap-3 xl:gap-7 ml-4 xl:ml-10" aria-label="Primary">
@@ -303,7 +306,7 @@ def header(active):
   <dialog id="site-nav" data-nav-panel class="nav-drawer" aria-label="Menu">
     <div class="nav-drawer-inner">
       <div class="nav-drawer-head">
-        <span><span class="wordmark">Apex</span><span class="wordmark-sub">Insurance Marketing</span></span>
+        <span><span class="wordmark">Apex</span><span class="wordmark-sub">Insurance</span></span>
         <button type="button" data-nav-close class="nav-drawer-close" aria-label="Close menu">{icon("x", 24)}</button>
       </div>
 
@@ -371,7 +374,7 @@ def footer():
 
       <div class="lg:col-span-4">
         <span class="wordmark">Apex</span>
-        <span class="wordmark-sub">Insurance Marketing</span>
+        <span class="wordmark-sub">Insurance</span>
         <p class="mt-5 text-white/80 max-w-sm">
           An independent life insurance agency. We are appointed with multiple carriers,
           which means we compare them for you instead of selling you one company's product.
@@ -410,7 +413,11 @@ def footer():
       <p class="lg:col-span-12">&#169; 2026 {BRAND}. All rights reserved.</p>
     </div>
   </div>
-</footer>"""
+</footer>
+
+<!-- Back to top. Hidden until site.js shows it past the first screen and a bit,
+     so a page with no script never carries a button that does nothing. -->
+<a href="#main" class="to-top" data-to-top hidden aria-label="Back to top">{icon("arrow-up", 22)}</a>"""
 
 
 # ---------------------------------------------------------------------------

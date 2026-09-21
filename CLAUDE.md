@@ -112,6 +112,7 @@ new JS, check whether one of these contracts already covers what you need:
 | `.reveal`, `[data-stagger]`, `[data-count]` | IntersectionObserver reveal, stagger, count-up |
 | `[data-calc]` + `data-calc-field`/`-out`/`-cta` | The coverage calculator (section 10) |
 | `[data-nav-toggle]` + `<dialog data-nav-panel>` | The mobile menu: a native dialog used as a right-hand drawer. `showModal()` supplies the focus trap, Escape and the dimmed backdrop; JS closes it on a backdrop tap, the close button, any link, and when the screen reaches 1024px |
+| `[data-to-top]` | Back to top. Emitted by `chrome.footer()` on every page, `hidden` until JS shows it past 1.25 screens; scrolls up (no smooth scroll under reduced motion) and moves focus to `#main` |
 | `[data-nav-dd]` | The header "Insurance" menu. A native `<details>`, so it opens without JS; JS only closes it on Escape, outside click, and link click |
 | `<dialog data-dialog-timed>` + `[data-dialog-cta]` | Opens once per session at 30s or 50% scroll, never under `html.fe`, never while `[data-triage]` is on screen or focused. Home only. Never put a form in it |
 | `[data-triage]` + `[data-triage-q]` / `[data-score]` / `[data-triage-seg]` / `[data-triage-back]` / `[data-triage-result]` | The home quiz. Scores are declared in markup (`data-score="term:3,whole:1"`); picks are a stack, so Back is a pop |

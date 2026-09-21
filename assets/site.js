@@ -170,6 +170,35 @@
   })();
 
   /* ------------------------------------------------------------------------
+     3c. BACK TO TOP
+     Appears once the visitor is well past the first screen. Never while a
+     dialog is open: the drawer and the review dialog own the screen then.
+     --------------------------------------------------------------------- */
+  (function backToTop() {
+    var btn = $('[data-to-top]');
+    if (!btn) return;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      btn.hidden = window.scrollY < window.innerHeight * 1.25;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      // Keyboard and screen reader users land at the start of the content,
+      // not on a button that is about to disappear.
+      var main = document.getElementById('main');
+      if (main) { main.setAttribute('tabindex', '-1'); main.focus({ preventScroll: true }); }
+    });
+  })();
+
+  /* ------------------------------------------------------------------------
      4. SCROLL REVEAL
      Reduced motion and missing IO both fall through to "everything visible".
      --------------------------------------------------------------------- */
