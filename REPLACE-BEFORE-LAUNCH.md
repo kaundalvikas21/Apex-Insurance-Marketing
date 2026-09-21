@@ -39,6 +39,12 @@ Also in `chrome.py`:
 
 ---
 
+- **Social profiles** (`SOCIAL` in `tools/chrome.py`): Facebook, LinkedIn, YouTube and Instagram
+  icons sit in the footer on every page. Each URL is a `[...]` placeholder, and an icon only
+  becomes a real link once its URL starts with `http`; until then it renders dimmed and inert, so
+  no page can ship a link to a profile that does not exist. Replace the URLs, and delete the row
+  for any network the agency does not use.
+
 ## 2. Rate tables
 
 **Twelve** tables ship with `$--` in every premium cell and a visible

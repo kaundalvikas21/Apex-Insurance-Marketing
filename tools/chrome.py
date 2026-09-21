@@ -31,6 +31,16 @@ POSTCODE      = "[ZIP]"                   # [PLACEHOLDER BUSINESS ADDRESS]
 # The agent profile every byline points its author node at. One profile page
 # exists as a template; add a module per real agent and give each its own slug.
 AGENT_SLUG    = "first-last"              # [PLACEHOLDER AGENT PROFILE SLUG]
+# Social profiles, shown as icons in the footer. [PLACEHOLDER SOCIAL URLS]: an
+# entry renders as a real outbound link only once its URL starts with "http".
+# Until then the icon is present but inert, so nobody ships a link to a profile
+# that does not exist. Delete a row to drop that network.
+SOCIAL = [
+    ("facebook",  "Facebook",  "[FACEBOOK URL]"),
+    ("linkedin",  "LinkedIn",  "[LINKEDIN URL]"),
+    ("youtube",   "YouTube",   "[YOUTUBE URL]"),
+    ("instagram", "Instagram", "[INSTAGRAM URL]"),
+]
 
 BRAND = "Apex Insurance Marketing, LLC"
 
@@ -321,25 +331,38 @@ def header(active):
 
 # ---------------------------------------------------------------------------
 # FOOTER
-# Note on internal linking: the footer deliberately does NOT repeat the three
-# hub links or /contact/. Those live in the primary nav. Spec section 07
-# requires one link per target per page.
+# Note on internal linking: the footer now DOES repeat the hub links and
+# /contact/, by client request (September 2026). The earlier rule kept them out
+# because they are already in the primary nav and spec section 07 wants one
+# link per target per page. Header and footer chrome are now the accepted
+# exception to that rule; body copy still links each target once.
 # ---------------------------------------------------------------------------
 def footer():
+    coverage = [(href, label + " Insurance") for href, label, _, _ in NAV_HUBS] + [
+        ("/free-policy-review/", "Free Policy Review"),
+        ("/get-a-quote/",        "Get a free quote"),
+    ]
     company = [
         ("/about/",          "About Apex"),
         ("/about/agents/",   "Our licensed agents"),
         ("/about/licensing/", "Licensing and appointments"),
+        ("/contact/",        "Contact us"),
     ]
     legal = [
         ("/legal/privacy/",    "Privacy policy"),
         ("/legal/terms/",      "Terms of use"),
         ("/legal/disclaimer/", "Disclaimer"),
     ]
+    social = "".join(
+        ('<a class="footer-social" href="%s" target="_blank" rel="noopener noreferrer" aria-label="Apex on %s">%s</a>'
+         % (url, name, icon(ico, 22))) if url.startswith("http") else
+        ('<span class="footer-social" role="img" aria-label="%s profile, link not set yet" title="%s">%s</span>'
+         % (name, url, icon(ico, 22)))
+        for ico, name, url in SOCIAL)
     def col(title, items):
         rows = "".join('<li><a class="footer-link" href="%s">%s</a></li>' % (h, t) for h, t in items)
-        return (f'<div><h2 class="text-white text-micro font-semibold uppercase tracking-[0.12em] '
-                f'!font-sans">{title}</h2><ul class="mt-4 grid gap-2.5">{rows}</ul></div>')
+        return (f'<div><h2 class="text-white text-sm font-semibold uppercase tracking-[0.12em] '
+                f'!font-sans">{title}</h2><ul class="mt-4 grid gap-1">{rows}</ul></div>')
 
     return f"""<footer class="site-footer band-navy on-navy">
   <div class="container-ax py-16 lg:py-20">
@@ -349,18 +372,20 @@ def footer():
       <div class="lg:col-span-4">
         <span class="wordmark">Apex</span>
         <span class="wordmark-sub">Insurance Marketing</span>
-        <p class="mt-5 text-sm text-white/80 max-w-sm">
+        <p class="mt-5 text-white/80 max-w-sm">
           An independent life insurance agency. We are appointed with multiple carriers,
           which means we compare them for you instead of selling you one company's product.
         </p>
         <div class="mt-6">
           {phone_link("footer", "btn btn-ghost", "Call " + PHONE_DISPLAY)}
-          <p class="mt-3 text-micro text-white/72">{HOURS}</p>
+          <p class="mt-3 text-sm text-white/72">{HOURS}</p>
         </div>
+        <div class="mt-6 flex flex-wrap gap-2" aria-label="Apex on social media">{social}</div>
       </div>
 
-      <div class="lg:col-span-3 lg:col-start-6">{col("Company", company)}</div>
-      <div class="lg:col-span-3 lg:col-start-10">{col("Legal", legal)}</div>
+      <div class="lg:col-span-3 lg:col-start-5 lg:pl-8">{col("Coverage", coverage)}</div>
+      <div class="lg:col-span-3">{col("Company", company)}</div>
+      <div class="lg:col-span-2">{col("Legal", legal)}</div>
     </div>
 
     <!-- The disclosures sit on the same 12 tracks as the columns above rather

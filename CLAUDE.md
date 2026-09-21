@@ -172,9 +172,11 @@ links pointing at pages not yet built. It is meant to be edited in the same comm
    ("term life insurance"), never "click here".
 2. Spokes link sideways only within their own silo; cross-silo movement only via `/compare/` or the
    hubs.
-3. One link per target per page. This is why the footer deliberately omits the hub links and
-   `/contact/` (they are in the nav), and why contextual teasers deep-link to a section anchor when
-   the spoke module already owns the canonical link.
+3. One link per target per page, **in the body**. Header and footer chrome are the accepted
+   exception: since September 2026 the footer repeats the three hubs, Free Policy Review, Get a
+   quote and `/contact/` by client request, as most sites do. In body copy the rule still holds,
+   which is why contextual teasers deep-link to a section anchor when the spoke module already
+   owns the canonical link.
 4. Global nav stays the "Insurance" menu (the three hubs, `chrome.NAV_HUBS`) + Free Policy Review +
    Contact. Do not add spokes. The menu carries exactly one aside: help choosing (`/#triage`) plus
    a call link. It is not a place for a second quote button; the header already has one.
