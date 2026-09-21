@@ -200,7 +200,23 @@ def rate_table():
 
 def body():
     # No parallax and no wipe: this page is exempt from transform-based motion.
-    quiet_media = C.figure("fe-quiet", "(min-width: 1024px) 52vw, 92vw", cls="reveal mt-10")
+    # One h1, one line, one button, and the button is the phone. No glow: fe.
+    hero = C.page_hero(
+        [("Home", "/"), ("Final Expense Insurance", None)],
+        "Final expense insurance, made simple.",
+        "A small whole life policy for funeral costs and final bills. No medical exam, and the "
+        "premium never goes up.",
+        extra='''<div class="reveal mt-8">
+        %s
+        <p class="mt-3 text-slate">%s</p>
+      </div>''' % (C.phone_link("fe_hero_primary", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 28), C.HOURS),
+        banner="fe-hero")
+    usps = C.usp_strip([
+        ("users", "Ages 50 to 85", "Accepted"),
+        ("stethoscope", "No medical exam", "Health questions only"),
+        ("shield-check", "Premium locked for life", "It never goes up"),
+        ("banknote", "$2,000 to $50,000", "Sized for final bills"),
+    ])
     hands_media = C.figure("fe-hands", "(min-width: 1024px) 44vw, 92vw", cls="reveal mt-10")
     call_band_1 = call_band(
         "Would you rather just ask someone?",
@@ -228,60 +244,52 @@ def body():
     byline = C.byline()
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
 
+    how_to_apply = C.steps_section(
+        "How to apply. One call, about fifteen minutes.",
+        "There is no paperwork to post and nothing to print. Have these four things nearby and the "
+        "call goes quickly.",
+        [("file-text", None, "Your date of birth and address",
+          "Exactly as they appear on your driver licence or state ID."),
+         ("stethoscope", None, "Your medications",
+          "The bottles are easiest. Names and doses are what the carrier asks for."),
+         ("users", None, "Your beneficiary",
+          "The full name and date of birth of whoever should receive the money."),
+         ("banknote", None, "Your bank details",
+          "Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.")],
+        after='''
+    <p class="reveal mt-10 text-slate max-w-3xl">
+      Many carriers give a decision on the call. Some take a few days. Either way you will know
+      what you have been offered, including any waiting period, before you agree to anything.
+    </p>''',
+        cls="section band", fe=True, label="Item")
+
     return f"""
+{hero}
+{usps}
+
 <!-- =====================================================================
-     HERO. Phone first. The plain answer comes before any call to action,
-     because a 72 year old landing here from search wants to know what this
-     is before they are asked to dial anything.
+     GET IN TOUCH. Phone first, with the four field call-back form as the
+     secondary. Moved out of the hero so the hero can stay one line and one
+     button.
      ================================================================== -->
-<section class="pt-4 md:pt-6 pb-14 md:pb-16">
+<section class="section band">
   <div class="container-ax">
-    {C.crumbs([("Home", "/"), ("Final Expense Insurance", None)])}
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
-    <div class="mt-5 md:mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-
-      <div class="lg:col-span-7">
-        <h1 class="reveal text-h1">Final Expense Insurance</h1>
-        <p class="reveal mt-4 md:mt-6 text-lead text-slate">
-          Final expense insurance is a small whole life policy that pays cash to your family when
-          you die. They use it for the funeral, the burial or cremation, and the bills that arrive
-          afterwards.
-        </p>
-        <div class="reveal mt-6">
-          {C.phone_link("fe_hero_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
-          <p class="mt-4 text-lead text-navy font-semibold">
-            Speak to a licensed agent. Most calls take about fifteen minutes.
+      <div class="lg:col-span-5">
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Speak to a licensed agent</h2>
+          <p class="reveal mt-5 text-slate">
+            Most calls take about fifteen minutes. There is no medical exam. You answer health
+            questions instead.
           </p>
-          <p class="mt-2 text-slate">{C.HOURS}</p>
-          <p class="mt-5 text-lead text-slate">
-            There is no medical exam. You answer health questions instead, the premium never goes
-            up, and the coverage does not expire.
-          </p>
-        </div>
+          <div class="reveal mt-6">
+            {C.phone_link("fe_contact_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
+            <p class="mt-3 text-slate">{C.HOURS}</p>
+          </div>
 
         <div class="reveal mt-8 pt-8 border-t border-rule">
-          <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-4">
-            <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
-              <span>No medical exam, ever</span>
-            </li>
-            <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
-              <span>Ages 50 to 85 accepted</span>
-            </li>
-            <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
-              <span>Premium locked for life</span>
-            </li>
-            <li class="flex items-start gap-3">
-              {icon("circle-check", 24, "shrink-0 text-green mt-0.5")}
-              <span>Independent. We compare carriers</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="reveal mt-8 pt-8 border-t border-rule">
-          <h2 class="text-h4">What happens when you get in touch</h2>
+          <h3 class="text-h4">What happens when you get in touch</h3>
           <ol class="mt-4 grid gap-3">
             <li class="flex items-start gap-3">
               <span class="text-navy font-semibold tnum shrink-0">1.</span>
@@ -298,99 +306,15 @@ def body():
           </ol>
         </div>
 
-        {quiet_media}
+        </div>
       </div>
 
       <!-- Secondary CTA. Four fields, one step, no scrolling inside the form. -->
-      <div class="lg:col-span-5 lg:col-start-8">
+      <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-semibold">Prefer we call you?</h2>
-          <p class="mt-3 text-slate">
-            Leave four details and a licensed agent will call you back.
-          </p>
-
-          <form class="mt-6" data-ax-form data-silo="final-expense"
-                data-form-name="fe_hero_callback" data-success-target="fe-hero-success" novalidate>
-
-            {F.scaffold(indent=12)}
-
-            <div class="field">
-              <label class="field-label" for="fe-name">Your name</label>
-              <input class="input" id="fe-name" name="name" type="text" autocomplete="name"
-                     required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error" id="fe-name-err">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="fe-age">Your age</label>
-              <input class="input" id="fe-age" name="age" type="text" inputmode="numeric"
-                     required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
-              <p class="field-error" id="fe-age-err">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="fe-state">Your state</label>
-              <select class="select" id="fe-state" name="state" required
-                      data-error="Please choose your state.">
-                <option value="">Choose your state</option>
-                {C.state_options()}
-              </select>
-              <p class="field-error" id="fe-state-err">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="fe-phone">Your phone number</label>
-              <input class="input" id="fe-phone" name="phone" type="tel" autocomplete="tel"
-                     required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error" id="fe-phone-err">{ERR}<span></span></p>
-            </div>
-
-            {F.consent_block("fe", C.BRAND, 12)}
-
-            <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
-            <p class="field-error" data-form-error>{ERR}<span></span></p>
-
-            <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
-
-          </form>
-
-          <div id="fe-hero-success" class="success">
-            <div class="flex items-start gap-3">
-              {icon("circle-check", 32, "shrink-0 text-green")}
-              <div>
-                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
-                <p class="mt-3 text-slate">
-                  A licensed agent will call you within {C.SLA}. If you would rather not wait,
-                  call us now and we can do it in one go.
-                </p>
-                <div class="mt-5">
-                  {C.phone_link("fe_hero_success", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY, 22)}
-                </div>
-              </div>
-            </div>
-          </div>
+          {callback_form("fe_hero", "fe_hero_callback")}
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust strip. Within one viewport of the hero phone CTA. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 22, "shrink-0")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("scale", 22, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("building", 22, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-      <span class="inline-flex items-center gap-2 text-slate">
-        {icon("shield-check", 22, "shrink-0")}Your details are never sold on
-      </span>
     </div>
   </div>
 </section>
@@ -669,56 +593,10 @@ def body():
   </div>
 </section>
 
-<!-- =====================================================================
-     8. HOW TO APPLY.
-     ================================================================== -->
-<section class="section band">
-  <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">How to apply. One call, about fifteen minutes.</h2>
-      <p class="reveal mt-5 text-slate">
-        There is no paperwork to post and nothing to print. Have these four things nearby and the
-        call goes quickly.
-      </p>
-    </div>
-
-    <div class="mt-10 grid md:grid-cols-2 gap-6">
-      <div class="reveal card flex items-start gap-4">
-        {icon("file-text", 26, "shrink-0 text-navy mt-1")}
-        <div>
-          <h3 class="text-h4">Your date of birth and address</h3>
-          <p class="mt-2 text-slate">Exactly as they appear on your driver licence or state ID.</p>
-        </div>
-      </div>
-      <div class="reveal card flex items-start gap-4">
-        {icon("stethoscope", 26, "shrink-0 text-navy mt-1")}
-        <div>
-          <h3 class="text-h4">Your medications</h3>
-          <p class="mt-2 text-slate">The bottles are easiest. Names and doses are what the carrier asks for.</p>
-        </div>
-      </div>
-      <div class="reveal card flex items-start gap-4">
-        {icon("users", 26, "shrink-0 text-navy mt-1")}
-        <div>
-          <h3 class="text-h4">Your beneficiary</h3>
-          <p class="mt-2 text-slate">The full name and date of birth of whoever should receive the money.</p>
-        </div>
-      </div>
-      <div class="reveal card flex items-start gap-4">
-        {icon("banknote", 26, "shrink-0 text-navy mt-1")}
-        <div>
-          <h3 class="text-h4">Your bank details</h3>
-          <p class="mt-2 text-slate">Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="reveal mt-8 text-slate max-w-3xl">
-      Many carriers give a decision on the call. Some take a few days. Either way you will know
-      what you have been offered, including any waiting period, before you agree to anything.
-    </p>
-  </div>
-</section>
+<!-- 8. HOW TO APPLY. The homepage stepper, as a numbered checklist of the
+     four things to have nearby. No CTA strip: call_band_3 is the next thing
+     on the page and already carries the ask. -->
+{how_to_apply}
 
 {call_band_3}
 
@@ -793,60 +671,7 @@ def body():
 
       <div class="reveal">
         <div class="panel">
-          <h2 class="text-h3 !font-display !font-semibold">Or leave your number</h2>
-          <p class="mt-3 text-slate">Four details. We call you back.</p>
-
-          <form class="mt-6" data-ax-form data-silo="final-expense"
-                data-form-name="fe_footer_callback" data-success-target="fe-footer-success" novalidate>
-
-            {F.scaffold(indent=12)}
-
-            <div class="field">
-              <label class="field-label" for="fe2-name">Your name</label>
-              <input class="input" id="fe2-name" name="name" type="text" autocomplete="name"
-                     required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field">
-              <label class="field-label" for="fe2-age">Your age</label>
-              <input class="input" id="fe2-age" name="age" type="text" inputmode="numeric"
-                     required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field">
-              <label class="field-label" for="fe2-state">Your state</label>
-              <select class="select" id="fe2-state" name="state" required data-error="Please choose your state.">
-                <option value="">Choose your state</option>
-                {C.state_options()}
-              </select>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field">
-              <label class="field-label" for="fe2-phone">Your phone number</label>
-              <input class="input" id="fe2-phone" name="phone" type="tel" autocomplete="tel"
-                     required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            {F.consent_block("fe2", C.BRAND, 12)}
-
-            <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
-            <p class="field-error" data-form-error>{ERR}<span></span></p>
-            <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
-          </form>
-
-          <div id="fe-footer-success" class="success">
-            <div class="flex items-start gap-3">
-              {icon("circle-check", 32, "shrink-0 text-green")}
-              <div>
-                <h3 class="text-h3 !font-display !font-semibold">We have your details</h3>
-                <p class="mt-3 text-slate">A licensed agent will call you within {C.SLA}.</p>
-                <div class="mt-5">
-                  {C.phone_link("fe_footer_success", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY, 22)}
-                </div>
-              </div>
-            </div>
-          </div>
+          {callback_form("fe_footer", "fe_footer_callback", heading="Or leave your number", intro="Four details. We call you back.")}
         </div>
       </div>
     </div>
@@ -858,62 +683,41 @@ def body():
 # --- The four field callback form ------------------------------------------
 # Extracted for the final expense SPOKES, which are phone first with a short
 # form as the secondary ask and would otherwise each hand-copy this block.
-# The hub keeps its own two inline copies: it is approved and signed off, and
-# refactoring it onto this would risk changing its rendered output for no
-# visible gain. Same reasoning as chrome.rate_chart() and the hubs' rate tables.
+# The hub uses it too, twice: its two inline copies were folded in during the
+# September 2026 forms pass, when every form changed shape anyway.
 def callback_form(prefix, form_name, heading="Prefer we call you?",
-                  intro="Leave four details and a licensed agent will call you back."):
-    """Four fields, one step, no scrolling inside the form.
+                  intro="Leave four details and a licensed agent will call you back.",
+                  silo="final-expense", senior=True):
+    """Four fields in two rows, one step, no scrolling inside the form.
 
     `prefix` must be unique per page, not per site: it namespaces every id in
     the block, including the TCPA consent checkbox and the success panel.
+
+    `silo` and `senior` exist for the one caller outside this silo, the free
+    policy review page, which takes any adult age rather than 50 to 85.
     """
+    fields = (
+        F.row(F.text_field(prefix + "-name", "name", "Your name", autocomplete="name",
+                           validate="name", error="Please tell us your name."),
+              F.age_field(prefix + "-age", senior=senior))
+        + F.row(F.select_field(prefix + "-state", "state", "Your state",
+                               '<option value="">Choose your state</option>\n' + C.state_options(),
+                               error="Please choose your state."),
+                F.phone_field(prefix + "-phone", label="Your phone number")))
     return f"""
           <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
           <p class="mt-3 text-slate">{intro}</p>
 
-          <form class="mt-6" data-ax-form data-silo="final-expense"
+          <form class="mt-6" data-ax-form data-silo="{silo}"
                 data-form-name="{form_name}" data-success-target="{prefix}-success" novalidate>
 
             {F.scaffold(indent=12)}
 
-            <div class="field">
-              <label class="field-label" for="{prefix}-name">Your name</label>
-              <input class="input" id="{prefix}-name" name="name" type="text" autocomplete="name"
-                     required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="{prefix}-age">Your age</label>
-              <input class="input" id="{prefix}-age" name="age" type="text" inputmode="numeric"
-                     required data-validate="ageSenior" data-error="Enter an age between 50 and 85.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="{prefix}-state">Your state</label>
-              <select class="select" id="{prefix}-state" name="state" required
-                      data-error="Please choose your state.">
-                <option value="">Choose your state</option>
-                {C.state_options()}
-              </select>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="{prefix}-phone">Your phone number</label>
-              <input class="input" id="{prefix}-phone" name="phone" type="tel" autocomplete="tel"
-                     required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
+            {fields}
 
             {F.consent_block(prefix, C.BRAND, 12)}
 
-            <button type="submit" class="btn btn-cta btn-block">Request a call back</button>
-            <p class="field-error" data-form-error>{ERR}<span></span></p>
-
-            <p class="mt-4 text-sm text-muted">Free &#183; No obligation &#183; Licensed agents</p>
+            {F.submit_block("Request a call back")}
 
           </form>
 

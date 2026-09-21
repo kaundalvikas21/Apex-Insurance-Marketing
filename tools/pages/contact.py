@@ -26,30 +26,54 @@ def schema():
 
 
 def body():
-    desk_media = C.figure("contact-desk", "(min-width: 1024px) 38vw, 92vw",
-                          cls="reveal", glow=True)
+    # One h1, one line, one button. Calling is the fastest route, so the button
+    # is the phone; the form is the section under the strip.
+    hero = C.page_hero(
+        [("Home", "/"), ("Contact", None)],
+        "Talk to a licensed agent.",
+        "Call us or send a message. Either way you reach a real licensed agent.",
+        extra='''<div class="reveal mt-8">
+        %s
+        <p class="mt-3 text-micro text-muted">%s</p>
+      </div>''' % (C.phone_link("contact_hero", "btn btn-call", "Call " + C.PHONE_DISPLAY), C.HOURS),
+        banner="contact-banner")
+    usps = C.usp_strip([
+        ("user-check", "Licensed agents", "Real people, not a chatbot"),
+        ("clock", "Reply within " + C.SLA, "From a real person"),
+        ("shield-check", "Never sold on", "Your details stay with us"),
+        ("handshake", "Free, no obligation", "You never pay us a fee"),
+    ])
+
+    fields = (
+        F.row(F.text_field("ct-name", "name", "Your name", autocomplete="name", validate="name",
+                           error="Please tell us your name."),
+              F.phone_field("ct-phone", label="Phone"))
+        + F.row(F.text_field("ct-email", "email", "Email", type="email", autocomplete="email",
+                             validate="email", error="Enter a valid email address."),
+                F.select_field("ct-interest", "interest", "What is it about?",
+                               [("", "Choose one"), ("term-life", "Term life insurance"),
+                                ("whole-life", "Whole life insurance"),
+                                ("final-expense", "Final expense insurance"),
+                                ("not-sure", "I am not sure which I need"),
+                                ("existing-policy", "A policy I already have"),
+                                ("other", "Something else")],
+                               error="Pick the closest one. We can change it on the call."))
+        + F.textarea_field("ct-message", "message", "Anything else?",
+                           hint="Optional. A health condition, a deadline, a quote from elsewhere."))
 
     return f"""
-<section class="pt-6 pb-14 md:pb-16 glow">
+{hero}
+{usps}
+
+<section id="message" class="section band">
   <div class="container-ax">
-    {C.crumbs([("Home", "/"), ("Contact", None)])}
-
-    <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">Contact Apex</h1>
-      <p class="reveal mt-5 text-lead text-slate">
-        You will reach a licensed agent. Not a call centre, not a lead form that gets sold on to
-        six other agencies, and not a chatbot pretending to be a person.
-      </p>
-    </div>
-
-    <div class="mt-12 grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
       <!-- LEFT: phone first, then what actually happens on the call. -->
       <div class="lg:col-span-5">
+       <div class="sticky-col">
 
-        {desk_media}
-
-        <div class="reveal card mt-8">
+        <div class="reveal card">
           <h2 class="text-h3 !font-display !font-semibold">Call us</h2>
           <div class="mt-5">
             {C.phone_link("contact_primary", "btn btn-call btn-block !min-h-[64px] !text-lead", C.PHONE_DISPLAY, 24)}
@@ -67,26 +91,27 @@ def body():
               {icon("clock", 22, "shrink-0 text-navy mt-1")}
               <div>
                 <p class="font-semibold text-navy">Ten to twenty minutes</p>
-                <p class="mt-1 text-slate">Longer if you want to work through the numbers, shorter if you already know what you want.</p>
+                <p class="mt-1 text-slate">Shorter if you already know what you want.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
               {icon("list-checks", 22, "shrink-0 text-navy mt-1")}
               <div>
                 <p class="font-semibold text-navy">Questions, then options</p>
-                <p class="mt-1 text-slate">Your age, state, health, and what you are trying to cover. No Social Security number and no credit check to get a quote.</p>
+                <p class="mt-1 text-slate">Age, state, health, and what you want to cover. No Social Security number, no credit check.</p>
               </div>
             </li>
             <li class="flex items-start gap-3">
               {icon("handshake", 22, "shrink-0 text-navy mt-1")}
               <div>
                 <p class="font-semibold text-navy">No pressure to decide on the call</p>
-                <p class="mt-1 text-slate">If the honest answer is that you do not need what you called about, we will say so.</p>
+                <p class="mt-1 text-slate">If you do not need it, we will say so.</p>
               </div>
             </li>
           </ul>
         </div>
 
+       </div>
       </div>
 
       <!-- RIGHT: the form. -->
@@ -102,58 +127,11 @@ def body():
 
             {F.scaffold(indent=12)}
 
-            <div class="field">
-              <label class="field-label" for="ct-name">Your name</label>
-              <input class="input" id="ct-name" name="name" type="text" autocomplete="name"
-                     required data-validate="name" data-error="Please tell us your name.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-x-4">
-              <div class="field">
-                <label class="field-label" for="ct-email">Email</label>
-                <input class="input" id="ct-email" name="email" type="email" autocomplete="email"
-                       required data-validate="email" data-error="Enter a valid email address.">
-                <p class="field-error">{ERR}<span></span></p>
-              </div>
-              <div class="field">
-                <label class="field-label" for="ct-phone">Phone</label>
-                <input class="input" id="ct-phone" name="phone" type="tel" autocomplete="tel"
-                       required data-validate="phone" data-error="Enter a 10 digit phone number.">
-                <p class="field-error">{ERR}<span></span></p>
-              </div>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="ct-interest">What are you interested in?</label>
-              <select class="select" id="ct-interest" name="interest" required
-                      data-error="Pick the closest one. We can change it on the call.">
-                <option value="">Choose one</option>
-                <option value="term-life">Term life insurance</option>
-                <option value="whole-life">Whole life insurance</option>
-                <option value="final-expense">Final expense insurance</option>
-                <option value="not-sure">I am not sure which I need</option>
-                <option value="existing-policy">A policy I already have</option>
-                <option value="other">Something else</option>
-              </select>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="field">
-              <label class="field-label" for="ct-message">Anything else?
-                <span class="field-hint block font-normal">Optional. Health conditions, a deadline, a number you have been quoted elsewhere.</span>
-              </label>
-              <textarea class="input" id="ct-message" name="message" rows="4"></textarea>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
+            {fields}
 
             {F.consent_block("ct", C.BRAND, 12)}
 
-            <button type="submit" class="btn btn-cta btn-block">Send message</button>
-            <p class="field-error" data-form-error>{ERR}<span></span></p>
-            <p class="mt-3 text-micro text-muted">
-              Free &#183; No obligation &#183; Licensed agents &#183; We never sell your details on
-            </p>
+            {F.submit_block("Send message")}
           </form>
 
           <!-- Designed success state, rendered in place. Never a browser dialog.

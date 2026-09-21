@@ -215,13 +215,17 @@ def body():
 {C.page_hero(
     TRAIL,
     "Is Whole Life Insurance Worth It? An Honest Look",
-    'For most households, no. The premium buys a fraction of the death benefit the same money '
-    'would buy in term, and the majority of people who are pitched '
-    '<a class="link" href="/whole-life-insurance/">whole life insurance</a> have a need with an '
-    'end date, unused room in a retirement account, or a real chance of giving the policy up early. '
-    'For a smaller number of households it is genuinely the right product, for reasons that have '
-    'nothing to do with returns. This page is about telling those two groups apart, and we sell '
-    'the product, which is a conflict of interest you should hold in mind while reading it.',
+    'For most households, no. And we sell the product, which is a conflict of interest '
+    'you should hold in mind while reading this page.',
+    answer=(
+        'The premium buys a fraction of the death benefit the same money would buy in '
+        'term, and the majority of people who are pitched <a class="link" '
+        'href="/whole-life-insurance/">whole life insurance</a> have a need with an end '
+        'date, unused room in a retirement account, or a real chance of giving the policy '
+        'up early. For a smaller number of households it is genuinely the right product, '
+        'for reasons that have nothing to do with returns. This page is about telling '
+        'those two groups apart.'),
+    extra=C.hero_cta("/whole-life-insurance/quotes/", "Get my whole life quote", cls="btn btn-ghost"),
     media=C.figure("whole-porch", C.MEDIA_SIZES, eager=True))}
 
 

@@ -90,12 +90,16 @@ def body():
 {C.page_hero(
     TRAIL,
     "Level Term Life Insurance",
-    'Level term means the premium and the death benefit are both fixed for the entire term you '
-    'buy. Twenty years in, you pay what you paid in year one and the policy pays what it promised '
-    'in year one. Nearly every '
-    '<a class="link" href="/term-life-insurance/">term life insurance</a> policy sold today is '
-    'level term, so the word is less a product choice than a description of what you are already '
-    'being quoted. What matters is what happens the day the level period ends.',
+    'Level term means the premium and the death benefit are both fixed for the entire '
+    'term you buy.',
+    answer=(
+        'Twenty years in, you pay what you paid in year one and the policy pays what it '
+        'promised in year one. Nearly every <a class="link" '
+        'href="/term-life-insurance/">term life insurance</a> policy sold today is level '
+        'term, so the word is less a product choice than a description of what you are '
+        'already being quoted. What matters is what happens the day the level period '
+        'ends.'),
+    extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
 
 

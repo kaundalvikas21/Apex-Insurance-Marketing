@@ -101,6 +101,12 @@ neither will be caught by looking for one.
   submission is blocked until it is checked.
 - **Footer licence disclosure** is marked `[PENDING LEGAL REVIEW]`. It currently states the agency
   is licensed, gives the state count and NPN, and links to `/about/licensing/`.
+- **Free policy review replacement warning** (`/free-policy-review/`, under "What your review
+  covers") renders as a visible `[PENDING LEGAL REVIEW]` flag. State replacement rules differ, so
+  counsel must approve the wording. The same page carries a sixth consent block (form
+  `policy_review`, silo `site`) via `final_expense.callback_form(silo="site", senior=False)`.
+- **Homepage popup copy** (`DIALOG` in `tools/pages/home.py`) says a review checks "that you are
+  not overpaying". It promises no saving, but counsel should read it with the page above.
 - The **government-affiliation disclaimer** and the **carrier / guarantees disclaimer** are in the
   footer on all six pages and are not placeholders, but should still be read by counsel.
 
@@ -114,6 +120,16 @@ have been checked. The footer's "appointed with multiple carriers" language make
 numeric claim and is fine as-is.
 
 ## 4b. Photography
+
+- **`[CONFIRM LICENCE]` Hero banners.** `term-hero`, `whole-hero`, `fe-hero`, `home-banner`,
+  `contact-banner` and `review-banner` were supplied by the client team on 2026-09-21 (`public/`), not pulled from Unsplash, so they are not in
+  the credits table below. Confirm the licence covers commercial web use and, if they are
+  AI-generated or stock with model releases, record which. They show identifiable people: they are
+  lifestyle images and must never be captioned or implied to be Apex agents or clients. That matters
+  most for `contact-banner`: a woman in a headset beside the heading "Talk to a licensed agent"
+  reads as one of ours. Either confirm that is acceptable to compliance, or replace it with a
+  photograph of a real, named Apex agent who has consented. The same question applies, less
+  sharply, to `review-banner` (a woman in a blazer walking a man through a document).
 
 Twenty six slots, all from Unsplash, all downloaded and served locally from `assets/img/`.
 `assets/img/CREDITS.md` lists every file, its source, and its alt text. The manifest is
@@ -272,7 +288,11 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
   `>>> WIRE TO CRM ENDPOINT HERE <<<` in `submitLead()`. It currently logs the payload and resolves.
   Replace the body with a `fetch()` and keep the returned promise: the success state, the error
   state, and the `form_submit` event all hang off it. The payload already carries every answer plus
-  `tcpa_consent`, `source_url`, `silo`, `form_name`, and `submitted_at`.
+  `tcpa_consent`, `source_url`, `silo`, `form_name`, `submitted_at`, and `submission_id`.
+  `submission_id` is one UUID per form load and is re-sent unchanged when a visitor presses "Try
+  again" after a failed submit, so the endpoint **must dedupe on it**. `phone` arrives formatted,
+  `(555) 018-0199`: strip non-digits server side. The front end gives up after 15 seconds and never
+  retries on its own, because a lead POST is not idempotent.
 - **GA4.** Events fire into `window.dataLayer` with a guard, so nothing breaks without a container.
   Install GTM or gtag and map: `form_start`, `form_submit`, `call_click`, `triage_complete`.
   A `calculator_complete` stub is exposed as `window.axTrack('calculator_complete', {...})` for the

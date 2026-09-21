@@ -150,6 +150,7 @@ OG_FOR_PAGE = {
     "/whole-life-insurance/": "whole-permanence",
     "/final-expense-insurance/": "fe-quiet",
     "/contact/": "contact-desk",
+    "/free-policy-review/": "contact-desk",
     "/thank-you/": "contact-desk",
     # P0 layer. These pages reuse the existing set rather than adding photography:
     # an about or legal page has no documentary photograph to earn, and a share
@@ -207,6 +208,30 @@ OG_FOR_PAGE = {
     "/compare/burial-insurance-vs-life-insurance/": "home-hero",
 }
 OG_SIZE = (1200, 630)
+
+
+# Client-supplied coverage hero banners. Local files, not Unsplash, so fetch()
+# never touches them: tools/hero_images.cjs makes the derivatives from
+# public/coverage_hero/. Each is a 16:9 frame with the people on the right and
+# empty wall on the left, which is where the hero copy sits from 1024px up.
+# name -> (alt, object-position from 1024px). [CONFIRM LICENCE] see
+# REPLACE-BEFORE-LAUNCH.md section 4b. The alt says what is in the frame and
+# nothing else: none of these people is an Apex agent or client.
+HERO_BANNERS = {
+    "term-hero": ("Two men and a small child reading a book together on a grey sofa in a bright room.",
+                  "right center"),
+    "whole-hero": ("A man and a woman talking across a wooden kitchen table, each with a mug.",
+                   "right center"),
+    "fe-hero": ("An older woman and a younger woman sitting close on a sofa, holding hands and smiling.",
+                "right center"),
+    # The family sits in the lower half of this frame, so it anchors low.
+    "home-banner": ("A couple with a laughing toddler on a sofa, talking with an older man in an armchair.",
+                    "right 85%"),
+    "contact-banner": ("A woman wearing a telephone headset, smiling at a laptop on a pale wooden desk.",
+                       "right 40%"),
+    "review-banner": ("A woman in a navy blazer and a man in a blue sweater reading an open document "
+                      "together at a pale wooden table.", "right 55%"),
+}
 
 
 def height_for(name, width):

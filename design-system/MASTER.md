@@ -187,7 +187,7 @@ not disabled.
 | CTA hover | translateY(-2px) + tinted shadow, 180ms | Buttons |
 | Link underline | grows from left, 180ms ease-out | Body links |
 | Accordion | height via `interpolate-size: allow-keywords`, 240ms | FAQ |
-| Form step change | 240ms crossfade, focus moves to the first field | Term multi-step form |
+| Form step change | 240ms crossfade, focus moves to the first field; the label reads "Step 1 of 2 · About you" | Term and master quote forms |
 
 The count-up target is written into the HTML, so with JavaScript off, in print, and before the
 observer fires the figure is simply there. Nothing ticks up to a placeholder.
@@ -222,10 +222,17 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.table-signature` | Modifier on `.table-scroll`: card shadow, so the table reads as the section's object. |
 | `.rate-table` / `.compare-table` | Tabular nums, navy-050 header in the display face, **one rule per row boundary** (top border on every row after the first, never top and bottom), first column sticky on phones. `th[colspan]` renders as a group row (final expense comparison). |
 | `.acc` | Each `<details>` is its own card row; hover and open states lift it. Native keyboard behavior. |
-| `.field` | Label above input, 48px input, border-strong, blue focus ring. The error line is **always in the layout** and only toggles `visibility`. |
+| `.field` | Label above input, 48px input (56px in `.fe`), border-strong, blue focus ring. The hint and the error share one reserved cell under the control (`.field-foot`): it is **always in the layout**, so the submit button cannot move between mousedown and mouseup, and an error simply takes the hint's place. A required answer that passes gets `.is-valid`, a green check inside the input (an icon, never colour alone). |
+| `.field-row` | Two fields side by side. A **container** query on `[data-ax-form]` (26rem; 28rem in `.fe`), not a viewport one, because the same builder sits in a wide panel on one page and a narrow rail on another. Pairing is how the forms got shorter; controls never shrink. |
+| Form failure | `[data-form-error]` is `role="alert"`. On a rejected or timed out submit (15s) it states the cause and the fix, the button becomes "Try again", every answer is kept, and there is no automatic retry (a lead POST is not idempotent; `submission_id` lets the CRM dedupe). |
 | `.site-header` | Solid white; glass only when `.is-stuck`. Wordmark navy, nav slate with a bright-blue underline. |
+| `.nav-dd` | The "Insurance" mega menu: a native `<details>`, solid white (never glass), two columns. Left, the three hubs as icon rows (the circle turns navy on hover). Right, one navy aside with the menu's only CTA, `.btn-cta` to `/#triage`, and a call link. 160ms fade and rise on open, off under reduced motion. Absent below 1024px, where the mobile panel lists the links flat. |
 | `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
-| `chrome.page_hero()` | T4's top: breadcrumb, one H1, and the answer in the first two sentences. The lead is HTML because it carries the mandated hub up-link. `glow=False` on every final-expense page. |
+| `chrome.page_hero()` | The top of every hub and informational page: breadcrumb, one H1, one sentence (30 words at most), one button. `check.py` enforces it through `data-hero`. `answer=` renders the rest of the direct answer, with the mandated hub up-link, as its own block directly beneath. `short=False` is for the T5 compare pages only. `glow=False` on every final-expense page. |
+| `chrome.hero_cta()` | The hero's one amber button and micro line, for `page_hero(extra=)`. Phone first pages pass a `phone_link()` block instead. |
+| `chrome.steps_section()` | The connected stepper: filled navy `.steps-node` circles on a dashed rail (on top from 768px, down the left below), a cell under each, optional `.steps-cta` strip. Three items read white, tinted, blue so the last is the destination. Four items, or `fe=True`, stay plain white with no stagger and no lift, go four across only from 1024px, and keep the vertical rail between 768 and 1023 because a 2 x 2 grid breaks the line. Used by home ("Three simple steps") and "How to apply" on the term and final expense hubs. |
+| `chrome.closing_band()` / `chrome.banner(inset=True)` | A page's final ask as a rounded photo card inside a pale section. **No page may end on a flat navy or edge to edge photo band**: directly on the navy footer it reads as part of the footer, and the pale margin under the card is the boundary. Used on `/get-a-quote/` and the five About pages. No people in the photograph on a reviews or an agent page. |
+| `chrome.usp_strip()` | Four icon tiles directly beneath a hero CTA. Spec facts or visible `[X]` placeholders only, never a claim, never a count-up. |
 | `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
 | `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. `media=` puts a figure under the lead and `sticky=` (default on) parks the column, which is how the left side stops leaving a dead half-row. Sticky needs no fe branching: `.fe main .sticky-col` is already static. |
 | `chrome.page_hero()` `media=` | Splits the hero into 6 / 5-from-8 and carries the page's one eager image. Absent it, the hero is the unchanged `max-w-3xl` single column. |
@@ -247,20 +254,28 @@ meaning carried by adjacent text.
 
 See `design-system/pages/*.md` for the full per-page notes. In brief:
 
-**Home.** Triage, not pitch. Hero: h1, lead, one link line, photo, and the three product paths as
-a three-cell bento (middle cell tinted). The comparison section is a four-cell bento: three product
-stat cells (white, tinted, blue) over a full-width signature comparison table.
+**Home.** Plain outline, one idea per section (client reframe, September 2026). Hero: h1, one
+lead, one CTA, over the `home-banner` photograph. Then the USP strip, a three-step "how it works" with one CTA, a four-cell
+"why us" navy band, three one-sentence coverage cells followed by exactly two CTAs (call, quote),
+the triage widget, the FAQ, and the closing card pair. The comparison table lives on
+`/compare/term-vs-whole-life-insurance/`, not here. Home also carries the site's one timed
+`<dialog>` (free policy review): once per session, never in `.fe` mode, never holding a form.
 
-**Term hub.** Form-weighted; the three-step form is the hero's right panel. "What it covers" ends
+**The homepage, the contact page and all three hubs** open the same way (client reframe, September 2026): `page_hero(banner=)` with
+one sentence and one button over a full-bleed client-supplied photograph (`images.HERO_BANNERS`;
+behind the copy from 1024px, a 4:3 crop under it below that; no scrim, no glow), then `usp_strip()`, then the quote or contact section.
+The hero button points at that section, so the form is one click away rather than in the hero.
+
+**Term hub.** Form-weighted; the two-step form (About you, Your cover) is the first section under the strip, `#quote`. "What it covers" ends
 in a three-cell bento led by a blue coverage-range stat. Term lengths are four segmented stat cells
 (`10 / 15 / 20 / 30`) that count up and drive the explainer panel. The rate table is the page's
 signature object, with its toggles above it and a dated pill beneath.
 
-**Whole-life hub.** Dual CTA at parity. The three guarantees are a white / blue / tinted bento.
+**Whole-life hub.** Dual CTA at parity, in the `#quote` section under the strip. The three guarantees are a white / blue / tinted bento.
 The cash-value chart sits in a `.bento-4` beside a tinted `.bento-2` stat (40 years). Section 7b
 ("who this does not suit") keeps identical prominence to 7a.
 
-**Final-expense hub.** Phone-first, Inter throughout, static. Cost table cut to three columns
+**Final-expense hub.** Phone-first (the hero's one button is `.btn-call.btn-xl`), Inter throughout, static. Cost table cut to three columns
 (`Age | $10,000 | $25,000`) with the row-level call CTA inside the age cell. The three-product
 comparison is a three-column table with group rows so it never needs a fourth column.
 
@@ -286,9 +301,10 @@ the derivation is complete rather than a column of zeros.
 They inherit this file without deviation except where a page doc exists (`term-no-medical-exam`,
 `whole-calculator`, `whole-cash-value`). Six rules run across all of them.
 
-1. **The answer is the first two sentences**, inside `chrome.page_hero()`, before any section. The
-   mandated hub up-link lives in that lead, which is the only placement that satisfies both spec
-   s07 rule 1 and "answer the question first".
+1. **The answer comes first, in two parts.** The hero lead is its first sentence. The rest goes in
+   `page_hero(answer=)`, which renders directly under the hero and before any section, and carries
+   the mandated hub up-link. That satisfies spec s07 rule 1 and "answer the question first" while
+   keeping the hero to one sentence. Every hero carries exactly one button, weighted per silo.
 2. **One mid-page CTA**, `chrome.inline_cta()`, never an interstitial. The exception is
    `/term-life-insurance/no-medical-exam/`, which the spec treats as near-money.
 3. **One link per target per page.** A page's spoke module may not repeat a target the body already

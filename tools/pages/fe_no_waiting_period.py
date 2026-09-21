@@ -99,13 +99,15 @@ def body():
 {C.page_hero(
     TRAIL,
     "Burial Insurance With No Waiting Period",
-    'Many burial insurance policies do pay the full benefit from the first day, and they are not '
-    'rare. Whether you can be issued one depends on your answers to the health questions and on '
-    'which carrier you apply to, so no honest page can promise you immediate coverage before those '
-    'questions have been asked. What this page can do is tell you exactly what decides it, and '
-    'what happens if the answer turns out to be no. All of this is '
-    '<a class="link" href="/final-expense-insurance/">final expense insurance</a>, sold under the '
-    'name burial insurance.',
+    'Many burial insurance policies do pay the full benefit from the first day, and they '
+    'are not rare.',
+    answer=(
+        'Whether you can be issued one depends on your answers to the health questions '
+        'and on which carrier you apply to, so no honest page can promise you immediate '
+        'coverage before those questions have been asked. What this page can do is tell '
+        'you exactly what decides it, and what happens if the answer turns out to be no. '
+        'All of this is <a class="link" href="/final-expense-insurance/">final expense '
+        'insurance</a>, sold under the name burial insurance.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 

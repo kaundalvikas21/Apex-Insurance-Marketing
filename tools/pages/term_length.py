@@ -29,7 +29,7 @@ VALIDATE_NOTE = """<!-- ========================================================
      ================================================================== -->"""
 
 
-def render(years, h1, lead, fits, dates_intro, dates, cost_note, faq, siblings,
+def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, siblings,
            cta_heading, cta_body, where):
     """One lean term-length page. `fits` is [(eyebrow, title, body)] of exactly
     three, so the bento gets its mandated white / blue / tinted variation."""
@@ -52,7 +52,8 @@ def render(years, h1, lead, fits, dates_intro, dates, cost_note, faq, siblings,
 {VALIDATE_NOTE}
 
 {C.page_hero([("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
-              ("%d year term" % years, None)], h1, lead,
+              ("%d year term" % years, None)], h1, lead, answer=answer,
+    extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-desk", C.MEDIA_SIZES, eager=True))}
 
 

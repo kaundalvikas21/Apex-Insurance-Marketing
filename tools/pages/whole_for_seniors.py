@@ -114,12 +114,15 @@ def body():
 {C.page_hero(
     TRAIL,
     "Whole Life Insurance for Seniors",
-    'After sixty five, <a class="link" href="/whole-life-insurance/">whole life insurance</a> is '
-    'widely available and the premium is locked for life, which is exactly why people move to it '
-    'at this age. What changes is the underwriting: most policies sold in this band are health '
-    'questions rather than an exam, and a few ask nothing at all. This page covers what you are '
-    'likely to be accepted for, what it costs, and the point at which a smaller policy is the '
-    'better buy.',
+    'After sixty five, whole life insurance is widely available and the premium is locked '
+    'for life.',
+    answer=(
+        'That lock is exactly why people move to <a class="link" '
+        'href="/whole-life-insurance/">whole life insurance</a> at this age. What changes '
+        'is the underwriting: most policies sold in this band are health questions rather '
+        'than an exam, and a few ask nothing at all. This page covers what you are likely '
+        'to be accepted for, what it costs, and the point at which a smaller policy is '
+        'the better buy.'),
     extra=hero_cta,
     media=C.figure("whole-porch", C.MEDIA_SIZES, eager=True))}
 

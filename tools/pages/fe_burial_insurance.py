@@ -185,12 +185,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "Burial Insurance",
-    'Burial insurance is a small whole life policy that pays your family a cash sum for a burial '
-    'and the bills that follow it. It is the same product as funeral insurance and as '
-    '<a class="link" href="/final-expense-insurance/">final expense insurance</a>: three names, '
-    'one contract, no medical exam. The thing worth knowing before you read further is that a '
-    'burial is billed by two separate businesses, the funeral home and the cemetery, and most '
-    'people size a policy having only asked one of them.',
+    'Burial insurance is a small whole life policy that pays your family a cash sum for a '
+    'burial and the bills that follow it.',
+    answer=(
+        'It is the same product as funeral insurance and as <a class="link" '
+        'href="/final-expense-insurance/">final expense insurance</a>: three names, one '
+        'contract, no medical exam. The thing worth knowing before you read further is '
+        'that a burial is billed by two separate businesses, the funeral home and the '
+        'cemetery, and most people size a policy having only asked one of them.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-letters", C.MEDIA_SIZES, eager=True))}
 

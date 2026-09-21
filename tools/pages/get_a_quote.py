@@ -99,23 +99,61 @@ def product_choices():
 
 
 def quote_form():
+    states = '<option value="">Choose your state</option>\n' + C.state_options()
+    sexes = [("female", "Female"), ("male", "Male")]
+    term = (
+        F.row(F.age_field("q-term-age", label="How old are you?", hint="The biggest factor in the price."),
+              F.select_field("q-term-state", "state", "Your state", states,
+                             error="Please choose your state."))
+        + F.row(F.radio_group("q-term-sex", "term_sex", "Sex on your birth certificate", sexes,
+                              hint="Carriers rate them differently.",
+                              error="Choose one so we can price it correctly."),
+                F.radio_group("q-term-tob", "term_tobacco", "Tobacco in the last 12 months?",
+                              [("no", "No"), ("yes", "Yes")], hint="Nicotine of any kind.",
+                              error="Let us know either way."))
+        + F.select_field("q-term-coverage", "coverage", "How much coverage?", [
+            ("", "Choose an amount"), ("100000", "$100,000"), ("250000", "$250,000"),
+            ("500000", "$500,000"), ("750000", "$750,000"), ("1000000", "$1,000,000"),
+            ("2000000", "$2,000,000 or more"), ("unsure", "Not sure yet")],
+            error="Choose a coverage amount, or pick the closest.", hint="A rough figure is fine.")
+        + F.next_button(back=True))
+    whole = (
+        F.row(F.age_field("q-wl-age"),
+              F.select_field("q-wl-state", "state", "Your state", states,
+                             error="Please choose your state."))
+        + F.row(F.radio_group("q-wl-sex", "wl_sex", "Sex on your birth certificate", sexes,
+                              error="Choose one so we can price it correctly."),
+                F.select_field("q-wl-coverage", "coverage", "How much coverage?", [
+                    ("", "Choose an amount"), ("25000", "$25,000"), ("50000", "$50,000"),
+                    ("100000", "$100,000"), ("250000", "$250,000"),
+                    ("500000", "$500,000 or more"), ("unsure", "Not sure yet")],
+                    error="Choose a coverage amount, or pick the closest."))
+        + F.next_button(back=True))
+    final = (
+        F.text_field("q-fe-name", "name", "Your name", autocomplete="name",
+                     validate="name", error="Please tell us your name.")
+        + F.row(F.age_field("q-fe-age"),
+                F.select_field("q-fe-state", "state", "Your state", states,
+                               error="Please choose your state."))
+        + F.next_button(back=True))
+    reach = (
+        F.row(F.phone_field("q-phone", hint="One agent calls, once."),
+              F.text_field("q-email", "email", "Email", hint="Optional. For the written comparison.",
+                           type="email", autocomplete="email", validate="email",
+                           error="Enter a valid email address.", required=False))
+        + F.consent_block("q", C.BRAND, 12)
+        + F.submit_block("See my quotes", back=True))
     return f"""
         <form id="quote-form" class="mt-6" data-ax-form data-steps data-silo="site"
               data-form-name="master_quote" data-success-target="quote-success" novalidate>
 
           {F.scaffold(indent=10)}
 
-          <div class="progress-track" aria-hidden="true">
-            <span class="progress-seg is-done" data-progress-seg></span>
-            <span class="progress-seg" data-progress-seg></span>
-            <span class="progress-seg" data-progress-seg></span>
-            <span class="progress-seg" data-progress-seg></span>
-          </div>
-          <p class="text-micro font-semibold text-muted" data-progress-label aria-live="polite">Step 1</p>
+          {F.progress(3)}
 
           <!-- STEP 1. Shared. Choosing here enables one branch and disables
                the other two. -->
-          <fieldset class="step is-active mt-5" data-step="1"
+          <fieldset class="step is-active mt-5" data-step="1" data-step-title="What you need"
                     data-error="Pick the one closest to what you are after. We can change it on the call.">
             <legend class="field-label">What are you looking for?</legend>
             <div class="choice-col mt-3" role="group">{product_choices()}
@@ -129,110 +167,15 @@ def quote_form():
             </p>
           </fieldset>
 
-          <!-- ============ TERM BRANCH. Three steps, six fields. ============ -->
-          <fieldset class="step mt-5" data-step="2" data-step-for="term">
-            <legend class="sr-only">Term life, step 2: your age and sex</legend>
-            {F.text_field("q-term-age", "age", "How old are you?",
-                          hint="Age is the single biggest factor in the price.",
-                          inputmode="numeric", validate="age",
-                          error="Enter an age between 18 and 85.", indent=12)}
-            {F.radio_group("q-term-sex", "term_sex", "Sex as shown on your birth certificate",
-                           [("female", "Female"), ("male", "Male")],
-                           hint="Carriers rate male and female applicants differently.",
-                           error="Choose one so we can price it correctly.", indent=12)}
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="button" class="btn btn-cta grow" data-step-next>Continue</button>
-            </div>
-          </fieldset>
+          <!-- One step per product, then one shared last step: every path is
+               three steps. Radio names stay unique per branch (check.py). -->
+          {F.step(2, "About you", term, owner="term")}
+          {F.step(2, "About you", whole, owner="whole")}
+          {F.step(2, "About you", final, owner="final-expense")}
 
-          <fieldset class="step mt-5" data-step="3" data-step-for="term">
-            <legend class="sr-only">Term life, step 3: state, coverage, and tobacco</legend>
-            {F.select_field("q-term-state", "state", "What state do you live in?",
-                            '<option value="">Choose your state</option>\n' + C.state_options(),
-                            error="Please choose your state.", indent=12)}
-            {F.select_field("q-term-coverage", "coverage", "How much coverage?", [
-                ("", "Choose an amount"), ("100000", "$100,000"), ("250000", "$250,000"),
-                ("500000", "$500,000"), ("750000", "$750,000"), ("1000000", "$1,000,000"),
-                ("2000000", "$2,000,000 or more"), ("unsure", "Not sure yet")],
-                error="Choose a coverage amount, or pick the closest.", indent=12)}
-            {F.radio_group("q-term-tob", "term_tobacco",
-                           "Have you used tobacco or nicotine in the last 12 months?",
-                           [("no", "No"), ("yes", "Yes")],
-                           error="Let us know either way.", indent=12)}
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="button" class="btn btn-cta grow" data-step-next>Continue</button>
-            </div>
-          </fieldset>
-
-          <!-- ============ WHOLE LIFE BRANCH. One step, five fields. ======== -->
-          <fieldset class="step mt-5" data-step="2" data-step-for="whole">
-            <legend class="sr-only">Whole life: age, sex, state, and coverage</legend>
-            <div class="grid sm:grid-cols-2 gap-x-4">
-              {F.text_field("q-wl-age", "age", "Your age", inputmode="numeric", validate="age",
-                            error="Enter an age between 18 and 85.", indent=14)}
-              {F.select_field("q-wl-state", "state", "Your state",
-                              '<option value="">Choose your state</option>\n' + C.state_options(),
-                              error="Please choose your state.", indent=14)}
-            </div>
-            {F.radio_group("q-wl-sex", "wl_sex", "Sex as shown on your birth certificate",
-                           [("female", "Female"), ("male", "Male")],
-                           error="Choose one so we can price it correctly.", indent=12)}
-            {F.select_field("q-wl-coverage", "coverage", "How much coverage?", [
-                ("", "Choose an amount"), ("25000", "$25,000"), ("50000", "$50,000"),
-                ("100000", "$100,000"), ("250000", "$250,000"),
-                ("500000", "$500,000 or more"), ("unsure", "Not sure yet")],
-                error="Choose a coverage amount, or pick the closest.", indent=12)}
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="button" class="btn btn-cta grow" data-step-next>Continue</button>
-            </div>
-          </fieldset>
-
-          <!-- ============ FINAL EXPENSE BRANCH. Short, four fields. ======== -->
-          <fieldset class="step mt-5" data-step="2" data-step-for="final-expense">
-            <legend class="sr-only">Final expense: your name, age, and state</legend>
-            {F.text_field("q-fe-name", "name", "Your name", autocomplete="name",
-                          validate="name", error="Please tell us your name.", indent=12)}
-            <div class="grid sm:grid-cols-2 gap-x-4">
-              {F.text_field("q-fe-age", "age", "Your age", inputmode="numeric", validate="age",
-                            error="Enter an age between 18 and 85.", indent=14)}
-              {F.select_field("q-fe-state", "state", "Your state",
-                              '<option value="">Choose your state</option>\n' + C.state_options(),
-                              error="Please choose your state.", indent=14)}
-            </div>
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="button" class="btn btn-cta grow" data-step-next>Continue</button>
-            </div>
-          </fieldset>
-
-          <!-- ============ FINAL STEP. Shared, so consent is asked once,
-               immediately above the button the visitor actually presses. ==== -->
-          <fieldset class="step mt-5" data-step="4">
-            <legend class="sr-only">Last step: how to reach you</legend>
-            {F.text_field("q-phone", "phone", "Best number to reach you",
-                          hint="One licensed agent calls once. Your number goes nowhere else.",
-                          type="tel", autocomplete="tel", validate="phone",
-                          error="Enter a 10 digit phone number.", indent=12)}
-            {F.text_field("q-email", "email", "Email",
-                          hint="Optional. Only used to send the written comparison.",
-                          type="email", autocomplete="email", validate="email",
-                          error="Enter a valid email address.", required=False, indent=12)}
-
-            {F.consent_block("q", C.BRAND, 12)}
-
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="submit" class="btn btn-cta grow">See my quotes</button>
-            </div>
-            <p class="field-error" data-form-error>{F.ERR}<span></span></p>
-          </fieldset>
-
-          <p class="mt-4 text-micro text-muted">
-            Free &#183; No obligation &#183; Licensed agents &#183; We never sell your details on
-          </p>
+          <!-- FINAL STEP. Shared, so consent is asked once, immediately above
+               the button the visitor actually presses. -->
+          {F.step(4, "How to reach you", reach)}
         </form>
 
         {F.success_panel("quote-success", "Got it",
@@ -261,6 +204,19 @@ def rate_rows():
 
 
 def body():
+    # The closing ask. Inset, because a flat navy band here sat directly on the
+    # navy footer and read as part of it. The photograph is at the far end of
+    # the page from the form, so "no image beside the form" is untouched.
+    talk_band = C.banner(
+        "term-band",
+        "Would rather talk it through?",
+        "A call gets you the same licensed agent and the same comparison, and you can ask the "
+        "awkward questions as they come up.",
+        C.phone_link("quote_footer", "btn btn-call btn-block !bg-white !text-navy",
+                     "Call " + C.PHONE_DISPLAY)
+        + '<p class="mt-3 text-sm text-white/75 text-center">%s</p>' % C.HOURS,
+        inset=True)
+
     return f"""
 <section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
@@ -512,19 +468,4 @@ def body():
 {C.faq_section("Before you start", FAQ, "quote-faq")}
 
 
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <h2 class="reveal text-h2 text-white">Would rather talk it through?</h2>
-        <p class="reveal mt-4 text-white/85 max-w-2xl">
-          A call gets you the same licensed agent and the same comparison, and you can ask the
-          awkward questions as they come up. {C.HOURS}.
-        </p>
-      </div>
-      <div class="lg:col-span-4 lg:col-start-9">
-        {C.phone_link("quote_footer", "btn btn-ghost btn-block", "Call " + C.PHONE_DISPLAY)}
-      </div>
-    </div>
-  </div>
-</section>"""
+{talk_band}"""

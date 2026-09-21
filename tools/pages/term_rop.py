@@ -178,12 +178,15 @@ def body():
 {C.page_hero(
     TRAIL,
     "Return of Premium Term Life Insurance",
-    'Return of premium is standard '
-    '<a class="link" href="/term-life-insurance/">term life insurance</a> with one addition: if you '
-    'are still alive at the end of the term, the carrier refunds the premiums you paid. The '
-    'coverage is identical to a standard policy of the same size and length, the premium is '
-    'substantially higher, and the refund carries no interest. We rarely recommend it, and this '
-    'page explains the arithmetic behind that rather than asking you to take it on trust.',
+    'Return of premium term refunds the premiums you paid if you are still alive when the '
+    'term ends.',
+    answer=(
+        'It is standard <a class="link" href="/term-life-insurance/">term life '
+        'insurance</a> with that one addition. The coverage is identical to a standard '
+        'policy of the same size and length, the premium is substantially higher, and the '
+        'refund carries no interest. We rarely recommend it, and this page explains the '
+        'arithmetic behind that rather than asking you to take it on trust.'),
+    extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
 
 

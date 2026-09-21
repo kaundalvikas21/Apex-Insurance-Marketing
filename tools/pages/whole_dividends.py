@@ -126,12 +126,15 @@ def schema():
 
 
 LEAD = (
-    'A dividend on a participating '
-    '<a class="link" href="/whole-life-insurance/">whole life insurance</a> policy is a share of '
-    "the carrier's surplus, returned to policyholders when the company's actual experience beats "
-    'the cautious assumptions it priced with. It is not interest, it is not an investment return, '
-    'and it is never guaranteed: the board declares it annually and can reduce it or skip it '
-    'entirely. What follows is how one is decided, what you can do with it, and how to read an '
+    "A dividend is a share of the carrier's surplus, returned to policyholders in a good "
+    'year. It is never guaranteed.')
+
+ANSWER = (
+    'A participating <a class="link" href="/whole-life-insurance/">whole life '
+    "insurance</a> policy pays one when the company's actual experience beats the "
+    'cautious assumptions it priced with. It is not interest, it is not an investment '
+    'return, and the board declares it annually and can reduce it or skip it entirely. '
+    'What follows is how one is decided, what you can do with it, and how to read an '
     'illustration that shows one.')
 
 
@@ -148,6 +151,8 @@ def body():
     TRAIL,
     "Dividend-Paying Whole Life Insurance Explained",
     LEAD,
+    answer=ANSWER,
+    extra=C.hero_cta("/whole-life-insurance/quotes/", "Get my whole life quote"),
     media=C.figure("whole-arbor", C.MEDIA_SIZES, eager=True))}
 
 

@@ -48,6 +48,13 @@ def schema():
 
 
 def body():
+    closing = C.closing_band(
+        "term-band",
+        "Judge us on the numbers instead",
+        "Ask for a quote and see whether the carrier names and premiums come back on "
+        "it. That tells you more than a testimonial would.",
+        "reviews_footer")
+
     return f"""
 <section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
@@ -153,20 +160,4 @@ def body():
 {C.faq_section("Questions about reviews", FAQ, "reviews-faq")}
 
 
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <h2 class="reveal text-h2 text-white">Judge us on the numbers instead</h2>
-        <p class="reveal mt-4 text-white/85 max-w-2xl">
-          Ask for a quote and see whether the carrier names and premiums come back on it. That
-          tells you more than a testimonial would.
-        </p>
-      </div>
-      <div class="lg:col-span-4 lg:col-start-9 grid gap-3">
-        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>
-        {C.phone_link("reviews_footer", "btn btn-ghost btn-block", "Call " + C.PHONE_DISPLAY)}
-      </div>
-    </div>
-  </div>
-</section>"""
+{closing}"""

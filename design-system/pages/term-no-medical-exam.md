@@ -7,7 +7,8 @@ phone at equal weight on this page and asks for a denser CTA rhythm than an info
 would carry. The visitor has usually already decided to buy and is looking for a reason not to be
 examined, which is the highest intent state in this silo.
 
-**Three asks instead of one.** Hero (amber anchor button plus a navy call button), a phone-first
+**Three asks instead of one.** Hero (one amber anchor button; the navy call button left the hero
+in the September 2026 reframe, one button per hero), a phone-first
 `inline_cta` at mid page, and the form section itself. That is the only page in the P2 layer with
 more than one CTA block.
 

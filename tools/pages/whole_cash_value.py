@@ -102,12 +102,15 @@ def body():
 {C.page_hero(
     TRAIL,
     "How Whole Life Insurance Cash Value Works",
-    'Cash value is a pot of money inside a permanent policy that grows on a schedule printed in '
-    'your contract, which you can borrow against or take by cancelling. It exists because '
-    '<a class="link" href="/whole-life-insurance/">whole life insurance</a> charges a level '
-    'premium for a risk that rises every year, so the early overpayment has to be held somewhere. '
-    'It is a real asset with real constraints, and most of what is written about it oversells one '
-    'and ignores the other.',
+    'Cash value is money inside a permanent policy that grows on a schedule printed in '
+    'your contract. You can borrow against it or take it by cancelling.',
+    answer=(
+        'It exists because <a class="link" href="/whole-life-insurance/">whole life '
+        'insurance</a> charges a level premium for a risk that rises every year, so the '
+        'early overpayment has to be held somewhere. It is a real asset with real '
+        'constraints, and most of what is written about it oversells one and ignores the '
+        'other.'),
+    extra=C.hero_cta("/whole-life-insurance/quotes/", "Get my whole life quote", cls="btn btn-ghost"),
     media=C.figure("whole-ledger", C.MEDIA_SIZES, eager=True))}
 
 

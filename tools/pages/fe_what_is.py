@@ -175,12 +175,13 @@ def body():
 {C.page_hero(
     TRAIL,
     "What Is Final Expense Insurance?",
-    'Final expense insurance is a small permanent life insurance policy, usually between $2,000 '
-    'and $50,000, bought so that a funeral and the bills that follow a death do not fall on your '
-    'family. There is no medical exam: you answer a short list of health questions, the premium is '
-    'fixed for life, and the coverage never expires. It is the same thing sold under the names '
-    'burial insurance and funeral insurance, and it is all '
-    '<a class="link" href="/final-expense-insurance/">final expense insurance</a>.',
+    'Final expense insurance is a small permanent policy, usually $2,000 to $50,000, so a '
+    'funeral and final bills do not fall on your family.',
+    answer=(
+        'There is no medical exam: you answer a short list of health questions, the '
+        'premium is fixed for life, and the coverage never expires. It is the same thing '
+        'sold under the names burial insurance and funeral insurance, and it is all <a '
+        'class="link" href="/final-expense-insurance/">final expense insurance</a>.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 

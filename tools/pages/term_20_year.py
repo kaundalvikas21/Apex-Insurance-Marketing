@@ -66,11 +66,14 @@ def body():
     return term_length.render(
         years=20,
         h1="20-Year Term Life Insurance",
-        lead='A twenty year term is the most commonly bought length of '
-             '<a class="link" href="/term-life-insurance/">term life insurance</a>, and for most '
-             'households it is genuinely the right one: it covers a child from primary school to '
-             'leaving home, or most of a standard mortgage. It is also the default that people '
-             'accept without checking, which is a different thing. This page is the check.',
+        lead=(
+            'A twenty year term is the most commonly bought length, and for most '
+            'households it is genuinely the right one.'),
+        answer=(
+            'It covers a child from primary school to leaving home, or most of a standard '
+            'mortgage. It is also the default length of <a class="link" '
+            'href="/term-life-insurance/">term life insurance</a> that people accept '
+            'without checking, which is a different thing. This page is the check.'),
         fits=[
             ("The common case", "A mortgage with about twenty years left",
              "If you took a thirty year mortgage roughly a decade ago, the arithmetic lines up "

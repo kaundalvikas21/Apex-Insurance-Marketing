@@ -102,69 +102,34 @@ REQUEST_TYPE_FIELD = '''<!-- Flipped to "illustration" by the tertiary CTA below
 
 
 def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl"):
-    """Five fields, one step. Equal partner to the phone CTA beside it.
+    """Five fields, one step, three rows. Equal partner to the phone CTA beside it.
 
     Parameterised so the whole life spokes can host their own copy: two forms
     posting the same data-form-name would make the GA4 form_submit event
     useless for telling the hub apart from the calculator.
     """
     p = id_prefix
+    fields = (
+        F.row(F.age_field(p + "-age"),
+              F.radio_group(p + "-sex", "sex", "Sex", [("female", "Female"), ("male", "Male")],
+                            error="Choose one so we can price it correctly."))
+        + F.row(F.select_field(p + "-state", "state", "Your state",
+                               '<option value="">Choose your state</option>\n' + C.state_options(),
+                               error="Please choose your state."),
+                F.select_field(p + "-coverage", "coverage", "Coverage in mind",
+                               [("", "Choose an amount"), ("25000", "$25,000"), ("50000", "$50,000"),
+                                ("100000", "$100,000"), ("250000", "$250,000"),
+                                ("500000", "$500,000 or more"), ("unsure", "Not sure yet")],
+                               error="Choose an amount, or pick the closest.",
+                               hint="A rough figure is fine."))
+        + F.phone_field(p + "-phone", hint="One agent calls, once."))
     return f"""
         <form id="{form_id}" class="mt-6" data-ax-form data-silo="whole-life"
               data-form-name="{form_name}" data-success-target="{p}-success" novalidate>
 
           {F.scaffold(REQUEST_TYPE_FIELD, 10)}
 
-          <div class="grid sm:grid-cols-2 gap-x-4">
-            <div class="field">
-              <label class="field-label" for="{p}-age">Your age</label>
-              <input class="input" id="{p}-age" name="age" type="text" inputmode="numeric"
-                     required data-validate="age" data-error="Enter an age between 18 and 85.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            <div class="field" data-error="Choose one so we can price it correctly.">
-              <span class="field-label" id="{p}-sex-label">Sex</span>
-              <div class="choice-row" role="group" aria-labelledby="{p}-sex-label">
-                <label class="choice"><input type="radio" name="sex" value="female" required><span>Female</span></label>
-                <label class="choice"><input type="radio" name="sex" value="male" required><span>Male</span></label>
-              </div>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="{p}-state">Your state</label>
-            <select class="select" id="{p}-state" name="state" required data-error="Please choose your state.">
-              <option value="">Choose your state</option>
-              {C.state_options()}
-            </select>
-            <p class="field-error">{ERR}<span></span></p>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="{p}-coverage">Coverage you have in mind
-              <span class="field-hint block font-normal">A rough figure is fine. We will talk it through.</span>
-            </label>
-            <select class="select" id="{p}-coverage" name="coverage" required
-                    data-error="Choose an amount, or pick the closest.">
-              <option value="">Choose an amount</option>
-              <option value="25000">$25,000</option>
-              <option value="50000">$50,000</option>
-              <option value="100000">$100,000</option>
-              <option value="250000">$250,000</option>
-              <option value="500000">$500,000 or more</option>
-              <option value="unsure">Not sure yet</option>
-            </select>
-            <p class="field-error">{ERR}<span></span></p>
-          </div>
-
-          <div class="field">
-            <label class="field-label" for="{p}-phone">Best number to reach you</label>
-            <input class="input" id="{p}-phone" name="phone" type="tel" autocomplete="tel"
-                   required data-validate="phone" data-error="Enter a 10 digit phone number.">
-            <p class="field-error">{ERR}<span></span></p>
-          </div>
+          {fields}
 
           <p id="{p}-illustration-note" data-prefill-note hidden
              class="flag !bg-navy-050 !border-navy !text-navy mb-4">
@@ -175,9 +140,7 @@ def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl
 
           {F.consent_block(p, C.BRAND, 10)}
 
-          <button type="submit" class="btn btn-cta btn-block">Get whole life quotes</button>
-          <p class="field-error" data-form-error>{ERR}<span></span></p>
-          <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
+          {F.submit_block("Get whole life quotes")}
         </form>
 
         <div id="{p}-success" class="success">
@@ -284,25 +247,40 @@ def body():
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
     byline = C.byline()
 
-    return f"""
-<!-- =====================================================================
-     HERO. Dual CTA at genuine parity: the form panel and the call panel are
-     the same width, the same height, and the same optical weight.
-     ================================================================== -->
-<section class="pt-6 pb-14 md:pb-16 glow">
-  <div class="container-ax">
-    {C.crumbs([("Home", "/"), ("Whole Life Insurance", None)])}
+    hero = C.page_hero(
+        [("Home", "/"), ("Whole Life Insurance", None)],
+        "Whole life insurance that never expires.",
+        "Lifelong cover, a premium that never rises, and cash value guaranteed in the contract.",
+        extra=C.hero_cta("#quote", "Get my whole life quote"),
+        banner="whole-hero")
+    usps = C.usp_strip([
+        ("heart", "Cover for life", "It never expires"),
+        ("shield-check", "Premium never rises", "Locked from day one"),
+        ("trending-up", "Guaranteed cash value", "Written into the contract"),
+        ("scale", "Independent agency", "We compare carriers for you"),
+    ])
 
-    <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">Whole Life Insurance</h1>
-      <p class="reveal mt-5 text-lead text-slate">
-        Coverage that does not expire, a premium that does not rise, and a cash value that is
-        guaranteed in the contract. It costs considerably more than term, and this page explains
-        exactly when that trade is worth making and when it is not.
+    return f"""
+{hero}
+{usps}
+
+<!-- =====================================================================
+     QUOTES. Dual CTA at genuine parity: the form panel and the call panel are
+     the same width, the same height, and the same optical weight. Still
+     #quote: the hero button, the banner, the closing card, and the homepage
+     triage all land here.
+     ================================================================== -->
+<section id="quote" class="section band">
+  <div class="container-ax">
+    <div class="max-w-3xl">
+      <h2 class="reveal text-h2">Compare quotes or talk to an agent</h2>
+      <p class="reveal mt-5 text-slate">
+        Whole life costs considerably more than term. This page explains exactly when that trade
+        is worth making and when it is not, and a licensed agent will tell you the same.
       </p>
     </div>
 
-    <div class="mt-10 grid lg:grid-cols-2 gap-6 items-stretch" id="quote">
+    <div class="mt-10 grid lg:grid-cols-2 gap-6 items-stretch">
 
       <div class="panel reveal flex flex-col">
         <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
@@ -341,26 +319,6 @@ def body():
           </button>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust strip, within one viewport of both CTAs. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("scale", 18, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("shield-check", 18, "shrink-0")}Your details are never sold to other agencies
-      </span>
     </div>
   </div>
 </section>

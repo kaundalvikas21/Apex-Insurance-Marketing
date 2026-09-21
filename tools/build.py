@@ -24,7 +24,7 @@ import images  # noqa: E402
 PAGES = [
     # The five approved pages, plus the P0 trust and conversion layer (spec s06).
     "home", "final_expense", "term", "whole", "contact",
-    "get_a_quote", "thank_you",
+    "get_a_quote", "thank_you", "free_policy_review",
     "about", "about_agents", "about_agent_profile",
     "about_licensing", "about_carriers", "about_reviews",
     "legal_privacy", "legal_terms", "legal_disclaimer",

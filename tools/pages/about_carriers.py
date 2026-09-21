@@ -62,6 +62,13 @@ def rows():
 
 
 def body():
+    closing = C.closing_band(
+        "term-band",
+        "See what they quote for you",
+        "The carrier names come back on the quote, not just a number. That is how you "
+        "check the comparison happened.",
+        "carriers_footer")
+
     return f"""
 <section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
@@ -199,20 +206,4 @@ def body():
 </section>
 
 
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <h2 class="reveal text-h2 text-white">See what they quote for you</h2>
-        <p class="reveal mt-4 text-white/85 max-w-2xl">
-          The carrier names come back on the quote, not just a number. That is how you check the
-          comparison happened.
-        </p>
-      </div>
-      <div class="lg:col-span-4 lg:col-start-9 grid gap-3">
-        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>
-        {C.phone_link("carriers_footer", "btn btn-ghost btn-block", "Call " + C.PHONE_DISPLAY)}
-      </div>
-    </div>
-  </div>
-</section>"""
+{closing}"""

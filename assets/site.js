@@ -98,6 +98,71 @@
     });
   })();
 
+  // Desktop "Insurance" menu. It is a native <details>, so it opens without
+  // this file. This only adds the closing behaviour a menu is expected to have.
+  (function navDropdown() {
+    var dd = $('[data-nav-dd]');
+    if (!dd) return;
+
+    document.addEventListener('click', function (e) {
+      if (dd.open && (!dd.contains(e.target) || e.target.closest('.nav-dd-menu a'))) dd.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dd.open) {
+        dd.open = false;
+        $('summary', dd).focus();
+      }
+    });
+  })();
+
+  /* ------------------------------------------------------------------------
+     3b. TIMED DIALOG
+     One native <dialog>, opened once per session at the first of 30 seconds
+     or half the page scrolled. showModal() supplies the focus trap, Escape,
+     and the backdrop. Never in senior mode, and never over an open form.
+     --------------------------------------------------------------------- */
+  (function timedDialog() {
+    var dlg = $('[data-dialog-timed]');
+    if (!dlg || !dlg.showModal || document.documentElement.classList.contains('fe')) return;
+
+    var KEY = 'ax_dialog_' + dlg.id;
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) { return; }
+
+    var timer = setTimeout(open, 30000);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    function onScroll() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.scrollY / max >= 0.5) open();
+    }
+
+    // Never over the quiz. It sits at about half way down the page, which is
+    // also this dialog's scroll trigger, so without this the dialog lands on
+    // top of it just as someone arrives. Returning early keeps the scroll
+    // listener alive, so the dialog simply waits until they have moved on.
+    function quizOnScreen() {
+      var quiz = $('[data-triage]');
+      if (!quiz) return false;
+      var r = quiz.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight;
+    }
+
+    function open() {
+      var busy = document.activeElement && document.activeElement.closest('[data-triage], [data-nav-panel]');
+      if (dlg.open || busy || quizOnScreen()) return;
+      clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      dlg.showModal();
+      track('dialog_open', { dialog: dlg.id });
+    }
+
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg) dlg.close();               // backdrop
+      if (e.target.closest('[data-dialog-cta]')) track('dialog_cta', { dialog: dlg.id });
+    });
+  })();
+
   /* ------------------------------------------------------------------------
      4. SCROLL REVEAL
      Reduced motion and missing IO both fall through to "everything visible".
@@ -218,10 +283,6 @@
     }
   };
 
-  function fieldWrapper(input) {
-    return input.closest('.field') || input.closest('.choice-row') || input.parentNode;
-  }
-
   function errorNode(input) {
     var wrap = input.closest('.field') || input.closest('fieldset') || input.parentNode;
     return $('.field-error', wrap);
@@ -240,12 +301,16 @@
     if (!node) return;
     setMessage(node, message);
     node.classList.add('is-shown');
+    input.classList.remove('is-valid');
+    // initForm() gives every error node an id, so this always resolves and a
+    // screen reader reads the message when focus lands on the field.
     if (node.id) input.setAttribute('aria-describedby', node.id);
   }
 
   function clearError(input) {
     var node = errorNode(input);
     input.removeAttribute('aria-invalid');
+    input.removeAttribute('aria-describedby');
     if (!node) return;
     node.classList.remove('is-shown');
     setMessage(node, '');
@@ -264,6 +329,8 @@
       return false;
     }
     clearError(input);
+    // A tick for a required answer that passed. An icon, not only a colour.
+    input.classList.toggle('is-valid', input.tagName === 'INPUT' && input.hasAttribute('required') && !!value);
     return true;
   }
 
@@ -272,11 +339,18 @@
     var group = $$('input[type="radio"][name="' + name + '"]', form);
     if (!group.length || !group[0].hasAttribute('required')) return true;
     var chosen = group.some(function (r) { return r.checked; });
-    var wrap = group[0].closest('fieldset') || group[0].closest('.field');
+    // .field first: on a multi-step form the fieldset is the whole step, and
+    // its first .field-error may belong to a different question.
+    var wrap = group[0].closest('.field') || group[0].closest('fieldset');
     var node = wrap && $('.field-error', wrap);
+    var set = wrap && ($('[role="group"]', wrap) || wrap);
+    if (set) {
+      if (chosen) { set.removeAttribute('aria-invalid'); set.removeAttribute('aria-describedby'); }
+      else { set.setAttribute('aria-invalid', 'true'); if (node && node.id) set.setAttribute('aria-describedby', node.id); }
+    }
     if (node) {
       node.classList.toggle('is-shown', !chosen);
-      if (!chosen) setMessage(node, wrap.getAttribute('data-error') || 'Choose an option.');
+      setMessage(node, chosen ? '' : (wrap.getAttribute('data-error') || 'Choose an option.'));
     }
     return chosen;
   }
@@ -304,8 +378,33 @@
     return ok;
   }
 
-  function firstInvalid(scope) {
-    return $('[aria-invalid="true"]', scope) || $('.field-error.is-shown', scope);
+  // One routine for Continue and for Submit. The first problem may be a text
+  // control, a radio group (focus its first radio), or the consent box.
+  function focusFirstInvalid(scope) {
+    var bad = $('[aria-invalid="true"], .consent[data-invalid="true"]', scope);
+    if (!bad) return;
+    var target = bad.matches('input, select, textarea') ? bad : $('input, select, textarea', bad);
+    if (target && target.focus) target.focus();
+    else bad.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  // Per-field messages are read on focus through aria-describedby. This is the
+  // one polite summary, so a failed Continue or Submit is not silent.
+  function announce(form, scope) {
+    var status = $('[data-form-status]', form);
+    if (!status) return;
+    var n = $$('[aria-invalid="true"], .consent[data-invalid="true"]', scope).length;
+    status.textContent = n ? (n === 1 ? '1 answer needs attention.' : n + ' answers need attention.') : '';
+  }
+
+  // (555) 018-0199 as it is typed. Only when the caret is at the end, so
+  // correcting a digit in the middle is never fought.
+  function formatPhone(input) {
+    if (input.selectionStart !== input.value.length) return;
+    var d = input.value.replace(/\D/g, '').slice(0, 10);
+    input.value = d.length > 6 ? '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6)
+      : d.length > 3 ? '(' + d.slice(0, 3) + ') ' + d.slice(3)
+      : d;
   }
 
   /* >>> WIRE TO CRM ENDPOINT HERE <<< */
@@ -317,6 +416,11 @@
     //     headers: { 'Content-Type': 'application/json' },
     //     body: JSON.stringify(payload)
     //   }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+    // Test hook, like AX_DEBUG: window.AX_FAIL_SUBMIT = true (or "offline")
+    // rejects, so the failure state can be seen before a backend exists.
+    if (window.AX_FAIL_SUBMIT) {
+      return Promise.reject(new Error(window.AX_FAIL_SUBMIT === 'offline' ? 'offline' : 'test failure'));
+    }
     console.log('[lead] would POST:', payload);
     return Promise.resolve();
   }
@@ -324,7 +428,21 @@
   function initForm(form) {
     var siloValue = form.getAttribute('data-silo') || 'site';
     var formName = form.getAttribute('data-form-name') || 'unnamed_form';
-    var started = false;
+    var submitting = false;
+    // One id per form load. A retry after a failure re-sends the same id, so
+    // the CRM can drop the duplicate. There is deliberately no automatic
+    // retry: a lead POST is not idempotent.
+    var submissionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'ax-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+
+    $$('.field-error', form).forEach(function (node, i) {
+      if (!node.id) node.id = (form.id || formName) + '-err-' + i;
+    });
+    var status = document.createElement('p');
+    status.className = 'sr-only';
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('data-form-status', '');
+    form.appendChild(status);
 
     // Compliance: source URL and silo captured on every submission.
     var src = $('input[name="source_url"]', form);
@@ -336,10 +454,11 @@
 
     // form_start fires once, on first real interaction.
     form.addEventListener('focusin', function (e) {
-      if (started) return;
+      // On the form, not in a closure: a rate-table prefill starts it too.
+      if (form.axStarted) return;
       if (!e.target.matches('input, select, textarea')) return;
       if (e.target.type === 'hidden') return;
-      started = true;
+      form.axStarted = true;
       track('form_start', { form_name: formName, silo: siloValue, page_path: window.location.pathname });
     });
 
@@ -354,7 +473,11 @@
         validateField(input);
       });
       input.addEventListener('input', function () {
+        var rule = input.getAttribute('data-validate');
+        if (rule === 'phone') formatPhone(input);
+        else if (rule === 'age' || rule === 'ageSenior') input.value = input.value.replace(/\D/g, '');
         if (input.getAttribute('aria-invalid') === 'true') validateField(input);
+        else input.classList.remove('is-valid');
       });
     });
 
@@ -378,6 +501,8 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      // button.disabled does not stop Enter in another field re-firing submit.
+      if (submitting) return;
 
       // Honeypot. Bots fill hidden text inputs; humans never see this one.
       var trap = $('input[name="company_website"]', form);
@@ -398,15 +523,8 @@
         }
       }
 
-      if (!valid) {
-        var bad = firstInvalid(form);
-        if (bad) {
-          var focusTarget = bad.matches('input, select, textarea') ? bad : $('input, select', bad.closest('.field, .consent, fieldset') || form);
-          if (focusTarget && focusTarget.focus) focusTarget.focus();
-          else bad.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
-        }
-        return;
-      }
+      announce(form, form);
+      if (!valid) { focusFirstInvalid(form); return; }
 
       var payload = {};
       new FormData(form).forEach(function (value, key) {
@@ -414,12 +532,32 @@
         payload[key] = value;
       });
       payload.submitted_at = new Date().toISOString();
+      payload.submission_id = submissionId;
 
       var button = $('[type="submit"]', form);
-      var originalLabel = button ? button.textContent : '';
-      if (button) { button.disabled = true; button.textContent = 'Sending...'; }
+      var failure = $('[data-form-error]', form);
+      // Child nodes, not textContent: a label with an icon survives the round trip.
+      if (button && !button.axLabel) button.axLabel = Array.prototype.slice.call(button.childNodes);
 
-      submitLead(payload).then(function () {
+      function setButton(text, busy) {
+        if (!button) return;
+        button.disabled = busy;
+        if (busy) button.setAttribute('aria-busy', 'true'); else button.removeAttribute('aria-busy');
+        button.textContent = text;
+      }
+
+      submitting = true;
+      if (failure) { failure.classList.remove('is-shown'); setMessage(failure, ''); }
+      setButton('Sending...', true);
+
+      // A request that never answers must not leave "Sending..." up for ever.
+      var timeout = new Promise(function (_, reject) {
+        setTimeout(function () { reject(new Error('timeout')); }, 15000);
+      });
+
+      Promise.race([submitLead(payload), timeout]).then(function () {
+        submitting = false;
+        if (button) { button.textContent = ''; button.axLabel.forEach(function (n) { button.appendChild(n); }); }
         track('form_submit', {
           form_name: formName,
           silo: siloValue,
@@ -427,13 +565,19 @@
           source_url: payload.source_url
         });
         showSuccess(form);
-      }).catch(function () {
-        if (button) { button.disabled = false; button.textContent = originalLabel; }
-        var node = $('[data-form-error]', form);
-        if (node) {
-          setMessage(node, 'Something went wrong sending your request. Please call us and we will take your details over the phone.');
-          node.classList.add('is-shown');
+      }).catch(function (err) {
+        // Recoverable: say what happened and what to do, keep every answer,
+        // and make the button the retry. The role="alert" node announces it.
+        submitting = false;
+        setButton('Try again', false);
+        var offline = (err && err.message === 'offline') || navigator.onLine === false;
+        if (failure) {
+          setMessage(failure, offline
+            ? 'You appear to be offline. Check your connection, then press Try again. Your answers are still here.'
+            : 'We could not send that. Your answers are still here: press Try again, or call us and we will take them by phone.');
+          failure.classList.add('is-shown');
         }
+        track('form_error', { form_name: formName, silo: siloValue, reason: offline ? 'offline' : (err && err.message === 'timeout' ? 'timeout' : 'failed') });
       });
     });
   }
@@ -505,9 +649,10 @@
       // Before a product is picked the total is genuinely not known yet, so the
       // label does not invent one.
       if (label) {
-        label.textContent = branchChosen()
+        var title = live[index].getAttribute('data-step-title');
+        label.textContent = (branchChosen()
           ? 'Step ' + (index + 1) + ' of ' + live.length
-          : 'Step ' + (index + 1);
+          : 'Step ' + (index + 1)) + (title ? ' \u00b7 ' + title : '');
       }
 
       if (focusFirst) {
@@ -533,11 +678,9 @@
       if (next) {
         e.preventDefault();
         var live = steps();
-        if (!collect(live[index], form)) {
-          var bad = firstInvalid(live[index]);
-          if (bad && bad.focus) bad.focus();
-          return;
-        }
+        var ok = collect(live[index], form);
+        announce(form, live[index]);
+        if (!ok) { focusFirstInvalid(live[index]); return; }
         if (index < live.length - 1) { index++; render(true); }
       }
 
@@ -621,11 +764,17 @@
         }
       });
 
-      track('form_start', {
-        form_name: form.getAttribute('data-form-name'),
-        silo: form.getAttribute('data-silo'),
-        trigger: button.getAttribute('data-prefill-trigger') || 'rate_table_prefill'
-      });
+      // Same flag initForm() uses, so a prefill followed by typing in the form
+      // is one form_start, not two.
+      if (!form.axStarted) {
+        form.axStarted = true;
+        track('form_start', {
+          form_name: form.getAttribute('data-form-name'),
+          silo: form.getAttribute('data-silo'),
+          page_path: window.location.pathname,
+          trigger: button.getAttribute('data-prefill-trigger') || 'rate_table_prefill'
+        });
+      }
 
       // Some prefill buttons also change what the visitor is asking for
       // (a full illustration rather than a quote). Reveal the note that says so.
@@ -687,16 +836,22 @@
     var questions = $$('[data-triage-q]', widget);
     var results = $$('[data-triage-result]', widget);
     var progress = $('[data-triage-progress]', widget);
-    var scores = {};
-    var at = 0;
+    var head = $('[data-triage-head]', widget);
+    var segs = $$('[data-triage-seg]', widget);
+    var back = $('[data-triage-back]', widget);
+    // One data-score string per answered question. Scores are summed from this
+    // at the end, which is what makes Back a pop() rather than a subtraction.
+    var picks = [];
+    var busy = false;
 
     function show(step, moveFocus) {
       questions.forEach(function (q, i) { q.hidden = i !== step; });
       results.forEach(function (r) { r.hidden = true; });
-      if (progress) {
-        progress.hidden = false;
-        progress.textContent = 'Question ' + (step + 1) + ' of ' + questions.length;
-      }
+      $$('[aria-pressed]', questions[step]).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      if (head) head.hidden = false;
+      if (back) back.hidden = step === 0;
+      segs.forEach(function (seg, i) { seg.classList.toggle('is-done', i <= step); });
+      if (progress) progress.textContent = 'Question ' + (step + 1) + ' of ' + questions.length;
       // Focus follows the question so keyboard and screen reader users hear the
       // new one. Not on first paint, which would ring the heading on page load.
       if (!moveFocus) return;
@@ -708,6 +863,15 @@
     }
 
     function finish() {
+      var scores = {};
+      picks.forEach(function (pick) {
+        pick.split(',').forEach(function (pair) {
+          var parts = pair.split(':');
+          var key = parts[0].trim();
+          scores[key] = (scores[key] || 0) + Number(parts[1]);
+        });
+      });
+
       var winner = 'term';
       var best = -1;
       Object.keys(scores).forEach(function (key) {
@@ -715,7 +879,8 @@
       });
 
       questions.forEach(function (q) { q.hidden = true; });
-      if (progress) progress.hidden = true;
+      if (head) head.hidden = true;
+      if (back) back.hidden = true;
       results.forEach(function (r) { r.hidden = r.getAttribute('data-triage-result') !== winner; });
 
       var shown = results.filter(function (r) { return !r.hidden; })[0];
@@ -725,24 +890,30 @@
     }
 
     widget.addEventListener('click', function (e) {
+      if (busy) return;
+
       // Every result panel has its own restart button, so this is delegated
       // rather than bound to a single node.
       if (e.target.closest('[data-triage-restart]')) {
-        scores = {}; at = 0; show(0, true);
+        picks = []; show(0, true);
+        return;
+      }
+      if (e.target.closest('[data-triage-back]')) {
+        picks.pop(); show(picks.length, true);
         return;
       }
 
       var choice = e.target.closest('[data-score]');
       if (!choice) return;
 
-      choice.getAttribute('data-score').split(',').forEach(function (pair) {
-        var parts = pair.split(':');
-        var key = parts[0].trim();
-        scores[key] = (scores[key] || 0) + Number(parts[1]);
-      });
-
-      at++;
-      if (at < questions.length) show(at, true); else finish();
+      // Show the pick before moving on, so the tap visibly did something.
+      choice.setAttribute('aria-pressed', 'true');
+      picks.push(choice.getAttribute('data-score'));
+      busy = true;
+      setTimeout(function () {
+        busy = false;
+        if (picks.length < questions.length) show(picks.length, true); else finish();
+      }, reduceMotion ? 0 : 240);
     });
 
     show(0, false);

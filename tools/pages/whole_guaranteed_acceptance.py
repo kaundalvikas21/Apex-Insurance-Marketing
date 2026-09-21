@@ -33,14 +33,16 @@ TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Guaranteed acceptance", None)]
 
 LEAD = (
-    "Guaranteed acceptance whole life asks no health questions, orders no medical records, and "
-    "turns nobody down inside its issue ages. It is real "
-    '<a class="link" href="/whole-life-insurance/">whole life insurance</a>: level premium, '
-    "permanent coverage, guaranteed cash value. What you pay for the acceptance is the highest "
-    "cost per dollar of coverage of anything we place, plus a waiting period during which a death "
-    "from natural causes returns your premiums rather than the face amount. It is a real answer "
-    "for people who have no other one, and the wrong answer for anyone who could still pass a "
-    "short health questionnaire.")
+    'Guaranteed acceptance whole life asks no health questions, orders no medical '
+    'records, and turns nobody down inside its issue ages.')
+
+ANSWER = (
+    'It is real <a class="link" href="/whole-life-insurance/">whole life insurance</a>: '
+    'level premium, permanent coverage, guaranteed cash value. What you pay for the '
+    'acceptance is the highest cost per dollar of coverage of anything we place, plus a '
+    'waiting period during which a death from natural causes returns your premiums rather '
+    'than the face amount. It is a real answer for people who have no other one, and the '
+    'wrong answer for anyone who could still pass a short health questionnaire.')
 
 AGE_BANDS = [("50 to 54", None), ("55 to 59", None), ("60 to 64", None), ("65 to 69", None),
              ("70 to 74", None), ("75 to 79", None), ("80 to 85", None)]
@@ -139,6 +141,7 @@ def body():
      ================================================================== -->
 
 {C.page_hero(TRAIL, "Guaranteed Acceptance Whole Life Insurance", LEAD,
+             answer=ANSWER,
              extra=hero_cta,
              media=C.figure("whole-acceptance", C.MEDIA_SIZES, eager=True))}
 

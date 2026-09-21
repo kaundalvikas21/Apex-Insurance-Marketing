@@ -76,6 +76,8 @@ class Forms(HTMLParser):
             step = {"attrs": a, "names": set()}
             self.cur["steps"].append(step)
             self.stack.append(step)
+        elif "data-form-error" in a and self.cur is not None:
+            self.cur["failure"] = True
         elif tag in ("input", "select", "textarea") and self.cur is not None:
             self.cur["inputs"].append(a)
             if "data-consent" in a:
@@ -141,6 +143,25 @@ def check_page(rel, html, built):
     # column holding nothing but a heading beside a full content column, which
     # is what twelve hand-rolled sections used to do. chrome.prose() cannot
     # produce it; only a hand-rolled copy of prose()'s grid can.
+    # A page_hero() hero is one h1, one sentence, one button (client reframe,
+    # September 2026). The rest of the answer goes in page_hero(answer=).
+    hero = re.search(r'<section[^>]*data-hero>(.*?)</section>', html, re.S)
+    if hero:
+        lead = re.search(r'<p class="[^"]*text-lead[^"]*">(.*?)</p>', hero.group(1), re.S)
+        words = len(re.sub(r"<[^>]+>", "", lead.group(1)).split()) if lead else 0
+        if words > 30:
+            fail(page, "hero lead is %d words, at most 30. Move the rest to page_hero(answer=)" % words)
+        buttons = len(re.findall(r'class="btn ', hero.group(1)))
+        if buttons > 1:
+            fail(page, "hero holds %d buttons, at most 1" % buttons)
+
+    # A dark band as the last thing in <main> sits straight on the navy footer
+    # and reads as part of it. Use chrome.closing_band() / banner(inset=True).
+    main = re.search(r"<main[^>]*>(.*)</main>", html, re.S)
+    last = re.findall(r"<section\b[^>]*>", main.group(1))[-1:] if main else []
+    if last and re.search(r'class="[^"]*(band-navy|banner-band)', last[0]):
+        fail(page, "page ends on a dark band, which merges with the footer. Use chrome.closing_band()")
+
     for m in DEAD_ROW.finditer(html):
         head = re.sub(r"<[^>]+>", "", m.group(1)).strip()
         fail(page, "dead half-row: %r fills 5 of 12 columns with only a heading. "
@@ -173,6 +194,10 @@ def check_page(rel, html, built):
         if form["consents"] != 1:
             fail(page, "form %s has %d TCPA consent boxes, expected exactly 1"
                  % (fid, form["consents"]))
+        # site.js writes a failed submit into [data-form-error] and turns the
+        # button into "Try again". Without the node a failure is silent.
+        if not form.get("failure"):
+            fail(page, "form %s has no [data-form-error] line (use forms.submit_block())" % fid)
         for i in form["inputs"]:
             if "data-consent" in i and "checked" in i:
                 fail(page, "form %s ships a pre-ticked consent box" % fid)

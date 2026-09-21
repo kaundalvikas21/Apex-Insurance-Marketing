@@ -91,12 +91,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "What Is Term Life Insurance?",
-    'Term life insurance pays a fixed, tax free lump sum to the people you name if you die within '
-    'a set number of years. You choose the number of years and the amount, the price is locked for '
-    'the whole period, and when the period ends the coverage ends with it. That last part is the '
-    'trade, and it is why '
-    '<a class="link" href="/term-life-insurance/">term life insurance</a> costs a fraction of '
-    'anything permanent.',
+    'Term life insurance pays a fixed, tax free lump sum to the people you name if you '
+    'die within a set number of years.',
+    answer=(
+        'You choose the number of years and the amount, the price is locked for the whole '
+        'period, and when the period ends the coverage ends with it. That last part is '
+        'the trade, and it is why <a class="link" href="/term-life-insurance/">term life '
+        'insurance</a> costs a fraction of anything permanent.'),
+    extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-notebook", C.MEDIA_SIZES, eager=True))}
 
 

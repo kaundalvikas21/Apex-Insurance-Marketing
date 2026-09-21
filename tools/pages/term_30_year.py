@@ -68,12 +68,15 @@ def body():
     return term_length.render(
         years=30,
         h1="30-Year Term Life Insurance",
-        lead='A thirty year term is the longest level period most carriers write, and it buys one '
-             'thing: certainty that runs past the point where a twenty year policy would leave you '
-             'exposed. It costs meaningfully more than twenty years of the same '
-             '<a class="link" href="/term-life-insurance/">term life insurance</a>, and for a '
-             'thirty year old with a new mortgage and young children it is frequently still less '
-             'than people assume. The question is whether your obligations actually run that far.',
+        lead=(
+            'A thirty year term is the longest most carriers write. It buys certainty '
+            'past the point where twenty years would leave you exposed.'),
+        answer=(
+            'It costs meaningfully more than twenty years of the same <a class="link" '
+            'href="/term-life-insurance/">term life insurance</a>, and for a thirty year '
+            'old with a new mortgage and young children it is frequently still less than '
+            'people assume. The question is whether your obligations actually run that '
+            'far.'),
         fits=[
             ("The common case", "A mortgage taken out in the last few years",
              "A thirty year loan signed recently needs a thirty year answer. Matching the two "

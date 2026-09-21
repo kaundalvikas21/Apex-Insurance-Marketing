@@ -1,9 +1,11 @@
 # Page override: Term Life Insurance hub (`/term-life-insurance/`)
 Inherits `design-system/MASTER.md`. Only deviations are listed.
 
-- **CTA weighting:** form first. The three-step form is the hero's right `.panel`, above the fold
-  at 1024. Phone lives in the sticky header.
-- **Hero:** `.glow`. h1, lead, four check facts, "what happens after you submit".
+- **CTA weighting:** form first. The hero's one button points at `#quote`, the two-step form in
+  the first section under the strip. Phone lives in the sticky header.
+- **Hero:** `.glow`. h1, one sentence, one button, full-bleed banner photograph (`term-hero`, the one eager image).
+  The four check facts became the `usp_strip()`; "what happens after you submit" sits in the
+  sticky rail beside the form.
 - **What it covers:** split with the `term-home` photograph (glow), then a three-cell bento led by
   a `.bento-cell-blue` coverage-range stat (`$2,000,000`, counts up) beside the "fits" and "look
   elsewhere" cells.
@@ -14,5 +16,5 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
   around it (a transformed wrapper leaks the table's width into the page until it reveals).
 - **No-exam teaser:** navy band.
 - **How to apply:** `chrome.step()` trio.
-- Layout families in order: hero + panel, strip, split + bento, selector + card, table, timeline,
+- Layout families in order: hero, strip, split + panel, split + bento, selector + card, table, timeline,
   navy band, step trio, tile grid, accordion, byline, split + panel. Eyebrow budget 4, used 1.

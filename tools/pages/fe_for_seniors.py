@@ -93,12 +93,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "Final Expense Insurance for Seniors",
-    'Final expense insurance is a small whole life policy, written from age fifty to eighty five, '
-    'bought to cover a funeral and the bills that follow. There is no medical exam. The premium '
-    'never rises and the coverage never expires. This page explains what changes between fifty and '
-    'eighty five, because it is not your age that decides what you can buy, it is your health '
-    'answers. Everything on this page is <a class="link" '
-    'href="/final-expense-insurance/">final expense insurance</a>.',
+    'Final expense insurance is a small whole life policy, written from age fifty to '
+    'eighty five, to cover a funeral and the bills that follow.',
+    answer=(
+        'There is no medical exam. The premium never rises and the coverage never '
+        'expires. This page explains what changes between fifty and eighty five, because '
+        'it is not your age that decides what you can buy, it is your health answers. '
+        'Everything on this page is <a class="link" '
+        'href="/final-expense-insurance/">final expense insurance</a>.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-chairs", C.MEDIA_SIZES, eager=True))}
 

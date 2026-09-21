@@ -197,12 +197,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "Final Expense Insurance for Parents",
-    'You can buy a <a class="link" href="/final-expense-insurance/">final expense insurance</a> '
-    'policy on your mother or father, and a great many people do. One thing is not negotiable: '
-    'your parent has to know about it and sign the application themselves, because a policy taken '
-    'out without them is void and would not pay. Beyond that, the decisions are who owns it, who '
-    'receives the money, and who pays the premium, and this page is about getting all three right '
-    'before you apply.',
+    'You can buy a policy on your mother or father. One thing is not negotiable: your '
+    'parent has to know about it and sign the application themselves.',
+    answer=(
+        'A <a class="link" href="/final-expense-insurance/">final expense insurance</a> '
+        'policy taken out without them is void and would not pay. Beyond that, the '
+        'decisions are who owns it, who receives the money, and who pays the premium, and '
+        'this page is about getting all three right before you apply.'),
+    extra=C.hero_cta("#call-back", "Ask us to call you"),
     media=C.figure("fe-chairs", C.MEDIA_SIZES, eager=True))}
 
 
@@ -213,7 +215,7 @@ def body():
      dropped, because a decision about a parent's health frequently
      produces a question a form cannot take.
      ================================================================== -->
-<section class="section-tight">
+<section id="call-back" class="section-tight">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
       <div class="lg:col-span-6">

@@ -158,11 +158,15 @@ def body():
 {C.page_hero(
     TRAIL,
     "10-Year Term Life Insurance",
-    'A ten year term is the shortest and cheapest length of '
-    '<a class="link" href="/term-life-insurance/">term life insurance</a> most carriers sell, and '
-    'it suits one specific situation: an obligation with a known end date inside the next decade. '
-    'Outside that situation it is usually the wrong purchase, not because it is a bad product but '
-    'because of what happens in year eleven. This page is mostly about year eleven.',
+    'A ten year term is the shortest and cheapest length most carriers sell, and it suits '
+    'one specific situation.',
+    answer=(
+        'That situation is an obligation with a known end date inside the next decade. '
+        'Outside it, ten years is usually the wrong length of <a class="link" '
+        'href="/term-life-insurance/">term life insurance</a> to buy, not because it is a '
+        'bad product but because of what happens in year eleven. This page is mostly '
+        'about year eleven.'),
+    extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
 
 

@@ -8,7 +8,7 @@ will put a term quote and a whole life illustration next to each other") rather 
 spec says this page earns trust and links and is not a sales page; the layout has to agree with the
 copy or the copy is not credible.
 
-**The byline is placed directly under the hero**, using `chrome.byline_section(cls="section-tight")`,
+**The byline is placed directly under the hero and its `answer=` block**, using `chrome.byline_section(cls="section-tight")`,
 and the page does not carry a second one at the foot. This is the only page on the site that moves
 it. The argument being made is "here is the case against the thing we sell", and who is making that
 argument is part of the argument. Burying the named agent at the foot of a page whose whole value is
@@ -19,8 +19,9 @@ numbered `chrome.step()` rows, then three fit cases as a bento. Reversing the or
 into a sales page with a balanced headline, which is the exact failure mode the spec is warning
 about. The four negative cases must also stay longer than the three positive ones.
 
-**The conflict of interest is disclosed in the hero**, in the last sentence of the lead: "we sell
-the product, which is a conflict of interest you should hold in mind while reading it." Do not move
+**The conflict of interest is disclosed in the hero**, as the second sentence of the one-line hero lead: "And
+we sell the product, which is a conflict of interest you should hold in mind while reading this
+page." The September 2026 hero reframe moved it up, not down. Do not move
 it lower or soften it. It is the sentence that makes the rest of the page worth reading.
 
 **No cost figure, no multiple, no rate of return anywhere.** The page says the cost gap is "a large

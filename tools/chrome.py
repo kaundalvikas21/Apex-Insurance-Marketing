@@ -43,10 +43,15 @@ LEGAL_SIBLINGS = [
     ("/legal/disclaimer/", "Disclaimer", "What this site is, and what it is not."),
 ]
 
+# The three hubs live under one "Insurance" disclosure. Each carries a one-line
+# description so the menu explains the product before the click.
+NAV_HUBS = [
+    ("/term-life-insurance/",     "Term Life",     "Affordable cover for a set number of years", "clock"),
+    ("/whole-life-insurance/",    "Whole Life",    "Lifelong cover that builds cash value", "shield-check"),
+    ("/final-expense-insurance/", "Final Expense", "Cover for funeral and final bills", "heart"),
+]
 NAV = [
-    ("/term-life-insurance/",          "Term Life Insurance"),
-    ("/whole-life-insurance/",         "Whole Life Insurance"),
-    ("/final-expense-insurance/",      "Final Expense Insurance"),
+    ("/free-policy-review/",           "Free Policy Review"),
     ("/contact/",                      "Contact"),
 ]
 
@@ -96,7 +101,7 @@ def picture(name, sizes, cls="", img_cls="", eager=False, alt=None):
     </picture>"""
 
 
-def banner(name, heading, sub, cta_html, eyebrow=None):
+def banner(name, heading, sub, cta_html, eyebrow=None, inset=False):
     """Full-bleed photo band carrying one heading and one CTA.
 
     CRO placement rules, and the reason this is not a hero image:
@@ -113,11 +118,13 @@ def banner(name, heading, sub, cta_html, eyebrow=None):
 
     The photograph is decorative and is scrimmed. All meaning lives in the
     text, which is why every band image carries empty alt.
+
+    inset=True is for a band that would otherwise sit directly on the navy
+    footer and read as part of it: the photograph becomes a rounded card
+    inside a pale section, and the pale margin under it is the boundary.
     """
     eye = ('<p class="eyebrow">%s</p>' % eyebrow) if eyebrow else ""
-    return f"""
-<section class="banner-band on-navy">
-  {picture(name, "100vw", cls="banner-media", img_cls="banner-img")}
+    inner = f"""{picture(name, "100vw", cls="banner-media", img_cls="banner-img")}
   <div class="container-ax banner-content section-tight">
     <div class="reveal grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
       <div class="lg:col-span-7">
@@ -127,8 +134,35 @@ def banner(name, heading, sub, cta_html, eyebrow=None):
       </div>
       <div class="lg:col-span-4 lg:col-start-9">{cta_html}</div>
     </div>
+  </div>"""
+    if inset:
+        return f"""
+<section class="section band">
+  <div class="container-ax">
+    <div class="banner-band banner-inset on-navy">
+  {inner}
+    </div>
   </div>
 </section>"""
+    return f"""
+<section class="banner-band on-navy">
+  {inner}
+</section>"""
+
+
+def closing_band(photo, heading, sub, where, phone_first=False):
+    """The last ask on a page: quote button plus call button on an inset photo
+    card. Inset because a flat navy band as the final section sits directly on
+    the navy footer and reads as part of it; the pale margin under the card is
+    the boundary. `phone_first` only changes which button comes first.
+
+    Pick a photograph with no people for a reviews or an agent page, where a
+    face would be read as a client or as the agent.
+    """
+    quote = '<a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>'
+    call = phone_link(where, "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)
+    first, second = (call, quote) if phone_first else (quote, call)
+    return banner(photo, heading, sub, '<div class="grid gap-3">%s%s</div>' % (first, second), inset=True)
 
 
 RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band",
@@ -154,15 +188,42 @@ def figure(name, sizes, caption=None, cls="", eager=False, glow=False):
 # HEADER
 # ---------------------------------------------------------------------------
 def header(active):
-    links = "".join(
-        '<a class="nav-link" href="%s"%s>%s</a>'
-        % (href, ' aria-current="page"' if href == active else "", label)
+    def cur(href):
+        return ' aria-current="page"' if href == active else ""
+
+    hub_active = any(hub[0] == active for hub in NAV_HUBS)
+    # Native <details>, so the menu opens with site.js blocked. site.js only
+    # adds close on Escape, outside click, and link click.
+    dropdown = (
+        '<details class="nav-dd" data-nav-dd>'
+        '<summary class="nav-link"%s>Insurance%s</summary>'
+        '<div class="nav-dd-menu"><div class="nav-dd-list">%s</div>%s</div></details>'
+        % (' data-active' if hub_active else "",
+           icon("chevron-down", 16, "nav-dd-chevron"),
+           "".join('<a class="nav-dd-item" href="%s"%s><span class="nav-dd-icon" aria-hidden="true">%s</span>'
+                   '<span><span class="nav-dd-title">%s</span><span class="nav-dd-desc">%s</span></span></a>'
+                   % (href, cur(href), icon(ico, 20), label, desc)
+                   for href, label, desc, ico in NAV_HUBS),
+           # The menu's one ask. Someone with this open is choosing between
+           # products, so it offers help choosing (the homepage triage widget),
+           # not a third quote button. A <p>, not a heading: it is on every page.
+           '<div class="nav-dd-aside">'
+           '<p class="nav-dd-aside-title">Not sure which one fits?</p>'
+           '<p class="nav-dd-aside-body">Answer three quick questions and we will point you to '
+           'the right cover. No email needed.</p>'
+           '<a class="btn btn-cta btn-block" href="/#triage">Help me choose%s</a>%s</div>'
+           % (icon("arrow-right", 18, "shrink-0"),
+              phone_link("nav_menu", "nav-dd-aside-call", "Or call " + PHONE_DISPLAY, 16)))
+    )
+    links = dropdown + "".join(
+        '<a class="nav-link" href="%s"%s>%s</a>' % (href, cur(href), label)
         for href, label in NAV
     )
-    panel_links = "".join(
-        '<a class="block py-3 text-ink text-base font-medium border-b border-rule" href="%s"%s>%s</a>'
-        % (href, ' aria-current="page"' if href == active else "", label)
-        for href, label in NAV
+    row = '<a class="block py-3 text-ink text-base font-medium border-b border-rule" href="%s"%s>%s</a>'
+    panel_links = (
+        '<p class="pt-1 text-micro font-semibold uppercase tracking-[0.12em] text-muted">Insurance</p>'
+        + "".join(row % (href, cur(href), label + " Insurance") for href, label, _, _ in NAV_HUBS)
+        + "".join(row % (href, cur(href), label) for href, label in NAV)
     )
     return f"""<a class="skip-link" href="#main">Skip to main content</a>
 <div data-header-sentinel aria-hidden="true" style="height:1px"></div>
@@ -182,8 +243,8 @@ def header(active):
 
       <div class="ml-auto flex items-center gap-2 sm:gap-3">
         <!-- Click-to-call is present at every desktop width. Below 1280 the
-             number itself does not fit beside four product-name nav links,
-             so the label shortens rather than the CTA disappearing. -->
+             number itself does not fit beside the nav, so the label shortens
+             rather than the CTA disappearing. -->
         {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors", "Call")}
         {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors")}
         <a href="/get-a-quote/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a Free Quote</a>
@@ -569,6 +630,64 @@ def step(n, title, body, note=None):
     </div>"""
 
 
+def steps_section(heading, lead, items, cta=None, after="", cls="section", fe=False, label="Step"):
+    """The connected stepper: numbered nodes on a dashed rail, a cell under each.
+    Home's "three simple steps", and "How to apply" on the hubs.
+
+    items: [(icon, chip_or_None, title, body)], three or four of them. Three
+    read white, tinted, blue so the last lands as the destination. Four, or
+    any fe page, stay plain white: fe takes no bento tones, no stagger and no
+    lift (MASTER.md, final expense exemption).
+
+    cta: (title, note, button_html) for the strip under the cards, or None
+    when the next section already carries the ask. `after` is finished HTML.
+    `label` is what a screen reader hears before each number: "Step" for a
+    sequence, "Item" for a checklist.
+    """
+    tones = ["", "bento-cell-tint", "bento-cell-blue"] if (len(items) == 3 and not fe) else [""] * len(items)
+    cards = []
+    for n, ((ico, chip, title, body), tone) in enumerate(zip(items, tones), 1):
+        on_blue = tone == "bento-cell-blue"
+        # A pill is navy-050, which is also the tinted cell's own colour.
+        pill = ("pill !bg-white/15 !text-white" if on_blue
+                else "pill !bg-white" if tone == "bento-cell-tint" else "pill")
+        chip_html = f'<span class="{pill}">{chip}</span>' if chip else ""
+        cards.append(f"""
+      <li class="reveal steps-item">
+        <span class="step-num steps-node tnum" aria-hidden="true">{n}</span>
+        <div class="bento-cell{"" if fe else " card-hover"} {tone}">
+          <div class="flex items-center justify-between gap-3">
+            {icon(ico, 28, "text-white" if on_blue else "text-navy")}
+            {chip_html}
+          </div>
+          <h3 class="mt-5 text-h4"><span class="sr-only">{label} {n}: </span>{title}</h3>
+          <p class="mt-2 {"text-white/85" if on_blue else "text-slate"}">{body}</p>
+        </div>
+      </li>""")
+    strip = ""
+    if cta:
+        title, note, button = cta
+        strip = f"""
+    <div class="reveal steps-cta">
+      <div>
+        <p class="font-semibold text-navy">{title}</p>
+        <p class="mt-1 text-sm text-muted">{note}</p>
+      </div>
+      {button}
+    </div>"""
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">{heading}</h2>
+      <p class="reveal mt-5 text-slate">{lead}</p>
+    </div>
+
+    <ol class="steps{" steps-4" if len(items) == 4 else ""} mt-12"{"" if fe else ' data-stagger="80"'}>{"".join(cards)}
+    </ol>{strip}{after}
+  </div>
+</section>"""
+
+
 def stat(value, label, prefix="", suffix="", count=True, cls=""):
     """A figure with a label. `value` must be a spec figure (10, 30, 2000,
     50000, 15), never a placeholder. count=False renders it static, which is
@@ -869,14 +988,72 @@ def no_obligation_section(short_version, no_obligation, stopping_contact,
 # copied out of term_rates.py by hand, which is how a breadcrumb and an H1 drift
 # apart across a silo. Authored once here instead.
 # ---------------------------------------------------------------------------
-def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None):
-    """T4's top: breadcrumb, one H1, and the direct answer in the first two
-    sentences.
+def hero_banner(name):
+    """Full-bleed hero background from images.HERO_BANNERS. Art directed: the
+    whole 16:9 frame behind the copy from 1024px, a 4:3 crop of the people as
+    an ordinary block under the copy below that. The page's one eager image."""
+    alt, position = images.HERO_BANNERS[name]
+    alt = alt.replace('"', "&quot;")
 
-    `lead` is HTML rather than text because it carries the mandated up-link to
+    def srcset(fmt, widths, m=""):
+        return ", ".join("/assets/img/%s%s-%d.%s %dw" % (name, m, w, fmt, w) for w in widths)
+
+    return f"""<picture class="hero-bg">
+      <source media="(min-width: 1024px)" type="image/avif" srcset="{srcset('avif', [1280, 1920])}" sizes="100vw" width="1920" height="1080">
+      <source media="(min-width: 1024px)" type="image/webp" srcset="{srcset('webp', [1280, 1920])}" sizes="100vw" width="1920" height="1080">
+      <source type="image/avif" srcset="{srcset('avif', [480, 800], '-m')}" sizes="92vw">
+      <source type="image/webp" srcset="{srcset('webp', [480, 800], '-m')}" sizes="92vw">
+      <img src="/assets/img/{name}-m-480.webp" width="800" height="600"
+           alt="{alt}" loading="eager" fetchpriority="high" style="object-position:{position}">
+    </picture>"""
+
+
+def hero_cta(href, label, micro="Free &#183; No obligation &#183; Licensed agents", cls="btn btn-cta"):
+    """The hero's one button and its micro line, for page_hero(extra=). Phone
+    first pages pass their own phone_link() block instead."""
+    return f"""<div class="reveal mt-8">
+        <a href="{href}" class="{cls}">{label}</a>
+        <p class="mt-3 text-micro text-muted">{micro}</p>
+      </div>"""
+
+
+def usp_strip(items):
+    """Four icon tiles directly beneath a hero CTA. items: [(icon, top, sub)].
+    Every line is a spec fact or a visible [X] placeholder, never a claim, and
+    nothing here counts up. The icon circle reuses .step-num."""
+    tiles = "".join(f"""
+      <li class="flex items-center gap-3">
+        <span class="step-num" aria-hidden="true">{icon(name, 22)}</span>
+        <span><span class="block text-navy font-semibold">{top}</span><span class="block text-sm text-muted">{sub}</span></span>
+      </li>""" for name, top, sub in items)
+    return f"""
+<section class="border-y border-rule bg-surface">
+  <div class="container-ax py-7">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5">{tiles}
+    </ul>
+  </div>
+</section>"""
+
+
+def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answer=None,
+              short=True, banner=None):
+    """The top of every hub and informational page: breadcrumb, one H1, one
+    sentence, one CTA. tools/check.py holds it to that (data-hero).
+
+    `answer` is the rest of the direct answer, as HTML. It renders as its own
+    block immediately under the hero, and it carries the mandated up-link to
     the silo hub (spec s07 rule 1: first 150 words, exact anchor = the hub
-    term). Putting it in the lead is the only placement that satisfies both the
-    word count and "answer the question first".
+    term), so "answer the question first" survives the short hero.
+
+
+    `trail=None` is the homepage, the one page with no breadcrumb.
+
+    `banner` is a name from images.HERO_BANNERS: the hub, home and contact treatment, a full
+    bleed photograph behind the copy instead of a figure beside it. It replaces
+    `media` and the glow.
+
+    short=False opts a page out of that check. Only the T5 compare pages use
+    it: their spec puts a three sentence answer in the hero (pages/compare.md).
 
     glow=False on every final expense page: `.fe main` opts out of the ambient
     glow along with the rest of the motion layer.
@@ -885,6 +1062,19 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None):
     ex = ("\n      " + extra) if extra else ""
     copy = f"""<h1 class="reveal text-h1">{h1}</h1>
       <p class="reveal mt-5 text-lead text-slate">{lead}</p>{ex}"""
+    if banner:
+        return f"""
+<section class="hero-banner" data-hero>
+  <div class="container-ax">
+    <div class="hero-banner-copy">
+      {crumbs(trail) if trail else ""}
+      <div class="mt-8 lg:w-5/12">
+        {copy}
+      </div>
+    </div>
+    {hero_banner(banner)}
+  </div>
+</section>"""
     if media:
         # The hero photograph is the page's one eager image, so the block splits
         # rather than sitting under the lead: the same 6 / 5-from-8 split the
@@ -899,14 +1089,20 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None):
         block = f"""<div class="mt-8 max-w-3xl">
       {copy}
     </div>"""
+    more = f"""
+<section class="pb-10">
+  <div class="container-ax">
+    <p class="reveal max-w-3xl text-slate">{answer}</p>
+  </div>
+</section>""" if answer else ""
     return f"""
-<section class="pt-6 {pb}{g}">
+<section class="pt-6 {pb}{g}"{" data-hero" if short else ""}>
   <div class="container-ax">
     {crumbs(trail)}
 
     {block}
   </div>
-</section>"""
+</section>{more}"""
 
 
 def inline_cta(heading, body, where, href, cta_label, phone_first=False,

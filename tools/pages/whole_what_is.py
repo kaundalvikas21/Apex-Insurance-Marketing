@@ -95,12 +95,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "What Is Whole Life Insurance?",
-    'Whole life insurance is permanent coverage: the premium is fixed for life, the death benefit '
-    'never expires, and the policy builds a guaranteed cash value you can borrow against. Those '
-    'three guarantees are the entire product, and they are why '
-    '<a class="link" href="/whole-life-insurance/">whole life insurance</a> costs several times '
-    'what the same death benefit costs as term. Whether that is worth paying depends on whether '
-    'you have a need that never ends.',
+    'Whole life insurance is permanent coverage: a premium fixed for life, a death '
+    'benefit that never expires, and a guaranteed cash value.',
+    answer=(
+        'Those three guarantees are the entire product, and they are why <a class="link" '
+        'href="/whole-life-insurance/">whole life insurance</a> costs several times what '
+        'the same death benefit costs as term. Whether that is worth paying depends on '
+        'whether you have a need that never ends.'),
+    extra=C.hero_cta("/whole-life-insurance/quotes/", "Get my whole life quote"),
     media=C.figure("whole-ledger", C.MEDIA_SIZES, eager=True))}
 
 

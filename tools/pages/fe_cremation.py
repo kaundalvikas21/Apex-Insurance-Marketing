@@ -157,11 +157,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "Final Expense Insurance for Cremation Costs",
-    'There is no separate cremation insurance policy. What is sold under that name is ordinary '
-    '<a class="link" href="/final-expense-insurance/">final expense insurance</a>, sized for a '
-    'cremation instead of a burial. Because a cremation costs materially less, the policy is '
-    'smaller and the premium is lower, and the single most useful thing this page can do is stop '
-    'you buying more coverage than you actually need.',
+    'There is no separate cremation insurance policy. It is ordinary final expense '
+    'insurance, sized for a cremation instead of a burial.',
+    answer=(
+        'What is sold under that name is <a class="link" '
+        'href="/final-expense-insurance/">final expense insurance</a> with a smaller face '
+        'amount. Because a cremation costs materially less, the policy is smaller and the '
+        'premium is lower, and the single most useful thing this page can do is stop you '
+        'buying more coverage than you actually need.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
 

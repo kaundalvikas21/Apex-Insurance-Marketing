@@ -73,11 +73,11 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
 
 - `tools/chrome.py` — every shared partial and **every placeholder constant** (`PHONE_DISPLAY`,
   `AGENT_NAME`, `RATES_DATE`, `NPN`, `SLA`, …). One address for the launch swap. Provides
-  `header`, `footer`, `crumbs`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `stat`,
+  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `stat`,
   `banner`, `picture`/`figure`, `legal_doc`, `flag`/`rates_flag`, `state_options`,
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).
-- `tools/forms.py` — form primitives. The compliance-critical parts (hidden `source_url`/`silo`/
+- `tools/forms.py` — form primitives, used by every builder: `text_field`/`age_field`/`phone_field`/`select_field`/`textarea_field`/`radio_group`, `row`, `step`/`progress`/`next_button`, `submit_block`. The compliance-critical parts (hidden `source_url`/`silo`/
   `form_name`, honeypot, TCPA consent block) are authored once here so a copy cannot drift.
   Every helper takes `indent`, the column its block sits at in the caller's f-string.
 - `tools/icons.py` — inlined Lucide paths. A name not in the dict is a build-time `KeyError`.
@@ -90,7 +90,9 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
   year page deliberately does **not** use it: it is the only measured length and carries its own
   renewal-schedule table.
 - `tools/images.py` — the image manifest and `OG_FOR_PAGE`. The Unsplash CDN does the resizing, so
-  there is no sharp/Pillow dependency.
+  there is no sharp/Pillow dependency. The one exception is `HERO_BANNERS`, the three
+  client-supplied hub banners: sources in `public/coverage_hero/`, derivatives made by
+  `tools/hero_images.cjs` (needs sharp from outside the repo; the header says how) and committed.
 
 ### The behaviour layer
 
@@ -109,13 +111,16 @@ new JS, check whether one of these contracts already covers what you need:
 | `[data-panels]` + `[data-panel]` | One checked radio shows one panel; `[data-panel-caption]` auto-writes "Showing female, 20 years." |
 | `.reveal`, `[data-stagger]`, `[data-count]` | IntersectionObserver reveal, stagger, count-up |
 | `[data-calc]` + `data-calc-field`/`-out`/`-cta` | The coverage calculator (section 10) |
+| `[data-nav-dd]` | The header "Insurance" menu. A native `<details>`, so it opens without JS; JS only closes it on Escape, outside click, and link click |
+| `<dialog data-dialog-timed>` + `[data-dialog-cta]` | Opens once per session at 30s or 50% scroll, never under `html.fe`, never while `[data-triage]` is on screen or focused. Home only. Never put a form in it |
+| `[data-triage]` + `[data-triage-q]` / `[data-score]` / `[data-triage-seg]` / `[data-triage-back]` / `[data-triage-result]` | The home quiz. Scores are declared in markup (`data-score="term:3,whole:1"`); picks are a stack, so Back is a pop |
 
 `submitLead()` is the single CRM integration point, marked `>>> WIRE TO CRM ENDPOINT HERE <<<`.
 It currently `console.log`s and resolves. Validators available via `data-validate`: `email`,
 `phone`, `age` (18–85), `ageSenior` (50–85), `name`.
 
-Set `window.AX_DEBUG = true` in the console to log every GA4 event. Events: `form_start`,
-`form_submit`, `call_click`, `calculator_complete`, `triage_complete`. **Never put PII or personal
+Set `window.AX_FAIL_SUBMIT = true` (or `"offline"`) to make `submitLead()` reject and see the failure state. Set `window.AX_DEBUG = true` in the console to log every GA4 event. Events: `form_start`,
+`form_submit`, `call_click`, `calculator_complete`, `triage_complete`, `dialog_open`, `dialog_cta`, `form_error` (reason only). **Never put PII or personal
 financial detail in an event payload.**
 
 ### The design system
@@ -169,11 +174,18 @@ links pointing at pages not yet built. It is meant to be edited in the same comm
 3. One link per target per page. This is why the footer deliberately omits the hub links and
    `/contact/` (they are in the nav), and why contextual teasers deep-link to a section anchor when
    the spoke module already owns the canonical link.
-4. Global nav stays hubs + Contact. Do not add spokes.
+4. Global nav stays the "Insurance" menu (the three hubs, `chrome.NAV_HUBS`) + Free Policy Review +
+   Contact. Do not add spokes. The menu carries exactly one aside: help choosing (`/#triage`) plus
+   a call link. It is not a place for a second quote button; the header already has one.
 5. Money pages should receive more internal links than they send.
 
 The breadcrumb link to a hub plus the mandated first-150-words hub link is the one accepted
-duplicate: both are required, one by `check.py` and one by the linking rules.
+duplicate: both are required, one by `check.py` and one by the linking rules. A repeated primary
+CTA **button** (hero plus mid-page, to the silo's quotes page) is also accepted; a repeated
+contextual text link is not.
+
+**Heroes are one h1, one sentence, one button.** `check.py` fails a `page_hero()` lead over 30
+words or a second `.btn`. The rest of the answer, and the hub up-link, go in `page_hero(answer=)`.
 
 ## Gotchas that cost real time
 

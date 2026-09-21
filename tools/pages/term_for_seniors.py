@@ -93,12 +93,14 @@ def body():
 {C.page_hero(
     TRAIL,
     "Term Life Insurance for Seniors Over 60",
-    'After sixty, <a class="link" href="/term-life-insurance/">term life insurance</a> is still '
-    'available and still sensible, but only for a need with an end date on it. Premiums rise '
-    'steeply through this decade, the number of carriers willing to write you shrinks every few '
-    'years, and most stop issuing new term somewhere between seventy five and eighty. This page '
-    'says plainly what is still available, what it costs, and when a small permanent policy is the '
-    'better buy.',
+    'After sixty, term life insurance is still available and still sensible, but only for '
+    'a need with an end date on it.',
+    answer=(
+        'Premiums for <a class="link" href="/term-life-insurance/">term life '
+        'insurance</a> rise steeply through this decade, the number of carriers willing '
+        'to write you shrinks every few years, and most stop issuing new term somewhere '
+        'between seventy five and eighty. This page says plainly what is still available, '
+        'what it costs, and when a small permanent policy is the better buy.'),
     extra=hero_cta,
     media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
 

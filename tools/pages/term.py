@@ -187,112 +187,52 @@ TERM_LENGTH_FIELD = '''<!-- Set by the rate table's "quote this" buttons. -->
 <input type="hidden" name="term_length" value="">'''
 
 
+COVERAGE_OPTIONS = [
+    ("", "Choose an amount"), ("100000", "$100,000"), ("250000", "$250,000"),
+    ("500000", "$500,000"), ("750000", "$750,000"), ("1000000", "$1,000,000"),
+    ("2000000", "$2,000,000 or more"), ("unsure", "Not sure yet"),
+]
+
+
 def quote_form(form_id, form_name, id_prefix):
-    """Three steps, six fields, progress indicator, TCPA on the final step."""
+    """Two steps, six fields, paired. Step 1 is about the person, step 2 is the
+    cover and how to reach them, with the TCPA block above the submit."""
+    p = id_prefix
+    about = (
+        F.row(F.age_field(p + "-age", label="How old are you?",
+                          hint="The biggest factor in the price."),
+              F.select_field(p + "-state", "state", "Your state",
+                             '<option value="">Choose your state</option>\n' + C.state_options(),
+                             error="Please choose your state."))
+        + F.row(F.radio_group(p + "-sex", "sex", "Sex on your birth certificate",
+                              [("female", "Female"), ("male", "Male")],
+                              hint="Carriers rate them differently.",
+                              error="Choose one so we can price it correctly."),
+                F.radio_group(p + "-tob", "tobacco", "Tobacco in the last 12 months?",
+                              [("no", "No"), ("yes", "Yes")],
+                              hint="Nicotine of any kind.",
+                              error="Let us know either way."))
+        + F.next_button())
+    cover = (
+        F.row(F.select_field(p + "-coverage", "coverage", "How much coverage?", COVERAGE_OPTIONS,
+                             error="Choose a coverage amount, or pick the closest.",
+                             hint="A rough figure is fine."),
+              F.phone_field(p + "-phone", hint="One agent calls, once."))
+        + F.consent_block(p, C.BRAND, 12)
+        + F.submit_block("See my quotes", back=True))
     return f"""
         <form id="{form_id}" class="mt-6" data-ax-form data-steps data-silo="term-life"
-              data-form-name="{form_name}" data-success-target="{id_prefix}-success" novalidate>
+              data-form-name="{form_name}" data-success-target="{p}-success" novalidate>
 
           {F.scaffold(TERM_LENGTH_FIELD, 10)}
 
-          <div class="progress-track" aria-hidden="true">
-            <span class="progress-seg is-done" data-progress-seg></span>
-            <span class="progress-seg" data-progress-seg></span>
-            <span class="progress-seg" data-progress-seg></span>
-          </div>
-          <p class="text-micro font-semibold text-muted" data-progress-label aria-live="polite">Step 1 of 3</p>
+          {F.progress(2)}
 
-          <!-- STEP 1 -->
-          <fieldset class="step is-active mt-5" data-step="1">
-            <legend class="sr-only">Step 1 of 3: your age</legend>
-            <div class="field">
-              <label class="field-label" for="{id_prefix}-age">How old are you?
-                <span class="field-hint block font-normal">Age is the single biggest factor in the price.</span>
-              </label>
-              <input class="input" id="{id_prefix}-age" name="age" type="text" inputmode="numeric"
-                     autocomplete="off" required data-validate="age"
-                     data-error="Enter an age between 18 and 85.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <button type="button" class="btn btn-cta btn-block" data-step-next>Continue</button>
-          </fieldset>
-
-          <!-- STEP 2 -->
-          <fieldset class="step mt-5" data-step="2">
-            <legend class="sr-only">Step 2 of 3: sex and state</legend>
-            <div class="field" data-error="Choose one so we can price it correctly.">
-              <span class="field-label" id="{id_prefix}-sex-label">Sex as shown on your birth certificate
-                <span class="field-hint block font-normal">Carriers rate male and female applicants differently.</span>
-              </span>
-              <div class="choice-row" role="group" aria-labelledby="{id_prefix}-sex-label">
-                <label class="choice"><input type="radio" name="sex" value="female" required><span>Female</span></label>
-                <label class="choice"><input type="radio" name="sex" value="male" required><span>Male</span></label>
-              </div>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field">
-              <label class="field-label" for="{id_prefix}-state">What state do you live in?</label>
-              <select class="select" id="{id_prefix}-state" name="state" required
-                      data-error="Please choose your state.">
-                <option value="">Choose your state</option>
-                {C.state_options()}
-              </select>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="button" class="btn btn-cta grow" data-step-next>Continue</button>
-            </div>
-          </fieldset>
-
-          <!-- STEP 3 -->
-          <fieldset class="step mt-5" data-step="3">
-            <legend class="sr-only">Step 3 of 3: coverage, tobacco, and how to reach you</legend>
-            <div class="field">
-              <label class="field-label" for="{id_prefix}-coverage">How much coverage?</label>
-              <select class="select" id="{id_prefix}-coverage" name="coverage" required
-                      data-error="Choose a coverage amount, or pick the closest.">
-                <option value="">Choose an amount</option>
-                <option value="100000">$100,000</option>
-                <option value="250000">$250,000</option>
-                <option value="500000">$500,000</option>
-                <option value="750000">$750,000</option>
-                <option value="1000000">$1,000,000</option>
-                <option value="2000000">$2,000,000 or more</option>
-                <option value="unsure">Not sure yet</option>
-              </select>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field" data-error="Let us know either way.">
-              <span class="field-label" id="{id_prefix}-tob-label">Have you used tobacco or nicotine in the last 12 months?</span>
-              <div class="choice-row" role="group" aria-labelledby="{id_prefix}-tob-label">
-                <label class="choice"><input type="radio" name="tobacco" value="no" required><span>No</span></label>
-                <label class="choice"><input type="radio" name="tobacco" value="yes" required><span>Yes</span></label>
-              </div>
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-            <div class="field">
-              <label class="field-label" for="{id_prefix}-phone">Best number to reach you</label>
-              <input class="input" id="{id_prefix}-phone" name="phone" type="tel" autocomplete="tel"
-                     required data-validate="phone" data-error="Enter a 10 digit phone number.">
-              <p class="field-error">{ERR}<span></span></p>
-            </div>
-
-            {F.consent_block(id_prefix, C.BRAND, 12)}
-
-            <div class="flex gap-3">
-              <button type="button" class="btn btn-ghost" data-step-back>Back</button>
-              <button type="submit" class="btn btn-cta grow">See my quotes</button>
-            </div>
-            <p class="field-error" data-form-error>{ERR}<span></span></p>
-          </fieldset>
-
-          <p class="mt-4 text-micro text-muted">
-            Free &#183; No obligation &#183; Licensed agents &#183; We never sell your details on
-          </p>
+          {F.step(1, "About you", about, first=True)}
+          {F.step(2, "Your cover", cover)}
         </form>
 
-        <div id="{id_prefix}-success" class="success">
+        <div id="{p}-success" class="success">
           <div class="flex items-start gap-3">
             {icon("circle-check", 30, "shrink-0 text-green")}
             <div>
@@ -360,69 +300,73 @@ def body():
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
     byline = C.byline()
 
+    # One h1, one line, one button. The form it points at is the next section
+    # but one, so the hero can take a photograph (MASTER.md section 8).
+    hero = C.page_hero(
+        [("Home", "/"), ("Term Life Insurance", None)],
+        "Term life insurance, made simple.",
+        "The most cover for your money, for exactly as long as your family needs it.",
+        extra=C.hero_cta("#quote", "Get my term life quote"),
+        banner="term-hero")
+    usps = C.usp_strip([
+        ("clock", "10, 15, 20 or 30 years", "Pick the term you need"),
+        ("shield-check", "Premium locked", "For the whole term"),
+        ("stethoscope", "Often no medical exam", "Many applicants skip it"),
+        ("scale", "Independent agency", "We compare carriers for you"),
+    ])
+
+    how_to_apply = C.steps_section(
+        "How to apply",
+        "Three steps, and you can stop after any of them.",
+        [("list-checks", "About ninety seconds", "Send the six answers",
+          "The form on this page, or a phone call if you would rather talk it through. No Social "
+          "Security number at this stage."),
+         ("search", "Named carriers", "Review named quotes",
+          "You get carrier names, premiums, term lengths, and the conversion terms, so you can "
+          "compare them against anything else you have been shown."),
+         ("circle-check", "We stay with it", "Apply and go through underwriting",
+          "We complete the application with you and stay with it until the policy is issued or the "
+          "carrier says no. Either way you hear it from us.")],
+        cta=("Ready when you are.", "Free, no obligation, and you can stop after any step.",
+             '<a href="#quote" class="btn btn-cta">Get my term life quote</a>'))
+
     return f"""
+{hero}
+{usps}
+
 <!-- =====================================================================
-     HERO. Form weighted per spec section 09. The quote form is the hero's
-     right column and is above the fold from 1024 up.
+     THE QUOTE FORM. Directly under the strip, and still #quote: the hero
+     button, the banner, and the homepage triage all land here.
      ================================================================== -->
-<section class="pt-6 pb-14 md:pb-16 glow">
+<section id="quote" class="section band">
   <div class="container-ax">
-    {C.crumbs([("Home", "/"), ("Term Life Insurance", None)])}
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
-    <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="lg:col-span-5">
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Get your term life quotes</h2>
+          <p class="reveal mt-5 text-slate">Six questions, about ninety seconds.</p>
 
-      <div class="lg:col-span-6">
-        <h1 class="reveal text-h1">Term Life Insurance</h1>
-        <p class="reveal mt-5 text-lead text-slate max-w-xl">
-          The most coverage per dollar, for exactly as long as your family needs it. We compare our
-          appointed carriers and show you the real numbers, including the carrier names.
-        </p>
-
-        <ul class="reveal mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">10, 15, 20, and 30 year terms</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Many applicants skip the medical exam</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Premium locked for the whole term</span></li>
-          <li class="flex items-start gap-2.5">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">Independent. We compare, we do not push one carrier</span></li>
-        </ul>
-
-        <div class="reveal mt-8 pt-8 border-t border-rule">
-          <p class="text-sm font-semibold text-navy">What happens after you submit</p>
-          <ol class="mt-3 grid gap-2 text-sm text-slate">
-            <li>1. A licensed agent reads it. No automated quote engine, no lead broker.</li>
-            <li>2. We run your details past our appointed carriers.</li>
-            <li>3. We come back within {C.SLA} with named carriers and real premiums.</li>
-            <li>4. If nothing fits, we tell you that too.</li>
-          </ol>
+          <div class="reveal mt-8 pt-8 border-t border-rule">
+            <p class="text-sm font-semibold text-navy">What happens after you submit</p>
+            <ol class="mt-3 grid gap-2 text-sm text-slate">
+              <li>1. A licensed agent reads it. No automated quote engine, no lead broker.</li>
+              <li>2. We run your details past our appointed carriers.</li>
+              <li>3. We come back within {C.SLA} with named carriers and real premiums.</li>
+              <li>4. If nothing fits, we tell you that too.</li>
+            </ol>
+          </div>
+          <p class="reveal mt-6 inline-flex items-center gap-2 text-sm text-muted">
+            {icon("shield-check", 18, "shrink-0 text-navy")}Your details are never sold to other agencies
+          </p>
         </div>
       </div>
 
-      <div class="lg:col-span-5 lg:col-start-8" id="quote">
+      <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-semibold">Get your term life quotes</h2>
-          <p class="mt-2 text-sm text-muted">Six questions, about ninety seconds.</p>
           {quote_form("term-quote-form", "term_hero_quote", "th")}
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust strip, within one viewport of the form CTA. -->
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">
-        {icon("shield-check", 18, "shrink-0")}Licensed in {C.STATES} states
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("scale", 18, "shrink-0")}Independent. We work for you, not for one carrier.
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("building", 18, "shrink-0")}{C.YEARS} years placing life insurance
-      </span>
-      <span class="inline-flex items-center gap-2">
-        {icon("shield-check", 18, "shrink-0")}Your details are never sold to other agencies
-      </span>
     </div>
   </div>
 </section>
@@ -609,22 +553,8 @@ def body():
      ================================================================== -->
 {no_exam_band}
 
-<!-- =====================================================================
-     8. HOW TO APPLY.
-     ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">How to apply</h2>
-      <p class="reveal mt-5 text-slate">Three steps, and you can stop after any of them.</p>
-    </div>
-    <div class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8" data-stagger>
-      {C.step(1, "Send the six answers", "The form at the top of this page, or a phone call if you would rather talk it through. No Social Security number at this stage.")}
-      {C.step(2, "Review named quotes", "You get carrier names, premiums, term lengths, and the conversion terms, so you can compare them against anything else you have been shown.")}
-      {C.step(3, "Apply and go through underwriting", "We complete the application with you and stay with it until the policy is issued or the carrier says no. Either way you hear it from us.")}
-    </div>
-  </div>
-</section>
+<!-- 8. HOW TO APPLY. The same connected stepper as the homepage. -->
+{how_to_apply}
 
 {spokes}
 

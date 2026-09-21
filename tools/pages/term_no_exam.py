@@ -100,22 +100,19 @@ def body():
     rows = "\n            ".join(
         '<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td>%s</td></tr>' % r for r in ROUTES)
 
-    hero_cta = """<div class="reveal mt-8 flex flex-wrap items-center gap-3">
-        <a class="btn btn-cta" href="#quote">See if you qualify</a>
-        %s
-        <p class="w-full text-micro text-muted">%s</p>
-      </div>""" % (C.phone_link("term_noexam_hero", "btn btn-call"), C.HOURS)
+    hero_cta = C.hero_cta("#quote", "See if you qualify")
 
     return f"""
 {C.page_hero(
     TRAIL,
     "No Medical Exam Term Life Insurance",
-    'Most healthy applicants under about sixty can now buy '
-    '<a class="link" href="/term-life-insurance/">term life insurance</a> without a paramedical '
-    'exam, at the same price they would have paid with one, with a decision in minutes rather than '
-    'weeks. That is real, and it is not the whole story: there are three different ways to skip '
-    'the exam and they cost very different amounts. This page tells you which one you are likely '
-    'to be offered and what it will cost you.',
+    'Most healthy applicants under about sixty can now skip the medical exam, often at '
+    'the same price and with a decision in minutes.',
+    answer=(
+        'That is real for <a class="link" href="/term-life-insurance/">term life '
+        'insurance</a>, and it is not the whole story: there are three different ways to '
+        'skip the exam and they cost very different amounts. This page tells you which '
+        'one you are likely to be offered and what it will cost you.'),
     extra=hero_cta,
     media=C.figure("term-underwriting", C.MEDIA_SIZES, eager=True))}
 

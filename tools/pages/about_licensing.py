@@ -60,6 +60,12 @@ def rows():
 
 
 def body():
+    closing = C.closing_band(
+        "term-band",
+        "Check we are licensed where you live",
+        "Tell us your state and we will confirm it on the call, before anything else.",
+        "licensing_footer", phone_first=True)
+
     return f"""
 <section class="pt-6 pb-14 md:pb-16 glow">
   <div class="container-ax">
@@ -142,19 +148,4 @@ def body():
 {C.faq_section("Licensing questions", FAQ, "lic-faq", cls="section")}
 
 
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <h2 class="reveal text-h2 text-white">Check we are licensed where you live</h2>
-        <p class="reveal mt-4 text-white/85 max-w-2xl">
-          Tell us your state and we will confirm it on the call, before anything else.
-        </p>
-      </div>
-      <div class="lg:col-span-4 lg:col-start-9 grid gap-3">
-        {C.phone_link("licensing_footer", "btn btn-ghost btn-block", "Call " + C.PHONE_DISPLAY)}
-        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>
-      </div>
-    </div>
-  </div>
-</section>"""
+{closing}"""
