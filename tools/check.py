@@ -249,8 +249,11 @@ def check_page(rel, html, built):
 def main():
     built = set()
     for dirpath, dirnames, filenames in os.walk(ROOT):
+        # dist/ is tools/stage.py's copy of the site for hosting, _proof/ is QA
+        # screenshots: crawling either one double-counts every page.
         dirnames[:] = [d for d in dirnames if d not in
-                       ("node_modules", ".git", "tools", "src", "design-system", "assets")]
+                       ("node_modules", ".git", "tools", "src", "design-system", "assets",
+                        "dist", "_proof", "public", "netlify")]
         for f in filenames:
             if f.endswith(".html"):
                 built.add(os.path.relpath(os.path.join(dirpath, f), ROOT).replace(os.sep, "/"))

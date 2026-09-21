@@ -1,0 +1,5 @@
+# Preview deploy. The site is not launched and must not be indexed.
+# At launch, replace this whole file with an allow rule plus:
+#   Sitemap: https://www.apexinsurancemarketing.com/sitemap.xml
+User-agent: *
+Disallow: /

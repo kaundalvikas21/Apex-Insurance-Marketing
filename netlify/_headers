@@ -1,0 +1,8 @@
+# Preview deploy only. Remove the X-Robots-Tag block before a real launch.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+
+/assets/*
+  Cache-Control: public, max-age=3600
