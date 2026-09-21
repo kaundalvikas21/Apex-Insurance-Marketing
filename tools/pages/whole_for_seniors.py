@@ -281,5 +281,9 @@ def body():
 {C.faq_section("Questions seniors ask about whole life", FAQ, "whole-seniors-faq")}
 
 
+{C.closing_band("whole-band", "Talk it through with a licensed agent",
+    "What you can be accepted for depends on your health answers. A call tells you in one conversation.",
+    "whole_seniors_close", silo="whole", phone_first=True)}
+
 {C.byline_section()}
 """

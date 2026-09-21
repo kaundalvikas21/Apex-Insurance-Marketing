@@ -282,6 +282,8 @@ def body():
                "application or an awkward second conversation.")}
 
 
+{C.ask_strip("Would it help to talk it through first?", "A licensed agent can explain the rules before you raise it with your parent.", C.phone_link("fe_parents_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
+
 {C.prose("How to raise it without a row", conversation,
          intro="This is the part people find hard, and it is worth more than any product detail "
                "on this page. The conversation usually goes better than the version of it you are "
@@ -301,6 +303,10 @@ def body():
 
 {C.faq_section("Questions about insuring a parent", FAQ, "fe-parents-faq")}
 
+
+{C.closing_band("whole-band", "Set it up the right way, with your parent on the call",
+    "We walk you both through who owns the policy, who is paid, and who pays the premium.",
+    "fe_parents_close", silo="fe", phone_first=True)}
 
 {C.byline_section()}
 """

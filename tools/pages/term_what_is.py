@@ -312,5 +312,9 @@ def body():
 {C.faq_section("Common questions about term life insurance", FAQ, "term-what-is-faq")}
 
 
+{C.closing_band("term-band", "Ready to see what term would cost you?",
+    "Tell us your age, state and the amount you have in mind. The quote comes back with the carrier named.",
+    "term_what_is_close", silo="term")}
+
 {C.byline_section()}
 """

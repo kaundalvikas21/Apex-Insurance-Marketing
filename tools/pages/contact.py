@@ -227,6 +227,9 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
         <h2 class="reveal text-h2">Before you get in touch</h2>
+        <p class="reveal mt-5 text-slate">The three things people ask us first.</p>
+        <p class="reveal mt-6 text-sm text-muted">Anything else is quicker to ask out loud.</p>
+        <div class="reveal mt-4">{C.phone_link("contact_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
         <details class="acc" name="contact-faq">

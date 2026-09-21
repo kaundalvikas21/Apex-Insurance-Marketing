@@ -365,5 +365,9 @@ def body():
 {C.faq_section("Questions about burial insurance", FAQ, "fe-burial-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Size the policy with someone who knows the costs",
+    "Tell us what kind of service you have in mind and we will help you work out an amount that covers it.",
+    "fe_burial_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

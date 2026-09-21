@@ -647,6 +647,8 @@ def body():
         <p class="reveal mt-5 text-slate">
           Eight things worth knowing before you sign a contract you intend to keep for fifty years.
         </p>
+        <p class="reveal mt-6 text-sm text-muted">Still stuck? Ask a licensed agent. No script, no obligation.</p>
+        <div class="reveal mt-4">{C.phone_link("whole_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
         {faq_html}

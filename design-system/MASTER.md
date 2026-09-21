@@ -232,6 +232,9 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `chrome.hero_cta()` | The hero's one amber button and micro line, for `page_hero(extra=)`. Phone first pages pass a `phone_link()` block instead. |
 | `chrome.steps_section()` | The connected stepper: filled navy `.steps-node` circles on a dashed rail (on top from 768px, down the left below), a cell under each, optional `.steps-cta` strip. Three items read white, tinted, blue so the last is the destination. Four items, or `fe=True`, stay plain white with no stagger and no lift, go four across only from 1024px, and keep the vertical rail between 768 and 1023 because a 2 x 2 grid breaks the line. Used by home ("Three simple steps") and "How to apply" on the term and final expense hubs. |
 | `chrome.closing_band()` / `chrome.banner(inset=True)` | A page's final ask as a rounded photo card inside a pale section. **No page may end on a flat navy or edge to edge photo band**: directly on the navy footer it reads as part of the footer, and the pale margin under the card is the boundary. Used on `/get-a-quote/` and the five About pages. No people in the photograph on a reviews or an agent page. |
+| `chrome.ask_strip()` | A slim one-line ask with one button, for the midpoint of a long run of prose. Quieter than `inline_cta()`. |
+| `.status-card` | "Which group am I in": a coloured left rail + a Lucide icon + a label + a one-line meaning. Never colour alone, never amber or red. Used for "Who qualifies" on the final expense hub, with the same icons and names as the benefit cards above it. |
+| `.reviewed-chip` | One line under a spoke's answer: reviewed by, title, date, from the byline's placeholders. No link; the byline owns it. |
 | `chrome.usp_strip()` | Four icon tiles directly beneath a hero CTA. Spec facts or visible `[X]` placeholders only, never a claim, never a count-up. |
 | `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
 | `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. `media=` puts a figure under the lead and `sticky=` (default on) parks the column, which is how the left side stops leaving a dead half-row. Sticky needs no fe branching: `.fe main .sticky-col` is already static. |
@@ -305,8 +308,12 @@ They inherit this file without deviation except where a page doc exists (`term-n
    `page_hero(answer=)`, which renders directly under the hero and before any section, and carries
    the mandated hub up-link. That satisfies spec s07 rule 1 and "answer the question first" while
    keeping the hero to one sentence. Every hero carries exactly one button, weighted per silo.
-2. **One mid-page CTA**, `chrome.inline_cta()`, never an interstitial. The exception is
-   `/term-life-insurance/no-medical-exam/`, which the spec treats as near-money.
+2. **Asks, in a fixed set.** One hero button; one mid-page `chrome.inline_cta()`, never an
+   interstitial; on a run of more than about 900 words with no button, one slim
+   `chrome.ask_strip()` at the midpoint; a call line under the FAQ (`faq_section(ask=True)`); and
+   `chrome.closing_band()` as the last ask, before the byline. The September 2026 audit found 32
+   pages ending with no ask at all and 39 of 41 FAQs with none, which is what this replaces. The two
+   soft pages (`/cash-value/`, `/is-it-worth-it/`) take outline buttons only, never amber.
 3. **One link per target per page.** A page's spoke module may not repeat a target the body already
    links. Where a contextual link and the module both want one page, the module keeps the canonical
    bare link and the contextual one deep-links to an anchor. The breadcrumb plus the mandated

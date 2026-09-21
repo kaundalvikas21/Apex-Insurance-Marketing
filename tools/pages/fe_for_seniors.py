@@ -299,5 +299,9 @@ def body():
 {C.faq_section("Questions about final expense after 50", FAQ, "fe-seniors-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Find out what your health answers qualify you for",
+    "It is your answers, not your age, that decide what you can buy. One call tells you.",
+    "fe_seniors_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

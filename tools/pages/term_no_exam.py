@@ -295,5 +295,9 @@ def body():
 {C.faq_section("Questions about no exam term life", FAQ, "term-noexam-faq")}
 
 
+{C.closing_band("term-band", "Find out which route you qualify for",
+    "A few questions are enough to tell you whether you are likely to skip the exam, and what it would cost if you do.",
+    "term_noexam_close", silo="term", quote=("#quote", "See if you qualify"))}
+
 {C.byline_section()}
 """

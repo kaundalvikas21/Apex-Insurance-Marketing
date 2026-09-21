@@ -153,16 +153,7 @@ def body():
 </section>
 
 
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">{icon("shield-check", 20)}Licensed in {C.STATES} states</span>
-      <span class="inline-flex items-center gap-2">{icon("handshake", 20, "text-navy-700")}Independent, appointed with {C.CARRIERS} carriers</span>
-      <span class="inline-flex items-center gap-2">{icon("clock", 20, "text-navy-700")}Reply within {C.SLA}</span>
-      <span class="inline-flex items-center gap-2">{icon("file-text", 20, "text-navy-700")}No fee, ever</span>
-    </div>
-  </div>
-</section>
+{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("scale", "Independent agency", "We compare carriers for you"), ("file-text", "Carrier named", "Guaranteed column shown"), ("handshake", "Never sold on", "Your details stay with us")])}
 
 
 <!-- =====================================================================
@@ -217,6 +208,8 @@ def body():
          "between what a form promises and what actually happens is where most of the distrust "
          "in this industry comes from.")}
 
+
+{C.ask_strip("Ready to start?", "Five questions, and one licensed agent replies.", '<a href="#wl-quotes-form" class="btn btn-cta">Back to the form</a>')}
 
 <!-- =====================================================================
      WHY QUOTES DIFFER BETWEEN CARRIERS. T1's objection section, written for
@@ -334,4 +327,8 @@ def body():
 
 
 {C.faq_section("Before you start", FAQ, "whole-quotes-faq")}
-"""
+
+
+{C.closing_band("whole-band", "Ready when you are",
+    "Five questions, or one call. Either way you reach a licensed agent.",
+    "whole_quotes_close", quote=("#wl-quotes-form", "Back to the form"))}"""

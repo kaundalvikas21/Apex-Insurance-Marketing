@@ -385,5 +385,9 @@ def body():
 {C.faq_section("Questions about waiting periods", FAQ, "fe-nowait-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Find out if you qualify for day one cover",
+    "It depends on your health answers and the carrier. We ask the questions with you and tell you plainly.",
+    "fe_no_waiting_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

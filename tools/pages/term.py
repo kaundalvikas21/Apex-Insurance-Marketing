@@ -465,6 +465,8 @@ def body():
   </div>
 </section>
 
+{C.ask_strip("Seen enough to get a quote?", "Six questions, about ninety seconds.", '<a href="#quote" class="btn btn-cta">Get my term life quote</a>')}
+
 <!-- =====================================================================
      4. WHAT IT COSTS.
      ================================================================== -->
@@ -568,8 +570,10 @@ def body():
         <h2 class="reveal text-h2">Term life questions</h2>
         <p class="reveal mt-5 text-slate">Nine things people ask before they apply.</p>
         <p class="reveal mt-6 text-sm text-muted">
-          If yours is not here, put it in the form and we will answer it in the reply.
+          If yours is not here, put it in the form and we will answer it in the reply. Or ask
+          a licensed agent now.
         </p>
+        <div class="reveal mt-4">{C.phone_link("term_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
         {faq_html}

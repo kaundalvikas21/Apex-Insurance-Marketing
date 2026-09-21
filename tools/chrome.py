@@ -150,19 +150,41 @@ def banner(name, heading, sub, cta_html, eyebrow=None, inset=False):
 </section>"""
 
 
-def closing_band(photo, heading, sub, where, phone_first=False):
+QUOTE_FOR_SILO = {
+    "term": ("/term-life-insurance/quotes/", "Get my term life quote"),
+    "whole": ("/whole-life-insurance/quotes/", "Get my whole life quote"),
+    "fe": ("/final-expense-insurance/quotes/", "Get final expense quotes"),
+    "site": ("/get-a-quote/", "Get a free quote"),
+}
+
+
+def closing_band(photo, heading, sub, where, phone_first=False, silo="site", soft=False,
+                 quote=None):
     """The last ask on a page: quote button plus call button on an inset photo
     card. Inset because a flat navy band as the final section sits directly on
     the navy footer and reads as part of it; the pale margin under the card is
-    the boundary. `phone_first` only changes which button comes first.
+    the boundary.
+
+    `silo` picks the quote page and its label. `quote=(href, label)` overrides
+    it, which is how a quotes page points back at its own form.
+    `phone_first` follows the per-silo CTA weighting: the call becomes the
+    solid white button and leads, the quote link drops to the outline.
+    `soft` is for the two pages whose docs forbid amber (cash value, is it
+    worth it): both buttons are outlines.
 
     Pick a photograph with no people for a reviews or an agent page, where a
     face would be read as a client or as the agent.
     """
-    quote = '<a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>'
-    call = phone_link(where, "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)
-    first, second = (call, quote) if phone_first else (quote, call)
-    return banner(photo, heading, sub, '<div class="grid gap-3">%s%s</div>' % (first, second), inset=True)
+    href, label = quote or QUOTE_FOR_SILO[silo]
+    if phone_first:
+        first = phone_link(where, "btn btn-call btn-block !bg-white !text-navy", "Call " + PHONE_DISPLAY)
+        second = '<a href="%s" class="btn btn-ghost btn-block">%s</a>' % (href, label)
+    else:
+        first = '<a href="%s" class="btn %s btn-block">%s</a>' % (href, "btn-ghost" if soft else "btn-cta", label)
+        second = phone_link(where, "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)
+    cta = ('<div class="grid gap-3">%s%s</div><p class="mt-3 text-sm text-white/75 text-center">%s</p>'
+           % (first, second, HOURS))
+    return banner(photo, heading, sub, cta, inset=True)
 
 
 RATIO_CLASS = {(4, 5): "media-tall", (3, 2): "media-wide", (21, 9): "media-band",
@@ -567,7 +589,7 @@ def acc(q, a, group, size=22):
             '</details>') % (group, q, icon("plus", size), a)
 
 
-def faq_section(heading, items, group, intro=None, size=22, cls="section", center=True):
+def faq_section(heading, items, group, intro=None, size=22, cls="section", center=True, ask=True):
     """Heading plus accordion list. `items` is [(question, answer_html)] and is
     the same list that should be passed to faq_schema(), so the visible copy and
     the structured data can never disagree.
@@ -578,6 +600,11 @@ def faq_section(heading, items, group, intro=None, size=22, cls="section", cente
     centred text: the question rows stay left aligned, because centred rows in
     a list are harder to scan. This is one centred section, not the centred
     page section 7 bans.
+
+    `ask` closes the list with one line and a call button. Someone who read
+    the FAQ and did not find their question is the warmest reader on the page,
+    and 39 of 41 FAQ sections used to leave them with nowhere to go. The GA4
+    location is the accordion group, so every page reports separately.
     """
     rows = "\n      ".join(acc(q, a, group, size) for q, a in items)
     lead = ('<p class="reveal mt-5 text-slate">%s</p>' % intro) if intro else ""
@@ -591,9 +618,20 @@ def faq_section(heading, items, group, intro=None, size=22, cls="section", cente
     </div>
     <div class="mt-10 grid gap-3 {list_cls}" data-stagger="60">
       {rows}
-    </div>
+    </div>{faq_ask(group, list_cls) if ask else ""}
   </div>
 </section>"""
+
+
+def faq_ask(group, cls="max-w-3xl"):
+    """The line under an accordion: still stuck, call. Shared so the hubs'
+    hand-laid FAQ columns can use the same words."""
+    return f"""
+    <div class="reveal faq-ask {cls}">
+      <p><span class="font-semibold text-navy">Still have a question?</span>
+        A licensed agent will answer it. No script and no obligation.</p>
+      {phone_link(group.replace("-", "_"), "btn btn-ghost", "Call " + PHONE_DISPLAY)}
+    </div>"""
 
 
 def spoke_module(heading, intro, spokes):
@@ -628,6 +666,24 @@ def step(n, title, body, note=None):
         <p class="mt-2 text-slate">{body}</p>{extra}
       </div>
     </div>"""
+
+
+def ask_strip(title, note, button_html):
+    """A slim mid-page ask: one line, one button. For the middle of a long run
+    of prose sections, where the reader is otherwise 900 words from any action.
+    Quieter than inline_cta() on purpose: it is a way out, not a pitch. It has
+    no top padding, so it sits in the gap the section above already leaves."""
+    return f"""<section class="pb-14 md:pb-16">
+  <div class="container-ax">
+    <div class="reveal steps-cta !mt-0">
+      <div>
+        <p class="font-semibold text-navy">{title}</p>
+        <p class="mt-1 text-sm text-muted">{note}</p>
+      </div>
+      {button_html}
+    </div>
+  </div>
+</section>"""
 
 
 def steps_section(heading, lead, items, cta=None, after="", cls="section", fe=False, label="Step"):
@@ -1040,6 +1096,12 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answ
     """The top of every hub and informational page: breadcrumb, one H1, one
     sentence, one CTA. tools/check.py holds it to that (data-hero).
 
+    Under the answer sits a one-line reviewed-by chip. The full byline is the
+    last thing on these pages, so without it the reader meets no sign of who
+    stands behind the advice until the very end. It uses the same AGENT_NAME
+    and REVIEW_DATE placeholders as the byline, and carries no link because
+    the byline already owns the link to the agent profile.
+
     `answer` is the rest of the direct answer, as HTML. It renders as its own
     block immediately under the hero, and it carries the mandated up-link to
     the silo hub (spec s07 rule 1: first 150 words, exact anchor = the hub
@@ -1093,6 +1155,7 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answ
 <section class="pb-10">
   <div class="container-ax">
     <p class="reveal max-w-3xl text-slate">{answer}</p>
+    <p class="reveal reviewed-chip">{icon("user-check", 16, "shrink-0")}<span>Reviewed by <span class="font-semibold text-navy">{AGENT_NAME}</span>, {AGENT_TITLE.lower()} &#183; Last reviewed {REVIEW_DATE}</span></p>
   </div>
 </section>""" if answer else ""
     return f"""

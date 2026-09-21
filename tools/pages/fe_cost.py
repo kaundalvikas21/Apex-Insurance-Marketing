@@ -343,5 +343,9 @@ def body():
 {C.faq_section("Questions about the cost", FAQ, "fe-cost-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Get your own number, not a chart",
+    "Your age, your state and your health answers decide the premium. One call gives you the real figure.",
+    "fe_cost_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

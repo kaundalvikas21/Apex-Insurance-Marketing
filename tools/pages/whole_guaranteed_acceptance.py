@@ -254,6 +254,8 @@ def body():
 </section>
 
 
+{C.ask_strip("Not sure you need guaranteed acceptance?", "One call finds out whether a short health questionnaire would do.", C.phone_link("whole_ga_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
+
 <!-- =====================================================================
      WHAT IT COSTS. Row level click-to-call inside the age cell, which is
      what rate_chart's "call" mode is for on a phone weighted page.
@@ -411,6 +413,10 @@ def body():
 
 {C.faq_section("Questions about guaranteed acceptance", FAQ, "whole-ga-faq")}
 
+
+{C.closing_band("term-band", "Check whether you can do better first",
+    "Many people who assume they need guaranteed acceptance can still pass a short health questionnaire. One call finds out.",
+    "whole_ga_close", silo="whole", phone_first=True)}
 
 {C.byline_section()}
 """

@@ -155,6 +155,8 @@ def render(trail, h1, lead, table_heading, table_intro, table_caption, table_col
 {C.prose(cost_heading, cost_blocks, intro=cost_intro, cls="section band")}
 
 
+{C.ask_strip("Rather have someone walk you through it?", "A licensed agent will compare the two for your age and your situation.", C.phone_link(faq_group.replace("-", "_") + "_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
+
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
@@ -176,6 +178,10 @@ def render(trail, h1, lead, table_heading, table_intro, table_caption, table_col
 
 {C.faq_section(faq_heading, faq, faq_group)}
 
+
+{C.closing_band("term-band", "Still not sure which one fits?",
+    "Tell a licensed agent what you are trying to cover. We will say which one we would buy in your position, and why.",
+    faq_group.replace("-", "_") + "_close")}
 
 {C.byline_section()}
 """

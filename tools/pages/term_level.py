@@ -315,5 +315,9 @@ def body():
 {C.faq_section("Questions about level term", FAQ, "term-level-faq")}
 
 
+{C.closing_band("term-band", "See level term quotes with the carrier named",
+    "You get the premium, the term length and the conversion terms in writing, so you can compare them with anything else you have been shown.",
+    "term_level_close", silo="term")}
+
 {C.byline_section()}
 """

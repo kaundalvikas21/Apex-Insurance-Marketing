@@ -206,6 +206,8 @@ def body():
 </section>
 
 
+{C.ask_strip("Rather skip to your own number?", "Your age, state and health decide it. Five questions.", '<a href="#whole-rates-quote-form" class="btn btn-cta">Get my whole life quote</a>')}
+
 <!-- =====================================================================
      HOW TO LOWER A QUOTED RATE. T2. Legitimate levers only.
      ================================================================== -->
@@ -346,4 +348,8 @@ def body():
     <div class="reveal">{C.byline()}</div>
   </div>
 </section>
-"""
+
+
+{C.closing_band("whole-band", "Turn the chart into your own number",
+    "A chart shows the shape of the pricing. Your age, state and health decide the figure.",
+    "whole_rates_close", silo="whole")}"""

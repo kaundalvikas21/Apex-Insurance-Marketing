@@ -293,5 +293,9 @@ def body():
 {C.faq_section("Questions about funeral insurance", FAQ, "fe-funeral-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Ask us anything before you decide",
+    "Insurance or a pre-paid plan, how much, and which carrier. A licensed agent will talk it through.",
+    "fe_funeral_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

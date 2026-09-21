@@ -382,5 +382,9 @@ def body():
       "The case for and against, side by side.")])}
 
 
+{C.closing_band("whole-band", "Take your number to a licensed agent",
+    "The calculator gives you an amount. An agent tells you what that amount costs for someone your age.",
+    "whole_calc_close", silo="whole")}
+
 {C.byline_section()}
 """

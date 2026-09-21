@@ -217,5 +217,9 @@ def body():
 {C.faq_section("Common questions", FAQ, "fe-cremation-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Buy only what a cremation needs",
+    "A smaller policy means a lower premium. One call is enough to size it properly.",
+    "fe_cremation_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

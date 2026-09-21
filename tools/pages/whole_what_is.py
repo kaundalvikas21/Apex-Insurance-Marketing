@@ -294,5 +294,9 @@ def body():
 {C.faq_section("Common questions about whole life insurance", FAQ, "whole-what-is-faq")}
 
 
+{C.closing_band("whole-band", "See whether whole life fits you",
+    "Ask us to price it next to term. If term is the better answer for you, we will say so.",
+    "whole_what_is_close", silo="whole")}
+
 {C.byline_section()}
 """

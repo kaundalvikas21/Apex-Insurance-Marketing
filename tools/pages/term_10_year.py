@@ -281,5 +281,9 @@ def body():
 {C.faq_section("Questions about 10 year term", FAQ, "term-10y-faq")}
 
 
+{C.closing_band("term-band", "See what ten years would cost you",
+    "And what twenty would, so you can see the gap before you choose the shorter one.",
+    "term_10y_close", silo="term")}
+
 {C.byline_section()}
 """

@@ -254,6 +254,8 @@ def body():
     cls="section band-surface")}
 
 
+{C.ask_strip("Want this for your own age?", "An illustration shows the guaranteed column year by year. No obligation.", '<a href="/whole-life-insurance/quotes/" class="btn btn-ghost">Ask for an illustration</a>')}
+
 <!-- =====================================================================
      WITHDRAWALS AND SURRENDER.
      ================================================================== -->
@@ -445,6 +447,10 @@ def body():
 
 {C.faq_section("Questions about whole life cash value", FAQ, "whole-cash-faq")}
 
+
+{C.closing_band("whole-band", "Want the numbers for your own age?",
+    "An illustration shows the guaranteed cash value year by year. There is no obligation in asking for one.",
+    "whole_cash_value_close", silo="whole", soft=True)}
 
 {C.byline_section()}
 """

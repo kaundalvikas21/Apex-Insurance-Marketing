@@ -569,20 +569,35 @@ def body():
       </div>
 
       <div class="lg:col-span-6 lg:col-start-7">
-        <dl class="reveal grid gap-6">
-          <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Usually accepted at level rates</dt>
-            <dd class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</dd>
-          </div>
-          <div class="pb-6 border-b border-rule">
-            <dt class="text-h4 text-navy">Often a graded benefit</dt>
-            <dd class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</dd>
-          </div>
-          <div>
-            <dt class="text-h4 text-navy">Usually guaranteed issue</dt>
-            <dd class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</dd>
-          </div>
-        </dl>
+        <!-- Status cards. The same three icons and names as the benefit cards
+             above, so "which group am I in" and "what does that mean" read as
+             one system. Status is carried by icon + label, never colour alone. -->
+        <ul class="reveal grid gap-4">
+          <li class="status-card status-good">
+            {icon("circle-check", 26, "shrink-0 text-green mt-0.5")}
+            <div>
+              <p class="status-label">Usually accepted at level rates</p>
+              <p class="status-means">Full benefit from day one, no waiting period.</p>
+              <p class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</p>
+            </div>
+          </li>
+          <li class="status-card status-mid">
+            {icon("hourglass", 26, "shrink-0 text-navy mt-0.5")}
+            <div>
+              <p class="status-label">Often a graded benefit</p>
+              <p class="status-means">A percentage in the first two or three years, then the full amount.</p>
+              <p class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</p>
+            </div>
+          </li>
+          <li class="status-card status-last">
+            {icon("circle-alert", 26, "shrink-0 text-slate mt-0.5")}
+            <div>
+              <p class="status-label">Usually guaranteed issue</p>
+              <p class="status-means">Nobody is turned down. A two or three year waiting period applies.</p>
+              <p class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</p>
+            </div>
+          </li>
+        </ul>
         <p class="reveal mt-6 text-sm text-muted">
           These groupings are typical of the carriers we are appointed with. Each carrier has its
           own health questions and its own look back periods, so treat this as a guide and let us

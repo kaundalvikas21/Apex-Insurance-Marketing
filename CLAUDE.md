@@ -73,7 +73,7 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
 
 - `tools/chrome.py` — every shared partial and **every placeholder constant** (`PHONE_DISPLAY`,
   `AGENT_NAME`, `RATES_DATE`, `NPN`, `SLA`, …). One address for the launch swap. Provides
-  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `stat`,
+  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `ask_strip`, `faq_ask`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `stat`,
   `banner`, `picture`/`figure`, `legal_doc`, `flag`/`rates_flag`, `state_options`,
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).

@@ -224,6 +224,8 @@ def body():
                               'one.</p>')}
 
 
+{C.ask_strip("Want to see one on a real illustration?", "We send the guaranteed and non guaranteed columns side by side.", '<a href="/whole-life-insurance/quotes/" class="btn btn-cta">Ask for an illustration</a>')}
+
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
@@ -326,6 +328,10 @@ def body():
 
 {C.faq_section("Questions about whole life dividends", FAQ, "whole-div-faq")}
 
+
+{C.closing_band("whole-band", "Ask for an illustration you can check",
+    "We send the guaranteed and the non guaranteed columns side by side, with the carrier named.",
+    "whole_dividends_close", silo="whole")}
 
 {C.byline_section()}
 """

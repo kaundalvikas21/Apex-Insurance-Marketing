@@ -303,5 +303,9 @@ def body():
 {C.faq_section("Questions seniors ask about term life", FAQ, "term-seniors-faq")}
 
 
+{C.closing_band("term-band", "Talk it through with a licensed agent",
+    "After sixty the right answer depends on your health and the date the need ends. A call sorts that out faster than a form.",
+    "term_seniors_close", silo="term", phone_first=True)}
+
 {C.byline_section()}
 """

@@ -259,5 +259,9 @@ def body():
 {C.faq_section("Common questions", FAQ, "fe-whatis-faq", size=24)}
 
 
+{C.closing_band("whole-band", "Want to know what you would qualify for?",
+    "A licensed agent asks the health questions with you and tells you what you can get and what it costs.",
+    "fe_what_is_close", silo="fe", phone_first=True)}
+
 {C.byline_section()}
 """

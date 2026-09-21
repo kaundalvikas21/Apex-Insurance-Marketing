@@ -243,6 +243,8 @@ def body():
 </section>
 
 
+{C.ask_strip("Want both prices in front of you?", "We quote standard term and return of premium side by side.", '<a href="/term-life-insurance/quotes/" class="btn btn-cta">Get both quotes</a>')}
+
 <section class="section">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
@@ -322,6 +324,10 @@ def body():
 
 {C.faq_section("Questions about return of premium term", FAQ, "term-rop-faq")}
 
+
+{C.closing_band("term-band", "Price it both ways before you decide",
+    "Ask for a standard term quote and a return of premium quote side by side. The difference is the whole decision.",
+    "term_rop_close", silo="term")}
 
 {C.byline_section()}
 """

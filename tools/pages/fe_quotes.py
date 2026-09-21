@@ -153,16 +153,7 @@ def body():
 </section>
 
 
-<section class="border-y border-rule bg-surface">
-  <div class="container-ax py-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 trust-strip">
-      <span class="inline-flex items-center gap-2 text-navy font-semibold">{icon("shield-check", 22)}Licensed in {C.STATES} states</span>
-      <span class="inline-flex items-center gap-2">{icon("handshake", 22, "text-navy-700")}Independent, appointed with {C.CARRIERS} carriers</span>
-      <span class="inline-flex items-center gap-2">{icon("clock", 22, "text-navy-700")}Reply within {C.SLA}</span>
-      <span class="inline-flex items-center gap-2">{icon("file-text", 22, "text-navy-700")}No fee, ever</span>
-    </div>
-  </div>
-</section>
+{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("stethoscope", "No medical exam", "Health questions only"), ("user-check", "One agency calls", "Not six"), ("handshake", "Never sold on", "Your details stay with us")])}
 
 
 <!-- =====================================================================
@@ -216,6 +207,8 @@ def body():
          "in this industry comes from.",
    media=C.figure("fe-path", C.MEDIA_SIZES))}
 
+
+{C.ask_strip("Ready to talk?", "One call, about fifteen minutes.", C.phone_link("fe_quotes_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
 
 <!-- =====================================================================
      WHY QUOTES DIFFER. T1's objection section. Static cards: no bento
@@ -320,4 +313,8 @@ def body():
 
 
 {C.faq_section("Before you call", FAQ, "fe-quotes-faq", size=24)}
-"""
+
+
+{C.closing_band("whole-band", "Ready when you are",
+    "One call, about fifteen minutes. Or leave four details and we call you.",
+    "fe_quotes_close", silo="fe", phone_first=True, quote=("#quote", "Ask us to call you"))}"""

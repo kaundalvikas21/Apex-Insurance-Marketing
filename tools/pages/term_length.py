@@ -115,5 +115,9 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
 {C.faq_section("Questions about %d year term" % years, faq, "term-%dy-faq" % years)}
 
 
+{C.closing_band("term-band", "See what a %d year term would cost you" % years,
+    "Tell us your age, state and the amount you have in mind. The quote comes back with the carrier named.",
+    "term_%dy_close" % years, silo="term")}
+
 {C.byline_section()}
 """

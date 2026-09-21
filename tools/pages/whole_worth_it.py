@@ -262,6 +262,8 @@ def body():
 </section>
 
 
+{C.ask_strip("Rather hear it for your own situation?", "A licensed agent will tell you if term is the better answer.", C.phone_link("whole_worth_it_mid", "btn btn-ghost", "Call " + C.PHONE_DISPLAY))}
+
 {C.prose("What the critics get right, and wrong", rw,
          intro="The case against whole life is largely correct, and repeating that here costs us "
                "nothing we should not be paying. The parts of it that are overstated are worth "
@@ -322,4 +324,8 @@ def body():
 
 
 {C.faq_section("Questions people actually ask about this", FAQ, "whole-worth-faq")}
-"""
+
+
+{C.closing_band("whole-band", "Still undecided? That is a reasonable place to be",
+    "Ask us to price term and whole life side by side. If term is the better answer for you, we will say so.",
+    "whole_worth_it_close", silo="whole", soft=True)}"""
