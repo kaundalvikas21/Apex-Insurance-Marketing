@@ -19,6 +19,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "pages"))
 
 import chrome  # noqa: E402
+import logo  # noqa: E402
 import images  # noqa: E402
 
 PAGES = [
@@ -182,3 +183,7 @@ if __name__ == "__main__":
 
     if not sys.argv[1:]:
         print("\n  sitemap.xml    %d urls" % sitemap())
+        # The favicon is generated from tools/logo.py, never edited by hand.
+        with open(os.path.join(ROOT, "assets", "favicon.svg"), "w", encoding="utf-8", newline="") as f:
+            f.write(logo.favicon_svg())
+        print("  favicon.svg    from tools/logo.py")

@@ -77,6 +77,12 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
   `banner`, `picture`/`figure`, `legal_doc`, `flag`/`rates_flag`, `state_options`,
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).
+- `tools/logo.py` — **the logo's single source of truth** ("Summit": the A as a two-facet peak with
+  an amber cap). Geometry, palettes and wording live here and nowhere else. `chrome.header()` and
+  `chrome.footer()` call `logo.lockup()`; a full build writes `assets/favicon.svg` from
+  `logo.favicon_svg()`. Never hand-edit the favicon or paste the polygons elsewhere: `check.py`
+  fails if the favicon differs from what `logo.py` generates, if another `tools/*.py` file contains
+  the mark's geometry, or if `logo.HEX` drifts from the tokens in `src/input.css`.
 - `tools/forms.py` — form primitives, used by every builder: `text_field`/`age_field`/`phone_field`/`select_field`/`textarea_field`/`radio_group`, `row`, `step`/`progress`/`next_button`, `submit_block`. The compliance-critical parts (hidden `source_url`/`silo`/
   `form_name`, honeypot, TCPA consent block) are authored once here so a copy cannot drift.
   Every helper takes `indent`, the column its block sits at in the caller's f-string.
@@ -140,6 +146,8 @@ links pointing at pages not yet built. It is meant to be edited in the same comm
 
 - **No em-dash anywhere in rendered copy.** `tools/build.py` fails with a line number, entity forms
   included. Use a comma, colon, period, or middot.
+- **The logo's cap is the one amber thing outside the CTA.** It is set inline by `tools/logo.py`,
+  not in CSS, so the count below is unaffected.
 - **Amber (`--color-gold`) appears in exactly 3 CSS rules** — `.btn-cta`, `.btn-cta:hover`,
   `.skip-link`. `check.py` counts them. Adding a fourth fails the check.
 - **Exactly one TCPA `[data-consent]` per form**, never pre-ticked, immediately above submit; and

@@ -7,6 +7,7 @@ address to point at. Nothing invented is presented as verified fact.
 import json
 
 import images
+import logo
 from icons import icon
 
 # --- PLACEHOLDERS. See REPLACE-BEFORE-LAUNCH.md -----------------------------
@@ -270,10 +271,7 @@ def header(active):
   <div class="container-ax">
     <div class="header-inner">
 
-      <a href="/" class="shrink-0 rounded-lg" aria-label="Apex Insurance, home">
-        <span class="wordmark">Apex</span>
-        <span class="wordmark-sub">Insurance</span>
-      </a>
+      <a href="/" class="shrink-0 rounded-lg" aria-label="{logo.NAME}, home">{logo.lockup("full", 36)}</a>
 
       <nav class="hidden lg:flex items-center gap-3 xl:gap-7 ml-4 xl:ml-10" aria-label="Primary">
         {links}
@@ -306,7 +304,7 @@ def header(active):
   <dialog id="site-nav" data-nav-panel class="nav-drawer" aria-label="Menu">
     <div class="nav-drawer-inner">
       <div class="nav-drawer-head">
-        <span><span class="wordmark">Apex</span><span class="wordmark-sub">Insurance</span></span>
+        {logo.lockup("full", 32)}
         <button type="button" data-nav-close class="nav-drawer-close" aria-label="Close menu">{icon("x", 24)}</button>
       </div>
 
@@ -373,8 +371,7 @@ def footer():
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
 
       <div class="lg:col-span-4">
-        <span class="wordmark">Apex</span>
-        <span class="wordmark-sub">Insurance</span>
+        {logo.lockup("reversed", 40)}
         <p class="mt-5 text-white/80 max-w-sm">
           An independent life insurance agency. We are appointed with multiple carriers,
           which means we compare them for you instead of selling you one company's product.

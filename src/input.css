@@ -1135,6 +1135,11 @@
   }
   .skip-link:focus { top: 1rem; }
 
+  /* The logo lockup. Geometry and wording live in tools/logo.py, nowhere else. */
+  .logo { display: inline-flex; align-items: center; gap: 0.625rem; vertical-align: middle; }
+  .logo-mark { flex: none; display: block; }
+  .logo-word { display: block; }
+
   .wordmark {
     display: block;
     font-family: var(--font-display);

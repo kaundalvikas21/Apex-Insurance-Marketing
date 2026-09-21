@@ -39,6 +39,10 @@ Also in `chrome.py`:
 
 ---
 
+- **Logo** (`tools/logo.py`, "Summit"): designed in house on 2026-09-21 and **not checked against
+  registered trademarks**. Commission a trademark search before launch. On the site the wordmark is
+  live text in the self-hosted Space Grotesk, which is fine; for print, signage or anywhere the
+  font is not available, the wordmark must first be converted to outlines by a designer.
 - **Social profiles** (`SOCIAL` in `tools/chrome.py`): Facebook, LinkedIn, YouTube and Instagram
   icons sit in the footer on every page. Each URL is a `[...]` placeholder, and an icon only
   becomes a real link once its URL starts with `http`; until then it renders dimmed and inert, so

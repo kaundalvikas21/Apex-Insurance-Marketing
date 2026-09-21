@@ -265,6 +265,26 @@ def main():
         if n != 3:
             problems.append("site.css: amber appears in %d rules, must be exactly 3" % n)
 
+    # --- logo: one source of truth --------------------------------------------
+    # tools/logo.py owns the mark. Its polygons may appear in no other source
+    # file, its HEX mirror must match the design tokens, and the committed
+    # favicon must be exactly the one it generates.
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import logo as _logo
+    src_css = open(os.path.join(ROOT, "src", "input.css"), encoding="utf-8").read()
+    for token, value in _logo.HEX.items():
+        if not re.search(re.escape(token) + r":\s*" + re.escape(value), src_css, re.I):
+            problems.append("logo.py HEX[%s]=%s does not match src/input.css" % (token, value))
+    fav = os.path.join(ROOT, "assets", "favicon.svg")
+    if not os.path.exists(fav) or open(fav, encoding="utf-8").read() != _logo.favicon_svg():
+        problems.append("assets/favicon.svg is not what tools/logo.py generates: run python3 tools/build.py")
+    cap = _logo.GEOMETRY[-1][1]
+    for base, _dirs, files in os.walk(os.path.join(ROOT, "tools")):
+        for fn in files:
+            if fn.endswith(".py") and fn != "logo.py":
+                if cap in open(os.path.join(base, fn), encoding="utf-8").read():
+                    problems.append("tools/%s redraws the logo: use logo.mark() or logo.lockup()" % fn)
+
     print("  checked %d pages" % len(built))
     for n in notes:
         print("  note   %s" % n)
