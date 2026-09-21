@@ -60,9 +60,9 @@ LEGAL_SIBLINGS = [
 # The three hubs live under one "Insurance" disclosure. Each carries a one-line
 # description so the menu explains the product before the click.
 NAV_HUBS = [
-    ("/term-life-insurance/",     "Term Life",     "Affordable cover for a set number of years", "clock"),
-    ("/whole-life-insurance/",    "Whole Life",    "Lifelong cover that builds cash value", "shield-check"),
-    ("/final-expense-insurance/", "Final Expense", "Cover for funeral and final bills", "heart"),
+    ("/term-life-insurance/",     "Term Life",     "Affordable coverage for a set number of years", "clock"),
+    ("/whole-life-insurance/",    "Whole Life",    "Lifelong coverage that builds cash value", "shield-check"),
+    ("/final-expense-insurance/", "Final Expense", "Coverage for funeral costs and final bills", "heart"),
 ]
 NAV = [
     ("/free-policy-review/",           "Free Policy Review"),
@@ -246,7 +246,7 @@ def header(active):
            '<div class="nav-dd-aside">'
            '<p class="nav-dd-aside-title">Not sure which one fits?</p>'
            '<p class="nav-dd-aside-body">Answer three quick questions and we will point you to '
-           'the right cover. No email needed.</p>'
+           'the right coverage. No email needed.</p>'
            '<a class="btn btn-cta btn-block" href="/#triage">Help me choose%s</a>%s</div>'
            % (icon("arrow-right", 18, "shrink-0"),
               phone_link("nav_menu", "nav-dd-aside-call", "Or call " + PHONE_DISPLAY, 16)))
@@ -283,7 +283,7 @@ def header(active):
              rather than the CTA disappearing. -->
         {phone_link("header", "hidden lg:inline-flex xl:hidden items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors", "Call")}
         {phone_link("header", "hidden xl:inline-flex items-center gap-2 min-h-[48px] px-2 text-navy text-sm font-semibold whitespace-nowrap rounded-lg hover:text-navy-700 transition-colors")}
-        <a href="/get-a-quote/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a Free Quote</a>
+        <a href="/get-a-quote/" class="btn btn-cta hidden sm:inline-flex !text-sm !px-4 xl:!px-5">Get a free quote</a>
         <a href="tel:{PHONE_TEL}" data-cta-location="header_mobile"
            class="lg:hidden inline-flex items-center justify-center w-12 h-12 text-navy rounded-lg">
           <span class="sr-only">Call {PHONE_DISPLAY}</span>
@@ -321,7 +321,7 @@ def header(active):
       </a>
 
       <div class="nav-drawer-foot">
-        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a Free Quote</a>
+        <a href="/get-a-quote/" class="btn btn-cta btn-block">Get a free quote</a>
         {phone_link("header_mobile_panel", "btn btn-ghost btn-block", "Call " + PHONE_DISPLAY)}
         <p class="text-micro text-muted text-center">{HOURS}</p>
       </div>
@@ -964,7 +964,7 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
             # Under the age label, not in its own column: a fourth column would
             # break the three column ceiling the senior pages are held to.
             head = ('<th scope="row"><span class="block">%s</span>%s</th>'
-                    % (band, phone_link(cta_location, "btn-row mt-2", "Get this quoted", 18)))
+                    % (band, phone_link(cta_location, "btn-row mt-2", "Quote this", 18)))
             body_rows.append("<tr>%s%s</tr>" % (head, cells))
         elif row_cta == "prefill":
             btn = ('<button type="button" class="btn-row" data-prefill=\'%s\' '

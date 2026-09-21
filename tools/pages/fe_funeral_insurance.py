@@ -26,8 +26,8 @@ SILO = "final-expense"
 HTML_CLASS = "fe"
 TITLE = "Funeral Insurance: What It Covers and What It Costs | Apex"
 OG_TITLE = "Funeral insurance, explained"
-DESC = ("Funeral insurance is a small whole life policy that pays your family cash to cover a "
-        "funeral. What it covers, how it differs from a pre-paid plan, and what decides the cost.")
+DESC = ("Funeral insurance is a small whole life policy that pays your family cash for a "
+        "funeral. What it covers, and how it differs from a pre-paid plan.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("Funeral insurance", None)]
@@ -62,20 +62,20 @@ FAQ = [
      "the coverage does not expire. The money is paid in cash to the person you name, not to a "
      "funeral home."),
     ("How much funeral insurance do I need?",
-     "Enough to cover what your family would actually face, which depends on your state, on "
+     "Enough to cover what your family would actually face. That depends on your state, on "
      "whether you want a burial or a cremation, and on what you would want included. We do not "
-     "publish an average figure, because averages in this category are usually borrowed from "
+     "publish an average figure. Averages in this category are usually borrowed from "
      "surveys that do not describe any particular funeral. A better approach is to call two "
      "funeral homes near you and ask for their general price list, which they are required to "
-     "give you, then insure that number plus a margin for the bills that arrive afterwards."),
+     "give you. Then insure that number plus a margin for the bills that arrive afterward."),
     ("Is funeral insurance worth it?",
-     "It is worth it if your family would otherwise have to find the money quickly, from savings "
-     "or from a credit card, at the worst possible moment. It is not worth it if you already have "
-     "liquid savings set aside for this and the discipline to leave them alone, or if you already "
-     "hold permanent life insurance that covers it. The honest test is whether the money would "
-     "actually be there, in cash, within a week."),
+     "It is worth it if your family would otherwise have to come up with the money quickly, from "
+     "savings or from a credit card. It is not worth it if you already have savings set aside "
+     "for this and will leave them alone, or if you already hold permanent life insurance that "
+     "covers it. The test is whether the money would actually be there, in cash, within a "
+     "week."),
     ("Can I be turned down for funeral insurance?",
-     "You can be declined for a policy that pays the full benefit from day one, and in that case "
+     "You can be declined for a policy that pays the full benefit from day one. In that case "
      "a graded policy or a guaranteed acceptance policy is normally still available. Outright "
      "decline from every option is uncommon within the issue ages. Which carriers will take you "
      "depends on your health answers, and they disagree with each other more than people expect."),
@@ -91,7 +91,7 @@ FUNERAL_COST = """<h3 class="reveal text-h4">What decides the premium</h3>
       </p>
       <h3 class="reveal mt-8 text-h4">Where the figures by age are</h3>
 <p class="reveal mt-3 text-slate">
-        The full picture by age lives on one page and is kept current in one place:
+        Premiums by age are on one page, kept current in one place:
         <a class="link" href="/final-expense-insurance/cost/">final expense insurance cost</a>.
       </p>
       <h3 class="reveal mt-8 text-h4">If a waiting period has come up</h3>
@@ -136,9 +136,8 @@ def body():
     answer=(
         'It is the same product as burial insurance and as <a class="link" '
         'href="/final-expense-insurance/">final expense insurance</a>: three names, one '
-        'contract, no medical exam. The one thing worth knowing before you read further '
-        'is that it is insurance rather than a pre-paid funeral plan, and those two are '
-        'genuinely different things.'),
+        'contract, no medical exam. It is insurance, not a pre-paid funeral plan, and '
+        'those two are different things.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-kitchen", C.MEDIA_SIZES, eager=True))}
 
@@ -151,10 +150,10 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What the money is used for</h2>
+        <h2 class="reveal text-h2">What funeral insurance pays for</h2>
         <p class="reveal mt-5 text-slate">
           The benefit is paid in cash to the person you name, so it can be used for anything. In
-          practice it goes on some combination of these.
+          practice it goes toward some combination of these.
         </p>
         <div class="reveal mt-6">
           {C.flag("We do not publish an average funeral cost on this site. Figures quoted in this "
@@ -175,8 +174,8 @@ def body():
           <li class="reveal">Cemetery costs, which are separate from the funeral home: the plot,
               opening and closing the grave, and a marker.</li>
           <li class="reveal">Cremation fees, if that is the choice, which are normally lower than
-              burial but are not nothing.</li>
-          <li class="reveal">The bills that arrive afterwards: outstanding medical accounts, a
+              burial but are still a real cost.</li>
+          <li class="reveal">The bills that arrive afterward: unpaid medical bills, a
               final month of rent or utilities, travel for family, and probate costs.</li>
         </ul>
         <p class="reveal mt-6 text-slate">
@@ -196,11 +195,11 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">Funeral insurance against a pre-paid plan</h2>
+      <h2 class="reveal text-h2">Funeral insurance vs. a pre-paid funeral plan</h2>
       <p class="reveal mt-5 text-slate">
-        A pre-need plan is bought from a funeral home and buys a specific funeral from that funeral
+        A pre-paid plan is bought from a funeral home and buys a specific funeral from that funeral
         home. Funeral insurance is bought from an insurance carrier and pays your family cash. Both
-        are legitimate. They fail in different ways, and that is what the table is for.
+        are legitimate. They fall short in different ways, which the table shows.
       </p>
     </div>
 
@@ -223,10 +222,10 @@ def body():
     </div>
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      The honest summary: a pre-paid plan can lock a price, which insurance cannot, and insurance
-      gives your family cash and freedom, which a plan does not. Some people sensibly do both, and
-      hold a smaller policy alongside a plan. We sell one of these and not the other, so treat that
-      summary accordingly and ask the funeral home the same questions you would ask us.
+      In short: a pre-paid plan can lock a price, which insurance cannot. Insurance gives your
+      family cash and freedom, which a plan does not. Some people do both, and hold a smaller
+      policy alongside a plan. We sell one of these and not the other, so keep that in mind, and
+      ask the funeral home the same questions you would ask us.
     </p>
   </div>
 </section>
@@ -257,8 +256,8 @@ def body():
         <h2 class="reveal text-h2">Talk it through with a licensed agent</h2>
         <p class="reveal mt-5 text-slate">
           We will ask your age, your state, and the health questions, then tell you which carriers
-          would write you and what the premium would be. If you already have a pre-paid plan, say
-          so, because it changes what you need rather than ruling this out.
+          would insure you and what the premium would be. If you already have a pre-paid plan, say
+          so. It changes what you need. It does not rule this out.
         </p>
         <div class="reveal mt-8">
           {C.phone_link("fe_funeral_footer", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 26)}
@@ -278,7 +277,7 @@ def body():
 
 {C.spoke_module(
     "More about final expense insurance",
-    "The same product, and the pages this one deliberately defers to.",
+    "Other pages about the same product.",
     [("/final-expense-insurance/for-seniors/", "Final expense after 50",
       "What changes at 70 and at 80, and what does not."),
      ("/final-expense-insurance/burial-insurance/", "Burial insurance",

@@ -29,7 +29,7 @@ SILO = "term-life"
 TITLE = "Term Life Insurance Calculator | How Much Coverage Do You Need?"
 OG_TITLE = "How much term life insurance do you need?"
 DESC = ("Work out how much term life insurance your household needs. Income, debts, and "
-        "dependants, with the method shown. No email required.")
+        "dependents, with the method shown. No email required.")
 
 # The coverage ladder the quote form's <select> offers. The recommendation has
 # to land on it, or assigning the value silently blanks the field.
@@ -92,7 +92,7 @@ def schema():
                 "operatingSystem": "Any modern web browser",
                 "url": C.DOMAIN + PATH,
                 "description": ("Calculates how much term life insurance a household needs from "
-                                "income replacement, debts, dependants, and existing coverage. "
+                                "income replacement, debts, dependents, and existing coverage. "
                                 "Free, with no registration."),
                 "publisher": {"@id": C.DOMAIN + "/#organization"},
                 "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
@@ -132,9 +132,9 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">How Much Term Life Insurance Do You Need?</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        Change the six figures below and the recommendation updates as you type. There is no email
-        wall, nothing to submit, and nothing is sent anywhere: the whole calculation happens in
-        your browser. It uses the income replacement method, which is the one most
+        Change the six figures below and the recommendation updates as you type. You do not give
+        an email, and nothing is sent anywhere. The whole calculation happens in your browser.
+        It uses the income replacement method, which most
         <a class="link" href="/term-life-insurance/">term life insurance</a> underwriters expect
         to see behind a coverage amount.
       </p>
@@ -164,11 +164,11 @@ def body():
               {field("calc-income", "income", "Your annual income before tax",
                      "What the household would stop receiving.", EX_INCOME)}
               {picker("calc-years", "years", "Years of income to replace",
-                      "Until the youngest child is independent, or the partner is at pension age.",
+                      "Until the youngest child is independent, or the partner is at retirement age.",
                       [("5", "5 years"), ("10", "10 years"), ("15", "15 years"),
                        ("20", "20 years"), ("25", "25 years"), ("30", "30 years")], str(EX_YEARS))}
               {field("calc-debt", "debt", "Mortgage and other debt",
-                     "Balance outstanding, not the monthly payment.", EX_DEBT)}
+                     "The balance you owe, not the monthly payment.", EX_DEBT)}
               {picker("calc-children", "children", "Children who would need support",
                       "Count anyone financially dependent on you.",
                       [(str(n), str(n)) for n in range(0, 7)], str(EX_CHILDREN))}
@@ -186,15 +186,15 @@ def body():
         </div>
 
         <div class="lg:col-span-6 lg:col-start-7">
-          <h2 class="reveal text-h2">How the figure is worked out</h2>
+          <h2 class="reveal text-h2">How we calculate your coverage amount</h2>
           <p class="reveal mt-5 text-slate">
-            The method, not a black box. Every line below is one term of the sum, and it updates
+            The method is shown in full. Each line below is one part of the math, and it updates
             with your numbers.
           </p>
 
           <div class="reveal mt-8 table-scroll table-signature">
             <table class="rate-table" style="min-width:26rem">
-              <caption>Coverage need, term by term.</caption>
+              <caption>Coverage need, line by line.</caption>
               <tbody>
                 <tr>
                   <th scope="row">Income to replace</th>
@@ -203,7 +203,7 @@ def body():
                   <td class="tnum" data-calc-out="income">{money(EX_REPLACE)}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Debt cleared</th>
+                  <th scope="row">Debt to pay off</th>
                   <td>Mortgage and other balances, paid off in full</td>
                   <td class="tnum" data-calc-out="debt">{money(EX_DEBT)}</td>
                 </tr>
@@ -233,9 +233,9 @@ def body():
               <span class="stat-value" data-calc-out="rounded">{money(EX_ROUNDED)}</span>
             </p>
             <p class="mt-4 text-slate">
-              Rounded up rather than down. Buying too little is the more common and more expensive
-              mistake, and the premium difference between two neighbouring amounts is usually
-              smaller than people expect.
+              We round up because buying too little is the more common and more expensive mistake.
+              The premium difference between two neighboring amounts is usually smaller than
+              people expect.
             </p>
 
             <button type="button" class="btn btn-cta btn-block btn-wrap mt-6"
@@ -269,8 +269,8 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What this calculator cannot account for</h2>
       <p class="reveal mt-5 text-slate">
-        It is a starting point, and a defensible one. It is not a financial plan, and these are
-        the things it is deliberately blind to.
+        It is a sound starting point, not a financial plan. These are the things it leaves out
+        on purpose.
       </p>
     </div>
 
@@ -279,7 +279,7 @@ def body():
         <h3 class="text-h4">Inflation over the term</h3>
         <p class="mt-3 text-slate">
           The sum is in today's dollars. Over 20 or 30 years the real value of a fixed death
-          benefit falls, which argues for the higher of two amounts you are choosing between.
+          benefit falls. That is a reason to pick the higher of two amounts you are considering.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
@@ -292,7 +292,8 @@ def body():
       <div class="reveal bento-cell bento-2">
         <h3 class="text-h4">Employer coverage that ends</h3>
         <p class="mt-3 text-slate">
-          Group cover usually stops when the job does, and it is rarely portable on good terms.
+          Group coverage usually stops when the job does, and you can rarely take it with you on
+          good terms.
           Counting it as permanent is the most common error in this calculation.
         </p>
       </div>
@@ -307,22 +308,22 @@ def body():
       <div class="reveal bento-cell bento-cell-tint bento-2">
         <h3 class="text-h4">Care for a dependent adult</h3>
         <p class="mt-3 text-slate">
-          A disabled child or a dependent parent needs a lifetime provision, not a fixed number of
-          years, and often permanent coverage rather than term.
+          A disabled child or a dependent parent needs support for life, not for a fixed number of
+          years. That often means permanent coverage rather than term.
         </p>
       </div>
       <div class="reveal bento-cell bento-2">
         <h3 class="text-h4">Business obligations</h3>
         <p class="mt-3 text-slate">
-          Key person cover, buy sell agreements, and personally guaranteed business debt are all
+          Key person coverage, buy sell agreements, and personally guaranteed business debt are all
           separate calculations, and usually separate policies.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      If more than one of these applies to you, the number above is a floor rather than an answer.
-      Say so when an agent calls and it will be worked through properly.
+      If more than one of these applies to you, the number above is a minimum, not a final answer.
+      Tell the agent when they call and they will work through it with you.
     </p>
   </div>
 </section>
@@ -337,11 +338,10 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Turn the number into real premiums</h2>
+        <h2 class="reveal text-h2">Get quotes for your coverage amount</h2>
         <p class="reveal mt-5 text-slate">
-          A coverage amount on its own does not tell you what it costs. Six questions and a
-          licensed agent comes back within {C.SLA} with premiums from named carriers for exactly
-          this amount.
+          A coverage amount does not tell you what it costs. Answer six questions and a licensed
+          agent replies within {C.SLA} with premiums from named carriers for this amount.
         </p>
         <p class="reveal mt-5 text-slate">
           Using the button above fills the coverage amount in for you and skips to what is still

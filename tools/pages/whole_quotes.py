@@ -28,19 +28,19 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Whole Life Insurance Quotes | Free, No Obligation"
 OG_TITLE = "Get whole life insurance quotes and illustrations"
-DESC = ("Get free whole life insurance quotes from multiple appointed carriers, with the "
-        "guaranteed columns shown separately. No obligation, no fee, and no policy until you sign.")
+DESC = ("Free whole life insurance quotes from multiple appointed carriers, with the "
+        "guaranteed numbers shown separately. No fee and no obligation.")
 
 FAQ = [
     ("How long does it take to get a whole life quote?",
      "The form takes about two minutes. A licensed agent calls you back within " + C.SLA +
-     " with named carriers and real premiums. A full illustration, which is the document that "
-     "shows the guaranteed and non guaranteed columns year by year, takes longer because the "
+     " with named carriers and real premiums. A full illustration is the document that shows "
+     "the guaranteed and non guaranteed columns year by year. It takes longer because the "
      "carrier produces it rather than us. Ask for one on the call and we will order it."),
     ("What is the difference between a quote and an illustration?",
      "A quote is a premium for a coverage amount. An illustration is the carrier's own multi page "
-     "document showing what that policy does over its whole life: premium, guaranteed cash value, "
-     "projected cash value, and the death benefit, year by year. The guaranteed columns are the "
+     "document showing what that policy does over its whole life. It shows the premium, "
+     "guaranteed cash value, projected cash value, and the death benefit, year by year. The guaranteed columns are the "
      "only ones the carrier is contractually bound to. Read those first, and treat everything "
      "beside them as a projection."),
     ("Do I have to buy anything?",
@@ -49,9 +49,9 @@ FAQ = [
      "applied and been approved."),
     ("Is whole life the right product for me?",
      "Often it is not, and we would rather say so on the call than sell you one. Whole life costs "
-     "several times what the same death benefit costs as term, and that gap only earns its keep "
-     "if the need is genuinely permanent. If what you actually need is thirty years of cover "
-     "while a mortgage runs down, we will tell you that and quote you term instead."),
+     "several times what the same death benefit costs as term. That gap is only worth paying "
+     "if the need is permanent. If what you need is thirty years of coverage while a mortgage "
+     "is paid down, we will tell you that and quote you term instead."),
     ("Will my details be sold to other agencies?",
      "No. Your details go to the licensed agent who quotes you and to the carriers we quote on "
      "your behalf. We are an agency, not a lead generator, so there is nothing for us to gain by "
@@ -106,11 +106,10 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">Get Whole Life Insurance Quotes</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        Answer five questions and a licensed agent comes back with premiums from our appointed
-        carriers, with the carrier names on them and the guaranteed numbers separated from the
-        projected ones. It is free, it commits you to nothing, and it is the fastest way to find
-        out what <a class="link" href="/whole-life-insurance/">whole life insurance</a> would
-        actually cost you at your age.
+        Answer five questions. A licensed agent comes back with real prices for
+        <a class="link" href="/whole-life-insurance/">whole life insurance</a> at your age, with
+        the carrier named on each one. Guaranteed numbers are kept apart from projected ones. It
+        is free, and you are not committed to anything.
       </p>
     </div>
 
@@ -130,8 +129,8 @@ def body():
         <div class="reveal panel h-full" id="call">
           <h2 class="text-h3 !font-display !font-semibold">Or talk it through first</h2>
           <p class="mt-3 text-slate">
-            Whole life is a decision with more moving parts than a term quote has, and most people
-            we place it for asked their real questions out loud before they filled anything in.
+            Whole life has more moving parts than term. Most people we place it for asked their
+            questions out loud before they filled anything in.
             The same licensed agent answers either way.
           </p>
           <div class="mt-6">
@@ -153,7 +152,7 @@ def body():
 </section>
 
 
-{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("scale", "Independent agency", "We compare carriers for you"), ("file-text", "Carrier named", "Guaranteed column shown"), ("handshake", "Never sold on", "Your details stay with us")])}
+{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("scale", "Independent agency", "We compare carriers for you"), ("file-text", "Carrier named", "Guaranteed column shown"), ("handshake", "Never sold", "Your details stay with us")])}
 
 
 <!-- =====================================================================
@@ -163,19 +162,19 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What you need to hand</h2>
+        <h2 class="reveal text-h2">What you need to get a quote</h2>
         <p class="reveal mt-5 text-slate">
-          Almost nothing, which is the point. You are not applying yet, so we are not asking for
-          anything an application would ask for.
+          Almost nothing. You are not applying yet, so we do not ask for anything an application
+          would.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <ul class="grid gap-4" data-stagger="60">
           {hand_item("Your age", "Your age at application, not your birthday. On a permanent policy it sets the premium you keep paying for the rest of your life, so a year of waiting is not free.")}
           {hand_item("Your state", "Carriers are licensed state by state, and the same policy is not priced identically everywhere.")}
-          {hand_item("Roughly how much coverage", "A round number is fine. Whole life is usually bought at smaller face amounts than term, and if you have no idea, our calculator sizes the permanent part of the need.")}
-          {hand_item("A number we can reach you on", "One licensed agent calls once. It goes nowhere else.")}
-          {hand_item("Whether you want a full illustration", "Tick that on the form and we will order the carrier's own document, with the guaranteed and projected columns side by side.")}
+          {hand_item("Roughly how much coverage", "A round number is fine. Whole life is usually bought in smaller amounts than term. If you have no idea, our calculator sizes the permanent part of the need.")}
+          {hand_item("A number we can reach you at", "One licensed agent calls once. It goes nowhere else.")}
+          {hand_item("Whether you want a full illustration", "Select that on the form and we will order the carrier's own document, with the guaranteed and projected columns side by side.")}
         </ul>
         <p class="reveal mt-6 text-slate">
           We do not ask for your Social Security number, your bank details, or your medical
@@ -189,24 +188,22 @@ def body():
 
 {C.post_submit_section([
     ("You get one call, from one agency",
-     "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote "
+     "A licensed agent from Apex, within " + C.SLA + ". Not a call center, not an automated quote "
      "engine, and not six agencies who bought your details, because we do not sell them.",
      "If you would rather we emailed first, say so on the call and we will."),
     ("Fifteen to thirty minutes on the phone",
-     "Longer than a term call, because there is more to say. What the guarantees actually "
-     "guarantee, what the cash value does in the early years, and what you are giving up by "
-     "putting the money here rather than somewhere else.", None),
+     "Longer than a term call, because there is more to say. We cover what the guarantees "
+     "guarantee and what the cash value does in the early years. We also cover what you give up "
+     "by putting the money here rather than somewhere else.", None),
     ("Named carriers, real premiums, and the guaranteed columns",
      "Carrier names, premiums, and the guaranteed cash value and death benefit, kept visibly "
-     "apart from anything projected. If a number in front of you is a projection, we will say so "
-     "rather than let the typeface imply otherwise.", None),
-    ("You decide, or you do not",
+     "apart from anything projected. If a number in front of you is a projection, we will say "
+     "so.", None),
+    ("You decide whether to apply",
      "There is no policy until you sign an application and a carrier issues it. If the honest "
      "answer is that term suits you better, that is what we will tell you, and you owe nothing "
      "either way.", None),
-], intro="Written out because \"we will be in touch\" is not an answer, and because the gap "
-         "between what a form promises and what actually happens is where most of the distrust "
-         "in this industry comes from.")}
+], intro="Written out step by step, because \"we will be in touch\" is not an answer.")}
 
 
 {C.ask_strip("Ready to start?", "Five questions, and one licensed agent replies.", '<a href="#wl-quotes-form" class="btn btn-cta">Back to the form</a>')}
@@ -218,11 +215,11 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Why two carriers illustrate the same person differently</h2>
+      <h2 class="reveal text-h2">Why whole life quotes differ between carriers</h2>
       <p class="reveal mt-5 text-slate">
         This is the whole reason an independent agency is worth using on a permanent policy. Two
-        illustrations for the same person can look a long way apart, and most of that distance is
-        in assumptions rather than in guarantees.
+        illustrations for the same person can look far apart. Most of that gap is in assumptions
+        rather than in guarantees.
       </p>
     </div>
 
@@ -231,8 +228,8 @@ def body():
         <h3 class="text-h4">The guarantees differ less than the projections</h3>
         <p class="mt-3 text-slate">
           Guaranteed columns are close together across carriers, because they are priced off the
-          same conservative assumptions. The projected columns are where the spread opens up, and
-          the projected columns are the ones nobody is bound to.
+          same conservative assumptions. The spread opens up in the projected columns, and those
+          are the ones nobody is bound to.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
@@ -244,19 +241,19 @@ def body():
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-blue bento-2">
-        <h3 class="text-h4">They want different customers</h3>
+        <h3 class="text-h4">Carriers want different customers</h3>
         <p class="mt-3 text-white/90">
-          Underwriting classes, minimum face amounts, and issue ages vary. The cheapest policy you
-          can actually be approved for beats the cheapest one on paper, and which carrier that is
-          depends on your health rather than on any rate chart.
+          Underwriting classes, minimum coverage amounts, and issue ages vary. The cheapest policy
+          you can be approved for beats the cheapest one on paper. Which carrier that is depends
+          on your health rather than on any rate chart.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      We are appointed with {C.CARRIERS} carriers and we do not have a house favourite. That is
-      the only useful thing an agency can offer here: the comparison, with the names on it, and
-      the guaranteed columns pointed out before the projected ones.
+      We are appointed with {C.CARRIERS} carriers and we do not have a house favorite. That is
+      the useful thing an agency can offer here: the comparison, with the names on it and the
+      guaranteed columns pointed out first.
     </p>
   </div>
 </section>
@@ -273,7 +270,7 @@ def body():
 <section class="section" id="rates">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Rough shape of whole life premiums</h2>
+      <h2 class="reveal text-h2">Whole life premiums by age and coverage</h2>
       <p class="reveal mt-5 text-slate">
         Shown before you fill anything in, not after. The structure below is what a real rate
         chart looks like; the numbers arrive when our carrier rate cards do.
@@ -304,8 +301,8 @@ def body():
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       A fuller chart, with more age bands and coverage amounts, is on the
-      <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates</a> page. If
-      you are not sure how much permanent coverage to ask for, the
+      <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates</a> page.
+      Not sure how much permanent coverage to ask for? The
       <a class="link" href="/whole-life-insurance/calculator/">whole life calculator</a> sizes it
       from your final expenses, your debts, and who you want to leave something to.
     </p>
@@ -326,7 +323,7 @@ def body():
                      "<a class=\"link-static\" href=\"/legal/privacy/\">privacy policy</a>.")}
 
 
-{C.faq_section("Before you start", FAQ, "whole-quotes-faq")}
+{C.faq_section("Whole life quote questions", FAQ, "whole-quotes-faq")}
 
 
 {C.closing_band("whole-band", "Ready when you are",

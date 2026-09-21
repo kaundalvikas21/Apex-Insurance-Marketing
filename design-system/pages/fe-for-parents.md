@@ -26,7 +26,7 @@ thing a reader arriving on this query needs and the one thing on the page that i
 it goes above everything else rather than seventh in an accordion.
 
 **Three rules bento, then two prose sections in a fixed order:** how to actually do it (four steps),
-then how to raise it without a row (four `chrome.qa()` pairs). The conversation section is not
+then how to bring it up without an argument (four `chrome.qa()` pairs). The conversation section is not
 padding. For most readers it is the actual blocker, and it is placed after the mechanics because a
 reader who does not yet know what they are proposing cannot rehearse proposing it.
 

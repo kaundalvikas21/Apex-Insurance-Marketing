@@ -40,7 +40,7 @@ def body():
     usps = C.usp_strip([
         ("user-check", "Licensed agents", "Real people, not a chatbot"),
         ("clock", "Reply within " + C.SLA, "From a real person"),
-        ("shield-check", "Never sold on", "Your details stay with us"),
+        ("shield-check", "Never sold", "Your details stay with us"),
         ("handshake", "Free, no obligation", "You never pay us a fee"),
     ])
 
@@ -171,9 +171,9 @@ def body():
       <div class="lg:col-span-7">
         <p class="text-slate">
           {C.BRAND} is a licensed independent insurance agency, licensed in {C.STATES} states,
-          National Producer Number {C.NPN}. We are appointed with multiple carriers and we are not
-          owned by any of them, which is what lets us take your application somewhere else when the
-          first carrier prices your health history badly.
+          National Producer Number {C.NPN}. We are appointed with multiple carriers and owned by
+          none of them. That lets us take your application somewhere else when the first carrier
+          prices your health history badly.
         </p>
         <a class="link-static mt-4 inline-block text-sm" href="/about/licensing/">See our licensing by state</a>
       </div>
@@ -189,12 +189,12 @@ def body():
     [("mail", None, "You send it",
       "Your message goes to our agency inbox. It is not sold, shared, or passed to a lead broker."),
      ("user-check", None, "A licensed agent reads it",
-      "A person, with a licence number, who can actually place the policy. Not a receptionist "
+      "A person, with a license number, who can actually place the policy. Not a receptionist "
       "taking a message."),
      # [SET HONEST SLA] Replace with the response time the agency can actually
      # hold to, including on a Friday afternoon.
      ("phone", None, "We contact you",
-      "Within " + C.SLA + ", by whichever of phone or email you seem to prefer. If we are going "
+      "Within " + C.SLA + ", by phone or email, whichever you seem to prefer. If we are going "
       "to be slower than that, we will tell you rather than let it drift.")],
     cls="section-tight band")}
 
@@ -205,7 +205,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Before you get in touch</h2>
+        <h2 class="reveal text-h2">Questions before you contact us</h2>
         <p class="reveal mt-5 text-slate">The three things people ask us first.</p>
         <p class="reveal mt-6 text-sm text-muted">Anything else is quicker to ask out loud.</p>
         <div class="reveal mt-4">{C.phone_link("contact_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
@@ -215,8 +215,8 @@ def body():
           <summary>Is this free?<span class="acc-icon">{icon("plus", 22)}</span></summary>
           <div class="acc-body"><p class="text-slate">
             Yes. Quotes, comparisons, and the conversation cost you nothing. If you buy a policy,
-            the carrier pays us a commission out of the premium you would have paid anyway, because
-            life insurance rates are filed with state regulators and are the same wherever you buy.
+            the carrier pays us a commission out of the premium you would have paid anyway. Life
+            insurance rates are filed with state regulators and are the same wherever you buy.
             You never pay Apex a fee.
           </p></div>
         </details>
@@ -233,8 +233,8 @@ def body():
           <div class="acc-body"><p class="text-slate">
             A licensed agent from {C.BRAND}, and nobody else. We do not sell, rent, or share your
             details with other agencies, lead buyers, or marketing partners. You will not start
-            getting calls from numbers you do not recognise, which is what happens on comparison
-            sites that sell the same enquiry to several agencies at once.
+            getting calls from numbers you do not recognize. That is what happens on comparison
+            sites that sell the same inquiry to several agencies at once.
           </p></div>
         </details>
       </div>

@@ -28,7 +28,7 @@ AGENT = {
         ("[STATE]", "[LICENCE NUMBER]", "Non-resident", "Life"),
         ("[STATE]", "[LICENCE NUMBER]", "Non-resident", "Life"),
     ],
-    "lines":   ["Life", "Accident and health, where the state licence includes it"],
+    "lines":   ["Life", "Accident and health, where the state license includes it"],
     "focus":   "Term life, whole life, and final expense for consumer buyers",
 }
 
@@ -38,8 +38,8 @@ ACTIVE = "/about/agents/"
 SILO = "site"
 TITLE = "%s, %s | Apex Insurance Marketing" % (AGENT["name"], AGENT["title"])
 OG_TITLE = "%s, %s" % (AGENT["name"], AGENT["title"])
-DESC = ("Licence numbers, states, years licensed, carrier appointments, and how to reach "
-        "%s, a licensed life insurance agent at %s." % (AGENT["name"], C.BRAND))
+DESC = ("License numbers, states, years licensed, carrier appointments, and how to reach "
+        "%s, a licensed agent at %s." % (AGENT["name"], C.BRAND))
 
 
 def schema():
@@ -96,13 +96,13 @@ def body():
         <p class="reveal mt-4 text-lead text-slate">{a['title']}</p>
         <p class="reveal mt-6 text-slate">
           {a['focus']}. Licensed for <span class="tnum">{a['years']}</span> years, with the
-          licence numbers below published so you can verify them with the state rather than
+          license numbers below published so you can verify them with the state rather than
           with us.
         </p>
 
         <div class="reveal mt-8">
           {C.flag("Replace this whole profile with the real agent's details: name, photograph, "
-                  "years licensed, National Producer Number, every state licence number, and the "
+                  "years licensed, National Producer Number, every state license number, and the "
                   "carriers they are personally appointed with. Copy this module per agent. A "
                   "profile that cannot be verified against a state lookup is worse than no "
                   "profile at all.", "PLACEHOLDER AGENT PROFILE")}
@@ -130,7 +130,7 @@ def body():
           </dl>
           <div class="mt-6 grid gap-3">
             {C.phone_link("agent_profile", "btn btn-call btn-block", "Call " + C.PHONE_DISPLAY)}
-            <a href="/get-a-quote/" class="btn btn-ghost btn-block">Request a quote</a>
+            <a href="/get-a-quote/" class="btn btn-ghost btn-block">Get a free quote</a>
           </div>
           <p class="mt-4 text-micro text-muted">{C.HOURS}</p>
         </div>
@@ -147,9 +147,9 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">State licences</h2>
+      <h2 class="reveal text-h2">State licenses</h2>
       <p class="reveal mt-5 text-slate">
-        Each number below is a producer licence issued by that state. Search it in the state's
+        Each number below is a producer license issued by that state. Search it in the state's
         own producer lookup. If the status there does not match what is published here, tell us
         before you buy anything.
       </p>
@@ -157,13 +157,13 @@ def body():
 
     <div class="reveal mt-8 table-scroll table-signature">
       <table class="rate-table" style="min-width:36rem">
-        <caption>State licences held by {a['name']}, with the lines each authorises.</caption>
+        <caption>State licenses held by {a['name']}, with the lines each authorizes.</caption>
         <thead>
           <tr>
             <th scope="col">State</th>
-            <th scope="col">Licence number</th>
+            <th scope="col">License number</th>
             <th scope="col">Type</th>
-            <th scope="col">Lines authorised</th>
+            <th scope="col">Lines authorized</th>
           </tr>
         </thead>
         <tbody>
@@ -173,8 +173,8 @@ def body():
     </div>
     <p class="reveal mt-4 text-micro text-muted max-w-3xl">
       <span class="pill mr-2">Reviewed: {C.REVIEW_DATE}</span>
-      Licence numbers are verifiable through each state's department of insurance producer
-      lookup. Agency level licences are listed separately on our
+      License numbers are verifiable through each state's department of insurance producer
+      lookup. Agency level licenses are listed separately on our
       <a class="link-static" href="/about/licensing/">licensing page</a>.
     </p>
   </div>
@@ -187,7 +187,7 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">Appointments and lines</h2>
         <p class="reveal mt-5 text-slate">
-          An appointment is a carrier authorising an agent to sell its products. It is what makes
+          An appointment is a carrier authorizing an agent to sell its products. It is what makes
           a comparison possible, and it is also the limit of one: nobody can quote a carrier they
           are not appointed with.
         </p>
@@ -196,7 +196,7 @@ def body():
 
       <div class="lg:col-span-6 lg:col-start-7 bento" data-stagger="40">
         <div class="reveal bento-cell bento-3">
-          <p class="eyebrow">Lines authorised</p>
+          <p class="eyebrow">Lines authorized</p>
           <ul class="mt-4 grid gap-3">
             {"".join('<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
                      % (icon("circle-check", 20, "shrink-0 mt-0.5 text-green"), t) for t in a['lines'])}

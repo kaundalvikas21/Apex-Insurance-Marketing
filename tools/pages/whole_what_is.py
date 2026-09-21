@@ -23,8 +23,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "What Is Whole Life Insurance? Definition & How It Works | Apex"
 OG_TITLE = "What is whole life insurance?"
-DESC = ("Whole life insurance is permanent cover with a premium that never rises, a death benefit "
-        "that never expires, and a guaranteed cash value. How it works, and who it suits.")
+DESC = ("Whole life insurance is permanent coverage: a premium that never rises, a death benefit "
+        "that never expires and a guaranteed cash value. See how it works.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("What is whole life insurance", None)]
@@ -53,12 +53,12 @@ FAQ = [
      "It is life insurance that does not expire, at a price that does not change, with a savings "
      "component built into the contract. You pay a fixed premium for as long as you live or until "
      "the policy is paid up. The carrier guarantees to pay a death benefit whenever you die, and "
-     "guarantees a schedule of cash values you can borrow against or take by cancelling. It costs "
+     "guarantees a schedule of cash values you can borrow against or take by canceling. It costs "
      "several times what term insurance costs for the same death benefit, and those three "
      "guarantees are what the difference buys."),
     ("How does whole life insurance work?",
      "Your premium is set at issue using your age, health, and the face amount, and it is designed "
-     "to be level for life, which means you overpay relative to the risk in the early years and "
+     "to be level for life. That means you overpay relative to the risk in the early years and "
      "underpay in the later ones. The overpayment is held in the policy as cash value and grows at "
      "a guaranteed rate. When you die, the carrier pays the face amount. On most standard "
      "policies the cash value is not paid in addition to it: it is the mechanism that funds it."),
@@ -72,13 +72,13 @@ FAQ = [
     ("What is the difference between whole life and term life insurance?",
      "Term covers a fixed number of years and builds nothing. Whole life covers your entire life "
      "and builds a guaranteed cash value. For the same death benefit at the same age, whole life "
-     "costs many times more, which is why most households insure a mortgage and an income with "
+     "costs many times more. That is why most households insure a mortgage and an income with "
      "term and use whole life, if at all, for something permanent and smaller."),
     ("Can you cash out a whole life policy?",
      "Yes, in two ways, and both have consequences. You can borrow against the cash value, which "
      "keeps the policy alive but reduces the death benefit by any loan and interest outstanding. "
-     "Or you can surrender the policy, which ends the coverage and pays you the surrender value, "
-     "with any gain above the premiums you paid taxed as ordinary income. Surrendering in the "
+     "Or you can surrender the policy, which ends the coverage and pays you the surrender value. "
+     "Any gain above the premiums you paid is taxed as ordinary income. Surrendering in the "
      "first several years frequently returns less than you paid in."),
 ]
 
@@ -98,7 +98,7 @@ def body():
     'Whole life insurance is permanent coverage: a premium fixed for life, a death '
     'benefit that never expires, and a guaranteed cash value.',
     answer=(
-        'Those three guarantees are the entire product, and they are why <a class="link" '
+        'Those three guarantees are the entire product. They are why <a class="link" '
         'href="/whole-life-insurance/">whole life insurance</a> costs several times what '
         'the same death benefit costs as term. Whether that is worth paying depends on '
         'whether you have a need that never ends.'),
@@ -113,15 +113,15 @@ def body():
 {C.prose(
     "How whole life insurance works",
     C.step(1, "The premium is calculated once and never recalculated",
-           "At issue, from your age, health, sex, and the face amount. It is deliberately higher "
-           "than the cost of insuring you at that age, because it has to stay level through the "
-           "decades when insuring you gets genuinely expensive.")
+           "At issue, from your age, health, sex, and the face amount. It starts higher than the "
+           "cost of insuring you at that age. It has to stay level through the decades when "
+           "insuring you gets expensive.")
     + '<div class="mt-8">' + C.step(2, "The overpayment becomes cash value",
            "The excess in the early years is held inside the policy and credited with guaranteed "
-           "interest on a schedule printed in your contract. Early on, most of your premium is "
-           "paying acquisition costs and the cost of insurance, which is why the first few years "
+           "interest on a schedule printed in your contract. Early on, most of your premium "
+           "pays setup and sales costs and the cost of insurance, which is why the first few years "
            "build very little.")
-    + '</div><div class="mt-8">' + C.step(3, "The cash value quietly funds the later years",
+    + '</div><div class="mt-8">' + C.step(3, "The cash value funds the later years",
            "As you age, the real cost of insuring you passes the premium you are paying. The "
            "accumulated cash value covers the difference. This is the mechanism, and it is why on "
            "a standard policy the cash value is not paid on top of the death benefit.")
@@ -131,7 +131,7 @@ def body():
            "Some designs are paid up after a set number of years or at a set age. Others are "
            "designed to be paid for life. That choice changes the premium substantially.")
     + '</div>',
-    intro="Four mechanics, and the third one is the part almost nobody is told.")}
+    intro="Four steps. The third is the part almost nobody is told.")}
 
 
 <!-- =====================================================================
@@ -140,10 +140,10 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The definition, in the contract's own words</h2>
+      <h2 class="reveal text-h2">Whole life insurance terms, defined</h2>
       <p class="reveal mt-5 text-slate">
-        A whole life illustration is a dense document, and almost all of the density is these eight
-        terms. If you can read this table you can read the illustration.
+        A whole life illustration is a dense document, and most of it comes down to these eight
+        terms. If you can read this table, you can read the illustration.
       </p>
     </div>
 
@@ -176,10 +176,10 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Where your premium actually goes</h2>
+      <h2 class="reveal text-h2">Where your whole life premium goes</h2>
       <p class="reveal mt-5 text-slate">
-        Three destinations, in a proportion that changes every year of the policy's life. Knowing
-        the split is what makes the early years make sense.
+        Your premium goes to three places, and the split changes every year. Knowing the split
+        explains why the early years build so little.
       </p>
     </div>
 
@@ -197,8 +197,7 @@ def body():
         <h3 class="mt-2 text-h4">Expenses and commission</h3>
         <p class="mt-3 text-slate">
           Underwriting, issue, administration, and the agent's compensation, concentrated in the
-          first year or two. This is the honest reason a policy surrendered in year three returns
-          so little.
+          first year or two. This is why a policy surrendered in year three returns so little.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
@@ -206,14 +205,14 @@ def body():
         <h3 class="mt-2 text-h4">Cash value</h3>
         <p class="mt-3 text-slate">
           The remainder, credited at the guaranteed rate. Modest at first and compounding
-          afterwards, which is why whole life rewards decades and punishes second thoughts.
+          afterward, which is why whole life rewards decades and costs you if you cancel early.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      The mechanics of that third cell, including borrowing, surrender, and the tax treatment, have
-      a page of their own: <a class="link" href="/whole-life-insurance/cash-value/">how whole life
+      Borrowing, surrender, and the tax treatment have a page of their own:
+      <a class="link" href="/whole-life-insurance/cash-value/">how whole life
       cash value works</a>.
     </p>
   </div>
@@ -221,11 +220,11 @@ def body():
 
 
 {C.inline_cta(
-    "See what a policy would actually look like",
-    "A licensed agent can price this for your age and send a full illustration with the guaranteed "
-    "and non guaranteed columns side by side, and the carrier named. Ask for the illustration and "
+    "See a whole life illustration for your age",
+    "A licensed agent can price this for your age and send a full illustration. It shows the "
+    "guaranteed and non guaranteed columns side by side, with the carrier named. Ask for it and "
     "we will send it whether or not you apply.",
-    "whole_what_is_mid", "/whole-life-insurance/quotes/", "Get whole life quotes")}
+    "whole_what_is_mid", "/whole-life-insurance/quotes/", "Get my whole life quote")}
 
 
 <!-- =====================================================================
@@ -239,12 +238,12 @@ def body():
       <div class="reveal card">
         <h2 class="text-h3 !font-display !font-semibold">When whole life is the right product</h2>
         <ul class="mt-5 grid gap-4 text-slate">
-          <li>A dependant who will need support for their whole life, not for twenty years.</li>
+          <li>A dependent who will need support for their whole life, not for twenty years.</li>
           <li>A funeral and final bills you want covered whenever they arrive.</li>
           <li>An estate likely to owe tax or need liquidity at settlement.</li>
           <li>A business buy sell agreement or a key person the business cannot replace cheaply.</li>
-          <li>A deliberate choice to hold a portion of your savings somewhere guaranteed and
-              uncorrelated, made with your eyes open about the cost.</li>
+          <li>A deliberate choice to hold part of your savings somewhere guaranteed and not tied
+              to the markets, knowing what it costs.</li>
         </ul>
         <p class="mt-5 text-slate">
           Every one of those needs is permanent. That is the only test that matters here.
@@ -252,10 +251,10 @@ def body():
       </div>
 
       <div class="reveal card">
-        <h2 class="text-h3 !font-display !font-semibold">When it is the wrong one</h2>
+        <h2 class="text-h3 !font-display !font-semibold">When whole life is the wrong product</h2>
         <ul class="mt-5 grid gap-4 text-slate">
           <li>You have a mortgage and young children and are not yet adequately insured. Buy the
-              coverage first, with term, and consider permanent afterwards.</li>
+              coverage first, with term, and consider permanent afterward.</li>
           <li>The premium would displace an employer retirement match, or high interest debt
               repayment. Both beat this comfortably.</li>
           <li>You are being sold it as an investment. It is insurance with a guaranteed savings
@@ -275,8 +274,8 @@ def body():
 
 
 {C.spoke_module(
-    "Keep reading in this section",
-    "Everything below is whole life. Each page assumes you have read this one.",
+    "More about whole life insurance",
+    "Each page below assumes you have read this one.",
     [("/whole-life-insurance/rates/", "Whole life rates",
       "Premium by age and coverage amount, from current rate cards."),
      ("/whole-life-insurance/calculator/", "Whole life calculator",

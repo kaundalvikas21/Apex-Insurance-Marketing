@@ -30,12 +30,12 @@ FAQ = [
      "Match the term to the obligation, not to a round number. If the mortgage has 22 years left, "
      "a 25 or 30 year term covers it; a 20 year term leaves two years exposed. If the goal is "
      "getting the youngest child to graduation, count the years to that date. A term that ends "
-     "before the need does is the most expensive kind of mistake, because replacing it later "
-     "means buying at an older age and in whatever health you are in by then."),
+     "before the need does is the most expensive kind of mistake. Replacing it later means "
+     "buying at an older age, in whatever health you are in by then."),
     ("What happens when the term ends?",
      "Coverage stops. Most policies allow you to keep it going year by year at an annually "
-     "increasing rate, which becomes very expensive very quickly and is meant as a short bridge "
-     "rather than a plan. The better option, if it is available on your policy, is conversion: "
+     "increasing rate. That becomes very expensive very quickly, and it is meant as a short "
+     "bridge rather than a plan. The better option, if it is available on your policy, is conversion: "
      "converting some or all of the term into a permanent policy with no new medical exam."),
     ("Can I convert a term policy to permanent coverage later?",
      "Most term policies from the carriers we work with include a conversion privilege, usually "
@@ -45,15 +45,15 @@ FAQ = [
      "apply, not after."),
     ("Do I need a medical exam for term life insurance?",
      "Increasingly, no. Many carriers now use accelerated underwriting for healthy applicants "
-     "under a certain age and coverage amount, drawing on prescription history, motor vehicle "
+     "under a certain age and coverage amount. It draws on prescription history, motor vehicle "
      "records, and medical databases instead of a paramedical exam. If you are in good health and "
      "you are willing to take the exam, fully underwritten policies still tend to offer the lowest "
      "premium."),
     ("Does tobacco use really change the price that much?",
      "Yes. Tobacco rate classes are commonly two to three times the non tobacco premium for the "
      "same coverage. Carriers define tobacco use differently, and a few treat occasional cigar use "
-     "or nicotine replacement therapy more favourably than others, so it is worth telling us "
-     "exactly what you use rather than answering a plain yes."),
+     "or nicotine replacement therapy more favorably than others. Tell us exactly what you use "
+     "rather than answering a plain yes."),
     ("What if I have a health condition?",
      "Apply anyway, and apply through an agency rather than to one carrier. Carriers underwrite the "
      "same condition very differently. A well managed condition that one carrier rates up two "
@@ -67,7 +67,7 @@ FAQ = [
     ("Is term life insurance worth it if I never claim?",
      "That is what buying insurance means, and it is the outcome you should want. You are not "
      "buying an investment. You are transferring a specific financial risk for a specific period "
-     "at a known price, so that if the improbable thing happens, the people who depend on you are "
+     "at a known price. If the improbable thing happens, the people who depend on you are "
      "not also dealing with money. If you also want a policy that builds value, that is "
      "<a class=\"link\" href=\"/whole-life-insurance/\">whole life insurance</a>, and it costs "
      "considerably more."),
@@ -76,12 +76,12 @@ FAQ = [
 SPOKES = [
     ("/term-life-insurance/quotes/", "Term life insurance quotes", "What we need from you and how quickly a quote comes back."),
     ("/term-life-insurance/rates/", "Term life insurance rates", "Full rate tables by age, term length, and coverage."),
-    ("/term-life-insurance/calculator/", "Coverage calculator", "Work out how much cover your household actually needs."),
+    ("/term-life-insurance/calculator/", "Coverage calculator", "Work out how much coverage your household needs."),
     ("/term-life-insurance/what-is-term-life-insurance/", "What term life insurance is", "The plain definition, with the fine print left in."),
     ("/term-life-insurance/for-seniors/", "Term life for seniors", "What is still available after 60, and what it costs."),
     ("/term-life-insurance/level-term/", "Level term life insurance", "Why a level premium matters and when it stops being level."),
     ("/term-life-insurance/10-year-term/", "10 year term life insurance", "Short obligations, and the trap of the renewal rate."),
-    ("/term-life-insurance/20-year-term/", "20 year term life insurance", "The most common choice, and who it actually fits."),
+    ("/term-life-insurance/20-year-term/", "20 year term life insurance", "The most common choice, and who it fits."),
     ("/term-life-insurance/30-year-term/", "30 year term life insurance", "Long mortgages and young children."),
     ("/term-life-insurance/no-medical-exam/", "No medical exam term life", "Accelerated and simplified issue, and what they cost."),
     ("/term-life-insurance/return-of-premium/", "Return of premium term life", "How it works, and why we rarely recommend it."),
@@ -93,11 +93,11 @@ COVERAGE_COLS = [("$250,000", "250000"), ("$500,000", "500000"), ("$1,000,000", 
 
 TERM_LENGTHS = [
     ("10", "10 years", "A short, specific obligation: the last stretch of a mortgage, a business loan, or the years until a pension starts.",
-     "Cheapest per year of cover, and the renewal rate at the end is brutal. Only choose this if the need genuinely ends."),
+     "Cheapest per year of coverage, and the renewal rate at the end is steep. Only choose this if the need really ends."),
     ("15", "15 years", "A mid length gap. Common for people who started a family later or refinanced part way through a mortgage.",
      "Often only slightly more than a 10 year term, and it buys five more years of certainty."),
-    ("20", "20 years", "The most common choice. It covers a child from primary school to leaving home, or most of a standard mortgage.",
-     "The default for a reason, but check it against your actual dates rather than choosing it because it is the default."),
+    ("20", "20 years", "The most common choice. It covers a child from elementary school to leaving home, or most of a standard mortgage.",
+     "A sound default, but check it against your own dates before you choose it."),
     ("30", "30 years", "A new 30 year mortgage, or very young children, or a much younger partner who would rely on the income.",
      "Costs meaningfully more than 20 years, and for a 30 year old it is often still less than people assume."),
 ]
@@ -229,7 +229,7 @@ def quote_form(form_id, form_name, id_prefix):
           {F.progress(2)}
 
           {F.step(1, "About you", about, first=True)}
-          {F.step(2, "Your cover", cover)}
+          {F.step(2, "Your coverage", cover)}
         </form>
 
         <div id="{p}-success" class="success">
@@ -284,18 +284,18 @@ def body():
     # navy so the second ask reads as a break, not as another content block.
     no_exam_band = C.banner(
         "term-band",
-        "Would rather skip the exam?",
+        "Want to skip the medical exam?",
         "Several of our carriers can issue term coverage with no paramedical exam for healthy "
         "applicants, often with a decision in days rather than weeks. It usually costs a little "
         "more, and the coverage limits are lower. Sometimes that trade is worth it.",
         '<a class="btn btn-cta btn-block" href="#quote" data-cta-location="term_band">'
-        'Get my term quotes</a>'
+        'Get my term life quote</a>'
         '<a class="btn btn-ghost btn-block mt-3" href="/term-life-insurance/no-medical-exam/#who-qualifies">'
         'No medical exam term life</a>',
         eyebrow="No medical exam")
     spokes = C.spoke_module(
         "Explore term life insurance",
-        "Eleven pages covering the parts of term life that need more than a paragraph.",
+        "Eleven pages that go deeper on each part of term life.",
         SPOKES)
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
     byline = C.byline()
@@ -305,7 +305,7 @@ def body():
     hero = C.page_hero(
         [("Home", "/"), ("Term Life Insurance", None)],
         "Term life insurance, made simple.",
-        "The most cover for your money, for exactly as long as your family needs it.",
+        "The most coverage for your money, for exactly as long as your family needs it.",
         extra=C.hero_cta("#quote", "Get my term life quote"),
         banner="term-hero")
     usps = C.usp_strip([
@@ -318,16 +318,16 @@ def body():
     how_to_apply = C.steps_section(
         "How to apply",
         "Three steps, and you can stop after any of them.",
-        [("list-checks", "About ninety seconds", "Send the six answers",
+        [("list-checks", "About ninety seconds", "Answer six questions",
           "The form on this page, or a phone call if you would rather talk it through. No Social "
           "Security number at this stage."),
-         ("search", "Named carriers", "Review named quotes",
+         ("search", "Named carriers", "Compare the quotes",
           "You get carrier names, premiums, term lengths, and the conversion terms, so you can "
           "compare them against anything else you have been shown."),
          ("circle-check", "We stay with it", "Apply and go through underwriting",
           "We complete the application with you and stay with it until the policy is issued or the "
           "carrier says no. Either way you hear it from us.")],
-        cta=("Ready when you are.", "Free, no obligation, and you can stop after any step.",
+        cta=("Ready when you are.", "Free, with no obligation.",
              '<a href="#quote" class="btn btn-cta">Get my term life quote</a>'))
 
     return f"""
@@ -352,7 +352,7 @@ def body():
             <ol class="mt-3 grid gap-2 text-sm text-slate">
               <li>1. A licensed agent reads it. No automated quote engine, no lead broker.</li>
               <li>2. We run your details past our appointed carriers.</li>
-              <li>3. We come back within {C.SLA} with named carriers and real premiums.</li>
+              <li>3. We reply within {C.SLA} with named carriers and real premiums.</li>
               <li>4. If nothing fits, we tell you that too.</li>
             </ol>
           </div>
@@ -381,12 +381,12 @@ def body():
         <h2 class="reveal text-h2">What term life insurance covers</h2>
         <p class="reveal mt-5 text-lead text-slate">
           Term life pays a lump sum to the people you name if you die during a fixed number of
-          years. It builds no cash value and it ends when the term does, which is exactly why it
-          costs so much less than permanent coverage.
+          years. It builds no cash value and it ends when the term does. That is why it costs so
+          much less than permanent coverage.
         </p>
         <p class="reveal mt-5 text-slate">
-          For most households the fixed number of years is not arbitrary. It is the years left on
-          the mortgage, or the years until the youngest child is independent, whichever runs longer.
+          For most households that number is the years left on the mortgage, or the years until
+          the youngest child is independent, whichever runs longer.
         </p>
       </div>
       <div class="lg:col-span-5">
@@ -421,7 +421,7 @@ def body():
       <div class="reveal bento-cell bento-2">
         <div class="flex items-center gap-3">
           {icon("circle-x", 24, "shrink-0 text-navy")}
-          <h3 class="text-h3 !font-display !font-semibold">When to look at something else</h3>
+          <h3 class="text-h3 !font-display !font-semibold">When term life is not the right fit</h3>
         </div>
         <ul class="mt-6 grid gap-4">
           <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You want coverage that cannot expire, for estate or legacy reasons.</span></li>
@@ -465,7 +465,7 @@ def body():
   </div>
 </section>
 
-{C.ask_strip("Seen enough to get a quote?", "Six questions, about ninety seconds.", '<a href="#quote" class="btn btn-cta">Get my term life quote</a>')}
+{C.ask_strip("Ready to get a term life quote?", "Six questions, about ninety seconds.", '<a href="#quote" class="btn btn-cta">Get my term life quote</a>')}
 
 <!-- =====================================================================
      4. WHAT IT COSTS.
@@ -537,7 +537,7 @@ def body():
             <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
             <p class="text-sm font-semibold text-muted">Week 3 to 6</p>
             <h3 class="mt-1 text-h4">Offer, and your decision</h3>
-            <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in money. You can accept, ask us to shop it elsewhere, or walk away.</p>
+            <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in dollars. You can accept, ask us to shop it elsewhere, or walk away.</p>
           </li>
         </ol>
 
@@ -600,12 +600,12 @@ def body():
       <div class="lg:col-span-5 reveal">
         <h2 class="text-h2">Get your quotes</h2>
         <p class="mt-5 text-slate">
-          Six answers, about ninety seconds, and a licensed agent comes back with named carriers
-          and real premiums. Nothing is sold on and nobody else calls you.
+          Six questions, about ninety seconds. A licensed agent replies with named carriers and
+          real premiums. Your details are never sold, and nobody else calls you.
         </p>
         <p class="mt-6 text-sm text-muted">
-          Would rather talk it through first? The number is in the header of every page, and you
-          will reach a licensed agent rather than a queue.
+          Want to talk it through first? The number is in the header of every page, and you
+          will reach a licensed agent.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">

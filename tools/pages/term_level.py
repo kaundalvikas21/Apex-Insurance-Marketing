@@ -19,7 +19,7 @@ SILO = "term-life"
 TITLE = "Level Term Life Insurance: Fixed Premiums Explained | Apex"
 OG_TITLE = "Level term life insurance, explained"
 DESC = ("Level term means the premium and the death benefit are fixed for the whole term. What "
-        "stays level, what happens the day it stops, and how to read your own policy.")
+        "stays level, what happens when it ends, and how to read your policy.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("Level term", None)]
@@ -53,15 +53,15 @@ FAQ = [
      "otherwise, this is what you are looking at."),
     ("Does a level term premium ever increase?",
      "Not during the level period. It can increase the day after it ends, and that increase is "
-     "usually dramatic, because the renewal premium is recalculated from your age at that point "
-     "with no health underwriting in your favour. The two things that can interrupt a level "
+     "usually dramatic. The renewal premium is recalculated from your age at that point, "
+     "with no health underwriting in your favor. The two things that can interrupt a level "
      "premium earlier are a policy loan on a rider and a change you request yourself, such as "
      "adding coverage."),
     ("What is the difference between level term and decreasing term?",
      "The death benefit. Level term pays the same amount in year one and year twenty. Decreasing "
      "term starts at a face amount and steps down over the term, usually tracking a mortgage "
-     "balance. Decreasing term is cheaper for the same starting amount and is a poor fit for "
-     "anything except a single amortising debt, which is why it is now uncommon outside "
+     "balance. Decreasing term is cheaper for the same starting amount. It is a poor fit for "
+     "anything except a single amortizing debt, which is why it is now uncommon outside "
      "mortgage protection products."),
     ("What happens at the end of a level term period?",
      "The level guarantee ends, not necessarily the policy. Most contracts become annually "
@@ -96,7 +96,7 @@ def body():
         'Twenty years in, you pay what you paid in year one and the policy pays what it '
         'promised in year one. Nearly every <a class="link" '
         'href="/term-life-insurance/">term life insurance</a> policy sold today is level '
-        'term, so the word is less a product choice than a description of what you are '
+        'term, so the word describes what you are '
         'already being quoted. What matters is what happens the day the level period '
         'ends.'),
     extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
@@ -110,9 +110,9 @@ def body():
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">The level period, and everything after it</h2>
+      <h2 class="reveal text-h2">What changes when the level term ends</h2>
       <p class="reveal mt-5 text-slate">
-        Most of what people misunderstand about term insurance lives in the gap between these two
+        Most misunderstandings about term insurance come from the difference between these two
         columns. The left column is what you bought. The right column is what you own the moment
         it ends, unless you have done something about it.
       </p>
@@ -138,7 +138,7 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       The right hand column is not a penalty and it is not a trick. Renewal without health
-      questions is a valuable right for someone whose health has collapsed, and it is priced as
+      questions is a valuable right for someone whose health has collapsed. It is priced as
       though everyone using it is exactly that person. If your health is fine, it is the most
       expensive coverage you will ever be offered.
     </p>
@@ -153,10 +153,9 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What the guarantee covers, precisely</h2>
+      <h2 class="reveal text-h2">What a level term guarantee covers</h2>
       <p class="reveal mt-5 text-slate">
-        Three things are locked and one thing is not. Knowing which is which is most of what this
-        page is for.
+        Three things are locked and one thing is not.
       </p>
     </div>
 
@@ -187,8 +186,8 @@ def body():
         <h3 class="mt-2 text-h4">What the coverage costs after the term ends</h3>
         <p class="mt-3 text-slate">
           This is the one number the guarantee says nothing about, and it is the number that
-          surprises people. The renewal premium is set from your attained age and rises every year
-          from there. It is a bridge for a few months while you sort something out, and treating it
+          surprises people. The renewal premium is set from your age at renewal and rises every year
+          from there. It is a bridge for a few months while you arrange something else. Treating it
           as a plan is how a household ends up paying many times over for coverage it could have
           converted years earlier.
         </p>
@@ -208,7 +207,7 @@ def body():
     "We quote guaranteed level term by default and tell you the conversion deadline before you "
     "buy, not fifteen years later. Six questions, and a licensed agent comes back with named "
     "carriers.",
-    "term_level_mid", "/term-life-insurance/quotes/", "Get term life quotes")}
+    "term_level_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
 
 <!-- =====================================================================
@@ -225,7 +224,7 @@ def body():
            "The face amount steps down over the term, usually to follow a mortgage balance. "
            "Cheaper for the same starting figure, and rigid: if you refinance, move, or overpay, "
            "the policy does not follow. It is mostly sold attached to a loan, and a level policy "
-           "for the same monthly outlay is nearly always the more useful object.", "mt-8")
+           "for the same monthly cost is nearly always more useful.", "mt-8")
     + C.qa("Annually renewable term",
            "One year of coverage that renews each year at a higher price with no new health "
            "questions. This is what a level policy turns into when its level period ends. Bought "
@@ -237,7 +236,7 @@ def body():
            "quote it beside a plain level policy so you can see the difference rather than being "
            "told about it.", "mt-8"),
     intro="Three products share the word term and behave nothing alike. A fourth is level term "
-          "with a rider bolted on.")}
+          "with a rider added.")}
 
 
 <!-- =====================================================================
@@ -263,7 +262,7 @@ def body():
         </p>
       </div>
       <div class="reveal">
-        <h3 class="text-h4 text-white">The conversion expiry</h3>
+        <h3 class="text-h4 text-white">The conversion deadline</h3>
         <p class="mt-3 text-white/85">
           Often earlier than the end of the term, and often expressed as an age rather than a year.
           This is the deadline that costs people the most.
@@ -286,7 +285,7 @@ def body():
     </div>
 
     <p class="reveal mt-10 max-w-3xl text-white/85">
-      Bring those four to a phone call and a licensed agent can tell you in a few minutes whether
+      Bring those four to a phone call. A licensed agent can tell you in a few minutes whether
       to convert, replace, or leave it alone. We do not charge for that and we will say leave it
       alone when that is the answer.
     </p>
@@ -306,7 +305,7 @@ def body():
      ("/term-life-insurance/30-year-term/", "30 year term",
       "When the extra decade of guarantee is worth its price."),
      ("/term-life-insurance/rates/", "Term rates by age",
-      "What a level premium actually costs, by age and amount."),
+      "What a level premium costs, by age and amount."),
      ("/term-life-insurance/what-is-term-life-insurance/", "What term life insurance is",
       "The plain definition, if you are starting from scratch."),
      ("/term-life-insurance/no-medical-exam/", "No medical exam term",

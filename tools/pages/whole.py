@@ -20,7 +20,7 @@ SILO = "whole-life"
 TITLE = "Whole Life Insurance: Guarantees, Cash Value, and Cost | Apex"
 OG_TITLE = "Whole life insurance, explained without the sales pitch"
 DESC = ("Whole life insurance guarantees a death benefit, a level premium, and a cash value. "
-        "See how it works, what it costs against term, and who it genuinely does not suit.")
+        "See how it works, what it costs next to term, and who it does not suit.")
 
 FAQ = [
     ("What makes whole life insurance permanent?",
@@ -31,12 +31,12 @@ FAQ = [
     ("How much more does whole life cost than term?",
      "For the same death benefit at the same age, whole life commonly costs several times what a "
      "20 year term policy costs. The gap is largest when you are young, because term is cheapest "
-     "then. This is not a hidden markup: you are buying coverage for 50 years instead of 20, plus "
+     "then. This is not a hidden markup. You are buying coverage for 50 years instead of 20, plus "
      "a guaranteed cash value, so the money has to come from somewhere."),
     ("Are dividends guaranteed?",
      "No. Dividends are not guaranteed. A participating policy from a mutual carrier may pay a "
-     "dividend when the company's actual mortality, expense, and investment results are better "
-     "than the conservative assumptions priced into the policy. Some carriers have paid one every "
+     "dividend. That happens when the carrier's actual mortality, expense, and investment results "
+     "are better than the conservative assumptions priced into the policy. Some carriers have paid one every "
      "year for a very long time, which is a real track record and still not a guarantee. Any "
      "illustration showing a non guaranteed column is showing an assumption, and the guaranteed "
      "column is the only one you are entitled to."),
@@ -48,8 +48,8 @@ FAQ = [
      "the numbers before you borrow, not after."),
     ("What is a guaranteed acceptance policy?",
      "It is a whole life policy issued with no health questions and no exam, so nobody is turned "
-     "down within the eligible ages. In exchange the coverage amount is small, the premium per "
-     "dollar of coverage is the highest of any product we offer, and there is a two or three year "
+     "down within the eligible ages. In exchange the coverage amount is small and the premium per "
+     "dollar of coverage is the highest of any product we offer. There is also a two or three year "
      "waiting period for death from natural causes. It exists for people who cannot qualify any "
      "other way, and it should be the last option considered, not the first."),
     ("Is whole life a good investment?",
@@ -60,8 +60,8 @@ FAQ = [
      "whether you have filled your tax advantaged retirement accounts first."),
     ("What happens if I stop paying the premium?",
      "You have options rather than an automatic loss. If there is enough cash value, the policy "
-     "can pay its own premium for a while, or convert to a smaller paid up policy that needs no "
-     "further payments, or be surrendered for its cash value. In the first few years, when there "
+     "can pay its own premium for a while. It can also convert to a smaller paid up policy that "
+     "needs no further payments, or be surrendered for its cash value. In the first few years, when there "
      "is little or no cash value, stopping usually means losing the policy and what you paid in. "
      "That is the main risk of buying more whole life than you can comfortably sustain."),
     ("Do I need a medical exam?",
@@ -140,7 +140,7 @@ def quote_form(form_id="wl-quote-form", form_name="wl_hero_quote", id_prefix="wl
 
           {F.consent_block(p, C.BRAND, 10)}
 
-          {F.submit_block("Get whole life quotes")}
+          {F.submit_block("See my quotes")}
         </form>
 
         <div id="{p}-success" class="success">
@@ -231,12 +231,12 @@ def body():
     # who-it-suits split, at roughly 60% scroll depth.
     legacy_band = C.banner(
         "whole-band",
-        "The number does not move for the rest of your life",
+        "A premium that stays the same for life",
         "The premium is fixed, the death benefit is guaranteed, and the cash value is contractual. "
-        "Tell us your age and what you want it to do, and a licensed agent comes back with named "
-        "carriers and the guaranteed columns, not an illustration.",
+        "Tell us your age and what you want the policy to do. A licensed agent comes back with "
+        "named carriers and the guaranteed numbers.",
         '<a class="btn btn-cta btn-block" href="#quote" data-cta-location="whole_band">'
-        'Get my whole life quotes</a>'
+        'Get my whole life quote</a>'
         + C.phone_link("whole_band", "btn btn-ghost btn-block mt-3",
                        "Call " + C.PHONE_DISPLAY, 20),
         eyebrow="Guaranteed, not projected")
@@ -250,11 +250,11 @@ def body():
     hero = C.page_hero(
         [("Home", "/"), ("Whole Life Insurance", None)],
         "Whole life insurance that never expires.",
-        "Lifelong cover, a premium that never rises, and cash value guaranteed in the contract.",
+        "Lifelong coverage, a premium that never rises, and cash value guaranteed in the contract.",
         extra=C.hero_cta("#quote", "Get my whole life quote"),
         banner="whole-hero")
     usps = C.usp_strip([
-        ("heart", "Cover for life", "It never expires"),
+        ("heart", "Coverage for life", "It never expires"),
         ("shield-check", "Premium never rises", "Locked from day one"),
         ("trending-up", "Guaranteed cash value", "Written into the contract"),
         ("scale", "Independent agency", "We compare carriers for you"),
@@ -302,7 +302,7 @@ def body():
         <ul class="mt-8 grid gap-4">
           <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">We name the carrier and show the guaranteed column separately</span></li>
           <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">We will tell you if term is the better answer for you</span></li>
-          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">No obligation, and your details are never sold on</span></li>
+          <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span class="text-sm">No obligation, and your details are never sold</span></li>
         </ul>
 
         <div class="mt-auto pt-8">
@@ -315,7 +315,7 @@ def body():
                   data-prefill='{{"request_type":"illustration"}}'
                   data-prefill-target="wl-quote-form"
                   data-prefill-reveal="wl-illustration-note">
-            {icon("file-text", 20, "shrink-0")}Request an illustration
+            {icon("file-text", 20, "shrink-0")}Request a policy illustration
           </button>
         </div>
       </div>
@@ -330,18 +330,17 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What makes it permanent</h2>
+        <h2 class="reveal text-h2">What makes whole life insurance permanent</h2>
         {permanence_media}
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <p class="reveal text-lead text-slate">
-          Term life rents you coverage for a fixed number of years. Whole life is a contract for
-          your entire life, and the carrier prices it on the assumption that it will eventually pay
-          out, because it will.
+          Term life covers you for a fixed number of years. Whole life is a contract for your
+          entire life. The carrier prices it knowing it will eventually pay out, because it will.
         </p>
         <p class="reveal mt-5 text-slate">
           To keep the premium level across fifty years instead of twenty, the carrier charges more
-          than the cost of insuring you in the early years and less than it in the later ones. The
+          than the cost of insuring you in the early years. In the later years it charges less. The
           surplus from the early years is held inside the policy, earns interest at a rate the
           contract guarantees, and becomes the cash value. That is the whole mechanism. Everything
           else on this page is a consequence of it.
@@ -413,9 +412,9 @@ def body():
       <h2 class="reveal text-h2">How cash value builds</h2>
       <p class="reveal mt-5 text-slate">
         Slowly at first, and that surprises people. In the first two or three years there is
-        often little or no cash value at all, because the carrier's costs of putting the policy
-        on the books come out first. After that it compounds at the guaranteed rate, and the gap
-        between what you have paid and what the policy is worth narrows, then reverses.
+        often little or no cash value at all. The carrier's costs of setting up the policy come
+        out first. After that it compounds at the guaranteed rate. The gap between what you have
+        paid and what the policy is worth narrows, then reverses.
       </p>
     </div>
 
@@ -426,9 +425,9 @@ def body():
         <p class="eyebrow">Read before you buy</p>
         <div class="mt-4">{C.stat(40, "policy years on the chart", suffix=" yrs")}</div>
         <p class="mt-4 text-slate">
-          A whole life contract is measured in decades. The single most important thing to
-          understand before buying is the early years: a policy surrendered in year three usually
-          returns less than was paid into it.
+          A whole life contract is measured in decades. The most important thing to understand
+          before buying is the early years. A policy surrendered in year three usually returns
+          less than was paid into it.
         </p>
         <p class="mt-auto pt-5 text-sm text-muted">
           Ask for a carrier illustration with the guaranteed column shown separately, then read
@@ -449,14 +448,14 @@ def body():
         <h2 class="reveal text-h2">Dividends and participating policies</h2>
         <p class="reveal mt-6 text-slate">
           A participating policy from a mutual carrier may pay an annual dividend. It is not
-          investment income. It is a return of part of the premium, paid when the company's actual
-          mortality, expense, and investment results come in better than the conservative
+          investment income. It is a return of part of the premium. The carrier pays it when its
+          actual mortality, expense, and investment results come in better than the conservative
           assumptions built into the price.
         </p>
         <p class="reveal mt-4 text-slate">
-          You can usually take a dividend in cash, use it to reduce the premium, leave it to
-          accumulate at interest, or buy paid up additions, which is small blocks of extra
-          permanent coverage that themselves build cash value.
+          You can usually take a dividend in cash, use it to reduce the premium, or leave it to
+          accumulate at interest. You can also buy paid up additions: small blocks of extra
+          permanent coverage that build their own cash value.
         </p>
       </div>
 
@@ -468,12 +467,12 @@ def body():
               <h3 class="text-h4">Dividends are not guaranteed</h3>
               <p class="mt-3 text-slate">
                 Not this year, not next year, not ever. Several mutual carriers have paid one every
-                year for more than a century, and that record is genuinely meaningful, and it is
-                still not a promise.
+                year for more than a century. That record means something, and it is still not a
+                promise.
               </p>
               <p class="mt-4 text-slate">
                 When you read an illustration, find the guaranteed column. That is what you are
-                actually entitled to. Every other column is an assumption about a dividend scale
+                entitled to. Every other column is an assumption about a dividend scale
                 that can change.
               </p>
               <a class="link-static mt-4 inline-block text-sm" href="/whole-life-insurance/dividends/#how-they-are-declared">How dividends are declared</a>
@@ -491,9 +490,9 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What it costs against term</h2>
+      <h2 class="reveal text-h2">Whole life cost compared with term life</h2>
       <p class="reveal mt-5 text-slate">
-        This is the comparison that decides it for most people, so here it is without softening.
+        This is the comparison that decides it for most people.
       </p>
     </div>
 
@@ -528,8 +527,8 @@ def body():
     </p>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      A common and reasonable answer is both: a large term policy covering the years your family is
-      most exposed, and a smaller whole life policy underneath it that never goes away. We will
+      A common and reasonable answer is both. A large term policy covers the years your family is
+      most exposed. A smaller whole life policy sits underneath it and never goes away. We will
       price that combination alongside the single product options.
       Read the longer version in our
       <a class="link" href="/compare/term-vs-whole-life-insurance/">comparison of term and whole life insurance</a>.
@@ -547,7 +546,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Who whole life actually suits</h2>
+      <h2 class="reveal text-h2">Who whole life insurance suits</h2>
       <p class="reveal mt-5 text-slate">
         Both halves of this matter equally. If you are on the right hand side, we will say so on
         the phone, and we will say it even though term pays us less.
@@ -559,7 +558,7 @@ def body():
       <div class="reveal card card-hover h-full">
         <div class="flex items-center gap-3 pb-4 border-b border-rule">
           {icon("circle-check", 26, "shrink-0 text-green")}
-          <h3 class="text-h3 !font-display !font-semibold">It genuinely suits you if</h3>
+          <h3 class="text-h3 !font-display !font-semibold">It suits you if</h3>
         </div>
         <ul class="mt-6 grid gap-5">
           <li class="flex items-start gap-3">{icon("check", 20, "shrink-0 text-green mt-1")}<span>You are supporting a dependent with a disability who will need help for their whole life.</span></li>
@@ -598,11 +597,11 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-6">
-        <h2 class="reveal text-h2">Underwriting</h2>
+        <h2 class="reveal text-h2">How whole life underwriting works</h2>
         <p class="reveal mt-6 text-slate">
           A fully underwritten whole life policy follows the same path as term: application, phone
-          interview, database checks, usually a paramedical exam, then medical records and an
-          underwriting decision. Three to six weeks is normal, and the waiting is mostly your
+          interview, database checks, and usually a paramedical exam. Then come medical records and
+          an underwriting decision. Three to six weeks is normal, and the waiting is mostly your
           doctor's office rather than the carrier.
         </p>
         <p class="reveal mt-4 text-slate">
@@ -619,8 +618,8 @@ def body():
           <h3 class="text-h4">If you cannot qualify</h3>
           <p class="mt-3 text-slate">
             Guaranteed acceptance whole life asks no health questions and turns nobody down within
-            the eligible ages. The coverage is small, the premium per dollar is the highest of
-            anything we offer, and there is a two or three year waiting period for natural causes.
+            the eligible ages. The coverage is small and the premium per dollar is the highest of
+            anything we offer. There is a two or three year waiting period for natural causes.
           </p>
           <p class="mt-4 text-slate">
             It is a real answer for people who have no other one. It should be the last option you
@@ -643,7 +642,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Whole life questions</h2>
+        <h2 class="reveal text-h2">Whole life insurance questions</h2>
         <p class="reveal mt-5 text-slate">
           Eight things worth knowing before you sign a contract you intend to keep for fifty years.
         </p>

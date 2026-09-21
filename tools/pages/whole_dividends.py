@@ -24,7 +24,7 @@ SILO = "whole-life"
 TITLE = "Dividend-Paying Whole Life Insurance Explained | Apex"
 OG_TITLE = "Dividend paying whole life insurance"
 DESC = ("What a whole life dividend is, how carriers decide one, the four things you can do with "
-        "it, and why no dividend is ever guaranteed. Written by a licensed agent.")
+        "it, and why no dividend is ever guaranteed.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Dividends", None)]
@@ -56,12 +56,12 @@ DECLARED = [
      "This is the largest component for most carriers most years."),
     ("Expense experience",
      "Whether running the company cost less than the pricing assumed. Administration, "
-     "distribution, and overhead all sit here, and a carrier that is efficient in a given year has "
+     "distribution, and overhead all sit here. A carrier that is efficient in a given year has "
      "more surplus to divide than one that is not."),
     ("Investment experience",
      "What the carrier's general account, mostly high grade bonds held to maturity, actually "
-     "earned against the rate it guaranteed. This is the component most sensitive to the interest "
-     "rate environment, and it is why dividend scales across the industry moved with rates over "
+     "earned against the rate it guaranteed. This is the component most sensitive to interest "
+     "rates. It is why dividend scales across the industry moved with rates over "
      "the past two decades."),
     ("The board's decision",
      "The three above produce a surplus. The board decides how much of it to distribute, how much "
@@ -76,7 +76,7 @@ FAQ = [
      "distribution of the carrier's divisible surplus, declared annually at the discretion of its "
      "board, and it can be reduced or not paid at all. Carriers have done both. The guaranteed "
      "part of your policy is the guaranteed cash value schedule and the guaranteed death benefit "
-     "printed in the contract, and a plan that only works if the dividends arrive is a plan that "
+     "printed in the contract. A plan that only works if the dividends arrive is a plan that "
      "does not work."),
     ("What is a dividend on a whole life policy?",
      "It is a return of the part of your premium the carrier did not need. Whole life is priced "
@@ -86,21 +86,21 @@ FAQ = [
      "that is eligible to share in it. That is why it is generally treated as a return of premium "
      "rather than as investment income."),
     ("How much are whole life dividends?",
-     "We are not going to print a number, and you should be sceptical of any agency that does. "
+     "We are not going to print a number, and you should be skeptical of any agency that does. "
      "The scale differs by carrier, by policy series, by issue year, and by policy size, and it "
      "changes annually. The only figure that means anything for your situation is the one on a "
-     "current illustration from the specific carrier being proposed, showing the guaranteed and "
-     "non guaranteed columns separately. We will send you one of those."),
+     "current illustration from the specific carrier being proposed. It should show the guaranteed "
+     "and non guaranteed columns separately. We will send you one of those."),
     ("What is the best dividend option?",
      "For most people buying whole life for the long term, paid up additions, because it is the "
-     "only option that compounds: the extra coverage it buys is itself eligible for future "
+     "only option that compounds. The extra coverage it buys is itself eligible for future "
      "dividends. Reducing the premium is the right answer when affordability is the binding "
      "constraint and keeping the policy in force matters more than growing it. There is no option "
      "that is best for everyone, and you can usually change the election later."),
     ("Do dividends make whole life a good investment?",
      "They improve the outcome; they do not change the category. A participating whole life policy "
-     "is insurance with a guaranteed savings component and a discretionary distribution attached, "
-     "and it should be judged against that description rather than against an index fund. If the "
+     "is insurance with a guaranteed savings component and a discretionary distribution attached. "
+     "It should be judged against that description rather than against an index fund. If the "
      "reason you are considering the policy is the dividend rather than the permanent death "
      "benefit, that is worth examining carefully before you buy."),
 ]
@@ -131,9 +131,9 @@ LEAD = (
 
 ANSWER = (
     'A participating <a class="link" href="/whole-life-insurance/">whole life '
-    "insurance</a> policy pays one when the company's actual experience beats the "
-    'cautious assumptions it priced with. It is not interest, it is not an investment '
-    'return, and the board declares it annually and can reduce it or skip it entirely. '
+    "insurance</a> policy pays one when the carrier's actual experience beats the "
+    'cautious assumptions it priced with. It is not interest and it is not an investment '
+    'return. The board declares it annually and can reduce it or skip it entirely. '
     'What follows is how one is decided, what you can do with it, and how to read an '
     'illustration that shows one.')
 
@@ -174,9 +174,9 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a dividend actually is</h2>
+        <h2 class="reveal text-h2">What a whole life dividend is</h2>
         <p class="reveal mt-5 text-slate">
-          The word is borrowed from company shares, and it misleads almost everybody who hears it.
+          The word is borrowed from stocks, and it misleads almost everybody who hears it.
           A whole life dividend is closer to a refund than to a payout.
         </p>
       </div>
@@ -191,10 +191,10 @@ def body():
         </div>
         <h3 class="reveal mt-6 text-h4">Priced on cautious assumptions</h3>
         <p class="reveal mt-3 text-slate">
-          Whole life is priced on deliberately cautious assumptions. The carrier assumes people
+          The carrier assumes people
           will die somewhat sooner than it really expects, that running the company will cost
           somewhat more, and that its investments will earn somewhat less. Those assumptions are
-          built into a premium that is fixed for life, which means the carrier has to be able to
+          built into a premium that is fixed for life. The carrier has to be able to
           keep its promise even if the pessimistic version comes true.
         </p>
         <h3 class="reveal mt-8 text-h4">Where the surplus comes from</h3>
@@ -206,13 +206,12 @@ def body():
         </p>
         <p class="reveal mt-4 text-slate">
           That is why it is generally treated for tax purposes as a return of premium
-          rather than as income: it largely is your own money, returned because it turned out not
+          rather than as income. It largely is your own money, returned because it turned out not
           to be needed.
         </p>
         <h3 class="reveal mt-8 text-h4">The two things people get wrong</h3>
         <p class="reveal mt-3 text-slate">
-          Two things follow from that description, and they are the two things people most often
-          get wrong. A dividend is not a rate of return on your cash value, so comparing it to an
+          A dividend is not a rate of return on your cash value, so comparing it to an
           investment yield compares two different kinds of number. And because it depends on
           experience that has not happened yet, no honest person can tell you what next year's will
           be.
@@ -238,15 +237,15 @@ def body():
                               'one.</p>')}
 
 
-{C.ask_strip("Want to see one on a real illustration?", "We send the guaranteed and non guaranteed columns side by side.", '<a href="/whole-life-insurance/quotes/" class="btn btn-cta">Ask for an illustration</a>')}
+{C.ask_strip("Want to see one on a real illustration?", "We send the guaranteed and non guaranteed columns side by side.", '<a href="/whole-life-insurance/quotes/" class="btn btn-cta">Request a policy illustration</a>')}
 
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The four things you can do with one</h2>
+      <h2 class="reveal text-h2">Four whole life dividend options</h2>
       <p class="reveal mt-5 text-slate">
         You elect this at application and can usually change it later. The election matters more
-        over thirty years than most buyers realise at the point of sale.
+        over thirty years than most buyers realize at the point of sale.
       </p>
     </div>
 
@@ -291,8 +290,8 @@ def body():
               "Every compliant whole life illustration has a guaranteed section and a non "
               "guaranteed section, usually side by side or on facing pages. The guaranteed columns "
               "assume no dividend is ever paid. The non guaranteed columns assume the carrier's "
-              "current dividend scale continues unchanged for the entire illustration, which is a "
-              "modelling convention rather than a forecast.")}
+              "current dividend scale continues unchanged for the entire illustration. That is a "
+              "modeling convention rather than a forecast.")}
         {C.qa("Read the guaranteed columns first, and judge the policy on them",
               "If the policy only makes sense on the non guaranteed columns, it does not make "
               "sense. This is the test, and it is the reason a good agent will hand you the "
@@ -300,7 +299,7 @@ def body():
         {C.qa("Check what dividend scale the illustration was run at",
               "It is printed on the illustration, usually in small type near the header or in the "
               "narrative pages. An illustration run at a scale the carrier has since reduced will "
-              "show non guaranteed values that are already out of date, which is why a current one "
+              "show non guaranteed values that are already out of date. That is why a current one "
               "matters.", "mt-8")}
         {C.qa("Ask for the same policy illustrated at a lower scale",
               "Most carriers can produce an illustration at a reduced dividend scale on request. "
@@ -320,8 +319,8 @@ def body():
     <div class="reveal card measure">
       <h2 class="text-h4">See an illustration with both columns</h2>
       <p class="mt-3 text-slate">
-        We will send you a current illustration from a named carrier for your age, with the
-        guaranteed and non guaranteed columns shown separately and the dividend scale it was run at
+        We will send you a current illustration from a named carrier for your age. It shows the
+        guaranteed and non guaranteed columns separately, with the dividend scale it was run at
         pointed out. We will do that whether or not you intend to buy anything, and we will tell
         you if the guaranteed columns alone do not support what is being proposed.
       </p>

@@ -21,8 +21,8 @@ ACTIVE = "/term-life-insurance/"
 SILO = "term-life"
 TITLE = "Term Life Insurance Rates by Age (2026 Rate Chart)"
 OG_TITLE = "Term life insurance rates by age"
-DESC = ("Term life insurance rate chart by age, coverage amount, and term length, with male and "
-        "female and tobacco splits. See what moves your rate and how to lower it.")
+DESC = ("Term life insurance rate chart by age, coverage amount, and term length, split by sex "
+        "and tobacco use. See what moves your rate and how to lower it.")
 
 # 25 to 74 in five year bands. The mid age is what the row's quote button
 # carries into the form, because a band cannot be typed into an age field.
@@ -40,9 +40,9 @@ FAQ = [
      "buying the same policy are not in the same order of magnitude."),
     ("Why do term life rates go up so much with age?",
      "Because the price tracks the chance of a claim during the term, and that chance rises "
-     "faster than most people expect after about 45. The practical consequence is that waiting a "
-     "year to decide is not free. The same policy bought at 46 instead of 45 costs more for its "
-     "whole term, and every year of waiting is also a year in which your health can change."),
+     "faster than most people expect after about 45. So waiting a year to decide is not free. "
+     "The same policy bought at 46 instead of 45 costs more for its whole term. Every year of "
+     "waiting is also a year in which your health can change."),
     ("Do men and women pay different rates?",
      "Yes, in most states. Women statistically live longer, so the same coverage generally costs "
      "a woman less than a man of the same age and health. Montana requires unisex rates, so the "
@@ -50,8 +50,8 @@ FAQ = [
     ("How much more does tobacco cost?",
      "Commonly two to three times the non tobacco premium for the same coverage, which is the "
      "largest single lever on this page after age. Carriers define tobacco use differently, and a "
-     "few treat occasional cigar use or nicotine replacement therapy more favourably than others, "
-     "so it is worth telling us exactly what you use rather than answering a plain yes."),
+     "few treat occasional cigar use or nicotine replacement therapy more favorably than others. "
+     "Tell us exactly what you use rather than answering a plain yes."),
     ("Are these rates guaranteed?",
      "No, and no rate chart anywhere is. A chart shows the shape of pricing for a rate class. "
      "Your rate class is decided by the carrier after underwriting, and until a policy is issued "
@@ -90,9 +90,9 @@ def body():
       <h1 class="reveal text-h1">Term Life Insurance Rates by Age</h1>
       <p class="reveal mt-5 text-lead text-slate">
         The chart below is the full pricing grid for
-        <a class="link" href="/term-life-insurance/">term life insurance</a>: age band by coverage
-        amount, split by term length, sex, and tobacco use. Every row has a button that carries
-        its numbers into the quote form further down, so you do not have to retype them.
+        <a class="link" href="/term-life-insurance/">term life insurance</a>, by age band and
+        coverage amount. Switch between term length, sex, and tobacco use. Each row has a button
+        that fills in the quote form further down, so you do not retype anything.
       </p>
     </div>
   </div>
@@ -125,8 +125,8 @@ def body():
         toggle_grid="grid sm:grid-cols-[8fr_4fr_4fr] gap-6 max-w-4xl")}
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      Coverage above $1,000,000 is routinely available and is quoted the same way; it is left off
-      the grid because at that point the carrier's underwriting programme matters more to the
+      Coverage above $1,000,000 is routinely available and is quoted the same way. It is left off
+      the grid because at that size the carrier's underwriting program matters more to the
       price than the column does. Terms of 10, 15, 20, and 30 years are the standard set. A few
       carriers write 25 and 35 year terms, and we will tell you when one is worth having.
     </p>
@@ -140,9 +140,9 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What actually moves your rate</h2>
+      <h2 class="reveal text-h2">What affects your term life rate</h2>
       <p class="reveal mt-5 text-slate">
-        In rough order of size. The first two are worth more than everything below them put
+        Listed from largest effect to smallest. The first two matter more than everything below them put
         together, which is why the chart is built around them.
       </p>
     </div>
@@ -158,20 +158,20 @@ def body():
              "at the last twelve months, some at the last two to five years for a preferred class.",
              "Very large")}
       {lever("Your health class",
-             "Preferred plus, preferred, standard plus, standard, and then rated classes. Blood "
+             "The classes run preferred plus, preferred, standard plus, standard, then rated. Blood "
              "pressure, cholesterol, build, and family history decide this, and carriers disagree "
              "about all four.",
              "Large")}
       {lever("Term length and coverage amount",
-             "A 30 year term costs meaningfully more than a 20. Coverage scales less than "
-             "proportionally, so doubling the amount rarely doubles the premium.",
+             "A 30 year term costs meaningfully more than a 20. The price rises more slowly than "
+             "the coverage, so doubling the amount rarely doubles the premium.",
              "Moderate")}
       {lever("Sex and state",
              "Women generally pay less for the same coverage. Montana requires unisex rates. "
              "State also decides which carriers can write you at all.",
              "Moderate")}
       {lever("Occupation, travel, and hobbies",
-             "Aviation, diving, climbing, and some occupations attract a flat extra or an "
+             "Aviation, diving, climbing, and some occupations bring a flat extra charge or an "
              "exclusion rather than a worse class. Often smaller than people fear.",
              "Situational")}
     </div>
@@ -179,7 +179,7 @@ def body():
 </section>
 
 
-{C.ask_strip("Rather skip to your own number?", "Your age, state and health decide it. Six questions.", '<a href="#term-rates-quote-form" class="btn btn-cta">Get my term life quote</a>')}
+{C.ask_strip("Want your own rate instead?", "Your age, state and health decide it. Six questions.", '<a href="#term-rates-quote-form" class="btn btn-cta">Get my term life quote</a>')}
 
 <!-- =====================================================================
      HOW TO LOWER A QUOTED RATE. T2. Legitimate levers only.
@@ -188,10 +188,10 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to lower a rate you have been quoted</h2>
+        <h2 class="reveal text-h2">How to lower your term life rate</h2>
         <p class="reveal mt-5 text-slate">
-          All of these are legitimate. None of them involves leaving something off an application,
-          which is not a discount, it is a reason for a claim to be contested.
+          All of these are legitimate. None involves leaving something off an application. That
+          is not a discount. It is a reason for a claim to be contested.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
@@ -206,17 +206,17 @@ def body():
                   "and takes about twenty minutes at your home.")}
         </div>
         <div class="mt-8">
-          {C.step(3, "Fix the fixable, then apply",
+          {C.step(3, "Improve your health readings, then apply",
                   "Blood pressure and cholesterol readings respond to treatment within months, "
-                  "and a class change is worth more than most people expect. Worth doing only if "
-                  "you are not currently uninsured and exposed.",
+                  "and a class change is worth more than most people expect. Only worth doing if "
+                  "you already have some coverage in place.",
                   "If you have no coverage at all right now, buy something first and improve on it later.")}
         </div>
         <div class="mt-8">
-          {C.step(4, "Right size the term and the amount",
-                  "A 30 year term when the mortgage has 18 years left is paying for 12 years you "
-                  "do not need. Matching the term to the obligation is usually a bigger saving "
-                  "than shaving the coverage amount.")}
+          {C.step(4, "Match the term and amount to the need",
+                  "A 30 year term when the mortgage has 18 years left means paying for 12 years "
+                  "you do not need. Matching the term to the obligation usually saves more than "
+                  "trimming the coverage amount.")}
         </div>
         <div class="mt-8">
           {C.step(5, "Ask about a reconsideration later",
@@ -238,9 +238,9 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2 text-white">Why your quote may not match this chart</h2>
       <p class="reveal mt-5 text-white/85">
-        A rate chart is an illustration of shape. It shows how premiums move between ages, terms,
-        and coverage amounts. It cannot show what a carrier will decide about you, and any chart
-        that claims otherwise is selling you a number it does not have.
+        A rate chart shows how premiums move between ages, terms, and coverage amounts. It cannot
+        show what a carrier will decide about you. Any chart that claims otherwise is selling you
+        a number it does not have.
       </p>
     </div>
     <div class="mt-10 grid md:grid-cols-3 gap-6 max-w-5xl" data-stagger="60">
@@ -279,14 +279,14 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Get the real number</h2>
+        <h2 class="reveal text-h2">Get your term life quote</h2>
         <p class="reveal mt-5 text-slate">
-          Six questions, about two minutes. A licensed agent comes back within {C.SLA} with
-          premiums from named carriers at a class we can defend, rather than a chart cell.
+          Six questions, about two minutes. A licensed agent replies within {C.SLA} with
+          premiums from named carriers, at a rate class we can justify.
         </p>
         <p class="reveal mt-5 text-slate">
-          If you used a "Quote this" button above, your age and coverage are already filled in and
-          the form has skipped to what is still missing.
+          If you used a "Quote this" button above, your age and coverage are already filled in.
+          The form skips to what is still missing.
         </p>
         <div class="reveal mt-6 pt-6 border-t border-rule">
           <p class="text-slate">Or talk it through with a licensed agent.</p>
@@ -314,6 +314,6 @@ def body():
 </section>
 
 
-{C.closing_band("term-band", "Turn the chart into your own number",
-    "A chart shows the shape of the pricing. Your age, state and health decide the figure.",
+{C.closing_band("term-band", "Get your own term life rate",
+    "A chart shows how prices move. Your age, state and health decide your price.",
     "term_rates_close", silo="term")}"""

@@ -18,8 +18,8 @@ ACTIVE = PATH
 SILO = "site"
 TITLE = "Our Licensed Agents | Apex Insurance Marketing"
 OG_TITLE = "The licensed agents at Apex Insurance Marketing"
-DESC = ("The licensed life insurance agents at Apex Insurance Marketing, with state licence "
-        "numbers you can verify, years licensed, and the carriers each is appointed with.")
+DESC = ("The licensed life insurance agents at Apex Insurance Marketing, with state license "
+        "numbers you can verify, years licensed, and carrier appointments.")
 
 # [PLACEHOLDER ROSTER] One entry per real agent before launch. `slug` becomes
 # the profile URL and must match the module that builds that profile.
@@ -69,7 +69,7 @@ def card(a):
               <span class="block mt-1">{a['line']}</span>
             </span>
             <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-navy">
-              Licence numbers and appointments {icon("arrow-right", 16)}
+              License numbers and appointments {icon("arrow-right", 16)}
             </span>
           </a>
         </li>"""
@@ -85,8 +85,8 @@ def body():
       <div class="lg:col-span-6">
       <h1 class="reveal text-h1">Our licensed agents</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        Every agent below holds an individual state licence, and every licence number is published
-        on their profile so you can check it with your state's department of insurance instead of
+        Every agent below holds an individual state license. Every license number is published
+        on their profile, so you can check it with your state's department of insurance instead of
         taking our word for it.
       </p>
       </div>
@@ -96,7 +96,7 @@ def body():
     <div class="reveal mt-8 max-w-3xl">
       {C.flag("The three cards below are placeholders. Replace with the real roster before "
               "launch: one card and one profile page per licensed agent, each with that agent's "
-              "own name, photograph, licence numbers, and carrier appointments. Do not ship a "
+              "own name, photograph, license numbers, and carrier appointments. Do not ship a "
               "roster that is larger than the licensed team.", "PLACEHOLDER ROSTER")}
     </div>
 
@@ -107,12 +107,12 @@ def body():
 </section>
 
 
-{C.steps_section("How to check a licence",
-    "You do not have to trust a number printed on our own website, and you should not have to. Every state publishes a lookup.",
-    [("Take the licence number from the agent's profile", "Each profile lists the licence number per state, alongside the lines that licence authorises."),
-     ("Search your state's department of insurance lookup", "Every state runs a public producer lookup. Search by licence number, or by the agent's name."),
-     ("Check the status, the lines, and the state", "A licence can be active in one state and lapsed in another. If what you find does not match what we published, tell us and do not buy until it is resolved.")],
-    after='<a class="link-static mt-8 inline-block text-sm" href="/about/licensing/">Our agency licence numbers by state</a>',
+{C.steps_section("How to check a license",
+    "You do not have to trust a number printed on our own website. Every state publishes a lookup.",
+    [("Take the license number from the agent's profile", "Each profile lists the license number per state, alongside the lines that license authorizes."),
+     ("Search your state's department of insurance lookup", "Every state runs a public producer lookup. Search by license number, or by the agent's name."),
+     ("Check the status, the lines, and the state", "A license can be active in one state and lapsed in another. If what you find does not match what we published, tell us and do not buy until it is resolved.")],
+    after='<a class="link-static mt-8 inline-block text-sm" href="/about/licensing/">Our agency license numbers by state</a>',
     cls="section band")}
 
 
@@ -120,7 +120,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7">
-        <h2 class="reveal text-h2">Talk to one of them</h2>
+        <h2 class="reveal text-h2">Talk to a licensed agent</h2>
         <p class="reveal mt-4 text-slate max-w-2xl">
           Calling gets you an agent directly. The form gets you one within {C.SLA}, with the
           comparison already done.

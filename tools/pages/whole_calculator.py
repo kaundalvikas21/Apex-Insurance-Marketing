@@ -38,8 +38,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Whole Life Insurance Calculator | Premium & Cash Value | Apex"
 OG_TITLE = "Whole life insurance calculator"
-DESC = ("Work out how much permanent coverage you need, with the method shown. No email required, "
-        "and an honest account of why a premium and a cash value cannot be calculated in a browser.")
+DESC = ("Calculate how much whole life coverage you need, with the method shown. No email "
+        "required. It sizes the need only, not a premium or a cash value.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Calculator", None)]
@@ -117,10 +117,9 @@ def body():
       <h1 class="reveal text-h1">Whole Life Insurance Calculator</h1>
       <p class="reveal mt-5 text-lead text-slate">
         Change the four figures below and the recommendation updates as you type. There is no email
-        wall and nothing is submitted: the calculation happens in your browser and is not sent
-        anywhere. It sizes the permanent need that
-        <a class="link" href="/whole-life-insurance/">whole life insurance</a> exists to cover,
-        which is the number a carrier illustration has to start from.
+        wall, and nothing leaves your browser. The calculator sizes the permanent need that
+        <a class="link" href="/whole-life-insurance/">whole life insurance</a> exists to cover.
+        That is the number a carrier illustration has to start from.
       </p>
     </div>
   </div>
@@ -166,13 +165,13 @@ def body():
         <div class="lg:col-span-6 lg:col-start-7">
           <h2 class="reveal text-h2">How the figure is worked out</h2>
           <p class="reveal mt-5 text-slate">
-            The method, not a black box. Every line below is one term of the sum, and it updates
-            with your numbers.
+            Here is the method. Every line below is one part of the sum, and it updates with
+            your numbers.
           </p>
 
           <div class="reveal mt-8 table-scroll table-signature">
             <table class="rate-table" style="min-width:26rem">
-              <caption>Permanent coverage need, term by term.</caption>
+              <caption>Permanent coverage need, line by line.</caption>
               <tbody>
                 <tr>
                   <th scope="row">Final expenses and debts</th>
@@ -218,7 +217,7 @@ def body():
             </button>
 
             <p class="mt-6 text-slate" data-calc-enough hidden>
-              On these numbers your existing permanent coverage already exceeds what the
+              With these numbers your existing permanent coverage already exceeds what the
               calculation asks for. That is worth a conversation rather than an application, and a
               licensed agent will tell you so on the phone.
             </p>
@@ -239,7 +238,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Why this tool does not show you a premium</h2>
+        <h2 class="reveal text-h2">Why this calculator shows no premium</h2>
         <p class="reveal mt-5 text-slate">
           Because it cannot know one, and a calculator that produces a number it cannot know is
           worse than one that admits the gap.
@@ -263,9 +262,10 @@ def body():
               "promise. We will send you a real illustration with the guaranteed column shown "
               "separately, which is the only version worth planning on.", "mt-8")}
         {C.qa("What this does tell you",
-              "The face amount. That is the input every illustration starts from, and getting it "
-              "right is worth more than any premium estimate: a policy sized correctly at a "
-              "slightly worse price beats a policy sized wrongly at the best price on the market.",
+              "The coverage amount, also called the face amount. That is the input every "
+              "illustration starts from, and getting it right is worth more than any premium "
+              "estimate. A policy sized correctly at a slightly worse price beats a policy sized "
+              "wrongly at the best price on the market.",
               "mt-8")}
       </div>
     </div>
@@ -282,7 +282,7 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What this calculator cannot account for</h2>
       <p class="reveal mt-5 text-slate">
-        It is a subtraction, and a subtraction cannot see any of the following. Each one is a
+        The calculator does simple math, and it cannot see any of the following. Each one is a
         reason to treat the figure as a starting point rather than an answer.
       </p>
     </div>
@@ -291,19 +291,19 @@ def body():
       <div class="reveal bento-cell bento-cell-blue bento-2">
         <h3 class="text-h4 text-white">Inflation over decades</h3>
         <p class="mt-3 text-white/90">
-          A permanent policy may pay in forty years. A fixed face amount does not index, and what
-          feels sufficient today buys less then. This is the strongest argument for rounding up.
+          A permanent policy may pay in forty years. A fixed face amount does not rise with
+          inflation, and what feels sufficient today buys less then. This is the strongest argument for rounding up.
         </p>
       </div>
       <div class="reveal bento-cell bento-2">
-        <h3 class="text-h4">Your estate's actual position</h3>
+        <h3 class="text-h4">Estate taxes, probate, and business interests</h3>
         <p class="mt-3 text-slate">
           State estate and inheritance taxes, probate costs, and business interests all change what
           liquidity an estate needs. Ask an estate attorney, not a web page.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
-        <h3 class="text-h4">A dependant with lifelong needs</h3>
+        <h3 class="text-h4">A dependent with lifelong needs</h3>
         <p class="mt-3 text-slate">
           Funding a special needs trust is a different calculation entirely, and it usually
           produces a larger number than this one. It is worth doing properly.
@@ -313,7 +313,7 @@ def body():
         <h3 class="text-h4">Whether you can carry the premium for life</h3>
         <p class="mt-3 text-slate">
           This is the constraint that most often decides the real face amount. A permanent premium
-          you cannot sustain becomes a lapsed policy, and a lapse in the early years is where whole
+          you cannot sustain becomes a lapsed policy. A lapse in the early years is where whole
           life does the most financial damage. If the number above is more than the budget will
           bear, buy less of it permanently rather than more of it briefly.
         </p>
@@ -340,11 +340,11 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Turn the figure into a real illustration</h2>
+        <h2 class="reveal text-h2">Get a quote and a full illustration</h2>
         <p class="reveal mt-5 text-slate">
           Five questions. A licensed agent comes back within {C.SLA} with premiums from named
-          carriers for the amount above, and a full illustration showing the guaranteed and non
-          guaranteed columns side by side rather than blended into one number.
+          carriers for the amount above. You also get a full illustration, with the guaranteed and
+          non guaranteed columns side by side rather than blended into one number.
         </p>
         <p class="reveal mt-5 text-slate">
           If you used the button above, the coverage amount is already filled in.

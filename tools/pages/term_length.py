@@ -61,10 +61,10 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Who a {years} year term actually fits</h2>
+      <h2 class="reveal text-h2">Who a {years} year term fits</h2>
       <p class="reveal mt-5 text-slate">
-        A term length is a guess about how long other people will need your income. These are the
-        three situations where {years} years is the right guess rather than the default one.
+        The right term length is how long other people will need your income. These are the
+        three situations where {years} years fits.
       </p>
     </div>
     <div class="mt-10 bento" data-stagger="40">{cells}
@@ -77,7 +77,7 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
 
 
 {C.inline_cta(cta_heading, cta_body, where, "/term-life-insurance/quotes/",
-              "Get term life quotes")}
+              "Get my term life quote")}
 
 
 <section class="section">
@@ -86,24 +86,22 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">What a {years} year term costs</h2>
-          <p class="reveal mt-5 text-slate">What moves the number for a {years} year policy, and where the full grid is kept current.</p>
+          <p class="reveal mt-5 text-slate">What changes the price of a {years} year policy, and where to see the full rate chart.</p>
         </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
-        <h3 class="reveal text-h4">What moves the number</h3>
+        <h3 class="reveal text-h4">What changes the price</h3>
         <p class="reveal mt-3 text-slate">{cost_note}</p>
-        <h3 class="reveal mt-8 text-h4">Where the full grid is kept</h3>
+        <h3 class="reveal mt-8 text-h4">Where to see the full rate chart</h3>
         <p class="reveal mt-3 text-slate">
-          Rather than reprint a slice of it here, the full grid lives on one page and is kept
-          current in one place: <a class="link" href="/term-life-insurance/rates/">term life
-          insurance rates by age</a>, with a term length toggle and a button on every row that
+          The full chart is on one page: <a class="link" href="/term-life-insurance/rates/">term life
+          insurance rates by age</a>. You can switch the term length, and a button on every row
           carries the numbers into a quote form.
         </p>
         <h3 class="reveal mt-8 text-h4">Not sure of the amount?</h3>
         <p class="reveal mt-3 text-slate">
-          If you are not yet sure of the amount rather than the length, the
-          <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
-          that out first and shows the arithmetic while it does.
+          The <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a>
+          works out the amount and shows the math.
         </p>
       </div>
     </div>
@@ -112,7 +110,7 @@ def render(years, h1, lead, answer, fits, dates_intro, dates, cost_note, faq, si
 
 
 {C.spoke_module("Related pages in term life",
-                "Same silo, and the pages this one deliberately defers to.", siblings)}
+                "More on term life, including the pages this one points to for detail.", siblings)}
 
 
 {C.faq_section("Questions about %d year term" % years, faq, "term-%dy-faq" % years)}

@@ -25,7 +25,7 @@ ACTIVE = "/term-life-insurance/"
 SILO = "term-life"
 TITLE = "No Medical Exam Term Life Insurance | Same-Day Options | Apex"
 OG_TITLE = "No medical exam term life insurance"
-DESC = ("Three ways to buy term life insurance without a paramedical exam, what each one costs "
+DESC = ("Three ways to buy term life insurance without a medical exam, what each one costs "
         "you, and who should still take the exam. Decisions in as little as a day.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
@@ -62,7 +62,7 @@ ROUTES = [
 FAQ = [
     ("Can you really get life insurance with no medical exam?",
      "Yes, and for a healthy applicant under about sixty it is now the normal experience rather "
-     "than a special product. Accelerated underwriting programmes check prescription, driving, "
+     "than a special product. Accelerated underwriting programs check prescription, driving, "
      "and claims databases against a detailed application and waive the exam when the picture is "
      "consistent. You still answer full health questions, and the application is still a legal "
      "declaration. What is skipped is the needle, not the honesty."),
@@ -73,7 +73,7 @@ FAQ = [
      "Guaranteed issue, where no health question is asked at all, is the most expensive coverage "
      "per thousand dollars sold anywhere, and almost always carries a waiting period."),
     ("How fast can I actually be covered?",
-     "With accelerated underwriting, a decision can come the same day and coverage begins once the "
+     "With accelerated underwriting, a decision can come the same day. Coverage begins once the "
      "policy is issued, delivered, and the first premium is paid. Same day means a same day "
      "decision, not always a same day approval and not always a yes. If the algorithm cannot get "
      "comfortable, the application drops to full underwriting with an exam, which is not a decline "
@@ -81,11 +81,11 @@ FAQ = [
     ("Will they still check my prescriptions and medical records?",
      "Almost certainly. Every route except guaranteed issue uses a prescription history check, and "
      "most use a motor vehicle record and the industry claims database. Some also pull electronic "
-     "health records with your authorisation. Leaving something off the application does not hide "
+     "health records with your authorization. Leaving something off the application does not hide "
      "it, and it does give the carrier a reason to contest a claim inside the first two years."),
     ("Should I take the exam if I am offered the choice?",
-     "If you are in good health, usually yes. A paramedical exam is free, takes about twenty "
-     "minutes at your home or office, and often lands you in a better rate class than an "
+     "If you are in good health, usually yes. A paramedical exam is free and takes about twenty "
+     "minutes at your home or office. It often lands you in a better rate class than an "
      "algorithm will award without it. The exam is worth skipping when speed genuinely matters, "
      "when a needle is a real obstacle for you, or when your readings on the day are likely to be "
      "worse than your record suggests."),
@@ -110,8 +110,8 @@ def body():
     'the same price and with a decision in minutes.',
     answer=(
         'That is real for <a class="link" href="/term-life-insurance/">term life '
-        'insurance</a>, and it is not the whole story: there are three different ways to '
-        'skip the exam and they cost very different amounts. This page tells you which '
+        'insurance</a>, but it is not the whole story. There are three different ways to '
+        'skip the exam, and they cost very different amounts. This page tells you which '
         'one you are likely to be offered and what it will cost you.'),
     extra=hero_cta,
     media=C.figure("term-underwriting", C.MEDIA_SIZES, eager=True))}
@@ -124,10 +124,10 @@ def body():
 <section class="pb-14 md:pb-16 scroll-mt-28" id="who-qualifies">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">Three ways to skip the exam, and what each one costs</h2>
+      <h2 class="reveal text-h2">Three ways to skip the medical exam</h2>
       <p class="reveal mt-5 text-slate">
         Advertising treats these as one thing. They are not. The left hand column is what most
-        healthy people get and it is nearly free; the right hand column is a different product
+        healthy people get, and it is nearly free. The right hand column is a different product
         sold to a different person for a different reason.
       </p>
     </div>
@@ -153,8 +153,7 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       Guaranteed issue is in the table for completeness, and it is a final expense product rather
-      than a term one. If that column is where you are, the coverage is real and the right place
-      to read about it is the
+      than a term one. If that column is where you are, the coverage is real. Read about it on the
       <a class="link" href="/final-expense-insurance/">final expense insurance</a> hub.
     </p>
   </div>
@@ -169,9 +168,9 @@ def body():
     "What same day actually means",
     C.step(1, "You complete the application",
            "Fifteen to twenty five minutes, on a call or online. Longer than the marketing "
-           "suggests, because accelerated programmes ask more questions rather than fewer: the "
+           "suggests, because accelerated programs ask more questions rather than fewer: the "
            "questions are doing the work the exam used to do.")
-    + '<div class="mt-8">' + C.step(2, "The carrier queries the databases",
+    + '<div class="mt-8">' + C.step(2, "The carrier checks the databases",
            "Prescription history, motor vehicle record, and the industry claims exchange, in "
            "minutes. Some carriers also request electronic health records with your permission, "
            "which can add a day or two.")
@@ -193,9 +192,9 @@ def body():
 
 {C.inline_cta(
     "Not sure which route you would land in?",
-    "A licensed agent can tell you in a few minutes, from your age, your state, and what you "
-    "take. That conversation costs nothing and does not put an application anywhere.",
-    "term_noexam_mid", "#quote", "Or answer six questions instead",
+    "A licensed agent can tell you in a few minutes, from your age, your state, and the "
+    "medications you take. That conversation is free, and it does not file an application anywhere.",
+    "term_noexam_mid", "#quote", "See if you qualify",
     phone_first=True)}
 
 
@@ -207,9 +206,9 @@ def body():
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
       <div class="reveal card">
-        <h2 class="text-h3 !font-display !font-semibold">What you give up</h2>
+        <h2 class="text-h3 !font-display !font-semibold">What skipping the exam costs you</h2>
         <ul class="mt-5 grid gap-4 text-slate">
-          <li><strong class="text-ink">Coverage ceiling.</strong> Accelerated programmes have limits
+          <li><strong class="text-ink">Coverage ceiling.</strong> Accelerated programs have limits
               on face amount and age. Above them, the exam comes back whether you want it or not.</li>
           <li><strong class="text-ink">The best rate class.</strong> An algorithm awards the class it
               can defend from data. An exam that shows excellent blood pressure and cholesterol can
@@ -217,7 +216,7 @@ def body():
           <li><strong class="text-ink">A second opinion on yourself.</strong> A paramedical exam is a
               free set of readings. People do occasionally learn something from it that matters more
               than the policy.</li>
-          <li><strong class="text-ink">Nothing at all, quite often.</strong> If you are young and
+          <li><strong class="text-ink">Often, nothing at all.</strong> If you are young and
               healthy and the databases agree with your application, accelerated underwriting costs
               you no money and saves you three weeks.</li>
         </ul>
@@ -229,7 +228,7 @@ def body():
           <li>Anyone buying a large face amount, where a single rate class is worth more over the
               term than three weeks of waiting.</li>
           <li>Anyone over roughly sixty, where fully underwritten pricing is usually better and the
-              accelerated programmes thin out.</li>
+              accelerated programs thin out.</li>
           <li>Anyone whose numbers have genuinely improved since their records were written: a
               current reading beats an old prescription.</li>
           <li>Anyone who has been rated or declined before. A human underwriter can be argued with.
@@ -256,8 +255,8 @@ def body():
         <h2 class="reveal text-h2">Find out which route you qualify for</h2>
         <p class="reveal mt-5 text-slate">
           Six questions, about two minutes. A licensed agent comes back within {C.SLA} with the
-          carriers most likely to waive the exam for your age and health, and the price if they do
-          not. We will tell you when taking the exam is the better deal.
+          carriers most likely to waive the exam for your age and health. You also get the price if
+          they do not. We will tell you when taking the exam is the better deal.
         </p>
         <div class="reveal mt-6 pt-6 border-t border-rule">
           <p class="text-slate">Or ask first, and apply later.</p>
@@ -281,13 +280,13 @@ def body():
     [("/term-life-insurance/rates/", "Term rates by age",
       "The full grid, and the six levers that move it."),
      ("/term-life-insurance/quotes/", "Get term life quotes",
-      "The full quote page, with what to have to hand."),
+      "The full quote page, with what to have ready."),
      ("/term-life-insurance/what-is-term-life-insurance/", "What term life insurance is",
       "The plain definition, with the fine print left in."),
      ("/term-life-insurance/level-term/", "Level term explained",
       "What the premium guarantee covers, and for how long."),
      ("/term-life-insurance/for-seniors/", "Term life after 60",
-      "Where the accelerated programmes stop reaching."),
+      "Where the accelerated programs stop reaching."),
      ("/term-life-insurance/20-year-term/", "20 year term",
       "The most common length, checked against real dates.")])}
 

@@ -25,8 +25,8 @@ ACTIVE = "/"
 SILO = "compare"
 TITLE = "Term vs Whole Life Insurance: Which One Do You Need? | Apex"
 OG_TITLE = "Term life vs whole life insurance"
-DESC = ("Term life covers a period and costs less. Whole life covers your whole life and builds "
-        "cash value. Side by side on premium, cash value, and how each one ends.")
+DESC = ("Term life covers a set period and costs less. Whole life lasts for life and builds cash "
+        "value. Compare them on premium, cash value, and how each one ends.")
 
 TRAIL = [("Home", "/"), ("Compare", None), ("Term vs whole life", None)]
 
@@ -49,7 +49,7 @@ ROWS = [
     ("The cost", []),
     ("Premium for the same death benefit",
      ["The lowest cost per dollar of coverage of any life product.",
-      "Several times the term premium for the same face amount. Not a markup, a different "
+      "Several times the term premium for the same death benefit. Not a markup, a different "
       "product."]),
     ("Can the premium rise",
      ["Not during the level term. At the end of the term it renews annually and rises steeply "
@@ -88,31 +88,31 @@ ROWS = [
 
 WINS = [
     ("Term wins", "When the need has an end date",
-     "<p>Most people's largest insurance need is temporary and they can name the year it stops: "
-     "the mortgage is paid, the youngest child finishes college, the retirement accounts are "
+     "<p>Most people's largest insurance need is temporary, and they can name the year it stops. "
+     "The mortgage is paid, the youngest child finishes college, or the retirement accounts are "
      "large enough to stand alone. Insuring a temporary need with permanent coverage means "
-     "buying far less of it than the need requires, which is the most common and most expensive "
+     "buying far less of it than the need requires. That is the most common and most expensive "
      "mistake in this category.</p>"
      "<p class='mt-3'>Term is also what makes a large death benefit affordable at all. A young "
      "family that needs a full income replaced can buy the amount it actually needs on term "
      "premiums and cannot on permanent ones. Being underinsured in a product with guarantees is "
      "worse than being fully insured in one without them.</p>"),
-    ("Whole life wins", "When the need never ends, or the money must be there",
-     "<p>Some needs do not expire: a funeral and final bills, a lifelong dependant, an estate "
-     "that will owe tax and needs liquidity, a business agreement that has to be funded whenever "
-     "the death happens. A policy that expires at 75 does not cover any of them, and buying a new "
+    ("Whole life wins", "When the need never ends or guarantees matter",
+     "<p>Some needs do not expire: a funeral and final bills, a lifelong dependent, an estate "
+     "that will owe tax and needs cash to pay it, a business agreement that has to be funded whenever "
+     "the death happens. A policy that expires at 75 does not cover any of them. Buying a new "
      "one at 75 is a different price and a different health conversation.</p>"
      "<p class='mt-3'>It also wins when the guarantee itself is the point. The premium cannot "
-     "rise, the coverage cannot expire, and there is nothing to monitor or refund correctly for "
+     "rise, the coverage cannot expire, and there is nothing to monitor or fund correctly for "
      "the next forty years. For some buyers that settled quality is worth the cost gap, and it is "
-     "a legitimate reason rather than a rationalisation.</p>"),
+     "a legitimate reason rather than a rationalization.</p>"),
 ]
 
 CHECKS = [
     "Write down the year your need ends. If you can name one, you are looking at term, and the "
     "rest of this page is detail.",
-    "Check that any tax advantaged account with unused room is full before permanent life "
-    "insurance is being considered as a place to put money.",
+    "Fill any tax advantaged account that has unused room before you consider permanent life "
+    "insurance as a place to put money.",
     "Work out the death benefit you actually need first, then the product. Choosing the product "
     "first is how people end up with a permanent policy a third the size of the need it was "
     "bought for.",
@@ -121,18 +121,18 @@ CHECKS = [
     "Ask whether the term policy is convertible, to what, and by what deadline. That clause is "
     "worth real money and it is routinely left out of a comparison.",
     "Ask the agent how they are paid on each option. The commission difference between these two "
-    "products is large, and an agent who will not answer has answered.",
+    "products is large.",
 ]
 
 FAQ = [
     ("Is term or whole life insurance better?",
-     "Neither is better in general, and any page that tells you one of them is has stopped "
-     "describing the products. The question that decides it is whether your need has an end date. "
+     "Neither is better in general. "
+     "The question that decides it is whether your need has an end date. "
      "If you can name the year the need stops, term is almost always the right answer and the "
      "cheaper one. If the need genuinely never ends, term will expire underneath it and permanent "
      "coverage is what the job requires."),
     ("Why is whole life so much more expensive than term?",
-     "Because a term policy is priced on the chance you die during the term, and most people do "
+     "Because a term policy is priced on the chance you die during the term. Most people do "
      "not, so most term policies never pay a claim. A whole life policy is priced on the "
      "certainty that it will pay one eventually, plus the guaranteed cash value it is required to "
      "build along the way. You are not paying more for the same thing, you are paying for a "
@@ -140,12 +140,12 @@ FAQ = [
     ("Can I convert term life insurance to whole life later?",
      "Usually yes, if the policy is convertible, and this is one of the most useful clauses in "
      "life insurance. Conversion lets you turn some or all of the coverage into a permanent "
-     "policy without answering new health questions, which matters enormously if your health has "
+     "policy without answering new health questions. That matters enormously if your health has "
      "changed. It has a deadline, commonly a stated age or a number of years, and missing it is "
-     "irreversible. Ask for the conversion terms in writing before you buy, not afterwards."),
+     "irreversible. Ask for the conversion terms in writing before you buy, not afterward."),
     ("Should I buy term and invest the difference?",
-     "It is a sound strategy and it beats whole life for most people on the arithmetic, on one "
-     "condition that is doing all the work: you actually invest the difference, every month, for "
+     "It is a sound strategy, and for most people it beats whole life on the math. It depends on "
+     "one condition: you actually invest the difference, every month, for "
      "decades, without touching it. Some people do. Many do not, and they end up with neither the "
      "investment nor the permanent coverage. Be honest about which one you are, because the "
      "answer changes the recommendation."),
@@ -156,10 +156,10 @@ FAQ = [
      "insuring the whole need permanently and covers more than insuring it all on term."),
     ("Does whole life insurance ever make sense for a young person?",
      "Sometimes, and the honest version is that it makes sense less often than it is sold. The "
-     "clear cases are a lifelong dependant, a family business that needs funding whenever a death "
+     "clear cases are a lifelong dependent, a family business that needs funding whenever a death "
      "happens, or a genuine need to lock insurability early where health history already suggests "
      "that will be hard. Buying it in your twenties as a savings vehicle is the case that "
-     "deserves the most scepticism, because the early years build very little and the money is "
+     "deserves the most skepticism, because the early years build very little and the money is "
      "hard to get back."),
 ]
 
@@ -182,11 +182,11 @@ COST_BLOCKS = """
           number in a comparison is worse than no number, because it does the arguing for you and
           it does it with a fake. Every rate cell on this site is
           <span class="tnum">$--</span> for the same reason, and it will stay that way until real
-          rate cards are loaded rather than until it becomes inconvenient.
+          rate cards are loaded.
         </p>
-        <h3 class="reveal mt-8 text-h4">The shape of the gap</h3>
+        <h3 class="reveal mt-8 text-h4">How big the cost gap is</h3>
         <p class="reveal mt-3 text-slate">
-          What is fair to say is the shape, and the shape is not subtle. For the same death
+          What we can fairly say is the size of the gap. For the same death
           benefit at the same age, whole life costs several times what term costs.
         </p>
         <p class="reveal mt-4 text-slate">
@@ -200,15 +200,15 @@ COST_BLOCKS = """
           When the rate cards land, the numbers will appear on the two pages that own them:
           <a class="link" href="/term-life-insurance/rates/">term life insurance rates by age</a>
           and <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates by
-          age</a>. They are kept there rather than reprinted here so there is one place to update
-          and one place to be wrong.
+          age</a>. They are kept there rather than reprinted here, so there is only one place to
+          update.
         </p>
         <h3 class="reveal mt-8 text-h4">A check for any comparison you are shown</h3>
         <p class="reveal mt-3 text-slate">
-          One thing worth adding to any cost comparison you are shown elsewhere: a term premium
-          stops when the term does, and a whole life premium usually does not. Comparing thirty
-          years of one against a lifetime of the other is comparing two different questions, and
-          the honest version of the sum runs to the same end date on both sides.
+          When you are shown a cost comparison elsewhere, remember that a term premium stops
+          when the term does, and a whole life premium usually does not. Comparing thirty years
+          of one against a lifetime of the other is comparing two different questions. An honest
+          comparison runs to the same end date on both sides.
         </p>"""
 
 
@@ -222,16 +222,16 @@ def body():
         h1="Term vs Whole Life Insurance",
         lead='Term life insurance covers you for a set number of years and costs the least per '
              'dollar of coverage. Whole life insurance covers you until you die, cannot expire, '
-             'and builds a guaranteed cash value, and it costs several times as much for the same '
-             'death benefit. The question that decides between them is not which product is '
-             'better, it is whether your need has an end date you can name: if it does, '
+             'and builds a guaranteed cash value, but costs several times as much for the same '
+             'death benefit. What decides between them is '
+             'whether your need has an end date you can name: if it does, '
              '<a class="link" href="/term-life-insurance/">term life insurance</a> is almost '
              'always the answer, and if it genuinely does not, '
              '<a class="link" href="/whole-life-insurance/">whole life insurance</a> is what the '
              'job requires.',
-        table_heading="The two contracts, side by side",
-        table_intro="Grouped by the part of the policy each row is about. The rows in the first "
-                    "and last groups decide this for most people; the middle two are where the "
+        table_heading="Term vs whole life, side by side",
+        table_intro="Grouped by the part of the policy each row is about. The first and last "
+                    "groups decide this for most people. The middle two are where the "
                     "arguing usually happens.",
         table_caption="Term life insurance compared with whole life insurance across duration, "
                       "cost, cash value, and failure modes",
@@ -246,12 +246,12 @@ def body():
                    "invent a number for. Here is what we can say, and where the real figures will "
                    "go.",
         cost_blocks=COST_BLOCKS,
-        wins_heading="Where each one genuinely wins",
+        wins_heading="When term wins and when whole life wins",
         wins_intro="Two situations, and they are not close calls. Most people reading this page "
-                   "will recognise themselves in one of them within a sentence or two.",
+                   "will recognize themselves in one of them within a sentence or two.",
         wins=WINS,
-        checklist_heading="Before you choose either",
-        checklist_intro="Six checks. The first one settles this more often than the other five "
+        checklist_heading="Six checks before you choose",
+        checklist_intro="The first one settles this more often than the other five "
                         "put together, and it takes about a minute.",
         checklist_items=CHECKS,
         checklist_aside='<p class="text-sm text-muted">An agent who will not tell you how they '
@@ -263,14 +263,14 @@ def body():
         paths=[
             ("Term life: the most coverage for the money",
              "Six questions and about two minutes. A licensed agent comes back with premiums from "
-             "named carriers, and with the conversion terms, so you can see what it would cost to "
+             "named carriers, and with the conversion terms. You can see what it would cost to "
              "make the policy permanent later if the need turns out not to end.",
-             "/term-life-insurance/quotes/", "Get term life quotes"),
+             "/term-life-insurance/quotes/", "Get my term life quote"),
             ("Whole life: coverage that cannot expire",
              "Five questions and about two minutes. You get named carriers and real premiums, "
-             "with the guaranteed columns kept visibly apart from the projected ones, and a "
+             "with the guaranteed columns kept visibly apart from the projected ones. You also get a "
              "straight answer if we think term suits you better.",
-             "/whole-life-insurance/quotes/", "Get whole life quotes"),
+             "/whole-life-insurance/quotes/", "Get my whole life quote"),
         ],
         faq_heading="Questions about term and whole life",
         faq=FAQ,

@@ -26,8 +26,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Whole Life Insurance Rates by Age (2026 Rate Chart)"
 OG_TITLE = "Whole life insurance rates by age"
-DESC = ("Whole life insurance rate chart by age and coverage amount, with male and female and "
-        "tobacco splits. What moves a permanent premium, and how to lower one you were quoted.")
+DESC = ("Whole life insurance rates by age and coverage amount, split by sex and tobacco use. "
+        "See what moves a permanent premium and how to lower a quote.")
 
 # 30 to 79 in five year bands. The mid age is what the row's quote button
 # carries into the form, because a band cannot be typed into an age field.
@@ -51,27 +51,27 @@ FAQ = [
      "There is no useful average, which is why this page is a chart rather than a number. Age, "
      "coverage amount, sex, tobacco use, health class, and how long you intend to pay premiums "
      "for each move the figure by more than any average would tell you. What is fair to say is "
-     "the shape: for the same death benefit, whole life costs several times what term costs, "
-     "because the policy is designed to still be in force on the day you die rather than to "
-     "expire before it."),
+     "the shape. For the same death benefit, whole life costs several times what term costs. "
+     "The policy is designed to still be in force on the day you die rather than to expire "
+     "before it."),
     ("Why is whole life so much more expensive than term?",
-     "Because a term policy is priced on the chance you die during the term, and most people do "
-     "not, so most term policies never pay a claim. A whole life policy is priced on the "
+     "A term policy is priced on the chance you die during the term. Most people do not, so "
+     "most term policies never pay a claim. A whole life policy is priced on the "
      "certainty that it will pay one eventually, plus the cash value it is required to build "
      "along the way. You are not paying more for the same thing. You are paying for a different "
      "thing, and whether that thing is worth it depends entirely on whether the need is "
      "permanent."),
     ("Does the premium ever go up?",
      "Not on a level premium whole life policy. The premium is fixed in the contract at issue and "
-     "cannot be raised by the carrier, which is one of the three guarantees this product is sold "
-     "on. That is not true of every permanent product: universal life premiums can and do need "
-     "topping up, which is a different conversation."),
+     "cannot be raised by the carrier. That is one of the three guarantees this product is sold "
+     "on. It is not true of every permanent product: universal life policies can and do need "
+     "extra premium payments, which is a different conversation."),
     ("Do men and women pay different rates?",
      "Yes, in most states. Women statistically live longer, so the same coverage generally costs "
      "a woman less than a man of the same age and health. Montana requires unisex rates, so the "
      "split does not apply there."),
     ("How much more does tobacco cost?",
-     "Commonly two to three times the premium for the same coverage, and on a permanent policy "
+     "Commonly two to three times the premium for the same coverage. On a permanent policy "
      "you carry that difference for the rest of your life rather than for a term. Most carriers "
      "ask about the last twelve months. Some will reconsider the class after a documented period "
      "without nicotine, which is worth asking about rather than assuming."),
@@ -108,11 +108,10 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">Whole Life Insurance Rates by Age</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        The chart below is the pricing grid for
-        <a class="link" href="/whole-life-insurance/">whole life insurance</a>: age band by
+        The chart below prices
+        <a class="link" href="/whole-life-insurance/">whole life insurance</a> by age band and
         coverage amount, split by sex and tobacco use. The premium in each cell is the one you
-        would keep paying for the rest of your life, which is the single most important thing to
-        understand before reading any of it. Every row has a button that carries its numbers into
+        would keep paying for the rest of your life. Every row has a button that carries its numbers into
         the quote form further down.
       </p>
     </div>
@@ -145,7 +144,7 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       The grid prices a policy you pay for as long as you live. A ten pay or twenty pay policy
-      compresses the same coverage into fewer, larger premiums and is a different contract rather
+      compresses the same coverage into fewer, larger premiums. It is a different contract rather
       than a different cell, so it is quoted rather than charted. Issue ages above this grid are
       routinely available and are covered on
       <a class="link" href="/whole-life-insurance/for-seniors/">whole life for seniors</a>. If your
@@ -163,10 +162,10 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What actually moves your rate</h2>
+      <h2 class="reveal text-h2">What affects your whole life rate</h2>
       <p class="reveal mt-5 text-slate">
         In rough order of size. On a permanent policy the first two are worth more than everything
-        below them put together, and unlike a term policy you carry the difference for life.
+        below them put together. Unlike a term policy, you carry the difference for life.
       </p>
     </div>
 
@@ -183,7 +182,7 @@ def body():
              "Very large")}
       {lever("How long you pay premiums for",
              "A policy paid up at 65, or in ten or twenty years, costs far more per month than "
-             "one you pay for life, because the same money is being collected over fewer years. "
+             "one you pay for life. The same money is being collected over fewer years. "
              "It is not a worse deal, it is a different schedule.",
              "Large")}
       {lever("Your health class",
@@ -192,7 +191,7 @@ def body():
              "and family history decide this, and carriers disagree about all four.",
              "Large")}
       {lever("Coverage amount",
-             "Scales less than proportionally, so doubling the face amount rarely doubles the "
+             "Scales less than proportionally, so doubling the coverage amount rarely doubles the "
              "premium. Carriers also set band breaks, and being just over one is cheaper per "
              "dollar than being just under it.",
              "Moderate")}
@@ -206,7 +205,7 @@ def body():
 </section>
 
 
-{C.ask_strip("Rather skip to your own number?", "Your age, state and health decide it. Five questions.", '<a href="#whole-rates-quote-form" class="btn btn-cta">Get my whole life quote</a>')}
+{C.ask_strip("Want your own rate?", "Your age, state and health decide it. Five questions.", '<a href="#whole-rates-quote-form" class="btn btn-cta">Get my whole life quote</a>')}
 
 <!-- =====================================================================
      HOW TO LOWER A QUOTED RATE. T2. Legitimate levers only.
@@ -222,9 +221,9 @@ def body():
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
-        {C.step(1, "Ask whether the need is actually permanent",
+        {C.step(1, "Ask whether the need is permanent",
                 "The largest saving available on this page is discovering that you needed twenty "
-                "years of cover rather than lifelong cover. That is not a rate reduction, it is a "
+                "years of coverage rather than lifelong coverage. That is not a rate reduction, it is a "
                 "different product, and it is the honest first question.")}
         <div class="mt-8">
           {C.step(2, "Apply to a different carrier",
@@ -240,7 +239,7 @@ def body():
                   "Simplified issue exists for people who would fail an exam, not as a convenience upgrade.")}
         </div>
         <div class="mt-8">
-          {C.step(4, "Right size the face amount",
+          {C.step(4, "Right size the coverage amount",
                   "Permanent coverage is usually bought for a specific, bounded job: a funeral, a "
                   "final tax bill, a legacy of a stated size. Sizing it to that job rather than "
                   "to a round number is normally a bigger saving than any class improvement.")}
@@ -252,9 +251,9 @@ def body():
         </div>
         <div class="mt-8">
           {C.step(6, "Split the need between two policies",
-                  "A small permanent policy for the part of the need that never goes away, plus "
-                  "term for the part that does, often costs less than one large permanent policy "
-                  "and covers the same exposure.")}
+                  "A small permanent policy covers the part of the need that never goes away, "
+                  "and term covers the part that does. Together they often cost less than one "
+                  "large permanent policy and cover the same exposure.")}
         </div>
       </div>
     </div>
@@ -271,8 +270,7 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2 text-white">Why your quote may not match this chart</h2>
       <p class="reveal mt-5 text-white/85">
-        A rate chart is an illustration of shape. It shows how premiums move between ages and
-        coverage amounts. It cannot show what a carrier will decide about you, and any chart that
+        A rate chart shows how premiums move between ages and coverage amounts. It cannot show what a carrier will decide about you, and any chart that
         claims otherwise is selling you a number it does not have.
       </p>
     </div>
@@ -294,7 +292,7 @@ def body():
       <div class="reveal">
         <h3 class="text-h4 text-white">Carriers differ by state</h3>
         <p class="mt-3 text-white/85">
-          Product availability, riders, minimum face amounts, and pricing all vary. The carrier
+          Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier
           that is cheapest in one state may not write in yours at all.
         </p>
       </div>
@@ -312,7 +310,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Get the real number</h2>
+        <h2 class="reveal text-h2">Get your whole life quote</h2>
         <p class="reveal mt-5 text-slate">
           Five questions, about two minutes. A licensed agent comes back within {C.SLA} with
           premiums from named carriers at a class we can defend, rather than a chart cell. Ask for
@@ -350,6 +348,6 @@ def body():
 </section>
 
 
-{C.closing_band("whole-band", "Turn the chart into your own number",
+{C.closing_band("whole-band", "Get your own whole life rate",
     "A chart shows the shape of the pricing. Your age, state and health decide the figure.",
     "whole_rates_close", silo="whole")}"""

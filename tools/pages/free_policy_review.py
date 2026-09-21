@@ -38,13 +38,13 @@ FAQ = [
     ("When should I review my life insurance?",
      "Once a year is a sensible habit, and any time something big changes: marriage, divorce, a "
      "new child or grandchild, a new home, a new job, or new debt."),
-    ("Can you help me convert a term policy to permanent cover?",
-     "Often, yes. Many term policies let you convert to permanent cover without a new medical "
+    ("Can you help me convert a term policy to permanent coverage?",
+     "Often, yes. Many term policies let you convert to permanent coverage without a new medical "
      "exam, but usually only before a deadline written into the policy. A review is a good time "
      "to find out whether yours has that option and when it ends."),
     ("How long does it take?",
      "Starting takes a few minutes. After you send the form, a licensed agent calls you within "
-     + C.SLA + ". Have your policy or your latest statement to hand if you can."),
+     + C.SLA + ". Have your policy or your latest statement ready if you can."),
 ]
 
 
@@ -78,7 +78,7 @@ def body():
 
     what = C.prose(
         "What is a free policy review?",
-        C.qa("A checkup for cover you already own",
+        C.qa("A checkup for coverage you already own",
              "A licensed agent looks at how your policy works today, not how it was sold to you. "
              "You find out what it covers, how long it lasts, and what it costs you.")
         + C.qa("Nothing has to change",
@@ -90,10 +90,10 @@ def body():
 
     # The same connected stepper as the homepage and the hubs' "How to apply".
     steps = C.steps_section(
-        "Three simple steps",
-        "No pressure at any of them.",
+        "How the free policy review works",
+        "Three steps, no pressure.",
         [("file-text", "A few minutes", "Share your policy",
-          "Tell us the basics about the cover you have now. A recent statement helps, but it is "
+          "Tell us the basics about the coverage you have now. A recent statement helps, but it is "
           "not required."),
          ("search", "We do the work", "We review it with fresh eyes",
           "A licensed agent checks how it fits your life today and explains it plainly, including "
@@ -115,10 +115,10 @@ def body():
       <p class="reveal mt-5 text-slate">If any of these sound familiar, it is a good time for a fresh look.</p>
     </div>
     <div class="mt-10 bento" data-stagger="40">
-      {_card("Your life changed", "Marriage, a new child, a new home, a new job, a divorce, or new debt can all change how much cover you need.")}
+      {_card("Your life changed", "Marriage, a new child, a new home, a new job, a divorce, or new debt can all change how much coverage you need.")}
       {_card("It has been a while", "If you have not looked at your policy in a year or more, check that it still does its job.", tone="bento-cell-tint")}
       {_card("You want to pay less", "Prices and your options change over time. A review shows whether a better fit exists. It does not promise one.")}
-      {_card("Your options may expire", "Many term policies can be converted to permanent cover, but only before a set deadline.")}
+      {_card("Your options may expire", "Many term policies can be converted to permanent coverage, but only before a set deadline.")}
     </div>
   </div>
 </section>
@@ -127,16 +127,16 @@ def body():
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What your review covers</h2>
-      <p class="reveal mt-5 text-slate">The three things that decide whether your cover still works for your family.</p>
+      <p class="reveal mt-5 text-slate">The three things that decide whether your coverage still works for your family.</p>
     </div>
     <div class="mt-10 bento" data-stagger="40">
-      {_covers("Protection", "Is the cover still right?",
+      {_covers("Protection", "Is the coverage still right?",
                ["Is the amount enough for your family today?", "Does it last as long as you need it to?", "Are your beneficiaries up to date?"])}
       {_covers("Cost", "Are you paying more than you need to?",
-               ["Is a better fitting policy available?", "Are you paying for overlapping cover?", "Will your premium rise later?"],
+               ["Is a better fitting policy available?", "Are you paying for overlapping coverage?", "Will your premium rise later?"],
                tone="bento-cell-tint")}
       {_covers("Options", "What choices do you have?",
-               ["Term and permanent cover, compared plainly", "Whether your term policy can be converted", "How a change in health affects your choices"])}
+               ["Term and permanent coverage, compared plainly", "Whether your term policy can be converted", "How a change in health affects your choices"])}
     </div>
 
     <div class="reveal mt-8 max-w-3xl">

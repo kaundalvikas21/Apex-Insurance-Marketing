@@ -26,8 +26,8 @@ ACTIVE = "/term-life-insurance/"
 SILO = "term-life"
 TITLE = "Return of Premium Term Life Insurance: Is It Worth It? | Apex"
 OG_TITLE = "Return of premium term life insurance"
-DESC = ("How return of premium term works, what the refund actually costs you, and the small "
-        "number of situations where it is the right buy. An honest look, not a pitch.")
+DESC = ("How return of premium term life works, what the refund costs you, and the few "
+        "situations where it is the right buy. An honest look, not a pitch.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("Return of premium", None)]
@@ -50,19 +50,19 @@ COST_ROWS = [
 ]
 
 WINS = [
-    ("The disciplined case", "You would genuinely not invest the difference",
-     "Not &quot;you intend to&quot;. If the honest answer is that the extra premium would be "
-     "absorbed into everyday spending, then a forced savings mechanism with a refund at the end "
+    ("The disciplined case", "You would not invest the difference",
+     "Not &quot;you intend to&quot;. Be honest: would the extra premium disappear into "
+     "everyday spending? If so, forced saving with a refund at the end "
      "beats an intention that never gets acted on. This is a real argument and it is the strongest "
      "one for the product."),
     ("The high income case", "You have filled every tax advantaged account first",
-     "If the retirement accounts are maxed and this is genuinely surplus, the calculus changes, "
-     "because the alternative use of the money is a taxable account rather than a tax advantaged "
+     "If your retirement accounts are maxed and this money is surplus, the math changes. "
+     "The alternative use of the money is a taxable account rather than a tax advantaged "
      "one. This is a narrow case, and it is worth checking with a tax professional rather than an "
      "insurance agent."),
     ("The certainty case", "You value a known outcome more than a probable one",
      "The refund amount is written into the contract at issue. Nothing else in this comparison "
-     "is. Some people will pay a real premium for a number they can point to, and that is a "
+     "is. Some people will pay extra for a number they can point to. That is a "
      "preference rather than a mistake, as long as it is priced honestly."),
 ]
 
@@ -70,8 +70,8 @@ FAQ = [
     ("Is return of premium life insurance worth it?",
      "For most households, no. You pay a substantially higher premium for the same death benefit, "
      "and the refund at the end is your own money back with no interest. For the difference to be "
-     "worth it, you have to be certain you will keep the policy for the entire term, and you have "
-     "to be someone who genuinely would not have put the extra premium anywhere else. Both of "
+     "worth it, you have to be certain you will keep the policy for the entire term. You also have "
+     "to be someone who would not have put the extra premium anywhere else. Both of "
      "those are true of some people. Neither is true of most."),
     ("Do you get all your money back with return of premium?",
      "Usually the base premiums, and usually only if you hold the policy for the full term. "
@@ -81,14 +81,14 @@ FAQ = [
      "differ on this."),
     ("What happens if I cancel a return of premium policy early?",
      "You receive a partial refund on a schedule set at issue, and in the early years that "
-     "schedule is unkind. It is common for a policy surrendered in the first several years to "
-     "return little or nothing, and for one surrendered halfway through the term to return well "
+     "schedule is unkind. A policy surrendered in the first several years commonly "
+     "returns little or nothing. One surrendered halfway through the term commonly returns well "
      "under half the premiums paid. Since the higher premium is the reason people lapse these "
      "policies, this is the risk that actually bites."),
     ("Is the return of premium refund taxable?",
      "A refund of your own premiums is generally treated as a return of basis rather than income, "
-     "so it is generally not taxable. Generally is doing real work in that sentence: the treatment "
-     "depends on the policy's structure and your own circumstances, and we are a licensed "
+     "so it is generally not taxable. The word generally matters: the treatment "
+     "depends on the policy's structure and your own circumstances. We are a licensed "
      "insurance agency, not tax advisers. Confirm it with a tax professional before you rely on "
      "it in a plan."),
     ("Do you recommend return of premium term life insurance?",
@@ -117,19 +117,18 @@ SIBLINGS = [
 
 BEFORE_EITHER = """<h3 class="reveal text-h4">1. Settle the amount and the length</h3>
 <p class="reveal mt-3 text-slate">
-        Settle the amount and the length first. Those two decisions matter more to your household
-        than the refund provision does, and they are the ones that are hard to change later. The
+        The
         <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> sizes the
-        amount and shows its working, and
+        amount and shows its work. Our page on
         <a class="link" href="/term-life-insurance/rates/">term life insurance rates by age</a>
-        shows how the premium moves with length so you can see what you are actually trading.
+        shows how the premium moves with length, so you can see what you are trading.
       </p>
       <h3 class="reveal mt-8 text-h4">2. Ask where the difference would go</h3>
 <p class="reveal mt-3 text-slate">
         Then ask one question about yourself, honestly: if you bought the standard policy, where
         would the difference in premium go? If you can name the account, buy the standard policy.
         If you cannot, return of premium may be the version of this decision you will actually
-        stick to, and sticking to it is worth more than being theoretically right.
+        stick to. Sticking to it is worth more than being theoretically right.
       </p>"""
 
 
@@ -166,11 +165,11 @@ def body():
              "to you after twenty or thirty years.", "mt-8"),
         C.qa("If you cancel early, you get a fraction of it",
              "The surrender schedule is set at issue and is heavily back loaded. A policy given up "
-             "in the early years typically returns little or nothing, and one given up at the "
+             "in the early years typically returns little or nothing. One given up at the "
              "halfway point commonly returns well under half. Since the higher premium is itself "
              "the main reason people give these policies up, the two risks compound.", "mt-8"),
         C.qa("The refund is not a return, it is a repayment",
-             "This is the sentence the product is usually sold without. No interest is credited, "
+             "No interest is credited, "
              "no growth is shared, and the amount does not change with market conditions. The "
              "carrier held your extra premium for thirty years and gives back the same dollars, "
              "which are worth less than the dollars you handed over.", "mt-8"),
@@ -186,14 +185,14 @@ def body():
         'It is standard <a class="link" href="/term-life-insurance/">term life '
         'insurance</a> with that one addition. The coverage is identical to a standard '
         'policy of the same size and length, the premium is substantially higher, and the '
-        'refund carries no interest. We rarely recommend it, and this page explains the '
-        'arithmetic behind that rather than asking you to take it on trust.'),
+        'refund carries no interest. We rarely recommend it, and this page shows the '
+        'math behind that.'),
     extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-window", C.MEDIA_SIZES, eager=True))}
 
 
-{C.prose("How it actually works", mechanics,
-         intro="Four mechanics, and the fourth is the one that decides it.")}
+{C.prose("How return of premium term works", mechanics,
+         intro="Four parts, and the fourth is the one that decides it.")}
 
 
 <!-- =====================================================================
@@ -206,7 +205,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The same coverage, priced two ways</h2>
+      <h2 class="reveal text-h2">Return of premium vs standard term cost</h2>
       <p class="reveal mt-5 text-slate">
         One household, one death benefit, one thirty year term, two structures. This is the
         comparison a return of premium quote should always be shown next to, and almost never is.
@@ -251,7 +250,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What the refund really costs</h2>
+        <h2 class="reveal text-h2">What the refund costs you</h2>
         <p class="reveal mt-5 text-slate">
           The honest objection to return of premium is not that the refund is fake. It is real and
           it is contractual. The objection is what the extra premium was doing for thirty years
@@ -264,34 +263,34 @@ def body():
           <ul>
             <li>The refund is real and it is contractual.</li>
             <li>Its true cost is whatever the extra premium would have done in an account you actually own.</li>
-            <li>It comes back at face value, so after thirty years of price rises it is worth less than what went in.</li>
+            <li>It comes back at face value, so after thirty years of rising prices it is worth less than what went in.</li>
           </ul>
         </div>
         <h3 class="reveal mt-6 text-h4">The cost you do not see</h3>
         <p class="reveal mt-3 text-slate">
           Take the difference between the two premiums in the table above. That difference leaves
           your account every month for thirty years, and at the end of it you receive the same
-          dollars back with nothing added. Whatever those dollars would have done in any account
-          you actually own, an index fund, a retirement account, an offset against the mortgage, or
-          a savings account, is the true cost of the refund.
+          dollars back with nothing added. The true cost of the refund is whatever those dollars
+          would have done in an account you own: an index fund, a retirement account, extra
+          mortgage payments, or a savings account.
         </p>
         <h3 class="reveal mt-8 text-h4">Why we put no percentage on it</h3>
         <p class="reveal mt-3 text-slate">
           We are deliberately not putting a percentage on that here. Any rate of return we chose
-          would be doing the arguing for us, and we would be choosing it knowing which way we
-          wanted the comparison to come out. Put your own number in, using an account you genuinely
+          would do the arguing for us, and we know which way we
+          want the comparison to come out. Put your own number in, using an account you genuinely
           hold, and the comparison becomes yours rather than ours.
         </p>
-        <h3 class="reveal mt-8 text-h4">The refund is nominal, not real</h3>
+        <h3 class="reveal mt-8 text-h4">The refund does not keep up with prices</h3>
         <p class="reveal mt-3 text-slate">
           There is a second cost that is easier to overlook. Thirty years of dollars returned at
           face value are worth less than the dollars that went in, because prices move over thirty
-          years. The refund is nominal, not real. That is not a criticism of the carrier; it is
+          years. That is not a criticism of the carrier; it is
           simply what a repayment without interest is.
         </p>
-        <h3 class="reveal mt-8 text-h4">The one genuine benefit</h3>
+        <h3 class="reveal mt-8 text-h4">The one real benefit</h3>
         <p class="reveal mt-3 text-slate">
-          Set against all of that is one genuine benefit, which the next section is about: if the
+          Set against all of that is one real benefit, covered in the next section. If the
           alternative is that the money is spent rather than invested, a contractual refund beats
           an intention.
         </p>
@@ -304,7 +303,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">When it is genuinely the right buy</h2>
+      <h2 class="reveal text-h2">When return of premium is the right buy</h2>
       <p class="reveal mt-5 text-slate">
         Three situations, and we would place the policy in all three without hesitation. If none of
         them describes you, the standard policy is the better decision and we will say so on the
@@ -320,9 +319,9 @@ def body():
 {C.inline_cta(
     "See both quoted side by side",
     "Six questions, about two minutes. We will come back with a standard term premium and a return "
-    "of premium premium for the same coverage from named carriers, so the gap is a number you can "
-    "look at rather than an argument you have to referee. No obligation, and no cost.",
-    "term_rop_mid", "/term-life-insurance/quotes/", "Get term life quotes")}
+    "of premium one for the same coverage, from named carriers. You see the gap as a number, "
+    "not an argument. No obligation, and no cost.",
+    "term_rop_mid", "/term-life-insurance/quotes/", "Get both quotes")}
 
 
 {C.prose("Before you decide either way", BEFORE_EITHER,

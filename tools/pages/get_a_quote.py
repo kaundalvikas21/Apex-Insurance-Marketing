@@ -39,12 +39,12 @@ ACTIVE = PATH
 SILO = "site"
 TITLE = "Get a Free Life Insurance Quote | Apex Insurance Marketing"
 OG_TITLE = "Get a free life insurance quote"
-DESC = ("Compare term life, whole life, and final expense quotes from multiple carriers. "
-        "Free, no obligation, no medical exam to get a quote, and no Social Security number.")
+DESC = ("Compare term life, whole life and final expense quotes from multiple carriers. "
+        "Free, no obligation, no medical exam or Social Security number for a quote.")
 
 PRODUCTS = [
-    ("term", "Term life", "Cover a set number of years. Usually the cheapest way to cover a mortgage or children at home."),
-    ("whole", "Whole life", "Cover for life, with a level premium and cash value that builds."),
+    ("term", "Term life", "Coverage for a set number of years. Usually the cheapest way to cover a mortgage or children at home."),
+    ("whole", "Whole life", "Coverage for life, with a level premium and cash value that builds."),
     ("final-expense", "Final expense", "A smaller policy for a funeral and final bills. No medical exam."),
 ]
 
@@ -58,11 +58,11 @@ FAQ = [
      "require one at all."),
     ("Will you ask for my Social Security number?",
      "Not for a quote. It is needed on an application, because the carrier uses it to order "
-     "your prescription and motor vehicle history, but nobody needs it to tell you what a "
+     "your prescription and motor vehicle history. Nobody needs it to tell you what a "
      "policy costs. If a site asks for it before showing you a price, leave."),
     ("How many people will call me?",
      "One. A licensed agent from this agency, once, within " + C.SLA + ". We are not a lead "
-     "generator: your details are not sold, rented, or passed to other agencies, so you will "
+     "generator: your details are not sold, rented, or passed to other agencies. You will "
      "not get the six calls in ten minutes that a comparison site produces."),
     ("What if I change my mind?",
      "Nothing happens. There is no obligation at any stage, no fee, and no policy until you "
@@ -209,7 +209,7 @@ def body():
     # the page from the form, so "no image beside the form" is untouched.
     talk_band = C.banner(
         "term-band",
-        "Would rather talk it through?",
+        "Prefer to talk it through?",
         "A call gets you the same licensed agent and the same comparison, and you can ask the "
         "awkward questions as they come up.",
         C.phone_link("quote_footer", "btn btn-call btn-block !bg-white !text-navy",
@@ -241,7 +241,7 @@ def body():
         </ul>
 
         <div class="reveal card mt-8">
-          <h2 class="text-h4">Would rather just talk?</h2>
+          <h2 class="text-h4">Prefer to talk?</h2>
           <p class="mt-2 text-sm text-slate">
             Calling is faster than the form and gets you the same agent.
           </p>
@@ -273,7 +273,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What you need to hand</h2>
+      <h2 class="reveal text-h2">What you need for a quote</h2>
       <p class="reveal mt-5 text-slate">
         Less than people expect. Everything below is something you already know without looking
         anything up.
@@ -289,7 +289,7 @@ def body():
             "Your age and the state you live in.",
             "Sex as shown on your birth certificate, because carriers rate it differently.",
             "Whether you have used tobacco or nicotine in the last 12 months.",
-            "Roughly how much cover you want, or that you are not sure yet.",
+            "Roughly how much coverage you want, or that you are not sure yet.",
             "A phone number a licensed agent can reach you on.",
           ])}
         </ul>
@@ -315,11 +315,11 @@ def body():
      WHAT HAPPENS AFTER SUBMIT. Honest call expectation, per T1.
      ================================================================== -->
 {C.steps_section("What happens after you submit",
-    'Written out because "we will be in touch" is not an answer, and because the gap between what a form promises and what actually happens is where most of the distrust in this industry comes from.',
-    [("You get one call, from one agency", "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote engine, and not six agencies who bought your details, because we do not sell them.", "If you would rather we emailed first, say so in the call and we will."),
-     ("Ten to twenty minutes on the phone", "Enough to confirm what you sent, ask the two or three health questions that actually move a rate, and understand what you are trying to cover. Longer if you want to work through the numbers."),
+    '"We will be in touch" is not an answer. Here is what happens, in order.',
+    [("You get one call, from one agency", "A licensed agent from Apex, within " + C.SLA + ". Not a call center, not an automated quote engine, and not six agencies who bought your details. We do not sell them.", "If you would rather we emailed first, say so in the call and we will."),
+     ("Ten to twenty minutes on the phone", "Enough to confirm what you sent, ask the two or three health questions that move a rate, and understand what you are trying to cover. Longer if you want to work through the numbers."),
      ("Named carriers and real premiums", "Carrier names, premiums, and the terms that matter, so you can compare them against anything else you have been shown. Including, where it applies, which carriers would decline you and why."),
-     ("You decide, or you do not", "There is no policy until you sign an application and a carrier issues it. If you decide against it, you owe nothing and we stop contacting you when you ask.")],
+     ("You decide whether to apply", "There is no policy until you sign an application and a carrier issues it. If you decide against it, you owe nothing and we stop contacting you when you ask.")],
     cls="section")}
 
 
@@ -332,8 +332,8 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Why two carriers quote you differently</h2>
       <p class="reveal mt-5 text-slate">
-        The same person, on the same day, gets materially different prices from different
-        carriers. That is not a mistake, and it is the entire reason comparing is worth the call.
+        The same person, on the same day, gets very different prices from different
+        carriers. That is not a mistake. It is the reason comparing is worth the call.
       </p>
     </div>
 
@@ -342,11 +342,11 @@ def body():
         <p class="text-h4">%s</p>
         <p class="mt-3 text-slate">%s</p>
       </li>''' % (h, b) for h, b in [
-        ("They price risk from different books",
+        ("They use different claims data",
          "Each carrier sets rates from its own claims experience. One carrier's data may say a condition matters less than another's does, so the same health history lands in a different rate class."),
-        ("They specialise",
+        ("They specialize",
          "Some carriers are lenient on controlled diabetes, others on a family history of cancer, others on private aviation. A carrier that is expensive for most people can be the cheapest for you."),
-        ("Underwriting depth varies",
+        ("Some check your health more closely",
          "A fully underwritten policy with an exam is usually cheaper than an instant-decision one, because the carrier is pricing with more information and less uncertainty."),
       ])}
     </ul>
@@ -361,10 +361,10 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What these usually cost</h2>
+      <h2 class="reveal text-h2">Sample life insurance rates by age</h2>
       <p class="reveal mt-5 text-slate">
-        Nothing on this page is gated. The table below is here before the form on purpose, because
-        you should be able to see the shape of the numbers before you give anyone your phone number.
+        Nothing on this page is locked behind the form. You should be able to see the shape of
+        the numbers before you give anyone your phone number.
       </p>
     </div>
 
@@ -408,7 +408,7 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
         <div class="sticky-col">
-          <h2 class="reveal text-h2">What we do with what you send</h2>
+          <h2 class="reveal text-h2">What we do with your details</h2>
           <p class="reveal mt-5 text-slate">Where your details go, what sending them commits you to, and how to stop contact.</p>
         </div>
       </div>
@@ -441,7 +441,7 @@ def body():
 </section>
 
 
-{C.faq_section("Before you start", FAQ, "quote-faq")}
+{C.faq_section("Common questions about getting a quote", FAQ, "quote-faq")}
 
 
 {talk_band}"""

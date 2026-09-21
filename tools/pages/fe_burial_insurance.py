@@ -33,9 +33,8 @@ SILO = "final-expense"
 HTML_CLASS = "fe"
 TITLE = "Burial Insurance: What It Covers and What It Costs | Apex"
 OG_TITLE = "Burial insurance, explained"
-DESC = ("Burial insurance is a small whole life policy that pays your family cash for a burial "
-        "and the bills that follow. What it covers, what a burial costs that a cremation does "
-        "not, and how to size it.")
+DESC = ("Burial insurance is a small whole life policy that pays your family cash for a burial. "
+        "What it covers, what the cemetery charges, and how much to buy.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("Burial insurance", None)]
@@ -57,7 +56,7 @@ BURIAL_COSTS = [
      "A separate business from the funeral home, with its own price list and its own rules."),
     ("Opening and closing the grave",
      "The cemetery",
-     "Frequently the line people have never heard of. It is charged on the day of the burial."),
+     "Many people have never heard of this fee. It is charged on the day of the burial."),
     ("Outer burial container or vault",
      "The cemetery, usually",
      "Not required by law in most places, but required by most cemeteries as a condition of the "
@@ -76,11 +75,11 @@ FAQ = [
      "use it for the funeral home, the cemetery, or anything else."),
     ("How much burial insurance do I need?",
      "Enough to cover what your family would actually face, which depends on your state, on the "
-     "cemetery, and on what you would want. We do not publish an average, because averages here "
-     "are national survey figures that describe no particular burial and routinely leave the "
-     "cemetery out entirely. Call one funeral home and one cemetery near you, ask each for its "
-     "price list, add the two together, and insure that plus a margin for the bills that arrive "
-     "afterwards."),
+     "cemetery, and on what you would want. We do not publish an average. Averages here are "
+     "national survey figures that describe no particular burial, and they routinely leave the "
+     "cemetery out. Call one funeral home and one cemetery near you and ask each for its price "
+     "list. Add the two together, then insure that total plus a margin for the bills that "
+     "arrive afterward."),
     ("Is burial insurance different from final expense insurance?",
      "No. They are the same contract sold under different names, and the name usually reflects "
      "how the policy was marketed rather than anything in the paperwork. If an agent tells you "
@@ -92,22 +91,22 @@ FAQ = [
      "funeral home so the bill is settled without the family having to advance the money. That is "
      "a choice you make, not something the policy does on its own."),
     ("Can I be turned down for burial insurance?",
-     "You can be declined for a policy that pays the full benefit from day one, and in that case "
+     "You can be declined for a policy that pays the full benefit from day one. In that case "
      "a graded policy or a guaranteed acceptance policy is normally still available. Outright "
      "decline from every option is uncommon within the issue ages. Which carriers will take you "
      "depends on your health answers, and they disagree with each other more than people expect."),
     ("Should I buy the plot now instead?",
-     "Buying a plot in advance is a reasonable thing to do and it is not an alternative to "
+     "Buying a plot in advance is reasonable. It does not replace "
      "insurance, because the plot is only one line of the bill. The two work together: the "
      "cemetery holds the space, and the policy pays for everything else on the day. If you have "
-     "already bought a plot, say so when we quote you, because it changes the amount you need "
-     "rather than whether you need any."),
+     "already bought a plot, say so when we quote you. It changes the amount you need, not "
+     "whether you need any."),
 ]
 
 
 SIZING = """<p class="reveal text-slate">
-        There is a way to do this that does not involve trusting a number off the internet, and it
-        takes about twenty minutes on the telephone.
+        You do not have to trust a number off the internet. This takes about twenty minutes on
+        the phone.
       </p>
       <ul class="mt-6 grid gap-5 text-slate">
         <li class="reveal">Call one funeral home near you and ask for their general price list.
@@ -117,10 +116,10 @@ SIZING = """<p class="reveal text-slate">
             opening and closing fee, and whether a vault is required. This is the half people
             forget, and it is a different business with a different bill.</li>
         <li class="reveal">Add a marker, if you want one. Then add a margin for the bills that
-            arrive after the funeral: a final month of rent or utilities, outstanding medical
-            accounts, and travel for family.</li>
-        <li class="reveal">Insure that total. If it is more than you can comfortably afford the
-            premium on, insure what you can carry rather than stretching. A smaller policy that
+            arrive after the funeral: a final month of rent or utilities, unpaid medical
+            bills, and travel for family.</li>
+        <li class="reveal">Insure that total. If the premium on it is more than you can comfortably
+            afford, insure a smaller amount. A smaller policy that
             stays in force beats a larger one that lapses at eighty two.</li>
       </ul>
       <p class="reveal mt-6 text-slate">
@@ -138,7 +137,7 @@ COST = """<h3 class="reveal text-h4">What decides the premium</h3>
       </p>
       <h3 class="reveal mt-8 text-h4">Where the figures by age are</h3>
 <p class="reveal mt-3 text-slate">
-        The full picture by age lives on one page and is kept current in one place:
+        Premiums by age are on one page, kept current in one place:
         <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
         costs</a>.
       </p>
@@ -193,9 +192,9 @@ def body():
     answer=(
         'It is the same product as funeral insurance and as <a class="link" '
         'href="/final-expense-insurance/">final expense insurance</a>: three names, one '
-        'contract, no medical exam. The thing worth knowing before you read further is '
-        'that a burial is billed by two separate businesses, the funeral home and the '
-        'cemetery, and most people size a policy having only asked one of them.'),
+        'contract, no medical exam. A burial is billed by two separate businesses, the '
+        'funeral home and the cemetery. Most people size a policy after asking only one '
+        'of them.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-letters", C.MEDIA_SIZES, eager=True))}
 
@@ -211,10 +210,10 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">What a burial is billed for, and by whom</h2>
+      <h2 class="reveal text-h2">What a burial costs, and who you pay</h2>
       <p class="reveal mt-5 text-slate">
-        This is the part that separates a burial from a cremation, and it is the reason a burial
-        policy is normally sized higher. The cemetery is not part of the funeral home. It sends
+        This is what separates a burial from a cremation, and why a burial policy is normally
+        sized higher. The cemetery is not part of the funeral home. It sends
         its own bill, on its own terms, and nobody warns you about it in advance.
       </p>
       <div class="reveal mt-6">
@@ -245,9 +244,8 @@ def body():
     </div>
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      If a cremation is what you would rather have, several of these lines disappear and the total
-      is normally a good deal lower. That decision changes the amount you should insure, and it is
-      covered on
+      If you would rather have a cremation, several of these lines disappear and the total is
+      normally much lower. That changes the amount you should insure, and it is covered on
       <a class="link" href="/final-expense-insurance/cremation-insurance/">cremation
       insurance</a>.
     </p>
@@ -265,9 +263,8 @@ def body():
 <!-- =====================================================================
      HOW TO SIZE IT. The method, rather than a number we cannot stand up.
      ================================================================== -->
-{C.prose("How to work out how much you need", SIZING,
-         intro="Two phone calls give you a real figure for your town. An average gives you a "
-               "figure for nowhere.",
+{C.prose("How much burial insurance you need", SIZING,
+         intro="Two phone calls give you a real figure for your town.",
          media=C.figure("fe-hands", C.MEDIA_SIZES))}
 
 
@@ -279,7 +276,7 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2">What burial insurance does not do</h2>
       <p class="reveal mt-5 text-slate">
-        Three limits worth hearing before you buy rather than after.
+        Three limits to know before you buy.
       </p>
     </div>
 
@@ -288,8 +285,8 @@ def body():
         <h3 class="text-h4">It does not rise with prices</h3>
         <p class="mt-3 text-slate">
           The benefit is a fixed amount. If costs rise over twenty years, the policy pays what it
-          says and no more. Some carriers offer an increasing benefit rider at extra cost, and it
-          is worth asking what that costs as a line item.
+          says and no more. Some carriers offer an increasing benefit rider at extra cost. Ask
+          what it costs.
         </p>
       </div>
       <div class="card">
@@ -331,8 +328,8 @@ def body():
         <h2 class="reveal text-h2">Talk it through with a licensed agent</h2>
         <p class="reveal mt-5 text-slate">
           We will ask your age, your state, and the health questions, then tell you which carriers
-          would write you and what the premium would be. If you have already bought a plot, say
-          so, because it changes the amount you need rather than whether you need any.
+          would insure you and what the premium would be. If you have already bought a plot, say
+          so. It changes the amount you need, not whether you need any.
         </p>
         <div class="reveal mt-8">
           {C.phone_link("fe_burial_footer", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 26)}
@@ -352,7 +349,7 @@ def body():
 
 {C.spoke_module(
     "More about final expense insurance",
-    "The same product, and the pages this one deliberately defers to.",
+    "Other pages about the same product.",
     [("/final-expense-insurance/what-is-final-expense-insurance/", "What it is",
       "The plain definition, with the fine print left in."),
      ("/final-expense-insurance/funeral-insurance/", "Funeral insurance",
@@ -369,7 +366,7 @@ def body():
 
 
 {C.closing_band("whole-band", "Size the policy with someone who knows the costs",
-    "Tell us what kind of service you have in mind and we will help you work out an amount that covers it.",
+    "Tell us what kind of service you have in mind and we will help you figure out an amount that covers it.",
     "fe_burial_close", silo="fe", phone_first=True)}
 
 {C.byline_section()}

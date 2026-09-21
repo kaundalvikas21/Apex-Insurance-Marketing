@@ -32,8 +32,8 @@ FAQ = [
      " with named carriers and real premiums. If you would rather have it in writing first, say "
      "so on the call and we will email the comparison instead."),
     ("Is this a real quote or an estimate?",
-     "What comes back from us is a quoted premium from a named carrier at an assumed rate class, "
-     "which is as close to real as anything can be before underwriting. The final premium is set "
+     "It is a quoted premium from a named carrier at an assumed rate class. That is as close "
+     "to real as anything can be before underwriting. The final premium is set "
      "by the carrier after it reviews your health, your build, your family history, and in most "
      "states your driving record. We tell you which assumptions we used, so you can see what "
      "would move the number."),
@@ -90,11 +90,10 @@ def body():
       <div class="lg:col-span-6">
         <h1 class="reveal text-h1">Get Term Life Insurance Quotes</h1>
         <p class="reveal mt-5 text-lead text-slate max-w-xl">
-          Answer six questions and a licensed agent comes back with premiums from our appointed
-          carriers, with the carrier names on them. It is free, it commits you to nothing, and
-          it is the fastest way to find out what
-          <a class="link" href="/term-life-insurance/">term life insurance</a> would actually
-          cost you rather than what a calculator guesses.
+          Answer six questions. A licensed agent sends you premiums from our appointed carriers
+          for
+          <a class="link" href="/term-life-insurance/">term life insurance</a>, with the carrier
+          named on each one. It is free, and you are not committed to anything.
         </p>
 
         <ul class="reveal mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-3">
@@ -106,8 +105,8 @@ def body():
 
         <div class="reveal mt-8 pt-8 border-t border-rule">
           <p class="text-slate">
-            Would rather say it out loud? A call gets you the same licensed agent and the same
-            comparison, and you can ask the awkward questions as they come up.
+            Prefer to talk? A call gets you the same licensed agent and the same comparison, and
+            you can ask questions as they come up.
           </p>
           <div class="mt-4">
             {C.phone_link("term_quotes_hero", "btn btn-call")}
@@ -131,7 +130,7 @@ def body():
 </section>
 
 
-{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("scale", "Independent agency", "We compare carriers for you"), ("user-check", "One agent, one call", "Not six agencies"), ("handshake", "Never sold on", "Your details stay with us")])}
+{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("scale", "Independent agency", "We compare carriers for you"), ("user-check", "One agent, one call", "Not six agencies"), ("handshake", "Never sold", "Your details stay with us")])}
 
 
 <!-- =====================================================================
@@ -142,10 +141,10 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What you need to hand</h2>
+        <h2 class="reveal text-h2">What you need to get a quote</h2>
         <p class="reveal mt-5 text-slate">
-          Almost nothing, which is the point. You are not applying yet, so we are not asking for
-          anything an application would ask for.
+          Very little. You are not applying yet, so we do not ask for what an application asks
+          for.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
@@ -154,11 +153,11 @@ def body():
           {hand_item("Your state", "Carriers are licensed state by state, and the same policy is not priced identically everywhere.")}
           {hand_item("Roughly how much coverage", "A round number is fine. If you have no idea, our coverage calculator works it out from your income and debts, and you can come back.")}
           {hand_item("Whether you have used tobacco or nicotine", "In the last twelve months. Answer honestly: it is verified during underwriting, and a surprise there costs you the policy, not just the rate.")}
-          {hand_item("A number we can reach you on", "One licensed agent calls once. It goes nowhere else.")}
+          {hand_item("A phone number where we can reach you", "One licensed agent calls once. Your number goes nowhere else.")}
         </ul>
         <p class="reveal mt-6 text-slate">
           We do not ask for your Social Security number, your bank details, or your medical
-          records to give you a quote. Anyone who does before quoting you is doing something else.
+          records to give you a quote. Be careful with anyone who asks for them before quoting you.
         </p>
       </div>
     </div>
@@ -168,22 +167,20 @@ def body():
 
 {C.post_submit_section([
     ("You get one call, from one agency",
-     "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote "
+     "A licensed agent from Apex, within " + C.SLA + ". Not a call center, not an automated quote "
      "engine, and not six agencies who bought your details, because we do not sell them.",
      "If you would rather we emailed first, say so on the call and we will."),
     ("Ten to twenty minutes on the phone",
-     "Enough to confirm what you sent, ask the two or three health questions that actually move a "
-     "term rate, and understand what you are trying to cover and for how long.", None),
+     "Enough to confirm what you sent and ask the two or three health questions that move a "
+     "term rate. We also ask what you are trying to cover, and for how long.", None),
     ("Named carriers and real premiums",
      "Carrier names, premiums, term lengths, and the conversion terms, so you can compare them "
      "against anything else you have been shown. Including, where it applies, which carriers "
      "would decline you and why.", None),
-    ("You decide, or you do not",
+    ("You decide whether to apply",
      "There is no policy until you sign an application and a carrier issues it. If you decide "
      "against it, you owe nothing and we stop contacting you when you ask.", None),
-], intro="Written out because \"we will be in touch\" is not an answer, and because the gap "
-         "between what a form promises and what actually happens is where most of the distrust "
-         "in this industry comes from.")}
+], intro="Here is what happens after you send the form, step by step.")}
 
 
 {C.ask_strip("Ready to start?", "Six questions, about ninety seconds.", '<a href="#quote" class="btn btn-cta">Back to the form</a>')}
@@ -195,10 +192,10 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Why two carriers quote the same person differently</h2>
+      <h2 class="reveal text-h2">Why term life quotes differ between carriers</h2>
       <p class="reveal mt-5 text-slate">
-        This is the whole reason an independent agency is worth using. Carriers are not competing
-        on one price list. They are competing on who they want to insure, and they disagree.
+        This is why an independent agency is worth using. Carriers do not share one price list.
+        Each decides who it wants to insure, and they disagree.
       </p>
     </div>
 
@@ -207,28 +204,28 @@ def body():
         <h3 class="text-h4">They weigh the same facts differently</h3>
         <p class="mt-3 text-slate">
           One carrier treats well controlled high blood pressure as a standard risk. Another rates
-          it up two classes. Neither is wrong; they are reading different books of claims.
+          it up two classes. Neither is wrong. Each prices from its own claims history.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-tint bento-2">
         <h3 class="text-h4">They want different customers</h3>
         <p class="mt-3 text-slate">
-          A carrier that wants more thirty year olds on twenty year terms prices that cell sharply
-          and prices the rest ordinarily. Which cell you fall into changes who is cheapest for you.
+          A carrier that wants more thirty year olds on twenty year terms prices that group low
+          and the rest normally. Which group you fall into changes who is cheapest for you.
         </p>
       </div>
       <div class="reveal bento-cell bento-cell-blue bento-2">
-        <h3 class="text-h4">Their underwriting programmes differ</h3>
+        <h3 class="text-h4">Their underwriting programs differ</h3>
         <p class="mt-3 text-white/90">
           Whether you can skip the medical exam, and at what age and coverage, varies by carrier.
-          The cheapest policy you can actually get approved for beats the cheapest one on paper.
+          The cheapest policy you can get approved for beats the cheapest one on paper.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      We are appointed with {C.CARRIERS} carriers and we do not have a house favourite. That is
-      the only useful thing an agency can offer here: the comparison, with the names on it.
+      We are appointed with {C.CARRIERS} carriers and we do not have a house favorite. That is
+      what an agency can offer here: the comparison, with the carrier names on it.
     </p>
   </div>
 </section>
@@ -241,10 +238,10 @@ def body():
 <section class="section" id="rates">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Rough shape of term premiums</h2>
+      <h2 class="reveal text-h2">Term life rates by age and coverage</h2>
       <p class="reveal mt-5 text-slate">
-        Shown before you fill anything in, not after. The structure below is what a real rate
-        chart looks like; the numbers arrive when our carrier rate cards do.
+        You do not need to fill in the form to see this. The layout below is what a real rate
+        chart looks like. The numbers arrive when our carrier rate cards do.
       </p>
     </div>
 
@@ -294,9 +291,9 @@ def body():
                      "<a class=\"link-static\" href=\"/legal/privacy/\">privacy policy</a>.")}
 
 
-{C.faq_section("Before you start", FAQ, "term-quotes-faq")}
+{C.faq_section("Term life quote questions", FAQ, "term-quotes-faq")}
 
 
 {C.closing_band("term-band", "Ready when you are",
-    "Six questions, about ninety seconds, and one licensed agent comes back to you.",
+    "Six questions, about ninety seconds, and one licensed agent calls you back.",
     "term_quotes_close", quote=("#quote", "Back to the form"))}"""

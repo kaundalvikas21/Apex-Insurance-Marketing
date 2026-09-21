@@ -20,7 +20,7 @@ HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance: Cover a Funeral, No Medical Exam | Apex"
 OG_TITLE = "Final expense insurance, explained by a licensed agent"
 DESC = ("Final expense insurance covers funeral and burial costs for ages 50 to 85. No medical "
-        "exam, health questions only. Talk to a licensed independent agent in about 15 minutes.")
+        "exam, health questions only. Talk to a licensed independent agent.")
 
 FAQ = [
     ("What is final expense insurance?",
@@ -87,7 +87,7 @@ SPOKES = [
     ("/final-expense-insurance/for-parents/", "Coverage for a parent",
      "Buying a policy on a parent, and the consent it needs."),
     ("/final-expense-insurance/cremation-insurance/", "Cremation insurance",
-     "What cremation actually costs and how much coverage fits."),
+     "What cremation costs and how much coverage fits."),
 ]
 
 
@@ -142,7 +142,7 @@ def rate_rows(sex):
         cells = "".join('<td class="tnum">$--</td>' for _ in COVERAGE_COLS)
         # The row-level call CTA sits under the age label so the table stays at
         # three columns.
-        call = C.phone_link("rate_table_" + sex, "btn-row mt-2", "Get this quoted", 18)
+        call = C.phone_link("rate_table_" + sex, "btn-row mt-2", "Quote this", 18)
         rows.append(f'<tr><th scope="row"><span class="block">{band}</span>{call}</th>{cells}</tr>')
     return "\n            ".join(rows)
 
@@ -223,8 +223,8 @@ def body():
         "A licensed agent can answer the health questions with you and tell you what you qualify for.",
         "fe_repeat_1")
     call_band_2 = call_band(
-        "Not sure which of the three you need?",
-        "Tell us your age and what you are trying to cover, and we will say so plainly.",
+        "Not sure which type of policy you need?",
+        "Tell us your age and what you want to cover. We will tell you which one fits.",
         "fe_repeat_2", photo="fe-band")
     # Sits directly under "How to apply. One call, about fifteen minutes." Its
     # copy deliberately does not restate that heading: the section above has
@@ -232,7 +232,7 @@ def body():
     # put the call off.
     call_band_3 = call_band(
         "You do not need anything ready to start",
-        "Nothing to print, nothing to post, no exam to book. If one of the four things above is "
+        "Nothing to print, nothing to mail, no exam to schedule. If one of the four things above is "
         "missing, call anyway and we will work around it.",
         "fe_repeat_3")
     spokes = C.spoke_module(
@@ -246,10 +246,10 @@ def body():
 
     how_to_apply = C.steps_section(
         "How to apply. One call, about fifteen minutes.",
-        "There is no paperwork to post and nothing to print. Have these four things nearby and the "
+        "There is no paperwork to mail and nothing to print. Have these four things nearby and the "
         "call goes quickly.",
         [("file-text", None, "Your date of birth and address",
-          "Exactly as they appear on your driver licence or state ID."),
+          "Exactly as they appear on your driver's license or state ID."),
          ("stethoscope", None, "Your medications",
           "The bottles are easiest. Names and doses are what the carrier asks for."),
          ("users", None, "Your beneficiary",
@@ -293,7 +293,7 @@ def body():
           <ol class="mt-4 grid gap-3">
             <li class="flex items-start gap-3">
               <span class="text-navy font-semibold tnum shrink-0">1.</span>
-              <span>A licensed agent picks up, or reads your form. Not a call centre.</span>
+              <span>A licensed agent picks up, or reads your form. Not a call center.</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="text-navy font-semibold tnum shrink-0">2.</span>
@@ -301,7 +301,7 @@ def body():
             </li>
             <li class="flex items-start gap-3">
               <span class="text-navy font-semibold tnum shrink-0">3.</span>
-              <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, in your own time.</span>
+              <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, at your own pace.</span>
             </li>
           </ol>
         </div>
@@ -373,10 +373,10 @@ def body():
 <section id="costs" class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What it costs by age</h2>
+      <h2 class="reveal text-h2">Final expense insurance cost by age</h2>
       <p class="reveal mt-5 text-slate">
-        Age is the biggest factor in the price, and it moves against you every year. Health,
-        tobacco use, your state, and the carrier decide the rest.
+        Age is the biggest factor in the price. The older you are when you apply, the more it
+        costs. Health, tobacco use, your state, and the carrier decide the rest.
       </p>
     </div>
 
@@ -400,20 +400,20 @@ def body():
         <h2 class="reveal text-h2">No medical exam. Health questions instead.</h2>
         <p class="reveal mt-6 text-slate">
           Nobody comes to your house. There is no blood draw and no urine sample. The application
-          asks a list of yes or no health questions, and an agent can go through them with you on
+          asks a list of yes or no health questions. An agent can go through them with you on
           the phone in a few minutes.
         </p>
         <p class="reveal mt-4 text-slate">
           The carrier does check two things electronically: your prescription history and a shared
           medical information database. So answer the questions honestly. An answer that does not
           match those records can delay your policy, or give the carrier grounds to refuse a claim
-          later, which is the one outcome nobody wants.
+          later.
         </p>
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h3 !font-display !font-semibold">The kind of thing you will be asked</h3>
+          <h3 class="text-h3 !font-display !font-semibold">Health questions you may be asked</h3>
           <ul class="mt-5 grid gap-4">
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Have you used tobacco in the last twelve months?</span></li>
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Are you in a nursing home or receiving hospice care?</span></li>
@@ -421,8 +421,8 @@ def body():
             <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Do you use oxygen equipment to help you breathe?</span></li>
           </ul>
           <p class="mt-6 text-sm text-muted">
-            A yes does not automatically mean no. It usually means a different carrier or a
-            different type of policy.
+            Answering yes does not automatically mean you are turned down. It usually means a
+            different carrier or a different type of policy.
           </p>
         </div>
       </div>
@@ -438,7 +438,7 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Waiting periods, said plainly</h2>
+      <h2 class="reveal text-h2">Waiting periods explained</h2>
       <p class="reveal mt-5 text-slate">
         Some of these policies pay in full from the first day. Some do not. Which one you are
         offered depends on your health, and you should know which you are signing before you sign it.
@@ -490,8 +490,8 @@ def body():
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      If an agent will not tell you plainly which of these three you are being sold, that is worth
-      noticing. We tell you before the application goes in, in writing if you want it that way.
+      An agent should tell you plainly which of these three you are being sold. We tell you before
+      the application goes in, in writing if you want.
     </p>
   </div>
 </section>
@@ -555,7 +555,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Who qualifies</h2>
+        <h2 class="reveal text-h2">Who qualifies for final expense insurance</h2>
         <p class="reveal mt-6 text-slate">
           Almost everyone between 50 and 85 can get a final expense policy of some kind. Health
           decides the price and whether there is a waiting period, not usually whether you can be
@@ -624,7 +624,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Questions people ask us</h2>
+        <h2 class="reveal text-h2">Common questions about final expense insurance</h2>
         <p class="reveal mt-5 text-slate">
           If yours is not here, ask it on the phone. There is no script.
         </p>
@@ -658,7 +658,7 @@ def body():
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
       <div class="reveal">
-        <h2 class="text-h2">Talk it through</h2>
+        <h2 class="text-h2">Talk it through with a licensed agent</h2>
         <p class="mt-5 text-slate">
           Fifteen minutes on the phone will tell you what you qualify for, what it costs, and
           whether there is a waiting period. No obligation to buy at the end of it.
@@ -668,8 +668,8 @@ def body():
         </div>
         <p class="mt-4 text-slate">{C.HOURS}</p>
         <p class="mt-6 text-sm text-muted">
-          You will reach a licensed agent, not a call centre queue and not a lead form that gets
-          sold on to six other agencies.
+          You will reach a licensed agent, not a call center queue and not a lead form that gets
+          sold to six other agencies.
         </p>
 
         <div class="mt-8 pt-8 border-t border-rule">

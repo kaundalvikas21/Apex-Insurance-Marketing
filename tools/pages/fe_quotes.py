@@ -28,8 +28,8 @@ SILO = "final-expense"
 HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance Quotes | Free, No Obligation"
 OG_TITLE = "Get final expense insurance quotes"
-DESC = ("Get free final expense insurance quotes from multiple appointed carriers. No medical "
-        "exam, no obligation, and no policy until you sign. One call, about fifteen minutes.")
+DESC = ("Free final expense insurance quotes from multiple appointed carriers. No medical "
+        "exam, no obligation, and no policy until you sign. One call.")
 
 AGE_BANDS = [("50 to 59", None), ("60 to 64", None), ("65 to 69", None), ("70 to 74", None),
              ("75 to 79", None), ("80 to 85", None)]
@@ -37,14 +37,14 @@ AGE_BANDS = [("50 to 59", None), ("60 to 64", None), ("65 to 69", None), ("70 to
 FAQ = [
     ("How long does it take to get a quote?",
      "One call, about fifteen minutes. We ask your age, your state, the coverage amount you have "
-     "in mind, and a short list of health questions, and you hear what carriers would offer "
+     "in mind, and a short list of health questions. You hear what carriers would offer "
      "before you hang up. If you use the form instead, a licensed agent calls you back within " +
      C.SLA + "."),
     ("Do I have to take a medical exam?",
      "No. Final expense is sold on health questions and a prescription check rather than an exam. "
      "Nobody visits your home, nobody takes blood, and there is no appointment to keep. Answer "
-     "the questions honestly: they are verified against prescription records, and a surprise "
-     "there costs you the policy rather than just the rate."),
+     "the questions honestly. The carrier checks them against prescription records, and a wrong "
+     "answer can cost you the policy, not just a better rate."),
     ("Is this a real quote or an estimate?",
      "What you get on the call is a quoted premium from a named carrier, based on your answers. "
      "The final premium is confirmed by the carrier when it reviews the application. We tell you "
@@ -105,11 +105,10 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">Get Final Expense Insurance Quotes</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        One call, about fifteen minutes, and you will know what
+        One call takes about fifteen minutes. You will hear what
         <a class="link" href="/final-expense-insurance/">final expense insurance</a> would cost
-        you and which carriers would take you. There is no medical exam and no obligation. If you
-        would rather we called you, leave four details in the form and a licensed agent will ring
-        back.
+        you and which carriers would accept you. There is no medical exam and no obligation. Or
+        leave four details in the form and a licensed agent will call you back.
       </p>
     </div>
 
@@ -119,8 +118,8 @@ def body():
         <div class="reveal card">
           <h2 class="text-h3 !font-display !font-semibold">Call and get an answer today</h2>
           <p class="mt-4 text-slate">
-            You will speak to a licensed agent, not a call centre. Have your age, your state, and
-            the medications you take to hand and that is all we need to price it.
+            You will speak to a licensed agent, not a call center. Have your age, your state, and
+            the medications you take ready. That is all we need to give you a price.
           </p>
           <div class="mt-8">
             {C.phone_link("fe_quotes_hero", "btn btn-call btn-xl btn-block",
@@ -153,7 +152,7 @@ def body():
 </section>
 
 
-{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("stethoscope", "No medical exam", "Health questions only"), ("user-check", "One agency calls", "Not six"), ("handshake", "Never sold on", "Your details stay with us")])}
+{C.usp_strip([("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"), ("stethoscope", "No medical exam", "Health questions only"), ("user-check", "One agency calls", "Not six"), ("handshake", "Never sold", "Your details stay with us")])}
 
 
 <!-- =====================================================================
@@ -163,7 +162,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What you need to hand</h2>
+        <h2 class="reveal text-h2">What you need for a quote</h2>
         <p class="reveal mt-5 text-slate">
           Four things, and you probably know three of them without looking. You are not applying
           yet, so we are not asking for anything an application would ask for.
@@ -174,12 +173,12 @@ def body():
           {hand_item("Your age", "Your age at application, not your birthday. It is the biggest single factor in the premium, and the premium is then fixed for life.")}
           {hand_item("Your state", "Carriers are licensed state by state, and the same policy is not priced identically everywhere.")}
           {hand_item("Roughly how much coverage", "A round number is fine. Most policies in this category are written between ten and twenty five thousand dollars.")}
-          {hand_item("The medications you take", "The bottle labels are enough. This is what decides which carriers will write you at the best rate, and it is the question people most often guess at.")}
+          {hand_item("The medications you take", "The bottle labels are enough. Your medications decide which carriers will offer you their best rate. It is also the question people most often guess at.")}
         </ul>
         <p class="reveal mt-6 text-slate">
           We do not ask for your Social Security number or your bank details to give you a quote.
-          Those are asked for on an application, after you have decided, and not before. Anyone
-          who asks for them first is doing something else.
+          Those are asked for on an application, after you have decided, and not before. Be
+          careful with anyone who asks for them first.
         </p>
       </div>
     </div>
@@ -189,22 +188,20 @@ def body():
 
 {C.post_submit_section([
     ("You get one call, from one agency",
-     "A licensed agent from Apex, within " + C.SLA + ". Not a call centre, not an automated quote "
+     "A licensed agent from Apex, within " + C.SLA + ". Not a call center, not an automated quote "
      "engine, and not six agencies who bought your details, because we do not sell them.",
      "If a call is difficult for you, tell us on the form and we will write instead."),
     ("About fifteen minutes on the phone",
      "We confirm what you sent, ask the health questions the carriers ask, and go through which "
-     "companies would write you. You can stop the call at any point.", None),
+     "carriers would accept you. You can stop the call at any point.", None),
     ("Named carriers, real premiums, and any waiting period",
      "You hear the carrier name, the monthly premium, and whether the policy pays in full from "
      "day one or has a waiting period. That last part is the one that gets left out elsewhere, "
      "and it is the one that matters most.", None),
-    ("You decide, or you do not",
+    ("You decide whether to apply",
      "There is no policy until you sign an application and a carrier issues it. If you decide "
      "against it, you owe nothing and we stop contacting you when you ask.", None),
-], intro="Written out because \"we will be in touch\" is not an answer, and because the gap "
-         "between what a form promises and what actually happens is where most of the distrust "
-         "in this industry comes from.",
+], intro="Written out step by step, because \"we will be in touch\" is not an answer.",
    fe=True)}
 
 
@@ -219,9 +216,9 @@ def body():
     <div class="max-w-3xl">
       <h2 class="reveal text-h2">Why two carriers quote the same person differently</h2>
       <p class="reveal mt-5 text-slate">
-        This is the whole reason to use an independent agency rather than ring one company. The
-        carriers are not working from one price list. They disagree about who they want to insure,
-        and on this product they disagree loudly.
+        This is the reason to use an independent agency rather than call one company. Carriers
+        do not work from one price list. They disagree about who they want to insure, and on this
+        product they disagree widely.
       </p>
     </div>
 
@@ -230,29 +227,29 @@ def body():
         <h3 class="text-h4">Their health questions differ</h3>
         <p class="mt-3 text-slate">
           A condition that is a straight decline at one carrier is a standard acceptance at
-          another. There is no common list, which is why the answer to "will anyone take me" is
+          another. There is no common list. That is why the answer to "will anyone take me" is
           almost always yes, at some price.
         </p>
       </div>
       <div class="card">
         <h3 class="text-h4">Waiting periods are not standard</h3>
         <p class="mt-3 text-slate">
-          Two carriers can look at the same health history and one offers a policy that pays in
-          full from day one while the other offers a graded one. That difference is worth more
-          than a few dollars of premium.
+          Two carriers can look at the same health history. One offers a policy that pays in
+          full from day one. The other offers a graded policy, which pays only partly at first.
+          That difference is worth more than a few dollars of premium.
         </p>
       </div>
       <div class="card">
         <h3 class="text-h4">They price age bands differently</h3>
         <p class="mt-3 text-slate">
-          A carrier that wants more seventy year olds prices that band sharply and prices the rest
-          ordinarily. Which band you are in changes who is cheapest for you.
+          A carrier that wants more seventy year olds sets a lower price for that age band and an
+          ordinary price for the rest. Which band you are in changes who is cheapest for you.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      We are appointed with {C.CARRIERS} carriers and we do not have a house favourite. That is
+      We are appointed with {C.CARRIERS} carriers and we do not have a favorite. That is
       the only useful thing an agency can offer here: the comparison, with the names on it.
     </p>
   </div>
@@ -266,7 +263,7 @@ def body():
 <section class="section" id="rates">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">Rough shape of the premiums</h2>
+      <h2 class="reveal text-h2">Sample final expense premiums by age</h2>
       <p class="reveal mt-5 text-slate">
         Shown before you tell us anything, not after. The structure below is what a real cost
         chart looks like; the numbers arrive when our carrier rate cards do.
@@ -312,9 +309,9 @@ def body():
                      "<a class=\"link-static\" href=\"/legal/privacy/\">privacy policy</a>.")}
 
 
-{C.faq_section("Before you call", FAQ, "fe-quotes-faq", size=24)}
+{C.faq_section("Final expense quote questions", FAQ, "fe-quotes-faq", size=24)}
 
 
 {C.closing_band("whole-band", "Ready when you are",
     "One call, about fifteen minutes. Or leave four details and we call you.",
-    "fe_quotes_close", silo="fe", phone_first=True, quote=("#quote", "Ask us to call you"))}"""
+    "fe_quotes_close", silo="fe", phone_first=True, quote=("#quote", "Request a call back"))}"""

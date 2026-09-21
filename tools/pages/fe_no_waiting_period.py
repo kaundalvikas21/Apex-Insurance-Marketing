@@ -26,7 +26,7 @@ HTML_CLASS = "fe"
 TITLE = "Burial Insurance With No Waiting Period | Apex"
 OG_TITLE = "Burial insurance with no waiting period"
 DESC = ("Some burial insurance policies pay the full benefit from day one. Whether you qualify "
-        "depends on your health answers and the carrier. What decides it, and how to find out.")
+        "depends on your health answers and the carrier. What decides it.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("No waiting period", None)]
@@ -44,9 +44,9 @@ FAQ = [
      "sometimes sharply, so the useful question is not whether you qualify but which carrier you "
      "qualify with. That is what an independent agency is for."),
     ("What happens if I die during a waiting period?",
-     "On a typical graded or modified policy, if death is from an illness within the waiting "
-     "period, usually two years, the carrier returns the premiums you paid plus interest rather "
-     "than paying the face amount. If death is from an accident, the full amount is normally paid "
+     "On a typical graded or modified policy, the waiting period is usually two years. If death "
+     "is from an illness within it, the carrier returns the premiums you paid plus interest "
+     "rather than paying the face amount. If death is from an accident, the full amount is normally paid "
      "from day one. The exact terms differ by carrier and are written in the policy, so read that "
      "section or ask us to read it to you before you sign."),
     ("Which health conditions usually mean a waiting period?",
@@ -58,10 +58,10 @@ FAQ = [
      "cholesterol, frequently do not."),
     ("Is a policy with a waiting period still worth buying?",
      "Often yes, if a full benefit policy is genuinely not available to you. The coverage is real, "
-     "the premium never rises, and accidental death is normally covered from day one. It is worth "
-     "buying only after a licensed agent has checked whether a full benefit carrier would take "
-     "you, because the difference in what your family receives during those two years is the whole "
-     "point of asking."),
+     "the premium never rises, and accidental death is normally covered from day one. Buy one "
+     "only after a licensed agent has checked whether a full benefit carrier would take "
+     "you. The difference in what your family receives during those two years is the reason "
+     "to ask."),
 ]
 
 
@@ -82,16 +82,16 @@ WAITING_PERIOD = """<div class="in-short reveal">
       </p>
       <h3 class="reveal mt-8 text-h4">Why carriers use one</h3>
 <p class="reveal mt-3 text-slate">
-        Carriers use it for one reason. Final expense underwriting is a short list of questions
-        and a prescription check rather than an exam, so when a carrier cannot get comfortable
-        with the answers, the waiting period is what lets it say yes instead of no. Without it,
-        the honest alternative for those applicants would be a decline.
+        Carriers use it for one reason. Final expense insurance is decided from a short list of
+        questions and a prescription check, not an exam. When a carrier is unsure about the
+        answers, the waiting period lets it say yes instead of no. Without it, those applicants
+        would be declined.
       </p>
       <h3 class="reveal mt-8 text-h4">What it is not</h3>
 <p class="reveal mt-3 text-slate">
-        That is worth holding onto. A waiting period is not a penalty aimed at you, and it is not
-        evidence that you have been sold something bad. It is the mechanism that keeps coverage
-        available to people who would otherwise have none.
+        A waiting period is not a penalty aimed at you, and it is not a sign that you have been
+        sold something bad. It keeps coverage available to people who would otherwise have
+        none.
       </p>"""
 
 
@@ -114,9 +114,9 @@ def body():
     'are not rare.',
     answer=(
         'Whether you can be issued one depends on your answers to the health questions '
-        'and on which carrier you apply to, so no honest page can promise you immediate '
-        'coverage before those questions have been asked. What this page can do is tell '
-        'you exactly what decides it, and what happens if the answer turns out to be no. '
+        'and on which carrier you apply to. No honest page can promise you immediate '
+        'coverage before those questions have been asked. This page tells you what '
+        'decides it, and what happens if the answer is no. '
         'All of this is <a class="link" href="/final-expense-insurance/">final expense '
         'insurance</a>, sold under the name burial insurance.'),
     extra=hero_cta, glow=False,
@@ -128,9 +128,9 @@ def body():
      arriving here have been told they need one and do not know what it
      means.
      ================================================================== -->
-{C.prose("What a waiting period is, and why carriers use one", WAITING_PERIOD,
-         intro="What it is, why it exists, and why its existence is not evidence that "
-               "you have been sold something bad.",
+{C.prose("What is a burial insurance waiting period?", WAITING_PERIOD,
+         intro="What it is, why it exists, and why it does not mean you were sold "
+               "something bad.",
          media=C.figure("fe-path", C.MEDIA_SIZES))}
 
 
@@ -142,7 +142,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">Which policies pay the full benefit from day one</h2>
+      <h2 class="reveal text-h2">Which policies pay in full from day one</h2>
       <p class="reveal mt-5 text-slate">
         Three kinds of policy are sold in this category. Only the first pays the full amount from
         the first day for any cause of death.
@@ -194,9 +194,9 @@ def body():
     </div>
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      Most people who ask us about waiting periods are eligible for the first row. The assumption
-      that they belong in the third row is the single most expensive mistake made in this category,
-      because guaranteed acceptance costs the most per thousand dollars of coverage and carries the
+      Most people who ask us about waiting periods are eligible for the first row. Assuming
+      they belong in the third row is the most expensive mistake made in this category.
+      Guaranteed acceptance costs the most per thousand dollars of coverage, and it carries the
       waiting period the applicant was trying to avoid.
     </p>
   </div>
@@ -221,7 +221,7 @@ def body():
         <h2 class="reveal text-h2">The health questions that decide it</h2>
         <p class="reveal mt-5 text-slate">
           Every carrier asks a version of these. They are short, they are specific, and they are
-          the whole of the underwriting.
+          what the carrier bases its decision on.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
@@ -231,7 +231,7 @@ def body():
               carrier and this is where they disagree most.</li>
           <li class="reveal">Do you currently use oxygen, a wheelchair for a medical reason,
               dialysis, or receive care in a nursing home or from hospice.</li>
-          <li class="reveal">Have you been hospitalised, or had a change to your medication, in the
+          <li class="reveal">Have you been hospitalized, or had a change to your medication, in the
               last twelve months.</li>
           <li class="reveal">What prescriptions do you take. The carrier checks this against a
               prescription database, so the answer needs to be complete.</li>
@@ -239,8 +239,8 @@ def body():
         </ul>
         <p class="reveal mt-6 text-slate">
           Answer all of them accurately. A policy issued on an inaccurate answer can be contested
-          in the first two years, which produces exactly the outcome a waiting period would have
-          produced, and does so as a surprise to your family.
+          in the first two years. That produces the same outcome a waiting period would have,
+          and it comes as a surprise to your family.
         </p>
       </div>
     </div>
@@ -277,7 +277,7 @@ def body():
         <h2 class="text-h3 !font-display !font-semibold">Usually does not</h2>
         <ul class="mt-5 grid gap-4 text-slate">
           <li>High blood pressure that is treated and stable.</li>
-          <li>Type 2 diabetes controlled with tablets or diet.</li>
+          <li>Type 2 diabetes controlled with pills or diet.</li>
           <li>High cholesterol.</li>
           <li>Arthritis, thyroid conditions, acid reflux, and most joint replacements.</li>
           <li>Depression or anxiety that is treated and stable.</li>
@@ -334,7 +334,7 @@ def body():
     <p class="reveal mt-10 max-w-3xl text-white/85">
       Ask for the exact wording before you sign, and ask us to read it with you. The difference
       between a return of premium with interest and a reduced percentage of the face amount is
-      real money to your family, and it is decided by which carrier the application went to.
+      real money to your family. It is decided by which carrier the application went to.
     </p>
   </div>
 </section>
@@ -378,7 +378,7 @@ def body():
 
 {C.spoke_module(
     "More about final expense insurance",
-    "Every page in this section is written for the same reader.",
+    "Other pages about the same product.",
     [("/final-expense-insurance/for-seniors/", "Final expense after 50",
       "What changes at 70 and at 80, and what does not."),
      ("/final-expense-insurance/burial-insurance/", "Burial insurance",
@@ -396,7 +396,7 @@ def body():
 {C.faq_section("Questions about waiting periods", FAQ, "fe-nowait-faq", size=24)}
 
 
-{C.closing_band("whole-band", "Find out if you qualify for day one cover",
+{C.closing_band("whole-band", "Find out if you qualify for day one coverage",
     "It depends on your health answers and the carrier. We ask the questions with you and tell you plainly.",
     "fe_no_waiting_close", silo="fe", phone_first=True)}
 

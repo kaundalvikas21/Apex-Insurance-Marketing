@@ -18,76 +18,74 @@ ACTIVE = "/term-life-insurance/"
 SILO = "term-life"
 TITLE = "10-Year Term Life Insurance | Who It Suits | Apex"
 OG_TITLE = "10 year term life insurance"
-DESC = ("Who a 10 year term actually suits, what happens to the premium in year eleven, and when "
-        "a longer term is the cheaper decision. Quotes from multiple carriers, no obligation.")
+DESC = ("Who a 10 year term fits, what the price does in year eleven, and when a longer term is "
+        "the cheaper choice. Quotes from multiple carriers, no obligation.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("10 year term", None)]
 
 FITS = [
-    ("The closing gap", "A debt with about ten years left on it",
+    ("The debt case", "A debt with about ten years left on it",
      "The last stretch of a mortgage, a business loan you personally guaranteed, or a parent plan "
      "loan. The obligation has a payoff date on a statement, and that date is inside ten years."),
-    ("The bridge", "Ten years to a pension or a retirement date",
-     "If your income stops being the household's dependency the day a pension starts, insure the "
-     "gap and not a year past it. Buying beyond the date the need ends is the commonest way "
+    ("The bridge case", "Ten years to a pension or a retirement date",
+     "If your household stops depending on your income the day a pension starts, insure the "
+     "gap and not a year past it. Buying past the date the need ends is the most common way "
      "people overpay for term."),
-    ("The top up", "A layer on top of cover you already hold",
-     "A ten year layer stacked on a longer policy costs less than raising the longer policy, and "
-     "it falls away on its own when the extra need does. This is the one case where ten years is "
+    ("The add-on case", "A layer on top of coverage you already have",
+     "A ten year layer stacked on a longer policy costs less than increasing the longer policy, and "
+     "it ends on its own when the extra need does. This is the one case where ten years is "
      "chosen rather than settled for."),
 ]
 
 DATES = [
     ("Write down the year the obligation ends",
      "The payoff year on the mortgage statement, the final year of the loan schedule, the year "
-     "your youngest finishes education. Not the year you hope it ends. Subtract this year from it."),
+     "your youngest finishes school. Not the year you hope it ends. Subtract this year from it."),
     ("Add the years you would need to recover, not just repay",
      "A household that loses an income does not resume normal spending the month the debt clears. "
-     "Most people add two to three years to the number above, and it is usually the difference "
+     "Most people add two to three years to the number above. That is usually the difference "
      "between a ten year term being right and being one renewal short."),
-    ("If the total lands above ten, price the longer term before you decide",
+    ("Over ten years? Price the longer term first",
      "This is the step people skip. The premium difference between ten and twenty years at the "
-     "same age is usually far smaller than the difference between being covered and not being "
-     "covered in year eleven, because you are buying the longer term at today's age and health "
-     "rather than at year eleven's."),
+     "same age is usually far smaller than the cost of having no coverage in year eleven. With "
+     "the longer term you buy at today's age and health, not at year eleven's."),
 ]
 
 FAQ = [
     ("How much does a 10-year term life insurance policy cost?",
      "Less than any other term length at the same age and coverage, because the carrier is taking "
      "ten years of risk instead of twenty or thirty. How much less depends almost entirely on "
-     "your age and whether you use tobacco. Our rates page carries the full grid by five year age "
-     "band and coverage amount, with a term length toggle, rather than an average premium that "
-     "would describe nobody."),
+     "your age and whether you use tobacco. Our rates page has the full chart by five year age "
+     "band and coverage amount, and you can switch the term length."),
     ("What happens at the end of a 10-year term?",
      "The level premium ends and the death benefit does not automatically stop. Most policies "
      "continue on an annually renewable basis at a price recalculated for your age at that moment "
-     "and rising every year afterwards. It is a bridge, not a plan. The more useful right is "
-     "conversion to a permanent policy with no new health questions, and on many ten year "
-     "policies that right expires before the term does, so check the conversion deadline in your "
+     "and rising every year afterward. It is a stopgap, not a plan. The more useful right is "
+     "conversion to a permanent policy with no new health questions. On many ten year "
+     "policies that right expires before the term does. Check the conversion deadline in your "
      "contract rather than assuming it runs the full ten years."),
     ("Is 10-year term life insurance worth it?",
      "It is worth it when the need genuinely ends inside ten years, and it is a false economy "
-     "when it does not. The trap is that a ten year term looks cheap next to a twenty at the "
-     "point of sale, and expensive next to it at renewal, when you are ten years older and may "
+     "when it does not. The trap is that a ten year term looks cheap next to a twenty when you "
+     "buy it, and expensive next to it at renewal. By then you are ten years older and may "
      "have picked up a condition that changes your health class. If there is any real chance the "
      "need runs past ten years, price the twenty before choosing."),
     ("Can I renew or extend a 10-year term policy?",
      "Renew, usually yes, at a price that resets to your age each year. Extend at the original "
      "premium, no. There is no mechanism for that in a level term contract. If you want ten more "
-     "years at a level price you apply for a new policy, and that application is underwritten on "
+     "years at a level price you apply for a new policy. That application is underwritten on "
      "your health at that point, which is the risk the renewal provision exists to cover."),
     ("Should I buy 10-year term or 20-year term?",
      "Count the years until the obligation ends, add the recovery time, and if the total is under "
      "ten a ten year term is right. If it is close to ten, buy the twenty. The extra premium is "
-     "known and small; the cost of being uninsurable in year eleven is unknown and large, and it "
+     "known and small. The cost of being uninsurable in year eleven is unknown and large. It "
      "is not a risk worth carrying to save a few dollars a month."),
 ]
 
 SIBLINGS = [
     ("/term-life-insurance/20-year-term/", "20 year term",
-     "The most common choice, and who it actually fits."),
+     "The most common length, and who it fits."),
     ("/term-life-insurance/30-year-term/", "30 year term",
      "Long mortgages and young children."),
     ("/term-life-insurance/level-term/", "Level term explained",
@@ -95,7 +93,7 @@ SIBLINGS = [
     ("/term-life-insurance/what-is-term-life-insurance/", "What term life insurance is",
      "The plain definition, if you are starting from scratch."),
     ("/term-life-insurance/no-medical-exam/", "No medical exam term",
-     "Same day options, and what they cost you in class."),
+     "Same day options, and what they do to your health class."),
     ("/term-life-insurance/return-of-premium/", "Return of premium term",
      "Getting the premiums back, and what that costs."),
 ]
@@ -110,26 +108,24 @@ RENEWAL_ROWS = [
 ]
 
 
-TEN_YEAR_COST = """<h3 class="reveal  text-h4">What moves the number</h3>
+TEN_YEAR_COST = """<h3 class="reveal  text-h4">What changes the price</h3>
 <p class="reveal mt-3 text-slate">
         Ten years is the cheapest level term a carrier will normally write, because it is the
-        least risk it is taking. What moves the number after that is your age today and whether
-        you use tobacco, then health class, coverage amount, sex, and state, in roughly that
-        order. The term length itself is rarely the largest factor, which is exactly why buying
-        the shortest one is a smaller saving than it appears.
+        least risk it is taking. After that, the two things that change the price most are your
+        age today and whether you use tobacco. Health class, coverage amount, sex, and state
+        come after those, in roughly that order. The term length itself is rarely the largest
+        factor, which is why buying the shortest one saves less than it appears.
       </p>
-      <h3 class="reveal mt-8 text-h4">Where the full grid is kept</h3>
+      <h3 class="reveal mt-8 text-h4">Where to see the full rate chart</h3>
 <p class="reveal mt-3 text-slate">
-        Rather than reprint a slice of it here, the full grid lives on one page and is kept
-        current in one place: <a class="link" href="/term-life-insurance/rates/">term life
-        insurance rates by age</a>, with a term length toggle and a button on every row that
+        The full chart is on one page: <a class="link" href="/term-life-insurance/rates/">term life
+        insurance rates by age</a>. You can switch the term length, and a button on every row
         carries the numbers into a quote form.
       </p>
       <h3 class="reveal mt-8 text-h4">Not sure of the amount?</h3>
 <p class="reveal mt-3 text-slate">
-        If the amount rather than the length is the open question, the
-        <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> works
-        that out first and shows its arithmetic while it does.
+        The <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a>
+        works out the amount and shows the math.
       </p>"""
 
 
@@ -164,11 +160,11 @@ def body():
     'A ten year term is the shortest and cheapest length most carriers sell, and it suits '
     'one specific situation.',
     answer=(
-        'That situation is an obligation with a known end date inside the next decade. '
+        'That situation is an obligation with a known end date inside the next ten years. '
         'Outside it, ten years is usually the wrong length of <a class="link" '
-        'href="/term-life-insurance/">term life insurance</a> to buy, not because it is a '
-        'bad product but because of what happens in year eleven. This page is mostly '
-        'about year eleven.'),
+        'href="/term-life-insurance/">term life insurance</a> to buy. It is not a '
+        'bad product. The problem is what happens in year eleven, and this page is mostly '
+        'about that.'),
     extra=C.hero_cta("/term-life-insurance/quotes/", "Get my term life quote"),
     media=C.figure("term-table", C.MEDIA_SIZES, eager=True))}
 
@@ -176,10 +172,10 @@ def body():
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Who a 10 year term actually suits</h2>
+      <h2 class="reveal text-h2">Who a 10 year term fits</h2>
       <p class="reveal mt-5 text-slate">
-        A term length is a guess about how long other people will need your income. These are the
-        three situations where ten years is the right guess rather than the cheapest one.
+        The right term length is how long other people will need your income. These are the
+        three situations where ten years fits.
       </p>
     </div>
     <div class="mt-10 bento" data-stagger="40">{cells}
@@ -200,9 +196,9 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">What happens in year eleven</h2>
       <p class="reveal mt-5 text-slate">
-        This is the part of a ten year term that is not explained at the point of sale. The policy
-        does not usually stop at the end of the tenth year. It converts to an annually renewable
-        premium recalculated for your age at that moment, and then recalculated again every year
+        This is the part of a ten year term that is not explained when you buy it. The policy
+        does not usually stop at the end of the tenth year. It switches to an annually renewable
+        premium: the price is recalculated for your age at that moment, and again every year
         after that. Nobody buys a ten year term intending to pay that. Plenty of people end up
         paying it because the renewal notice arrives before a replacement policy does.
       </p>
@@ -238,7 +234,7 @@ def body():
 
     <div class="reveal mt-10 grid lg:grid-cols-2 gap-4">
       <div class="card">
-        <h3 class="text-h4">The conversion right is the one that matters</h3>
+        <h3 class="text-h4">Check when your conversion right expires</h3>
         <p class="mt-3 text-slate">
           Most term policies let you convert some or all of the death benefit to a permanent policy
           with no new health questions. On a ten year policy that right frequently expires at year
@@ -247,12 +243,12 @@ def body():
         </p>
       </div>
       <div class="card">
-        <h3 class="text-h4">Do not cancel until the replacement is in force</h3>
+        <h3 class="text-h4">Do not cancel before the new policy starts</h3>
         <p class="mt-3 text-slate">
           If you intend to buy a new policy at the end of the term, apply while the old one is
           still running. An application can be declined, postponed, or offered at a worse class
-          than you expected, and the gap between cancelling one policy and being issued another is
-          the only period in this whole exercise where your family is genuinely exposed.
+          than you expected. The gap between canceling one policy and being issued another is
+          the one period when your family has no coverage.
         </p>
       </div>
     </div>
@@ -269,24 +265,25 @@ def body():
 {C.inline_cta(
     "Price ten and twenty years side by side",
     "Six questions, about two minutes. A licensed agent comes back with premiums from named "
-    "carriers at both lengths, at a class we can defend, so you can see the actual gap rather "
+    "carriers at both lengths, at a health class we can defend. You see the actual gap rather "
     "than guess at it. No obligation, and no cost.",
-    "term_10y_mid", "/term-life-insurance/quotes/", "Get term life quotes")}
+    "term_10y_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
 
 {C.prose("What a 10 year term costs", TEN_YEAR_COST,
-         intro="What actually moves the number, and where the full grid is kept current.")}
+         intro="What changes the price of a 10 year policy, and where to see the full rate chart.")}
 
 
 {C.spoke_module("Related pages in term life",
-                "Same silo, and the pages this one deliberately defers to.", SIBLINGS)}
+                "More on term life, including the pages this one points to for detail.", SIBLINGS)}
 
 
 {C.faq_section("Questions about 10 year term", FAQ, "term-10y-faq")}
 
 
-{C.closing_band("term-band", "See what ten years would cost you",
-    "And what twenty would, so you can see the gap before you choose the shorter one.",
+{C.closing_band("term-band", "See what a 10 year term would cost you",
+    "Tell us your age, state and the amount you have in mind. We quote ten and twenty years, so "
+    "you can see the gap before you choose.",
     "term_10y_close", silo="term")}
 
 {C.byline_section()}

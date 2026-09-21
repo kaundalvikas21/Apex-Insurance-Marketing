@@ -457,3 +457,43 @@ where the copy crosses the whole frame. It hangs off `.banner-media::after`, not
 
 Every banner photo is decorative and carries empty `alt`. All meaning is in the text. No banner
 photo repeats a photo used elsewhere on the same page.
+
+---
+
+## 9. Voice (September 2026 copy pass)
+
+The client's note was "headings too clever, sections too text-heavy". The reference for plainness
+is accuquote.com: its sentence shapes, never its claims.
+
+- Talk to "you". Active verbs. One idea per sentence, 25 words at most.
+- Headings: sentence case, 8 words or fewer, say what the section contains in words a searcher
+  would type, with the product term where it fits. No wordplay, no "actually", "genuinely",
+  "honestly".
+- US English: coverage (the noun; "cover" only as a verb), license, dependent, percent, call back,
+  -ize, program, favor, center, behavior, afterward, toward, canceling, math. Bracket tokens keep
+  their spelling (`[PLACEHOLDER LICENCE TABLE]`), because the launch register greps for them.
+- One word per thing: coverage, policy, premium, death benefit, licensed agent, carrier, no medical
+  exam, quote, cash value, term length.
+- Facts and hedges are not copy. A number, age, duration, eligibility statement, "generally",
+  "usually", "never guaranteed", "not always an approval" is reworded around, never changed. No
+  promise of approval, a saving, a price or a speed.
+- `TITLE`, `<h1>`, breadcrumb names and FAQ question text carry the search phrasing and stay.
+  `DESC` is 155 characters or fewer and says what the reader gets.
+- Final expense pages stay calm and unhurried, including `/for-parents/`.
+
+**Button labels.** One label per intent, sentence case everywhere including the header:
+
+| Intent | Label |
+|---|---|
+| Sitewide quote | Get a free quote |
+| Term / whole life quote | Get my term life quote · Get my whole life quote |
+| Final expense quote | Get final expense quotes |
+| Quote form submit | See my quotes |
+| Rate or cost row | Quote this |
+| Callback | Request a call back |
+| Illustration | Request a policy illustration |
+| Hub teaser | Learn about term life (etc.) |
+| Phone | Call `PHONE_DISPLAY` · Or call `PHONE_DISPLAY` |
+
+A label that names a specific thing ("Quote a 20 year term", "Get quotes for $750,000 of
+coverage", "See if you qualify", "Help me choose", "Get both quotes") is not a duplicate and stays.

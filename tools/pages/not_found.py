@@ -23,9 +23,9 @@ DESC = "That page does not exist. Here is where to find what you were probably l
 
 DESTINATIONS = [
     ("/term-life-insurance/", "Term life insurance",
-     "Cover for a set number of years. Usually the cheapest way to cover a mortgage or children at home."),
+     "Coverage for a set number of years. Usually the cheapest way to cover a mortgage or children at home."),
     ("/whole-life-insurance/", "Whole life insurance",
-     "Cover for life, with a level premium and cash value that builds inside the policy."),
+     "Coverage for life, with a level premium and cash value that builds inside the policy."),
     ("/final-expense-insurance/", "Final expense insurance",
      "A smaller policy for a funeral and final bills. No medical exam."),
 ]
@@ -52,7 +52,7 @@ def body():
       <h1 class="mt-3 text-h1">That page is not here</h1>
       <p class="mt-5 text-lead text-slate">
         The link may be old, or we may have moved something. Nothing is wrong with your browser
-        and nothing is wrong with your details. Below is everything this site actually contains.
+        and nothing is wrong with your details. The main pages are below.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="/get-a-quote/" class="btn btn-cta">Get a free quote</a>
@@ -60,7 +60,7 @@ def body():
       </div>
     </div>
 
-    <h2 class="reveal mt-16 text-h2">The three things we do</h2>
+    <h2 class="reveal mt-16 text-h2">The three types of life insurance we offer</h2>
     <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-stagger="40">{tiles}
     </ul>
   </div>
@@ -71,9 +71,9 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Or you were looking for</h2>
+        <h2 class="reveal text-h2">Other pages you may want</h2>
         <p class="reveal mt-5 text-slate">
-          The pages people most often arrive at a broken link from.
+          Pages people often look for when a link breaks.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
@@ -87,7 +87,7 @@ def body():
             ("users", "/about/", "About Apex Insurance Marketing",
              "Who we are, how we are paid, and what we do not do."),
             ("shield-check", "/about/licensing/", "Licensing by state",
-             "Our licence numbers, so you can check them with your own state."),
+             "Our license numbers, so you can check them with your own state."),
             ("phone", "/contact/", "Contact us",
              "A phone number that reaches a licensed agent, and a form if you would rather write."),
           ])}

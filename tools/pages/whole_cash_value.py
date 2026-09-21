@@ -27,8 +27,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Whole Life Insurance Cash Value: How It Works | Apex"
 OG_TITLE = "How whole life cash value works"
-DESC = ("What cash value is, how guaranteed and non guaranteed growth differ, what borrowing "
-        "really costs, the tax treatment, and an honest look at investing the difference instead.")
+DESC = ("How whole life cash value works: guaranteed and non guaranteed growth, what borrowing "
+        "costs, how it is taxed, and investing the difference instead.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Cash value", None)]
@@ -57,16 +57,16 @@ FAQ = [
     ("How does cash value work in a whole life policy?",
      "Your premium is level for life, which means in the early years you pay more than it costs "
      "the carrier to insure you. That excess, after acquisition costs and the cost of insurance, "
-     "is credited to a cash value inside the policy and grows at a guaranteed rate set in the "
+     "is credited to a cash value inside the policy. It grows at a guaranteed rate set in the "
      "contract. You can borrow against it, or take it by surrendering the policy. On a standard "
-     "whole life contract it is not paid in addition to the death benefit: it is the mechanism "
+     "whole life contract it is not paid in addition to the death benefit. It is the mechanism "
      "that lets the carrier promise a level premium for life."),
     ("How long before a whole life policy builds cash value?",
-     "Typically very little in the first two or three years and meaningful amounts from somewhere "
-     "in the second decade, though it varies a great deal by carrier and by how the policy is "
+     "Typically very little in the first two or three years, and meaningful amounts from "
+     "somewhere in the second decade. It varies a great deal by carrier and by how the policy is "
      "designed. The reason is that first year costs, including underwriting, issue, and "
      "commission, come out before anything is credited. This is the single most important thing "
-     "to understand before buying: whole life punishes early surrender severely, and a policy you "
+     "to understand before buying. Whole life punishes early surrender severely, and a policy you "
      "might cancel in year four is a policy you should not buy."),
     ("Do you lose the cash value when you die?",
      "On a standard whole life policy, yes in the sense that your beneficiaries receive the death "
@@ -76,15 +76,15 @@ FAQ = [
      "costs more. If that matters to you, ask for it explicitly, because it is not the default."),
     ("Is a policy loan taxable?",
      "Generally not while the policy stays in force, because a loan is not income. The trap is "
-     "what happens if the policy lapses or is surrendered with a loan outstanding: the loan can "
+     "what happens if the policy lapses or is surrendered with a loan outstanding. The loan can "
      "then be treated as a distribution, and any gain above the premiums you paid becomes taxable "
      "as ordinary income, in a year when you have already spent the money. Talk to a tax "
      "professional about your own circumstances before relying on any of this."),
     ("Should I buy term and invest the difference instead?",
      "For most households with a mortgage and young children, buying adequate term coverage first "
-     "is not optional, it is the base case, and a whole life premium that crowds out that coverage "
+     "is not optional, it is the base case. A whole life premium that crowds out that coverage "
      "is the wrong trade. Whether to invest the difference or fund a permanent policy after that "
-     "is a genuine question with a real answer on both sides, and it depends on your tax position, "
+     "is a genuine question with a real answer on both sides. It depends on your tax position, "
      "your discipline, whether the need is actually permanent, and how much you value a guarantee "
      "over an expected return. Anyone who tells you one answer always wins is selling something."),
 ]
@@ -103,7 +103,7 @@ def body():
     TRAIL,
     "How Whole Life Insurance Cash Value Works",
     'Cash value is money inside a permanent policy that grows on a schedule printed in '
-    'your contract. You can borrow against it or take it by cancelling.',
+    'your contract. You can borrow against it or take it by canceling.',
     answer=(
         'It exists because <a class="link" href="/whole-life-insurance/">whole life '
         'insurance</a> charges a level premium for a risk that rises every year, so the '
@@ -119,25 +119,25 @@ def body():
      read once the reader knows what the two lines are.
      ================================================================== -->
 {C.prose(
-    "What cash value actually is",
+    "What cash value is",
     C.qa("It is the by-product of a level premium",
          "Insuring a forty year old for a year is cheap. Insuring an eighty year old for a year is "
          "not. A premium that stays level across both has to be too high at the start and too low "
-         "at the end, and the surplus from the first half is what funds the second. That surplus, "
+         "at the end. The surplus from the first half is what funds the second. That surplus, "
          "credited with interest, is your cash value.")
     + C.qa("It is inside the policy, not beside it",
            "It is not an account you own separately. It is a value the contract attributes to your "
-           "policy, and every way of getting at it changes the policy: a loan reduces the death "
+           "policy, and every way of getting at it changes the policy. A loan reduces the death "
            "benefit until repaid, a withdrawal reduces it permanently, and a surrender ends it.",
            "mt-8")
     + C.qa("It is slow at the start by design",
            "First year costs, underwriting, issue, and commission, come out before anything is "
            "credited. A policy surrendered in year three commonly returns less than was paid into "
            "it. This is the fact that decides whether whole life is right for you, and it is the "
-           "one most often left to the small print.", "mt-8")
+           "one most often left to the fine print.", "mt-8")
     + C.qa("It is not the death benefit",
-           "On a standard policy your beneficiaries receive the face amount, not the face amount "
-           "plus the cash value. Designs that pay both exist and cost more. If you want that, ask "
+           "On a standard policy your beneficiaries receive the death benefit, called the face "
+           "amount, not the face amount plus the cash value. Designs that pay both exist and cost more. If you want that, ask "
            "for it by name, because it is not what you will be quoted by default.", "mt-8"),
     intro="Four facts, in the order that makes the rest of the page make sense.")}
 
@@ -149,7 +149,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The shape of the first forty years</h2>
+      <h2 class="reveal text-h2">How cash value grows over forty years</h2>
       <p class="reveal mt-5 text-slate">
         No dollar amounts, because putting numbers on this axis without a carrier illustration
         behind them would be inventing a projection. The shape, however, is consistent across
@@ -170,8 +170,8 @@ def body():
           for it explicitly, on the guaranteed column, before you ask about anything else.
         </p>
         <p class="mt-4 text-slate">
-          If you cannot see yourself holding the policy well past that point, the honest conclusion
-          is that this is not the right product for you, and we would rather say so here.
+          If you cannot see yourself holding the policy well past that point, this is not the right
+          product for you. We would rather say so here.
         </p>
       </div>
     </div>
@@ -244,7 +244,7 @@ def body():
     + '</div><div class="mt-8">' + C.step(4, "The policy can collapse under the loan",
            "If the loan and its interest grow to approach the cash value, the carrier will demand "
            "repayment or the policy lapses. A lapse with a loan outstanding is the worst case on "
-           "this page: the coverage ends and the gain above the premiums you paid can become "
+           "this page. The coverage ends, and the gain above the premiums you paid can become "
            "taxable income in that year.",
            "Ask your carrier for an in force illustration once a year if you carry a loan. It is "
            "free and it is the only way to see this coming.")
@@ -254,7 +254,7 @@ def body():
     cls="section band-surface")}
 
 
-{C.ask_strip("Want this for your own age?", "An illustration shows the guaranteed column year by year. No obligation.", '<a href="/whole-life-insurance/quotes/" class="btn btn-ghost">Ask for an illustration</a>')}
+{C.ask_strip("Want this for your own age?", "An illustration shows the guaranteed column year by year. No obligation.", '<a href="/whole-life-insurance/quotes/" class="btn btn-ghost">Request a policy illustration</a>')}
 
 <!-- =====================================================================
      WITHDRAWALS AND SURRENDER.
@@ -267,7 +267,7 @@ def body():
         <h2 class="text-h3 !font-display !font-semibold">Withdrawals</h2>
         <p class="mt-4 text-slate">
           On a participating whole life policy, what is usually described as a withdrawal is the
-          surrender of paid up additions: you are selling back small pieces of extra coverage that
+          surrender of paid up additions. You are selling back small pieces of extra coverage that
           dividends bought. The money is yours, and the death benefit falls permanently by more
           than the amount you take.
         </p>
@@ -281,7 +281,7 @@ def body():
       <div class="reveal card">
         <h2 class="text-h3 !font-display !font-semibold">Surrender</h2>
         <p class="mt-4 text-slate">
-          Cancelling the policy for its surrender value. The coverage ends, and if you are older or
+          Canceling the policy for its surrender value. The coverage ends. If you are older or
           in worse health than when you bought it, replacing that coverage will cost considerably
           more or may not be possible at all.
         </p>
@@ -320,12 +320,12 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         {C.qa("The death benefit",
               "Generally received by beneficiaries free of federal income tax. It can still be "
-              "counted in your estate for estate tax purposes if you owned the policy, which is a "
-              "different tax and one an estate attorney should look at where the amounts are "
+              "counted in your estate for estate tax purposes if you owned the policy. That is a "
+              "different tax, and one an estate attorney should look at where the amounts are "
               "large.")}
         {C.qa("Growth inside the policy",
               "Generally not taxed as it accrues. This tax deferral is one of the genuine "
-              "structural advantages of the product, and it is also the feature most often "
+              "structural advantages of the product. It is also the feature most often "
               "oversold, because the growth being deferred is modest on the guaranteed column.",
               "mt-8")}
         {C.qa("Money you take out",
@@ -334,8 +334,8 @@ def body():
               "taxable if it lapses or is surrendered with a loan outstanding.", "mt-8")}
         {C.qa("Modified endowment contracts",
               "If a policy is funded faster than federal limits allow, it becomes a modified "
-              "endowment contract, and the tax treatment of loans and withdrawals changes for the "
-              "worse and does so permanently. Any agent proposing to overfund a policy should "
+              "endowment contract. The tax treatment of loans and withdrawals then changes for the "
+              "worse, and does so permanently. Any agent proposing to overfund a policy should "
               "raise this before you do.", "mt-8")}
       </div>
     </div>
@@ -353,7 +353,7 @@ def body():
       <h2 class="reveal text-h2 text-white">Buy term and invest the difference</h2>
       <p class="reveal mt-5 text-white/85">
         This is the strongest argument against whole life and it deserves a straight answer rather
-        than a rebuttal. Here is ours, including the part that does not favour us.
+        than a rebuttal. Here is ours, including the part that does not favor us.
       </p>
     </div>
 
@@ -362,7 +362,7 @@ def body():
       <div class="reveal">
         <h3 class="text-h3 !font-display !font-semibold text-white">Where the argument is right</h3>
         <ul class="mt-5 grid gap-4 text-white/85">
-          <li>For the same premium you can buy far more death benefit with term, and during the
+          <li>For the same premium you can buy far more death benefit with term. During the
               years a young family is most exposed, the amount of coverage matters more than
               anything else on this page.</li>
           <li>A low cost index fund inside a tax advantaged account has historically produced a
@@ -371,7 +371,7 @@ def body():
           <li>Whole life is expensive to exit early, and life is unpredictable. Flexibility has
               real value that an illustration does not price.</li>
           <li>Most whole life sold to households who had no term coverage was sold in the wrong
-              order, and that is an industry failure rather than a misunderstanding by the buyer.</li>
+              order. That is an industry failure rather than a misunderstanding by the buyer.</li>
         </ul>
       </div>
 
@@ -379,14 +379,14 @@ def body():
         <h3 class="text-h3 !font-display !font-semibold text-white">Where it is incomplete</h3>
         <ul class="mt-5 grid gap-4 text-white/85">
           <li>It assumes the difference actually gets invested, every month, for thirty years,
-              without being spent. Measured behaviour says most people do not do this, and a
+              without being spent. Measured behavior says most people do not do this, and a
               strategy that only works with perfect discipline should be priced accordingly.</li>
           <li>It compares an expected return with a guarantee as though they were the same kind of
               number. They are not, and how much you should pay for a guarantee is a preference,
-              not an arithmetic error.</li>
+              not a math error.</li>
           <li>Term ends. If the need does not, the comparison quietly assumes you will be insurable
               later, which is exactly what nobody can promise.</li>
-          <li>It ignores the cases where permanence is the point: a lifelong dependant, a business
+          <li>It ignores the cases where permanence is the point: a lifelong dependent, a business
               agreement, an estate that needs liquidity whenever it settles.</li>
         </ul>
       </div>
@@ -394,8 +394,8 @@ def body():
 
     <p class="reveal mt-10 max-w-3xl text-white/85">
       Our practical position: insure the temporary need with term first, because it is cheap and
-      the exposure is real, and consider a permanent policy for a permanent need afterwards, sized
-      to what you can carry for life. If you want the comparison worked through with costs over
+      the exposure is real. Then consider a permanent policy for a permanent need, sized to what
+      you can carry for life. If you want the comparison worked through with costs over
       thirty years, that is on
       <a class="link !text-white" href="/compare/term-vs-whole-life-insurance/">term life against
       whole life</a>.

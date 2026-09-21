@@ -218,7 +218,7 @@ OG_SIZE = (1200, 630)
 # REPLACE-BEFORE-LAUNCH.md section 4b. The alt says what is in the frame and
 # nothing else: none of these people is an Apex agent or client.
 HERO_BANNERS = {
-    "term-hero": ("Two men and a small child reading a book together on a grey sofa in a bright room.",
+    "term-hero": ("Two men and a small child reading a book together on a gray sofa in a bright room.",
                   "right center"),
     "whole-hero": ("A man and a woman talking across a wooden kitchen table, each with a mug.",
                    "right center"),

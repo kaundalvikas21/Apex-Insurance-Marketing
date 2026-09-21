@@ -23,8 +23,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Whole Life Insurance for Seniors: Rates & Acceptance | Apex"
 OG_TITLE = "Whole life insurance for seniors"
-DESC = ("What whole life insurance costs after 65, which underwriting route you are likely to be "
-        "offered, and when a smaller final expense policy is the better answer.")
+DESC = ("What whole life insurance costs after 65, the three ways you can be accepted, and when a "
+        "smaller final expense policy is the better answer.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("For seniors", None)]
@@ -66,23 +66,23 @@ ROUTES = [
 
 FAQ = [
     ("Can a 75 year old get whole life insurance?",
-     "Yes. Most of our appointed carriers write whole life to around eighty five, and simplified "
-     "issue and guaranteed acceptance policies are specifically designed for this age band. What "
-     "narrows above seventy five is the face amount rather than the availability: the products "
+     "Yes. Most of our appointed carriers write whole life to around eighty five. Simplified "
+     "issue and guaranteed acceptance policies are designed for this age band. What "
+     "narrows above seventy five is the face amount rather than the availability. The products "
      "still exist, and they are sized for a funeral and final bills rather than for income "
      "replacement."),
     ("Is whole life insurance a good idea for seniors?",
      "It is a good idea when the need is permanent and modest: a funeral, final medical bills, an "
-     "outstanding debt, or a defined amount left to someone. It is a poor idea when it is being "
-     "used as a savings vehicle late in life, because the cash value has very few years to do "
-     "anything useful, or when the premium would strain a fixed income. A policy that lapses at "
-     "eighty two because the premium became unaffordable is the worst outcome on this page, and "
-     "it is avoided by buying an amount you can carry rather than the largest one you qualify for."),
+     "outstanding debt, or a defined amount left to someone. It is a poor idea as a savings "
+     "vehicle late in life, because the cash value has very few years to do anything useful. "
+     "It is also a poor idea when the premium would strain a fixed income. A policy that lapses at "
+     "eighty two because the premium became unaffordable is the worst outcome on this page. "
+     "Avoid it by buying an amount you can carry rather than the largest one you qualify for."),
     ("Do I have to take a medical exam?",
      "Usually not at these ages. Most whole life sold after sixty five is simplified issue, which "
      "means health questions and a prescription check rather than an exam. Fully underwritten "
      "whole life with an exam is still available and is the cheapest per thousand if your health "
-     "supports it, so it is worth asking rather than assuming."),
+     "supports it. It is worth asking rather than assuming."),
     ("What is the difference between whole life and final expense insurance?",
      "Final expense is whole life. It is the same contract type, sold in smaller face amounts, "
      "with simplified underwriting and marketing aimed at covering a funeral. The guarantees are "
@@ -91,7 +91,7 @@ FAQ = [
      "policy even if you searched for whole life."),
     ("Will my premium go up as I get older?",
      "No. That is the defining feature of the product. The premium is calculated once, at issue, "
-     "from your age and health at that point, and it is guaranteed not to rise for as long as the "
+     "from your age and health at that point. It is guaranteed not to rise for as long as the "
      "policy is in force. This is the main reason people move from term to permanent coverage at "
      "this age: the term renewal premium does rise, every single year."),
 ]
@@ -117,10 +117,10 @@ def body():
     'After sixty five, whole life insurance is widely available and the premium is locked '
     'for life.',
     answer=(
-        'That lock is exactly why people move to <a class="link" '
+        'That lock is why people move to <a class="link" '
         'href="/whole-life-insurance/">whole life insurance</a> at this age. What changes '
-        'is the underwriting: most policies sold in this band are health questions rather '
-        'than an exam, and a few ask nothing at all. This page covers what you are likely '
+        'is how you apply: most policies sold at these ages ask health questions rather '
+        'than require an exam, and a few ask nothing at all. This page covers what you are likely '
         'to be accepted for, what it costs, and the point at which a smaller policy is '
         'the better buy.'),
     extra=hero_cta,
@@ -162,9 +162,9 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       Most people at these ages land in the middle column, and most people assume they belong in
-      the right hand one. That assumption is expensive: guaranteed acceptance costs the most and
-      carries a waiting period, and it is worth reaching for only after the middle column has
-      actually said no. The detail on that product is on
+      the right hand one. That assumption is expensive. Guaranteed acceptance costs the most and
+      carries a waiting period. It is worth reaching for only after the middle column has
+      said no. The detail on that product is on
       <a class="link" href="/whole-life-insurance/guaranteed-acceptance/">guaranteed acceptance
       whole life</a>.
     </p>
@@ -179,11 +179,10 @@ def body():
 <section class="section band" id="rates">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">What it costs, by age</h2>
+      <h2 class="reveal text-h2">Whole life insurance rates for seniors, by age</h2>
       <p class="reveal mt-5 text-slate">
-        Monthly premium for a level benefit policy, non tobacco. Every row has a button that puts
-        you through to a licensed agent who can price that band for your state and health in a few
-        minutes.
+        Monthly premium for a level benefit policy, non tobacco. Every row has a button that calls
+        a licensed agent, who can price that age band for your state and health.
       </p>
       <div class="reveal mt-6">
         {C.rates_flag("premiums")}
@@ -213,8 +212,8 @@ def body():
 
 
 {C.inline_cta(
-    "One call settles which column you are in",
-    "Tell a licensed agent your age, your state, and what you take. You will get a straight answer "
+    "One call tells you which route fits you",
+    "Tell a licensed agent your age, your state, and what medications you take. You will get a straight answer "
     "about whether you need to answer health questions at all, and what the difference costs. No "
     "application, and no obligation.",
     "whole_seniors_mid", "/whole-life-insurance/quotes/", "Or start a quote online",
@@ -228,24 +227,24 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-6">
-        <h2 class="reveal text-h2 text-white">If the amount you need is smaller</h2>
+        <h2 class="reveal text-h2 text-white">Need less coverage? Consider final expense insurance</h2>
         <p class="reveal mt-5 text-white/85">
           Below roughly fifty thousand dollars of coverage, the product built for the job is sold
           under a different name:
           <a class="link !text-white" href="/final-expense-insurance/">final expense insurance</a>.
           It is the same contract, whole life, in a smaller size, with simplified underwriting and
-          carriers who specialise in exactly this band.
+          carriers who specialize in this size.
         </p>
         <p class="reveal mt-5 text-white/85">
-          The practical difference is who will write you and at what price. A carrier that is
+          The practical difference is who will insure you and at what price. A carrier that is
           competitive at two hundred and fifty thousand dollars is frequently uncompetitive at
-          fifteen thousand, and the reverse is just as true. Being appointed with both kinds is the
-          only reason we can tell you which one you are.
+          fifteen thousand, and the reverse is just as true. We are appointed with both kinds,
+          which is how we can tell you which one fits you.
         </p>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h4 !text-ink">A rough rule that holds up</h3>
+          <h3 class="text-h4 !text-ink">Final expense or whole life: a rough rule</h3>
           <p class="mt-3 text-slate">
             If the purpose is a funeral and the bills that follow, you are looking for final
             expense. If the purpose includes leaving a meaningful amount behind, or covering an

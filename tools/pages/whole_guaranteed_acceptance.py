@@ -26,8 +26,8 @@ ACTIVE = "/whole-life-insurance/"
 SILO = "whole-life"
 TITLE = "Guaranteed Acceptance Whole Life Insurance | No Health Questions"
 OG_TITLE = "Guaranteed acceptance whole life insurance"
-DESC = ("Guaranteed acceptance whole life asks no health questions and declines nobody within the "
-        "issue ages. What the waiting period pays, what it costs, and when to try something else.")
+DESC = ("Guaranteed acceptance whole life asks no health questions and declines nobody in its issue "
+        "ages. What the waiting period pays, and when to try something else.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Guaranteed acceptance", None)]
@@ -39,8 +39,8 @@ LEAD = (
 ANSWER = (
     'It is real <a class="link" href="/whole-life-insurance/">whole life insurance</a>: '
     'level premium, permanent coverage, guaranteed cash value. What you pay for the '
-    'acceptance is the highest cost per dollar of coverage of anything we place, plus a '
-    'waiting period during which a death from natural causes returns your premiums rather '
+    'acceptance is the highest cost per dollar of coverage of anything we sell. There is also a '
+    'waiting period, during which a death from natural causes returns your premiums rather '
     'than the face amount. It is a real answer for people who have no other one, and the '
     'wrong answer for anyone who could still pass a short health questionnaire.')
 
@@ -66,9 +66,9 @@ FAQ = [
     ("Is guaranteed acceptance life insurance really guaranteed?",
      "Acceptance is guaranteed, within the issue ages and the coverage limits the carrier sets. "
      "There are no health questions, no exam, and no prescription check, so there is no decline. "
-     "What is not guaranteed is that the full death benefit is payable immediately: nearly every "
-     "one of these policies has a two or three year waiting period for death from natural causes, "
-     "and that is the trade you are making for the acceptance."),
+     "What is not guaranteed is that the full death benefit is payable immediately. Nearly every "
+     "one of these policies has a two or three year waiting period for death from natural causes. "
+     "That is the trade you are making for the acceptance."),
     ("What happens if I die during the waiting period?",
      "If the death is accidental, the full face amount is paid from day one. If it is from "
      "illness or natural causes, the carrier returns the premiums you have paid, normally with "
@@ -78,17 +78,17 @@ FAQ = [
     ("Who is guaranteed acceptance actually for?",
      "Someone inside the issue ages who has been declined for a simplified issue policy, or whose "
      "health history contains something that is a knockout question at every carrier we can "
-     "reach: a recent cancer diagnosis, dialysis, oxygen use, an organ transplant, a terminal "
+     "reach. Examples are a recent cancer diagnosis, dialysis, oxygen use, an organ transplant, a terminal "
      "diagnosis, or a nursing home admission. If none of those describe you, you are probably "
      "eligible for something cheaper and you should let us check before buying this."),
     ("How much coverage can I get without health questions?",
      "Small amounts, by design. Most carriers write these policies in a band that stops well "
-     "short of what a fully underwritten policy would offer, because the carrier is accepting "
+     "short of what a fully underwritten policy would offer. The carrier is accepting "
      "everyone and has to price for that. The product is built to cover a funeral and the bills "
      "that follow it, not to replace an income or fund an estate."),
     ("Is guaranteed acceptance a rip off?",
      "It is expensive, and being sold one when a cheaper policy would have taken you is the "
-     "problem worth naming. The product itself is not dishonest: for someone who genuinely cannot "
+     "problem worth naming. The product itself is not dishonest. For someone who genuinely cannot "
      "be underwritten, it is the only permanent coverage available, and a small policy that "
      "actually pays is better than an uninsured funeral. The failure is an agent who leads with "
      "it. Any agent who quotes you this before trying a simplified issue carrier is not working "
@@ -147,7 +147,7 @@ def body():
 
 
 {C.prose(
-    "What you are actually buying",
+    "What a guaranteed acceptance policy gives you",
     """
         <div class="in-short reveal">
           <p class="in-short-title">In short</p>
@@ -166,15 +166,15 @@ def body():
         </p>
         <h3 class="reveal mt-8 text-h4">One unusual condition</h3>
         <p class="reveal mt-3 text-slate">
-          The unusual condition is at the front. Because the carrier is accepting everyone who
-          applies, including people who are already seriously ill, it cannot pay a full claim in
-          the first two years without being used as a way of buying a payout on a known diagnosis.
-          So it does not. For that window it returns your money instead, and accidental death is
-          carved out and paid in full from the first day.
+          The unusual condition is at the front. The carrier accepts everyone who applies,
+          including people who are already seriously ill. If it paid a full claim in the first
+          two years, people could buy a payout on a known diagnosis. So it does not. For that
+          window it returns your money instead. Accidental death is the exception and is paid in
+          full from the first day.
         </p>
         <h3 class="reveal mt-8 text-h4">Why it costs more</h3>
         <p class="reveal mt-3 text-slate">
-          Everything that makes this product expensive follows from that one sentence. You are not
+          Everything that makes this product expensive follows from accepting everyone. You are not
           paying more because the coverage is better. You are paying more because the carrier is
           not allowed to look at you first.
         </p>""",
@@ -212,16 +212,16 @@ def body():
           If none of those describe you, this is not your product yet. The order that protects you
           is simple: fully underwritten first, simplified issue second, this third. Skipping to
           the third because it is the easiest to buy is how people end up paying several times
-          what they needed to, with a two year gap they did not know about.
+          what they needed to. It also leaves a two year gap they did not know about.
         </p>
         <p class="reveal mt-5 text-slate">
-          After roughly sixty five the middle route is where most applicants actually land, and
+          After roughly sixty five the middle route is where most applicants land, and
           the comparison of all three sits on
           <a class="link" href="/whole-life-insurance/for-seniors/">whole life insurance for
           seniors</a>. It is worth reading before you buy anything on this page.
         </p>""",
-    intro="Written narrowly on purpose. Most people who arrive here searching for no health "
-          "questions can still be underwritten, and would be better off.")}
+    intro="Most people who arrive here searching for no health questions can still qualify for a "
+          "policy that asks them, and would be better off.")}
 
 
 <!-- =====================================================================
@@ -231,7 +231,7 @@ def body():
 <section class="section band" id="waiting-period">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">The waiting period, stated plainly</h2>
+      <h2 class="reveal text-h2">How the waiting period works</h2>
       <p class="reveal mt-5 text-slate">
         This is the part that gets skipped in the advertising, and it is the only part that
         matters if the worst happens early. Read it before you read the premium.
@@ -256,9 +256,9 @@ def body():
     </div>
 
     <p class="reveal mt-6 text-slate max-w-3xl">
-      Two years is the common shape. Three exists, and so does a graded structure that pays a
-      rising percentage instead of returning premiums. The differences are real money, they are
-      set out on the policy schedule rather than in the brochure, and comparing them across
+      Two years is the most common waiting period. Three exists, and so does a graded structure
+      that pays a rising percentage instead of returning premiums. The differences are real money,
+      and they are set out on the policy schedule rather than in the brochure. Comparing them across
       carriers is the single most useful thing an agent can do for you on this product.
     </p>
   </div>
@@ -274,12 +274,11 @@ def body():
 <section class="section" id="rates">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">What it costs, by age</h2>
+      <h2 class="reveal text-h2">Guaranteed acceptance rates, by age</h2>
       <p class="reveal mt-5 text-slate">
         Monthly premium for a guaranteed acceptance policy, fixed for life at issue. Every row has
-        a button that puts you through to a licensed agent who can price that band for your state
-        in a few minutes, and who will tell you first whether you could avoid this product
-        altogether.
+        a button that calls a licensed agent, who can price that age band for your state. They
+        will tell you first whether you could avoid this product altogether.
       </p>
       <div class="reveal mt-6">
         {C.rates_flag("premiums")}
@@ -304,8 +303,8 @@ def body():
       Expect the cost per thousand of coverage to be the highest on this site, and expect the
       available face amounts to be the smallest. Both are the same fact seen from two directions.
       The wider grid for underwritten policies is on the
-      <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates</a> page, and
-      the gap between the two is the price of not being asked any questions.
+      <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates</a> page. The
+      gap between the two is the price of not being asked any questions.
     </p>
   </div>
 </section>
@@ -346,7 +345,7 @@ def body():
         <div class="mt-8">
           {C.step(4, "What you actually need is a funeral covered",
                   "Then you are looking for a product built for that job, in that size, from "
-                  "carriers who specialise in it. Same contract type, different market, and "
+                  "carriers who specialize in it. Same contract type, different market, and "
                   "usually a better price for the same face amount.")}
         </div>
       </div>
@@ -356,10 +355,10 @@ def body():
 
 
 {C.inline_cta(
-    "One call tells you whether you need this product at all",
-    "Tell a licensed agent your age, your state, and what you take. Before anyone quotes you a "
-    "guaranteed acceptance policy we will check whether a simplified issue carrier would still "
-    "write you, because that is almost always the cheaper answer. No application, and no "
+    "Find out if you need guaranteed acceptance",
+    "Tell a licensed agent your age, your state, and what medications you take. Before anyone "
+    "quotes you a guaranteed acceptance policy, we will check whether a simplified issue carrier "
+    "would still accept you. That is almost always the cheaper answer. No application, and no "
     "obligation either way.",
     "whole_ga_mid", "/whole-life-insurance/quotes/", "Or start a quote online",
     phone_first=True)}
@@ -372,7 +371,7 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-6">
-        <h2 class="reveal text-h2 text-white">If this is about covering a funeral</h2>
+        <h2 class="reveal text-h2 text-white">Covering a funeral? Look at final expense insurance</h2>
         <p class="reveal mt-5 text-white/85">
           Say so on the call, because it changes which carriers we approach. The product built for
           that job is sold under a different name:
@@ -381,15 +380,15 @@ def body():
           with a short health questionnaire rather than with no questions at all.
         </p>
         <p class="reveal mt-5 text-white/85">
-          That distinction is worth money. A carrier that specialises in ten and fifteen thousand
+          That distinction is worth money. A carrier that specializes in ten and fifteen thousand
           dollar policies and is willing to ask three questions will frequently beat a guaranteed
-          acceptance premium by a wide margin, for the same face amount, with no waiting period at
-          the front. You only find that out by being asked the questions.
+          acceptance premium by a wide margin. That is for the same face amount, with no waiting
+          period at the front. You only find that out by being asked the questions.
         </p>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h4 !text-ink">The order that protects you</h3>
+          <h3 class="text-h4 !text-ink">Which type of policy to try first</h3>
           <p class="mt-3 text-slate">
             Fully underwritten first, because it is cheapest per thousand. Simplified issue second,
             because it is where most people at these ages actually land. Guaranteed acceptance

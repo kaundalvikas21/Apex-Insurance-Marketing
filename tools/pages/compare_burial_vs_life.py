@@ -23,8 +23,8 @@ ACTIVE = "/"
 SILO = "compare"
 TITLE = "Burial Insurance vs Life Insurance: What's the Difference? | Apex"
 OG_TITLE = "Burial insurance vs life insurance"
-DESC = ("Burial insurance is life insurance. It is a small permanent policy sized for a funeral. "
-        "How it differs from a full sized policy, and which one your situation calls for.")
+DESC = ("Burial insurance is life insurance: a small permanent policy sized for a funeral. See how "
+        "it differs from a full sized policy and which one fits you.")
 
 TRAIL = [("Home", "/"), ("Compare", None), ("Burial insurance vs life insurance", None)]
 
@@ -55,13 +55,13 @@ ROWS = [
 ]
 
 WINS = [
-    ("Burial insurance fits", "Nobody depends on your income any more",
-     "<p>The children are independent, the mortgage is gone or nearly gone, and the thing you "
-     "actually want to prevent is your family paying for a funeral out of savings or a credit "
-     "card. That is a specific, bounded cost, and a small permanent policy sized to it is exactly "
-     "the right instrument.</p>"
+    ("Burial insurance fits", "Nobody depends on your income anymore",
+     "<p>The children are independent and the mortgage is gone or nearly gone. What you "
+     "want to prevent is your family paying for a funeral out of savings or a credit "
+     "card. That is a specific, bounded cost, and a small permanent policy sized to it is "
+     "the right tool.</p>"
      "<p class='mt-3'>It is also the practical answer when health or age would make a large policy "
-     "expensive or unavailable, because the underwriting is a short list of questions rather than "
+     "expensive or unavailable. The application is a short list of health questions rather than "
      "an exam.</p>"),
     ("Full sized life insurance fits", "Somebody would struggle if your income stopped",
      "<p>A partner who could not cover the mortgage alone, children who are not yet independent, a "
@@ -80,7 +80,7 @@ CHECKS = [
     "general price list on request, and two calls gives you a number that describes your area.",
     "Check whether the policy you are being shown has a waiting period, and what happens if you "
     "die during it. This is the single most common unpleasant surprise in the small policy market.",
-    "If you are told a policy is guaranteed acceptance, ask what it costs against a policy with "
+    "If you are told a policy is guaranteed acceptance, ask what it costs compared with a policy that asks "
     "health questions. Answering the questions is usually worth real money.",
     "Decide who the beneficiary is and tell them the policy exists. A policy nobody knows about is "
     "the most common way any of this fails.",
@@ -92,18 +92,18 @@ FAQ = [
      "with health questions instead of a medical exam and sized for a funeral. It is also sold as "
      "final expense insurance and funeral insurance, and those three names describe the same "
      "thing. When people ask this question they usually mean the difference between it and a large "
-     "policy, and that difference is size and purpose rather than category."),
+     "policy. That difference is size and purpose rather than category."),
     ("Which is better, burial insurance or life insurance?",
      "Neither, in the abstract. They answer different questions. If someone depends on your income "
      "you need a policy sized to replace that income, and a burial policy will not do it. If "
      "nobody does, and the concern is a funeral bill landing on your children, a large policy is "
-     "more coverage than the situation calls for and you would be paying for it every month. The "
+     "more coverage than the situation calls for. You would be paying for it every month. The "
      "question is not which is better but which describes your household."),
     ("Is burial insurance more expensive than regular life insurance?",
      "Per thousand dollars of coverage, yes, usually noticeably so, because there is no medical "
      "exam and the carrier is accepting more uncertainty. In total monthly cost, no, because the "
      "policy is a fraction of the size. That is why comparing the two on premium alone is "
-     "misleading in both directions, and why the useful comparison is per thousand of coverage at "
+     "misleading in both directions. The useful comparison is per thousand dollars of coverage at "
      "the same age."),
     ("Can I have both?",
      "Yes, and it is common. A term policy covering the years the family is dependent, with a "
@@ -113,7 +113,7 @@ FAQ = [
      "than a rule."),
     ("Do I need burial insurance if I already have life insurance?",
      "Probably not, if the existing policy is large enough and will still be in force when you "
-     "die. Two things catch people out: employer provided coverage usually ends with the job, and "
+     "die. Two things catch people off guard: employer provided coverage usually ends with the job, and "
      "a term policy expires on a date, frequently before the funeral it was supposed to help pay "
      "for. Check what you actually own and when it ends before buying anything else."),
 ]
@@ -128,12 +128,12 @@ def body():
         trail=TRAIL,
         h1="Burial Insurance vs Life Insurance",
         lead='Burial insurance is life insurance. It is a small permanent policy, usually between '
-             '$2,000 and $50,000, underwritten with health questions instead of a medical exam and '
+             '$2,000 and $50,000, issued on health questions instead of a medical exam and '
              'sized to cover a funeral and the bills that follow. A full sized life insurance '
              'policy is bought to replace an income or clear a mortgage, and is measured in '
-             'hundreds of thousands. The whole of the difference is size and purpose, so the only '
+             'hundreds of thousands. The difference is size and purpose, so the only '
              'question that matters is whether anybody currently depends on your income.',
-        table_heading="The two, side by side",
+        table_heading="Burial insurance vs life insurance, side by side",
         table_intro="Everything in this table follows from one distinction: one policy is sized "
                     "for a funeral and the other for a household.",
         table_caption="Burial insurance compared with full sized life insurance on coverage, "
@@ -144,7 +144,7 @@ def body():
         table_note="Product names, coverage limits, and underwriting differ by carrier and by "
                    "state. This table describes the two categories, not any specific policy.",
         cost_heading="Which one costs more",
-        cost_intro="The honest answer is that the question is asked the wrong way round, and "
+        cost_intro="The question is asked the wrong way around, and "
                    "answering it as asked is how people end up with the wrong policy.",
         cost_blocks="""
         <div class="in-short reveal">
@@ -165,31 +165,30 @@ def body():
         <p class="reveal mt-3 text-slate">
           Per thousand dollars of coverage, a burial policy costs noticeably more. There is no
           medical exam, the underwriting is a short questionnaire, and the carrier prices that
-          uncertainty in. You are paying a premium for convenience and for access, which is a
-          reasonable thing to pay for when access is the constraint, and a poor thing to pay for
-          when it is not.
+          uncertainty in. You are paying extra for convenience and for access. That is reasonable
+          when access is the problem, and a poor deal when it is not.
         </p>
         <h3 class="reveal mt-8 text-h4">The comparison that matters</h3>
         <p class="reveal mt-3 text-slate">
           So the real comparison is not between two premiums. It is between two situations. A
           household that still depends on an earner needs an amount of coverage that only a full
-          sized policy provides, and buying three burial policies to get there would cost far more
+          sized policy provides. Buying three burial policies to get there would cost far more
           than one term policy.
         </p>
         <p class="reveal mt-4 text-slate">
           A household where nobody depends on the income needs a funeral
-          covered, and buying a large policy to do that means paying every month for coverage that
+          covered. Buying a large policy to do that means paying every month for coverage that
           is not doing anything.
         </p>
-        <h3 class="reveal mt-8 text-h4">Where the actual numbers are</h3>
+        <h3 class="reveal mt-8 text-h4">Where to find the rate tables</h3>
         <p class="reveal mt-3 text-slate">
-          Both silos publish their own rate tables, with the carrier rate card and its date named
-          on the page, so you can see the actual numbers rather than take that on trust:
+          Each product has its own rate table on this site, with the carrier rate card and its
+          date named on the page:
           <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
           costs</a> and <a class="link" href="/term-life-insurance/rates/">term life insurance
           rates by age</a>.
         </p>""",
-        wins_heading="Which one your situation calls for",
+        wins_heading="Which one fits your situation",
         wins_intro="One question decides this, and it is not about age, health, or budget. It is "
                    "about whether anybody's monthly bills currently depend on your income.",
         wins=WINS,
@@ -198,20 +197,20 @@ def body():
                         "them take one phone call or one look at a statement.",
         checklist_items=CHECKS,
         paths_heading="Where to go from here",
-        paths_intro="Both routes go to the section of the site that covers that product properly, "
+        paths_intro="Both routes go to the section of the site that covers that product in full, "
                     "not to a form. If you are still deciding, that is the right place to be.",
         paths=[
             ("If nobody depends on your income",
              "Final expense and burial insurance: small permanent coverage sized for a funeral, no "
-             "medical exam, a premium fixed for life. The hub covers what it is, what it costs, "
+             "medical exam, a premium fixed for life. That page covers what it is, what it costs, "
              "and which policies pay from day one.",
              "/final-expense-insurance/", "Go to final expense insurance"),
-            ("If somebody does",
+            ("If somebody depends on your income",
              "Term and whole life insurance: coverage sized to replace an income or clear a "
-             "mortgage. The term hub carries the rate tables and a calculator that sizes the "
+             "mortgage. The term life page has the rate tables and a calculator that sizes the "
              "amount before you price anything.",
              "/term-life-insurance/", "Go to term life insurance"),
         ],
-        faq_heading="Questions about the difference",
+        faq_heading="Questions about burial insurance vs life insurance",
         faq=FAQ,
         faq_group="cmp-burial-life-faq")

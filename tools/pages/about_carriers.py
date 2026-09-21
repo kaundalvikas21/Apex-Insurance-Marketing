@@ -19,8 +19,8 @@ ACTIVE = PATH
 SILO = "site"
 TITLE = "Carriers We Are Appointed With | Apex Insurance Marketing"
 OG_TITLE = "The carriers Apex Insurance Marketing compares"
-DESC = ("The life insurance carriers Apex Insurance Marketing holds appointments with, what an "
-        "appointment means, and why being owned by none of them is what makes a comparison possible.")
+DESC = ("The life insurance carriers Apex Insurance Marketing is appointed with, what an "
+        "appointment means, and why being owned by none of them matters.")
 
 # [PLACEHOLDER CARRIER LIST] One row per carrier the agency actually holds a
 # current appointment with. Names only, no logos, no ratings we cannot source.
@@ -34,7 +34,7 @@ CARRIERS = [
 
 FAQ = [
     ("Does an appointment mean the carrier endorses you?",
-     "No. An appointment is a carrier authorising us to sell its products and to be paid a "
+     "No. An appointment is a carrier authorizing us to sell its products and to be paid a "
      "commission for doing so. It is not a partnership, an endorsement, or a rating of us by "
      "them. We are not owned by, affiliated with, or a subsidiary of any carrier on this page."),
     ("Are these all the carriers on the market?",
@@ -42,8 +42,8 @@ FAQ = [
      "with, so our comparison is a comparison of our shelf, not of the whole market. It is wider "
      "than a captive agent's shelf of one, and it is narrower than every carrier that exists."),
     ("How do you decide which carrier to recommend?",
-     "Price for your age, state, and health, then whether that carrier is likely to accept you, "
-     "then the policy terms that matter for what you are covering, such as conversion options on "
+     "First, price for your age, state, and health. Then whether that carrier is likely to accept you. "
+     "Then the policy terms that matter for what you are covering, such as conversion options on "
      "term or the waiting period on a final expense policy. Commission does not enter it, and we "
      "explain how we are paid on our about page."),
 ]
@@ -79,8 +79,8 @@ def body():
       <h1 class="reveal text-h1">The carriers we compare</h1>
       <p class="reveal mt-5 text-lead text-slate">
         We are appointed with <span class="tnum">{C.CARRIERS}</span> life insurance carriers and
-        owned by none of them. That is the entire mechanism behind a comparison: an agency that
-        answers to one carrier can only ever recommend that carrier.
+        owned by none of them. That is what makes a comparison possible: an agency that
+        answers to one carrier can only recommend that carrier.
       </p>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">{C.figure("contact-desk", C.MEDIA_SIZES, eager=True)}</div>
@@ -100,7 +100,7 @@ def body():
         <p class="eyebrow">What that buys you</p>
         <p class="mt-4 text-slate">
           One set of answers priced against several carriers at once, including the ones likely to
-          decline you, so you find that out before an application rather than after one. And an
+          decline you. You find that out before you apply, not after. And an
           agent who can say a carrier is wrong for you without it costing them their job.
         </p>
       </div>
@@ -153,10 +153,10 @@ def body():
 </section>
 
 
-{C.steps_section("How an appointment actually works",
-    "Worth understanding, because it is the difference between a comparison and a sales pitch with extra steps.",
-    [("The carrier authorises the agency", "It vets us, contracts us, and files the appointment with the state. Until that is done we cannot quote or sell that carrier's products at all."),
-     ("We quote across everyone we hold", "Your age, state, health, and coverage amount go to each appointed carrier's rate structure, and the answers come back different, because carriers price risk differently."),
+{C.steps_section("How a carrier appointment works",
+    "An appointment is what separates a comparison from a sales pitch.",
+    [("The carrier authorizes the agency", "It vets us, contracts us, and files the appointment with the state. Until that is done we cannot quote or sell that carrier's products at all."),
+     ("We quote every carrier we are appointed with", "Your age, state, health, and coverage amount go to each appointed carrier's rate structure. The answers come back different, because carriers price risk differently."),
      ("The carrier issues and pays the claim", "We place the policy; the carrier owns it. Your premium goes to them, your claim is paid by them, and the guarantees rest on their financial strength rather than on ours.")],
     cls="section")}
 
@@ -171,7 +171,7 @@ def body():
         <span class="flex items-start gap-3">%s<span class="text-slate">%s</span></span>
       </li>''' % (icon("circle-x", 20, "shrink-0 mt-0.5 text-muted"), t) for t in [
         "That we search every carrier on the market. We search the ones we are appointed with, which is not the same thing.",
-        "That any carrier here endorses, partners with, or recommends us. An appointment is a sales authorisation, nothing more.",
+        "That any carrier here endorses, partners with, or recommends us. An appointment is a sales authorization, nothing more.",
         "A financial strength rating for any carrier that we have not sourced and dated from the rating agency itself.",
       ])}
     </ul>

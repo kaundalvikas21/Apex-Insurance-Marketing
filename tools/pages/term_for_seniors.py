@@ -23,8 +23,8 @@ ACTIVE = "/term-life-insurance/"
 SILO = "term-life"
 TITLE = "Term Life Insurance for Seniors Over 60 | Rates & Options | Apex"
 OG_TITLE = "Term life insurance for seniors over 60"
-DESC = ("What term life insurance is still available after 60, what it costs, where issue ages "
-        "stop, and when a small permanent policy is the better answer. Talk to a licensed agent.")
+DESC = ("What term life insurance is still available after 60, what it costs, and when a small "
+        "permanent policy is the better answer. Talk to a licensed agent.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("For seniors", None)]
@@ -44,7 +44,7 @@ FAQ = [
      "Usually yes, most commonly as a ten year term and sometimes fifteen, and the number of "
      "carriers willing to write it drops sharply. Whether it is a good idea is a separate "
      "question from whether it is possible. At seventy, a ten year term leaves you uninsured at "
-     "eighty, which is the age at which cover is hardest to replace. If the need genuinely ends "
+     "eighty, which is the age at which coverage is hardest to replace. If the need genuinely ends "
      "within ten years, that is fine. If it does not, a small permanent policy usually serves you "
      "better even though the premium per thousand looks worse."),
     ("What is the oldest age you can buy term life insurance?",
@@ -60,9 +60,9 @@ FAQ = [
      "needs do not expire and term does. The test is not your age, it is whether the need has a "
      "date on it."),
     ("Do I need a medical exam to get term life insurance at 65?",
-     "Often, yes, and it usually works in your favour. Accelerated underwriting programmes that "
-     "skip the exam are mostly built around younger applicants and smaller face amounts, so above "
-     "sixty the fully underwritten route with a paramedical exam frequently produces a better "
+     "Often, yes, and it usually works in your favor. Accelerated underwriting programs that "
+     "skip the exam are mostly built around younger applicants and smaller face amounts. Above "
+     "sixty, the fully underwritten route with a paramedical exam frequently produces a better "
      "class and a lower premium. If your health makes an exam a bad bet, say so at the start and "
      "we will aim you at the carriers that are kindest about it."),
     ("What if I am declined for term life insurance?",
@@ -97,7 +97,7 @@ def body():
     'a need with an end date on it.',
     answer=(
         'Premiums for <a class="link" href="/term-life-insurance/">term life '
-        'insurance</a> rise steeply through this decade, the number of carriers willing '
+        'insurance</a> rise steeply through this decade. The number of carriers willing '
         'to write you shrinks every few years, and most stop issuing new term somewhere '
         'between seventy five and eighty. This page says plainly what is still available, '
         'what it costs, and when a small permanent policy is the better buy.'),
@@ -112,9 +112,9 @@ def body():
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">What is still available, by age</h2>
+      <h2 class="reveal text-h2">Term life still available, by age</h2>
       <p class="reveal mt-5 text-slate">
-        Availability, not price. A cell that says limited means a handful of our carriers will
+        This table shows availability, not price. A cell that says limited means a handful of our carriers will
         consider it, usually with tighter health requirements and a lower maximum face amount.
       </p>
       <div class="reveal mt-6">
@@ -150,9 +150,9 @@ def body():
     </p>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
-      For what the premium itself does across these ages, the full grid is on our
-      <a class="link" href="/term-life-insurance/rates/">term life insurance rates</a> page, which
-      runs to age seventy four by five year bands.
+      To see how the premium changes across these ages, go to the full grid on our
+      <a class="link" href="/term-life-insurance/rates/">term life insurance rates</a> page. It
+      runs to age seventy four in five year bands.
     </p>
   </div>
 </section>
@@ -163,25 +163,25 @@ def body():
      invented number.
      ================================================================== -->
 {C.prose(
-    "Why the price moves so fast in this decade",
+    "Why term life costs more after 60",
     C.qa("The premium tracks one year of risk at a time",
          "Term pricing is built from the chance of a claim during the term. That chance is small "
          "and flat through your thirties and forties, and it starts bending upward in the late "
          "fifties. By the mid sixties each additional year of age costs meaningfully more than the "
-         "one before it, which is why a chart of term rates looks like a hockey stick rather than "
+         "one before it. That is why a chart of term rates looks like a hockey stick, not "
          "a ramp.")
     + C.qa("A longer term compounds the same effect",
            "A twenty year term bought at sixty five is priced across ages sixty five to eighty "
-           "five, and the back half of that window is where nearly all the risk sits. That is the "
+           "five. The back half of that window is where nearly all the risk sits. That is the "
            "real reason twenty and thirty year terms disappear from the grid above, rather than "
            "any rule about how old you are.", "mt-8")
     + C.qa("Health class matters more than it used to",
            "At thirty five, the gap between preferred and standard is real but modest. At "
            "sixty eight it is large, and the carriers disagree with each other far more than they "
            "did about the same applicant thirty years earlier. This is the age at which shopping "
-           "several carriers stops being tidy and starts being worth actual money.", "mt-8")
+           "several carriers starts being worth real money.", "mt-8")
     + C.qa("Waiting a year is not free",
-           "The same policy bought a year later costs more for its entire term, and a year is also "
+           "The same policy bought a year later costs more for its entire term. A year is also "
            "long enough for a diagnosis to change which carriers will take you at all. If you are "
            "going to buy, the cheapest day is the first one you are sure.", "mt-8"),
     intro="Three forces, all pulling the same way. None of them is a sales tactic, and all of "
@@ -192,9 +192,9 @@ def body():
 {C.inline_cta(
     "Fifteen minutes on the phone will settle this",
     "Tell a licensed agent your age, your state, and roughly what your health looks like. You will "
-    "get a straight answer about which carriers will write you and whether term is even the right "
-    "product, before you fill in anything.",
-    "term_seniors_mid", "/term-life-insurance/quotes/", "Or start a quote online",
+    "get a straight answer about which carriers will write you and whether term is the right "
+    "product, before you fill out anything.",
+    "term_seniors_mid", "/term-life-insurance/quotes/", "Get my term life quote",
     phone_first=True)}
 
 
@@ -224,7 +224,7 @@ def body():
       </div>
 
       <div class="reveal card">
-        <h2 class="text-h3 !font-display !font-semibold">When it is the wrong tool</h2>
+        <h2 class="text-h3 !font-display !font-semibold">When term is wrong after 60</h2>
         <ul class="mt-5 grid gap-4 text-slate">
           <li>The purpose is a funeral, burial, or cremation and the bills that follow.</li>
           <li>You want to leave something behind whenever that happens, not only if it happens
@@ -234,7 +234,7 @@ def body():
           <li>You are over seventy five, where the grid above has largely run out.</li>
         </ul>
         <p class="mt-5 text-slate">
-          In every one of those cases the need has no expiry date, and buying a product that does
+          In every one of those cases the need has no end date. Buying a product that does
           expire is how people end up uninsured at exactly the age they cannot replace it.
         </p>
       </div>
@@ -255,22 +255,22 @@ def body():
         <p class="reveal mt-5 text-white/85">
           We would rather tell you that on this page than after an application. For a funeral,
           final bills, and a modest amount left behind, the product built for the job is a small
-          permanent policy, sold under the name
+          permanent policy. It is sold under the name
           <a class="link !text-white" href="/final-expense-insurance/">final expense insurance</a>.
         </p>
         <p class="reveal mt-5 text-white/85">
           It is whole life, so the premium never rises and the coverage never ends. Face amounts
-          typically run from a few thousand up to around fifty thousand, underwriting is health
+          typically run from a few thousand up to around fifty thousand. Underwriting is health
           questions rather than an exam, and issue ages run to eighty five with most carriers.
         </p>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">
         <div class="reveal card">
-          <h3 class="text-h4 !text-ink">Not sure which side of the line you are on?</h3>
+          <h3 class="text-h4 !text-ink">Not sure if term is right for you?</h3>
           <p class="mt-3 text-slate">
             The question that decides it is whether the need has an end date. A licensed agent can
-            work through that with you in one call, and will say so if the answer is that you do
-            not need to buy anything today.
+            work through that with you in one call. If you do not need to buy anything today, they
+            will say so.
           </p>
           <div class="mt-5">
             {C.phone_link("term_seniors_offramp", "btn btn-call btn-block")}
@@ -304,7 +304,7 @@ def body():
 
 
 {C.closing_band("term-band", "Talk it through with a licensed agent",
-    "After sixty the right answer depends on your health and the date the need ends. A call sorts that out faster than a form.",
+    "After sixty the right answer depends on your health and the date the need ends. A call settles that faster than a form.",
     "term_seniors_close", silo="term", phone_first=True)}
 
 {C.byline_section()}

@@ -28,8 +28,8 @@ SILO = "final-expense"
 HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance Cost by Age (2026 Chart) | Apex"
 OG_TITLE = "What final expense insurance costs by age"
-DESC = ("What final expense insurance costs between 50 and 85, what moves the premium, and how "
-        "to bring a quoted price down without leaving anything off the application.")
+DESC = ("What final expense insurance costs between ages 50 and 85, what moves the premium, and "
+        "legitimate ways to bring a quoted price down.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("What it costs", None)]
@@ -43,8 +43,8 @@ FAQ = [
      "It depends on four things: your age when the policy is issued, how much coverage you buy, "
      "whether you use tobacco, and your answers to the health questions. That is why this page is "
      "a chart rather than a single figure. What is fair to say is the shape. The premium rises "
-     "steadily with age and rises sharply after about seventy five, it roughly tracks the "
-     "coverage amount, and once it is set it never moves again for as long as the policy is in "
+     "steadily with age and rises sharply after about seventy five. It roughly tracks the "
+     "coverage amount. Once it is set, it never moves again for as long as the policy is in "
      "force."),
     ("Does the premium go up as I get older?",
      "No. That is the defining feature of the product and the main reason people buy it at this "
@@ -54,23 +54,23 @@ FAQ = [
     ("Why is the price so much higher at 80 than at 60?",
      "Because the carrier is pricing the years between now and a claim, and at eighty there are "
      "fewer of them. It is the same coverage doing the same job, collected over a shorter time. "
-     "This is also why the advice to buy the amount you can carry rather than the largest amount "
-     "you qualify for gets more important with every year."),
+     "This is also why it matters more each year to buy the amount you can afford, rather than "
+     "the largest amount you qualify for."),
     ("How much does tobacco use add?",
-     "Commonly a meaningful step up in premium for the same coverage, and you carry the "
+     "Commonly a meaningful step up in premium for the same coverage. You pay the "
      "difference for the rest of your life rather than for a term. Most carriers ask about the "
      "last twelve months. A few will reconsider the class after a documented period without "
      "nicotine, which is worth asking about rather than assuming."),
     ("Can I lower the price I have been quoted?",
      "Usually, and there are five legitimate ways to try, all of them on this page. None of them "
      "involves leaving something off an application. Answering a health question wrongly is not a "
-     "discount, it is a reason for the carrier to contest the claim, and the person who pays for "
+     "discount. It gives the carrier a reason to contest the claim, and the person who pays for "
      "that is your family."),
     ("Is it worth buying at 80?",
      "Sometimes yes and sometimes no, and we will say which on the call rather than in a "
      "brochure. It is worth it when your family would otherwise have to find the money quickly "
      "and the premium fits comfortably in your budget. It is not worth it when the premium would "
-     "strain a fixed income, because a policy that lapses at eighty five has cost you every "
+     "strain a fixed income. A policy that lapses at eighty five has cost you every "
      "payment and paid nothing back."),
 ]
 
@@ -82,21 +82,22 @@ LOWER = """<p class="reveal text-slate">
       <ul class="mt-8 grid gap-6 text-slate">
         <li class="reveal"><span class="font-semibold text-ink">Let us try more than one
             carrier.</span> The same health history can produce a level benefit policy at one
-            carrier and a graded one at another. This is the single biggest lever on this page and
-            it is the one you cannot pull on your own.</li>
+            carrier and a graded one at another. This usually makes the biggest difference, and it
+            is the one thing you cannot do on your own.</li>
         <li class="reveal"><span class="font-semibold text-ink">Size the policy to the job.</span>
             Work out what the funeral and the bills would actually come to and insure that, rather
-            than picking a round number. It is usually a bigger saving than any class change.</li>
-        <li class="reveal"><span class="font-semibold text-ink">Ask what each rider costs as a
-            line.</span> Accidental death and child riders are added easily and removed just as
-            easily. Anything you cannot explain the purpose of back to the agent is a line you can
-            probably drop.</li>
+            than picking a round number. It usually lowers the premium more than a better health
+            rating would.</li>
+        <li class="reveal"><span class="font-semibold text-ink">Ask what each rider costs on its
+            own.</span> Riders are optional extras, such as accidental death or child coverage.
+            They are added easily and removed just as easily. If you cannot explain what one is
+            for, you can probably drop it.</li>
         <li class="reveal"><span class="font-semibold text-ink">Pay annually if you can.</span>
             Most carriers charge a modal factor for monthly payment. Paying yearly, or even
             quarterly, is a real discount rather than a sales tactic.</li>
         <li class="reveal"><span class="font-semibold text-ink">Buy sooner rather than
-            later.</span> Not a sales line, an arithmetic one. The premium is set by your age at
-            issue, so a year of thinking about it costs a year of pricing, permanently.</li>
+            later.</span> This is math, not a sales line. The premium is set by your age at
+            issue, so waiting a year means paying the price for an older age, for life.</li>
       </ul>
       <p class="reveal mt-8 text-slate">
         If a waiting period is the thing pushing your price up, read
@@ -119,12 +120,12 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">Final Expense Insurance Cost by Age</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        The chart below is how the premium for
+        The chart below shows how the premium for
         <a class="link" href="/final-expense-insurance/">final expense insurance</a> moves between
-        fifty and eighty five. The figure in each row is the amount you would pay every month for
-        the rest of your life, fixed on the day the policy is issued and never raised afterwards.
-        Every row has a button that puts you through to a licensed agent who can price that band
-        for your state and your health.
+        ages fifty and eighty five. Each figure is what you would pay every month for the rest of
+        your life. It is fixed on the day the policy is issued and never raised afterward. Every
+        row has a button that calls a licensed agent, who can price that age band for your state
+        and your health.
       </p>
     </div>
   </div>
@@ -157,9 +158,9 @@ def body():
 
     <p class="reveal mt-6 text-slate max-w-3xl">
       Amounts between and above these columns are written every day. Ten and twenty five thousand
-      dollars are shown because that is the band most policies in this category fall into, not
+      dollars are shown because most policies in this category fall in that band, not
       because they are the only options. Below about five thousand dollars few carriers will
-      write at all, and above about fifty thousand you are usually better served by a standard
+      write at all. Above about fifty thousand you are usually better served by a standard
       <a class="link" href="/whole-life-insurance/">whole life insurance</a> policy, which is the
       same contract priced for a larger market.
     </p>
@@ -173,7 +174,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">What actually moves the price</h2>
+      <h2 class="reveal text-h2">What affects the price of final expense insurance</h2>
       <p class="reveal mt-5 text-slate">
         In rough order of size. The first two are worth more than everything below them put
         together, which is why the chart is built around them.
@@ -185,14 +186,13 @@ def body():
         <h3 class="text-h4">Your age when the policy is issued</h3>
         <p class="mt-3 text-slate">
           Not your age when you decide, your age when the carrier issues the policy. It is the
-          largest single factor, and it is the only one on this list that gets worse while you
-          think about it.
+          largest single factor, and the only one on this list that rises as time passes.
         </p>
       </div>
       <div class="card">
         <h3 class="text-h4">How much coverage you buy</h3>
         <p class="mt-3 text-slate">
-          The premium tracks the face amount closely on this product, more closely than it does on
+          The premium tracks the coverage amount closely on this product, more closely than it does on
           a large underwritten policy. Halving the coverage roughly halves the payment.
         </p>
       </div>
@@ -207,25 +207,24 @@ def body():
       <div class="card">
         <h3 class="text-h4">Your health answers</h3>
         <p class="mt-3 text-slate">
-          They decide which of three things you are offered: a level benefit policy that pays in
-          full from day one, a graded policy that pays partially at first, or a guaranteed
-          acceptance policy with a full waiting period. The gap between the first and the last is
-          large.
+          They decide which of three things you are offered. A level benefit policy pays in full
+          from day one. A graded policy pays partially at first. A guaranteed acceptance policy
+          has a full waiting period. The gap between the first and the last is large.
         </p>
       </div>
       <div class="card">
-        <h3 class="text-h4">Which carrier writes you</h3>
+        <h3 class="text-h4">Which carrier insures you</h3>
         <p class="mt-3 text-slate">
           Carriers disagree sharply about the same medication and the same diagnosis. Two quotes
-          for one person on one day can land a long way apart, and neither company is being
+          for one person on one day can land a long way apart, and neither carrier is being
           unreasonable.
         </p>
       </div>
       <div class="card">
         <h3 class="text-h4">How you pay</h3>
         <p class="mt-3 text-slate">
-          Monthly payment usually carries a modal factor, so twelve monthly payments cost a little
-          more than one annual one. Small next to the items above, and it is real money you can
+          Monthly payment usually carries an extra charge, called a modal factor, so twelve monthly
+          payments cost a little more than one annual one. Small next to the items above, and it is real money you can
           keep by asking.
         </p>
       </div>
@@ -235,9 +234,9 @@ def body():
 
 
 {FE.call_band(
-    "Have your band priced properly, in about fifteen minutes",
-    "Tell a licensed agent your age, your state, and what you take. You will hear which carriers "
-    "would write you, what the premium is, and whether any waiting period applies. No application "
+    "Get your own price in about fifteen minutes",
+    "Tell a licensed agent your age, your state, and the medications you take. You will hear which "
+    "carriers would accept you, what the premium is, and whether any waiting period applies. No application "
     "and no obligation.",
     "fe_cost_band_1")}
 
@@ -261,7 +260,7 @@ def body():
       <h2 class="reveal text-h2 text-white">Why your quote may not match this chart</h2>
       <p class="reveal mt-5 text-white/85">
         A cost chart is an illustration of shape. It shows how premiums move between ages and
-        coverage amounts. It cannot show what a carrier will decide about you, and any chart that
+        coverage amounts. It cannot show what a carrier will decide about you. Any chart that
         claims otherwise is selling you a number it does not have.
       </p>
     </div>
@@ -277,7 +276,7 @@ def body():
       <div class="reveal">
         <h3 class="text-h4 text-white">Carriers differ by state</h3>
         <p class="mt-3 text-white/85">
-          Product availability, riders, minimum face amounts, and pricing all vary. The carrier
+          Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier
           that is cheapest in one state may not write in yours at all.
         </p>
       </div>
@@ -301,10 +300,11 @@ def body():
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
 
       <div class="lg:col-span-6">
-        <h2 class="reveal text-h2">Get your own number</h2>
+        <h2 class="reveal text-h2">Get your own final expense quote</h2>
         <p class="reveal mt-5 text-slate">
-          A chart cell is a shape. A quote is a price. We will ask your age, your state, and the
-          health questions the carriers ask, then tell you which companies would write you, what
+          A chart shows how prices move. A quote is your own price. We will ask your age, your
+          state, and the health questions the carriers ask, then tell you which carriers would
+          accept you, what
           it costs, and whether the policy pays in full from day one.
         </p>
         <div class="reveal mt-8">
@@ -325,7 +325,7 @@ def body():
 
 {C.spoke_module(
     "More about final expense insurance",
-    "The pages people read either side of this one.",
+    "The pages people read before and after this one.",
     [("/final-expense-insurance/burial-insurance/", "Burial insurance",
       "The same product under the name people search for most."),
      ("/final-expense-insurance/what-is-final-expense-insurance/", "What it is",
@@ -340,10 +340,10 @@ def body():
       "What we need from you, and how fast an answer comes back.")])}
 
 
-{C.faq_section("Questions about the cost", FAQ, "fe-cost-faq", size=24)}
+{C.faq_section("Questions about final expense cost", FAQ, "fe-cost-faq", size=24)}
 
 
-{C.closing_band("whole-band", "Get your own number, not a chart",
+{C.closing_band("whole-band", "Get your own price, not a chart",
     "Your age, your state and your health answers decide the premium. One call gives you the real figure.",
     "fe_cost_close", silo="fe", phone_first=True)}
 

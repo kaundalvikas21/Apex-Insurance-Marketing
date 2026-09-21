@@ -30,8 +30,8 @@ ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
 TITLE = "Final Expense Insurance for Parents: Buying for Mom or Dad | Apex"
 OG_TITLE = "Buying final expense insurance for a parent"
-DESC = ("How to buy a final expense policy for your mother or father: the consent they have to "
-        "give, who should own it, who pays the premium, and how to raise it without a row.")
+DESC = ("How to buy a final expense policy for your mother or father: the consent they must "
+        "give, who owns it, who pays, and how to bring it up without an argument.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("Buying for a parent", None)]
@@ -42,55 +42,55 @@ RULES = [
      "application, answers the health questions themselves, and in most cases speaks to the "
      "carrier or the agent directly. If anyone offers to arrange this without their involvement, "
      "end the conversation: that is fraud, and the policy would not pay."),
-    ("Insurable interest", "You are allowed to do this, and here is why",
+    ("Insurable interest", "You are allowed to insure your parent",
      "A carrier will only issue a policy where the owner would suffer a genuine loss from the "
      "death. A child paying for a parent's funeral qualifies without difficulty. It is one of the "
      "clearest cases there is, and it is not the part of this that will be questioned."),
-    ("Ownership and beneficiary", "Two separate decisions, and they should be",
+    ("Ownership and beneficiary", "Owner and beneficiary are separate decisions",
      "The owner controls the policy and pays for it. The beneficiary receives the money. If you "
-     "are paying, being the owner protects you from the policy lapsing without your knowledge, and "
-     "being the beneficiary means the funds reach the person who will be paying the funeral "
+     "are paying, being the owner protects you from the policy lapsing without your knowledge. "
+     "Being the beneficiary means the funds reach the person who will be paying the funeral "
      "director."),
 ]
 
 STEPS = [
     ("Have the conversation before you get a quote",
-     "Not after. The health questions have to be answered by your parent, and a quote based on "
-     "your guesses about their medication is not a quote. Starting with the conversation also "
-     "avoids the situation where you have done work you then have to undo."),
-    ("Agree who owns it and who is the beneficiary",
-     "If you are paying the premium, it is usually cleanest for you to be the owner and the "
-     "beneficiary, with a clear understanding of what the money is for. If there are several "
+     "Not after. Your parent has to answer the health questions, and a quote based on "
+     "your guesses about their medication is not a quote. Talking first also saves you from "
+     "doing work you then have to undo."),
+    ("Agree on the owner and the beneficiary",
+     "If you are paying the premium, it is usually simplest for you to be both the owner and the "
+     "beneficiary. Agree clearly what the money is for. If there are several "
      "siblings, decide now which of you it is, and tell the others. This is the decision that "
      "causes arguments later, and it takes ten minutes to settle in advance."),
-    ("Get your parent's medication list in front of you",
-     "Not the conditions, the medications, with doses. Carriers underwrite final expense largely "
-     "from the prescription history, and the difference between a level benefit policy and a "
-     "graded one frequently turns on a single drug. Guessing at this wastes an application."),
-    ("Apply to the carrier that treats their health best",
-     "This is the part an independent agency is actually for. Carriers disagree with each other, "
+    ("Have your parent's medication list ready",
+     "Not the conditions, the medications, with doses. Carriers decide final expense applications "
+     "largely from the prescription history. The difference between a policy that pays in full "
+     "from day one and one with a waiting period often turns on a single drug. Guessing at this "
+     "wastes an application."),
+    ("Apply to the carrier that suits their health",
+     "This is what an independent agency is for. Carriers disagree with each other, "
      "sometimes sharply, about the same condition. The useful question is never whether your "
-     "parent qualifies but which carrier they qualify best with, and that is not something you "
-     "can determine from any website, ours included."),
+     "parent qualifies but which carrier they qualify best with. No website can tell you that, "
+     "ours included."),
 ]
 
 CONVERSATION = [
-    ("Lead with the practical, not the mortal",
+    ("Start with the practical side",
      "&quot;I want to make sure I am not making decisions about money in the week after you die&quot; "
      "lands very differently from &quot;have you thought about what happens when you go&quot;. Most "
-     "parents are considerably less squeamish about this than their children expect, and are "
-     "frequently relieved that somebody has raised it."),
+     "parents are far less uncomfortable with this than their children expect, and are "
+     "often relieved that somebody brought it up."),
     ("Be specific about what it is and what it costs",
      "A small policy, a fixed premium that never rises, no medical exam, a short list of health "
      "questions, and it exists so the funeral is not paid for out of somebody's savings. Vagueness "
      "reads as a sales pitch even when it is coming from your own child."),
     ("Say clearly who is paying",
-     "If you are paying, say so at the start. A great many of these conversations stall because "
-     "the parent assumes they are being asked to take on a new bill on a fixed income, and nobody "
-     "corrected the assumption."),
+     "If you are paying, say so at the start. Many of these conversations stall because "
+     "the parent assumes they are being asked to take on a new bill on a fixed income."),
     ("Let them say no, and leave it open",
      "Some parents will decline, and a policy taken out over somebody's objection is a policy "
-     "somebody resents. It is a reasonable thing to raise again in six months. It is not a "
+     "somebody resents. It is a reasonable thing to bring up again in six months. It is not a "
      "reasonable thing to push through in one call."),
 ]
 
@@ -128,7 +128,7 @@ FAQ = [
      "check rather than a medical exam, and most applicants are approved. Carriers disagree with "
      "each other about the same conditions, so a decline from one is not a decline from all. If no "
      "carrier will write a standard policy, guaranteed acceptance coverage with a waiting period "
-     "is normally still available, and we will tell you plainly which of the two you are looking "
+     "is normally still available. We will tell you plainly which of the two you are looking "
      "at rather than let you find out at claim time."),
 ]
 
@@ -159,23 +159,23 @@ SHARING_COST = """<div class="in-short reveal">
 <h3 class="reveal mt-6 text-h4">One policy, one owner</h3>
 <p class="reveal mt-3 text-slate">
         One policy with one owner is almost always simpler than several small policies, one per
-        sibling. Pick the sibling who will be dealing with the funeral director, make them the
-        owner and the beneficiary, and settle in writing between yourselves who contributes what
+        sibling. Pick the sibling who will be dealing with the funeral director, and make them
+        the owner and the beneficiary. Settle in writing between yourselves who contributes what,
         and what happens to any money left over after the funeral is paid for.
       </p>
       <h3 class="reveal mt-8 text-h4">Write it down</h3>
 <p class="reveal mt-3 text-slate">
         Write it down even though it feels excessive. The policy will probably pay out fifteen or
-        twenty years from now, in a week when nobody is at their best, and a short note agreed
+        twenty years from now, in a week when nobody is at their best. A short note agreed
         while everyone is calm is worth a great deal then.
       </p>
       <h3 class="reveal mt-8 text-h4">Do not name the estate</h3>
 <p class="reveal mt-3 text-slate">
-        Naming the estate as beneficiary instead, to be split automatically, is the tempting
-        shortcut and it is usually a mistake: it can tie the money up in probate for months, and
-        the funeral bill arrives in days. Premiums by age and coverage amount are on
+        Naming the estate as beneficiary instead, to be split automatically, is tempting and
+        usually a mistake. It can tie the money up in probate for months, and the funeral bill
+        arrives in days. Premiums by age and coverage amount are on
         <a class="link" href="/final-expense-insurance/cost/">what final expense insurance
-        costs</a>, and if you would rather start in writing than on a call, the
+        costs</a>. If you would rather start in writing than on a call, the
         <a class="link" href="/final-expense-insurance/quotes/">final expense quote page</a>
         takes the same details.
       </p>"""
@@ -213,9 +213,9 @@ def body():
     answer=(
         'A <a class="link" href="/final-expense-insurance/">final expense insurance</a> '
         'policy taken out without them is void and would not pay. Beyond that, the '
-        'decisions are who owns it, who receives the money, and who pays the premium, and '
-        'this page is about getting all three right before you apply.'),
-    extra=C.hero_cta("#call-back", "Ask us to call you"),
+        'decisions are who owns it, who receives the money, and who pays the premium. '
+        'This page helps you get all three right before you apply.'),
+    extra=C.hero_cta("#call-back", "Request a call back"),
     media=C.figure("fe-chairs", C.MEDIA_SIZES, eager=True))}
 
 
@@ -235,8 +235,8 @@ def body():
               "fe-parents", "fe_for_parents_callback",
               heading="Ask us what it would cost for your parent",
               intro="Leave four details and a licensed agent will call you. We will talk you "
-                    "through the health questions, tell you which carriers treat your parent's "
-                    "situation best, and say plainly if a waiting period is likely.")}
+                    "through the health questions and tell you which carriers treat your parent's "
+                    "situation best. We will say plainly if a waiting period is likely.")}
         </div>
       </div>
       <div class="lg:col-span-5 lg:col-start-8">
@@ -276,10 +276,10 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The three rules that govern this</h2>
+      <h2 class="reveal text-h2">Three rules for insuring a parent</h2>
       <p class="reveal mt-5 text-slate">
-        Insuring another adult is more constrained than insuring yourself, and for good reasons.
-        None of the constraints is difficult, but the first one is absolute.
+        Insuring another adult has more rules than insuring yourself, for good reasons.
+        None of the rules is difficult, but the first one is absolute.
       </p>
     </div>
     <div class="mt-10 bento" data-stagger="40">{rules}
@@ -288,35 +288,35 @@ def body():
 </section>
 
 
-{C.steps_section("How to actually do it",
+{C.steps_section("How to buy a policy for a parent",
          "Four steps, in this order. Doing them out of order is what produces a wasted "
                "application or an awkward second conversation.",
          STEPS, cls="section")}
 
 
-{C.ask_strip("Would it help to talk it through first?", "A licensed agent can explain the rules before you raise it with your parent.", C.phone_link("fe_parents_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
+{C.ask_strip("Would it help to talk it through first?", "A licensed agent can explain the rules before you bring it up with your parent.", C.phone_link("fe_parents_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
 
-{C.prose("How to raise it without a row", conversation,
-         intro="This is the part people find hard, and it is worth more than any product detail "
-               "on this page. The conversation usually goes better than the version of it you are "
+{C.prose("How to bring it up without an argument", conversation,
+         intro="This is the part people find hard, and it matters more than any product detail "
+               "on this page. The conversation usually goes better than the one you are "
                "dreading.",
          cls="section band")}
 
 
-{C.prose("If several of you are sharing the cost", SHARING_COST,
-         intro="Splitting the premium between siblings is common and workable. How you "
-               "structure it decides whether it stays workable.",
+{C.prose("If siblings are sharing the cost", SHARING_COST,
+         intro="Splitting the premium between siblings is common, and it works. How you "
+               "set it up decides whether it keeps working.",
          media=C.figure("fe-kitchen", C.MEDIA_SIZES))}
 
 
-{C.spoke_module("Related pages in final expense",
+{C.spoke_module("More about final expense insurance",
                 "Worth reading before the conversation, and before you apply.", SIBLINGS)}
 
 
 {C.faq_section("Questions about insuring a parent", FAQ, "fe-parents-faq")}
 
 
-{C.closing_band("whole-band", "Set it up the right way, with your parent on the call",
+{C.closing_band("whole-band", "Set up the policy with your parent on the call",
     "We walk you both through who owns the policy, who is paid, and who pays the premium.",
     "fe_parents_close", silo="fe", phone_first=True)}
 

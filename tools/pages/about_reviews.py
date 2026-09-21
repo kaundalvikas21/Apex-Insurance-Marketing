@@ -30,7 +30,7 @@ FAQ = [
      "indistinguishable from one we wrote ourselves. When there are real ones, they will appear "
      "here with the reviewer's name and the platform they were left on, so you can go and check."),
     ("Will you offer me something in exchange for a review?",
-     "No. Paying for or incentivising a review breaches the terms of every major review platform "
+     "No. Paying for or incentivizing a review breaches the terms of every major review platform "
      "and, for an insurance agency, risks being treated as an inducement. We will ask, once, "
      "after your policy is issued, and we will take no for an answer."),
     ("Can I leave a review if my application was declined?",
@@ -143,7 +143,7 @@ def body():
              "A review appears here with a real first name and the platform it was left on, or it does not appear."),
             ("Collected on a platform we do not control",
              "Reviews are left on the client's own account on a third party platform. We cannot edit, delete, or reorder them there."),
-            ("Never bought, never incentivised",
+            ("Never bought, never incentivized",
              "No discount, no gift card, no entry into anything. We ask once after a policy is issued."),
             ("The bad ones stay up",
              "We respond to them. We do not ask a platform to remove a review because it is unflattering."),

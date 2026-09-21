@@ -34,7 +34,7 @@ SILO = "whole-life"
 TITLE = "Is Whole Life Insurance Worth It? An Honest Look | Apex"
 OG_TITLE = "Is whole life insurance worth it?"
 DESC = ("For most households, no. Here is who whole life genuinely does suit, what the critics "
-        "get right and wrong, and how to check it for yourself. Written by a licensed agent.")
+        "get right and wrong, and how to check it for yourself.")
 
 TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
          ("Is it worth it?", None)]
@@ -42,8 +42,8 @@ TRAIL = [("Home", "/"), ("Whole Life Insurance", "/whole-life-insurance/"),
 NOT_FOR = [
     ("You have a temporary need and a permanent budget problem",
      "A mortgage and young children are a need with an end date. Insuring them with permanent "
-     "coverage means buying far less death benefit than the same money would buy in term, at "
-     "exactly the point in life when the family is most exposed. Being underinsured in a policy "
+     "coverage means buying far less death benefit than the same money would buy in term. It does "
+     "so at exactly the point in life when the family is most exposed. Being underinsured in a policy "
      "that lasts forever is worse than being adequately insured in one that expires."),
     ("You have not filled your tax advantaged accounts",
      "If there is unused room in an employer match, a retirement account, or a health savings "
@@ -52,10 +52,10 @@ NOT_FOR = [
     ("You are being sold it as an investment",
      "It is not one, and the language used to sell it that way is the clearest warning sign in "
      "this industry. If the pitch leans on the non guaranteed columns, on a dividend history, or "
-     "on being your own bank, the proposal is being judged on the wrong axis and you should ask "
+     "on being your own bank, the proposal is being judged on the wrong axis. Ask "
      "to see it judged on the guaranteed columns instead."),
     ("There is a real chance you will not keep it",
-     "Whole life is punishing to abandon. The early years go mostly to acquisition costs, so a "
+     "Whole life is punishing to abandon. The early years go mostly to acquisition costs. A "
      "policy surrendered in the first several years commonly returns a small fraction of what was "
      "paid in. If the premium is at the edge of affordable, or your income is variable, the "
      "honest question is not whether whole life is good but whether you will still be paying for "
@@ -71,7 +71,7 @@ FOR = [
      "Estate taxes, a business buy sell agreement, or an illiquid estate where the heirs would "
      "otherwise have to sell the farm, the building, or the company to settle it. The policy is "
      "buying liquidity at a known price rather than growth."),
-    ("The behaviour case", "The forced structure is the feature, honestly assessed",
+    ("The behavior case", "The forced structure is the feature, honestly assessed",
      "Some people accumulate reliably inside a contract with a bill attached and not at all "
      "outside one. If that is genuinely true of you, and you can afford the premium for decades, "
      "the guaranteed component is worth more to you than a theoretically better outcome you would "
@@ -87,15 +87,15 @@ RIGHT_WRONG = [
         "with temporary needs that is the whole ballgame.",
         "Early surrender is brutal and is not adequately explained at the point of sale.",
         "Illustrations are routinely presented on their non guaranteed columns.",
-        "Commissions on these policies are large and front loaded, which is a real conflict of "
-        "interest and one you should assume is present in any conversation about them, including "
+        "Commissions on these policies are large and front loaded. That is a real conflict of "
+        "interest, and one you should assume is present in any conversation about them, including "
         "this one.",
         "&quot;Buy term and invest the difference&quot; does beat whole life for most people over "
         "most periods, provided the difference actually gets invested.",
     ]),
     ("What the critics get wrong", "circle-alert", [
         "The comparison is usually run against an investor who never panics, never stops "
-        "contributing, and never pays tax on a rebalance, which describes very few real households.",
+        "contributing, and never pays tax on a rebalance. That describes very few real households.",
         "The guaranteed cash value floor is treated as worthless when for some people it is the "
         "reason the money survives a bad decade.",
         "Permanent needs are dismissed as edge cases when they are ordinary in families with a "
@@ -143,16 +143,16 @@ FAQ = [
     ("What is the biggest downside of whole life insurance?",
      "The cost, and specifically what the cost does to the amount of coverage you can afford. A "
      "household that would have bought adequate term instead buys a fraction of the death benefit "
-     "in whole life, and if the earner dies during the years the children are at home, that "
+     "in whole life. If the earner dies during the years the children are at home, that "
      "difference is the entire consequence. The second biggest downside is the early surrender "
-     "penalty, which turns a change of circumstances into a large realised loss."),
+     "penalty, which turns a change of circumstances into a large realized loss."),
     ("Should I cancel my whole life policy?",
      "Not on the strength of a web page, including this one. If the policy has been in force for "
-     "many years the worst of the acquisition cost is already behind you, and surrendering can "
-     "crystallise a loss and a possible tax event while leaving you uninsured at an older age. "
-     "There are also options between keeping it and cancelling it, including reducing the death "
+     "many years the worst of the acquisition cost is already behind you. Surrendering can "
+     "lock in a loss and a possible tax event while leaving you uninsured at an older age. "
+     "There are also options between keeping it and canceling it, including reducing the death "
      "benefit or making it paid up. Get the in force illustration first and have someone read it "
-     "with you, and be aware that an agency paid to sell you a replacement has an interest in the "
+     "with you. Be aware that an agency paid to sell you a replacement has an interest in the "
      "answer."),
 ]
 
@@ -168,7 +168,7 @@ SIBLINGS = [
     ("/whole-life-insurance/guaranteed-acceptance/", "Guaranteed acceptance",
      "No health questions, and what that costs you."),
     ("/whole-life-insurance/for-seniors/", "Whole life for seniors",
-     "Where the arithmetic changes after 65."),
+     "Where the math changes after 65."),
 ]
 
 
@@ -182,7 +182,7 @@ WORTH_COST = """<div class="in-short reveal">
 </div>
 <h3 class="reveal mt-6 text-h4">A large multiple, not a small markup</h3>
 <p class="reveal mt-3 text-slate">
-        The honest version of the cost comparison is a large multiple, not a small markup: for the
+        The honest version of the cost comparison is a large multiple, not a small markup. For the
         same death benefit at the same age, whole life costs several times what term costs, and
         the multiple grows with the length of term you compare against. That is the number that
         decides this for most people, and it is the reason the answer at the top of this page is
@@ -245,7 +245,7 @@ def body():
     'you should hold in mind while reading this page.',
     answer=(
         'The premium buys a fraction of the death benefit the same money would buy in '
-        'term, and the majority of people who are pitched <a class="link" '
+        'term. The majority of people who are pitched <a class="link" '
         'href="/whole-life-insurance/">whole life insurance</a> have a need with an end '
         'date, unused room in a retirement account, or a real chance of giving the policy '
         'up early. For a smaller number of households it is genuinely the right product, '
@@ -293,7 +293,7 @@ def body():
 {C.prose("What the critics get right, and wrong", rw,
          intro="The case against whole life is largely correct, and repeating that here costs us "
                "nothing we should not be paying. The parts of it that are overstated are worth "
-               "naming too, because a reader who believes the strong version will also dismiss the "
+               "naming too. A reader who believes the strong version will also dismiss the "
                "situations where the product is the right answer.",
          cls="section band")}
 
@@ -329,7 +329,7 @@ def body():
       <h2 class="text-h4">If you want the comparison run properly</h2>
       <p class="mt-3 text-slate">
         We will put a term quote and a whole life illustration for your age next to each other, with
-        the guaranteed columns shown separately, and tell you which one we would buy in your
+        the guaranteed columns shown separately. We will tell you which one we would buy in your
         position. Frequently that is the term policy. We will send it either way, and there is no
         call attached unless you ask for one.
       </p>

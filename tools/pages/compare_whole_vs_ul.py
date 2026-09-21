@@ -27,8 +27,8 @@ ACTIVE = "/"
 SILO = "compare"
 TITLE = "Whole Life vs Universal Life Insurance | Apex"
 OG_TITLE = "Whole life vs universal life insurance"
-DESC = ("Whole life guarantees the premium, the cash value, and the death benefit. Universal life "
-        "trades those guarantees for flexibility. Which one that suits, side by side.")
+DESC = ("Whole life guarantees the premium, cash value, and death benefit. Universal life trades "
+        "those guarantees for flexibility. See the two side by side.")
 
 TRAIL = [("Home", "/"), ("Compare", None), ("Whole life vs universal life", None)]
 
@@ -61,7 +61,7 @@ ROWS = [
       "No. There is a target premium, but you can pay more, less, or skip, within limits."]),
     ("What flexibility costs you",
      ["Nothing. There is no flexibility to price.",
-      "Underpaying draws on the account value. Sustained underpayment is the single commonest way "
+      "Underpaying draws on the account value. Sustained underpayment is the single most common way "
       "these policies fail."]),
 
     ("The cash value", []),
@@ -91,12 +91,12 @@ ROWS = [
       "possible age."]),
     ("What protects you",
      ["The contract. There is nothing to monitor.",
-      "An in force illustration requested from the carrier every year or two, and acting on it. "
+      "An in force illustration (an updated projection of your policy) requested from the carrier every year or two, and acting on it. "
       "This is real, ongoing work."]),
 ]
 
 WINS = [
-    ("Whole life wins", "When you want the decision to be over",
+    ("Whole life wins", "When you want guarantees and nothing to monitor",
      "<p>If the point of buying permanent coverage is that it is settled, whole life is the "
      "product that delivers that. The premium cannot rise, the cash value schedule is printed at "
      "issue, and there is nothing to review, monitor, or fund correctly for the next forty years. "
@@ -105,13 +105,13 @@ WINS = [
      "<p class='mt-3'>It is also the better answer when the coverage backs an obligation that "
      "cannot be allowed to fail: a special needs trust, a buy sell agreement, or an estate tax "
      "bill.</p>"),
-    ("Universal life wins", "When the premium has to be able to move",
+    ("Universal life wins", "When you need a flexible premium",
      "<p>If your income is irregular, or the policy needs to absorb a bad year without lapsing, "
      "the flexibility is genuinely valuable rather than a sales feature. Business owners with "
      "uneven cash flow and people funding a policy alongside a variable income are the clearest "
      "cases.</p>"
      "<p class='mt-3'>It can also be the cheaper route to a guaranteed death benefit where a no "
-     "lapse guarantee rider is used deliberately and funded to its own schedule, which is a "
+     "lapse guarantee rider is used deliberately and funded to its own schedule. That is a "
      "different product decision from buying universal life for its cash value.</p>"),
 ]
 
@@ -135,14 +135,14 @@ CHECKS = [
 FAQ = [
     ("What is the main difference between whole life and universal life?",
      "Whole life guarantees the premium, the cash value schedule, and the death benefit at issue, "
-     "and none of them can move. Universal life unbundles those pieces so the premium can flex and "
+     "and none of them can move. Universal life separates those pieces. The premium can flex, and "
      "the cash value grows at a rate the carrier credits rather than a rate it promises. You are "
      "trading certainty for flexibility, and the trade is real in both directions."),
     ("Is universal life insurance a good idea?",
-     "It can be, for someone whose premium genuinely needs to move, or where a no lapse guarantee "
-     "rider is being used deliberately to buy a guaranteed death benefit at a lower cost than "
+     "It can be, for someone whose premium genuinely needs to move. It can also work where a no lapse guarantee "
+     "rider is used deliberately to buy a guaranteed death benefit at a lower cost than "
      "whole life. It is a poor idea for someone who buys it, files it, and never looks at it "
-     "again, which is unfortunately how a large number of these policies have been sold. The "
+     "again. Unfortunately, that is how a large number of these policies have been sold. The "
      "product requires ongoing attention that whole life does not."),
     ("Can a universal life policy lapse even if I pay the premium?",
      "Yes, and this is the most important sentence on this page. If the credited rate falls or the "
@@ -158,7 +158,7 @@ FAQ = [
      "which is not a comparison."),
     ("Should I switch from whole life to universal life?",
      "Very rarely, and not without independent advice from someone who is not paid on the "
-     "replacement. Surrendering an established whole life policy can crystallise a loss and a "
+     "replacement. Surrendering an established whole life policy can lock in a loss and a "
      "possible tax event, and you would be giving up guarantees for assumptions at an older age. "
      "Get the in force illustration on what you already have before anyone shows you anything new."),
 ]
@@ -174,14 +174,14 @@ def body():
         trail=TRAIL,
         h1="Whole Life vs Universal Life Insurance",
         lead='Both are permanent life insurance, and both build a cash value, so the choice between '
-             'them is not really about either of those things. '
+             'them is not about either of those things. '
              '<a class="link" href="/whole-life-insurance/">Whole life insurance</a> fixes the '
-             'premium, the cash value schedule, and the death benefit in the contract at issue, and '
-             'none of them can move afterwards. Universal life unbundles those pieces so the '
-             'premium can flex and the cash value grows at a rate the carrier credits rather than '
-             'one it guarantees, which buys real flexibility and hands you a policy that has to be '
-             'monitored for the rest of your life.',
-        table_heading="The two contracts, side by side",
+             'premium, the cash value schedule, and the death benefit when the policy is issued, and '
+             'none of them can move afterward. Universal life lets the '
+             'premium flex and grows the cash value at a rate the carrier credits rather than '
+             'one it guarantees, which buys real flexibility and hands you a policy you have to '
+             'monitor for the rest of your life.',
+        table_heading="Whole life vs universal life, side by side",
         table_intro="Grouped by the part of the policy each row is about. The rows that decide "
                     "this for most people are in the last group.",
         table_caption="Whole life insurance compared with universal life insurance across premium, "
@@ -207,15 +207,15 @@ def body():
         <h3 class="reveal mt-6 text-h4">Whole life: one number</h3>
         <p class="reveal mt-3 text-slate">
           A whole life premium is one number, known at issue, unchanged for life. You can put it in
-          a spreadsheet on the day you buy and it will still be right in year forty, and the grid it
+          a spreadsheet on the day you buy and it will still be right in year forty. The grid it
           comes from is on <a class="link" href="/whole-life-insurance/rates/">whole life
           rates by age</a>.
         </p>
         <h3 class="reveal mt-8 text-h4">Universal life: a schedule, not a number</h3>
         <p class="reveal mt-3 text-slate">
           A universal life premium is not a number in the same sense. It is a schedule of payments
-          into an account that pays for the insurance out of itself, at a cost that rises with your
-          age and is credited with interest at a rate the carrier resets.
+          into an account that pays for the insurance out of itself. That cost rises with your
+          age, and the account is credited with interest at a rate the carrier resets.
         </p>
         <p class="reveal mt-4 text-slate">
           Its true cost over forty
@@ -225,7 +225,7 @@ def body():
         </p>
         <h3 class="reveal mt-8 text-h4">Ask for two illustrations</h3>
         <p class="reveal mt-3 text-slate">
-          What you can do, and should insist on, is see the universal life policy illustrated twice:
+          Insist on seeing the universal life policy illustrated twice:
           once at the current assumptions, and once at the guaranteed minimum credited rate with the
           maximum contractual cost of insurance. Carriers can produce both. The gap between those
           two illustrations is the actual size of the decision you are making, and it is frequently
@@ -233,17 +233,17 @@ def body():
         </p>
         <h3 class="reveal mt-8 text-h4">For whole life, read the guaranteed columns</h3>
         <p class="reveal mt-3 text-slate">
-          For whole life, the equivalent discipline is simpler: read the guaranteed columns and
+          For whole life it is simpler: read the guaranteed columns and
           ignore the rest. How that works, and why the non guaranteed columns are not a forecast, is
           set out on <a class="link" href="/whole-life-insurance/dividends/">dividends and
           participating policies</a>.
         </p>""",
-        wins_heading="Where each one genuinely wins",
+        wins_heading="When whole life or universal life wins",
         wins_intro="Two situations, and they are not close calls. Most people reading this page "
-                   "will recognise themselves in one of them within a sentence or two.",
+                   "will recognize themselves in one of them within a sentence or two.",
         wins=WINS,
-        checklist_heading="Before you choose either",
-        checklist_intro="Six checks. The first one is about you rather than the products, and it "
+        checklist_heading="Six checks before you choose",
+        checklist_intro="The first one is about you rather than the products, and it "
                         "settles this more often than any of the others.",
         checklist_items=CHECKS,
         checklist_aside='<p class="text-sm text-muted">An agency that resists producing the '
@@ -255,12 +255,12 @@ def body():
         paths=[
             ("Whole life: guaranteed premium, guaranteed cash value",
              "We place whole life directly. We will send a current illustration from a named "
-             "carrier for your age with the guaranteed columns shown separately, and tell you if "
+             "carrier for your age, with the guaranteed columns shown separately. We will tell you if "
              "the guarantees alone do not support what is being proposed.",
-             "/whole-life-insurance/quotes/", "Request a whole life illustration"),
+             "/whole-life-insurance/quotes/", "Request a policy illustration"),
             ("Universal life: flexible premium, and ongoing responsibility",
              "Universal life is not currently one of our published quote paths. Speak to a "
-             "licensed agent about whether it fits and whether we can place it, and if we cannot, "
+             "licensed agent about whether it fits and whether we can place it. If we cannot, "
              "we will say so rather than steer you into something else.",
              "/contact/", "Talk to an agent about universal life"),
         ],

@@ -18,7 +18,7 @@ SILO = "site"
 TITLE = "About Apex Insurance Marketing | An Independent Life Insurance Agency"
 OG_TITLE = "About Apex Insurance Marketing"
 DESC = ("Who we are, how an independent life insurance agency gets paid, what we do and do not "
-        "do, and why this site exists. Licensed agents, multiple appointed carriers.")
+        "do, and why this site exists. Licensed agents, appointed carriers.")
 
 FAQ = [
     ("Does it cost more to buy through an agency?",
@@ -37,17 +37,16 @@ FAQ = [
 
 WHY_EXISTS = f"""<p class="reveal text-slate">
         To be found by people shopping for life insurance, and to earn the call. We are not
-        neutral about that and pretending otherwise would be the first dishonest thing on the
-        page.
+        neutral about that, and it would be dishonest to pretend otherwise.
       </p>
       <p class="reveal mt-5 text-slate">
-        What follows from it is the standard we hold the writing to.
+        Here is the standard we hold the writing to.
       </p>
       <ul class="reveal mt-5 grid gap-3">
         <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Every page is written or reviewed by a licensed agent who places these policies.</span></li>
         <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Where a figure comes from a carrier rate card, the card and its date are named.</span></li>
         <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">Where the answer depends on your state, your age, or your health, we say so instead of rounding it into a promise.</span></li>
-        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">We do not publish invented premiums, invented reviews, or carrier claims we cannot source, because a number that turns out to be decoration costs more trust than it ever buys.</span></li>
+        <li class="flex items-start gap-3">{icon("circle-check", 20, "shrink-0 text-green mt-1")}<span class="text-slate">We do not publish invented premiums, invented reviews, or carrier claims we cannot source. A made-up number costs more trust than it earns.</span></li>
       </ul>
       <p class="reveal mt-5 text-slate">
         If you find something here that is out of date or wrong, tell us. We will correct it and
@@ -98,8 +97,8 @@ def body():
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">About Apex Insurance Marketing</h1>
       <p class="reveal mt-5 text-lead text-slate">
-        We are an independent life insurance agency. We are appointed with several carriers and we
-        compare them for you, which is a different job from selling you one company's product.
+        We are an independent life insurance agency. We are appointed with several carriers, and we
+        compare them for you. That is a different job from selling you one company's product.
       </p>
     </div>
 
@@ -111,7 +110,7 @@ def body():
         <p class="eyebrow">Licensing</p>
         {C.stat(C.STATES, "states we are licensed to write in", count=False, cls="mt-3")}
         <p class="mt-4 text-sm text-muted">
-          Every licence number is listed, by state, on our
+          Every license number is listed, by state, on our
           <a class="link-static" href="/about/licensing/">licensing page</a>, where you can check
           it against your own state's department of insurance.
         </p>
@@ -120,8 +119,8 @@ def body():
         <p class="eyebrow">Independence</p>
         {C.stat(C.CARRIERS, "carriers we hold appointments with", count=False, cls="mt-3")}
         <p class="mt-4 text-sm text-slate">
-          No carrier owns us and none of them sets our quotas, which is the whole reason we can
-          tell you when a carrier we represent is the wrong answer for you. The
+          No carrier owns us and none of them sets our quotas. That is why we can
+          tell you when a carrier we represent is the wrong fit for you. The
           <a class="link-static" href="/about/carriers/">carriers we are appointed with</a> are listed.
         </p>
       </div>
@@ -148,9 +147,8 @@ def body():
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">Who we are</h2>
         <p class="reveal mt-5 text-slate">
-          The name on the licence, the address the mail goes to, and the number a regulator would
-          use to look us up. If any of it does not match what your state shows, we would rather
-          you told us than assumed.
+          The name on the license, the address the mail goes to, and the number a regulator would
+          use to look us up. If any of it does not match what your state shows, please tell us.
         </p>
       </div>
 
@@ -170,7 +168,7 @@ def body():
               <dd class="mt-2 text-slate tnum">{C.NPN}</dd>
             </div>
             <div>
-              <dt class="text-micro font-semibold uppercase tracking-[0.12em] text-muted">Lines authorised</dt>
+              <dt class="text-micro font-semibold uppercase tracking-[0.12em] text-muted">Lines authorized</dt>
               <dd class="mt-2 text-slate">Life, and where noted by state, accident and health</dd>
             </div>
             <div class="sm:col-span-2">
@@ -198,7 +196,7 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How we get paid</h2>
       <p class="reveal mt-5 text-slate">
-        Plainly, because you are entitled to know before you take our advice.
+        You are entitled to know this before you take our advice.
       </p>
     </div>
 
@@ -209,20 +207,20 @@ def body():
           premium. It is a percentage of that premium, it is highest in the first policy year, and
           it comes out of the carrier's own pricing. <strong>You do not pay us a fee, and the
           premium is not higher because you came through us.</strong> Life insurance rates are
-          filed with your state, so the same policy from the same carrier costs the same whether
+          filed with your state. The same policy from the same carrier costs the same whether
           you buy it here, from another agency, or direct.
         </p>
         <p class="reveal mt-5 text-slate">
-          The obvious follow-up is whether that gives us a reason to steer you to the policy that
-          pays us most. It would, if nobody named it. So: commission scales with premium, which
-          means a bigger or more permanent policy pays us more than a smaller or shorter one. The
+          Does that give us a reason to steer you to the policy that
+          pays us most? It would, if nobody named it. So: commission scales with premium. A
+          bigger or more permanent policy pays us more than a smaller or shorter one. The
           check on that is that you can see the carrier names and the numbers on every quote we
           send, and you can take them somewhere else. We would rather place the right policy and
           keep the client.
         </p>
         <p class="reveal mt-5 text-slate">
-          If a carrier ever offered us a bonus to favour their product over a better fit, that is
-          the kind of arrangement that has to be disclosed, and we would disclose it here.
+          If a carrier ever offered us a bonus to favor their product over a better fit, that
+          arrangement has to be disclosed, and we would disclose it here.
         </p>
       </div>
 
@@ -234,10 +232,10 @@ def body():
             underwriting are all part of placing the policy.
           </p>
           <p class="mt-4 text-slate">
-            If you decide against buying, you owe us nothing and we do not sell your details on.
+            If you decide against buying, you owe us nothing and we do not sell your details.
           </p>
           <div class="mt-6">
-            {C.phone_link("about_paid", "btn btn-call btn-block btn-wrap", "Ask us anything: " + C.PHONE_DISPLAY)}
+            {C.phone_link("about_paid", "btn btn-call btn-block btn-wrap", "Call " + C.PHONE_DISPLAY)}
           </div>
         </div>
       </div>
@@ -300,11 +298,11 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">The people who answer</h2>
+        <h2 class="reveal text-h2">The licensed agents who answer your call</h2>
         <p class="reveal mt-5 text-slate">
-          Every agent here is individually licensed, and every licence number is published so you
+          Every agent here is individually licensed. Every license number is published, so you
           can verify it with your state rather than take our word for it. When you call, you get
-          one of them, not a call centre routing you to whoever is free.
+          one of them, not a call center routing you to whoever is free.
         </p>
         <a class="reveal btn btn-ghost mt-8" href="/about/agents/">Meet our licensed agents</a>
       </div>

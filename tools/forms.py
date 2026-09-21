@@ -92,7 +92,7 @@ def consent_block(field_id, brand, indent=12):
 #   * row() pairs two fields when the form is wide enough. Pairing, not smaller controls, is how
 #     the forms got shorter: targets stay 48px (56px in .fe).
 # ---------------------------------------------------------------------------
-TRUST = "Goes to one licensed agent. Never sold on."
+TRUST = "Goes to one licensed agent. Never sold to anyone else."
 
 
 def _foot(hint=""):

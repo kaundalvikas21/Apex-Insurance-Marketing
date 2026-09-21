@@ -25,21 +25,21 @@ HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance for Seniors, Ages 50 to 85 | Apex"
 OG_TITLE = "Final expense insurance for seniors"
 DESC = ("Final expense insurance for ages 50 to 85. What changes at 70 and at 80, what the health "
-        "questions decide, and how to find out what you qualify for in about fifteen minutes.")
+        "questions decide, and how to find out what you qualify for.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("For seniors", None)]
 
 FAQ = [
     ("What is the best age to buy final expense insurance?",
-     "The best age is the youngest age at which you are certain you want it, because the premium "
+     "The best age is the youngest age at which you are certain you want it. The premium "
      "is set from your age when the policy is issued and never rises after that. Someone who buys "
      "at sixty two pays a lower premium for the rest of their life than the same person buying at "
-     "seventy. There is no benefit to waiting and there is a real risk in it, because health "
-     "changes can move you from a full benefit policy to a graded one."),
+     "seventy. There is no benefit to waiting and there is a real risk in it. A change in your "
+     "health can move you from a full benefit policy to a graded one."),
     ("Can I get final expense insurance at 80?",
      "Yes. Most of our appointed carriers write to eighty five, and a few go higher. What narrows "
-     "at eighty is the range of face amounts and the number of carriers who will pay the full "
+     "at eighty is the range of coverage amounts. Fewer carriers will pay the full "
      "benefit from day one rather than after a waiting period. Both of those depend on your health "
      "answers rather than your age alone, which is why it is worth a call rather than an "
      "assumption."),
@@ -48,15 +48,15 @@ FAQ = [
      "answered on a call. The carrier also checks your prescription history. There is no blood "
      "work, no urine sample, and nobody comes to your home."),
     ("How much coverage do most people buy?",
-     "Enough to cover a funeral or cremation and the bills that arrive in the weeks afterwards. "
+     "Enough to cover a funeral or cremation and the bills that arrive in the weeks afterward. "
      "The right amount is the one your family would actually face, and it varies enormously by "
-     "state and by what you want. We will walk through the parts of that cost with you rather "
-     "than quote you a figure from a national average that may not resemble your area."),
+     "state and by what you want. We will walk through the parts of that cost with you. We will "
+     "not quote you a national average that may not resemble your area."),
     ("Will my premium or my coverage change as I get older?",
      "No. This is whole life insurance, so the premium is fixed for life and the coverage does not "
      "reduce or expire as long as the premium is paid. If anyone offers you a policy where the "
      "premium rises with age or the benefit falls after a certain birthday, that is a different "
-     "product and you should have us look at it before you sign."),
+     "product. Have us look at it before you sign."),
 ]
 
 
@@ -97,8 +97,8 @@ def body():
     'eighty five, to cover a funeral and the bills that follow.',
     answer=(
         'There is no medical exam. The premium never rises and the coverage never '
-        'expires. This page explains what changes between fifty and eighty five, because '
-        'it is not your age that decides what you can buy, it is your health answers. '
+        'expires. This page explains what changes between fifty and eighty five. Your '
+        'health answers, not your age, decide what you can buy. '
         'Everything on this page is <a class="link" '
         'href="/final-expense-insurance/">final expense insurance</a>.'),
     extra=hero_cta, glow=False,
@@ -111,7 +111,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What you are actually buying</h2>
+      <h2 class="reveal text-h2">What you get with a final expense policy</h2>
     </div>
 
     <div class="mt-10 bento">
@@ -142,7 +142,7 @@ def body():
 
 
 {band("If you are 50 to 69",
-      "This is the easiest band to buy in, and the one where waiting costs the most.",
+      "This is the easiest age range to buy in, and the one where waiting costs the most.",
       ["Most applicants qualify for a full benefit policy, which means the whole amount is payable "
        "from the first day rather than after a waiting period.",
        "Health conditions that are being treated and are stable are commonly accepted here, "
@@ -155,16 +155,16 @@ def body():
 
 
 {band("If you are 70 to 79",
-      "Still straightforward for most people. What changes is that the health questions start "
-      "doing more of the work, and the differences between carriers get wider.",
+      "Still straightforward for most people. The health questions matter more, and the "
+      "differences between carriers get wider.",
       ["Full benefit policies remain widely available. Whether you qualify depends on your "
        "answers and your prescriptions, not on your age.",
        "A recent hospital stay, a new diagnosis, or a change of medication in the last twelve "
-       "months is the sort of thing that moves an application from one carrier to another. It is "
+       "months can move an application from one carrier to another. It is "
        "usually not a decline, it is a different carrier.",
-       "Face amounts start to narrow at the top end. For most people in this band that is not a "
-       "constraint, because the amount needed for a funeral has not changed.",
-       "This is the band where being appointed with several carriers stops being a nicety. The "
+       "Coverage amounts start to narrow at the top end. For most people this age that is not a "
+       "problem, because the amount needed for a funeral has not changed.",
+       "This is the age where it starts to matter that we are appointed with several carriers. The "
        "same set of answers can produce very different outcomes at two companies."],
       cls="section band-surface")}
 
@@ -172,24 +172,23 @@ def body():
 {FE.call_band(
     "Find out what you qualify for in about fifteen minutes",
     "A licensed agent will ask the health questions over the phone and tell you which carriers "
-    "will write you and whether there is a waiting period. There is no application and no "
+    "will insure you and whether there is a waiting period. There is no application and no "
     "obligation.",
     "fe_seniors_band_1")}
 
 
 {band("If you are 80 to 85",
-      "Coverage is still available, and this is the band where the honest answers matter most.",
+      "Coverage is still available. This is what changes after eighty.",
       ["Most carriers write to eighty five. Some stop at eighty, and a small number go beyond "
        "eighty five. Which of those applies to you depends on your state as well as your age.",
-       "Waiting periods become more common. A graded or modified policy pays a return of your "
-       "premiums plus interest if you die from illness in the first two years, and pays the full "
+       "Waiting periods become more common. A graded or modified policy returns your "
+       "premiums plus interest if you die from illness in the first two years. It pays the full "
        "amount for an accident from day one.",
        "A waiting period is not a reason to give up. It is a reason to check whether a full "
        "benefit carrier will still take you, which is a fifteen minute conversation rather than a "
        "guess.",
-       "Face amounts are smaller in this band. For a funeral and final bills that is usually "
-       "sufficient, and we would rather tell you the real ceiling than let you find it during an "
-       "application."],
+       "Coverage amounts are smaller at this age. For a funeral and final bills that is usually "
+       "enough, and we would rather tell you the real limit before you apply than during it."],
       cls="section")}
 
 
@@ -200,7 +199,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2">Your answers matter more than your age</h2>
+      <h2 class="reveal text-h2">Your health answers matter more than your age</h2>
       <p class="reveal mt-5 text-slate">
         Every carrier asks a short list of health questions. The answers put you into one of three
         outcomes. Age moves the premium; the questions decide which outcome you are in.
@@ -281,7 +280,7 @@ def body():
 
 {C.spoke_module(
     "More about final expense insurance",
-    "Every page in this section is written for the same reader.",
+    "Other pages about the same product.",
     [("/final-expense-insurance/burial-insurance/", "Burial insurance",
       "The same product under the name people search for."),
      ("/final-expense-insurance/funeral-insurance/", "Funeral insurance",

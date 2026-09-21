@@ -15,8 +15,8 @@ ACTIVE = "/"
 SILO = "site"
 TITLE = "Life Insurance Quotes from an Independent Agency | Apex"
 OG_TITLE = "Compare life insurance from multiple carriers"
-DESC = ("Independent, licensed life insurance agency. Compare term life, whole life, and final "
-        "expense coverage from multiple appointed carriers. Free quotes, no obligation.")
+DESC = ("Independent, licensed life insurance agency. Compare term life, whole life and final "
+        "expense coverage from multiple carriers. Free quotes, no obligation.")
 
 FAQ = [
     ("How much life insurance do I actually need?",
@@ -99,7 +99,7 @@ HERO = C.page_hero(
     None,
     "Get your family covered.",
     "Life insurance from multiple carriers, compared for you by a licensed, independent agent.",
-    extra=C.hero_cta("/get-a-quote/", "Get my free quote"),
+    extra=C.hero_cta("/get-a-quote/", "Get a free quote"),
     banner="home-banner") + f"""
 <!-- USP strip, directly beneath the hero CTA. -->{C.usp_strip([
     ("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"),
@@ -205,7 +205,7 @@ TRIAGE = f"""
 
       <noscript>
         <p class="mt-6 text-slate">This short quiz needs JavaScript. The three cards above describe
-        each type of cover, and a licensed agent can talk you through them.</p>
+        each type of coverage, and a licensed agent can talk you through them.</p>
       </noscript>
 {_question("What is the money mainly for?", [
     _tile("term:3", icon("users", 24), "Replace my income", "While my family still depends on it"),
@@ -219,7 +219,7 @@ TRIAGE = f"""
 ])}
 {_question("Which matters more to you?", [
     _tile("term:3,final:1", icon("trending-up", 24), "The lowest premium", "For the most coverage"),
-    _tile("whole:3,final:2", icon("shield-check", 24), "Cover that never ends", "It cannot expire or be cancelled"),
+    _tile("whole:3,final:2", icon("shield-check", 24), "Coverage that never ends", "It cannot expire or be canceled"),
     _tile("final:3", icon("stethoscope", 24), "No medical exam", "Approved on health questions"),
 ])}
 
@@ -228,12 +228,12 @@ TRIAGE = f"""
     "You are describing a temporary obligation with a large price tag. Term buys the most coverage "
     "per dollar for exactly as long as that obligation lasts, then it ends. If the need turns out "
     "to be permanent, most term policies can be converted later without a new medical exam.",
-    '<a class="btn btn-cta" href="/term-life-insurance/#quote">Start a term life quote</a>')}
+    '<a class="btn btn-cta" href="/term-life-insurance/#quote">Get my term life quote</a>')}
 {_result("whole", "shield-check", "Look at whole life insurance",
     "You want the policy to still be there whenever it is needed, which term cannot promise. Whole "
     "life costs considerably more per dollar of death benefit, so the honest next step is a written "
     "illustration you can read at your own pace, not a rushed application.",
-    '<a class="btn btn-cta" href="/whole-life-insurance/#quote">See whole life options</a>')}
+    '<a class="btn btn-cta" href="/whole-life-insurance/#quote">Get my whole life quote</a>')}
 {_result("final", "heart", "Final expense insurance is probably the fit",
     "You need a smaller policy, issued on health questions rather than a medical exam, that pays "
     "quickly and covers a funeral and the bills around it. This is almost always faster to arrange "
@@ -296,7 +296,7 @@ REST = """
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">Which type of life insurance is right for you?</h2>
-      <p class="reveal mt-5 text-slate">Three kinds of cover. Most people only need one.</p>
+      <p class="reveal mt-5 text-slate">Three kinds of coverage. Most people only need one.</p>
     </div>
 
     <div class="mt-10 bento" data-stagger="40">{cover_html}
@@ -304,7 +304,7 @@ REST = """
 
     <div class="reveal mt-10 flex flex-wrap items-center gap-3">
       {call_cover}
-      <a href="/get-a-quote/" class="btn btn-cta">Get a no-obligation quote</a>
+      <a href="/get-a-quote/" class="btn btn-cta">Get a free quote</a>
     </div>
     <p class="reveal mt-4 text-sm text-muted">
       Not sure? <a class="link" href="#triage">Answer three questions</a> and we will point you to the right one.
@@ -383,7 +383,7 @@ def rest():
              ("circle-check", "Your decision", "Choose your plan",
               "Review your options, ask us anything, and pick the one you like. Only if you want to.")],
             cta=("Ready when you are.", "No Social Security number needed for a quote.",
-                 '<a href="/get-a-quote/" class="btn btn-cta">Get started now</a>')),
+                 '<a href="/get-a-quote/" class="btn btn-cta">Get a free quote</a>')),
         why_html="".join([
             _why("scale", "Independent agency",
                  "We work for you, not for one insurance company. If one carrier prices you badly, "
@@ -400,11 +400,11 @@ def rest():
         ]),
         cover_html="".join([
             _cover_card("Term life insurance", "10 to 30 years",
-                        "Affordable cover for a set number of years. A good fit while you have a "
+                        "Affordable coverage for a set number of years. A good fit while you have a "
                         "mortgage or children at home.",
                         "/term-life-insurance/", "Learn about term life"),
             _cover_card("Whole life insurance", "For life",
-                        "Cover that lasts your whole life, with a premium that never rises and cash "
+                        "Coverage that lasts your whole life, with a premium that never rises and cash "
                         "value that builds.",
                         "/whole-life-insurance/", "Learn about whole life", tone="bento-cell-tint"),
             _cover_card("Final expense insurance", "$2,000 to $50,000",

@@ -19,8 +19,8 @@ SILO = "final-expense"
 HTML_CLASS = "fe"
 TITLE = "What Is Final Expense Insurance? | Apex"
 OG_TITLE = "What is final expense insurance?"
-DESC = ("Final expense insurance is a small permanent life insurance policy, usually $2,000 to "
-        "$50,000, bought to cover a funeral and the bills that follow. What it is, and what it is not.")
+DESC = ("Final expense insurance is a small permanent life policy, usually $2,000 to $50,000, "
+        "that covers a funeral and final bills. What it is, and what it is not.")
 
 TRAIL = [("Home", "/"), ("Final Expense Insurance", "/final-expense-insurance/"),
          ("What it is", None)]
@@ -31,7 +31,7 @@ FACTS = [
      "Not enough to replace an income, and it is not meant to."),
     ("How long it lasts", "Your whole life",
      "It is permanent coverage. As long as the premium is paid, it does not expire and cannot be "
-     "cancelled by the carrier because of your age or your health."),
+     "canceled by the carrier because of your age or your health."),
     ("What it costs", "A premium that never rises",
      "The price is set by your age and health when the policy is issued, and it is fixed for life "
      "by the contract. It does not go up as you get older."),
@@ -43,12 +43,12 @@ NOT = [
      "expense insurance is a life insurance policy that pays money to a person you name, and that "
      "person decides what to do with it. If you want a specific funeral arranged in advance, you "
      "want a funeral home. If you want your family to have money and choices, you want this."),
-    ("It is not burial insurance, exactly, but the names are used for the same thing",
+    ("It is not separate from burial insurance",
      "Burial insurance, funeral insurance, and final expense insurance almost always describe the "
      "same product. Carriers and agents use whichever name their market uses. There is no "
      "difference in the contract, and anyone who tells you one is better than another is "
-     "describing marketing, not coverage. If what you are actually weighing up is this "
-     'against a full sized policy, that is a different question and '
+     "describing marketing, not coverage. If you are weighing this "
+     'against a full sized policy, that is a different question, and '
      '<a class="link" href="/compare/burial-insurance-vs-life-insurance/">burial insurance '
      'compared with life insurance</a> answers it.'),
     ("It is not guaranteed acceptance unless it says so",
@@ -57,9 +57,9 @@ NOT = [
      "all, always has a waiting period, and costs considerably more for the same coverage. They "
      "are different products, and the questions are usually worth answering."),
     ("It is not a way to leave money to your family",
-     "Or at least, that is not what it is sized for. The amount is set against a funeral and the "
+     "That is not what it is sized for. The amount is set against a funeral and the "
      "bills that follow it. If your goal is to leave a meaningful inheritance or replace income "
-     "someone depends on, that is a larger policy and a different conversation, and we will tell "
+     "someone depends on, that is a larger policy and a different conversation. We will tell "
      "you so rather than sell you three of these."),
 ]
 
@@ -67,11 +67,11 @@ COVERS = [
     ("Funeral or cremation", "The service, the casket or urn, the plot or the scattering, the "
      "funeral director's charges, and the transport."),
     ("Medical bills left behind", "Deductibles, co-pays, and the balances that arrive after a "
-     "final hospital stay, which frequently outlast the person."),
+     "final hospital stay."),
     ("Small debts and the paperwork", "A credit card balance, the last utility bills, and the "
      "several hundred dollars of certified copies, filings, and legal fees that a death "
      "generates."),
-    ("Anything else, honestly", "It is a life insurance payment made to a person, not a voucher. "
+    ("Anything else", "It is a life insurance payment made to a person, not a voucher. "
      "Your beneficiary can spend it on the mortgage, on travel to the funeral, or on nothing at "
      "all. Nobody supervises it."),
 ]
@@ -85,14 +85,14 @@ FAQ = [
     ("What is the difference between final expense and life insurance?",
      "Final expense insurance is life insurance. It is a category of it, defined by being small, "
      "permanent, and underwritten with health questions instead of a medical exam. When people ask "
-     "this question they usually mean the difference between it and a large term policy, which is "
-     "size and purpose: term replaces an income for a fixed number of years, final expense covers "
-     "a funeral for the rest of your life."),
+     "this, they usually mean the difference between it and a large term policy. That difference "
+     "is size and purpose: term replaces an income for a fixed number of years, and final expense "
+     "covers a funeral for the rest of your life."),
     ("How much final expense insurance do I need?",
      "Enough for a funeral in your area plus a margin for the bills that follow. Funeral costs "
-     "vary considerably by region and by what you choose, so the sensible way to size it is to "
-     "call two funeral homes near you, ask for their general price list, which they are required "
-     "to provide, and add a few thousand dollars. That is a more reliable number than any national "
+     "vary considerably by region and by what you choose. The sensible way to size it is to "
+     "call two funeral homes near you and ask for their general price list, which they are "
+     "required to provide. Then add a few thousand dollars. That is a more reliable number than any national "
      "average."),
     ("Who should buy final expense insurance?",
      "Usually someone between 50 and 85 who does not have a large policy already, does not have "
@@ -127,14 +127,13 @@ SIBLINGS = [
 SIZING_IT = """<h3 class="reveal  text-h4">1. Price a funeral where you live</h3>
 <p class="mt-3 text-slate">
         Start with what a funeral actually costs where you live, not with a national figure.
-        Funeral homes are required to give you a general price list if you ask for one, and two
-        calls will give you a real number for your area rather than an average that describes
-        nowhere.
+        Funeral homes are required to give you a general price list if you ask for one. Two
+        calls will give you a real number for your area.
       </p>
-      <h3 class="reveal mt-8 text-h4">2. Add a margin for the bills afterwards</h3>
+      <h3 class="reveal mt-8 text-h4">2. Add a margin for the bills afterward</h3>
 <p class="mt-3 text-slate">
-        Then add a margin for the bills that arrive afterwards: the medical balances, the last
-        utility accounts, and the certified copies and filings a death generates. Most people
+        Then add a margin for the bills that arrive afterward: the medical balances, the last
+        utility bills, and the certified copies and filings a death generates. Most people
         land somewhere between ten and twenty thousand dollars, but the number that matters is
         yours.
       </p>
@@ -181,9 +180,9 @@ def body():
     'Final expense insurance is a small permanent policy, usually $2,000 to $50,000, so a '
     'funeral and final bills do not fall on your family.',
     answer=(
-        'There is no medical exam: you answer a short list of health questions, the '
-        'premium is fixed for life, and the coverage never expires. It is the same thing '
-        'sold under the names burial insurance and funeral insurance, and it is all <a '
+        'There is no medical exam. You answer a short list of health questions, the '
+        'premium is fixed for life, and the coverage never expires. Burial insurance '
+        'and funeral insurance are other names for the same <a '
         'class="link" href="/final-expense-insurance/">final expense insurance</a>.'),
     extra=hero_cta, glow=False,
     media=C.figure("fe-garden-door", C.MEDIA_SIZES, eager=True))}
@@ -192,10 +191,10 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="text-h2">The three things that define it</h2>
+      <h2 class="text-h2">Three things that define final expense insurance</h2>
       <p class="mt-5 text-slate">
         Everything else about the product follows from these. If a policy you are shown does not
-        have all three, it is something different and should be called something different.
+        have all three, it is a different product.
       </p>
     </div>
     <div class="mt-10 bento">{facts}
@@ -210,7 +209,7 @@ def body():
       <h2 class="text-h2">What the money is normally used for</h2>
       <p class="mt-5 text-slate">
         The policy pays a single cash amount to the person you name. Nobody directs how it is
-        spent. These are simply the things it usually goes on.
+        spent. These are the things it usually pays for.
       </p>
     </div>
 
@@ -221,7 +220,7 @@ def body():
         <caption class="sr-only">What a final expense insurance payout is normally used for</caption>
         <thead>
           <tr>
-            <th scope="col">What it goes on</th>
+            <th scope="col">What it pays for</th>
             <th scope="col">What that includes</th>
           </tr>
         </thead>
@@ -235,8 +234,7 @@ def body():
 
 
 {C.prose("What it is not", nots,
-         intro="Four things this product gets confused with. Two of them are sold hard by people "
-               "who rely on the confusion.",
+         intro="Four things this product gets confused with, and how to tell them apart.",
          media=C.figure("fe-kitchen", C.MEDIA_SIZES))}
 
 
@@ -255,11 +253,11 @@ def body():
          media=C.figure("fe-chairs", C.MEDIA_SIZES))}
 
 
-{C.spoke_module("Related pages in final expense",
-                "The rest of the silo, in the order most people need it.", SIBLINGS)}
+{C.spoke_module("More about final expense insurance",
+                "The other pages on this product, in the order most people need them.", SIBLINGS)}
 
 
-{C.faq_section("Common questions", FAQ, "fe-whatis-faq", size=24)}
+{C.faq_section("Questions about final expense insurance", FAQ, "fe-whatis-faq", size=24)}
 
 
 {C.closing_band("whole-band", "Want to know what you would qualify for?",

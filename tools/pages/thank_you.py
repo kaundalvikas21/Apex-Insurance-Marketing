@@ -74,7 +74,7 @@ def body():
       <div class="mt-8 card">
         <h2 class="text-h3 !font-display !font-semibold">What to have ready for the call</h2>
         <p class="mt-3 text-slate">
-          None of this needs sending anywhere. It just makes the call shorter, and it is the
+          You do not need to send any of this. It makes the call shorter, and it is the
           difference between a rough number and one you can rely on.
         </p>
         <ul class="mt-6 grid gap-5">
@@ -87,7 +87,7 @@ def body():
             ("calculator", "Roughly what you are trying to cover",
              "A mortgage balance, years of income, childcare, a funeral. An approximate number is fine; the agent will help you sharpen it."),
             ("stethoscope", "Any conditions and medications",
-             "Names of prescriptions and rough dates of diagnosis. This is what decides which carriers will take you, and it is better said up front than found in underwriting."),
+             "Names of prescriptions and rough dates of diagnosis. This is what decides which carriers will take you, and it is better said up front than found later by the carrier."),
             ("users", "Family history, if you know it",
              "Parents or siblings with heart disease or cancer before 60. Several carriers rate this and several do not, which is exactly the kind of difference comparing finds."),
             ("file-text", "Any policy you already have",

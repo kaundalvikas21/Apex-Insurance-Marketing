@@ -25,7 +25,7 @@ SILO = "term-life"
 TITLE = "What Is Term Life Insurance? A Plain-English Guide | Apex"
 OG_TITLE = "What is term life insurance?"
 DESC = ("Term life insurance pays a fixed benefit if you die within a set number of years. What it "
-        "covers, what happens when the term ends, and where it stops being the right tool.")
+        "covers, what happens when the term ends, and who it does not fit.")
 
 TRAIL = [("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
          ("What is term life insurance", None)]
@@ -107,10 +107,10 @@ def body():
      intent as an H2 rather than a separate competing page.
      ================================================================== -->
 {C.prose(
-    "How a term policy actually works",
+    "How term life insurance works",
     C.step(1, "You choose an amount and a number of years",
-           "Usually enough to clear the mortgage and replace your income for as long as somebody "
-           "would need it, over a period that matches the obligation. A thirty year mortgage taken "
+           "Usually enough to pay off the mortgage and replace your income for as long as someone "
+           "would need it. The number of years should match the obligation. A thirty year mortgage taken "
            "out last year and a fourteen year old at home are two different answers.")
     + '<div class="mt-8">' + C.step(2, "The carrier underwrites you",
            "Health questions, a prescription and medical records check, often a short paramedical "
@@ -125,7 +125,7 @@ def body():
            "You can stop paying at any time. There is no surrender charge, because there is "
            "nothing to surrender.")
     + '</div>',
-    intro="Four moves, in order. Nothing else happens in between, which is the appeal.")}
+    intro="Four steps, in order. Nothing else happens in between.")}
 
 
 <!-- =====================================================================
@@ -135,7 +135,7 @@ def body():
 <section class="section band">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">The words on a term policy, defined</h2>
+      <h2 class="reveal text-h2">Term life insurance glossary</h2>
       <p class="reveal mt-5 text-slate">
         Six terms cover almost everything you will see on an illustration or an application. If an
         agent uses a word that is not on this list and does not stop to define it, ask.
@@ -167,10 +167,10 @@ def body():
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
-      <h2 class="reveal text-h2">What the money is actually for</h2>
+      <h2 class="reveal text-h2">What the death benefit pays for</h2>
       <p class="reveal mt-5 text-slate">
-        A death benefit is not a windfall. It is a substitute for a specific stream of money that
-        stops when you do, and sizing it is a subtraction problem rather than a guess.
+        A death benefit is not a windfall. It replaces the money that stops coming in when you
+        die. Sizing it is subtraction, not a guess.
       </p>
     </div>
 
@@ -193,15 +193,14 @@ def body():
         <p class="eyebrow">The bills that arrive anyway</p>
         <p class="mt-3 text-slate">
           Funeral costs, outstanding debts, and several months of ordinary expenses while an estate
-          is sorted out. Small next to the other two, and the first thing a family runs into.
+          is settled. Small next to the other two, and the first thing a family runs into.
         </p>
       </div>
     </div>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       Our <a class="link" href="/term-life-insurance/calculator/">coverage calculator</a> does that
-      subtraction with the method shown on screen, so you can see how the figure was reached rather
-      than being handed one.
+      subtraction and shows the method on screen, so you can see how it reached the figure.
     </p>
   </div>
 </section>
@@ -209,9 +208,9 @@ def body():
 
 {C.inline_cta(
     "See what this costs for your age",
-    "Six questions, about two minutes, and a licensed agent comes back with premiums from named "
-    "carriers rather than a range. No obligation, and no cost either way.",
-    "term_what_is_mid", "/term-life-insurance/quotes/", "Get term life quotes")}
+    "Answer six questions in about two minutes. A licensed agent sends you prices from named "
+    "carriers, not a range. It is free, and there is no obligation.",
+    "term_what_is_mid", "/term-life-insurance/quotes/", "Get my term life quote")}
 
 
 <!-- =====================================================================
@@ -227,16 +226,16 @@ def body():
            "Almost every term policy is annually renewable after the level period, with no new "
            "health questions. The price resets to your current age and then climbs every single "
            "year. Treat it as a bridge of months, not a plan for years.", "mt-8")
-    + C.qa("You can convert, and this is the valuable one",
+    + C.qa("You can convert to a permanent policy",
            "Conversion turns some or all of the term coverage into a permanent policy with no new "
            "medical questions, at your original health class. If your health has changed, this "
            "right is worth more than the policy. It expires, often at a fixed age or after a set "
-           "number of policy years, and carriers differ enormously on which permanent products "
-           "they will convert into.", "mt-8")
+           "number of policy years. Carriers differ widely on which permanent products they let "
+           "you convert into.", "mt-8")
     + C.qa("You can buy a new term policy",
            "Possible, and priced at your new age and new health. Worth comparing against "
            "conversion rather than assuming either one wins.", "mt-8"),
-    intro="Three options and a default, and the default is the one most people take without "
+    intro="You have three options and a default. Most people take the default without "
           "deciding to.",
     aside='<p class="text-slate">Conversion deadlines are why we ask about them before you '
           'buy, not after. Two policies at the same premium can carry very different conversion '
@@ -251,7 +250,7 @@ def body():
 <section class="section band-navy on-navy">
   <div class="container-ax">
     <div class="max-w-3xl">
-      <h2 class="reveal text-h2 text-white">Where term life stops being the right tool</h2>
+      <h2 class="reveal text-h2 text-white">When term life insurance does not fit</h2>
       <p class="reveal mt-5 text-white/85">
         Term is the correct answer for most people buying life insurance for the first time. It is
         not the correct answer for all of them, and an agency that never says so is selling rather
@@ -263,12 +262,12 @@ def body():
       <div class="reveal">
         <h3 class="text-h4 text-white">When the need has no end date</h3>
         <p class="mt-3 text-white/85">
-          A dependant with a lifelong disability, a business buy sell agreement, or an estate that
+          A dependent with a lifelong disability, a business buy sell agreement, or an estate that
           will owe tax whenever it settles. A twenty year answer does not fit a permanent question.
         </p>
       </div>
       <div class="reveal">
-        <h3 class="text-h4 text-white">When you are already past the issue ages</h3>
+        <h3 class="text-h4 text-white">When you are past the age carriers accept</h3>
         <p class="mt-3 text-white/85">
           Most carriers stop writing new term above the mid seventies, and the price well before
           that stops being defensible for a small face amount.
@@ -304,7 +303,7 @@ def body():
      ("/term-life-insurance/30-year-term/", "30 year term",
       "Long mortgages, young children, and what the extra decade costs."),
      ("/term-life-insurance/no-medical-exam/", "No medical exam term",
-      "Same day approvals, and the trade you make for them."),
+      "Same day decisions, and the trade you make for them."),
      ("/term-life-insurance/for-seniors/", "Term life after 60",
       "What is still available, and when to stop looking at term.")])}
 
