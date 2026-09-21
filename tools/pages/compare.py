@@ -125,9 +125,15 @@ def render(trail, h1, lead, table_heading, table_intro, table_caption, table_col
            cost_heading, cost_intro, cost_blocks, wins_heading, wins_intro, wins,
            checklist_heading, checklist_intro, checklist_items, paths_heading, paths_intro,
            paths, faq_heading, faq, faq_group, table_min_width="46rem", table_note=None,
-           checklist_aside=None, prologue=""):
+           checklist_aside=None, prologue="", cost_media=None):
     """One compare page. Every argument is copy; the order of the sections is
-    T5's and is not parameterised."""
+    T5's and is not parameterised.
+
+    `cost_media` is the In short box. It belongs under the cost lead in the
+    LEFT column, which is what prose(media=) is for: the cost blocks are long
+    and the lead is three lines, so with the summary on the right the left
+    column left a dead half row (MASTER.md section 3).
+    """
     note = ('<p class="reveal mt-4 text-micro text-muted max-w-3xl">%s</p>' % table_note
             ) if table_note else ""
     return f"""{prologue}
@@ -152,7 +158,7 @@ def render(trail, h1, lead, table_heading, table_intro, table_caption, table_col
 </section>
 
 
-{C.prose(cost_heading, cost_blocks, intro=cost_intro, cls="section band")}
+{C.prose(cost_heading, cost_blocks, intro=cost_intro, media=cost_media, cls="section band")}
 
 
 {C.ask_strip("Rather have someone walk you through it?", "A licensed agent will compare the two for your age and your situation.", C.phone_link(faq_group.replace("-", "_") + "_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}

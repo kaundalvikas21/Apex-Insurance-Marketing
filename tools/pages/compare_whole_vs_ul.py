@@ -194,16 +194,16 @@ def body():
         cost_heading="What it costs over time",
         cost_intro="This is where a comparison page normally prints two numbers. We are not going "
                    "to, and the reason is the same reason this decision is difficult.",
+        cost_media="""<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>A whole life premium is one number, known at issue and unchanged for life.</li>
+    <li>A universal life premium is a schedule of payments, not a number in the same sense.</li>
+    <li>Insist on seeing universal life illustrated twice: at current assumptions and at the guaranteed minimum.</li>
+  </ul>
+</div>""",
         cost_blocks="""
-        <div class="in-short reveal">
-          <p class="in-short-title">In short</p>
-          <ul>
-            <li>A whole life premium is one number, known at issue and unchanged for life.</li>
-            <li>A universal life premium is a schedule of payments, not a number in the same sense.</li>
-            <li>Insist on seeing universal life illustrated twice: at current assumptions and at the guaranteed minimum.</li>
-          </ul>
-        </div>
-        <h3 class="reveal mt-6 text-h4">Whole life: one number</h3>
+        <h3 class="reveal text-h4">Whole life: one number</h3>
         <p class="reveal mt-3 text-slate">
           A whole life premium is one number, known at issue, unchanged for life. You can put it in
           a spreadsheet on the day you buy and it will still be right in year forty. The grid it

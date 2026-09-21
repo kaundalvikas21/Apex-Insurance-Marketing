@@ -448,9 +448,22 @@
      the touch target: 130px each, 48px tall. forms.row(tight=True)
      opts a pair in, and its docstring says which pairs qualify. */
   @container (min-width: 16rem) { .field-row-tight { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
-  /* Narrow container: tighten the rhythm between fields, not the
-     controls themselves. 12px still sits on the 4pt grid. */
-  @container (max-width: 25.99rem) { .field { margin-bottom: 0.75rem; } }
+  /* Narrow container: tighten the rhythm around the controls, never the
+     controls themselves. The reserved error line under a hintless field is
+     doing the separating already, so it does not also need a full margin
+     under it: on a phone that stacked 48px of nothing between an input and
+     the next label. A field that carries a hint keeps its margin, or the
+     hint reads as if it belongs to the label below it. The reserve itself is
+     untouched, so an error still cannot move the submit button. */
+  @container (max-width: 25.99rem) {
+    .field { margin-bottom: 0.25rem; }
+    .field:has(.field-hint) { margin-bottom: 0.625rem; }
+    .field-label { margin-bottom: 0.25rem; }
+    .field-foot { margin-top: 0.25rem; }
+    /* .consent is declared further down the file, so it needs the extra
+       specificity to win at equal weight. */
+    [data-ax-form] .consent { padding: 0.75rem; margin-bottom: 0.75rem; }
+  }
 
   /* The hint and the error share one reserved cell under the control. It is
      always in the layout, so the submit button never moves between mousedown

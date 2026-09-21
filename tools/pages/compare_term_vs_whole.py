@@ -171,16 +171,20 @@ def _more(q, a):
     return C.acc(q, a, "cmp-term-whole-cost")
 
 
+# The In short box goes in the LEFT column, under the lead: prose(media=).
+# The lead is three lines and the blocks beside it are long, so with the
+# summary on the right the left column left a dead half row.
+COST_SUMMARY = """<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>For the same death benefit at the same age, whole life costs several times what term costs.</li>
+    <li>We print no figures until real carrier rate cards are loaded.</li>
+    <li>Run any comparison to the same end date on both sides, or it is two different questions.</li>
+  </ul>
+</div>"""
+
 COST_BLOCKS = """
-        <div class="in-short reveal">
-          <p class="in-short-title">In short</p>
-          <ul>
-            <li>For the same death benefit at the same age, whole life costs several times what term costs.</li>
-            <li>We print no figures until real carrier rate cards are loaded.</li>
-            <li>Run any comparison to the same end date on both sides, or it is two different questions.</li>
-          </ul>
-        </div>
-        <h3 class="reveal mt-6 text-h4">How big the cost gap is</h3>
+        <h3 class="reveal text-h4">How big the cost gap is</h3>
         <p class="reveal mt-3 text-slate">
           Several times over, for the same death benefit at the same age. That gap is large
           enough that it changes what you can afford to insure, which is the decision underneath
@@ -244,6 +248,7 @@ def body():
         cost_intro="The cost gap is the most important fact on this page and the one we will not "
                    "invent a number for. Here is what we can say, and where the real figures will "
                    "go.",
+        cost_media=COST_SUMMARY,
         cost_blocks=COST_BLOCKS,
         wins_heading="When term wins and when whole life wins",
         wins_intro="Two situations, and they are not close calls. Most people reading this page "

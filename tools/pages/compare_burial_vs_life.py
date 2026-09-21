@@ -144,16 +144,16 @@ def body():
         cost_heading="Which one costs more",
         cost_intro="The question is asked the wrong way around, and "
                    "answering it as asked is how people end up with the wrong policy.",
+        cost_media="""<div class="in-short reveal">
+  <p class="in-short-title">In short</p>
+  <ul>
+    <li>Per month, a burial policy costs less, because it is a small fraction of the size.</li>
+    <li>Per thousand dollars of coverage, it costs noticeably more.</li>
+    <li>The real comparison is between two situations, not two premiums.</li>
+  </ul>
+</div>""",
         cost_blocks="""
-        <div class="in-short reveal">
-          <p class="in-short-title">In short</p>
-          <ul>
-            <li>Per month, a burial policy costs less, because it is a small fraction of the size.</li>
-            <li>Per thousand dollars of coverage, it costs noticeably more.</li>
-            <li>The real comparison is between two situations, not two premiums.</li>
-          </ul>
-        </div>
-        <h3 class="reveal mt-6 text-h4">Per month</h3>
+        <h3 class="reveal text-h4">Per month</h3>
         <p class="reveal mt-3 text-slate">
           A burial policy costs less per month than a full sized policy, because it is a small
           fraction of the size. That is the comparison most people make, and on its own it is
