@@ -161,6 +161,16 @@ FAQ = [
      "hard to get back."),
 ]
 
+# The cost section was 330 words down one column: 1906px on a 390px phone,
+# 2.3 screens for a section whose answer is one sentence. The In short box and
+# the size of the gap stay in the open; the three blocks that qualify the
+# answer fold into native <details>, so the section is scannable at a glance
+# and the reader opens the qualification they care about. Content is unchanged
+# and still in the markup, which is what a crawler and a JS-blocked reader see.
+def _more(q, a):
+    return C.acc(q, a, "cmp-term-whole-cost")
+
+
 COST_BLOCKS = """
         <div class="in-short reveal">
           <p class="in-short-title">In short</p>
@@ -170,44 +180,35 @@ COST_BLOCKS = """
             <li>Run any comparison to the same end date on both sides, or it is two different questions.</li>
           </ul>
         </div>
-        <h3 class="reveal mt-6 text-h4">Why there are no numbers here</h3>
+        <h3 class="reveal mt-6 text-h4">How big the cost gap is</h3>
         <p class="reveal mt-3 text-slate">
-          This is the point where a comparison page normally prints two premiums and a total.
-          We are not going to.
+          Several times over, for the same death benefit at the same age. That gap is large
+          enough that it changes what you can afford to insure, which is the decision underneath
+          this page. It is also why the answer is so often term for the big
+          temporary need and a small permanent policy beside it, rather than one product for
+          everything.
         </p>
-        <p class="reveal mt-5 text-slate">
-          We hold no carrier rate cards yet, so any figure here would be one we made up. A made up
-          number in a comparison is worse than no number, because it does the arguing for you and
-          it does it with a fake. Every rate cell on this site is
-          <span class="tnum">$--</span> for the same reason, and it will stay that way until real
-          rate cards are loaded.
-        </p>
-        <h3 class="reveal mt-8 text-h4">How big the cost gap is</h3>
-        <p class="reveal mt-3 text-slate">
-          What we can fairly say is the size of the gap. For the same death
-          benefit at the same age, whole life costs several times what term costs.
-        </p>
-        <p class="reveal mt-4 text-slate">
-          That gap is
-          large enough that it changes what you can afford to insure, which is the decision
-          underneath this page. It is also why the answer is so often term for the big temporary
-          need and a small permanent policy beside it, rather than one product for everything.
-        </p>
-        <h3 class="reveal mt-8 text-h4">Where the real figures will go</h3>
-        <p class="reveal mt-3 text-slate">
-          When the rate cards land, the numbers will appear on the two pages that own them:
-          <a class="link" href="/term-life-insurance/rates/">term life insurance rates by age</a>
-          and <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates by
-          age</a>. They are kept there rather than reprinted here, so there is only one place to
-          update.
-        </p>
-        <h3 class="reveal mt-8 text-h4">A check for any comparison you are shown</h3>
-        <p class="reveal mt-3 text-slate">
-          When you are shown a cost comparison elsewhere, remember that a term premium stops
-          when the term does, and a whole life premium usually does not. Comparing thirty years
-          of one against a lifetime of the other is comparing two different questions. An honest
-          comparison runs to the same end date on both sides.
-        </p>"""
+        <div class="reveal mt-6">""" + "".join([
+    _more("Why there are no numbers here",
+          "This is the point where a comparison page normally prints two premiums and a total. We "
+          "are not going to. We hold no carrier rate cards yet, so any figure here would be one we "
+          "made up, and a made up number in a comparison is worse than no number: it does the "
+          "arguing for you and it does it with a fake. Every rate cell on this site is "
+          '<span class="tnum">$--</span> for the same reason, and it will stay that way until real '
+          "rate cards are loaded."),
+    _more("Where the real figures will go",
+          "When the rate cards land, the numbers will appear on the two pages that own them: "
+          '<a class="link" href="/term-life-insurance/rates/">term life insurance rates by age</a> '
+          'and <a class="link" href="/whole-life-insurance/rates/">whole life insurance rates by '
+          "age</a>. They are kept there rather than reprinted here, so there is only one place to "
+          "update."),
+    _more("A check for any comparison you are shown",
+          "When you are shown a cost comparison elsewhere, remember that a term premium stops when "
+          "the term does, and a whole life premium usually does not. Comparing thirty years of one "
+          "against a lifetime of the other is comparing two different questions. An honest "
+          "comparison runs to the same end date on both sides."),
+]) + """
+        </div>"""
 
 
 def schema():

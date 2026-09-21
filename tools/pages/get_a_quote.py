@@ -128,7 +128,7 @@ def quote_form():
         F.row(F.phone_field("q-phone", hint="One agent calls, once."),
               F.text_field("q-email", "email", "Email", hint="Optional. For the written comparison.",
                            type="email", autocomplete="email", validate="email",
-                           error="Enter a valid email address.", required=False))
+                           error="Enter a valid email address.", required=False), tight=True)
         + F.consent_block("q", C.BRAND, 12)
         + F.submit_block("See my quotes", back=True))
     return f"""

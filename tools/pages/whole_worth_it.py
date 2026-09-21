@@ -230,12 +230,27 @@ def body():
         <p class="mt-3 {'text-white/90' if navy else 'text-slate'}">{text}</p>
       </div>"""
 
-    rw = "".join(
-        '<div class="reveal%s"><h3 class="text-h4">%s</h3><ul class="mt-4 grid gap-3">%s</ul></div>'
-        % ("" if i == 0 else " mt-10", h, "".join(
+    # Nine long bullets stacked ran 1582px on a 390px phone, and the second
+    # heading was below the fold, which is a poor way to present a page whose
+    # whole point is that both columns exist. The two sides become one
+    # [data-panels] toggle (site.js section 8): one list at a time, the other
+    # one tab away. Neither panel carries `hidden` in the markup, so with
+    # JavaScript blocked both lists render exactly as they did before.
+    keys = ["right", "wrong"]
+    rw_tabs = "".join(
+        '<label class="choice"><input type="radio" name="critics-view" value="%s"%s>'
+        '<span class="!gap-2">%s%s</span></label>'
+        % (keys[i], " checked" if i == 0 else "", C.icon(ico, 18, "shrink-0"), h.replace("What the critics get ", "What they get "))
+        for i, (h, ico, points) in enumerate(RIGHT_WRONG))
+    rw_panels = "".join(
+        '<div data-panel="%s"><h3 class="sr-only">%s</h3><ul class="mt-6 grid gap-3">%s</ul></div>'
+        % (keys[i], h, "".join(
             '<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
             % (C.icon(ico, 20, "shrink-0 text-navy mt-1"), t) for t in points))
         for i, (h, ico, points) in enumerate(RIGHT_WRONG))
+    rw = ('<div class="reveal" data-panels>'
+          '<div class="choice-row" role="group" aria-label="Which side of the argument to show">%s</div>'
+          '%s</div>') % (rw_tabs, rw_panels)
 
     return f"""
 {C.page_hero(

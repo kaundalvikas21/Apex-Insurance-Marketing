@@ -574,14 +574,23 @@ def body():
       <div class="lg:col-span-6 lg:col-start-7">
         <!-- Status cards. The same three icons and names as the benefit cards
              above, so "which group am I in" and "what does that mean" read as
-             one system. Status is carried by icon + label, never colour alone. -->
+             one system. Status is carried by icon + label, never colour alone.
+
+             The example conditions fold into a native <details> under each
+             card: 445px of the 1878px this section used on a phone was three
+             lists of conditions, two of which are not the reader's group. The
+             status and what it means stay in the open, the summary is a 56px
+             target, and with JavaScript blocked the disclosure still works. -->
         <ul class="reveal grid gap-4">
           <li class="status-card status-good">
             {icon("circle-check", 26, "shrink-0 text-green mt-0.5")}
             <div>
               <p class="status-label">Usually accepted at level rates</p>
               <p class="status-means">Full benefit from day one, no waiting period.</p>
-              <p class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</p>
+              <details class="status-more">
+                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
+                <p class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</p>
+              </details>
             </div>
           </li>
           <li class="status-card status-mid">
@@ -589,7 +598,10 @@ def body():
             <div>
               <p class="status-label">Often a graded benefit</p>
               <p class="status-means">A percentage in the first two or three years, then the full amount.</p>
-              <p class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</p>
+              <details class="status-more">
+                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
+                <p class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</p>
+              </details>
             </div>
           </li>
           <li class="status-card status-last">
@@ -597,7 +609,10 @@ def body():
             <div>
               <p class="status-label">Usually guaranteed issue</p>
               <p class="status-means">Nobody is turned down. A two or three year waiting period applies.</p>
-              <p class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</p>
+              <details class="status-more">
+                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
+                <p class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</p>
+              </details>
             </div>
           </li>
         </ul>

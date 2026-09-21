@@ -185,9 +185,20 @@ def radio_group(group_id, name, legend, options, hint="", error="", indent=12):
        "error": error or "Choose an option.", "foot": _foot(hint)}, indent)
 
 
-def row(*fields):
-    """Two fields side by side once the form itself is wide enough (a container query, not a viewport one)."""
-    return '<div class="field-row">\n%s\n</div>' % "\n".join(fields)
+def row(*fields, tight=False):
+    """Two fields side by side once the form itself is wide enough (a container
+    query, not a viewport one).
+
+    tight=True pairs them from 16rem instead of 26rem, which is the only width
+    a phone actually gives a form in a panel (277px at 390). Use it ONLY for
+    two short controls: a text or tel input whose value is a few characters.
+    Never for a state select (its prompt clips) and never for a radio group
+    (.choice has a 6rem min-width, so the pair wraps and the block gets
+    taller). .fe is unaffected: its own rule keeps senior forms single column
+    below 27.99rem.
+    """
+    cls = "field-row field-row-tight" if tight else "field-row"
+    return '<div class="%s">\n%s\n</div>' % (cls, "\n".join(fields))
 
 
 def progress(total):

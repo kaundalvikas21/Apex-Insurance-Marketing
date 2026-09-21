@@ -51,11 +51,11 @@ def body():
     fields = (
         F.row(F.text_field("ct-name", "name", "Your name", autocomplete="name", validate="name",
                            error="Please tell us your name."),
-              F.phone_field("ct-phone", label="Phone"))
+              F.phone_field("ct-phone", label="Phone"), tight=True)
         + F.text_field("ct-email", "email", "Email", type="email", autocomplete="email",
                        validate="email", error="Enter a valid email address.", required=False,
                        hint="Optional. We reply by phone unless you ask us not to.")
-        + F.textarea_field("ct-message", "message", "What can we help with?",
+        + F.textarea_field("ct-message", "message", "What can we help with?", rows=2,
                            hint="Optional. A health condition, a deadline, a quote from elsewhere."))
 
     return f"""

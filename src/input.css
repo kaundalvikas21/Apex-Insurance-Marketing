@@ -443,6 +443,14 @@
      more room before two controls fit side by side. */
   [data-ax-form] { container-type: inline-size; }
   @container (min-width: 26rem) { .field-row { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+  /* A phone gives a form in a panel about 277px, so 26rem never pairs
+     there. Two SHORT controls can pair at that width and still clear
+     the touch target: 130px each, 48px tall. forms.row(tight=True)
+     opts a pair in, and its docstring says which pairs qualify. */
+  @container (min-width: 16rem) { .field-row-tight { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+  /* Narrow container: tighten the rhythm between fields, not the
+     controls themselves. 12px still sits on the 4pt grid. */
+  @container (max-width: 25.99rem) { .field { margin-bottom: 0.75rem; } }
 
   /* The hint and the error share one reserved cell under the control. It is
      always in the layout, so the submit button never moves between mousedown
@@ -1236,6 +1244,30 @@
   .status-last { border-left-color: var(--color-border-strong); }
   .status-label { font-size: var(--text-h4); font-weight: 600; color: var(--color-ink); line-height: 1.3; }
   .status-means { margin-top: 0.25rem; font-size: var(--text-sm); font-weight: 600; color: var(--color-navy); }
+
+  /* The example conditions, on demand. The status and what it means stay
+     visible: only the evidence folds, so the card answers "which group am I
+     in" in two lines and the reader opens the one group that sounds like
+     them. Native <details>, no name, so two can be open at once and it works
+     with JavaScript blocked. No motion: this renders on a .fe page. */
+  .status-more { margin-top: 0.625rem; }
+  .status-more > summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    min-height: 44px;
+    list-style: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-navy);
+    cursor: pointer;
+  }
+  .status-more > summary::-webkit-details-marker { display: none; }
+  .status-more > summary:hover { color: var(--color-navy-700); }
+  .status-more > summary .status-chev { flex-shrink: 0; transition: transform .15s ease-out; }
+  .status-more[open] > summary .status-chev { transform: rotate(180deg); }
+  .fe .status-more > summary { min-height: 56px; }
+  @media (prefers-reduced-motion: reduce) {
+    .status-more > summary .status-chev { transition: none; }
+  }
 
   /* The ask under an accordion. */
   .faq-ask {
