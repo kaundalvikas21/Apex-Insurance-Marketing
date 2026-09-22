@@ -343,9 +343,10 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
   `robots.txt` is `netlify/robots.txt`, which says `Disallow: /` because the preview must not be
   indexed; replace it with an allow rule plus a `Sitemap:` line when the domain is settled.
 - **Hosting is configured for a locked-down preview, and that configuration is itself a
-  placeholder.** `netlify.toml`, `tools/stage.py`, `netlify/_headers`, `netlify/robots.txt` and
-  `netlify/edge-functions/preview-auth.ts` give a password gate, a `noindex` header and a publish
-  directory that excludes `public/`, `tools/`, `design-system/` and every `.md`. **`DEPLOY.md`** is
+  placeholder.** `netlify.toml`, `tools/stage.py`, `netlify/_headers` and `netlify/robots.txt` give a `noindex`
+  header, `Disallow: /` and a publish directory that excludes `public/`, `tools/`, `design-system/`
+  and every `.md`. There is **no password gate**: the preview is open to anyone with the link, so
+  the link is the only control. **`DEPLOY.md`** is
   the runbook and lists what to undo before a real launch. No Netlify site has been created; none
   should be until the rest of this file is empty.
 - **`/compare/whole-life-vs-universal-life/` is built but held back.** Spec section 05 makes this

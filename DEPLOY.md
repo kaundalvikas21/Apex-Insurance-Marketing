@@ -3,7 +3,8 @@
 **This site is not cleared to launch.** `REPLACE-BEFORE-LAUNCH.md` is not empty, the TCPA consent
 is `[PENDING LEGAL REVIEW]`, `PHONE_DISPLAY` is a fictional number, every rate cell is `$--`, and
 `submitLead()` in `assets/site.js` still discards what a visitor types. So the only deploy this
-config supports is a **private preview**: password-gated, `noindex`, forms inert.
+config supports is an **unlisted preview**: `noindex`, `Disallow: /`, forms inert. There is no
+password, so the link is the only thing keeping it private. Hand it to the client and no one else.
 
 Everything here is committed and unused until someone creates a Netlify site. Nothing is live.
 
@@ -11,9 +12,8 @@ Everything here is committed and unused until someone creates a Netlify site. No
 
 | File | Job |
 |---|---|
-| `netlify.toml` | Build command `python3 tools/stage.py`, publish `dist`, edge function on `/*` |
+| `netlify.toml` | Build command `python3 tools/stage.py`, publish `dist` |
 | `tools/stage.py` | Copies the site surface into `dist/`. An allowlist, so `public/`, `tools/`, `design-system/`, `src/` and every `.md` stay out of the deploy |
-| `netlify/edge-functions/preview-auth.ts` | HTTP Basic Auth. Netlify's own site password needs a paid plan; this is the free-tier equivalent |
 | `netlify/_headers` | `X-Robots-Tag: noindex, nofollow, noarchive` on everything |
 | `netlify/robots.txt` | `Disallow: /` |
 
@@ -31,27 +31,20 @@ publishing quietly.
    `kaundalvikas21/Apex-Insurance-Marketing`.
 2. Set **branch to deploy** to `build/marketing-site-v3-transparent-numbers`. It is not `main`.
 3. Leave build command and publish directory **blank**. `netlify.toml` supplies both.
-4. **Site configuration → Environment variables**, add two:
-   - `PREVIEW_USER`
-   - `PREVIEW_PASSWORD`
-
-   Choose the password yourself. Send it to the client separately from the link, and never commit
-   it. With either variable missing the edge function denies every request, so a half-finished
-   setup keeps the site shut rather than opening it.
+4. No environment variables are needed.
 
 ## Checking the deploy
 
-Replace `<site>` and the credentials:
+Replace `<site>`:
 
 ```bash
-curl -sI https://<site>/                                  # 401
-curl -sI -u user:pass https://<site>/ | grep -i robots    # x-robots-tag: noindex, nofollow, noarchive
-curl -u  user:pass https://<site>/robots.txt              # Disallow: /
+curl -sI https://<site>/ | grep -i robots    # x-robots-tag: noindex, nofollow, noarchive
+curl -s  https://<site>/robots.txt           # Disallow: /
 
 # each of these must be 404
 for p in REPLACE-BEFORE-LAUNCH.md CLAUDE.md tools/chrome.py \
          public/coverage_hero/Term_Life_hero.png assets/img/CREDITS.md; do
-  printf '%s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' -u user:pass https://<site>/$p)"
+  printf '%s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' https://<site>/$p)"
 done
 ```
 
@@ -60,8 +53,6 @@ the multi-step form work from the CDN.
 
 ## Before a real launch, undo all of this
 
-- Delete `netlify/edge-functions/preview-auth.ts` and the `[[edge_functions]]` block, and remove
-  `PREVIEW_USER` / `PREVIEW_PASSWORD`.
 - Replace `netlify/robots.txt` with an allow rule and a `Sitemap:` line.
 - Drop `X-Robots-Tag` from `netlify/_headers`.
 - Empty `REPLACE-BEFORE-LAUNCH.md` first. That file's own rule is "Do not publish until this file

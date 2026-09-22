@@ -1,5 +1,9 @@
 # Preview hosting. See DEPLOY.md for the click-through and for what to undo at launch.
 #
+# The site is open: no password gate. It stays out of search via netlify/_headers
+# (X-Robots-Tag) and netlify/robots.txt (Disallow: /), so do not hand the link out
+# any wider than the client while REPLACE-BEFORE-LAUNCH.md is not empty.
+#
 # Nothing is generated at deploy time: every .html, assets/site.css and image is
 # committed. The "build" is tools/stage.py copying the site surface into dist/, so
 # public/, tools/, design-system/ and every .md stay out of the deploy.
@@ -10,8 +14,3 @@
 
 [build.environment]
   NODE_VERSION = "22"
-
-# Basic auth on everything. Set PREVIEW_USER and PREVIEW_PASSWORD in the Netlify UI.
-[[edge_functions]]
-  function = "preview-auth"
-  path = "/*"
