@@ -211,6 +211,16 @@ def quote_form(form_id, form_name, id_prefix, coverage=True):
 
 
 def body():
+    # "What happens after you submit": numbered, one step per line, spaced so
+    # it reads as four steps rather than one dense paragraph.
+    after_steps = "".join(
+        f'''<li class="flex items-start gap-3"><span class="shrink-0 grid place-items-center w-7 h-7 rounded-full bg-surface border border-rule text-sm font-semibold text-navy tnum" aria-hidden="true">{n}</span><span class="pt-0.5">{text}</span></li>'''
+        for n, text in enumerate([
+            "A licensed agent reads it. Every submission. No quote engine, no lead broker.",
+            f"We run your details past the {C.CARRIERS} carriers we're appointed with.",
+            f"You get named carriers and real premiums within {C.SLA}, on a call to the number you give us.",
+            "If nothing fits, we tell you that, and where to look instead.",
+        ], 1))
     term_cards = "".join(f"""
         <label class="choice reveal !min-w-0">
           <input type="radio" name="term-length-explainer" value="{key}"{" checked" if key == "20" else ""}>
@@ -316,26 +326,11 @@ def body():
           </p>
 
           <div class="reveal mt-8 pt-8 border-t border-rule">
-            <p class="text-sm font-semibold text-navy">What happens after you submit</p>
-            <ol class="mt-3 grid gap-2 text-sm text-slate">
-              <li>1. A licensed agent reads it. Every submission. No quote engine, no lead broker.</li>
-              <li>2. We run your details past the {C.CARRIERS} carriers we're appointed with.</li>
-              <li>3. You get named carriers and real premiums within {C.SLA}, on a call to the number you give us.</li>
-              <li>4. If nothing fits, we tell you that, and where to look instead.</li>
+            <p class="font-semibold text-navy">What happens after you submit</p>
+            <ol class="mt-4 grid gap-4 text-slate">
+              {after_steps}
             </ol>
           </div>
-
-          <ul class="reveal mt-8 pt-8 border-t border-rule grid gap-3 text-sm text-slate">
-            <li class="flex items-start gap-3">{icon("shield-check", 18, "shrink-0 text-navy mt-0.5")}<span>Your details stay with us. Not sold, not shared with other agencies or lead buyers.</span></li>
-            <li class="flex items-start gap-3">{icon("badge-check", 18, "shrink-0 text-navy mt-0.5")}<span>Licensed in {C.STATES} states. {C.BRAND}, NPN {C.NPN}.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 18, "shrink-0 text-navy mt-0.5")}<span>No obligation. One agent calls you, once, and nobody else does.</span></li>
-          </ul>
-
-          <p class="reveal mt-8 text-sm text-slate">
-            <span class="font-semibold text-navy">Rather talk it through?</span>
-            Call {C.phone_link("term_form_side", "link font-semibold inline-flex items-center gap-1 whitespace-nowrap", size=16)},
-            <span class="text-muted">{C.HOURS}.</span>
-          </p>
         </div>
       </div>
 
@@ -343,6 +338,18 @@ def body():
         <div class="panel reveal">
           {quote_form("term-quote-form", "term_hero_quote", "th")}
         </div>
+
+        <ul class="reveal mt-8 px-1 grid gap-3 text-sm text-slate">
+          <li class="flex items-start gap-3">{icon("shield-check", 18, "shrink-0 text-navy mt-0.5")}<span>Your details stay with us. Not sold, not shared with other agencies or lead buyers.</span></li>
+          <li class="flex items-start gap-3">{icon("badge-check", 18, "shrink-0 text-navy mt-0.5")}<span>Licensed in {C.STATES} states. {C.BRAND}, NPN {C.NPN}.</span></li>
+          <li class="flex items-start gap-3">{icon("circle-check", 18, "shrink-0 text-navy mt-0.5")}<span>No obligation. One agent calls you, once, and nobody else does.</span></li>
+        </ul>
+
+        <p class="reveal mt-6 px-1 pt-6 border-t border-rule text-sm text-slate">
+          <span class="font-semibold text-navy">Rather talk it through?</span>
+          Call {C.phone_link("term_form_side", "link font-semibold inline-flex items-center gap-1 whitespace-nowrap", size=16)},
+          <span class="text-muted">{C.HOURS}.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -484,38 +491,22 @@ def body():
       </div>
 
       <div class="lg:col-span-7">
-        <ol class="reveal relative border-l border-rule pl-8 grid gap-8">
-          <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
-            <p class="text-sm font-semibold text-muted">Day 1</p>
-            <h3 class="mt-1 text-h4">Application</h3>
-            <p class="mt-2 text-slate">We complete it with you, by phone or electronically. Twenty to thirty minutes, including the health and lifestyle questions.</p>
-          </li>
-          <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
-            <p class="text-sm font-semibold text-muted">Day 1 to 5</p>
-            <h3 class="mt-1 text-h4">Phone interview and database checks</h3>
-            <p class="mt-2 text-slate">The carrier confirms your answers and pulls your prescription history, motor vehicle record, and medical information database file.</p>
-          </li>
-          <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
-            <p class="text-sm font-semibold text-muted">Day 3 to 10, if required</p>
-            <h3 class="mt-1 text-h4">The medical exam</h3>
-            <p class="mt-2 text-slate">A paramedical examiner comes to your home or office. Height, weight, blood pressure, a blood sample, and a urine sample. Around twenty minutes. It is free and you do not arrange it yourself.</p>
-          </li>
-          <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
-            <p class="text-sm font-semibold text-muted">Week 2 to 5</p>
-            <h3 class="mt-1 text-h4">Medical records and review</h3>
-            <p class="mt-2 text-slate">This is the slow part, and it is your doctor's office rather than the carrier. An underwriter then assigns a rate class.</p>
-          </li>
-          <li class="relative">
-            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
-            <p class="text-sm font-semibold text-muted">Week 3 to 6</p>
-            <h3 class="mt-1 text-h4">Offer, and your decision</h3>
-            <p class="mt-2 text-slate">If the rate class is worse than we quoted, we say so and tell you what it means in dollars. You can accept, ask us to shop it elsewhere, or walk away.</p>
-          </li>
-        </ol>
+        {C.timeline([
+            ('Day 1',
+             'Application',
+             'We complete it with you, by phone or electronically. Twenty to thirty minutes, including the health and lifestyle questions.'),
+            ('Day 1 to 5',
+             'Phone interview and database checks',
+             'The carrier confirms your answers and pulls your prescription history, motor vehicle record, and medical information database file.'),
+            ('Day 3 to 10, if required',
+             'The medical exam',
+             'A paramedical examiner comes to your home or office. Height, weight, blood pressure, a blood sample, and a urine sample. Around twenty minutes. It is free and you do not arrange it yourself.'),
+            ('Week 2 to 5',
+             'Medical records and review',
+             "This is the slow part, and it is your doctor's office rather than the carrier. An underwriter then assigns a rate class."),
+            ('Week 3 to 6',
+             'Offer, and your decision',
+             'If the rate class is worse than we quoted, we say so and tell you what it means in dollars. You can accept, ask us to shop it elsewhere, or walk away.')])}
 
         <p class="reveal mt-8 pt-6 border-t border-rule text-sm text-muted">
           Nothing is owed and no coverage is in force until the policy is issued, delivered, and the
@@ -593,7 +584,9 @@ def body():
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <div class="panel">
-          <h3 class="text-h3 !font-display !font-semibold">Start your quote</h3>
+          <div class="panel-head">
+            <h3 class="text-h3 !font-display !font-semibold">Start your quote</h3>
+          </div>
           {quote_form("term-quote-form-footer", "term_footer_quote", "tf", coverage=False)}
         </div>
       </div>

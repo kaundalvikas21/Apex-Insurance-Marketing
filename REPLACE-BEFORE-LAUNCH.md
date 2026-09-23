@@ -114,11 +114,20 @@ neither will be caught by looking for one.
 - **Free policy review replacement warning** (`/free-policy-review/`, under "What your review
   covers") renders as a visible `[PENDING LEGAL REVIEW]` flag. State replacement rules differ, so
   counsel must approve the wording. The same page carries a sixth consent block (form
-  `policy_review`, silo `site`) via `final_expense.callback_form(silo="site", senior=False)`.
+  `policy_review`, silo `site`) in its own two-step form (`free_policy_review.review_form()`).
+  The "never cancel first" aside in "How we get paid" is a second flagged copy of the same rule.
+- **Free policy review "many reviews end with keep" figure** (`/free-policy-review/`, "How we get
+  paid"). Visible `[PLACEHOLDER]`: replace with a real measured ratio or delete the sentence. Do
+  not estimate it.
+- **Free policy review document upload** (`/free-policy-review/`, form step 2, visible `[DEV]`
+  flag). A declarations page is personal information. Before launch it needs encryption at rest,
+  a retention limit, privacy policy coverage, and a multipart CRM post: `site.js` sends only
+  `has_attachment`, never the file or its name.
 - **"Unbiased opinion" USP tile** (`/free-policy-review/`, the strip under the hero, added at the
   client's request September 2026). The sub-line is the page's own FAQ answer restated, "Many
   reviews end with: keep what you have", and the same page discloses that the carrier pays the
-  commission. Counsel should read the tile and the disclosure together: an unbiased claim with
+  commission (since September 2026 a full "How we get paid" section plus a "We will / We will
+  not" pledge, from the client team's artifact). Counsel should read the tile and the disclosure together: an unbiased claim with
   nothing behind it is a compliance problem, not a copy preference.
 - **Homepage popup copy** (`DIALOG` in `tools/pages/home.py`) says a review checks "that you are
   not overpaying". It promises no saving, but counsel should read it with the page above.

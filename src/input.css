@@ -311,6 +311,21 @@
     box-shadow: var(--shadow-panel);
   }
   @media (min-width: 768px) { .panel { padding: 2rem; } }
+  /* A form panel's title and intro sit on a tinted head that bleeds to the
+     panel's edges, so every form on the site opens the same way. The negative
+     margins cancel the panel padding; the form below keeps its own mt-6. */
+  .panel-head {
+    margin: -1.5rem -1.5rem 0;
+    padding: 1.25rem 1.5rem;
+    /* Very light: a soft wash that fades toward the form, a faint glow in
+       the top corner, and a hairline that is barely there. */
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgb(30 106 225 / 0.07), transparent 60%),
+      linear-gradient(180deg, rgb(232 240 252 / 0.55), rgb(232 240 252 / 0.12));
+    border-bottom: 1px solid rgb(30 106 225 / 0.07);
+    border-radius: calc(var(--radius-ax) - 1px) calc(var(--radius-ax) - 1px) 0 0;
+  }
+  @media (min-width: 768px) { .panel-head { margin: -2rem -2rem 0; padding: 1.5rem 2rem; } }
 
   /* --- Bento ------------------------------------------------------------
      Six tracks. Cells span 2, 3, 4, or 6. Exactly as many cells as there is
@@ -590,6 +605,21 @@
     transition: border-color .15s ease-out, box-shadow .15s ease-out;
   }
   .input::placeholder { color: var(--color-muted); opacity: 1; }
+  /* The one file input (free policy review). Navy outline button, no amber:
+     amber stays on the three CTA rules check.py counts. */
+  .input-file { padding: 0.5rem; font-size: 0.875rem; color: var(--color-slate); cursor: pointer; }
+  .input-file::file-selector-button {
+    margin-right: 0.75rem;
+    padding: 0.4375rem 0.875rem;
+    border: 1px solid var(--color-navy);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    color: var(--color-navy);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .input-file:hover::file-selector-button { background-color: var(--color-navy); color: #fff; }
   .input:hover, .select:hover { border-color: var(--color-navy); }
   .input:focus, .select:focus { border-color: var(--color-navy-700); box-shadow: 0 0 0 3px rgb(30 106 225 / 0.14); outline: none; }
   .input[aria-invalid="true"], .select[aria-invalid="true"] {

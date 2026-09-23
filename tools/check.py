@@ -57,6 +57,7 @@ notes = []
 HERO_TWO_CTA = {
     "contact/index.html",              # Call + Send a message
     "final-expense-insurance/index.html",  # Call + Get coverage now
+    "free-policy-review/index.html",   # Request my free review + Call (client artifact, Sept 2026)
 }
 
 
@@ -153,8 +154,8 @@ def check_page(rel, html, built):
     # September 2026). The rest of the answer goes in page_hero(answer=).
     # HERO_TWO_CTA is the client's September 2026 exception: two pages whose
     # job is "call us or write to us" carry the call button plus one in page
-    # jump to the form. It is a named set, not a raised limit, so the other
-    # forty eight heroes still fail on a second button.
+    # jump to the form. The free policy review joined them on the client team's
+    # artifact. It is a named set, not a raised limit, so the other heroes still fail on a second button.
     hero = re.search(r'<section[^>]*data-hero>(.*?)</section>', html, re.S)
     if hero:
         lead = re.search(r'<p class="[^"]*text-lead[^"]*">(.*?)</p>', hero.group(1), re.S)

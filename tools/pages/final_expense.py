@@ -705,8 +705,10 @@ def callback_form(prefix, form_name, heading="Prefer we call you?",
                              error="Please choose your state."))
         + F.phone_field(prefix + "-phone", label="Your phone number"))
     return f"""
-          <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
-          <p class="mt-3 text-slate">{intro}</p>
+          <div class="panel-head">
+            <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
+            <p class="mt-3 text-slate">{intro}</p>
+          </div>
 
           <form{f' id="{form_id}"' if form_id else ""} class="mt-6" data-ax-form data-silo="{silo}"
                 data-form-name="{form_name}" data-success-target="{prefix}-success" novalidate>

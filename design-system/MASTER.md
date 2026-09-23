@@ -224,6 +224,7 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.btn-row` | Row-level action inside tables and cells, 44px, navy outline. 48px inside `.fe main`. |
 | `.card` / `.bento-cell` | White fill, 1px rule, 12px radius, `--shadow-card`, 24 to 32px pad. `.bento-cell-tint` and `.bento-cell-blue` are the variation cells. |
 | `.panel` | The hero form panels. `--shadow-panel`. |
+| `.panel-head` | A form panel's title and intro, first child of `.panel`. A very light wash bleeding to the panel edges: `--color-navy-050` fading downward, a faint navy glow in the top-left corner, a near-invisible hairline under it. Every form panel that carries its own title uses it, so all forms open the same way. |
 | `.stat` | `.stat-value` (display face, tabular) over `.stat-label` (muted). Holds `data-count` only when the figure is a spec figure. Rendered by `chrome.stat()`. |
 | `.pill` | Navy-050 chip for dated lines ("Rates last updated") and column tags. Never amber. |
 | `.table-signature` | Modifier on `.table-scroll`: card shadow, so the table reads as the section's object. |

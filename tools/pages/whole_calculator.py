@@ -139,10 +139,12 @@ def body():
 
         <div class="lg:col-span-5">
           <div class="reveal panel">
-            <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
-            <p class="mt-2 text-sm text-muted">
-              Prefilled with an example so you can see how it works. Round figures are fine.
-            </p>
+            <div class="panel-head">
+              <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
+              <p class="mt-2 text-sm text-muted">
+                Prefilled with an example so you can see how it works. Round figures are fine.
+              </p>
+            </div>
             <div class="mt-6">
               {T.field("wlcalc-final", "debt", "Funeral, final bills, and debts",
                        "What would still have to be paid after you die.", EX_FINAL)}

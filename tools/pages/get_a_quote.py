@@ -231,8 +231,10 @@ def body():
            on desktop's right column and directly under the H1 on mobile. -->
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="panel reveal">
-          <h2 class="text-h3 !font-display !font-semibold">Start your quote</h2>
-          <p class="mt-2 text-sm text-muted">Takes about a minute. Nothing is charged and nothing is binding.</p>
+          <div class="panel-head">
+            <h2 class="text-h3 !font-display !font-semibold">Start your quote</h2>
+            <p class="mt-2 text-sm text-muted">Takes about a minute. Nothing is charged and nothing is binding.</p>
+          </div>
           {quote_form()}
         </div>
       </div>

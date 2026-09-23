@@ -117,10 +117,12 @@ def body():
 
       <div class="lg:col-span-6">
         <div class="reveal panel h-full">
-          <h2 class="text-h3 !font-display !font-semibold">Start your quote</h2>
-          <p class="mt-2 text-sm text-muted">
-            Nothing here is a credit check, and none of it affects your credit score.
-          </p>
+          <div class="panel-head">
+            <h2 class="text-h3 !font-display !font-semibold">Start your quote</h2>
+            <p class="mt-2 text-sm text-muted">
+              Nothing here is a credit check, and none of it affects your credit score.
+            </p>
+          </div>
           {whole.quote_form("wl-quotes-form", "whole_quotes_page", "wq")}
         </div>
       </div>

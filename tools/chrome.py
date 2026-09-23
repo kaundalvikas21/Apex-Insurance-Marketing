@@ -841,6 +841,21 @@ def step(n, title, body, note=None):
     </div>"""
 
 
+def timeline(items):
+    """A vertical milestone line: a rule down the left, a navy dot per item, a
+    small muted label over each heading. items: [(label, title, body)].
+    Term's "How underwriting works" and the free policy review use it."""
+    lis = "".join(f"""
+          <li class="relative">
+            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-navy-700 rounded-full ring-4 ring-surface"></span>
+            <p class="text-sm font-semibold text-muted">{label}</p>
+            <h3 class="mt-1 text-h4">{title}</h3>
+            <p class="mt-2 text-slate">{body}</p>
+          </li>""" for label, title, body in items)
+    return f"""<ol class="reveal relative border-l border-rule pl-8 grid gap-8">{lis}
+        </ol>"""
+
+
 def ask_strip(title, note, button_html):
     """A slim mid-page ask: one line, one button. For the middle of a long run
     of prose sections, where the reader is otherwise 900 words from any action.

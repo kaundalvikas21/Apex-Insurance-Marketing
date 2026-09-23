@@ -157,10 +157,12 @@ def body():
 
         <div class="lg:col-span-5">
           <div class="reveal panel">
-            <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
-            <p class="mt-2 text-sm text-muted">
-              Prefilled with an example so you can see how it works. Round figures are fine.
-            </p>
+            <div class="panel-head">
+              <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
+              <p class="mt-2 text-sm text-muted">
+                Prefilled with an example so you can see how it works. Round figures are fine.
+              </p>
+            </div>
             <div class="mt-6">
               {field("calc-income", "income", "Your annual income before tax",
                      "What the household would stop receiving.", EX_INCOME)}

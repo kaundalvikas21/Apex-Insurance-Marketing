@@ -180,6 +180,20 @@ def textarea_field(field_id, name, label, hint="", rows=3, required=False,
        "req": " required" if required else "", "ph": ph, "foot": _foot(hint)}, indent)
 
 
+def file_field(field_id, name, label, hint="", accept=".pdf,.jpg,.jpeg,.png,.heic", indent=12):
+    """An optional document upload. Always optional: a form that cannot be sent
+    without a scan loses everyone who is on a phone away from their papers.
+    site.js keeps the File out of the JSON payload (it records has_attachment
+    instead), so the CRM wiring has to post multipart to carry the file."""
+    return block("""
+<div class="field">
+  <label class="field-label" for="%(id)s">%(label)s</label>
+  <input class="input input-file" id="%(id)s" name="%(name)s" type="file" accept="%(accept)s">
+  %(foot)s
+</div>
+""" % {"id": field_id, "name": name, "label": label, "accept": accept, "foot": _foot(hint)}, indent)
+
+
 def radio_group(group_id, name, legend, options, hint="", error="", indent=12):
     """A .choice-row radio set. site.js validates these as a group, reading the
     error message off the wrapper's data-error, so the wrapper carries it."""

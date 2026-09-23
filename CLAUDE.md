@@ -73,7 +73,7 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
 
 - `tools/chrome.py` — every shared partial and **every placeholder constant** (`PHONE_DISPLAY`,
   `AGENT_NAME`, `RATES_DATE`, `NPN`, `SLA`, …). One address for the launch swap. Provides
-  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `ask_strip`, `faq_ask`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `stat`,
+  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `ask_strip`, `faq_ask`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `timeline`, `stat`,
   `banner`, `picture`/`figure`, `legal_doc`, `flag`/`rates_flag`, `state_options`,
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).
@@ -83,7 +83,7 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
   `logo.favicon_svg()`. Never hand-edit the favicon or paste the polygons elsewhere: `check.py`
   fails if the favicon differs from what `logo.py` generates, if another `tools/*.py` file contains
   the mark's geometry, or if `logo.HEX` drifts from the tokens in `src/input.css`.
-- `tools/forms.py` — form primitives, used by every builder: `text_field`/`age_field`/`phone_field`/`select_field`/`textarea_field`/`radio_group`, `row`, `step`/`progress`/`next_button`, `submit_block`. The compliance-critical parts (hidden `source_url`/`silo`/
+- `tools/forms.py` — form primitives, used by every builder: `text_field`/`age_field`/`phone_field`/`select_field`/`textarea_field`/`file_field`/`radio_group`, `row`, `step`/`progress`/`next_button`, `submit_block`. The compliance-critical parts (hidden `source_url`/`silo`/
   `form_name`, honeypot, TCPA consent block) are authored once here so a copy cannot drift.
   Every helper takes `indent`, the column its block sits at in the caller's f-string.
 - `tools/icons.py` — inlined Lucide paths. A name not in the dict is a build-time `KeyError`.
@@ -198,8 +198,8 @@ contextual text link is not.
 
 **Heroes are one h1, one sentence, one button.** `check.py` fails a `page_hero()` lead over 30
 words or a second `.btn`. The rest of the answer, and the hub up-link, go in `page_hero(answer=)`.
-The one exception is `check.py`'s `HERO_TWO_CTA` set: `/contact/` and `/final-expense-insurance/`
-carry the call button plus one in-page jump to the form. Two is the ceiling, and the set is closed.
+The one exception is `check.py`'s `HERO_TWO_CTA` set: `/contact/`, `/final-expense-insurance/`
+and `/free-policy-review/` carry the call button plus one in-page jump to the form. Two is the ceiling, and the set is closed.
 
 ## Gotchas that cost real time
 

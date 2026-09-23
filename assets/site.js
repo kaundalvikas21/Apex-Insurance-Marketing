@@ -462,6 +462,9 @@
     //     headers: { 'Content-Type': 'application/json' },
     //     body: JSON.stringify(payload)
     //   }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+    // A form with a file input (the free policy review) sends has_attachment
+    // here, never the file: post new FormData(form) as multipart instead, and
+    // only once the upload's storage, retention and privacy terms are signed off.
     // Test hook, like AX_DEBUG: window.AX_FAIL_SUBMIT = true (or "offline")
     // rejects, so the failure state can be seen before a backend exists.
     if (window.AX_FAIL_SUBMIT) {
@@ -575,6 +578,8 @@
       var payload = {};
       new FormData(form).forEach(function (value, key) {
         if (key === 'company_website') return;
+        // A File serialises to {} in JSON, and its name can carry PII.
+        if (value instanceof File) { if (value.size) payload.has_attachment = true; return; }
         payload[key] = value;
       });
       payload.submitted_at = new Date().toISOString();

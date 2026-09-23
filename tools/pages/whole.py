@@ -341,16 +341,20 @@ def body():
     <div class="mt-10 grid lg:grid-cols-2 gap-6 items-stretch">
 
       <div class="panel reveal flex flex-col">
-        <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
-        <p class="mt-2 text-sm text-muted">Four questions. A licensed agent replies within {C.SLA}.</p>
+        <div class="panel-head">
+          <h2 class="text-h3 !font-display !font-semibold">Compare quotes</h2>
+          <p class="mt-2 text-sm text-muted">Four questions. A licensed agent replies within {C.SLA}.</p>
+        </div>
         {quote_form(coverage=False)}
       </div>
 
       <div class="panel reveal flex flex-col">
-        <h2 class="text-h3 !font-display !font-semibold">Or talk to a licensed agent</h2>
-        <p class="mt-2 text-sm text-muted">
-          Whole life has more moving parts than term. Most people find it faster to ask.
-        </p>
+        <div class="panel-head">
+          <h2 class="text-h3 !font-display !font-semibold">Or talk to a licensed agent</h2>
+          <p class="mt-2 text-sm text-muted">
+            Whole life has more moving parts than term. Most people find it faster to ask.
+          </p>
+        </div>
 
         <div class="mt-6">
           {C.phone_link("wl_hero_call", "btn btn-call btn-block !min-h-[64px] !text-lead", "Call " + C.PHONE_DISPLAY, 24)}
