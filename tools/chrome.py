@@ -856,6 +856,29 @@ def timeline(items):
         </ol>"""
 
 
+def chart_caveats(intro, items):
+    """The navy honesty band under every rate or cost chart: why a real quote
+    can differ from the chart. items: [(icon, title, body)], three of them.
+    Split header, then one card per reason with an icon, so it scans as three
+    reasons rather than three paragraphs."""
+    cards = "".join(f"""
+      <div class="reveal rounded-[var(--radius-ax)] border border-white/15 bg-white/[0.06] p-6">
+        <span class="grid place-items-center w-11 h-11 rounded-full bg-white/10 text-white" aria-hidden="true">{icon(name, 22)}</span>
+        <h3 class="mt-4 text-h4 text-white">{title}</h3>
+        <p class="mt-2 text-white/85">{body}</p>
+      </div>""" for name, title, body in items)
+    return f"""<section class="section band-navy on-navy">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 lg:items-end">
+      <h2 class="reveal lg:col-span-5 text-h2 text-white">Why your quote may not match this chart</h2>
+      <p class="reveal lg:col-span-6 lg:col-start-7 text-white/85">{intro}</p>
+    </div>
+    <div class="mt-10 grid md:grid-cols-3 gap-6" data-stagger="60">{cards}
+    </div>
+  </div>
+</section>"""
+
+
 def ask_strip(title, note, button_html):
     """A slim mid-page ask: one line, one button. For the middle of a long run
     of prose sections, where the reader is otherwise 900 words from any action.
@@ -1268,8 +1291,14 @@ def usp_strip(items):
 </section>"""
 
 
+# The wider banner copy column the three insurance hubs use from 75rem: their
+# h1s set as two lines instead of four. Below 75rem it falls back to 5/12,
+# where the wide column runs into the people in the photographs.
+HERO_WIDE = "lg:w-5/12 min-[75rem]:w-[62%]"
+
+
 def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answer=None,
-              short=True, banner=None):
+              short=True, banner=None, copy_w="lg:w-5/12"):
     """The top of every hub and informational page: breadcrumb, one H1, one
     sentence, one CTA. tools/check.py holds it to that (data-hero).
 
@@ -1291,6 +1320,9 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answ
     bleed photograph behind the copy instead of a figure beside it. It replaces
     `media` and the glow.
 
+    `copy_w` is the banner copy column's width. Final expense widens it so its
+    two-sentence h1 sets as two lines; the lead keeps its own measure (CSS).
+
     short=False opts a page out of that check. Only the T5 compare pages use
     it: their spec puts a three sentence answer in the hero (pages/compare.md).
 
@@ -1307,7 +1339,7 @@ def page_hero(trail, h1, lead, extra="", glow=True, pb="pb-10", media=None, answ
   <div class="container-ax">
     <div class="hero-banner-copy">
       {crumbs(trail) if trail else ""}
-      <div class="mt-8 lg:w-5/12">
+      <div class="mt-8 {copy_w}">
         {copy}
       </div>
     </div>

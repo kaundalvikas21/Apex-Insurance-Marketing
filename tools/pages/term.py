@@ -274,10 +274,10 @@ def body():
     # but one, so the hero can take a photograph (MASTER.md section 8).
     hero = C.page_hero(
         [("Home", "/"), ("Term Life Insurance", None)],
-        "Term life insurance, made simple.",
+        "Term life insurance,<br>made simple.",
         "The most coverage for your money, for exactly as long as your family needs it.",
         extra=C.hero_cta("#quote", "Get my term life quote"),
-        banner="term-hero")
+        banner="term-hero", copy_w=C.HERO_WIDE)
     usps = C.usp_strip([
         ("clock", "10, 15, 20 or 30 years", "Pick the term you need"),
         ("shield-check", "Premium locked", "For the whole term"),
@@ -542,13 +542,15 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Term life questions</h2>
-        <p class="reveal mt-5 text-slate">Nine things people ask before they apply.</p>
-        <p class="reveal mt-6 text-sm text-muted">
-          If yours is not here, put it in the form and we will answer it in the reply. Or ask
-          a licensed agent now.
-        </p>
-        <div class="reveal mt-4">{C.phone_link("term_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Term life questions</h2>
+          <p class="reveal mt-5 text-slate">Nine things people ask before they apply.</p>
+          <p class="reveal mt-6 text-sm text-muted">
+            If yours is not here, put it in the form and we will answer it in the reply. Or ask
+            a licensed agent now.
+          </p>
+          <div class="reveal mt-4">{C.phone_link("term_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
+        </div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
         {faq_html}
@@ -570,17 +572,19 @@ def body():
      ================================================================== -->
 <section class="section glow">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-      <div class="lg:col-span-5 reveal">
-        <h2 class="text-h2">Get your quotes</h2>
-        <p class="mt-5 text-slate">
-          Five questions, about ninety seconds. A licensed agent replies with named carriers and
-          real premiums. Your details are never sold, and nobody else calls you.
-        </p>
-        <p class="mt-6 text-sm text-muted">
-          Want to talk it through first? The number is in the header of every page, and you
-          will reach a licensed agent.
-        </p>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+      <div class="lg:col-span-5">
+        <div class="sticky-col reveal">
+          <h2 class="text-h2">Get your quotes</h2>
+          <p class="mt-5 text-slate">
+            Five questions, about ninety seconds. A licensed agent replies with named carriers and
+            real premiums. Your details are never sold, and nobody else calls you.
+          </p>
+          <p class="mt-6 text-sm text-muted">
+            Want to talk it through first? The number is in the header of every page, and you
+            will reach a licensed agent.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <div class="panel">

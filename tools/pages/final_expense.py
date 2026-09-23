@@ -205,7 +205,7 @@ def body():
     # One h1, one line, one button, and the button is the phone. No glow: fe.
     hero = C.page_hero(
         [("Home", "/"), ("Final Expense Insurance", None)],
-        "Final expense insurance. Paid for by you, not by them.",
+        "Final expense insurance.<br>Paid for by you, not by them.",
         "A small whole life policy for your funeral and the bills that follow it, paid now so "
         "nobody has to find the money the week after.",
         extra='''<div class="reveal mt-8 grid gap-3 max-w-md">
@@ -213,7 +213,7 @@ def body():
         <a href="#fe-quote" class="btn btn-cta btn-xl btn-block">Get coverage now</a>
         <p class="mt-3 text-slate">%s</p>
       </div>''' % (C.phone_link("fe_hero_primary", "btn btn-call btn-xl", "Call " + C.PHONE_DISPLAY, 28), C.HOURS),
-        banner="fe-hero")
+        banner="fe-hero", copy_w=C.HERO_WIDE)
     usps = C.usp_strip([
         ("users", "Ages 50 to 85", "Accepted"),
         ("stethoscope", "No medical exam", "Health questions only"),
@@ -584,12 +584,14 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Common questions about final expense insurance</h2>
-        <p class="reveal mt-5 text-slate">
-          If yours is not here, ask it on the phone. There is no script.
-        </p>
-        <div class="reveal mt-6">
-          {call_faq}
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Common questions about final expense insurance</h2>
+          <p class="reveal mt-5 text-slate">
+            If yours is not here, ask it on the phone. There is no script.
+          </p>
+          <div class="reveal mt-6">
+            {call_faq}
+          </div>
         </div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">

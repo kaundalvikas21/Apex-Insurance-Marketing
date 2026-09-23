@@ -73,7 +73,7 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
 
 - `tools/chrome.py` — every shared partial and **every placeholder constant** (`PHONE_DISPLAY`,
   `AGENT_NAME`, `RATES_DATE`, `NPN`, `SLA`, …). One address for the launch swap. Provides
-  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `ask_strip`, `faq_ask`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `timeline`, `stat`,
+  `header`, `footer`, `crumbs`, `page_hero`/`hero_cta`/`usp_strip`, `steps_section`, `closing_band`, `ask_strip`, `faq_ask`, `byline`, `acc`/`faq_section`, `spoke_module`, `step`, `timeline`, `chart_caveats`, `stat`,
   `banner`, `picture`/`figure`, `legal_doc`, `flag`/`rates_flag`, `state_options`,
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).
@@ -116,7 +116,7 @@ new JS, check whether one of these contracts already covers what you need:
 | `[data-prefill]` (JSON) + `data-prefill-target` | Writes values into a form by field name, fires `form_start`, scrolls, jumps to the first empty field. **Read at click time**, so the attribute can be rewritten at runtime |
 | `[data-panels]` + `[data-panel]` | One checked radio shows one panel; `[data-panel-caption]` auto-writes "Showing female, 20 years." |
 | `.reveal`, `[data-stagger]`, `[data-count]` | IntersectionObserver reveal, stagger, count-up |
-| `[data-calc]` + `data-calc-field`/`-out`/`-cta` | The coverage calculator (section 10) |
+| `[data-calc]` + `data-calc-field`/`-out`/`-cta`/`-bar` | The coverage calculator (section 10). `-bar` segments get their width as a share of the need. Markup comes from the helpers in `term_calculator.py` (`calc_hero`, `field`/`picker`/`pair`, `result_card`, `calc_bar`, `breakdown`), which the whole life calculator reuses |
 | `[data-nav-toggle]` + `<dialog data-nav-panel>` | The mobile menu: a native dialog used as a right-hand drawer. `showModal()` supplies the focus trap, Escape and the dimmed backdrop; JS closes it on a backdrop tap, the close button, any link, and when the screen reaches 1024px |
 | `[data-to-top]` | Back to top. Emitted by `chrome.footer()` on every page, `hidden` until JS shows it past 1.25 screens; scrolls up (no smooth scroll under reduced motion) and moves focus to `#main` |
 | `[data-nav-dd]` | The header "Insurance" menu. A native `<details>`, so it opens without JS; JS only closes it on Escape, outside click, and link click |

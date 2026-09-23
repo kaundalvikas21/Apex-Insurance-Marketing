@@ -307,10 +307,10 @@ def body():
 
     hero = C.page_hero(
         [("Home", "/"), ("Whole Life Insurance", None)],
-        "Whole life insurance that never expires.",
+        "Whole life insurance<br>that never expires.",
         "Lifelong coverage, a premium that never rises, and cash value guaranteed in the contract.",
         extra=C.hero_cta("#quote", "Get my whole life quote"),
-        banner="whole-hero")
+        banner="whole-hero", copy_w=C.HERO_WIDE)
     usps = C.usp_strip([
         ("heart", "Coverage for life", "It never expires"),
         ("shield-check", "Premium never rises", "Locked from day one"),
@@ -696,12 +696,14 @@ def body():
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-4">
-        <h2 class="reveal text-h2">Whole life insurance questions</h2>
-        <p class="reveal mt-5 text-slate">
-          Eight things worth knowing before you sign a contract you intend to keep for fifty years.
-        </p>
-        <p class="reveal mt-6 text-sm text-muted">Still stuck? Ask a licensed agent. No script, no obligation.</p>
-        <div class="reveal mt-4">{C.phone_link("whole_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Whole life insurance questions</h2>
+          <p class="reveal mt-5 text-slate">
+            Eight things worth knowing before you sign a contract you intend to keep for fifty years.
+          </p>
+          <p class="reveal mt-6 text-sm text-muted">Still stuck? Ask a licensed agent. No script, no obligation.</p>
+          <div class="reveal mt-4">{C.phone_link("whole_faq", "btn btn-ghost", "Call " + C.PHONE_DISPLAY)}</div>
+        </div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
         {faq_html}

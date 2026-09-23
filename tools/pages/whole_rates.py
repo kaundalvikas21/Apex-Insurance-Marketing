@@ -212,13 +212,15 @@ def body():
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to lower a rate you have been quoted</h2>
-        <p class="reveal mt-5 text-slate">
-          All of these are legitimate. None of them involves leaving something off an application,
-          which is not a discount, it is a reason for a claim to be contested.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">How to lower a rate you have been quoted</h2>
+          <p class="reveal mt-5 text-slate">
+            All of these are legitimate. None of them involves leaving something off an application,
+            which is not a discount, it is a reason for a claim to be contested.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         {C.step(1, "Ask whether the need is permanent",
@@ -265,40 +267,14 @@ def body():
      WHY OUR NUMBERS MAY DIFFER FROM YOUR QUOTE. T2. The honesty section
      that stops a rate chart being read as a promise.
      ================================================================== -->
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="max-w-3xl">
-      <h2 class="reveal text-h2 text-white">Why your quote may not match this chart</h2>
-      <p class="reveal mt-5 text-white/85">
-        A rate chart shows how premiums move between ages and coverage amounts. It cannot show what a carrier will decide about you, and any chart that
-        claims otherwise is selling you a number it does not have.
-      </p>
-    </div>
-    <div class="mt-10 grid md:grid-cols-3 gap-6 max-w-5xl" data-stagger="60">
-      <div class="reveal">
-        <h3 class="text-h4 text-white">A chart assumes a rate class</h3>
-        <p class="mt-3 text-white/85">
-          Usually the best or second best. Most applicants are issued at standard or standard
-          plus, which is a different number and an entirely normal outcome.
-        </p>
-      </div>
-      <div class="reveal">
-        <h3 class="text-h4 text-white">A premium is not the whole contract</h3>
-        <p class="mt-3 text-white/85">
-          Two policies at the same premium can build very different guaranteed cash value. Compare
-          the guaranteed columns of the illustrations, not the monthly figures.
-        </p>
-      </div>
-      <div class="reveal">
-        <h3 class="text-h4 text-white">Carriers differ by state</h3>
-        <p class="mt-3 text-white/85">
-          Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier
-          that is cheapest in one state may not write in yours at all.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.chart_caveats(
+    "A rate chart shows how premiums move between ages and coverage amounts. It cannot show what a carrier will decide about you, and any chart that claims otherwise is selling you a number it does not have.",
+    [("badge-check", "A chart assumes a rate class",
+      "Usually the best or second best. Most applicants are issued at standard or standard plus, which is a different number and an entirely normal outcome."),
+     ("file-text", "A premium is not the whole contract",
+      "Two policies at the same premium can build very different guaranteed cash value. Compare the guaranteed columns of the illustrations, not the monthly figures."),
+     ("map-pin", "Carriers differ by state",
+      "Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier that is cheapest in one state may not write in yours at all.")])}
 
 
 <!-- =====================================================================

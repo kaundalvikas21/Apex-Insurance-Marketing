@@ -607,6 +607,41 @@
   .input::placeholder { color: var(--color-muted); opacity: 1; }
   /* The one file input (free policy review). Navy outline button, no amber:
      amber stays on the three CTA rules check.py counts. */
+  /* --- Calculators (term and whole) -----------------------------------
+     Pair short controls inside the inputs panel the way forms do: the
+     .field-row container query needs a container, and this is not a form. */
+  [data-calc] .panel { container-type: inline-size; }
+  .calc-adorn { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--color-muted); pointer-events: none; }
+  .input.calc-money { padding-left: 1.75rem; }
+  .calc-chip {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    padding: 0.3125rem 0.75rem;
+    border: 1px solid var(--color-rule); border-radius: 999px;
+    background-color: var(--color-surface);
+    font-size: 0.875rem; color: var(--color-slate);
+  }
+  .calc-result { border-color: rgb(30 106 225 / 0.25); }
+  .calc-bar {
+    position: relative; display: flex; height: 0.875rem; overflow: hidden;
+    border-radius: 999px; background-color: var(--color-navy-050);
+  }
+  .calc-seg, .calc-covered { height: 100%; transition: width .35s var(--ease-ax); }
+  .calc-seg-1 { background-color: var(--color-navy); }
+  .calc-seg-2 { background-color: var(--color-navy-700); }
+  .calc-seg-3 { background-color: rgb(30 106 225 / 0.45); }
+  /* What existing coverage already pays for, laid over the need from the right. */
+  .calc-covered {
+    position: absolute; top: 0; right: 0;
+    background: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.9) 0 3px, rgb(255 255 255 / 0.45) 3px 7px);
+  }
+  .calc-dot { display: inline-block; width: 0.625rem; height: 0.625rem; border-radius: 999px; }
+  .calc-dot-covered { border: 1px solid var(--color-navy); background: repeating-linear-gradient(135deg, var(--color-navy) 0 1.5px, #fff 1.5px 3.5px); }
+  .calc-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 0.875rem 0; border-bottom: 1px solid var(--color-rule); }
+  .calc-line dd { font-weight: 600; color: var(--color-ink); white-space: nowrap; }
+  .calc-total { border-bottom: 0; border-top: 2px solid var(--color-navy); margin-top: -1px; font-weight: 700; color: var(--color-navy); }
+  .calc-total dd { font-size: 1.125rem; color: var(--color-navy); }
+  @media (prefers-reduced-motion: reduce) { .calc-seg, .calc-covered { transition: none; } }
+
   .input-file { padding: 0.5rem; font-size: 0.875rem; color: var(--color-slate); cursor: pointer; }
   .input-file::file-selector-button {
     margin-right: 0.75rem;
@@ -1053,6 +1088,8 @@
     .hero-banner { display: flex; align-items: center; min-height: clamp(34rem, 38vw, 46rem); padding-block: 1.5rem 4rem; }
     .hero-banner > .container-ax { width: 100%; }
     .hero-banner-copy { position: relative; z-index: 1; }
+    /* A wider copy column (final expense) still keeps the lead off the photo. */
+    .hero-banner-copy .text-lead { max-width: 36rem; }
     .hero-bg { position: absolute; inset: 0; margin: 0; border-radius: 0; }
     .hero-bg img { height: 100%; object-fit: cover; }   /* object-position is per image, inline */
   }

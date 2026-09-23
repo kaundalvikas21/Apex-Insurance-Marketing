@@ -215,13 +215,15 @@ def body():
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">The health questions that decide it</h2>
-        <p class="reveal mt-5 text-slate">
-          Every carrier asks a version of these. They are short, they are specific, and they are
-          what the carrier bases its decision on.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">The health questions that decide it</h2>
+          <p class="reveal mt-5 text-slate">
+            Every carrier asks a version of these. They are short, they are specific, and they are
+            what the carrier bases its decision on.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <ul class="grid gap-5 text-slate">

@@ -172,13 +172,15 @@ def body():
 
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What a whole life dividend is</h2>
-        <p class="reveal mt-5 text-slate">
-          The word is borrowed from stocks, and it misleads almost everybody who hears it.
-          A whole life dividend is closer to a refund than to a payout.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">What a whole life dividend is</h2>
+          <p class="reveal mt-5 text-slate">
+            The word is borrowed from stocks, and it misleads almost everybody who hears it.
+            A whole life dividend is closer to a refund than to a payout.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <div class="in-short reveal">
@@ -277,13 +279,15 @@ def body():
 
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How to read an illustration that shows dividends</h2>
-        <p class="reveal mt-5 text-slate">
-          This is the most useful skill on this page, and it takes about two minutes to
-          learn.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">How to read an illustration that shows dividends</h2>
+          <p class="reveal mt-5 text-slate">
+            This is the most useful skill on this page, and it takes about two minutes to
+            learn.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         {C.qa("Find the two sets of columns",

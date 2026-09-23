@@ -252,42 +252,14 @@ def body():
      WHY OUR NUMBERS MAY DIFFER FROM YOUR QUOTE. T2. The honesty section
      that stops a cost chart being read as a promise.
      ================================================================== -->
-<section class="section band-navy on-navy">
-  <div class="container-ax">
-    <div class="max-w-3xl">
-      <h2 class="reveal text-h2 text-white">Why your quote may not match this chart</h2>
-      <p class="reveal mt-5 text-white/85">
-        A cost chart is an illustration of shape. It shows how premiums move between ages and
-        coverage amounts. It cannot show what a carrier will decide about you. Any chart that
-        claims otherwise is selling you a number it does not have.
-      </p>
-    </div>
-    <div class="mt-10 grid md:grid-cols-3 gap-6">
-      <div class="reveal">
-        <h3 class="text-h4 text-white">A chart assumes an acceptance</h3>
-        <p class="mt-3 text-white/85">
-          Usually a level benefit policy for someone in reasonable health. A graded or guaranteed
-          acceptance policy is priced above this, and that is a normal outcome rather than a bad
-          one.
-        </p>
-      </div>
-      <div class="reveal">
-        <h3 class="text-h4 text-white">Carriers differ by state</h3>
-        <p class="mt-3 text-white/85">
-          Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier
-          that is cheapest in one state may not write in yours at all.
-        </p>
-      </div>
-      <div class="reveal">
-        <h3 class="text-h4 text-white">Your medications are read together</h3>
-        <p class="mt-3 text-white/85">
-          Not one at a time. A combination can move you between offers even when no single item on
-          the list would.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{C.chart_caveats(
+    "A cost chart is an illustration of shape. It shows how premiums move between ages and coverage amounts. It cannot show what a carrier will decide about you. Any chart that claims otherwise is selling you a number it does not have.",
+    [("circle-check", "A chart assumes an acceptance",
+      "Usually a level benefit policy for someone in reasonable health. A graded or guaranteed acceptance policy is priced above this, and that is a normal outcome rather than a bad one."),
+     ("map-pin", "Carriers differ by state",
+      "Product availability, riders, minimum coverage amounts, and pricing all vary. The carrier that is cheapest in one state may not write in yours at all."),
+     ("stethoscope", "Your medications are read together",
+      "Not one at a time. A combination can move you between offers even when no single item on the list would.")])}
 
 
 <!-- =====================================================================

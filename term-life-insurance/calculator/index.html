@@ -100,19 +100,14 @@
 
 <main id="main">
 
-<section class="pt-6 pb-10 glow">
+<section class="pt-6 pb-8 glow">
   <div class="container-ax">
     <nav class="crumbs" aria-label="Breadcrumb"><ol class="contents"><li class="contents"><a href="/">Home</a></li><li class="contents" aria-hidden="true"><svg class="text-muted shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li class="contents"><a href="/term-life-insurance/">Term Life Insurance</a></li><li class="contents" aria-hidden="true"><svg class="text-muted shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li class="contents"><span aria-current="page">Coverage calculator</span></li></ol></nav>
 
     <div class="mt-8 max-w-3xl">
       <h1 class="reveal text-h1">How Much Term Life Insurance Do You Need?</h1>
-      <p class="reveal mt-5 text-lead text-slate">
-        Change the six figures below and the recommendation updates as you type. You do not give
-        an email, and nothing is sent anywhere. The whole calculation happens in your browser.
-        It uses the income replacement method, which most
-        <a class="link" href="/term-life-insurance/">term life insurance</a> underwriters expect
-        to see behind a coverage amount.
-      </p>
+      <p class="reveal mt-5 text-lead text-slate">Work out how much <a class="link" href="/term-life-insurance/">term life insurance</a> your household needs. The answer updates as you type.</p>
+      <ul class="reveal mt-6 flex flex-wrap gap-2"><li class="calc-chip"><svg class="shrink-0 text-navy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>No email</span></li><li class="calc-chip"><svg class="shrink-0 text-navy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span>Nothing leaves your browser</span></li><li class="calc-chip"><svg class="shrink-0 text-navy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg><span>Method shown in full</span></li></ul>
     </div>
   </div>
 </section>
@@ -127,9 +122,10 @@
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div data-calc="term_coverage_needs">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
         <div class="lg:col-span-5">
+          <div class="sticky-col">
           <div class="reveal panel">
             <div class="panel-head">
               <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
@@ -138,121 +134,101 @@
               </p>
             </div>
             <div class="mt-6">
-              <div class="field">
-          <label class="field-label" for="calc-income">Your annual income before tax
-            <span class="field-hint block font-normal">What the household would stop receiving.</span>
-          </label>
-          <input class="input" id="calc-income" name="income" type="text" inputmode="numeric"
-                 autocomplete="off" value="60000" placeholder="Amount in dollars"
-                 data-calc-field="income">
+              <div class="field-row field-row-tight">
+<div class="field">
+          <label class="field-label" for="calc-income">Annual income</label>
+          <div class="relative"><span class="calc-adorn" aria-hidden="true">$</span><input class="input calc-money" id="calc-income" name="income" type="text" inputmode="numeric"
+                 autocomplete="off" value="60,000" placeholder="Amount in dollars"
+                 data-calc-field="income"></div>
+          <p class="field-hint">Before tax.</p>
         </div>
-              <div class="field">
-          <label class="field-label" for="calc-years">Years of income to replace
-            <span class="field-hint block font-normal">Until the youngest child is independent, or the partner is at retirement age.</span>
-          </label>
+<div class="field">
+          <label class="field-label" for="calc-years">Years to replace</label>
           <select class="select" id="calc-years" name="years" data-calc-field="years"><option value="5">5 years</option><option value="10" selected>10 years</option><option value="15">15 years</option><option value="20">20 years</option><option value="25">25 years</option><option value="30">30 years</option></select>
+          <p class="field-hint">Until the youngest is independent.</p>
         </div>
+</div>
               <div class="field">
-          <label class="field-label" for="calc-debt">Mortgage and other debt
-            <span class="field-hint block font-normal">The balance you owe, not the monthly payment.</span>
-          </label>
-          <input class="input" id="calc-debt" name="debt" type="text" inputmode="numeric"
-                 autocomplete="off" value="210000" placeholder="Amount in dollars"
-                 data-calc-field="debt">
+          <label class="field-label" for="calc-debt">Mortgage and debts</label>
+          <div class="relative"><span class="calc-adorn" aria-hidden="true">$</span><input class="input calc-money" id="calc-debt" name="debt" type="text" inputmode="numeric"
+                 autocomplete="off" value="210,000" placeholder="Amount in dollars"
+                 data-calc-field="debt"></div>
+          <p class="field-hint">The balance you owe, not the monthly payment.</p>
         </div>
-              <div class="field">
-          <label class="field-label" for="calc-children">Children who would need support
-            <span class="field-hint block font-normal">Count anyone financially dependent on you.</span>
-          </label>
+              <div class="field-row field-row-tight">
+<div class="field">
+          <label class="field-label" for="calc-children">Children</label>
           <select class="select" id="calc-children" name="children" data-calc-field="children"><option value="0">0</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>
+          <p class="field-hint">Anyone who depends on you.</p>
         </div>
-              <div class="field">
-          <label class="field-label" for="calc-perchild">Set aside per child
-            <span class="field-hint block font-normal">Education and support. Pick the closest.</span>
-          </label>
+<div class="field">
+          <label class="field-label" for="calc-perchild">Per child</label>
           <select class="select" id="calc-perchild" name="perchild" data-calc-field="perchild"><option value="0">Nothing</option><option value="25000">$25,000</option><option value="50000" selected>$50,000</option><option value="100000">$100,000</option><option value="150000">$150,000</option></select>
+          <p class="field-hint">Education and support.</p>
         </div>
+</div>
               <div class="field">
-          <label class="field-label" for="calc-existing">Coverage and savings you already have
-            <span class="field-hint block font-normal">Include employer coverage and liquid savings.</span>
-          </label>
-          <input class="input" id="calc-existing" name="existing" type="text" inputmode="numeric"
-                 autocomplete="off" value="200000" placeholder="Amount in dollars"
-                 data-calc-field="existing">
+          <label class="field-label" for="calc-existing">Already covered</label>
+          <div class="relative"><span class="calc-adorn" aria-hidden="true">$</span><input class="input calc-money" id="calc-existing" name="existing" type="text" inputmode="numeric"
+                 autocomplete="off" value="200,000" placeholder="Amount in dollars"
+                 data-calc-field="existing"></div>
+          <p class="field-hint">Existing life insurance, employer coverage and savings.</p>
         </div>
             </div>
             <p class="mt-2 text-micro text-muted">
               Nothing here is stored, sent, or associated with you.
             </p>
           </div>
+          </div>
         </div>
 
         <div class="lg:col-span-6 lg:col-start-7">
-          <h2 class="reveal text-h2">How we calculate your coverage amount</h2>
-          <p class="reveal mt-5 text-slate">
-            The method is shown in full. Each line below is one part of the math, and it updates
-            with your numbers.
-          </p>
-
-          <div class="reveal mt-8 table-scroll table-signature">
-            <table class="rate-table" style="min-width:26rem">
-              <caption>Coverage need, line by line.</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Income to replace</th>
-                  <td><span data-calc-out="incomeyear">$60,000</span> a year for
-                      <span data-calc-out="years">10</span> years</td>
-                  <td class="tnum" data-calc-out="income">$600,000</td>
-                </tr>
-                <tr>
-                  <th scope="row">Debt to pay off</th>
-                  <td>Mortgage and other balances, paid off in full</td>
-                  <td class="tnum" data-calc-out="debt">$210,000</td>
-                </tr>
-                <tr>
-                  <th scope="row">Set aside for children</th>
-                  <td><span data-calc-out="children">2</span> at
-                      <span data-calc-out="perchild">$50,000</span> each</td>
-                  <td class="tnum" data-calc-out="education">$100,000</td>
-                </tr>
-                <tr>
-                  <th scope="row">Less what you already have</th>
-                  <td>Existing coverage and savings</td>
-                  <td class="tnum" data-calc-out="existing">$200,000</td>
-                </tr>
-                <tr>
-                  <th scope="row">What the household would need</th>
-                  <td></td>
-                  <td class="tnum" data-calc-out="raw">$710,000</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="reveal mt-8 card">
-            <p class="text-sm text-muted">Rounded up to the next amount carriers quote</p>
-            <p class="mt-2" aria-live="polite">
+          <div class="reveal card calc-result">
+            <p class="text-sm font-semibold text-navy">Your recommended coverage</p>
+            <p class="mt-1" aria-live="polite">
               <span class="stat-value" data-calc-out="rounded">$750,000</span>
             </p>
-            <p class="mt-4 text-slate">
-              We round up because buying too little is the more common and more expensive mistake.
-              The premium difference between two neighboring amounts is usually smaller than
-              people expect.
-            </p>
-
+            <p class="mt-1 text-sm text-muted">Rounded up to the next amount carriers quote.</p>
+            <div class="mt-6" aria-hidden="true">
+              <div class="calc-bar"><span class="calc-seg calc-seg-1" data-calc-bar="income" style="width:65.93%"></span><span class="calc-seg calc-seg-2" data-calc-bar="debt" style="width:23.08%"></span><span class="calc-seg calc-seg-3" data-calc-bar="education" style="width:10.99%"></span><span class="calc-covered" data-calc-bar="existing" style="width:21.98%"></span></div>
+              <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-micro text-muted"><li class="flex items-center gap-1.5"><span class="calc-dot calc-seg-1"></span>Income</li><li class="flex items-center gap-1.5"><span class="calc-dot calc-seg-2"></span>Debts</li><li class="flex items-center gap-1.5"><span class="calc-dot calc-seg-3"></span>Children</li><li class="flex items-center gap-1.5"><span class="calc-dot calc-dot-covered"></span>Already covered</li></ul>
+            </div>
             <button type="button" class="btn btn-cta btn-block btn-wrap mt-6"
                     data-calc-cta
                     data-prefill='{"coverage":"750000"}'
                     data-prefill-trigger="calculator"
                     data-prefill-target="term-calc-quote-form">
-              Get quotes for <span data-calc-out="rounded">$750,000</span> of coverage
+              <span>Get quotes for <span data-calc-out="rounded">$750,000</span> of coverage</span>
             </button>
+            <p class="mt-6 text-slate" data-calc-enough hidden>On these numbers you already have more coverage than the calculation asks for. That is worth a conversation rather than an application, and a licensed agent will tell you so on the phone.</p>
+          </div>
 
-            <p class="mt-6 text-slate" data-calc-enough hidden>
-              On these numbers you already have more coverage than the calculation asks for. That
-              is worth a conversation rather than an application, and a licensed agent will tell
-              you so on the phone.
-            </p>
+          <div class="reveal mt-10">
+            <h2 class="text-h3 !font-display !font-semibold">How we calculate your coverage amount</h2>
+            <p class="mt-2 text-sm text-muted">The income replacement method, which most term life underwriters expect to see behind a coverage amount. Every line updates with your numbers.</p>
+            <dl class="mt-4">
+              <div class="calc-line">
+                <dt><span class="font-semibold text-ink">Income to replace</span><span class="block mt-0.5 text-sm text-muted"><span data-calc-out="incomeyear">$60,000</span> a year for <span data-calc-out="years">10</span> years</span></dt>
+                <dd class="tnum"><span data-calc-out="income">$600,000</span></dd>
+              </div>
+              <div class="calc-line">
+                <dt><span class="font-semibold text-ink">Debt to pay off</span><span class="block mt-0.5 text-sm text-muted">Mortgage and other balances, in full</span></dt>
+                <dd class="tnum"><span data-calc-out="debt">$210,000</span></dd>
+              </div>
+              <div class="calc-line">
+                <dt><span class="font-semibold text-ink">Set aside for children</span><span class="block mt-0.5 text-sm text-muted"><span data-calc-out="children">2</span> at <span data-calc-out="perchild">$50,000</span> each</span></dt>
+                <dd class="tnum"><span data-calc-out="education">$100,000</span></dd>
+              </div>
+              <div class="calc-line">
+                <dt><span class="font-semibold text-ink">Less what you already have</span><span class="block mt-0.5 text-sm text-muted">Existing coverage and savings</span></dt>
+                <dd class="tnum">&#8722;<span data-calc-out="existing">$200,000</span></dd>
+              </div>
+              <div class="calc-line calc-total">
+                <dt>What the household would need</dt>
+                <dd class="tnum"><span data-calc-out="raw">$710,000</span></dd>
+              </div>
+            </dl>
+            <p class="mt-4 text-sm text-muted">We round up because buying too little is the more common and more expensive mistake. The premium difference between two neighboring amounts is usually smaller than people expect.</p>
           </div>
         </div>
 

@@ -108,22 +108,9 @@ def schema():
 
 
 def body():
-    return f"""
-<section class="pt-6 pb-10 glow">
-  <div class="container-ax">
-    {C.crumbs(TRAIL)}
-
-    <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">Whole Life Insurance Calculator</h1>
-      <p class="reveal mt-5 text-lead text-slate">
-        Change the four figures below and the recommendation updates as you type. There is no email
-        wall, and nothing leaves your browser. The calculator sizes the permanent need that
-        <a class="link" href="/whole-life-insurance/">whole life insurance</a> exists to cover.
-        That is the number a carrier illustration has to start from.
-      </p>
-    </div>
-  </div>
-</section>
+    return f"""{T.calc_hero(TRAIL, "Whole Life Insurance Calculator",
+          'Size the permanent need that <a class="link" href="/whole-life-insurance/">whole life '
+          'insurance</a> exists to cover. The answer updates as you type.')}
 
 
 <!-- =====================================================================
@@ -135,9 +122,10 @@ def body():
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div data-calc="whole_life_permanent_need" data-calc-ladder="{LADDER_ATTR}">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
         <div class="lg:col-span-5">
+          <div class="sticky-col">
           <div class="reveal panel">
             <div class="panel-head">
               <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
@@ -148,82 +136,45 @@ def body():
             <div class="mt-6">
               {T.field("wlcalc-final", "debt", "Funeral, final bills, and debts",
                        "What would still have to be paid after you die.", EX_FINAL)}
-              {T.picker("wlcalc-people", "children", "People you want to leave something to",
-                        "Count anyone you intend to receive a share.",
-                        [(str(n), str(n)) for n in range(0, 7)], str(EX_PEOPLE))}
-              {T.picker("wlcalc-each", "perchild", "Amount for each of them",
-                        "A bequest, not income replacement. Pick the closest.",
-                        [("0", "Nothing"), ("10000", "$10,000"), ("25000", "$25,000"),
-                         ("50000", "$50,000"), ("100000", "$100,000")], str(EX_EACH))}
-              {T.field("wlcalc-existing", "existing", "Permanent coverage you already have",
+              {T.pair(T.picker("wlcalc-people", "children", "People",
+                               "Anyone you want to leave something to.",
+                               [(str(n), str(n)) for n in range(0, 7)], str(EX_PEOPLE)),
+                      T.picker("wlcalc-each", "perchild", "Amount each", "A bequest, not income.",
+                               [("0", "Nothing"), ("10000", "$10,000"), ("25000", "$25,000"),
+                                ("50000", "$50,000"), ("100000", "$100,000")], str(EX_EACH)))}
+              {T.field("wlcalc-existing", "existing", "Already covered",
                        "Whole life or final expense policies only. Not term.", EX_EXISTING)}
             </div>
             <p class="mt-2 text-micro text-muted">
               Nothing here is stored, sent, or associated with you.
             </p>
           </div>
+          </div>
         </div>
 
         <div class="lg:col-span-6 lg:col-start-7">
-          <h2 class="reveal text-h2">How the figure is worked out</h2>
-          <p class="reveal mt-5 text-slate">
-            Every line below is one part of the sum, and it updates with
-            your numbers.
-          </p>
+          {T.result_card(EX_ROUNDED,
+                         T.calc_bar([("debt", "Final bills and debts", EX_FINAL),
+                                     ("education", "Left to people", EX_LEGACY)], EX_EXISTING),
+                         "whole-calc-quote-form",
+                         "With these numbers your existing permanent coverage already exceeds what "
+                         "the calculation asks for. That is worth a conversation rather than an "
+                         "application, and a licensed agent will tell you so on the phone.")}
 
-          <div class="reveal mt-8 table-scroll table-signature">
-            <table class="rate-table" style="min-width:26rem">
-              <caption>Permanent coverage need, line by line.</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Final expenses and debts</th>
-                  <td>Funeral, final medical and estate bills, outstanding balances</td>
-                  <td class="tnum" data-calc-out="debt">{money(EX_FINAL)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Left to the people you name</th>
-                  <td><span data-calc-out="children">{EX_PEOPLE}</span> at
-                      <span data-calc-out="perchild">{money(EX_EACH)}</span> each</td>
-                  <td class="tnum" data-calc-out="education">{money(EX_LEGACY)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Less permanent coverage in force</th>
-                  <td>Existing whole life or final expense policies</td>
-                  <td class="tnum" data-calc-out="existing">{money(EX_EXISTING)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">What would still be needed</th>
-                  <td></td>
-                  <td class="tnum" data-calc-out="raw">{money(EX_RAW)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="reveal mt-8 card">
-            <p class="text-sm text-muted">Rounded up to the next amount carriers quote</p>
-            <p class="mt-2" aria-live="polite">
-              <span class="stat-value" data-calc-out="rounded">{money(EX_ROUNDED)}</span>
-            </p>
-            <p class="mt-4 text-slate">
-              Rounded up rather than down. With a permanent policy the amount is fixed for life,
-              so buying slightly short is a decision you cannot cheaply revisit at eighty.
-            </p>
-
-            <button type="button" class="btn btn-cta btn-block btn-wrap mt-6"
-                    data-calc-cta
-                    data-prefill='{{"coverage":"{EX_ROUNDED}"}}'
-                    data-prefill-trigger="calculator"
-                    data-prefill-target="whole-calc-quote-form">
-              Get quotes for <span data-calc-out="rounded">{money(EX_ROUNDED)}</span> of coverage
-            </button>
-
-            <p class="mt-6 text-slate" data-calc-enough hidden>
-              With these numbers your existing permanent coverage already exceeds what the
-              calculation asks for. That is worth a conversation rather than an application, and a
-              licensed agent will tell you so on the phone.
-            </p>
-          </div>
+          {T.breakdown("How the figure is worked out",
+                       "Every line is one part of the sum, and it updates with your numbers.",
+                       [("Final expenses and debts",
+                         "Funeral, final medical and estate bills, outstanding balances",
+                         "debt", EX_FINAL, False),
+                        ("Left to the people you name",
+                         '<span data-calc-out="children">%s</span> at <span data-calc-out="perchild">%s</span> each'
+                         % (EX_PEOPLE, money(EX_EACH)), "education", EX_LEGACY, False),
+                        ("Less permanent coverage in force",
+                         "Existing whole life or final expense policies", "existing", EX_EXISTING, True)],
+                       "What would still be needed", EX_RAW,
+                       "Rounded up rather than down. With a permanent policy the amount is fixed for "
+                       "life, so buying slightly short is a decision you cannot cheaply revisit at "
+                       "eighty.")}
         </div>
 
       </div>
@@ -340,21 +291,23 @@ def body():
      ================================================================== -->
 <section class="section band-surface" id="quote">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Get a quote and a full illustration</h2>
-        <p class="reveal mt-5 text-slate">
-          Five questions. A licensed agent comes back within {C.SLA} with premiums from named
-          carriers for the amount above. You also get a full illustration, with the guaranteed and
-          non guaranteed columns side by side rather than blended into one number.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          If you used the button above, the coverage amount is already filled in.
-        </p>
-        <div class="reveal mt-6 pt-6 border-t border-rule">
-          <p class="text-slate">Or talk it through first. This is a product worth asking about.</p>
-          <div class="mt-4">{C.phone_link("whole_calc_form", "btn btn-call")}</div>
-          <p class="mt-3 text-micro text-muted">{C.HOURS}</p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">Get a quote and a full illustration</h2>
+          <p class="reveal mt-5 text-slate">
+            Five questions. A licensed agent comes back within {C.SLA} with premiums from named
+            carriers for the amount above. You also get a full illustration, with the guaranteed and
+            non guaranteed columns side by side rather than blended into one number.
+          </p>
+          <p class="reveal mt-5 text-slate">
+            If you used the button above, the coverage amount is already filled in.
+          </p>
+          <div class="reveal mt-6 pt-6 border-t border-rule">
+            <p class="text-slate">Or talk it through first. This is a product worth asking about.</p>
+            <div class="mt-4">{C.phone_link("whole_calc_form", "btn btn-call")}</div>
+            <p class="mt-3 text-micro text-muted">{C.HOURS}</p>
+          </div>
         </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">

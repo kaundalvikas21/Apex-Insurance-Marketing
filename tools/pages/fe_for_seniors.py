@@ -67,10 +67,12 @@ def band(heading, intro, points, cls="section"):
     items = "".join('<li class="reveal">%s</li>' % p for p in points)
     return f"""<section class="{cls}">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">{heading}</h2>
-        <p class="reveal mt-5 text-slate">{intro}</p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">{heading}</h2>
+          <p class="reveal mt-5 text-slate">{intro}</p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <ul class="grid gap-5 text-slate">{items}</ul>

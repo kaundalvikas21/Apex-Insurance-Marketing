@@ -990,6 +990,9 @@
                                 click time, so rewriting the attribute here is
                                 the whole bridge into the quote form.
        [data-calc-enough]       shown instead of the CTA when the need is zero.
+       [data-calc-bar="..."]    income | debt | education | existing. Width set
+                                to that part's share of the need; existing is
+                                the striped overlay, capped at the whole bar.
      --------------------------------------------------------------------- */
   (function calculator() {
     var box = $('[data-calc]');
@@ -1057,6 +1060,14 @@
       put('existing', money(existing));
       put('raw', money(raw > 0 ? raw : 0));
       put('rounded', money(rounded));
+
+      // The composition bar: each part as a share of the need before existing
+      // coverage, and what existing coverage already pays for from the right.
+      var gross = income + debt + education;
+      var parts = { income: income, debt: debt, education: education, existing: Math.min(existing, gross) };
+      $$('[data-calc-bar]', box).forEach(function (el) {
+        el.style.width = (gross ? (parts[el.getAttribute('data-calc-bar')] || 0) / gross * 100 : 0) + '%';
+      });
 
       var cta = $('[data-calc-cta]', box);
       var enough = $('[data-calc-enough]', box);

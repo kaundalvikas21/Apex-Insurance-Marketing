@@ -302,19 +302,21 @@ def body():
      ================================================================== -->
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">How it is taxed</h2>
-        <p class="reveal mt-5 text-slate">
-          In general terms, under current federal rules, for a policy that is not a modified
-          endowment contract. Every one of those qualifications does real work.
-        </p>
-        <div class="reveal mt-6">
-          {C.flag("This section is general information, not tax advice, and it is not written for "
-                  "your circumstances. Tax treatment depends on federal and state law, on how the "
-                  "policy is funded, and on facts specific to you. Consult a qualified tax "
-                  "professional before acting on any of it. Nothing on this site should be relied "
-                  "on as tax or legal advice.", "GENERAL INFORMATION ONLY")}
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">How it is taxed</h2>
+          <p class="reveal mt-5 text-slate">
+            In general terms, under current federal rules, for a policy that is not a modified
+            endowment contract. Every one of those qualifications does real work.
+          </p>
+          <div class="reveal mt-6">
+            {C.flag("This section is general information, not tax advice, and it is not written for "
+                    "your circumstances. Tax treatment depends on federal and state law, on how the "
+                    "policy is funded, and on facts specific to you. Consult a qualified tax "
+                    "professional before acting on any of it. Nothing on this site should be relied "
+                    "on as tax or legal advice.", "GENERAL INFORMATION ONLY")}
+          </div>
         </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">

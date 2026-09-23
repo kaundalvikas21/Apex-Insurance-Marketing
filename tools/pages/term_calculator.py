@@ -101,14 +101,16 @@ def schema():
 
 
 def field(fid, role, label, hint, value, prefix="$"):
-    pre = ('<span class="text-muted">%s</span>' % prefix) if prefix else ""
+    """A calculator amount: label, the control with a visible $ adornment, the
+    hint under it (as on every form). Comma formatted; site.js strips the
+    commas before it reads the number."""
+    pre = ('<span class="calc-adorn" aria-hidden="true">%s</span>' % prefix) if prefix else ""
     return f"""<div class="field">
-          <label class="field-label" for="{fid}">{label}
-            <span class="field-hint block font-normal">{hint}</span>
-          </label>
-          <input class="input" id="{fid}" name="{role}" type="text" inputmode="numeric"
-                 autocomplete="off" value="{value}" placeholder="Amount in dollars"
-                 data-calc-field="{role}">
+          <label class="field-label" for="{fid}">{label}</label>
+          <div class="relative">{pre}<input class="input{' calc-money' if prefix else ''}" id="{fid}" name="{role}" type="text" inputmode="numeric"
+                 autocomplete="off" value="{format(int(value), ',')}" placeholder="Amount in dollars"
+                 data-calc-field="{role}"></div>
+          <p class="field-hint">{hint}</p>
         </div>"""
 
 
@@ -116,32 +118,104 @@ def picker(fid, role, label, hint, options, selected):
     opts = "".join('<option value="%s"%s>%s</option>'
                    % (v, " selected" if v == selected else "", t) for v, t in options)
     return f"""<div class="field">
-          <label class="field-label" for="{fid}">{label}
-            <span class="field-hint block font-normal">{hint}</span>
-          </label>
+          <label class="field-label" for="{fid}">{label}</label>
           <select class="select" id="{fid}" name="{role}" data-calc-field="{role}">{opts}</select>
+          <p class="field-hint">{hint}</p>
         </div>"""
 
 
-def body():
+def pair(a, b):
+    """Two short calculator controls side by side from 16rem of panel width."""
+    return '<div class="field-row field-row-tight">\n%s\n%s\n</div>' % (a, b)
+
+
+def calc_hero(trail, h1, lead):
+    """One line of lead, then three chips for what the visitor worries about:
+    who sees the numbers."""
+    chips = "".join(
+        '<li class="calc-chip">%s<span>%s</span></li>' % (icon(name, 16, "shrink-0 text-navy"), text)
+        for name, text in (("mail", "No email"), ("shield-check", "Nothing leaves your browser"),
+                           ("list-checks", "Method shown in full")))
     return f"""
-<section class="pt-6 pb-10 glow">
+<section class="pt-6 pb-8 glow">
   <div class="container-ax">
-    {C.crumbs([("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
-               ("Coverage calculator", None)])}
+    {C.crumbs(trail)}
 
     <div class="mt-8 max-w-3xl">
-      <h1 class="reveal text-h1">How Much Term Life Insurance Do You Need?</h1>
-      <p class="reveal mt-5 text-lead text-slate">
-        Change the six figures below and the recommendation updates as you type. You do not give
-        an email, and nothing is sent anywhere. The whole calculation happens in your browser.
-        It uses the income replacement method, which most
-        <a class="link" href="/term-life-insurance/">term life insurance</a> underwriters expect
-        to see behind a coverage amount.
-      </p>
+      <h1 class="reveal text-h1">{h1}</h1>
+      <p class="reveal mt-5 text-lead text-slate">{lead}</p>
+      <ul class="reveal mt-6 flex flex-wrap gap-2">{chips}</ul>
     </div>
   </div>
-</section>
+</section>"""
+
+
+def calc_bar(parts, existing):
+    """The live composition bar. parts: [(role, label, value)], one segment
+    each, in order. Widths are rendered here from the worked example so the
+    bar is right with JavaScript off; site.js section 10 rewrites them on edit
+    ([data-calc-bar]). The striped overlay from the right is what existing
+    coverage already pays for. Hidden from assistive tech: the line list under
+    it carries the same numbers as text."""
+    gross = sum(v for _, _, v in parts)
+    pct = lambda v: "%.2f%%" % (100 * v / gross if gross else 0)
+    segs = "".join('<span class="calc-seg calc-seg-%d" data-calc-bar="%s" style="width:%s"></span>'
+                   % (i, role, pct(v)) for i, (role, _, v) in enumerate(parts, 1))
+    legend = "".join('<li class="flex items-center gap-1.5"><span class="calc-dot calc-seg-%d"></span>%s</li>'
+                     % (i, label) for i, (_, label, _) in enumerate(parts, 1))
+    return f"""<div class="mt-6" aria-hidden="true">
+              <div class="calc-bar">{segs}<span class="calc-covered" data-calc-bar="existing" style="width:{pct(min(existing, gross))}"></span></div>
+              <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-micro text-muted">{legend}<li class="flex items-center gap-1.5"><span class="calc-dot calc-dot-covered"></span>Already covered</li></ul>
+            </div>"""
+
+
+def result_card(rounded, bar, target, enough):
+    """The answer first: the figure, what it is made of, and the one button."""
+    return f"""<div class="reveal card calc-result">
+            <p class="text-sm font-semibold text-navy">Your recommended coverage</p>
+            <p class="mt-1" aria-live="polite">
+              <span class="stat-value" data-calc-out="rounded">{money(rounded)}</span>
+            </p>
+            <p class="mt-1 text-sm text-muted">Rounded up to the next amount carriers quote.</p>
+            {bar}
+            <button type="button" class="btn btn-cta btn-block btn-wrap mt-6"
+                    data-calc-cta
+                    data-prefill='{{"coverage":"{rounded}"}}'
+                    data-prefill-trigger="calculator"
+                    data-prefill-target="{target}">
+              <span>Get quotes for <span data-calc-out="rounded">{money(rounded)}</span> of coverage</span>
+            </button>
+            <p class="mt-6 text-slate" data-calc-enough hidden>{enough}</p>
+          </div>"""
+
+
+def breakdown(heading, sub, rows, total_label, total, note):
+    """The method, line by line. rows: [(label, detail_html, out_role, value,
+    minus)]. Two columns, so nothing wraps into a third."""
+    lines = "".join(f"""
+              <div class="calc-line">
+                <dt><span class="font-semibold text-ink">{label}</span><span class="block mt-0.5 text-sm text-muted">{detail}</span></dt>
+                <dd class="tnum">{"&#8722;" if minus else ""}<span data-calc-out="{role}">{money(value)}</span></dd>
+              </div>""" for label, detail, role, value, minus in rows)
+    return f"""<div class="reveal mt-10">
+            <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
+            <p class="mt-2 text-sm text-muted">{sub}</p>
+            <dl class="mt-4">{lines}
+              <div class="calc-line calc-total">
+                <dt>{total_label}</dt>
+                <dd class="tnum"><span data-calc-out="raw">{money(total)}</span></dd>
+              </div>
+            </dl>
+            <p class="mt-4 text-sm text-muted">{note}</p>
+          </div>"""
+
+
+def body():
+    return f"""{calc_hero([("Home", "/"), ("Term Life Insurance", "/term-life-insurance/"),
+               ("Coverage calculator", None)],
+          "How Much Term Life Insurance Do You Need?",
+          'Work out how much <a class="link" href="/term-life-insurance/">term life insurance</a> '
+          'your household needs. The answer updates as you type.')}
 
 
 <!-- =====================================================================
@@ -153,9 +227,10 @@ def body():
 <section class="pb-14 md:pb-16">
   <div class="container-ax">
     <div data-calc="term_coverage_needs">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
 
         <div class="lg:col-span-5">
+          <div class="sticky-col">
           <div class="reveal panel">
             <div class="panel-head">
               <h2 class="text-h3 !font-display !font-semibold">Your numbers</h2>
@@ -164,97 +239,52 @@ def body():
               </p>
             </div>
             <div class="mt-6">
-              {field("calc-income", "income", "Your annual income before tax",
-                     "What the household would stop receiving.", EX_INCOME)}
-              {picker("calc-years", "years", "Years of income to replace",
-                      "Until the youngest child is independent, or the partner is at retirement age.",
-                      [("5", "5 years"), ("10", "10 years"), ("15", "15 years"),
-                       ("20", "20 years"), ("25", "25 years"), ("30", "30 years")], str(EX_YEARS))}
-              {field("calc-debt", "debt", "Mortgage and other debt",
+              {pair(field("calc-income", "income", "Annual income", "Before tax.", EX_INCOME),
+                    picker("calc-years", "years", "Years to replace", "Until the youngest is independent.",
+                           [("5", "5 years"), ("10", "10 years"), ("15", "15 years"),
+                            ("20", "20 years"), ("25", "25 years"), ("30", "30 years")], str(EX_YEARS)))}
+              {field("calc-debt", "debt", "Mortgage and debts",
                      "The balance you owe, not the monthly payment.", EX_DEBT)}
-              {picker("calc-children", "children", "Children who would need support",
-                      "Count anyone financially dependent on you.",
-                      [(str(n), str(n)) for n in range(0, 7)], str(EX_CHILDREN))}
-              {picker("calc-perchild", "perchild", "Set aside per child",
-                      "Education and support. Pick the closest.",
-                      [("0", "Nothing"), ("25000", "$25,000"), ("50000", "$50,000"),
-                       ("100000", "$100,000"), ("150000", "$150,000")], str(EX_PERCHILD))}
-              {field("calc-existing", "existing", "Coverage and savings you already have",
-                     "Include employer coverage and liquid savings.", EX_EXISTING)}
+              {pair(picker("calc-children", "children", "Children", "Anyone who depends on you.",
+                           [(str(n), str(n)) for n in range(0, 7)], str(EX_CHILDREN)),
+                    picker("calc-perchild", "perchild", "Per child", "Education and support.",
+                           [("0", "Nothing"), ("25000", "$25,000"), ("50000", "$50,000"),
+                            ("100000", "$100,000"), ("150000", "$150,000")], str(EX_PERCHILD)))}
+              {field("calc-existing", "existing", "Already covered",
+                     "Existing life insurance, employer coverage and savings.", EX_EXISTING)}
             </div>
             <p class="mt-2 text-micro text-muted">
               Nothing here is stored, sent, or associated with you.
             </p>
           </div>
+          </div>
         </div>
 
         <div class="lg:col-span-6 lg:col-start-7">
-          <h2 class="reveal text-h2">How we calculate your coverage amount</h2>
-          <p class="reveal mt-5 text-slate">
-            The method is shown in full. Each line below is one part of the math, and it updates
-            with your numbers.
-          </p>
+          {result_card(EX_ROUNDED,
+                       calc_bar([("income", "Income", EX_REPLACE), ("debt", "Debts", EX_DEBT),
+                                 ("education", "Children", EX_EDUCATION)], EX_EXISTING),
+                       "term-calc-quote-form",
+                       "On these numbers you already have more coverage than the calculation asks "
+                       "for. That is worth a conversation rather than an application, and a "
+                       "licensed agent will tell you so on the phone.")}
 
-          <div class="reveal mt-8 table-scroll table-signature">
-            <table class="rate-table" style="min-width:26rem">
-              <caption>Coverage need, line by line.</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Income to replace</th>
-                  <td><span data-calc-out="incomeyear">{money(EX_INCOME)}</span> a year for
-                      <span data-calc-out="years">{EX_YEARS}</span> years</td>
-                  <td class="tnum" data-calc-out="income">{money(EX_REPLACE)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Debt to pay off</th>
-                  <td>Mortgage and other balances, paid off in full</td>
-                  <td class="tnum" data-calc-out="debt">{money(EX_DEBT)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Set aside for children</th>
-                  <td><span data-calc-out="children">{EX_CHILDREN}</span> at
-                      <span data-calc-out="perchild">{money(EX_PERCHILD)}</span> each</td>
-                  <td class="tnum" data-calc-out="education">{money(EX_EDUCATION)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">Less what you already have</th>
-                  <td>Existing coverage and savings</td>
-                  <td class="tnum" data-calc-out="existing">{money(EX_EXISTING)}</td>
-                </tr>
-                <tr>
-                  <th scope="row">What the household would need</th>
-                  <td></td>
-                  <td class="tnum" data-calc-out="raw">{money(EX_RAW)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="reveal mt-8 card">
-            <p class="text-sm text-muted">Rounded up to the next amount carriers quote</p>
-            <p class="mt-2" aria-live="polite">
-              <span class="stat-value" data-calc-out="rounded">{money(EX_ROUNDED)}</span>
-            </p>
-            <p class="mt-4 text-slate">
-              We round up because buying too little is the more common and more expensive mistake.
-              The premium difference between two neighboring amounts is usually smaller than
-              people expect.
-            </p>
-
-            <button type="button" class="btn btn-cta btn-block btn-wrap mt-6"
-                    data-calc-cta
-                    data-prefill='{{"coverage":"{EX_ROUNDED}"}}'
-                    data-prefill-trigger="calculator"
-                    data-prefill-target="term-calc-quote-form">
-              Get quotes for <span data-calc-out="rounded">{money(EX_ROUNDED)}</span> of coverage
-            </button>
-
-            <p class="mt-6 text-slate" data-calc-enough hidden>
-              On these numbers you already have more coverage than the calculation asks for. That
-              is worth a conversation rather than an application, and a licensed agent will tell
-              you so on the phone.
-            </p>
-          </div>
+          {breakdown("How we calculate your coverage amount",
+                     "The income replacement method, which most term life underwriters expect to "
+                     "see behind a coverage amount. Every line updates with your numbers.",
+                     [("Income to replace",
+                       '<span data-calc-out="incomeyear">%s</span> a year for <span data-calc-out="years">%s</span> years'
+                       % (money(EX_INCOME), EX_YEARS), "income", EX_REPLACE, False),
+                      ("Debt to pay off", "Mortgage and other balances, in full", "debt", EX_DEBT, False),
+                      ("Set aside for children",
+                       '<span data-calc-out="children">%s</span> at <span data-calc-out="perchild">%s</span> each'
+                       % (EX_CHILDREN, money(EX_PERCHILD)), "education", EX_EDUCATION, False),
+                      ("Less what you already have", "Existing coverage and savings", "existing",
+                       EX_EXISTING, True)],
+                     "What the household would need", EX_RAW,
+                     "We round up because buying too little is the more common and more expensive "
+                     "mistake. The premium difference between two neighboring amounts is usually "
+                     "smaller than people expect.")}
         </div>
 
       </div>

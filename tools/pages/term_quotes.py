@@ -141,13 +141,15 @@ def body():
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What you need to get a quote</h2>
-        <p class="reveal mt-5 text-slate">
-          Very little. You are not applying yet, so we do not ask for what an application asks
-          for.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">What you need to get a quote</h2>
+          <p class="reveal mt-5 text-slate">
+            Very little. You are not applying yet, so we do not ask for what an application asks
+            for.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         <ul class="grid gap-4" data-stagger="60">

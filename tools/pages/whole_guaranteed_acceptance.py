@@ -314,13 +314,15 @@ def body():
      ================================================================== -->
 <section class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">When not to buy this</h2>
-        <p class="reveal mt-5 text-slate">
-          Four situations where the right answer is something else. An agent who does not raise
-          them before selling you this policy has not done the job.
-        </p>
+        <div class="sticky-col">
+          <h2 class="reveal text-h2">When not to buy this</h2>
+          <p class="reveal mt-5 text-slate">
+            Four situations where the right answer is something else. An agent who does not raise
+            them before selling you this policy has not done the job.
+          </p>
+        </div>
       </div>
       <div class="lg:col-span-6 lg:col-start-7">
         {C.step(1, "You have not been declined yet",
