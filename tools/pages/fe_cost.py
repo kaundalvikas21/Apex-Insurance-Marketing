@@ -25,7 +25,6 @@ PATH = "/final-expense-insurance/cost/"
 OUT = "final-expense-insurance/cost/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance Cost by Age (2026 Chart) | Apex"
 OG_TITLE = "What final expense insurance costs by age"
 DESC = ("What final expense insurance costs between ages 50 and 85, what moves the premium, and "
@@ -340,7 +339,7 @@ def body():
       "What we need from you, and how fast an answer comes back.")])}
 
 
-{C.faq_section("Questions about final expense cost", FAQ, "fe-cost-faq", size=24)}
+{C.faq_section("Questions about final expense cost", FAQ, "fe-cost-faq")}
 
 
 {C.closing_band("whole-band", "Get your own price, not a chart",

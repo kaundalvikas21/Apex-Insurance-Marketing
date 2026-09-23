@@ -22,7 +22,6 @@ PATH = "/final-expense-insurance/no-waiting-period/"
 OUT = "final-expense-insurance/no-waiting-period/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Burial Insurance With No Waiting Period | Apex"
 OG_TITLE = "Burial insurance with no waiting period"
 DESC = ("Some burial insurance policies pay the full benefit from day one. Whether you qualify "
@@ -393,7 +392,7 @@ def body():
       "What it covers, and how it compares with pre paying.")])}
 
 
-{C.faq_section("Questions about waiting periods", FAQ, "fe-nowait-faq", size=24)}
+{C.faq_section("Questions about waiting periods", FAQ, "fe-nowait-faq")}
 
 
 {C.closing_band("whole-band", "Find out if you qualify for day one coverage",

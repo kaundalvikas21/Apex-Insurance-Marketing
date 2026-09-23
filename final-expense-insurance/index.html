@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="fe">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -525,45 +525,50 @@
   <div class="container-ax">
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How this differs from term and whole life</h2>
-      <p class="reveal mt-5 text-slate">
-        Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for
-        a different job.
-      </p>
+      <p class="reveal mt-5 text-slate">Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for a different job.</p>
     </div>
 
-    <div class="reveal mt-10 table-scroll table-signature">
-      <!-- Three columns, one per product. Each fact is a group row above its
-           three cells, so the table never needs a fourth column. -->
-      <table class="compare-table" style="min-width:0">
+    <!-- .reveal sits on the scroll container itself (see CLAUDE.md). -->
+    <div class="reveal mt-10 table-scroll pc-scroll">
+      <table class="pc-table">
+        <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>
         <caption class="sr-only">Final expense compared with term life and whole life insurance</caption>
         <thead>
           <tr>
-            <th scope="col">Final expense</th>
-            <th scope="col">Term life</th>
-            <th scope="col">Whole life</th>
+            <td class="pc-corner"></td>
+            <th scope="col" class="pc-head pc-current">
+              <span class="pc-name">Final expense</span> <span class="pc-this">This page</span>
+              <span class="pc-tag">A small policy, no exam, built for funeral and final bills.</span>
+            </th>
+            <th scope="col" class="pc-head">
+              <span class="pc-name">Term life</span>
+              <span class="pc-tag">The most coverage per dollar, for a fixed number of years.</span>
+            </th>
+            <th scope="col" class="pc-head">
+              <span class="pc-name">Whole life</span>
+              <span class="pc-tag">Lifelong coverage at a larger face amount, with cash value.</span>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr><th scope="rowgroup" colspan="3">Typical coverage</th></tr>
-          <tr><td class="tnum">$2,000 to $50,000</td><td class="tnum">$100,000 and up</td><td class="tnum">$25,000 and up</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Medical exam</th></tr>
-          <tr><td>Never</td><td>Often</td><td>Usually</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Typical age</th></tr>
-          <tr><td>50 to 85</td><td>30 to 55</td><td>40 to 65</td></tr>
-          <tr><th scope="rowgroup" colspan="3">How long it lasts</th></tr>
-          <tr><td>For life</td><td>10 to 30 years</td><td>For life</td></tr>
-          <tr><th scope="rowgroup" colspan="3">What it is for</th></tr>
-          <tr><td>A funeral and final bills</td><td>Replacing income</td><td>A lifelong need or an estate</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Time to get covered</th></tr>
-          <tr><td>Often the same day</td><td>Three to six weeks</td><td>Three to six weeks</td></tr>
+            <tr><th scope="row">Typical coverage</th><td class="pc-big pc-current">$2,000 to $50,000</td><td class="pc-big">$100,000 and up</td><td class="pc-big">$25,000 and up</td></tr>
+            <tr><th scope="row">Medical exam</th><td class=" pc-current"><span class="pc-pill">Never</span><span class="pc-note">A short set of health questions instead.</span></td><td class=""><span class="pc-pill">Often</span></td><td class=""><span class="pc-pill">Usually</span></td></tr>
+            <tr><th scope="row">Typical age</th><td class=" pc-current">50 to 85</td><td class="">30 to 55</td><td class="">40 to 65</td></tr>
+            <tr><th scope="row">How long it lasts</th><td class=" pc-current">For life</td><td class="">10 to 30 years</td><td class="">For life</td></tr>
+            <tr><th scope="row">What it is for</th><td class=" pc-current">A funeral and final bills</td><td class="">Replacing income</td><td class="">A lifelong need or an estate</td></tr>
+            <tr><th scope="row">Time to get covered</th><td class="pc-accent pc-current">Often the same day</td><td class="">Three to six weeks</td><td class="">Three to six weeks</td></tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td></td><td class="pc-current"><a href="tel:+15550180199" data-cta-location="fe_compare" class="btn btn-call btn-block whitespace-nowrap"><svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a><p class="mt-2 text-micro text-muted">Licensed agent, no hold queue &#183; <a class="link" href="#fe-quote">or get a quote online</a></p></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/term-life-insurance/">See term life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/whole-life-insurance/">See whole life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
-
     <p class="reveal mt-6 text-slate max-w-3xl">
-      If you are under 60 and in good health and you want a larger amount, look at
-      <a class="link" href="/term-life-insurance/">term life insurance</a> first. It buys far more
-      coverage for the same money, and we will tell you so on the phone.
+      If you are under 60 and in good health and you want a larger amount, look at term life
+      insurance first. It buys far more coverage for the same money, and we will tell you so on
+      the phone.
     </p>
   </div>
 </section>
@@ -673,10 +678,10 @@
       <p class="reveal mt-5 text-slate">There is no paperwork to mail and nothing to print. Have these four things nearby and the call goes quickly.</p>
     </div>
 
-    <ol class="steps steps-4 mt-12">
+    <ol class="steps steps-4 mt-12" data-stagger="80">
       <li class="reveal steps-item">
         <span class="step-num steps-node tnum" aria-hidden="true">1</span>
-        <div class="bento-cell ">
+        <div class="bento-cell card-hover ">
           <div class="flex items-center justify-between gap-3"><svg class="text-navy" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
           <h3 class="mt-5 text-h4"><span class="sr-only">Item 1: </span>Your date of birth and address</h3>
           <p class="mt-2 text-slate">Exactly as they appear on your driver's license or state ID.</p>
@@ -684,7 +689,7 @@
       </li>
       <li class="reveal steps-item">
         <span class="step-num steps-node tnum" aria-hidden="true">2</span>
-        <div class="bento-cell ">
+        <div class="bento-cell card-hover ">
           <div class="flex items-center justify-between gap-3"><svg class="text-navy" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg></div>
           <h3 class="mt-5 text-h4"><span class="sr-only">Item 2: </span>Your medications</h3>
           <p class="mt-2 text-slate">The bottles are easiest. Names and doses are what the carrier asks for.</p>
@@ -692,7 +697,7 @@
       </li>
       <li class="reveal steps-item">
         <span class="step-num steps-node tnum" aria-hidden="true">3</span>
-        <div class="bento-cell ">
+        <div class="bento-cell card-hover ">
           <div class="flex items-center justify-between gap-3"><svg class="text-navy" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <h3 class="mt-5 text-h4"><span class="sr-only">Item 3: </span>Your beneficiary</h3>
           <p class="mt-2 text-slate">The full name and date of birth of whoever should receive the money.</p>
@@ -700,7 +705,7 @@
       </li>
       <li class="reveal steps-item">
         <span class="step-num steps-node tnum" aria-hidden="true">4</span>
-        <div class="bento-cell ">
+        <div class="bento-cell card-hover ">
           <div class="flex items-center justify-between gap-3"><svg class="text-navy" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div>
           <h3 class="mt-5 text-h4"><span class="sr-only">Item 4: </span>Your bank details</h3>
           <p class="mt-2 text-slate">Premiums are paid by monthly bank draft. Nothing is taken until the policy is approved.</p>
@@ -730,70 +735,6 @@
   </div>
 </section>
 
-<section class="section band">
-  <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">Explore final expense insurance</h2>
-      <p class="reveal mt-5 text-slate">The nine questions people ask most often about this coverage, each answered in full on its own page.</p>
-    </div>
-    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">
-        <li class="reveal">
-          <a href="/final-expense-insurance/burial-insurance/" class="tile">
-            <span class="text-h4 text-ink">Burial insurance</span>
-            <span class="mt-2 text-sm text-muted">The same product under the name people search for most.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/quotes/" class="tile">
-            <span class="text-h4 text-ink">Final expense quotes</span>
-            <span class="mt-2 text-sm text-muted">What we need from you and how fast a quote comes back.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/cost/" class="tile">
-            <span class="text-h4 text-ink">Final expense cost by age</span>
-            <span class="mt-2 text-sm text-muted">How premium moves between ages 50 and 85.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/for-seniors/" class="tile">
-            <span class="text-h4 text-ink">Final expense for seniors</span>
-            <span class="mt-2 text-sm text-muted">What changes after 70, and what still does not.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/no-waiting-period/" class="tile">
-            <span class="text-h4 text-ink">Policies with no waiting period</span>
-            <span class="mt-2 text-sm text-muted">Which carriers pay in full from day one and who qualifies.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/funeral-insurance/" class="tile">
-            <span class="text-h4 text-ink">Funeral insurance</span>
-            <span class="mt-2 text-sm text-muted">How this compares with pre paying at a funeral home.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/what-is-final-expense-insurance/" class="tile">
-            <span class="text-h4 text-ink">What final expense insurance is</span>
-            <span class="mt-2 text-sm text-muted">The plain definition, with the fine print left in.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/for-parents/" class="tile">
-            <span class="text-h4 text-ink">Coverage for a parent</span>
-            <span class="mt-2 text-sm text-muted">Buying a policy on a parent, and the consent it needs.</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="/final-expense-insurance/cremation-insurance/" class="tile">
-            <span class="text-h4 text-ink">Cremation insurance</span>
-            <span class="mt-2 text-sm text-muted">What cremation costs and how much coverage fits.</span>
-          </a>
-        </li>
-    </ul>
-  </div>
-</section>
 
 <!-- =====================================================================
      10. FAQ.
@@ -811,65 +752,170 @@
         </div>
       </div>
       <div class="lg:col-span-7 lg:col-start-6 reveal">
-        <details class="acc" name="fe-faq"><summary>What is final expense insurance?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">It is a small whole life insurance policy, usually between $2,000 and $50,000, bought to cover a funeral, burial or cremation, and the bills that arrive in the weeks after a death. The premium never rises and the coverage never expires as long as the premium is paid. It is sometimes sold under the names burial insurance or funeral insurance. Those are the same product with a different label.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>Do I need a medical exam?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. Final expense policies are issued on health questions alone. There is no paramedical exam, no blood work, and no urine sample. The carrier will check your prescription history and a medical information database, so answer the health questions accurately. An answer that does not match the records can delay the policy or void a claim later.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>Can I be turned down?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">You can be declined for a policy that pays from day one, but there is almost always an option available. Carriers sort applicants into level benefit, graded benefit, and guaranteed issue, and the last of those asks no health questions at all. What changes with poorer health is the premium and whether there is a waiting period, not usually whether you can get covered.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>What is a waiting period?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Some final expense policies do not pay the full death benefit if you die of natural causes in the first two or three years. Instead they refund the premiums you paid, usually with interest added. Accidental death is normally covered in full from the first day. If you qualify for a level benefit policy, there is no waiting period at all. We will tell you which one you qualify for before you apply.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>How fast does the money reach my family?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Once the carrier has a certified death certificate and a completed claim form, most final expense claims are paid within a few business days to two weeks. Many carriers will assign the benefit directly to a funeral home so the family does not have to pay up front and wait for reimbursement.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>Can I still get this if I have diabetes, COPD, or heart problems?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">In most cases yes. Controlled diabetes is routinely accepted at level rates by several carriers. COPD, congestive heart failure, and a recent cardiac event more often lead to a graded benefit or a guaranteed issue policy. Carriers underwrite these conditions very differently from each other, which is the practical reason to apply through an independent agency rather than to one company.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>Will the premium go up as I get older?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. The premium on a final expense whole life policy is locked at the age you buy it and stays level for the rest of your life. What does change is the price of buying a new policy: every birthday you wait makes the same coverage cost more.</p></div></details>
-        <details class="acc" name="fe-faq"><summary>Is this the same as pre-paying at a funeral home?<span class="acc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. A pre-need contract is money paid to one funeral home for a named list of goods and services at that home. A final expense policy pays cash to the person you name as beneficiary, who can spend it at any funeral home, or on a headstone, unpaid medical bills, or anything else. If you move or change your mind, the policy moves with you.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>What is final expense insurance?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">It is a small whole life insurance policy, usually between $2,000 and $50,000, bought to cover a funeral, burial or cremation, and the bills that arrive in the weeks after a death. The premium never rises and the coverage never expires as long as the premium is paid. It is sometimes sold under the names burial insurance or funeral insurance. Those are the same product with a different label.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>Do I need a medical exam?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. Final expense policies are issued on health questions alone. There is no paramedical exam, no blood work, and no urine sample. The carrier will check your prescription history and a medical information database, so answer the health questions accurately. An answer that does not match the records can delay the policy or void a claim later.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>Can I be turned down?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">You can be declined for a policy that pays from day one, but there is almost always an option available. Carriers sort applicants into level benefit, graded benefit, and guaranteed issue, and the last of those asks no health questions at all. What changes with poorer health is the premium and whether there is a waiting period, not usually whether you can get covered.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>What is a waiting period?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Some final expense policies do not pay the full death benefit if you die of natural causes in the first two or three years. Instead they refund the premiums you paid, usually with interest added. Accidental death is normally covered in full from the first day. If you qualify for a level benefit policy, there is no waiting period at all. We will tell you which one you qualify for before you apply.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>How fast does the money reach my family?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">Once the carrier has a certified death certificate and a completed claim form, most final expense claims are paid within a few business days to two weeks. Many carriers will assign the benefit directly to a funeral home so the family does not have to pay up front and wait for reimbursement.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>Can I still get this if I have diabetes, COPD, or heart problems?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">In most cases yes. Controlled diabetes is routinely accepted at level rates by several carriers. COPD, congestive heart failure, and a recent cardiac event more often lead to a graded benefit or a guaranteed issue policy. Carriers underwrite these conditions very differently from each other, which is the practical reason to apply through an independent agency rather than to one company.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>Will the premium go up as I get older?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. The premium on a final expense whole life policy is locked at the age you buy it and stays level for the rest of your life. What does change is the price of buying a new policy: every birthday you wait makes the same coverage cost more.</p></div></details>
+        <details class="acc" name="fe-faq"><summary>Is this the same as pre-paying at a funeral home?<span class="acc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary><div class="acc-body"><p class="text-slate">No. A pre-need contract is money paid to one funeral home for a named list of goods and services at that home. A final expense policy pays cash to the person you name as beneficiary, who can spend it at any funeral home, or on a headstone, unpaid medical bills, or anything else. If you move or change your mind, the policy moves with you.</p></div></details>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Guides, laid out as blog posts. After the FAQ by client request. -->
+<section class="section band">
+  <div class="container-ax">
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">Final expense insurance guides</h2>
+      <p class="reveal mt-5 text-slate">Nine short articles on the questions people ask most often about this coverage.</p>
+    </div>
+    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">
+        <li class="reveal">
+          <a href="/final-expense-insurance/burial-insurance/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Burial insurance</span>
+            <span class="mt-2 text-sm text-muted">The same product under the name people search for most.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/quotes/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Final expense quotes</span>
+            <span class="mt-2 text-sm text-muted">What we need from you and how fast a quote comes back.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/cost/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Final expense cost by age</span>
+            <span class="mt-2 text-sm text-muted">How premium moves between ages 50 and 85.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/for-seniors/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Final expense for seniors</span>
+            <span class="mt-2 text-sm text-muted">What changes after 70, and what still does not.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/no-waiting-period/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Policies with no waiting period</span>
+            <span class="mt-2 text-sm text-muted">Which carriers pay in full from day one and who qualifies.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/funeral-insurance/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Funeral insurance</span>
+            <span class="mt-2 text-sm text-muted">How this compares with pre paying at a funeral home.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/what-is-final-expense-insurance/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">What final expense insurance is</span>
+            <span class="mt-2 text-sm text-muted">The plain definition, with the fine print left in.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/for-parents/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Coverage for a parent</span>
+            <span class="mt-2 text-sm text-muted">Buying a policy on a parent, and the consent it needs.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="/final-expense-insurance/cremation-insurance/" class="tile post-card">
+            <span class="post-tag"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg>Final expense guide</span>
+            <span class="mt-4 text-h4 text-ink">Cremation insurance</span>
+            <span class="mt-2 text-sm text-muted">What cremation costs and how much coverage fits.</span>
+            <span class="post-more">Read article<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </li>
+    </ul>
   </div>
 </section>
 
 <!-- =====================================================================
      11. BYLINE. Spec section 09.5.
      ================================================================== -->
-<section class="section-tight band">
+<section class="section">
   <div class="container-ax">
-    <div class="reveal">
-      <div class="card">
-      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-
-        <div class="lg:col-span-5 flex items-start gap-5">
-          <!-- [REAL AGENT PHOTO REQUIRED]
-               This slot stays a placeholder on purpose. A stock photograph here
-               would present a stranger as the named licensed agent, which is the
-               same fabrication as an invented testimonial. See MASTER.md s7. -->
-          <div class="avatar-slot shrink-0" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
-            <span>Agent<br>photo</span>
-          </div>
-          <div>
-            <!-- Spec section 09.5 requires this exact construction:
-                 "Written by [Agent Name], Licensed Agent, Reviewed [date]". -->
-            <p class="text-h4">Written by [Agent Name], Licensed Life Insurance Agent</p>
-            <p class="mt-3 text-micro text-muted">
-              Reviewed [DATE]<br>
-              Licensed in [X] states<br>
-              National Producer Number [NPN]
-            </p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7">
-          <p class="text-slate">
-            This page is written and kept current by a licensed agent who places these policies.
-            Where a figure comes from a carrier rate card, the card and its date are named on the
-            page. Where something depends on your state or your health, we say so instead of
-            rounding it off.
-          </p>
-          <p class="mt-4 text-slate">
-            If you find something here that is out of date or wrong, tell us and we will correct it
-            and change the review date. That is the whole point of printing one.
-          </p>
-          <a class="link-static mt-5 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+      <div class="lg:col-span-4">
+        <h2 class="reveal text-h2">What our clients say</h2>
+        <p class="reveal mt-5 text-slate">
+          Short videos from people we have placed a policy for, in their own words.
+        </p>
+        <div class="reveal mt-6">
+          <p class="flag">[CLIENT VIDEO TESTIMONIALS PENDING] Three video slots, empty until the client videos arrive. Real clients only, captioned, and if anyone on screen was paid, given anything, or is not a client, say so on screen (FTC 16 CFR 255). Never add a written quote here.</p>
         </div>
       </div>
+      <ul class="lg:col-span-8 grid grid-cols-3 gap-3 sm:gap-5" data-stagger="60">
+      <li class="reveal">
+        <!-- REPLACE WITH: <video controls preload="none" playsinline
+               poster="/assets/video/<name>.jpg" class="video-frame">
+               <source src="/assets/video/<name>.mp4" type="video/mp4">
+               <track kind="captions" src="/assets/video/<name>.vtt" srclang="en" label="English" default>
+             </video>
+             then a <p> with the client's first name and state, and the
+             FTC disclosure if they were paid or given anything. -->
+        <div class="video-slot" data-video-slot>
+          <span class="video-slot-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+          <span>Client video</span>
+        </div>
+      </li>
+      <li class="reveal">
+        <!-- REPLACE WITH: <video controls preload="none" playsinline
+               poster="/assets/video/<name>.jpg" class="video-frame">
+               <source src="/assets/video/<name>.mp4" type="video/mp4">
+               <track kind="captions" src="/assets/video/<name>.vtt" srclang="en" label="English" default>
+             </video>
+             then a <p> with the client's first name and state, and the
+             FTC disclosure if they were paid or given anything. -->
+        <div class="video-slot" data-video-slot>
+          <span class="video-slot-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+          <span>Client video</span>
+        </div>
+      </li>
+      <li class="reveal">
+        <!-- REPLACE WITH: <video controls preload="none" playsinline
+               poster="/assets/video/<name>.jpg" class="video-frame">
+               <source src="/assets/video/<name>.mp4" type="video/mp4">
+               <track kind="captions" src="/assets/video/<name>.vtt" srclang="en" label="English" default>
+             </video>
+             then a <p> with the client's first name and state, and the
+             FTC disclosure if they were paid or given anything. -->
+        <div class="video-slot" data-video-slot>
+          <span class="video-slot-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+          <span>Client video</span>
+        </div>
+      </li>
+      </ul>
     </div>
-    </div>
+    <div class="mt-12"><div class="reveal author-line">
+      <!-- [REAL AGENT PHOTO REQUIRED] A stock photograph here would present a
+           stranger as the named licensed agent. See MASTER.md s7. -->
+      <div class="avatar-slot avatar-slot-sm shrink-0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></div>
+      <p class="text-sm text-slate">
+        <span class="font-semibold text-navy">Written by [Agent Name], Licensed Life Insurance Agent.</span>
+        Reviewed [DATE] &#183; Licensed in [X] states &#183; NPN [NPN]
+      </p>
+      <a class="link-static text-sm sm:ml-auto shrink-0" href="/about/agents/">About our licensed agents</a>
+    </div></div>
   </div>
 </section>
 

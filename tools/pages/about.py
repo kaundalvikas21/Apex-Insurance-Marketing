@@ -327,9 +327,7 @@ def body():
 {C.faq_section("Questions people ask before they call", FAQ, "about-faq")}
 
 
-<section class="section-tight band-surface hairline">
-  <div class="container-ax">{C.byline()}</div>
-</section>
+{C.byline_section()}
 
 
 {closing}"""

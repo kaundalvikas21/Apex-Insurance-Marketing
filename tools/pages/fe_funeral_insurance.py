@@ -23,7 +23,6 @@ PATH = "/final-expense-insurance/funeral-insurance/"
 OUT = "final-expense-insurance/funeral-insurance/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Funeral Insurance: What It Covers and What It Costs | Apex"
 OG_TITLE = "Funeral insurance, explained"
 DESC = ("Funeral insurance is a small whole life policy that pays your family cash for a "
@@ -292,7 +291,7 @@ def body():
       "Buying a policy on a parent, and the consent it needs.")])}
 
 
-{C.faq_section("Questions about funeral insurance", FAQ, "fe-funeral-faq", size=24)}
+{C.faq_section("Questions about funeral insurance", FAQ, "fe-funeral-faq")}
 
 
 {C.closing_band("whole-band", "Ask us anything before you decide",

@@ -195,6 +195,8 @@ def body():
       "to be slower than that, we will tell you.")],
     cls="section-tight band")}
 
+{C.testimonials("section")}
+
 <!-- =====================================================================
      MINI FAQ.
      ================================================================== -->

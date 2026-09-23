@@ -187,6 +187,7 @@ not disabled.
 | CTA hover | translateY(-2px) + tinted shadow, 180ms | Buttons |
 | Link underline | grows from left, 180ms ease-out | Body links |
 | Accordion | height via `interpolate-size: allow-keywords`, 240ms | FAQ |
+| Hero settle | Hero banner photo scales 1.1 to 1 once on load, 3.2s `cubic-bezier(.25,.46,.45,.94)`, transform only (never opacity, it is the LCP image) | `.hero-bg img`: every hero banner: home, the three hubs (final expense included), contact, free policy review. Off only under reduced motion |
 | Form step change | 240ms crossfade, focus moves to the first field; the label reads "Step 1 of 2 · About you" | Term and master quote forms |
 
 The count-up target is written into the HTML, so with JavaScript off, in print, and before the
@@ -201,7 +202,13 @@ cascade, draws the chart fully, leaves every count-up at its final value, and fo
 visible so no content can be trapped invisible. Verified in the browser: zero hidden reveals.
 
 ### Final-expense exemption
-`.fe main` opts out of every pattern above except the opacity reveal: no translate, no stagger, no
+> **Switched off, 2026-09-23, by client decision.** No page sets `HTML_CLASS = "fe"` any more:
+> the ten final expense pages use the sitewide type, motion and components so the three silos
+> read the same side by side. The `.fe` CSS and JS below are left in place, unused, so the mode
+> can be restored per page by putting `HTML_CLASS = "fe"` back. Everything below describes the
+> mode, not the current site.
+
+`.fe main` opts out of every pattern above except the opacity reveal and the hero settle (which applies to every hero banner by client request, September 2026): no translate, no stagger, no
 count-up (`countUp()` returns early on `html.fe`), no row cascade, no lift, no glow, no chart.
 Static, calm, large. This is an accessibility decision, not a stylistic one.
 
@@ -247,7 +254,10 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `chrome.faq_section()` `center=` | Default on. An accordion has no second column, so the block is centred rather than stranding 40% of the row. Heading text is centred; the question rows stay left aligned. |
 | `.sticky-col` | Goes on an **inner div** inside a full-height grid item, and the grid must not be `items-start`. On the grid item itself under `items-start` the column is content height and never travels. |
 | `chrome.qa()` | One heading-and-paragraph pair inside a `prose()` column. Used where a page absorbs a secondary search intent as an H3 rather than a page. |
-| `chrome.byline_section()` | The byline in its own band. Closes every editorial page. Placed directly under the hero as well on `/whole-life-insurance/is-it-worth-it/`. |
+| `chrome.byline_section()` | Client video testimonials plus the compact author line (`author_line()`). Closes every editorial page; it took the old byline card's slot in the September 2026 client review. `/whole-life-insurance/is-it-worth-it/` also puts `author_line()` alone directly under the hero. |
+| `chrome.testimonials()` | "What our clients say": three dashed 9:16 `.video-slot` frames and a visible flag, until the UGC videos arrive. Pages without a byline place it above their closing ask. No photo, quote, name or star ever goes in a slot (section 8). |
+| `chrome.product_compare()` | The three products side by side on all three hubs, facts in `chrome.COMPARE_ROWS` only. The current hub's column is a raised card (`.pc-current`: surface, blue cap, rounded ends) with a "This page" pill, its note, one blue accent cell and its own CTA in the footer; the others end in "See term life" / "See whole life" / "See final expense", which are that hub's one body link to each sibling. The label column is sticky so it survives the sideways scroll on phones. |
+| `chrome.spoke_module()` | Spoke links laid out as blog posts (`.post-card`): silo tag, title, excerpt, "Read article". On the three hubs it sits after the FAQ. |
 | `compare.render()` | T5's whole body. Section order is fixed, only the copy is passed in. |
 | `compare.table()` | The side-by-side `.compare-table` inside `.table-scroll.table-signature`. A row with an empty cell list becomes a `th[colspan]` group row. |
 | `compare.checklist()` | Lucide `check` plus a statement per row, `data-stagger="40"`. Statements the reader answers about themselves, never a scored quiz: a quiz needs a threshold and there is no honest one. |
@@ -287,7 +297,7 @@ The cash-value chart sits in a `.bento-4` beside a tinted `.bento-2` stat (40 ye
 
 **Final-expense hub.** Phone-first (the call is the leading `.btn-call.btn-xl`, with "Get coverage now" stacked under it to `#fe-quote`), Inter throughout, static. Cost table cut to three columns
 (`Age | $10,000 | $25,000`) with the row-level call CTA inside the age cell. The three-product
-comparison is a three-column table with group rows so it never needs a fourth column.
+comparison is `chrome.product_compare("fe", ...)`, shared with the other two hubs.
 
 **Contact.** Split layout; "what happens next" is a three-cell bento (white, tinted, blue).
 
@@ -339,7 +349,7 @@ T5. The T4 seven inherit the six rules above without exception. Three deviations
 page docs (`whole-is-it-worth-it`, `fe-for-parents`, `compare`), and they exist because on these
 pages the layout is carrying an editorial position:
 
-- `/whole-life-insurance/is-it-worth-it/` puts `chrome.byline_section()` **directly under the
+- `/whole-life-insurance/is-it-worth-it/` puts `chrome.author_line()` **directly under the
   hero** as well as ending without one, has no amber anywhere, and orders "who it is not for"
   before "who it is for". A page arguing the case against the thing we sell has to show who is
   making the argument before the argument, and leading with the case for would make it a sales page

@@ -21,7 +21,6 @@ PATH = "/final-expense-insurance/for-seniors/"
 OUT = "final-expense-insurance/for-seniors/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance for Seniors, Ages 50 to 85 | Apex"
 OG_TITLE = "Final expense insurance for seniors"
 DESC = ("Final expense insurance for ages 50 to 85. What changes at 70 and at 80, what the health "
@@ -293,7 +292,7 @@ def body():
       "What cremation costs, and how much coverage fits.")])}
 
 
-{C.faq_section("Questions about final expense after 50", FAQ, "fe-seniors-faq", size=24)}
+{C.faq_section("Questions about final expense after 50", FAQ, "fe-seniors-faq")}
 
 
 {C.closing_band("whole-band", "Find out what your health answers qualify you for",

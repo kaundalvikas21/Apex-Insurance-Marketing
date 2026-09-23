@@ -215,4 +215,6 @@ def body():
 </section>
 
 
+{C.testimonials()}
+
 {closing}"""

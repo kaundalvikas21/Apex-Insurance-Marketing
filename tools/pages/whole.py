@@ -234,7 +234,7 @@ def cash_value_chart():
 
 def body():
     permanence_media = C.figure("whole-permanence", "(min-width: 1024px) 38vw, 92vw",
-                                cls="reveal mt-8", glow=True)
+                                cls="", glow=True)
     acceptance_media = C.picture("whole-acceptance", "(min-width: 1024px) 38vw, 92vw",
                                  cls="media media-strip !rounded-none", img_cls="media-img")
     # Mid-page banner, placed after the cash value proof and before the
@@ -251,11 +251,59 @@ def body():
                        "Call " + C.PHONE_DISPLAY, 20),
         eyebrow="Guaranteed, not projected")
     spokes = C.spoke_module(
-        "Explore whole life insurance",
-        "Nine pages covering the parts of whole life that need more than a paragraph.",
+        "Whole life insurance guides",
+        "Nine short articles on the parts of whole life that need more than a paragraph.",
         SPOKES)
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
-    byline = C.byline()
+    byline = C.byline_section("section")
+
+    permanence = C.prose(
+        "What makes whole life insurance permanent",
+        """<p class="reveal text-slate">
+          That changes how it is priced. Term is priced on the chance you die during the term.
+          Whole life is priced on the certainty that, if the policy stays in force, a claim comes
+          eventually.
+        </p>
+
+        <h3 class="reveal mt-10 text-h4">Why the premium stays level</h3>
+        <p class="reveal mt-3 text-slate">
+          The cost of insuring you rises every year you age. Your premium doesn't.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          To make that work, the carrier sets the premium above the cost of insuring you in the
+          early years. Decades later, when the real cost of covering you has climbed past that
+          figure, the premium hasn't moved, and the surplus built up in the early years covers the
+          difference.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          That surplus is held inside the policy and credited at a minimum rate the contract
+          guarantees. What you can reach of it is the cash value.
+        </p>
+
+        <h3 class="reveal mt-10 text-h4">Two things about cash value worth stating plainly</h3>
+        <p class="reveal mt-3 text-slate">
+          It builds slowly. Most policies show little or nothing in the first two or three years,
+          because the carrier recovers the cost of putting the policy on the books first. Whole life
+          rewards a long hold and penalizes a short one.
+        </p>
+        <p class="reveal mt-4 text-slate">
+          And it is not added to the death benefit. On a standard whole life policy your
+          beneficiaries receive the death benefit. The cash value is what you can access while
+          you're alive, by borrowing against it or surrendering the policy. It is not a second
+          payout on top.
+        </p>
+
+        <h3 class="reveal mt-10 text-h4">If you stop paying</h3>
+        <p class="reveal mt-3 text-slate">
+          The policy doesn't simply disappear. Once cash value has built up, state nonforfeiture
+          law gives you options: take the cash and end the contract, convert to a smaller fully
+          paid up policy, or keep the full death benefit for a limited number of years. Which
+          applies depends on the contract.
+        </p>""",
+        intro=("Term life covers you for a fixed number of years. Whole life stays in force for as "
+               "long as you keep paying: most modern contracts to age 121, at which point the policy "
+               "matures and pays out to you rather than to your beneficiaries."),
+        media=permanence_media)
 
     hero = C.page_hero(
         [("Home", "/"), ("Whole Life Insurance", None)],
@@ -334,30 +382,13 @@ def body():
 </section>
 
 <!-- =====================================================================
-     2. WHAT MAKES IT PERMANENT.
+     2. WHAT MAKES IT PERMANENT. Client copy, September 2026 review.
      ================================================================== -->
-<section class="section">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">What makes whole life insurance permanent</h2>
-        {permanence_media}
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="reveal text-lead text-slate">
-          Term life covers you for a fixed number of years. Whole life is a contract for your
-          entire life. The carrier prices it knowing it will eventually pay out.
-        </p>
-        <p class="reveal mt-5 text-slate">
-          To keep the premium level across fifty years instead of twenty, the carrier charges more
-          than the cost of insuring you in the early years. In the later years it charges less. The
-          surplus from the early years is held inside the policy, earns interest at a rate the
-          contract guarantees, and becomes the cash value.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+{permanence}
+
+{C.ask_strip("Want to see the guaranteed numbers for your age?",
+             "A licensed agent sends a carrier illustration with the guaranteed column shown separately.",
+             '<a href="#quote" class="btn btn-cta" data-cta-location="whole_permanence">Get my whole life quote</a>')}
 
 <!-- =====================================================================
      3. THE THREE GUARANTEES.
@@ -446,6 +477,10 @@ def body():
     </div>
   </div>
 </section>
+
+{C.ask_strip("Questions about cash value or surrender values?",
+             "Ask a licensed agent. No script and no obligation.",
+             C.phone_link("whole_cashvalue", "btn btn-ghost", "Call " + C.PHONE_DISPLAY))}
 
 <!-- =====================================================================
      5. DIVIDENDS.
@@ -545,6 +580,14 @@ def body():
   </div>
 </section>
 
+<!-- The three products side by side. Shared with the other two hubs. -->
+{C.product_compare(
+    "whole", "How whole life differs from term and final expense",
+    "Whole life is permanent coverage at a size term buyers would recognize. Final expense is "
+    "the same idea, made small and easy to qualify for.",
+    '<a href="#quote" class="btn btn-cta btn-block">Get my whole life quote</a>',
+    "Free, no obligation &#183; or call " + C.phone_link("whole_compare", "link inline-flex items-center gap-1 whitespace-nowrap", size=14))}
+
 {legacy_band}
 
 <!-- =====================================================================
@@ -591,8 +634,7 @@ def body():
           <li class="flex items-start gap-3">{icon("arrow-right", 20, "shrink-0 text-navy mt-1")}<span>You need the largest possible death benefit on a fixed budget. Nothing beats term on that measure.</span></li>
         </ul>
         <p class="mt-6 text-sm text-slate">
-          If more than one of these describes you, start with
-          <a class="link" href="/term-life-insurance/">term life insurance</a> instead.
+          If more than one of these describes you, start with term life insurance instead.
         </p>
       </div>
     </div>
@@ -642,7 +684,6 @@ def body():
   </div>
 </section>
 
-{spokes}
 
 <!-- =====================================================================
      10. FAQ.
@@ -665,14 +706,13 @@ def body():
   </div>
 </section>
 
+<!-- Guides, laid out as blog posts. After the FAQ by client request. -->
+{spokes}
+
 <!-- =====================================================================
      11. BYLINE.
      ================================================================== -->
-<section class="section-tight band">
-  <div class="container-ax">
-    <div class="reveal">{byline}</div>
-  </div>
-</section>
+{byline}
 
 <!-- =====================================================================
      12. FINAL SPLIT CTA, at parity again.

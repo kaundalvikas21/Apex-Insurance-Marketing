@@ -363,9 +363,5 @@ def body():
 </section>
 
 
-<section class="section-tight band">
-  <div class="container-ax">
-    <div class="reveal">{C.byline()}</div>
-  </div>
-</section>
+{C.byline_section()}
 """

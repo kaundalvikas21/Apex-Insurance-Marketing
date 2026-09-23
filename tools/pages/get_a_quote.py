@@ -432,4 +432,6 @@ def body():
 {C.faq_section("Common questions about getting a quote", FAQ, "quote-faq")}
 
 
+{C.testimonials("section band")}
+
 {talk_band}"""

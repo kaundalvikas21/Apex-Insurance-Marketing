@@ -148,4 +148,6 @@ def body():
 {C.faq_section("Licensing questions", FAQ, "lic-faq", cls="section")}
 
 
+{C.testimonials("section band")}
+
 {closing}"""

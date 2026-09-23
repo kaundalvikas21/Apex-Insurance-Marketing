@@ -307,11 +307,7 @@ def body():
 {C.faq_section("Questions about term life rates", FAQ, "term-rates-faq")}
 
 
-<section class="section-tight band">
-  <div class="container-ax">
-    <div class="reveal">{C.byline()}</div>
-  </div>
-</section>
+{C.byline_section()}
 
 
 {C.closing_band("term-band", "Get your own term life rate",

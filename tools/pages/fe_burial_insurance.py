@@ -30,7 +30,6 @@ PATH = "/final-expense-insurance/burial-insurance/"
 OUT = "final-expense-insurance/burial-insurance/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Burial Insurance: What It Covers and What It Costs | Apex"
 OG_TITLE = "Burial insurance, explained"
 DESC = ("Burial insurance is a small whole life policy that pays your family cash for a burial. "
@@ -361,7 +360,7 @@ def body():
       "Buying a policy on a parent, and the consent it needs.")])}
 
 
-{C.faq_section("Questions about burial insurance", FAQ, "fe-burial-faq", size=24)}
+{C.faq_section("Questions about burial insurance", FAQ, "fe-burial-faq")}
 
 
 {C.closing_band("whole-band", "Size the policy with someone who knows the costs",

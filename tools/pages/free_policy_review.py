@@ -183,4 +183,7 @@ def body():
 </section>
 
 {C.faq_section("Free policy review questions", FAQ, "review-faq", cls="section band")}
+
+{C.testimonials("section")}
+
 """

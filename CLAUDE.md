@@ -256,7 +256,8 @@ carry the call button plus one in-page jump to the form. Two is the ceiling, and
 - `.field-error` holds an icon plus a `<span>`; JS writes into the span so the icon survives.
 - Calculator-style inputs must sit **outside** any `<form>`, or `collect()` validates them and
   `FormData` posts them to the CRM.
-- `<html class="fe">` (final expense) rescopes the type ramp on `main`, not `html`, so the shared
+- Senior mode is currently **off on every page** (client decision, 2026-09-23; see MASTER.md s4).
+  When on, `<html class="fe">` (final expense) rescopes the type ramp on `main`, not `html`, so the shared
   header and footer stay at sitewide scale. That mode is static: no count-up, no row cascade, no
   lift, no glow. It is an accessibility decision, not a style one.
 

@@ -69,7 +69,7 @@ FAQ = [
      "buying an investment. You are transferring a specific financial risk for a specific period "
      "at a known price. If the improbable thing happens, the people who depend on you are "
      "not also dealing with money. If you also want a policy that builds value, that is "
-     "<a class=\"link\" href=\"/whole-life-insurance/\">whole life insurance</a>, and it costs "
+     "whole life insurance, and it costs "
      "considerably more."),
 ]
 
@@ -106,8 +106,7 @@ TERM_LENGTHS = [
 def schema():
     return [C.org_schema(),
             C.breadcrumbs([("Home", "/"), ("Term Life Insurance", None)]),
-            C.faq_schema([(q, a.replace('<a class="link" href="/whole-life-insurance/">', '')
-                                 .replace('</a>', '')) for q, a in FAQ]),
+            C.faq_schema(FAQ),
             C.person_schema(PATH)]
 
 
@@ -305,11 +304,11 @@ def body():
         'No medical exam term life</a>',
         eyebrow="No medical exam")
     spokes = C.spoke_module(
-        "Explore term life insurance",
-        "Eleven pages that go deeper on each part of term life.",
+        "Term life insurance guides",
+        "Eleven short articles, each on one part of term life.",
         SPOKES)
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
-    byline = C.byline()
+    byline = C.byline_section("section")
 
     # One h1, one line, one button. The form it points at is the next section
     # but one, so the hero can take a photograph (MASTER.md section 8).
@@ -356,19 +355,36 @@ def body():
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">Get your term life quotes</h2>
-          <p class="reveal mt-5 text-slate">Six questions, about ninety seconds.</p>
+          <p class="reveal mt-5 text-slate">
+            Six questions, about ninety seconds. No payment details, no credit check.
+          </p>
+
+          <p class="reveal mt-6 preflight">
+            {icon("list-checks", 20, "shrink-0 text-navy mt-0.5")}
+            <span><span class="font-semibold text-navy">You'll need:</span> your age, your state,
+            tobacco use, and a phone number. Nothing else.</span>
+          </p>
 
           <div class="reveal mt-8 pt-8 border-t border-rule">
             <p class="text-sm font-semibold text-navy">What happens after you submit</p>
             <ol class="mt-3 grid gap-2 text-sm text-slate">
-              <li>1. A licensed agent reads it. No automated quote engine, no lead broker.</li>
-              <li>2. We run your details past our appointed carriers.</li>
-              <li>3. We reply within {C.SLA} with named carriers and real premiums.</li>
-              <li>4. If nothing fits, we tell you that too.</li>
+              <li>1. A licensed agent reads it. Every submission. No quote engine, no lead broker.</li>
+              <li>2. We run your details past the {C.CARRIERS} carriers we're appointed with.</li>
+              <li>3. You get named carriers and real premiums within {C.SLA}, on a call to the number you give us.</li>
+              <li>4. If nothing fits, we tell you that, and where to look instead.</li>
             </ol>
           </div>
-          <p class="reveal mt-6 inline-flex items-center gap-2 text-sm text-muted">
-            {icon("shield-check", 18, "shrink-0 text-navy")}Your details are never sold to other agencies
+
+          <ul class="reveal mt-8 pt-8 border-t border-rule grid gap-3 text-sm text-slate">
+            <li class="flex items-start gap-3">{icon("shield-check", 18, "shrink-0 text-navy mt-0.5")}<span>Your details stay with us. Not sold, not shared with other agencies or lead buyers.</span></li>
+            <li class="flex items-start gap-3">{icon("badge-check", 18, "shrink-0 text-navy mt-0.5")}<span>Licensed in {C.STATES} states. {C.BRAND}, NPN {C.NPN}.</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 18, "shrink-0 text-navy mt-0.5")}<span>No obligation. One agent calls you, once, and nobody else does.</span></li>
+          </ul>
+
+          <p class="reveal mt-8 text-sm text-slate">
+            <span class="font-semibold text-navy">Rather talk it through?</span>
+            Call {C.phone_link("term_form_side", "link font-semibold inline-flex items-center gap-1 whitespace-nowrap", size=16)},
+            <span class="text-muted">{C.HOURS}.</span>
           </p>
         </div>
       </div>
@@ -443,8 +459,7 @@ def body():
         <p class="mt-6 text-sm text-slate">
           The first three point toward
           <a class="link" href="/compare/term-vs-whole-life-insurance/">a comparison of term and whole life</a>.
-          The last one points toward
-          <a class="link" href="/final-expense-insurance/">final expense insurance</a>.
+          The last one points toward final expense insurance, compared below.
         </p>
       </div>
     </div>
@@ -561,6 +576,15 @@ def body():
   </div>
 </section>
 
+<!-- The three products side by side. Shared with the other two hubs. -->
+{C.product_compare(
+    "term", "How term life differs from whole life and final expense",
+    "Term life is the cheapest way to cover a fixed number of years. The other two last for "
+    "life and cost more for it.",
+    '<a href="#quote" class="btn btn-cta btn-block">Get my term life quote</a>',
+    "Free, no obligation &#183; or call " + C.phone_link("term_compare", "link inline-flex items-center gap-1 whitespace-nowrap", size=14),
+    cls="section")}
+
 <!-- =====================================================================
      6. NO EXAM TEASER.
      ================================================================== -->
@@ -569,7 +593,6 @@ def body():
 <!-- 8. HOW TO APPLY. The same connected stepper as the homepage. -->
 {how_to_apply}
 
-{spokes}
 
 <!-- =====================================================================
      10. FAQ.
@@ -593,14 +616,13 @@ def body():
   </div>
 </section>
 
+<!-- Guides, laid out as blog posts. After the FAQ by client request. -->
+{spokes}
+
 <!-- =====================================================================
      11. BYLINE.
      ================================================================== -->
-<section class="section-tight band">
-  <div class="container-ax">
-    <div class="reveal">{byline}</div>
-  </div>
-</section>
+{byline}
 
 <!-- =====================================================================
      12. FINAL FORM CTA.

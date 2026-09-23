@@ -277,7 +277,9 @@ def body():
      is making the argument is part of the argument, and burying that at
      the foot would be the wrong call.
      ================================================================== -->
-{C.byline_section(cls="section-tight")}
+<section class="section-tight">
+  <div class="container-ax">{C.author_line()}</div>
+</section>
 
 
 {C.prose("Who whole life is not for", not_for,
@@ -366,6 +368,8 @@ def body():
 
 {C.faq_section("Questions people ask about this", FAQ, "whole-worth-faq")}
 
+
+{C.testimonials()}
 
 {C.closing_band("whole-band", "Still undecided? That is a reasonable place to be",
     "Ask us to price term and whole life side by side. If term is the better answer for you, we will say so.",

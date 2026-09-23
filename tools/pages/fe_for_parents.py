@@ -2,7 +2,6 @@
 """FINAL EXPENSE FOR PARENTS. Spec P3, template T4. FORM WEIGHTED.
 
 The one CTA exception in this silo, and the only page in it that does not set
-HTML_CLASS = "fe". Both follow from the same fact: the buyer is the adult child,
 typically 30 to 55, not the insured. Spec s05 says standard type sizes are fine
 here. The calm register is not, and is kept.
 

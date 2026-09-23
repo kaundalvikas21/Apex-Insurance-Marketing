@@ -25,7 +25,6 @@ PATH = "/final-expense-insurance/quotes/"
 OUT = "final-expense-insurance/quotes/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance Quotes | Free, No Obligation"
 OG_TITLE = "Get final expense insurance quotes"
 DESC = ("Free final expense insurance quotes from multiple appointed carriers. No medical "
@@ -201,8 +200,7 @@ def body():
     ("You decide whether to apply",
      "There is no policy until you sign an application and a carrier issues it. If you decide "
      "against it, you owe nothing and we stop contacting you when you ask.", None),
-], intro="Written out step by step.",
-   fe=True)}
+], intro="Written out step by step.")}
 
 
 {C.ask_strip("Ready to talk?", "One call, about fifteen minutes.", C.phone_link("fe_quotes_mid", "btn btn-call", "Call " + C.PHONE_DISPLAY))}
@@ -309,8 +307,10 @@ def body():
                      "<a class=\"link-static\" href=\"/legal/privacy/\">privacy policy</a>.")}
 
 
-{C.faq_section("Final expense quote questions", FAQ, "fe-quotes-faq", size=24)}
+{C.faq_section("Final expense quote questions", FAQ, "fe-quotes-faq")}
 
+
+{C.testimonials()}
 
 {C.closing_band("whole-band", "Ready when you are",
     "One call, about fifteen minutes. Or leave three details and we call you.",

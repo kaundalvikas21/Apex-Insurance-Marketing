@@ -16,7 +16,6 @@ PATH = "/final-expense-insurance/"
 OUT = "final-expense-insurance/index.html"
 ACTIVE = PATH
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance: Cover a Funeral, No Medical Exam | Apex"
 OG_TITLE = "Final expense insurance, explained by a licensed agent"
 DESC = ("Final expense insurance covers funeral and burial costs for ages 50 to 85. No medical "
@@ -128,7 +127,7 @@ def call_band(heading, sub, where, photo=None):
 
 
 def _acc(q, a):
-    return C.acc(q, a, "fe-faq", 24)
+    return C.acc(q, a, "fe-faq")
 
 
 # --- Rate table -----------------------------------------------------------
@@ -239,12 +238,11 @@ def body():
         "missing, call anyway and we will work around it.",
         "fe_repeat_3")
     spokes = C.spoke_module(
-        "Explore final expense insurance",
-        "The nine questions people ask most often about this coverage, each answered in full on "
-        "its own page.",
+        "Final expense insurance guides",
+        "Nine short articles on the questions people ask most often about this coverage.",
         SPOKES)
     call_faq = C.phone_link("fe_faq", "btn btn-call", "Call " + C.PHONE_DISPLAY, 22)
-    byline = C.byline()
+    byline = C.byline_section("section")
     faq_html = "\n        ".join(_acc(q, a) for q, a in FAQ)
 
     how_to_apply = C.steps_section(
@@ -264,7 +262,7 @@ def body():
       Many carriers give a decision on the call. Some take a few days. Either way you will know
       what you have been offered, including any waiting period, before you agree to anything.
     </p>''',
-        cls="section band", fe=True, label="Item")
+        cls="section band", label="Item")
 
     return f"""
 {hero}
@@ -502,52 +500,18 @@ def body():
 <!-- =====================================================================
      6. HOW IT DIFFERS FROM TERM AND WHOLE LIFE.
      ================================================================== -->
-<section class="section band">
-  <div class="container-ax">
-    <div class="max-w-2xl">
-      <h2 class="reveal text-h2">How this differs from term and whole life</h2>
-      <p class="reveal mt-5 text-slate">
-        Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for
-        a different job.
-      </p>
-    </div>
-
-    <div class="reveal mt-10 table-scroll table-signature">
-      <!-- Three columns, one per product. Each fact is a group row above its
-           three cells, so the table never needs a fourth column. -->
-      <table class="compare-table" style="min-width:0">
-        <caption class="sr-only">Final expense compared with term life and whole life insurance</caption>
-        <thead>
-          <tr>
-            <th scope="col">Final expense</th>
-            <th scope="col">Term life</th>
-            <th scope="col">Whole life</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="rowgroup" colspan="3">Typical coverage</th></tr>
-          <tr><td class="tnum">$2,000 to $50,000</td><td class="tnum">$100,000 and up</td><td class="tnum">$25,000 and up</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Medical exam</th></tr>
-          <tr><td>Never</td><td>Often</td><td>Usually</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Typical age</th></tr>
-          <tr><td>50 to 85</td><td>30 to 55</td><td>40 to 65</td></tr>
-          <tr><th scope="rowgroup" colspan="3">How long it lasts</th></tr>
-          <tr><td>For life</td><td>10 to 30 years</td><td>For life</td></tr>
-          <tr><th scope="rowgroup" colspan="3">What it is for</th></tr>
-          <tr><td>A funeral and final bills</td><td>Replacing income</td><td>A lifelong need or an estate</td></tr>
-          <tr><th scope="rowgroup" colspan="3">Time to get covered</th></tr>
-          <tr><td>Often the same day</td><td>Three to six weeks</td><td>Three to six weeks</td></tr>
-        </tbody>
-      </table>
-    </div>
-
+{C.product_compare(
+    "fe", "How this differs from term and whole life",
+    "Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for "
+    "a different job.",
+    C.phone_link("fe_compare", "btn btn-call btn-block whitespace-nowrap", "Call " + C.PHONE_DISPLAY, 20),
+    'Licensed agent, no hold queue &#183; <a class="link" href="#fe-quote">or get a quote online</a>',
+    after="""
     <p class="reveal mt-6 text-slate max-w-3xl">
-      If you are under 60 and in good health and you want a larger amount, look at
-      <a class="link" href="/term-life-insurance/">term life insurance</a> first. It buys far more
-      coverage for the same money, and we will tell you so on the phone.
-    </p>
-  </div>
-</section>
+      If you are under 60 and in good health and you want a larger amount, look at term life
+      insurance first. It buys far more coverage for the same money, and we will tell you so on
+      the phone.
+    </p>""")}
 
 {call_band_2}
 
@@ -633,7 +597,6 @@ def body():
 
 {call_band_3}
 
-{spokes}
 
 <!-- =====================================================================
      10. FAQ.
@@ -657,16 +620,13 @@ def body():
   </div>
 </section>
 
+<!-- Guides, laid out as blog posts. After the FAQ by client request. -->
+{spokes}
+
 <!-- =====================================================================
      11. BYLINE. Spec section 09.5.
      ================================================================== -->
-<section class="section-tight band">
-  <div class="container-ax">
-    <div class="reveal">
-      {byline}
-    </div>
-  </div>
-</section>
+{byline}
 
 <!-- =====================================================================
      12. FINAL: phone CTA and the short form, side by side.

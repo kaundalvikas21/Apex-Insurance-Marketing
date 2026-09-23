@@ -294,6 +294,8 @@ def body():
 {C.faq_section("Term life quote questions", FAQ, "term-quotes-faq")}
 
 
+{C.testimonials()}
+
 {C.closing_band("term-band", "Ready when you are",
     "Six questions, about ninety seconds, and one licensed agent calls you back.",
     "term_quotes_close", quote=("#quote", "Back to the form"))}"""

@@ -231,6 +231,20 @@ Profile feed. **Its `schema()` deliberately emits no `AggregateRating` and no `R
 them only when there is a real rating and a real count: an aggregate rating over zero reviews is a
 fabricated review expressed in structured data, and it is the form search engines penalise hardest.
 
+### 5b. Client video testimonials (September 2026)
+
+`chrome.testimonials()` renders three empty 9:16 `[data-video-slot]` frames with a visible
+`[CLIENT VIDEO TESTIMONIALS PENDING]` flag, on every page except legal, 404, thank-you and
+`/about/reviews/`. `chrome.byline_section()` now emits it plus the compact `author_line()`. To
+launch, swap each slot for the `<video>` in the comment inside it, then remove the flag.
+
+- **Captions are required** (`<track kind="captions">`), and a poster image, `preload="none"`.
+- **FTC 16 CFR 255 and the 2024 fake-review rule.** If a person on screen is a paid creator,
+  an actor, or anyone other than a real client describing their own experience, say so on
+  screen. A real client who was paid or given anything must have that disclosed. UGC made to
+  order is not a client testimonial unless the speaker is a client.
+- No written quotes, names without consent, stars, or `Review`/`AggregateRating` schema.
+
 ---
 
 ## 6. Placeholder links

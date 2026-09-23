@@ -339,6 +339,8 @@ REST = """
   </div>
 </section>
 
+{testimonials}
+
 <!-- =====================================================================
      FINAL CTA, split by intent. Spec section 01.8.
      ================================================================== -->
@@ -373,6 +375,7 @@ REST = """
 
 def rest():
     return REST.format(
+        testimonials=C.testimonials("section"),
         steps=C.steps_section(
             "Three simple steps to get covered",
             "No pressure at any step. Stop whenever you like.",

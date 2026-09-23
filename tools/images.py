@@ -220,8 +220,8 @@ OG_SIZE = (1200, 630)
 HERO_BANNERS = {
     "term-hero": ("Two men and a small child reading a book together on a gray sofa in a bright room.",
                   "right center"),
-    "whole-hero": ("A man and a woman talking across a wooden kitchen table, each with a mug.",
-                   "right center"),
+    "whole-hero": ("A smiling man and woman sitting close together on a pale armchair, her hand on his arm.",
+                   "right top"),  # heads sit high in this frame
     "fe-hero": ("An older woman and a younger woman sitting close on a sofa, holding hands and smiling.",
                 "right center"),
     # The family sits in the lower half of this frame, so it anchors low.

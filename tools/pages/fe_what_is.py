@@ -16,7 +16,6 @@ PATH = "/final-expense-insurance/what-is-final-expense-insurance/"
 OUT = "final-expense-insurance/what-is-final-expense-insurance/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "What Is Final Expense Insurance? | Apex"
 OG_TITLE = "What is final expense insurance?"
 DESC = ("Final expense insurance is a small permanent life policy, usually $2,000 to $50,000, "
@@ -244,7 +243,7 @@ def body():
     "short list of health questions, then tell you what carriers would offer you. If we "
     "think you do not need this, we will tell you that instead.",
     "fe_whatis_mid", "/final-expense-insurance/quotes/", "Or request a call back",
-    phone_first=True, fe=True)}
+    phone_first=True)}
 
 
 {C.prose("How much coverage to buy", SIZING_IT,
@@ -257,7 +256,7 @@ def body():
                 "The other pages on this product, in the order most people need them.", SIBLINGS)}
 
 
-{C.faq_section("Questions about final expense insurance", FAQ, "fe-whatis-faq", size=24)}
+{C.faq_section("Questions about final expense insurance", FAQ, "fe-whatis-faq")}
 
 
 {C.closing_band("whole-band", "Want to know what you would qualify for?",

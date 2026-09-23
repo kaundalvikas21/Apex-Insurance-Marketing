@@ -116,7 +116,9 @@ def body():
     cls="section band")}
 
 
-<section class="section">
+{C.testimonials("section")}
+
+<section class="section band">
   <div class="container-ax">
     <div class="grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7">

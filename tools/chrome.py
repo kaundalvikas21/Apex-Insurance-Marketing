@@ -579,52 +579,69 @@ def crumbs(trail):
                       for p in parts))
 
 
-def byline():
-    """Spec section 09.5. Appears on every hub.
-
-    Two columns at full container width. As a single narrow card it left an
-    identical 368px dead gutter on all three hubs; as two columns the row is
-    full and each column still breaks at a readable measure.
+def author_line():
+    """The byline, compact. It used to be a full card (spec 09.5); the client's
+    third review gave its slot to the testimonial section, so it shrinks to one
+    row. It stays because person_schema() names this agent as the author, and a
+    YMYL page whose author is only in the structured data is worse than one
+    whose author is on the page.
     """
-    return f"""<div class="card">
-      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+    return f"""<div class="reveal author-line">
+      <!-- [REAL AGENT PHOTO REQUIRED] A stock photograph here would present a
+           stranger as the named licensed agent. See MASTER.md s7. -->
+      <div class="avatar-slot avatar-slot-sm shrink-0" aria-hidden="true">{icon("user-check", 20)}</div>
+      <p class="text-sm text-slate">
+        <span class="font-semibold text-navy">Written by {AGENT_NAME}, {AGENT_TITLE}.</span>
+        Reviewed {REVIEW_DATE} &#183; Licensed in {STATES} states &#183; NPN {NPN}
+      </p>
+      <a class="link-static text-sm sm:ml-auto shrink-0" href="/about/agents/">About our licensed agents</a>
+    </div>"""
 
-        <div class="lg:col-span-5 flex items-start gap-5">
-          <!-- [REAL AGENT PHOTO REQUIRED]
-               This slot stays a placeholder on purpose. A stock photograph here
-               would present a stranger as the named licensed agent, which is the
-               same fabrication as an invented testimonial. See MASTER.md s7. -->
-          <div class="avatar-slot shrink-0" aria-hidden="true">
-            {icon("user-check", 26)}
-            <span>Agent<br>photo</span>
-          </div>
-          <div>
-            <!-- Spec section 09.5 requires this exact construction:
-                 "Written by [Agent Name], Licensed Agent, Reviewed [date]". -->
-            <p class="text-h4">Written by {AGENT_NAME}, {AGENT_TITLE}</p>
-            <p class="mt-3 text-micro text-muted">
-              Reviewed {REVIEW_DATE}<br>
-              Licensed in {STATES} states<br>
-              National Producer Number {NPN}
-            </p>
-          </div>
+
+def testimonials(cls="section band", author=False):
+    """Client video testimonials. Three 9:16 slots, empty and visibly flagged.
+
+    No quote, name, star or Review schema is written here, not even a marked
+    one: an invented testimonial is the fabrication MASTER.md s7 bans. The UGC
+    videos drop in as <video> elements, one per slot (see the comment in the
+    slot). `author=True` closes the section with author_line(), which is how it
+    takes the old byline's place.
+    """
+    slot = f"""
+      <li class="reveal">
+        <!-- REPLACE WITH: <video controls preload="none" playsinline
+               poster="/assets/video/<name>.jpg" class="video-frame">
+               <source src="/assets/video/<name>.mp4" type="video/mp4">
+               <track kind="captions" src="/assets/video/<name>.vtt" srclang="en" label="English" default>
+             </video>
+             then a <p> with the client's first name and state, and the
+             FTC disclosure if they were paid or given anything. -->
+        <div class="video-slot" data-video-slot>
+          <span class="video-slot-play">{icon("play", 26)}</span>
+          <span>Client video</span>
         </div>
-
-        <div class="lg:col-span-7">
-          <p class="text-slate">
-            This page is written and kept current by a licensed agent who places these policies.
-            Where a figure comes from a carrier rate card, the card and its date are named on the
-            page. Where something depends on your state or your health, we say so instead of
-            rounding it off.
-          </p>
-          <p class="mt-4 text-slate">
-            If you find something here that is out of date or wrong, tell us and we will correct it
-            and change the review date. That is the whole point of printing one.
-          </p>
-          <a class="link-static mt-5 inline-block text-sm" href="/about/agents/">About our licensed agents</a>
+      </li>"""
+    tail = ('\n    <div class="mt-12">%s</div>' % author_line()) if author else ""
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+      <div class="lg:col-span-4">
+        <h2 class="reveal text-h2">What our clients say</h2>
+        <p class="reveal mt-5 text-slate">
+          Short videos from people we have placed a policy for, in their own words.
+        </p>
+        <div class="reveal mt-6">
+          {flag("Three video slots, empty until the client videos arrive. Real clients only, "
+                "captioned, and if anyone on screen was paid, given anything, or is not a client, "
+                "say so on screen (FTC 16 CFR 255). Never add a written quote here.",
+                "CLIENT VIDEO TESTIMONIALS PENDING")}
         </div>
       </div>
-    </div>"""
+      <ul class="lg:col-span-8 grid grid-cols-3 gap-3 sm:gap-5" data-stagger="60">{slot * 3}
+      </ul>
+    </div>{tail}
+  </div>
+</section>"""
 
 
 def acc(q, a, group, size=22):
@@ -686,14 +703,25 @@ def faq_ask(group, cls="max-w-3xl"):
     </div>"""
 
 
+POST_TAG = [("/term-life-insurance/", "Term life"), ("/whole-life-insurance/", "Whole life"),
+            ("/final-expense-insurance/", "Final expense"), ("/compare/", "Compare")]
+
+
 def spoke_module(heading, intro, spokes):
-    """Visible in-page module linking DOWN to every spoke in the silo.
-    spokes: [(href, anchor_text, one_line_description)]"""
+    """Visible in-page module linking DOWN to every spoke in the silo, laid out
+    as blog posts (client review, September 2026). Each card is still one <a>,
+    so it is still one link per target. No thumbnails: there are four
+    photographs on the whole site, and the same one on eleven cards reads as
+    filler. spokes: [(href, anchor_text, one_line_description)]"""
+    def tag(href):
+        return next((t for p, t in POST_TAG if href.startswith(p)), "Guide")
     items = "".join(f"""
         <li class="reveal">
-          <a href="{href}" class="tile">
-            <span class="text-h4 text-ink">{text}</span>
+          <a href="{href}" class="tile post-card">
+            <span class="post-tag">{icon("book-open", 16, "shrink-0")}{tag(href)} guide</span>
+            <span class="mt-4 text-h4 text-ink">{text}</span>
             <span class="mt-2 text-sm text-muted">{desc}</span>
+            <span class="post-more">Read article{icon("arrow-right", 16, "shrink-0")}</span>
           </a>
         </li>""" for href, text, desc in spokes)
     return f"""<section class="section band">
@@ -704,6 +732,99 @@ def spoke_module(heading, intro, spokes):
     </div>
     <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">{items}
     </ul>
+  </div>
+</section>"""
+
+
+# ---------------------------------------------------------------------------
+# PRODUCT COMPARISON. One table, three hubs: each passes which product it is
+# and its own CTA; the facts live here only (client review, September 2026).
+# ---------------------------------------------------------------------------
+PRODUCTS = {
+    "term": ("Term life", "/term-life-insurance/",
+             "The most coverage per dollar, for a fixed number of years."),
+    "whole": ("Whole life", "/whole-life-insurance/",
+              "Lifelong coverage at a larger face amount, with cash value."),
+    "fe": ("Final expense", "/final-expense-insurance/",
+           "A small policy, no exam, built for funeral and final bills."),
+}
+COMPARE_ROWS = [
+    ("Typical coverage", {"fe": "$2,000 to $50,000", "term": "$100,000 and up", "whole": "$25,000 and up"}, "big"),
+    ("Medical exam", {"fe": "Never", "term": "Often", "whole": "Usually"}, "pill"),
+    ("Typical age", {"fe": "50 to 85", "term": "30 to 55", "whole": "40 to 65"}, ""),
+    ("How long it lasts", {"fe": "For life", "term": "10 to 30 years", "whole": "For life"}, ""),
+    ("What it is for", {"fe": "A funeral and final bills", "term": "Replacing income",
+                        "whole": "A lifelong need or an estate"}, ""),
+    ("Time to get covered", {"fe": "Often the same day", "term": "Three to six weeks",
+                             "whole": "Three to six weeks"}, ""),
+]
+# Shown under a cell, in the current product's column only.
+COMPARE_NOTES = {("fe", "Medical exam"): "A short set of health questions instead.",
+                 ("term", "Medical exam"): "Many healthy applicants now skip it."}
+# The one cell per product set in blue: its strongest line.
+COMPARE_ACCENT = {"fe": "Time to get covered", "term": "Typical coverage", "whole": "How long it lasts"}
+
+
+def product_compare(current, heading, lead, cta, micro, cls="section band", after=""):
+    """The three products side by side, the current page's column raised as a
+    card. The "See ..." links are each hub's one body link to its siblings, so
+    a hub using this must not link them again in prose (linking rule 3).
+    `cta` and `micro` are finished HTML for the current column's footer."""
+    order = [current] + [k for k in ("term", "whole", "fe") if k != current]
+
+    def cur(k):
+        return " pc-current" if k == current else ""
+
+    heads = "".join(f"""
+            <th scope="col" class="pc-head{cur(k)}">
+              <span class="pc-name">{PRODUCTS[k][0]}</span>{' <span class="pc-this">This page</span>' if k == current else ""}
+              <span class="pc-tag">{PRODUCTS[k][2]}</span>
+            </th>""" for k in order)
+
+    def cell(label, k, value, kind):
+        v = '<span class="pc-pill">%s</span>' % value if kind == "pill" else value
+        classes = "pc-big" if kind == "big" else ""
+        if k == current and COMPARE_ACCENT[k] == label:
+            classes += " pc-accent"
+        note = COMPARE_NOTES.get((k, label)) if k == current else None
+        note = '<span class="pc-note">%s</span>' % note if note else ""
+        return '<td class="%s%s">%s%s</td>' % (classes.strip(), cur(k), v, note)
+
+    rows = "".join(
+        '\n            <tr><th scope="row">%s</th>%s</tr>'
+        % (label, "".join(cell(label, k, vals[k], kind) for k in order))
+        for label, vals, kind in COMPARE_ROWS)
+    foot = "".join(
+        f"""<td class="pc-current">{cta}<p class="mt-2 text-micro text-muted">{micro}</p></td>"""
+        if k == current else
+        f"""<td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="{PRODUCTS[k][1]}">See {PRODUCTS[k][0].lower()}{icon("arrow-right", 16, "shrink-0")}</a></td>"""
+        for k in order)
+    return f"""<section class="{cls}">
+  <div class="container-ax">
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">{heading}</h2>
+      <p class="reveal mt-5 text-slate">{lead}</p>
+    </div>
+
+    <!-- .reveal sits on the scroll container itself (see CLAUDE.md). -->
+    <div class="reveal mt-10 table-scroll pc-scroll">
+      <table class="pc-table">
+        <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>
+        <caption class="sr-only">{PRODUCTS[current][0]} compared with {PRODUCTS[order[1]][0].lower()} and {PRODUCTS[order[2]][0].lower()} insurance</caption>
+        <thead>
+          <tr>
+            <td class="pc-corner"></td>{heads}
+          </tr>
+        </thead>
+        <tbody>{rows}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>{foot}
+          </tr>
+        </tfoot>
+      </table>
+    </div>{after}
   </div>
 </section>"""
 
@@ -1247,13 +1368,10 @@ def inline_cta(heading, body, where, href, cta_label, phone_first=False,
 </section>"""
 
 
-def byline_section(cls="section-tight band"):
-    """The byline in its own band. Every editorial page ends with this."""
-    return f"""<section class="{cls}">
-  <div class="container-ax">
-    <div class="reveal">{byline()}</div>
-  </div>
-</section>"""
+def byline_section(cls="section band"):
+    """Testimonials plus the compact author line. Every editorial page ends
+    with this; it is the old byline's slot."""
+    return testimonials(cls, author=True)
 
 
 def prose(heading, blocks, intro=None, cls="section", aside=None, media=None, sticky=True):

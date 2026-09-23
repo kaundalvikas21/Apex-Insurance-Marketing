@@ -326,6 +326,8 @@ def body():
 {C.faq_section("Whole life quote questions", FAQ, "whole-quotes-faq")}
 
 
+{C.testimonials()}
+
 {C.closing_band("whole-band", "Ready when you are",
     "Five questions, or one call. Either way you reach a licensed agent.",
     "whole_quotes_close", quote=("#wl-quotes-form", "Back to the form"))}"""

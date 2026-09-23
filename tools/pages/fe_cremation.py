@@ -23,7 +23,6 @@ PATH = "/final-expense-insurance/cremation-insurance/"
 OUT = "final-expense-insurance/cremation-insurance/index.html"
 ACTIVE = "/final-expense-insurance/"
 SILO = "final-expense"
-HTML_CLASS = "fe"
 TITLE = "Final Expense Insurance for Cremation Costs | Apex"
 OG_TITLE = "Insurance for cremation costs"
 DESC = ("A cremation costs less than a burial, so the policy that covers it is smaller. How to "
@@ -191,7 +190,7 @@ def body():
                "from one part of the country to another that a national average would point you "
                "at the wrong number. Fifteen minutes of your own research beats anything we "
                "could publish.",
-         SIZING, cls="section band", fe=True)}
+         SIZING, cls="section band")}
 
 
 {C.inline_cta(
@@ -201,7 +200,7 @@ def body():
     "would offer. If the amount you have picked looks higher than you need, we will say "
     "so.",
     "fe_cremation_mid", "/final-expense-insurance/quotes/", "Or request a call back",
-    phone_first=True, fe=True)}
+    phone_first=True)}
 
 
 {C.prose("Two conversations to have before you buy", TELL_THEM,
@@ -213,7 +212,7 @@ def body():
                 "The same product under its other names, and what it costs.", SIBLINGS)}
 
 
-{C.faq_section("Questions about cremation insurance", FAQ, "fe-cremation-faq", size=24)}
+{C.faq_section("Questions about cremation insurance", FAQ, "fe-cremation-faq")}
 
 
 {C.closing_band("whole-band", "Buy only what a cremation needs",

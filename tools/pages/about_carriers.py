@@ -182,9 +182,7 @@ def body():
 {C.faq_section("Questions about carriers and appointments", FAQ, "carriers-faq")}
 
 
-<section class="section-tight band-surface hairline">
-  <div class="container-ax">{C.byline()}</div>
-</section>
+{C.byline_section()}
 
 
 {closing}"""
