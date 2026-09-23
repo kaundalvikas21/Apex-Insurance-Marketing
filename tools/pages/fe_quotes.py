@@ -280,7 +280,6 @@ def body():
         caption="Monthly premium by age band and coverage amount.",
         row_cta="call",
         cta_location="fe_quotes_rate_row",
-        min_width="26rem",
         top_margin="mt-8",
         aside="Non tobacco, level benefit. Tobacco rates are higher.")}
 

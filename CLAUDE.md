@@ -125,7 +125,7 @@ new JS, check whether one of these contracts already covers what you need:
 
 `submitLead()` is the single CRM integration point, marked `>>> WIRE TO CRM ENDPOINT HERE <<<`.
 It currently `console.log`s and resolves. Validators available via `data-validate`: `email`,
-`phone`, `age` (18–85), `ageSenior` (50–85), `name`.
+`phone`, `age` (18–85), `ageSenior` (50–85), `dobSenior` (a date of birth, 50–85), `name`.
 
 Set `window.AX_FAIL_SUBMIT = true` (or `"offline"`) to make `submitLead()` reject and see the failure state. Set `window.AX_DEBUG = true` in the console to log every GA4 event. Events: `form_start`,
 `form_submit`, `call_click`, `calculator_complete`, `triage_complete`, `dialog_open`, `dialog_cta`, `form_error` (reason only). **Never put PII or personal

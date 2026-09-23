@@ -170,6 +170,14 @@
   @media (min-width: 768px) { .section-tight { padding-block: 4rem; } }
 
   .band { background-color: var(--color-navy-050); }
+  /* chrome.ask_strip() has no top padding: it sits in the gap the section
+     above leaves. After a tinted or white section that gap is a different
+     colour, and the card straddled the edge (term hub, September 2026). So
+     it takes the section's ground and reads as that section's closing ask,
+     and the section gives up some bottom padding to keep the gap even. */
+  .band + .ask-strip { background-color: var(--color-navy-050); }
+  .band-surface + .ask-strip { background-color: var(--color-surface); }
+  :is(.band, .band-surface):has(+ .ask-strip) { padding-bottom: 2.5rem; }
   .band-navy { background-color: var(--color-navy); color: #fff; }
   .band-navy h2, .band-navy h3, .band-navy h4 { color: #fff; }
   .band-surface { background-color: var(--color-surface); }
@@ -419,6 +427,31 @@
   }
   .post-card:hover .post-more { text-decoration: underline; text-underline-offset: 3px; }
 
+  /* Final expense waiting-period and who-qualifies cards. The rank tag and
+     icon name the type at rest (never colour alone); the <dl> rows line up
+     across all three. No coloured top rule: a stripe on a rounded card is
+     template filler (client review, September 2026). The tone shows on
+     hover instead, as a border and a deeper shadow. No lift: these cards
+     are not links, and lift is how this site says "clickable". */
+  .wp-card {
+    --wp: var(--color-navy-700);
+    transition: border-color .2s ease-out, box-shadow .2s ease-out;
+  }
+  .wp-card:hover { border-color: var(--wp); box-shadow: var(--shadow-lift); }
+  .wp-level { --wp: var(--color-green); }
+  .wp-gi { --wp: var(--color-border-strong); }
+  .wp-icon { color: var(--wp); }
+  .wp-rank {
+    align-self: flex-start; padding: 0.25rem 0.625rem; border-radius: 999px;
+    background-color: color-mix(in srgb, var(--wp) 12%, transparent); color: var(--wp);
+    font-size: var(--text-micro); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .wp-gi .wp-rank, .wp-gi .wp-icon { color: var(--color-slate); }
+  .wp-facts { margin-top: 1.25rem; border-top: 1px solid var(--color-rule); }
+  .wp-facts > div { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.625rem; border-bottom: 1px solid var(--color-rule); }
+  .wp-facts dt { font-size: var(--text-sm); color: var(--color-muted); }
+  .wp-facts dd { margin: 0; font-size: var(--text-sm); font-weight: 600; color: var(--color-ink); text-align: right; }
+
   /* Client video testimonial slot. Dashed like .avatar-slot: it must never
      read as a filled video until a real one replaces it. */
   .video-slot {
@@ -471,7 +504,13 @@
   }
 
   /* --- Forms ------------------------------------------------------------ */
-  .field { display: block; margin-bottom: 0.875rem; }
+  /* The reserved error line under every control (.field-foot) IS the gap to
+     the next field: 0.25rem + one micro line + 0.25rem, about 24px. A full
+     margin on top of it read as dead space between fields (client review,
+     September 2026). A field with a hint keeps a little more, or the hint
+     reads as if it belongs to the label below it. */
+  .field { display: block; margin-bottom: 0.25rem; }
+  .field:has(.field-hint) { margin-bottom: 0.625rem; }
   .field-label {
     display: block;
     font-size: var(--text-sm);
@@ -502,10 +541,7 @@
      hint reads as if it belongs to the label below it. The reserve itself is
      untouched, so an error still cannot move the submit button. */
   @container (max-width: 25.99rem) {
-    .field { margin-bottom: 0.25rem; }
-    .field:has(.field-hint) { margin-bottom: 0.625rem; }
     .field-label { margin-bottom: 0.25rem; }
-    .field-foot { margin-top: 0.25rem; }
     /* .consent is declared further down the file, so it needs the extra
        specificity to win at equal weight. */
     [data-ax-form] .consent { padding: 0.75rem; margin-bottom: 0.75rem; }
@@ -514,7 +550,7 @@
   /* The hint and the error share one reserved cell under the control. It is
      always in the layout, so the submit button never moves between mousedown
      and mouseup; an error simply takes the hint's place. */
-  .field-foot { display: grid; margin-top: 0.375rem; min-height: 1.35em; }
+  .field-foot { display: grid; margin-top: 0.25rem; min-height: 1.35em; }
   .field-foot > * { grid-area: 1 / 1; margin: 0; }
   .field-foot:has(.field-error.is-shown) .field-hint { visibility: hidden; }
 
@@ -761,6 +797,17 @@
     transition: background-color .15s ease-out, color .15s ease-out;
   }
   .btn-row:hover { background-color: var(--color-navy); color: #fff; }
+  /* Rate tables on a phone: the row action shrinks to its icon so the column
+     stays on screen. The words remain the button's accessible name. */
+  @media (max-width: 639px) {
+    .rate-table th, .rate-table td { padding-inline: 0.75rem; }
+    .rate-table thead th { white-space: normal; }
+    .rate-table .btn-row { padding-inline: 0.625rem; }
+    .rate-table .btn-row-label {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+  }
 
   .compare-table {
     width: 100%;
@@ -844,13 +891,16 @@
   .pc-table td.pc-current { color: var(--color-ink); font-weight: 600; }
   .pc-table td.pc-accent { color: var(--color-navy); }
   .pc-table tfoot td { padding-block: 1.5rem; border-top: 1px solid var(--color-rule); }
+  /* The current page's column: one continuous 2px blue outline, rounded at
+     both ends. No top stripe (a stripe on a rounded card is template filler),
+     and no amber: amber is the CTA's alone, and the column's CTA sits in it. */
   .pc-table .pc-current {
     background-color: var(--color-surface);
-    border-left: 1px solid var(--color-rule);
-    border-right: 1px solid var(--color-rule);
+    border-left: 2px solid var(--color-navy-700);
+    border-right: 2px solid var(--color-navy-700);
   }
-  .pc-table thead .pc-current { border-top: 3px solid var(--color-navy-700); border-radius: var(--radius-ax) var(--radius-ax) 0 0; }
-  .pc-table tfoot .pc-current { border-bottom: 1px solid var(--color-rule); border-radius: 0 0 var(--radius-ax) var(--radius-ax); box-shadow: 0 12px 24px -12px rgb(11 59 140 / 0.18); font-weight: 400; text-align: center; }
+  .pc-table thead .pc-current { border-top: 2px solid var(--color-navy-700); border-radius: var(--radius-ax) var(--radius-ax) 0 0; }
+  .pc-table tfoot .pc-current { border-bottom: 2px solid var(--color-navy-700); border-radius: 0 0 var(--radius-ax) var(--radius-ax); box-shadow: 0 12px 24px -12px rgb(11 59 140 / 0.18); font-weight: 400; text-align: center; }
   .pc-table tfoot .pc-current .text-muted { color: var(--color-muted); }
   /* Column widths live on <colgroup> (fixed layout honours them). On a phone
      the label column narrows and the highlighted column is sized to its CTA,
@@ -1365,23 +1415,6 @@
     background-color: var(--color-navy-050);
     border-radius: 999px;
   }
-
-  /* Status cards: "which group am I in". A coloured rail plus an icon plus a
-     label, so the status never depends on colour alone. No amber and no red:
-     amber is the CTA's, and none of these is an error. Static, so fe safe. */
-  .status-card {
-    display: flex; align-items: flex-start; gap: 0.875rem;
-    padding: 1.125rem 1.25rem;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-rule);
-    border-left-width: 4px;
-    border-radius: var(--radius-ax);
-  }
-  .status-good { border-left-color: var(--color-green); }
-  .status-mid  { border-left-color: var(--color-navy-700); }
-  .status-last { border-left-color: var(--color-border-strong); }
-  .status-label { font-size: var(--text-h4); font-weight: 600; color: var(--color-ink); line-height: 1.3; }
-  .status-means { margin-top: 0.25rem; font-size: var(--text-sm); font-weight: 600; color: var(--color-navy); }
 
   /* The example conditions, on demand. The status and what it means stay
      visible: only the evidence folds, so the card answers "which group am I

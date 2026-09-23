@@ -846,7 +846,7 @@ def ask_strip(title, note, button_html):
     of prose sections, where the reader is otherwise 900 words from any action.
     Quieter than inline_cta() on purpose: it is a way out, not a pitch. It has
     no top padding, so it sits in the gap the section above already leaves."""
-    return f"""<section class="pb-14 md:pb-16">
+    return f"""<section class="ask-strip pb-14 md:pb-16">
   <div class="container-ax">
     <div class="reveal steps-cta !mt-0">
       <div>
@@ -1028,12 +1028,11 @@ def rates_flag(what):
 
 # ---------------------------------------------------------------------------
 # T2: THE RATE CHART
-# Generalised from the term hub's rate_table() so the three P1 rate pages
-# (term rates, whole life rates, final expense cost) share one implementation.
-#
-# The hubs deliberately keep their own copies. They are approved and signed
-# off, and refactoring them onto this would risk changing their rendered output
-# for no visible gain.
+# The ONE premium table on the site (client review, September 2026: "one
+# layout, different content"). Every rate table renders through this: the
+# three hubs, /get-a-quote/, and the quote, rate and cost pages. Only the
+# 10 year term renewal schedule is its own table, because it is a schedule by
+# policy year, not a price by age.
 #
 # Every cell is `$--` by decision (MASTER.md s7): no invented premium, even a
 # marked one, because a marked fake number still gets screenshotted. The
@@ -1051,13 +1050,14 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
     rows      [(band_label, prefill_dict_or_None)].
     toggles   [(legend, radio_name, [(value, label)], prefill_name_or_None)].
               The first option of each is checked.
-    row_cta   None, "prefill", or "call".
-              "prefill" adds a trailing cell per row whose button writes the
-              row's numbers into `prefill_target` (site.js section 7), merging
-              in whatever the toggles above are currently set to.
-              "call" puts a click-to-call under the age label INSIDE the row
-              header, which is how the final expense pages stay at three
-              columns. Phone weighted silos use this.
+    row_cta   None, "prefill", or "call". Either way the action is a trailing
+              "Quote this" cell at the end of the row, so every table reads
+              band, prices, action.
+              "prefill" writes the row's numbers into `prefill_target`
+              (site.js section 7), merging in whatever the toggles above are
+              currently set to. "call" is click-to-call, for the phone
+              weighted silos.
+    toggles   may be empty: the toggle row is then left out.
     aside     optional paragraph rendered beside the toggles.
     """
     def toggle(legend, name, options, prefill_name):
@@ -1075,28 +1075,30 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
         toggle_html += '<p class="text-sm text-muted">%s</p>' % aside
 
     heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in cols)
-    if row_cta == "prefill":
+    if row_cta:
         heads += '<th scope="col"><span class="sr-only">Get a quote for this row</span></th>'
 
+    # The label hides visually on a phone (CSS) and stays as the accessible
+    # name, so a narrow table keeps its action column on screen.
+    LABEL = '<span class="btn-row-label">Quote this</span>'
     body_rows = []
     for band, prefill in rows:
         cells = "".join('<td class="tnum">$--</td>' for _ in cols)
         if row_cta == "call":
-            # Under the age label, not in its own column: a fourth column would
-            # break the three column ceiling the senior pages are held to.
-            head = ('<th scope="row"><span class="block">%s</span>%s</th>'
-                    % (band, phone_link(cta_location, "btn-row mt-2", "Quote this", 18)))
-            body_rows.append("<tr>%s%s</tr>" % (head, cells))
+            body_rows.append('<tr><th scope="row">%s</th>%s<td>%s</td></tr>'
+                             % (band, cells, phone_link(cta_location, "btn-row", LABEL, 16, wrap_num=False)))
         elif row_cta == "prefill":
             btn = ('<button type="button" class="btn-row" data-prefill=\'%s\' '
-                   'data-prefill-target="%s">Quote this %s</button>'
+                   'data-prefill-target="%s">%s%s</button>'
                    % (json.dumps(prefill, separators=(",", ":")), prefill_target,
-                      icon("arrow-right", 16)))
+                      LABEL, icon("arrow-right", 16)))
             body_rows.append('<tr><th scope="row">%s</th>%s<td>%s</td></tr>' % (band, cells, btn))
         else:
             body_rows.append('<tr><th scope="row">%s</th>%s</tr>' % (band, cells))
     body = "\n            ".join(body_rows)
 
+    toggle_row = ('<div class="reveal %s %s">\n        %s\n      </div>'
+                  % (top_margin, toggle_grid, toggle_html)) if toggle_html else ""
     tail = note or ("Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, "
                     "state, health, and tobacco use. A rate table is an illustration of shape, "
                     "not an offer of coverage.")
@@ -1104,9 +1106,7 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
     return f"""
     <div data-panels="{panels_id}">
 
-      <div class="reveal {top_margin} {toggle_grid}">
-        {toggle_html}
-      </div>
+      {toggle_row}
 
       <!-- INTEGRATION POINT: every cell below is a structural placeholder.
            Populate from the carrier rate cards keyed by (toggle state, age

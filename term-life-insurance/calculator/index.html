@@ -141,7 +141,8 @@
             <span class="field-hint block font-normal">What the household would stop receiving.</span>
           </label>
           <input class="input" id="calc-income" name="income" type="text" inputmode="numeric"
-                 autocomplete="off" value="60000" data-calc-field="income">
+                 autocomplete="off" value="60000" placeholder="Amount in dollars"
+                 data-calc-field="income">
         </div>
               <div class="field">
           <label class="field-label" for="calc-years">Years of income to replace
@@ -154,7 +155,8 @@
             <span class="field-hint block font-normal">The balance you owe, not the monthly payment.</span>
           </label>
           <input class="input" id="calc-debt" name="debt" type="text" inputmode="numeric"
-                 autocomplete="off" value="210000" data-calc-field="debt">
+                 autocomplete="off" value="210000" placeholder="Amount in dollars"
+                 data-calc-field="debt">
         </div>
               <div class="field">
           <label class="field-label" for="calc-children">Children who would need support
@@ -173,7 +175,8 @@
             <span class="field-hint block font-normal">Include employer coverage and liquid savings.</span>
           </label>
           <input class="input" id="calc-existing" name="existing" type="text" inputmode="numeric"
-                 autocomplete="off" value="200000" data-calc-field="existing">
+                 autocomplete="off" value="200000" placeholder="Amount in dollars"
+                 data-calc-field="existing">
         </div>
             </div>
             <p class="mt-2 text-micro text-muted">
@@ -373,7 +376,7 @@
 <div class="field-row">
 <div class="field">
               <label class="field-label" for="tcq-age">How old are you?</label>
-              <input class="input" id="tcq-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <input class="input" id="tcq-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
               <div class="field-foot"><p class="field-hint">The biggest factor in the price.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 <div class="field">
@@ -422,7 +425,7 @@
             </div>
 <div class="field">
               <label class="field-label" for="tcq-phone">Best number to reach you</label>
-              <input class="input" id="tcq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <input class="input" id="tcq-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-hint">One agent calls, once.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 </div><!-- TCPA consent. Separate, unchecked, immediately above submit.

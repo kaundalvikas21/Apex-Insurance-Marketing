@@ -216,7 +216,7 @@
 <div class="field-row">
 <div class="field">
               <label class="field-label" for="th-age">How old are you?</label>
-              <input class="input" id="th-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <input class="input" id="th-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
               <div class="field-foot"><p class="field-hint">The biggest factor in the price.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 <div class="field">
@@ -265,7 +265,7 @@
             </div>
 <div class="field">
               <label class="field-label" for="th-phone">Best number to reach you</label>
-              <input class="input" id="th-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <input class="input" id="th-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-hint">One agent calls, once.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 </div><!-- TCPA consent. Separate, unchecked, immediately above submit.
@@ -490,7 +490,7 @@
   </div>
 </section>
 
-<section class="pb-14 md:pb-16">
+<section class="ask-strip pb-14 md:pb-16">
   <div class="container-ax">
     <div class="reveal steps-cta !mt-0">
       <div>
@@ -524,21 +524,18 @@
     <div data-panels="term-rates">
 
       <div class="reveal mt-8 grid sm:grid-cols-[7fr_4fr_4fr] gap-6 max-w-3xl">
-        <fieldset><legend class="field-label">Term length</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-length" value="20" checked data-prefill-name="term_length"><span>20 years</span></label><label class="choice"><input type="radio" name="term-rate-length" value="10" data-prefill-name="term_length"><span>10 years</span></label><label class="choice"><input type="radio" name="term-rate-length" value="30" data-prefill-name="term_length"><span>30 years</span></label></div></fieldset>
-        <fieldset><legend class="field-label">Sex</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-sex" value="female" checked data-prefill-name="sex"><span>Female</span></label><label class="choice"><input type="radio" name="term-rate-sex" value="male" data-prefill-name="sex"><span>Male</span></label></div></fieldset>
-        <fieldset><legend class="field-label">Tobacco</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-tobacco" value="no" checked data-prefill-name="tobacco"><span>No</span></label><label class="choice"><input type="radio" name="term-rate-tobacco" value="yes" data-prefill-name="tobacco"><span>Yes</span></label></div></fieldset>
+        <fieldset><legend class="field-label">Term length</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-length" value="20" checked data-prefill-name="term_length"><span>20 years</span></label><label class="choice"><input type="radio" name="term-rate-length" value="10" data-prefill-name="term_length"><span>10 years</span></label><label class="choice"><input type="radio" name="term-rate-length" value="30" data-prefill-name="term_length"><span>30 years</span></label></div></fieldset><fieldset><legend class="field-label">Sex</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-sex" value="female" checked data-prefill-name="sex"><span>Female</span></label><label class="choice"><input type="radio" name="term-rate-sex" value="male" data-prefill-name="sex"><span>Male</span></label></div></fieldset><fieldset><legend class="field-label">Tobacco</legend><div class="choice-row"><label class="choice"><input type="radio" name="term-rate-tobacco" value="no" checked data-prefill-name="tobacco"><span>No</span></label><label class="choice"><input type="radio" name="term-rate-tobacco" value="yes" data-prefill-name="tobacco"><span>Yes</span></label></div></fieldset>
       </div>
 
       <!-- INTEGRATION POINT: every cell below is a structural placeholder.
-           When the carrier rate cards arrive, populate the cells from the
-           dataset keyed by (term length, sex, tobacco, age band, coverage)
-           and have the toggles above rewrite them. Until then the toggles
-           update the caption only, and nothing on this page can be mistaken
-           for a real quoted premium. -->
+           Populate from the carrier rate cards keyed by (toggle state, age
+           band, coverage) and have the toggles above rewrite them. Until then
+           the toggles update the caption only, and nothing here can be
+           mistaken for a real quoted premium. -->
       <!-- .reveal sits on the scroll container itself. A transformed wrapper
            around a scrolling table leaks the table's width into the page
            until the section reveals. -->
-      <div class="reveal mt-8 table-scroll table-signature">
+      <div class="reveal mt-6 table-scroll table-signature">
         <table class="rate-table" style="min-width:48rem">
           <caption>
             Monthly premium by age band and coverage amount.
@@ -547,18 +544,17 @@
           <thead>
             <tr>
               <th scope="col">Age at application</th>
-              <th scope="col" class="tnum">$250,000</th><th scope="col" class="tnum">$500,000</th><th scope="col" class="tnum">$1,000,000</th>
-              <th scope="col"><span class="sr-only">Get a quote for this row</span></th>
+              <th scope="col" class="tnum">$250,000</th><th scope="col" class="tnum">$500,000</th><th scope="col" class="tnum">$1,000,000</th><th scope="col"><span class="sr-only">Get a quote for this row</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">30 to 34</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"32","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">35 to 39</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"37","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">40 to 44</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"42","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">45 to 49</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"47","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">50 to 54</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"52","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">55 to 59</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"57","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
-            <tr><th scope="row">60 to 65</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"62","coverage":"500000"}' data-prefill-target="term-quote-form">Quote this <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">30 to 34</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"32","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">35 to 39</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"37","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">40 to 44</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"42","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">45 to 49</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"47","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">50 to 54</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"52","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">55 to 59</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"57","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
+            <tr><th scope="row">60 to 65</th><td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td><td><button type="button" class="btn-row" data-prefill='{"age":"62","coverage":"500000"}' data-prefill-target="term-quote-form"><span class="btn-row-label">Quote this</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></td></tr>
           </tbody>
         </table>
       </div>
@@ -566,10 +562,7 @@
 
     <p class="reveal mt-4 text-micro text-muted max-w-3xl">
       <span class="pill mr-2">Rates last updated: [DATE]</span>
-      Source: [CARRIER RATE CARD NAME AND EDITION].
-      Premiums vary by carrier, state, health, build, family history, and tobacco use. A rate table
-      is an illustration of shape, not an offer of coverage. Your rate class is decided by the
-      carrier after underwriting.
+      Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, state, health, build, family history, and tobacco use. A rate table is an illustration of shape, not an offer of coverage. Your rate class is decided by the carrier after underwriting.
     </p>
     </div>
   </div>
@@ -997,7 +990,7 @@
 <div class="field-row">
 <div class="field">
               <label class="field-label" for="tf-age">How old are you?</label>
-              <input class="input" id="tf-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <input class="input" id="tf-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
               <div class="field-foot"><p class="field-hint">The biggest factor in the price.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 <div class="field">
@@ -1031,7 +1024,7 @@
 <legend class="sr-only">How to reach you</legend>
 <div class="field">
               <label class="field-label" for="tf-phone">Best number to reach you</label>
-              <input class="input" id="tf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <input class="input" id="tf-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-hint">One agent calls, once. We ask what you want to cover on that call.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div><!-- TCPA consent. Separate, unchecked, immediately above submit.
                  [PENDING LEGAL REVIEW] Wording must be approved by counsel and

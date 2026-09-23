@@ -178,19 +178,6 @@ def quote_form():
             icon_size=30, indent=8)}"""
 
 
-def rate_rows():
-    rows = []
-    for band, mid in AGE_BANDS:
-        prefill = '{"age":"%s"}' % mid
-        btn = ('<button type="button" class="btn-row" data-prefill=\'%s\' '
-               'data-prefill-target="quote-form">Quote this %s</button>'
-               % (prefill, icon("arrow-right", 16)))
-        rows.append('<tr><th scope="row">%s</th>'
-                    '<td class="tnum">$--</td><td class="tnum">$--</td><td class="tnum">$--</td>'
-                    '<td>%s</td></tr>' % (band, btn))
-    return "\n            ".join(rows)
-
-
 def body():
     # The closing ask. Inset, because a flat navy band here sat directly on the
     # navy footer and read as part of it. The photograph is at the far end of
@@ -358,31 +345,16 @@ def body():
 
     <div class="reveal mt-8 max-w-3xl">{C.rates_flag("premiums")}</div>
 
-    <div class="reveal mt-8 table-scroll table-signature">
-      <table class="rate-table" style="min-width:44rem">
-        <caption>Indicative monthly premium by age, non-tobacco, for a representative policy in each product.</caption>
-        <thead>
-          <tr>
-            <th scope="col">Age at application</th>
-            <th scope="col" class="tnum">Term life, $250,000</th>
-            <th scope="col" class="tnum">Whole life, $25,000</th>
-            <th scope="col" class="tnum">Final expense, $10,000</th>
-            <th scope="col"><span class="sr-only">Start a quote for this age</span></th>
-          </tr>
-        </thead>
-        <tbody>
-            {rate_rows()}
-        </tbody>
-      </table>
-    </div>
-
-    <p class="reveal mt-4 text-micro text-muted max-w-3xl">
-      <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
-      Source: [CARRIER RATE CARD NAME AND EDITION].
-      Premiums vary by carrier, state, health, build, family history, and tobacco use. A rate table
-      is an illustration of shape, not an offer of coverage. Your rate class is decided by the
-      carrier after underwriting.
-    </p>
+    {C.rate_chart(
+        "quote-sample-rates",
+        ["Term life, $250,000", "Whole life, $25,000", "Final expense, $10,000"],
+        [(band, {"age": mid}) for band, mid in AGE_BANDS], [],
+        "Indicative monthly premium by age, non-tobacco, for a representative policy in each product.",
+        row_cta="prefill", prefill_target="quote-form", min_width="44rem",
+        note="Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, state, "
+             "health, build, family history, and tobacco use. A rate table is an illustration of "
+             "shape, not an offer of coverage. Your rate class is decided by the carrier after "
+             "underwriting.")}
   </div>
 </section>
 

@@ -115,71 +115,21 @@ def _acc(q, a):
 
 
 def rate_table():
-    heads = "".join('<th scope="col" class="tnum">%s</th>' % label for label, _ in COVERAGE_COLS)
-    rows = []
-    for band, mid_age in AGE_BANDS:
-        cells = "".join('<td class="tnum">$--</td>' for _ in COVERAGE_COLS)
-        prefill = '{"age":"%s","coverage":"500000"}' % mid_age
-        btn = ('<button type="button" class="btn-row" data-prefill=\'%s\' '
-               'data-prefill-target="term-quote-form">Quote this %s</button>'
-               % (prefill, icon("arrow-right", 16)))
-        rows.append('<tr><th scope="row">%s</th>%s<td>%s</td></tr>' % (band, cells, btn))
-    body = "\n            ".join(rows)
-
-    def toggle(legend, name, options, prefill_name):
-        opts = "".join(
-            '<label class="choice"><input type="radio" name="%s" value="%s"%s '
-            'data-prefill-name="%s"><span>%s</span></label>'
-            % (name, value, " checked" if i == 0 else "", prefill_name, label)
-            for i, (value, label) in enumerate(options))
-        return ('<fieldset><legend class="field-label">%s</legend>'
-                '<div class="choice-row">%s</div></fieldset>' % (legend, opts))
-
-    return f"""
-    <div data-panels="term-rates">
-
-      <div class="reveal mt-8 grid sm:grid-cols-[7fr_4fr_4fr] gap-6 max-w-3xl">
-        {toggle("Term length", "term-rate-length", [("20", "20 years"), ("10", "10 years"), ("30", "30 years")], "term_length")}
-        {toggle("Sex", "term-rate-sex", [("female", "Female"), ("male", "Male")], "sex")}
-        {toggle("Tobacco", "term-rate-tobacco", [("no", "No"), ("yes", "Yes")], "tobacco")}
-      </div>
-
-      <!-- INTEGRATION POINT: every cell below is a structural placeholder.
-           When the carrier rate cards arrive, populate the cells from the
-           dataset keyed by (term length, sex, tobacco, age band, coverage)
-           and have the toggles above rewrite them. Until then the toggles
-           update the caption only, and nothing on this page can be mistaken
-           for a real quoted premium. -->
-      <!-- .reveal sits on the scroll container itself. A transformed wrapper
-           around a scrolling table leaks the table's width into the page
-           until the section reveals. -->
-      <div class="reveal mt-8 table-scroll table-signature">
-        <table class="rate-table" style="min-width:48rem">
-          <caption>
-            Monthly premium by age band and coverage amount.
-            <span data-panel-caption></span>
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Age at application</th>
-              {heads}
-              <th scope="col"><span class="sr-only">Get a quote for this row</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            {body}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <p class="reveal mt-4 text-micro text-muted max-w-3xl">
-      <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
-      Source: [CARRIER RATE CARD NAME AND EDITION].
-      Premiums vary by carrier, state, health, build, family history, and tobacco use. A rate table
-      is an illustration of shape, not an offer of coverage. Your rate class is decided by the
-      carrier after underwriting.
-    </p>"""
+    """The shared rate table (chrome.rate_chart). Each row prefills the quote
+    form with its age and $500,000, plus whatever the toggles are set to."""
+    return C.rate_chart(
+        "term-rates", [label for label, _ in COVERAGE_COLS],
+        [(band, {"age": mid, "coverage": "500000"}) for band, mid in AGE_BANDS],
+        [("Term length", "term-rate-length", [("20", "20 years"), ("10", "10 years"), ("30", "30 years")], "term_length"),
+         ("Sex", "term-rate-sex", [("female", "Female"), ("male", "Male")], "sex"),
+         ("Tobacco", "term-rate-tobacco", [("no", "No"), ("yes", "Yes")], "tobacco")],
+        "Monthly premium by age band and coverage amount.",
+        row_cta="prefill", prefill_target="term-quote-form", min_width="48rem",
+        toggle_grid="grid sm:grid-cols-[7fr_4fr_4fr] gap-6 max-w-3xl",
+        note="Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, state, "
+             "health, build, family history, and tobacco use. A rate table is an illustration of "
+             "shape, not an offer of coverage. Your rate class is decided by the carrier after "
+             "underwriting.")
 
 
 TERM_LENGTH_FIELD = '''<!-- Set by the rate table's "quote this" buttons. -->

@@ -140,7 +140,8 @@
             <span class="field-hint block font-normal">What would still have to be paid after you die.</span>
           </label>
           <input class="input" id="wlcalc-final" name="debt" type="text" inputmode="numeric"
-                 autocomplete="off" value="25000" data-calc-field="debt">
+                 autocomplete="off" value="25000" placeholder="Amount in dollars"
+                 data-calc-field="debt">
         </div>
               <div class="field">
           <label class="field-label" for="wlcalc-people">People you want to leave something to
@@ -159,7 +160,8 @@
             <span class="field-hint block font-normal">Whole life or final expense policies only. Not term.</span>
           </label>
           <input class="input" id="wlcalc-existing" name="existing" type="text" inputmode="numeric"
-                 autocomplete="off" value="10000" data-calc-field="existing">
+                 autocomplete="off" value="10000" placeholder="Amount in dollars"
+                 data-calc-field="existing">
         </div>
             </div>
             <p class="mt-2 text-micro text-muted">
@@ -372,7 +374,7 @@
           <div class="field-row">
 <div class="field">
               <label class="field-label" for="wlc-age">Your age</label>
-              <input class="input" id="wlc-age" name="age" type="text" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <input class="input" id="wlc-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
               <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 <div class="field" data-error="Choose one so we can price it correctly.">
@@ -407,7 +409,7 @@
             </div>
 </div><div class="field">
               <label class="field-label" for="wlc-phone">Best number to reach you</label>
-              <input class="input" id="wlc-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <input class="input" id="wlc-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
               <div class="field-foot"><p class="field-hint">One agent calls, once.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
             </div>
 

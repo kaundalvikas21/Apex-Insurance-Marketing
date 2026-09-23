@@ -132,71 +132,72 @@ def _acc(q, a):
 
 # --- Rate table -----------------------------------------------------------
 AGE_BANDS = ["50 to 54", "55 to 59", "60 to 64", "65 to 69", "70 to 74", "75 to 79", "80 to 85"]
+# The three benefit types. Facts are the ones this page already states; the
+# premium order is the one "highest of the three" implies.
+WAITING = [
+    ("level", "Best case", "circle-check", "Level benefit",
+     "The full amount is payable from day one, whatever the cause.",
+     "None", "Yes", "The full amount", "Lowest of the three",
+     "Offered to applicants in reasonable health for their age. This is what we try for first."),
+    ("graded", "Middle", "hourglass", "Graded benefit",
+     "A percentage of the benefit at first, rising each year until the full amount applies.",
+     "Two or three years", "Yes", "A percentage, rising each year", "In between",
+     "Accidental death is normally covered in full from day one."),
+    ("gi", "Last resort", "circle-alert", "Guaranteed issue",
+     "Nobody is turned down. In exchange there is a wait before the full benefit applies.",
+     "Two or three years", "None", "Your premiums back, usually with interest", "Highest of the three",
+     "For when health rules out the other two."),
+]
+
+# Who gets which benefit type. Tones and icons match WAITING, row for row.
+QUALIFY = [
+    ("level", "Most people", "circle-check", "Usually accepted at level rates",
+     "Full benefit from day one, no waiting period.",
+     "Level benefit", "None",
+     "Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, "
+     "a cancer in remission beyond the carrier's look back period."),
+    ("graded", "Some people", "hourglass", "Often a graded benefit",
+     "A percentage in the first two or three years, then the full amount.",
+     "Graded benefit", "Two or three years",
+     "COPD, a heart attack or stroke in the last two years, insulin started before age 50, "
+     "chronic kidney disease."),
+    ("gi", "Nobody turned down", "circle-alert", "Usually guaranteed issue",
+     "No health questions. A two or three year waiting period applies.",
+     "Guaranteed issue", "Two or three years",
+     "Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, "
+     "oxygen use for a lung condition."),
+]
+
+# The coverage bands. key doubles as the value "Quote this amount" writes into
+# the quote form's hidden coverage field.
+TIERS = [
+    ("2000-8000", "$2,000 to $8,000",
+     "A cremation, a simple service, and the last few bills. Enough that nobody has to reach "
+     "for a credit card at the funeral home."),
+    ("8000-20000", "$8,000 to $20,000",
+     "A traditional burial with a service, and room for what comes after it: the headstone, "
+     "the outstanding medical bills, the catering nobody planned for."),
+    ("20000-50000", "$20,000 to $50,000",
+     "The funeral, and something left for whoever is still here. Often a spouse whose household "
+     "income drops in the same week."),
+]
+
 # Three columns at most on this page (senior readability). The full coverage
 # range is described in the scale above the table.
 COVERAGE_COLS = ["$10,000", "$25,000"]
 
 
-def rate_rows(sex):
-    rows = []
-    for band in AGE_BANDS:
-        cells = "".join('<td class="tnum">$--</td>' for _ in COVERAGE_COLS)
-        # The row-level call CTA sits under the age label so the table stays at
-        # three columns.
-        call = C.phone_link("rate_table_" + sex, "btn-row mt-2", "Quote this", 18)
-        rows.append(f'<tr><th scope="row"><span class="block">{band}</span>{call}</th>{cells}</tr>')
-    return "\n            ".join(rows)
-
-
 def rate_table():
-    heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in COVERAGE_COLS)
-    return f"""
-      <div data-panels="fe-rates">
-      <div class="reveal mt-8 flex flex-wrap items-end gap-6">
-        <fieldset>
-          <legend class="field-label">Show premiums for</legend>
-          <div class="choice-row">
-            <label class="choice">
-              <input type="radio" name="fe-rate-sex" value="female" checked>
-              <span>Female</span>
-            </label>
-            <label class="choice">
-              <input type="radio" name="fe-rate-sex" value="male">
-              <span>Male</span>
-            </label>
-          </div>
-        </fieldset>
-        <p class="text-sm text-muted">Non tobacco, level benefit. Tobacco rates are higher.</p>
-      </div>
-
-      <div class="reveal mt-6 table-scroll table-signature">
-        <table class="rate-table" style="min-width:0">
-          <caption>
-            Monthly premium by age band and coverage amount.
-            <span data-panel-caption>Showing female.</span>
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Age at application</th>
-              {heads}
-            </tr>
-          </thead>
-          <tbody data-panel="female">
-            {rate_rows("female")}
-          </tbody>
-          <tbody data-panel="male" hidden>
-            {rate_rows("male")}
-          </tbody>
-        </table>
-      </div>
-
-      </div>
-
-      <p class="reveal mt-4 text-sm text-muted">
-        <span class="pill mr-2">Rates last updated: {C.RATES_DATE}</span>
-        Source: [CARRIER RATE CARD NAME AND EDITION].
-        Premiums vary by carrier, state, health, and tobacco use, and are not an offer of coverage.
-      </p>"""
+    """The shared rate table (chrome.rate_chart), phone weighted: each row's
+    "Quote this" is a call."""
+    return C.rate_chart(
+        "fe-rates", COVERAGE_COLS, [(band, None) for band in AGE_BANDS],
+        [("Show premiums for", "fe-rate-sex", [("female", "Female"), ("male", "Male")], None)],
+        "Monthly premium by age band and coverage amount.",
+        row_cta="call", cta_location="rate_table",
+        aside="Non tobacco, level benefit. Tobacco rates are higher.",
+        note="Source: [CARRIER RATE CARD NAME AND EDITION]. Premiums vary by carrier, state, "
+             "health, and tobacco use, and are not an offer of coverage.")
 
 
 def body():
@@ -204,9 +205,9 @@ def body():
     # One h1, one line, one button, and the button is the phone. No glow: fe.
     hero = C.page_hero(
         [("Home", "/"), ("Final Expense Insurance", None)],
-        "Final expense insurance, made simple.",
-        "A small whole life policy for funeral costs and final bills. No medical exam, and the "
-        "premium never goes up.",
+        "Final expense insurance. Paid for by you, not by them.",
+        "A small whole life policy for your funeral and the bills that follow it, paid now so "
+        "nobody has to find the money the week after.",
         extra='''<div class="reveal mt-8 grid gap-3 max-w-md">
         %s
         <a href="#fe-quote" class="btn btn-cta btn-xl btn-block">Get coverage now</a>
@@ -217,9 +218,117 @@ def body():
         ("users", "Ages 50 to 85", "Accepted"),
         ("stethoscope", "No medical exam", "Health questions only"),
         ("shield-check", "Premium locked for life", "It never goes up"),
-        ("banknote", "$2,000 to $50,000", "Sized for final bills"),
+        ("banknote", "$2,000 to $50,000", "Sized for a funeral, not an income"),
     ])
-    hands_media = C.figure("fe-hands", "(min-width: 1024px) 44vw, 92vw", cls="reveal mt-10")
+    # Team rewrite, September 2026: the reason to buy, in the reader's words,
+    # beside the quote form (the team's layout). It is #fe-quote: the hero's
+    # "Get coverage now" and the comparison's "get a quote online" land here.
+    form_after = f"""<p class="mt-2 text-sm text-muted">No payment details, and nothing is taken unless you are approved and say yes.</p>
+            <p class="mt-5 pt-5 border-t border-rule text-sm text-slate">Rather just talk to someone?
+              {C.phone_link("fe_form_call", "link font-semibold inline-flex items-center gap-1 whitespace-nowrap", size=16)}</p>"""
+    hero_form = quote_form(
+        "fe_hero", "fe_hero_quote", "Get your quote",
+        "Five questions. A licensed agent calls you back with real numbers.",
+        form_id="fe-quote-form", after=form_after)
+    wait_cards = "".join(f"""
+      <li class="reveal card wp-card wp-{tone} flex flex-col">
+        <span class="wp-rank">{rank}</span>
+        <div class="mt-4 flex items-center gap-3">
+          {icon(ico, 26, "shrink-0 wp-icon")}
+          <h3 class="text-h4">{name}</h3>
+        </div>
+        <p class="mt-3 text-slate">{summary}</p>
+        <dl class="wp-facts">
+          <div><dt>Waiting period</dt><dd>{wait}</dd></div>
+          <div><dt>Health questions</dt><dd>{questions}</dd></div>
+          <div><dt>If you die of natural causes early</dt><dd>{early}</dd></div>
+          <div><dt>Premium</dt><dd>{premium}</dd></div>
+        </dl>
+        <p class="mt-auto pt-5 text-sm text-muted">{who}</p>
+      </li>""" for tone, rank, ico, name, summary, wait, questions, early, premium, who in WAITING)
+    qualify_cards = "".join(f"""
+      <li class="reveal card wp-card wp-{tone} flex flex-col">
+        <span class="wp-rank">{rank}</span>
+        <div class="mt-4 flex items-center gap-3">
+          {icon(ico, 26, "shrink-0 wp-icon")}
+          <h3 class="text-h4">{title}</h3>
+        </div>
+        <p class="mt-3 text-slate">{means}</p>
+        <dl class="wp-facts">
+          <div><dt>Usual result</dt><dd>{result}</dd></div>
+          <div><dt>Waiting period</dt><dd>{wait}</dd></div>
+        </dl>
+        <details class="status-more mt-auto pt-3">
+          <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
+          <p class="mt-2 text-sm text-slate">{conditions}</p>
+        </details>
+      </li>""" for tone, rank, ico, title, means, result, wait, conditions in QUALIFY)
+    tier_cards = "".join(f"""
+      <li class="reveal card flex flex-col">
+        <h3 class="text-h4 tnum">{label}</h3>
+        <p class="mt-3 text-slate">{desc}</p>
+        <div class="mt-auto pt-6">
+          <button type="button" class="btn btn-ghost btn-block"
+                  data-prefill='{{"coverage":"{key}"}}' data-prefill-target="fe-quote-form"
+                  data-prefill-trigger="coverage_band">Quote this amount</button>
+        </div>
+      </li>""" for key, label, desc in TIERS)
+    week_after = f"""<section id="fe-quote" class="section band">
+  <div class="container-ax">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+
+      <div class="lg:col-span-6">
+        <h2 class="reveal text-h2">So the week after is about you, not about money</h2>
+        <p class="reveal mt-6 text-lead text-slate">
+          A funeral has to be paid for before it happens. Someone chooses the casket or the urn,
+          the service, the plot. Someone is handed the total and asked how they would like to
+          settle it.
+        </p>
+        <p class="reveal mt-5 text-slate">
+          If there is no policy, that someone is your partner, your son, or your sister, three
+          days after losing you.
+        </p>
+        <p class="reveal mt-5 text-slate">
+          A final expense policy moves that decision to today, while you are still the one making
+          it. You choose the amount. You pay a fixed premium. When the time comes the money goes to
+          the person you name, in cash, and they decide what it covers: the funeral, the last
+          medical bills, the flight for a grandchild who lives too far away.
+        </p>
+        <p class="reveal mt-5 text-slate">
+          It is a small policy. What it does is keep that week about you, instead of about money.
+        </p>
+
+        <div class="reveal mt-8 card">
+          <p class="font-semibold text-navy">Worth knowing before you sign</p>
+          <p class="mt-2 text-slate">
+            Not every final expense policy pays in full from the first day. Some carry a waiting
+            period of two or three years. Which one you are offered depends on your health, and
+            you should know which you are signing before you sign it.
+          </p>
+          <a class="link-static mt-3 inline-block text-sm" href="#waiting-periods">How the three policy types differ</a>
+        </div>
+
+        <div class="reveal mt-8 flex flex-wrap gap-3">
+          {C.phone_link("fe_story_call", "btn btn-call", "Call " + C.PHONE_DISPLAY, 22)}
+          <a href="#how-to-apply" class="btn btn-ghost">See what the call involves</a>
+        </div>
+        <p class="reveal mt-3 text-sm text-muted">{C.HOURS}</p>
+      </div>
+
+      <!-- The form rides beside the story on desktop: the story is the longer
+           column. Six columns, not five, so the panel clears the 26rem
+           container query and date of birth pairs with state, as in the
+           team's layout. -->
+      <div class="lg:col-span-6 lg:col-start-7">
+        <div class="sticky-col">
+          <div class="panel reveal">
+            {hero_form}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
     call_band_1 = call_band(
         "Would you rather just ask someone?",
         "A licensed agent can answer the health questions with you and tell you what you qualify for.",
@@ -268,57 +377,10 @@ def body():
 {hero}
 {usps}
 
-<!-- =====================================================================
-     GET IN TOUCH. Phone first, with the three field call-back form as the
-     secondary. Moved out of the hero, which now carries a second button that
-     jumps here.
-     ================================================================== -->
-<section id="fe-quote" class="section band">
-  <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+{week_after}
 
-      <div class="lg:col-span-5">
-        <div class="sticky-col">
-          <h2 class="reveal text-h2">Speak to a licensed agent</h2>
-          <p class="reveal mt-5 text-slate">
-            Most calls take about fifteen minutes. There is no medical exam. You answer health
-            questions instead.
-          </p>
-          <div class="reveal mt-6">
-            {C.phone_link("fe_contact_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
-            <p class="mt-3 text-slate">{C.HOURS}</p>
-          </div>
-
-        <div class="reveal mt-8 pt-8 border-t border-rule">
-          <h3 class="text-h4">What happens when you get in touch</h3>
-          <ol class="mt-4 grid gap-3">
-            <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">1.</span>
-              <span>A licensed agent picks up, or reads your form. Not a call center.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">2.</span>
-              <span>We ask the health questions and compare our carriers with you.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-navy font-semibold tnum shrink-0">3.</span>
-              <span>You hear what you qualify for, what it costs, and whether there is a waiting period. Then you decide, at your own pace.</span>
-            </li>
-          </ol>
-        </div>
-
-        </div>
-      </div>
-
-      <!-- Secondary CTA. Three fields, one step, no scrolling inside the form. -->
-      <div class="lg:col-span-6 lg:col-start-7">
-        <div class="panel reveal">
-          {callback_form("fe_hero", "fe_hero_callback")}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- "Speak to a licensed agent" was removed here (September 2026): its call
+     button, form and three steps all repeat elsewhere on the page. -->
 
 <!-- =====================================================================
      2. COVERAGE AMOUNTS as a simple visual scale.
@@ -328,43 +390,41 @@ def body():
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">How much coverage people usually buy</h2>
       <p class="reveal mt-5 text-slate">
-        Final expense policies run from about $2,000 to about $50,000. Most people buy somewhere in
-        the middle, because they are covering a funeral rather than replacing an income.
+        Pick the amount by what the week will actually cost, not by what sounds like a round
+        number. Most people land in the middle, because this is covering a funeral, not replacing
+        an income.
       </p>
     </div>
 
-    <div class="reveal mt-10 card">
+    <!-- The scale: where most policies land, before the three bands. -->
+    <div class="reveal mt-10 max-w-3xl">
       <div class="flex items-baseline justify-between text-sm font-semibold text-navy tnum">
         <span>$2,000</span>
         <span>$50,000</span>
       </div>
-      <div class="mt-3 h-4 w-full bg-navy-050 border border-rule rounded-full overflow-hidden">
+      <div class="mt-3 h-3 w-full bg-navy-050 border border-rule rounded-full overflow-hidden">
         <div class="h-full bg-navy-700 rounded-full" style="margin-left:12%;width:34%"></div>
       </div>
       <p class="mt-3 text-sm text-navy font-semibold">
         The shaded band is roughly $8,000 to $20,000, where most policies we place land.
       </p>
-      <div class="mt-8 pt-8 border-t border-rule grid sm:grid-cols-3 gap-6">
-        <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$2,000 to $8,000</p>
-          <p class="mt-2 text-slate">Cremation, a simple service, and a few outstanding bills.</p>
-        </div>
-        <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$8,000 to $20,000</p>
-          <p class="mt-2 text-slate">A traditional burial with a service, plus room for the bills that follow.</p>
-        </div>
-        <div>
-          <p class="text-h3 !font-display !font-semibold text-navy tnum">$20,000 to $50,000</p>
-          <p class="mt-2 text-slate">A funeral plus something left over for a spouse or an adult child.</p>
-        </div>
-      </div>
     </div>
 
-    <p class="reveal mt-5 text-sm text-muted max-w-3xl">
-      Funeral costs vary widely by region and by what a family chooses. Ask a local funeral home
-      for its current general price list before you settle on an amount. We can also walk through
-      it with you on the phone.
-    </p>
+    <!-- Three bands, one card each. "Quote this amount" sets the quote form's
+         coverage select and scrolls there, so the agent calls already knowing
+         the figure. -->
+    <ul class="mt-8 grid md:grid-cols-3 gap-6" data-stagger="40">{tier_cards}
+    </ul>
+
+    <div class="reveal mt-6 max-w-3xl">
+      <p class="text-sm font-semibold text-navy">Before you settle on a figure</p>
+      <p class="mt-2 text-sm text-slate">
+        Ask a local funeral home for its general price list. Under the FTC's Funeral Rule, if you
+        ask in person they have to give you an itemized list to keep, and you do not have to be
+        buying anything. That list is a better guide than any national average. We are happy to
+        walk through it with you on the phone.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -408,7 +468,7 @@ def body():
           The carrier does check two things electronically: your prescription history and a shared
           medical information database. So answer the questions honestly. An answer that does not
           match those records can delay your policy, or give the carrier grounds to refuse a claim
-          later.
+          later, which is exactly the outcome this policy exists to prevent.
         </p>
       </div>
 
@@ -436,6 +496,7 @@ def body():
 <!-- =====================================================================
      5. WAITING PERIODS. The section most competitors bury.
      ================================================================== -->
+<div id="waiting-periods" class="sr-only" aria-hidden="true"></div>
 <section class="section">
   <div class="container-ax">
     <div class="max-w-2xl">
@@ -446,53 +507,15 @@ def body():
       </p>
     </div>
 
-    <div class="mt-10 grid md:grid-cols-3 gap-6">
-      <div class="reveal card">
-        <div class="flex items-center gap-3">
-          {icon("circle-check", 26, "shrink-0 text-green")}
-          <h3 class="text-h4">Level benefit</h3>
-        </div>
-        <p class="mt-4 text-slate">
-          No waiting period. The full amount is payable from day one, whatever the cause.
-        </p>
-        <p class="mt-4 text-sm text-muted">
-          Offered to applicants in reasonable health for their age. This is what we try for first.
-        </p>
-      </div>
-
-      <div class="reveal card">
-        <div class="flex items-center gap-3">
-          {icon("hourglass", 26, "shrink-0 text-navy")}
-          <h3 class="text-h4">Graded benefit</h3>
-        </div>
-        <p class="mt-4 text-slate">
-          Pays a percentage of the benefit if you die of natural causes in the first two or three
-          years, rising each year until the full amount applies.
-        </p>
-        <p class="mt-4 text-sm text-muted">
-          Accidental death is normally covered in full from day one.
-        </p>
-      </div>
-
-      <div class="reveal card">
-        <div class="flex items-center gap-3">
-          {icon("circle-alert", 26, "shrink-0 text-navy")}
-          <h3 class="text-h4">Guaranteed issue</h3>
-        </div>
-        <p class="mt-4 text-slate">
-          No health questions at all, and nobody is turned down. In exchange there is a two or three
-          year waiting period, and the premium is the highest of the three.
-        </p>
-        <p class="mt-4 text-sm text-muted">
-          If you die of natural causes during the wait, the carrier returns your premiums, usually
-          with interest.
-        </p>
-      </div>
-    </div>
+    <!-- Scannable: every card carries the same four facts in the same order,
+         so the three read across as a comparison. Rank and top rule say
+         which is which before a word is read. -->
+    <ul class="mt-10 grid md:grid-cols-3 gap-6" data-stagger="40">{wait_cards}
+    </ul>
 
     <p class="reveal mt-8 text-slate max-w-3xl">
       An agent should tell you plainly which of these three you are being sold. We tell you before
-      the application goes in, in writing if you want.
+      the application goes in, in writing if you want it.
     </p>
   </div>
 </section>
@@ -520,79 +543,35 @@ def body():
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
-      <div class="lg:col-span-5">
-        <h2 class="reveal text-h2">Who qualifies for final expense insurance</h2>
-        <p class="reveal mt-6 text-slate">
-          Almost everyone between 50 and 85 can get a final expense policy of some kind. Health
-          decides the price and whether there is a waiting period, not usually whether you can be
-          covered at all.
-        </p>
-        <p class="reveal mt-4 text-slate">
-          Carriers rate the same condition very differently from each other. That is the
-          practical argument for applying through an independent agency instead of to one company
-          and taking its answer as final.
-        </p>
-      </div>
-
-      <div class="lg:col-span-6 lg:col-start-7">
-        <!-- Status cards. The same three icons and names as the benefit cards
-             above, so "which group am I in" and "what does that mean" read as
-             one system. Status is carried by icon + label, never colour alone.
-
-             The example conditions fold into a native <details> under each
-             card: 445px of the 1878px this section used on a phone was three
-             lists of conditions, two of which are not the reader's group. The
-             status and what it means stay in the open, the summary is a 56px
-             target, and with JavaScript blocked the disclosure still works. -->
-        <ul class="reveal grid gap-4">
-          <li class="status-card status-good">
-            {icon("circle-check", 26, "shrink-0 text-green mt-0.5")}
-            <div>
-              <p class="status-label">Usually accepted at level rates</p>
-              <p class="status-means">Full benefit from day one, no waiting period.</p>
-              <details class="status-more">
-                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
-                <p class="mt-2 text-slate">Controlled high blood pressure, controlled type 2 diabetes, high cholesterol, arthritis, a cancer in remission beyond the carrier's look back period.</p>
-              </details>
-            </div>
-          </li>
-          <li class="status-card status-mid">
-            {icon("hourglass", 26, "shrink-0 text-navy mt-0.5")}
-            <div>
-              <p class="status-label">Often a graded benefit</p>
-              <p class="status-means">A percentage in the first two or three years, then the full amount.</p>
-              <details class="status-more">
-                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
-                <p class="mt-2 text-slate">COPD, a heart attack or stroke in the last two years, insulin started before age 50, chronic kidney disease.</p>
-              </details>
-            </div>
-          </li>
-          <li class="status-card status-last">
-            {icon("circle-alert", 26, "shrink-0 text-slate mt-0.5")}
-            <div>
-              <p class="status-label">Usually guaranteed issue</p>
-              <p class="status-means">Nobody is turned down. A two or three year waiting period applies.</p>
-              <details class="status-more">
-                <summary>Example conditions{icon("chevron-down", 20, "status-chev")}</summary>
-                <p class="mt-2 text-slate">Currently in a nursing home, receiving hospice or dialysis, an active cancer diagnosis, oxygen use for a lung condition.</p>
-              </details>
-            </div>
-          </li>
-        </ul>
-        <p class="reveal mt-6 text-sm text-muted">
-          These groupings are typical of the carriers we are appointed with. Each carrier has its
-          own health questions and its own look back periods, so treat this as a guide and let us
-          check your specific situation.
-        </p>
-      </div>
+    <div class="max-w-2xl">
+      <h2 class="reveal text-h2">Who qualifies for final expense insurance</h2>
+      <p class="reveal mt-5 text-slate">
+        Almost everyone between 50 and 85 can get a final expense policy of some kind. Health
+        decides the price and whether there is a waiting period, not usually whether you can be
+        covered at all.
+      </p>
     </div>
+
+    <!-- Same three tones, ranks and fact rows as the waiting-period cards
+         above, so "which group am I in" and "what that means" read as one
+         system. The example conditions stay folded (native <details>): on a
+         phone, three open lists were most of this section's height. -->
+    <ul class="mt-10 grid md:grid-cols-3 gap-6" data-stagger="40">{qualify_cards}
+    </ul>
+
+    <p class="reveal mt-8 text-slate max-w-3xl">
+      Carriers rate the same condition very differently from each other. That is the practical
+      argument for applying through an independent agency instead of to one company and taking
+      its answer as final. These groupings are typical of the carriers we are appointed with, so
+      treat them as a guide and let us check your specific situation.
+    </p>
   </div>
 </section>
 
 <!-- 8. HOW TO APPLY. The homepage stepper, as a numbered checklist of the
      four things to have nearby. No CTA strip: call_band_3 is the next thing
      on the page and already carries the ask. -->
+<div id="how-to-apply" class="sr-only" aria-hidden="true"></div>
 {how_to_apply}
 
 {call_band_3}
@@ -633,44 +612,71 @@ def body():
      ================================================================== -->
 <section class="section">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
       <div class="reveal">
-        <h2 class="text-h2">Talk it through with a licensed agent</h2>
-        <p class="mt-5 text-slate">
-          Fifteen minutes on the phone will tell you what you qualify for, what it costs, and
-          whether there is a waiting period. No obligation to buy at the end of it.
+        <h2 class="text-h2">Fifteen minutes now spares them later</h2>
+        <p class="mt-5 text-lead text-slate">
+          One unhurried call, and you will know where you stand. What you qualify for, what it
+          costs, and whether there is a waiting period.
         </p>
-        <div class="mt-8">
-          {C.phone_link("fe_final_primary", "btn btn-call btn-xl btn-block", "Call " + C.PHONE_DISPLAY, 28)}
-        </div>
-        <p class="mt-4 text-slate">{C.HOURS}</p>
-        <p class="mt-6 text-sm text-muted">
-          You will reach a licensed agent, not a call center queue and not a lead form that gets
-          sold to six other agencies.
+        <p class="mt-4 text-slate">
+          No obligation, and nothing is taken unless you say yes. If final expense is not right
+          for you, we will say so.
         </p>
 
-        <div class="mt-8 pt-8 border-t border-rule">
-          <h3 class="text-h4">What you will know by the end of the call</h3>
-          <ul class="mt-4 grid gap-3">
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Which carriers will accept you, and which will not.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>What the premium is, and that it will never rise.</span></li>
-            <li class="flex items-start gap-3">{icon("circle-check", 24, "shrink-0 text-green mt-0.5")}<span>Whether your policy would have a waiting period, and how long.</span></li>
+        <div class="mt-8">
+          {C.phone_link("fe_final_primary", "btn btn-call btn-xl btn-block sm:!w-auto", "Call " + C.PHONE_DISPLAY, 28)}
+          <p class="mt-3 text-sm text-muted">{C.HOURS}</p>
+        </div>
+
+        <!-- The four answers the call gives, as short scannable points. -->
+        <div class="mt-10 rounded-[12px] bg-navy-050 p-6">
+          <h3 class="text-h4">By the end of the call, you will know</h3>
+          <ul class="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-4">
+            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-0.5")}<span>Which carriers will accept you</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-0.5")}<span>Your premium, locked for life</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-0.5")}<span>Whether there is a waiting period</span></li>
+            <li class="flex items-start gap-3">{icon("circle-check", 22, "shrink-0 text-green mt-0.5")}<span>Who receives the money, and how</span></li>
           </ul>
         </div>
-
-        {hands_media}
       </div>
 
       <div class="reveal">
         <div class="panel">
-          {callback_form("fe_footer", "fe_footer_callback", heading="Or leave your number", intro="Three details. We call you back.")}
+          {quote_form("fe_footer", "fe_footer_quote", "Or leave your number",
+                      "Five questions. A licensed agent calls you back with real numbers.")}
         </div>
       </div>
     </div>
   </div>
 </section>
 """
+
+
+# --- The hub's quote form: the team's five questions ------------------------
+COVERAGE_OPTIONS = ([("unsure", "Not sure yet, help me decide")]
+                    + [(key, label) for key, label, _ in TIERS])
+
+
+def quote_form(prefix, form_name, heading, intro, form_id="", after=""):
+    """The team's five-question form (September 2026), in both of the hub's
+    placements so the two cannot drift. The coverage values are TIERS keys:
+    the coverage cards' "Quote this amount" buttons prefill this select."""
+    fields = (
+        F.row(F.text_field(prefix + "-dob", "dob", "Date of birth", type="date",
+                           autocomplete="bday", validate="dobSenior",
+                           error="Enter your date of birth. Final expense is for ages 50 to 85."),
+              F.select_field(prefix + "-state", "state", "Your state",
+                             '<option value="">Choose your state</option>\n' + C.state_options(),
+                             error="Please choose your state."))
+        + F.select_field(prefix + "-coverage", "coverage", "Coverage you have in mind",
+                         COVERAGE_OPTIONS)
+        + F.radio_group(prefix + "-tob", "tobacco", "Tobacco in the last twelve months?",
+                        [("no", "No"), ("yes", "Yes")], error="Let us know either way.")
+        + F.phone_field(prefix + "-phone", label="Your phone number"))
+    return callback_form(prefix, form_name, heading=heading, intro=intro, form_id=form_id,
+                         submit="Get my quote", fields=fields, after=after)
 
 
 # --- The three field callback form -----------------------------------------
@@ -680,7 +686,8 @@ def body():
 # September 2026 forms pass, when every form changed shape anyway.
 def callback_form(prefix, form_name, heading="Prefer we call you?",
                   intro="Leave three details and a licensed agent will call you back.",
-                  silo="final-expense", senior=True):
+                  silo="final-expense", senior=True, submit="Request a call back", after="",
+                  form_id="", fields=None):
     """Three fields, one step, no scrolling inside the form. The name went in
     the September 2026 shortening pass: the agent asks for it in the first five
     seconds of the call, so it was a field the form did not need to carry.
@@ -691,7 +698,7 @@ def callback_form(prefix, form_name, heading="Prefer we call you?",
     `silo` and `senior` exist for the one caller outside this silo, the free
     policy review page, which takes any adult age rather than 50 to 85.
     """
-    fields = (
+    fields = fields or (
         F.row(F.age_field(prefix + "-age", senior=senior),
               F.select_field(prefix + "-state", "state", "Your state",
                              '<option value="">Choose your state</option>\n' + C.state_options(),
@@ -701,7 +708,7 @@ def callback_form(prefix, form_name, heading="Prefer we call you?",
           <h2 class="text-h3 !font-display !font-semibold">{heading}</h2>
           <p class="mt-3 text-slate">{intro}</p>
 
-          <form class="mt-6" data-ax-form data-silo="{silo}"
+          <form{f' id="{form_id}"' if form_id else ""} class="mt-6" data-ax-form data-silo="{silo}"
                 data-form-name="{form_name}" data-success-target="{prefix}-success" novalidate>
 
             {F.scaffold(indent=12)}
@@ -710,7 +717,8 @@ def callback_form(prefix, form_name, heading="Prefer we call you?",
 
             {F.consent_block(prefix, C.BRAND, 12)}
 
-            {F.submit_block("Request a call back")}
+            {F.submit_block(submit)}
+            {after}
 
           </form>
 

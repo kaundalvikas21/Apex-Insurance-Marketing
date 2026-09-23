@@ -107,7 +107,8 @@ def field(fid, role, label, hint, value, prefix="$"):
             <span class="field-hint block font-normal">{hint}</span>
           </label>
           <input class="input" id="{fid}" name="{role}" type="text" inputmode="numeric"
-                 autocomplete="off" value="{value}" data-calc-field="{role}">
+                 autocomplete="off" value="{value}" placeholder="Amount in dollars"
+                 data-calc-field="{role}">
         </div>"""
 
 

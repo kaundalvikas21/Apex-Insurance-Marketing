@@ -312,6 +312,17 @@
       test: function (v) { return /^\d{1,3}$/.test(v) && +v >= 50 && +v <= 85; },
       message: 'Enter an age between 50 and 85.'
     },
+    // Date of birth (a type="date" value, YYYY-MM-DD) for a 50 to 85 product.
+    dobSenior: {
+      test: function (v) {
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+        if (!m) return false;
+        var now = new Date(), age = now.getFullYear() - +m[1];
+        if (now.getMonth() + 1 < +m[2] || (now.getMonth() + 1 === +m[2] && now.getDate() < +m[3])) age--;
+        return age >= 50 && age <= 85;
+      },
+      message: 'Final expense is for ages 50 to 85.'
+    },
     name: {
       test: function (v) { return v.trim().length >= 2; },
       message: 'Enter your name.'

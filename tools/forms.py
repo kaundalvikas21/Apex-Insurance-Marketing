@@ -100,9 +100,19 @@ def _foot(hint=""):
     return '<div class="field-foot">%s<p class="field-error">%s<span></span></p></div>' % (tip, ERR)
 
 
+# Placeholders show the expected FORMAT, never a stand-in answer, and the
+# label always stays above: a placeholder is gone the moment anyone types.
+PLACEHOLDER = {"tel": "(555) 555-5555", "email": "name@example.com"}
+
+
 def text_field(field_id, name, label, hint="", type="text", autocomplete="",
-               validate="", error="", required=True, inputmode="", maxlength="", indent=12):
+               validate="", error="", required=True, inputmode="", maxlength="",
+               placeholder=None, indent=12):
     attrs = ['class="input"', 'id="%s"' % field_id, 'name="%s"' % name, 'type="%s"' % type]
+    if placeholder is None:
+        placeholder = "First and last name" if validate == "name" else PLACEHOLDER.get(type, "")
+    if placeholder:
+        attrs.append('placeholder="%s"' % placeholder)
     if inputmode:
         attrs.append('inputmode="%s"' % inputmode)
     attrs.append('autocomplete="%s"' % (autocomplete or "off"))
@@ -127,7 +137,8 @@ def age_field(field_id, senior=False, label="Your age", hint="", indent=12):
     """The one age question, so the range and its message cannot drift apart."""
     rule, low = ("ageSenior", 50) if senior else ("age", 18)
     return text_field(field_id, "age", label, hint=hint, inputmode="numeric", validate=rule,
-                      error="Enter an age between %d and 85." % low, maxlength="2", indent=indent)
+                      error="Enter an age between %d and 85." % low, maxlength="2",
+                      placeholder="e.g. %d" % (67 if senior else 42), indent=indent)
 
 
 def phone_field(field_id, label="Best number to reach you", hint="", indent=12):
@@ -156,15 +167,17 @@ def select_field(field_id, name, label, options, error="", required=True, hint="
        "err": err_attr, "opts": options, "foot": _foot(hint)}, indent)
 
 
-def textarea_field(field_id, name, label, hint="", rows=3, required=False, indent=12):
+def textarea_field(field_id, name, label, hint="", rows=3, required=False,
+                   placeholder="Type your question here", indent=12):
+    ph = (' placeholder="%s"' % placeholder) if placeholder else ""
     return block("""
 <div class="field">
   <label class="field-label" for="%(id)s">%(label)s</label>
-  <textarea class="input" id="%(id)s" name="%(name)s" rows="%(rows)d"%(req)s></textarea>
+  <textarea class="input" id="%(id)s" name="%(name)s" rows="%(rows)d"%(req)s%(ph)s></textarea>
   %(foot)s
 </div>
 """ % {"id": field_id, "name": name, "label": label, "rows": rows,
-       "req": " required" if required else "", "foot": _foot(hint)}, indent)
+       "req": " required" if required else "", "ph": ph, "foot": _foot(hint)}, indent)
 
 
 def radio_group(group_id, name, legend, options, hint="", error="", indent=12):
