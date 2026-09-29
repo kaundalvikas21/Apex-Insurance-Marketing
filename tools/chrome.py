@@ -183,7 +183,7 @@ def closing_band(photo, heading, sub, where, phone_first=False, silo="site", sof
     it, which is how a quotes page points back at its own form.
     `phone_first` follows the per-silo CTA weighting: the call becomes the
     solid white button and leads, the quote link drops to the outline.
-    `soft` is for the two pages whose docs forbid amber (cash value, is it
+    `soft` is for the two pages whose docs forbid a red CTA (cash value, is it
     worth it): both buttons are outlines.
 
     Pick a photograph with no people for a reviews or an agent page, where a
@@ -1381,7 +1381,7 @@ def inline_cta(heading, body, where, href, cta_label, phone_first=False,
                cls="section-tight band", fe=False, note=None):
     """T4's single mid-page CTA. One ask, offered two ways, never an interstitial.
 
-    `phone_first` decides which of the two carries the amber, per the per-silo
+    `phone_first` decides which of the two carries the red CTA, per the per-silo
     CTA weighting: term and whole life lead with the form, final expense and the
     two senior spokes lead with the phone. Exactly one of these per
     informational page, so the reader meets the ask once rather than being

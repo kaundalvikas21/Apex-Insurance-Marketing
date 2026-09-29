@@ -2,7 +2,7 @@
 
 Deviations from MASTER.md. Everything not listed here is inherited.
 
-**Soft CTA only. No amber anywhere on this page.** The audience is financially literate and is
+**Soft CTA only. No red CTA anywhere on this page.** The audience is financially literate and is
 actively comparing this product against investing the difference. The spec is explicit that hard
 selling this reader loses them. There is no form, no `btn-cta`, and one ask near the end: a ghost
 button reading "Request a policy illustration" beside a plain phone link.

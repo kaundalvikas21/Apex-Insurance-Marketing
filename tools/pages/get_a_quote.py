@@ -1,33 +1,23 @@
 # -*- coding: utf-8 -*-
-"""GET A QUOTE. Spec P0, template T1. The master quote form.
+"""GET A QUOTE. Spec P0, template T1. Stage 1 of the two-stage quote.
 
 The form is the page. Everything below it exists to answer the objections that
 stop someone finishing it, in the order they occur: what will you ask me, what
 happens after I submit, why do quotes differ, what do the numbers look like,
 and what do you do with my details.
 
-BRANCHING. Step 1 picks the product and the following steps adapt to that
-silo's shipped pattern:
+TWO STAGES (client request, 2026-09-29, modelled on AccuQuote's quote form):
 
-    term life       three-step, five fields  (matches the term hub)
-    whole life      single step, four fields (matches the whole life hub)
-    final expense   short, two fields        (matches the final expense hub)
+    stage 1  here. Name, age, email, phone, type of insurance. One screen, and
+             it sends the lead, so the agent has a contact even if the
+             visitor stops here.
+    stage 2  /get-a-quote/details/. Optional, offered in the success panel:
+             reason, dependants, health, tobacco, coverage. Opens prefilled
+             from stage 1 via [data-handoff] (site.js) and is linked to this
+             lead by quick_submission_id.
 
-Mechanically the form holds every branch at once and disables the ones that do
-not apply. A disabled <fieldset> is native: collect() in site.js already skips
-disabled inputs and FormData already drops them, so a submitted payload only
-ever contains the chosen branch. Nothing here needed new validation code.
-
-RADIO NAMES are unique per branch (term_sex, term_tobacco, wl_sex) rather than
-shared. site.js validates a radio group by querying the whole form for the
-name, so two branches sharing `sex` would attach the error message to whichever
-fieldset came first in the DOM, which may be the hidden one. The CRM reads
-`product` first and then that branch's keys.
-
-CONSENT is one block on the shared final step, not one per branch. initForm()
-binds a single [data-consent] per form, and one consent block is also the
-correct reading of the rule: the visitor consents once, immediately above the
-submit button they actually press.
+The form keeps id="quote-form" and form_name master_quote, so the rate table's
+"quote this row" prefill and GA4 history both carry over.
 """
 from icons import icon
 import chrome as C
@@ -87,6 +77,8 @@ def schema():
 
 
 def product_choices():
+    """The three products as described cards, with data-step-branch. Used by
+    the detailed form's first step (get_a_quote_details.py)."""
     opts = "".join(f"""
               <label class="choice choice-block">
                 <input type="radio" name="product" value="{value}" required data-step-branch>
@@ -99,82 +91,39 @@ def product_choices():
 
 
 def quote_form():
-    states = '<option value="">Choose your state</option>\n' + C.state_options()
-    sexes = [("female", "Female"), ("male", "Male")]
-    term = (
-        F.row(F.age_field("q-term-age", label="How old are you?", hint="The biggest factor in the price."),
-              F.select_field("q-term-state", "state", "Your state", states,
-                             error="Please choose your state."))
-        + F.row(F.radio_group("q-term-sex", "term_sex", "Sex on your birth certificate", sexes,
-                              hint="Carriers rate them differently.",
-                              error="Choose one so we can price it correctly."),
-                F.radio_group("q-term-tob", "term_tobacco", "Tobacco in the last 12 months?",
-                              [("no", "No"), ("yes", "Yes")], hint="Nicotine of any kind.",
-                              error="Let us know either way."))
-        + F.next_button(back=True))
-    whole = (
-        F.row(F.age_field("q-wl-age"),
-              F.select_field("q-wl-state", "state", "Your state", states,
-                             error="Please choose your state."))
-        + F.radio_group("q-wl-sex", "wl_sex", "Sex on your birth certificate", sexes,
-                        error="Choose one so we can price it correctly.")
-        + F.next_button(back=True))
-    final = (
-        F.row(F.age_field("q-fe-age"),
-                F.select_field("q-fe-state", "state", "Your state", states,
-                               error="Please choose your state."))
-        + F.next_button(back=True))
-    reach = (
-        F.row(F.phone_field("q-phone", hint="One agent calls, once."),
-              F.text_field("q-email", "email", "Email", hint="Optional. For the written comparison.",
-                           type="email", autocomplete="email", validate="email",
-                           error="Enter a valid email address.", required=False), tight=True)
-        + F.consent_block("q", C.BRAND, 12)
-        + F.submit_block("See my quotes", back=True))
+    fields = (
+        F.row(F.text_field("q-name", "name", "Your name", autocomplete="name", validate="name",
+                           error="Enter your name."),
+              F.age_field("q-age", hint="The biggest factor in the price."))
+        + F.row(F.text_field("q-email", "email", "Email", type="email", autocomplete="email",
+                             validate="email", error="Enter a valid email address."),
+                F.phone_field("q-phone", hint="One agent calls, once."))
+        + F.radio_group("q-product", "product", "Type of insurance",
+                        [(v, l) for v, l, _ in PRODUCTS],
+                        hint="Not sure? Pick the closest. The agent can change it.",
+                        error="Pick the one closest to what you are after.")
+        + F.consent_block("q", C.BRAND, 10)
+        + F.submit_block("Get my free quote"))
     return f"""
-        <form id="quote-form" class="mt-6" data-ax-form data-steps data-silo="site"
+        <form id="quote-form" class="mt-6" data-ax-form data-handoff data-silo="site"
               data-form-name="master_quote" data-success-target="quote-success" novalidate>
 
           {F.scaffold(indent=10)}
 
-          {F.progress(3)}
-
-          <!-- STEP 1. Shared. Choosing here enables one branch and disables
-               the other two. -->
-          <fieldset class="step is-active mt-5" data-step="1" data-step-title="What you need"
-                    data-error="Pick the one closest to what you are after. We can change it on the call.">
-            <legend class="field-label">What are you looking for?</legend>
-            <div class="choice-col mt-3" role="group">{product_choices()}
-            </div>
-            <p class="field-error">{F.ERR}<span></span></p>
-            <button type="button" class="btn btn-cta btn-block mt-5" data-step-next>Continue</button>
-            <p class="mt-3 text-micro text-muted">
-              Not sure? Pick the closest. Or
-              {C.phone_link("quote_step1", "link-static inline-flex items-center gap-1.5", "call " + C.PHONE_DISPLAY, 16, False)}
-              and we will work it out with you.
-            </p>
-          </fieldset>
-
-          <!-- One step per product, then one shared last step: every path is
-               three steps. Radio names stay unique per branch (check.py). -->
-          {F.step(2, "About you", term, owner="term")}
-          {F.step(2, "About you", whole, owner="whole")}
-          {F.step(2, "About you", final, owner="final-expense")}
-
-          <!-- FINAL STEP. Shared, so consent is asked once, immediately above
-               the button the visitor actually presses. -->
-          {F.step(4, "How to reach you", reach)}
+          {fields}
         </form>
 
         {F.success_panel("quote-success", "Got it",
             '''<p class="mt-3 text-slate">
-                 A licensed agent is comparing our appointed carriers for what you told us. You
-                 will hear from us within %s, and the quote comes back with the carrier names on
-                 it.
+                 A licensed agent will call within %s with quotes from our appointed carriers,
+                 carrier names on them.
+               </p>
+               <p class="mt-3 text-slate">
+                 Want sharper numbers on that call? A few more questions about your health and
+                 the coverage you want takes about two minutes. Your answers so far are kept.
                </p>''' % C.SLA,
-            '''%s
-               <a class="link text-sm ml-5" href="/thank-you/">What happens next</a>'''
-            % C.phone_link("quote_success", "btn btn-call", "Or call " + C.PHONE_DISPLAY),
+            '''<a class="btn btn-cta" href="/get-a-quote/details/">Answer a few more questions</a>
+               <a class="link text-sm inline-block mt-4 sm:mt-0 sm:ml-5" href="/thank-you/">What happens next</a>''',
             icon_size=30, indent=8)}"""
 
 
@@ -263,11 +212,9 @@ def body():
         <ul class="mt-4 grid gap-3">
           {"".join('<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
                    % (icon("circle-check", 20, "shrink-0 mt-0.5 text-green"), t) for t in [
-            "Your age and the state you live in.",
-            "Sex as shown on your birth certificate, because carriers rate it differently.",
-            "Whether you have used tobacco or nicotine in the last 12 months.",
-            "Roughly how much coverage you want. The agent asks that on the call.",
-            "A phone number a licensed agent can reach you on.",
+            "Your name, age, email, and a phone number a licensed agent can reach you on.",
+            "Which kind of insurance you are after: term, whole life, or final expense.",
+            "Optional, on the next page: sex as on your birth certificate, health, tobacco, and how much coverage you want. It sharpens the quote.",
           ])}
         </ul>
       </div>

@@ -90,7 +90,7 @@ def two_path(heading, intro, paths, note=None):
     already carries an h3 and a labelled button, and a third label for the same
     thing put these pages over the house eyebrow ceiling of three.
 
-    Both buttons are .btn-cta. On a neutral page, giving one of them the amber
+    Both buttons are .btn-cta. On a neutral page, giving one of them the red CTA
     and the other a ghost outline is a recommendation dressed as a layout
     decision, and the reader can tell.
     """

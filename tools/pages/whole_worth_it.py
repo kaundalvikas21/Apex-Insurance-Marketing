@@ -11,7 +11,7 @@ later by someone optimising conversion:
   2. The section on who it is NOT for comes BEFORE the section on who it is
      for. A page that leads with the case for and buries the case against is
      a sales page wearing a balanced headline, and this reader can tell.
-  3. There is no amber button, no form, and no inline_cta() anywhere on the
+  3. There is no red CTA button, no form, and no inline_cta() anywhere on the
      page. The single ask is a text link inside a card near the end, and it
      offers a document rather than a call.
 
@@ -340,7 +340,7 @@ def body():
 </section>
 
 
-<!-- The softest CTA on the site. No amber, no form, no button hierarchy:
+<!-- The softest CTA on the site. No red CTA, no form, no button hierarchy:
      one text link offering a document. Spec s05. -->
 <section class="section-tight">
   <div class="container-ax">

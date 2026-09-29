@@ -2,7 +2,7 @@
 
 Deviations from MASTER.md. Everything not listed here is inherited.
 
-**The softest CTA on the site.** No amber, no form, no `chrome.inline_cta()`, and no button
+**The softest CTA on the site.** No red CTA, no form, no `chrome.inline_cta()`, and no button
 hierarchy. The single ask is a text link inside a card near the end, and it offers a document ("we
 will put a term quote and a whole life illustration next to each other") rather than a call. The
 spec says this page earns trust and links and is not a sales page; the layout has to agree with the

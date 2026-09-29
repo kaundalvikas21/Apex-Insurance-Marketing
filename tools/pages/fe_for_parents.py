@@ -17,7 +17,7 @@ They are legal and relational rather than product ones:
 
 The form is FE.callback_form() with its own prefix and form_name, so the GA4
 form_submit event distinguishes this page from the hub. It sits beside a phone
-CTA rather than replacing it: form weighted means the form gets the amber and
+CTA rather than replacing it: form weighted means the form gets the red CTA and
 the panel, not that the phone disappears.
 """
 import chrome as C
@@ -221,7 +221,7 @@ def body():
 <!-- =====================================================================
      THE FORM. The one CTA exception in this silo (spec s09): the buyer
      here is the adult child, typically 30 to 55, so the form takes the
-     amber and the panel. The phone stays beside it rather than being
+     red CTA and the panel. The phone stays beside it rather than being
      dropped, because a decision about a parent's health frequently
      produces a question a form cannot take.
      ================================================================== -->

@@ -10,8 +10,8 @@ copy stays as calm and unhurried as the rest of the silo, because the subject is
 death.
 
 **The one CTA exception in the silo: form weighted, not phone first.** `FE.callback_form()` sits in
-a `.panel` on the left with the amber submit, and the phone CTA sits beside it as a full-width
-`.btn-call` rather than being dropped. Form weighted means the form gets the amber and the panel; it
+a `.panel` on the left with the red submit, and the phone CTA sits beside it as a full-width
+`.btn-call` rather than being dropped. Form weighted means the form gets the red CTA and the panel; it
 does not mean the phone disappears. A decision about somebody else's health produces questions a
 four-field form cannot take.
 

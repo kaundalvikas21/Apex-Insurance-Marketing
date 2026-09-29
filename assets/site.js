@@ -615,6 +615,7 @@
           page_path: window.location.pathname,
           source_url: payload.source_url
         });
+        handoff(form, payload);
         showSuccess(form);
       }).catch(function (err) {
         // Recoverable: say what happened and what to do, keep every answer,
@@ -633,6 +634,39 @@
     });
   }
 
+  /* Two-stage quote. The quick form ([data-handoff]) leaves its answers in
+     sessionStorage so the detailed form ([data-handoff-fill]) on the next page
+     opens prefilled and linked to the first lead by quick_submission_id.
+     Tab-scoped, never in the URL, never in a GA4 payload, and cleared once
+     the detailed form is sent. */
+  var HANDOFF = 'ax_quote';
+  function handoff(form, payload) {
+    try {
+      if (form.hasAttribute('data-handoff')) {
+        var keep = { quick_submission_id: payload.submission_id };
+        ['name', 'age', 'email', 'phone', 'product'].forEach(function (k) { if (payload[k]) keep[k] = payload[k]; });
+        sessionStorage.setItem(HANDOFF, JSON.stringify(keep));
+      }
+      if (form.hasAttribute('data-handoff-fill')) sessionStorage.removeItem(HANDOFF);
+    } catch (e) {}
+  }
+
+  // Write values into a form by field name; radios by value. Unknown names
+  // are dropped. Shared by the rate-table prefill and the quote handoff.
+  function writeValues(form, values) {
+    Object.keys(values).forEach(function (name) {
+      var field = form.elements[name];
+      if (!field) return;
+      if (field.length && field[0] && field[0].type === 'radio') {
+        Array.prototype.forEach.call(field, function (radio) {
+          radio.checked = (radio.value === String(values[name]));
+        });
+      } else {
+        field.value = values[name];
+      }
+    });
+  }
+
   function showSuccess(form) {
     var panel = document.getElementById(form.getAttribute('data-success-target'));
     if (!panel) { form.reset(); return; }
@@ -648,6 +682,14 @@
   }
 
   $$('[data-ax-form]').forEach(initForm);
+
+  // Before [data-steps] initialises, so a handed-off product radio is already
+  // checked and the matching branch is live on first render.
+  $$('[data-handoff-fill]').forEach(function (form) {
+    var saved;
+    try { saved = JSON.parse(sessionStorage.getItem(HANDOFF) || 'null'); } catch (e) { return; }
+    if (saved) writeValues(form, saved);
+  });
 
   /* ------------------------------------------------------------------------
      6. MULTI-STEP FORMS (term hub hero)
@@ -803,17 +845,7 @@
         });
       }
 
-      Object.keys(values).forEach(function (name) {
-        var field = form.elements[name];
-        if (!field) return;
-        if (field.length && field[0] && field[0].type === 'radio') {
-          Array.prototype.forEach.call(field, function (radio) {
-            radio.checked = (radio.value === String(values[name]));
-          });
-        } else {
-          field.value = values[name];
-        }
-      });
+      writeValues(form, values);
 
       // Same flag initForm() uses, so a prefill followed by typing in the form
       // is one form_start, not two.

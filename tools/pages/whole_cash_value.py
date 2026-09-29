@@ -3,7 +3,7 @@
 
 The audience is financially literate and is comparing this against investing
 the difference. The spec is explicit that hard selling this reader loses them,
-so there is no amber button on the page, no form, and one soft ask near the
+so there is no red CTA button on the page, no form, and one soft ask near the
 end: see an illustration for your age.
 
 The buy term and invest the difference section is written to be genuinely
@@ -407,7 +407,7 @@ def body():
 
 
 <!-- =====================================================================
-     THE SOFT CTA. One ask, no amber, no form. Spec: hard selling this
+     THE SOFT CTA. One ask, no red CTA, no form. Spec: hard selling this
      reader loses them.
      ================================================================== -->
 <section class="section-tight">

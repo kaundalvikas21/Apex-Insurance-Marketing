@@ -39,29 +39,31 @@ here; if the two disagree, this file is wrong and gets updated, not the other wa
 | `--color-navy` | `#0B3B8C` | Deep Blue. Dark bands, nav text, links, phone CTA fill, blue bento cell. |
 | `--color-navy-700` | `#1E6AE1` | Bright Blue. Icons, strokes, focus ring, chart value line, progress fill. Text only at 18px and up. |
 | `--color-navy-050` | `#E8F0FC` | Table header fill, tinted bento cell, tinted band, pills. |
-| `--color-ink` | `#0A1F44` | Headlines, stat figures, and the amber CTA label. |
+| `--color-ink` | `#0A1F44` | Headlines, stat figures. |
 | `--color-slate` | `#334155` | Body text. |
 | `--color-muted` | `#5B6B82` | Secondary text, captions, stat labels. |
 | `--color-cream` | `#F4F7FB` | Page field (cool near-white). |
 | `--color-surface` | `#FFFFFF` | Cards, bento cells, panels, table rows. |
-| `--color-gold` | `#F5A623` | Amber. **CTA ONLY.** |
-| `--color-gold-700` | `#DC941B` | CTA hover. |
+| `--color-cta` | `#DC2626` | Red. **CTA ONLY.** |
+| `--color-cta-700` | `#B91C1C` | CTA hover. |
 | `--color-green` | `#1F7A5C` | Positive / included states (check icons, success). |
 | `--color-rule` | `#D9E2EF` | 1px borders, row rules. |
 | `--color-border-strong` | `#7B8CA0` | Form input borders (3:1 per WCAG 1.4.11). |
 | `--color-flag` | `#8A6D1F` | Placeholder / pending-review notice text. |
 
-### The amber rule (non-negotiable)
-Amber appears in exactly three CSS rules: `.btn-cta`, `.btn-cta:hover`, and `.skip-link`. Nowhere
+### The CTA red rule (non-negotiable)
+CTA red appears in exactly three CSS rules: `.btn-cta`, `.btn-cta:hover`, and `.skip-link`. Nowhere
 else. Not on icons, not on pills, not on chart lines, not on hover states of non-CTA elements.
-Verified by `grep -o "var(--color-gold" assets/site.css | wc -l` = 3.
+Verified by `grep -o "var(--color-cta" assets/site.css | wc -l` = 3. The logo cap is the only
+other red: set inline by `tools/logo.py`, the CTA red on light grounds and `#F87171` on navy
+(client decision 2026-09-29: CTAs and the cap went from amber to red; the site has no amber).
 
 ### Verified contrast pairs (computed, not eyeballed)
 | Pair | Ratio | Verdict |
 |---|---|---|
-| **Ink on amber** (primary CTA label) | **8.0:1** | AAA |
-| Ink on amber-700 (CTA hover) | 6.4:1 | AA |
-| White on amber | 2.0:1 | **Fails. Never used.** |
+| **White on red** (primary CTA label) | **4.8:1** | AA |
+| White on red-700 (CTA hover) | 6.5:1 | AA |
+| Ink on red | 3.4:1 | **Fails for body text. Never used.** |
 | Slate on white / on field | 10.4:1 / 9.6:1 | AAA |
 | Slate on navy-050 (tinted cell) | 9.0:1 | AAA |
 | Muted on white / on field / on navy-050 | 5.4:1 / 5.1:1 | AA |
@@ -74,7 +76,9 @@ Verified by `grep -o "var(--color-gold" assets/site.css | wc -l` = 3.
 | Flag on flag-050 | 4.5:1 | AA |
 | Border-strong on white | 3.4:1 | Passes 1.4.11 for inputs |
 
-Primary CTA is **ink text on amber fill**, never white on amber.
+Primary CTA is **white text on red fill**, never ink on red. The CTA red (`#DC2626`) is a bright
+fill; `--color-danger` (`#A32020`) is brick and only ever text or a border, so an error never reads
+as a button.
 
 ### Focus
 Default focus ring: 3px bright blue, 2px offset, 4px radius. On navy surfaces (`.on-navy`,
@@ -218,7 +222,8 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 
 | Component | Contract |
 |---|---|
-| `.btn-cta` | Amber fill, ink text, 600 weight, min-height 48px, 8px radius. The only amber thing. |
+| `.btn-cta` | Red fill, white text, 600 weight, min-height 48px, 8px radius. The only red fill. |
+| `.btn` on phones | Below 640px every `.btn` inside `main` is full width, so a button alone on its line spans it and a wrapping pair stacks one per line (client, 2026-09-29). A no-wrap flex row (the form's Back + Continue) and table cells keep their shared layout. A text link beside a button takes `sm:ml-5`, not `ml-5`, so it sits flush left once it wraps under. |
 | `.btn-call` | Navy fill, white text, phone icon, min-height 48px. `.btn-xl` 64/72px for final expense. |
 | `.btn-ghost` | White fill, navy text, 1px navy rule. Tertiary only. |
 | `.btn-row` | Row-level action inside tables and cells, 44px, navy outline. 48px inside `.fe main`. |
@@ -228,14 +233,14 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `chart_caveats()` | The navy "Why your quote may not match this chart" band under every rate or cost chart: split header, then three cards on navy (white/6% fill, white/15% border), each an icon chip, an h3 and one short paragraph. One helper, three pages. |
 | `.calc-bar` | The calculator's live composition bar: navy, navy-700 and navy-700/45 segments for each part of the need, a striped white overlay from the right for what existing coverage already pays for, a legend under it. Width transitions off under reduced motion. Decorative (aria-hidden); the line list beneath carries the same numbers as text. |
 | `.stat` | `.stat-value` (display face, tabular) over `.stat-label` (muted). Holds `data-count` only when the figure is a spec figure. Rendered by `chrome.stat()`. |
-| `.pill` | Navy-050 chip for dated lines ("Rates last updated") and column tags. Never amber. |
+| `.pill` | Navy-050 chip for dated lines ("Rates last updated") and column tags. Never red. |
 | `.table-signature` | Modifier on `.table-scroll`: card shadow, so the table reads as the section's object. |
 | `.rate-table` / `.compare-table` | Tabular nums, navy-050 header in the display face, **one rule per row boundary** (top border on every row after the first, never top and bottom), first column sticky on phones. `th[colspan]` renders as a group row (final expense comparison). |
 | `.acc` | Each `<details>` is its own card row; hover and open states lift it. Native keyboard behavior. |
 | `.field` | Label above input, 48px input (56px in `.fe`), border-strong, blue focus ring. The hint and the error share one reserved cell under the control (`.field-foot`): it is **always in the layout**, so the submit button cannot move between mousedown and mouseup, and an error simply takes the hint's place. A required answer that passes gets `.is-valid`, a green check inside the input (an icon, never colour alone). The reserved line **is** the gap between fields (`.field` margin is 0.25rem, about 32px input to next label); a field with a hint gets 0.625rem. Placeholders show the expected format only (`(555) 555-5555`, `name@example.com`, `e.g. 67`), set once in `forms.py`; the label always stays above. |
 | `.field-row` | Two fields side by side. A **container** query on `[data-ax-form]` (26rem; 28rem in `.fe`), not a viewport one, because the same builder sits in a wide panel on one page and a narrow rail on another. Pairing is how the forms got shorter; controls never shrink. |
 | Form failure | `[data-form-error]` is `role="alert"`. On a rejected or timed out submit (15s) it states the cause and the fix, the button becomes "Try again", every answer is kept, and there is no automatic retry (a lead POST is not idempotent; `submission_id` lets the CRM dedupe). |
-| Logo | "Summit", chosen September 2026 from four directions: the A as a mountain peak in two facets (navy, bright blue) with an amber cap. Apex means the highest point, so the mark says the name. **Single source: `tools/logo.py`.** Lockup = mark + "Apex" (Space Grotesk 700) over "INSURANCE" (Inter 600, tracked). Palettes: full on light, reversed (white, pale blue, amber cap) on navy, one colour via `currentColor`. The cap is part of the mark and the only amber outside the CTA. Clear space = the cap's height on every side; never under 16px, never stretched, never on a photograph without the reversed palette on navy. Favicon = reversed mark at 72% on a navy rounded square, generated by the build. |
+| Logo | "Summit", chosen September 2026 from four directions: the A as a mountain peak in two facets (navy, bright blue) with a red cap. Apex means the highest point, so the mark says the name. **Single source: `tools/logo.py`.** Lockup = mark + "Apex" (Space Grotesk 700) over "INSURANCE" (Inter 600, tracked). Palettes: full on light, reversed (white, pale blue, light red `#F87171` cap) on navy, one colour via `currentColor`. The cap is part of the mark. Clear space = the cap's height on every side; never under 16px, never stretched, never on a photograph without the reversed palette on navy. Favicon = reversed mark at 72% on a navy rounded square, generated by the build. |
 | `.site-header` | Solid white; glass only when `.is-stuck`. Wordmark navy, nav slate with a bright-blue underline. The wordmark reads "Apex" over "Insurance" (client request, September 2026). `chrome.BRAND` stays the legal entity, "Apex Insurance Marketing, LLC", for the licence line, TCPA consent and schema. |
 | `.to-top` | Back to top: a 48px navy circle (56px on senior pages), fixed bottom right above the safe area, Lucide `arrow-up`. Hidden at the top of the page and with JS off. Sits under every dialog. |
 | `.site-footer` | Four columns from 1024px: brand (blurb, call button, hours, social icons), Coverage, Company, Legal. Links are body size (16px) with 40px rows; nav links match. Social icons are 44px outlined circles, Lucide marks, dimmed and inert until a real URL is set. |
@@ -243,15 +248,15 @@ Static, calm, large. This is an accessibility decision, not a stylistic one.
 | `.nav-dd` | The "Insurance" mega menu: a native `<details>`, solid white (never glass), two columns. Left, the three hubs as icon rows (the circle turns navy on hover). Right, one navy aside with the menu's only CTA, `.btn-cta` to `/#triage`, and a call link. 160ms fade and rise on open, off under reduced motion. Absent below 1024px, where the mobile panel lists the links flat. |
 | `.flag` | Visible placeholder notice. Left rule in `--color-flag`. Renders on the page, not only in comments. |
 | `chrome.page_hero()` | The top of every hub and informational page: breadcrumb, one H1, one sentence (30 words at most), one button. `check.py` enforces it through `data-hero`, with one named exception: `check.py`'s `HERO_TWO_CTA` lets **contact** and the **final expense hub** carry two, a call button plus an in page jump to the form (client request, September 2026). Two is the ceiling and the set is closed. `answer=` renders the rest of the direct answer, with the mandated hub up-link, as its own block directly beneath. `short=False` is for the T5 compare pages only. `glow=False` on every final-expense page. |
-| `chrome.hero_cta()` | The hero's one amber button and micro line, for `page_hero(extra=)`. Phone first pages pass a `phone_link()` block instead. |
+| `chrome.hero_cta()` | The hero's one red button and micro line, for `page_hero(extra=)`. Phone first pages pass a `phone_link()` block instead. |
 | `chrome.steps_section()` | The connected stepper: filled navy `.steps-node` circles on a dashed rail (on top from 768px, down the left below), a cell under each, optional `.steps-cta` strip. Three items read white, tinted, blue so the last is the destination. Four items, or `fe=True`, stay plain white with no stagger and no lift, go four across only from 1024px, and keep the vertical rail between 768 and 1023 because a 2 x 2 grid breaks the line. Every genuine sequence on the site uses it (16 sections): home, free policy review, "How to apply" on two hubs, "What happens after you submit" on the three silo quote pages (`post_submit_section()` now delegates to it) and `/get-a-quote/`, the three "check it against your own dates" sections, contact, About agents and carriers, cremation and for-parents. Lists of reasons or parts ("How to lower a rate", "When not to buy this") are deliberately not steppers: a numbered rail would imply an order they do not have. |
 | `chrome.closing_band()` / `chrome.banner(inset=True)` | A page's final ask as a rounded photo card inside a pale section. **No page may end on a flat navy or edge to edge photo band**: directly on the navy footer it reads as part of the footer, and the pale margin under the card is the boundary. Used on `/get-a-quote/` and the five About pages. No people in the photograph on a reviews or an agent page. |
 | `chrome.ask_strip()` | A slim one-line ask with one button, for the midpoint of a long run of prose. Quieter than `inline_cta()`. |
 | `.in-short` | A tinted box of two or three bullets at the top of a long prose section, restating that section's own points for someone scanning. **It never adds a claim or a figure.** Paired with a short `<h3>` label on each paragraph below it. The September 2026 audit found 14 sections of 150 to 330 words with no sub-heads, icons or lists; the rule now is that no prose section runs past about 150 words without one of the two. |
-| `.status-card` | "Which group am I in": a coloured left rail + a Lucide icon + a label + a one-line meaning. Never colour alone, never amber or red. Used for "Who qualifies" on the final expense hub, with the same icons and names as the benefit cards above it. |
+| `.status-card` | "Which group am I in": a coloured left rail + a Lucide icon + a label + a one-line meaning. Never colour alone, never CTA red or danger red. Used for "Who qualifies" on the final expense hub, with the same icons and names as the benefit cards above it. |
 | `.reviewed-chip` | One line under a spoke's answer: reviewed by, title, date, from the byline's placeholders. No link; the byline owns it. |
 | `chrome.usp_strip()` | Four icon tiles directly beneath a hero CTA. Spec facts or visible `[X]` placeholders only, never a claim, never a count-up. |
-| `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the amber. Never an interstitial. |
+| `chrome.inline_cta()` | The single mid-page CTA on an informational page. One ask offered two ways; `phone_first` decides which one carries the red. Never an interstitial. |
 | `chrome.prose()` | Heading and lead on the left, substance on the right. What keeps a long informational page off the single centred column section 7 bans. `media=` puts a figure under the lead and `sticky=` (default on) parks the column, which is how the left side stops leaving a dead half-row. Sticky needs no fe branching: `.fe main .sticky-col` is already static. |
 | `chrome.page_hero()` `media=` | Splits the hero into 6 / 5-from-8 and carries the page's one eager image. Absent it, the hero is the unchanged `max-w-3xl` single column. |
 | `chrome.faq_section()` `center=` | Default on. An accordion has no second column, so the block is centred rather than stranding 40% of the row. Heading text is centred; the question rows stay left aligned. |
@@ -335,7 +340,7 @@ They inherit this file without deviation except where a page doc exists (`term-n
    `chrome.ask_strip()` at the midpoint; a call line under the FAQ (`faq_section(ask=True)`); and
    `chrome.closing_band()` as the last ask, before the byline. The September 2026 audit found 32
    pages ending with no ask at all and 39 of 41 FAQs with none, which is what this replaces. The two
-   soft pages (`/cash-value/`, `/is-it-worth-it/`) take outline buttons only, never amber.
+   soft pages (`/cash-value/`, `/is-it-worth-it/`) take outline buttons only, never a red CTA.
 3. **One link per target per page.** A page's spoke module may not repeat a target the body already
    links. Where a contextual link and the module both want one page, the module keeps the canonical
    bare link and the contextual one deep-links to an anchor. The breadcrumb plus the mandated
@@ -354,7 +359,7 @@ page docs (`whole-is-it-worth-it`, `fe-for-parents`, `compare`), and they exist 
 pages the layout is carrying an editorial position:
 
 - `/whole-life-insurance/is-it-worth-it/` puts `chrome.author_line()` **directly under the
-  hero** as well as ending without one, has no amber anywhere, and orders "who it is not for"
+  hero** as well as ending without one, has no red CTA anywhere, and orders "who it is not for"
   before "who it is for". A page arguing the case against the thing we sell has to show who is
   making the argument before the argument, and leading with the case for would make it a sales page
   with a balanced headline.
@@ -369,13 +374,13 @@ is not parameterised: hero carrying the answer in three sentences, side-by-side 
 the signature object, worked cost over time, where each one wins as a two-cell bento, decision
 checklist, two-path CTA, FAQ, byline. A row in the table with an empty cell list renders as a
 `th[colspan]` group row. Both buttons in `compare.two_path()` are `.btn-cta`: on a neutral page,
-giving one the amber and the other a ghost outline is a recommendation disguised as a layout
+giving one the red and the other a ghost outline is a recommendation disguised as a layout
 decision, and readers can tell.
 
 **Per-silo CTA weighting on the spokes.** Term is form first, except `/for-seniors/` which is phone
 first. Whole life is form and phone at parity with an illustration request as the tertiary ask,
 except `/for-seniors/` which is phone first and `/cash-value/` which is soft CTA only and carries no
-amber at all. Final expense is phone first throughout, with the four-field
+red CTA at all. Final expense is phone first throughout, with the four-field
 `final_expense.callback_form()` as the secondary.
 
 ---
@@ -384,7 +389,7 @@ amber at all. Final expense is phone first throughout, with the four-field
 
 No purple or pink gradients. No neon. No dark mode. No emoji as icons. No section-number eyebrows
 (`01 / Coverage`). No scroll cues. No centered-everything pages: one centred section, such as the
-FAQ block, is not a centred page and is not what this bans. No Fraunces. No amber outside the
+FAQ block, is not a centred page and is not what this bans. No Fraunces. No CTA red outside the
 three CTA rules. No `border-top` plus `border-bottom` on the same table row. No bento cell without
 content. No count-up on a placeholder or a rate. No glass except the stuck header.
 No em-dash anywhere in rendered copy: use a comma, a colon, a period, or a middot separator.

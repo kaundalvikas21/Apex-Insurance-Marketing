@@ -331,6 +331,13 @@ Same reason the home page triage results point at `#quote`, `#rates`, and `#cost
   again" after a failed submit, so the endpoint **must dedupe on it**. `phone` arrives formatted,
   `(555) 018-0199`: strip non-digits server side. The front end gives up after 15 seconds and never
   retries on its own, because a lead POST is not idempotent.
+- **Two-stage quote.** `/get-a-quote/` (`master_quote`) is stage 1: name, age, email (required),
+  phone, product. Its success panel offers `/get-a-quote/details/` (`detailed_quote`, noindex), an
+  optional five-step form (reason, dependants, state, sex, tobacco, health, term length, coverage)
+  that opens prefilled and carries `quick_submission_id` = stage 1's `submission_id`. The CRM should
+  **merge** a `detailed_quote` into the lead with that id rather than create a second lead. The
+  handoff sits in sessionStorage (tab-scoped, cleared on stage 2 submit); confirm that is acceptable
+  under the privacy policy.
 - **GA4.** Events fire into `window.dataLayer` with a guard, so nothing breaks without a container.
   Install GTM or gtag and map: `form_start`, `form_submit`, `call_click`, `triage_complete`.
   A `calculator_complete` stub is exposed as `window.axTrack('calculator_complete', {...})` for the

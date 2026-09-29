@@ -20,8 +20,8 @@
   --color-muted:         #5B6B82;  /* secondary */
   --color-cream:         #F4F7FB;  /* cool near-white field */
   --color-surface:       #FFFFFF;
-  --color-gold:          #F5A623;  /* Amber. CTA ONLY */
-  --color-gold-700:      #DC941B;
+  --color-cta:           #DC2626;  /* Red. CTA ONLY */
+  --color-cta-700:       #B91C1C;  /* CTA hover */
   --color-green:         #1F7A5C;
   --color-green-050:     #E8F3EF;
   --color-rule:          #D9E2EF;
@@ -231,13 +231,13 @@
                 border-color .18s ease-out;
   }
 
-  /* The only amber element on the site. Ink label: white on amber is 2:1. */
+  /* The only red fill on the site. White label: 4.8:1 on red, ink is 3.4:1. */
   .btn-cta {
-    background-color: var(--color-gold);
-    color: var(--color-ink);
+    background-color: var(--color-cta);
+    color: #fff;
     box-shadow: 0 1px 2px rgb(11 59 140 / 0.12);
   }
-  .btn-cta:hover { background-color: var(--color-gold-700); transform: translateY(-2px); box-shadow: 0 8px 20px rgb(220 148 27 / 0.32); }
+  .btn-cta:hover { background-color: var(--color-cta-700); transform: translateY(-2px); box-shadow: 0 8px 20px rgb(185 28 28 / 0.32); }
   .btn-cta:active { transform: translateY(0); box-shadow: 0 1px 2px rgb(11 59 140 / 0.12); }
 
   .btn-call {
@@ -258,6 +258,14 @@
   .band-navy .btn-ghost:hover, .banner-band .btn-ghost:hover { background-color: #fff; color: var(--color-navy); border-color: #fff; }
 
   .btn-block { width: 100%; }
+  /* Phones: a button alone on its line spans it (client, 2026-09-29). Wrapping
+     rows (.faq-ask, .steps-cta, flex-wrap pairs) stack one full-width button per
+     line. A no-wrap flex row (the form's Back + Continue) and table cells keep
+     their shared layout. */
+  @media (max-width: 639px) {
+    main .btn { width: 100%; }
+    main .flex:not(.flex-wrap):not(.flex-col) > .btn, main table .btn { width: auto; }
+  }
   .btn-wrap { white-space: normal; }
   @media (min-width: 768px) { .btn:not(.btn-wrap) { white-space: nowrap; } }
 
@@ -605,8 +613,8 @@
     transition: border-color .15s ease-out, box-shadow .15s ease-out;
   }
   .input::placeholder { color: var(--color-muted); opacity: 1; }
-  /* The one file input (free policy review). Navy outline button, no amber:
-     amber stays on the three CTA rules check.py counts. */
+  /* The one file input (free policy review). Navy outline button, no red:
+     CTA red stays on the three rules check.py counts. */
   /* --- Calculators (term and whole) -----------------------------------
      Pair short controls inside the inputs panel the way forms do: the
      .field-row container query needs a container, and this is not a form. */
@@ -958,7 +966,7 @@
   .pc-table tfoot td { padding-block: 1.5rem; border-top: 1px solid var(--color-rule); }
   /* The current page's column: one continuous 2px blue outline, rounded at
      both ends. No top stripe (a stripe on a rounded card is template filler),
-     and no amber: amber is the CTA's alone, and the column's CTA sits in it. */
+     and no red: red is the CTA's alone, and the column's CTA sits in it. */
   .pc-table .pc-current {
     background-color: var(--color-surface);
     border-left: 2px solid var(--color-navy-700);
@@ -1389,8 +1397,8 @@
     align-items: center;
     min-height: 48px;
     padding: 0.75rem 1.25rem;
-    background-color: var(--color-gold);
-    color: var(--color-ink);
+    background-color: var(--color-cta);
+    color: #fff;
     font-size: var(--text-sm);
     font-weight: 600;
     border-radius: var(--radius-sm);

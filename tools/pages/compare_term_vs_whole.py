@@ -6,7 +6,7 @@ five spokes point here. It is the sanctioned cross silo route under spec s07
 rule 3, which is why it carries SILO = "compare" and ACTIVE = "/" and why
 neither product's CTA weighting applies to it.
 
-Both two-path buttons are .btn-cta. Giving one product the amber and the other
+Both two-path buttons are .btn-cta. Giving one product the red CTA and the other
 a ghost outline on a page titled "X vs Y" is a recommendation disguised as a
 layout decision, and readers can tell. See design-system/pages/compare.md.
 

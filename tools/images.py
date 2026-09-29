@@ -156,6 +156,7 @@ OG_FOR_PAGE = {
     # an about or legal page has no documentary photograph to earn, and a share
     # card is not a reason to fetch one.
     "/get-a-quote/": "contact-desk",
+    "/get-a-quote/details/": "contact-desk",
     "/about/": "home-hero",
     "/about/agents/": "contact-desk",
     "/about/agents/first-last/": "contact-desk",

@@ -78,7 +78,7 @@ time.** Only reuse an OG slot that has a real `assets/img/og-<slot>.jpg` on disk
   `rate_chart`, `post_submit_section`, `no_obligation_section`, and the schema builders
   (`org_schema`, `breadcrumbs`, `faq_schema`, `person_schema`, `jsonld`).
 - `tools/logo.py` — **the logo's single source of truth** ("Summit": the A as a two-facet peak with
-  an amber cap). Geometry, palettes and wording live here and nowhere else. `chrome.header()` and
+  a red cap). Geometry, palettes and wording live here and nowhere else. `chrome.header()` and
   `chrome.footer()` call `logo.lockup()`; a full build writes `assets/favicon.svg` from
   `logo.favicon_svg()`. Never hand-edit the favicon or paste the polygons elsewhere: `check.py`
   fails if the favicon differs from what `logo.py` generates, if another `tools/*.py` file contains
@@ -114,6 +114,7 @@ new JS, check whether one of these contracts already covers what you need:
 | `[data-ax-form]` | Fills the hidden fields, blur validation, TCPA gate, honeypot, GA4, success panel |
 | `[data-steps]` + `[data-step]` + `[data-step-next/back]` | Multi-step forms; `[data-step-branch]`/`[data-step-for]` add branching via `fieldset.disabled` |
 | `[data-prefill]` (JSON) + `data-prefill-target` | Writes values into a form by field name, fires `form_start`, scrolls, jumps to the first empty field. **Read at click time**, so the attribute can be rewritten at runtime |
+| `[data-handoff]` + `[data-handoff-fill]` | The two-stage quote. On success a `data-handoff` form (`/get-a-quote/`) saves name, age, email, phone, product and `quick_submission_id` to sessionStorage; a `data-handoff-fill` form (`/get-a-quote/details/`) is prefilled from it before `[data-steps]` initialises (so the product branch is live), and clears it on its own success. Never in the URL or GA4 |
 | `[data-panels]` + `[data-panel]` | One checked radio shows one panel; `[data-panel-caption]` auto-writes "Showing female, 20 years." |
 | `.reveal`, `[data-stagger]`, `[data-count]` | IntersectionObserver reveal, stagger, count-up |
 | `[data-calc]` + `data-calc-field`/`-out`/`-cta`/`-bar` | The coverage calculator (section 10). `-bar` segments get their width as a share of the need. Markup comes from the helpers in `term_calculator.py` (`calc_hero`, `field`/`picker`/`pair`, `result_card`, `calc_bar`, `breakdown`), which the whole life calculator reuses |
@@ -146,10 +147,11 @@ links pointing at pages not yet built. It is meant to be edited in the same comm
 
 - **No em-dash anywhere in rendered copy.** `tools/build.py` fails with a line number, entity forms
   included. Use a comma, colon, period, or middot.
-- **The logo's cap is the one amber thing outside the CTA.** It is set inline by `tools/logo.py`,
-  not in CSS, so the count below is unaffected.
-- **Amber (`--color-gold`) appears in exactly 3 CSS rules** — `.btn-cta`, `.btn-cta:hover`,
-  `.skip-link`. `check.py` counts them. Adding a fourth fails the check.
+- **The logo's cap is red**, set inline by `tools/logo.py`, not in CSS: `var(--color-cta)` on
+  light grounds, `#F87171` on navy (footer, favicon). The site has no amber since 2026-09-29.
+- **CTA red (`--color-cta`) appears in exactly 3 CSS rules** — `.btn-cta`, `.btn-cta:hover`,
+  `.skip-link`, white label (ink on red fails contrast). `check.py` counts them. Adding a fourth
+  fails the check.
 - **Exactly one TCPA `[data-consent]` per form**, never pre-ticked, immediately above submit; and
   the hidden `source_url` / `silo` / `form_name` / `company_website` fields must be present. Always
   emit them with `forms.scaffold()` and `forms.consent_block()`.

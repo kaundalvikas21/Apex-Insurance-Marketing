@@ -15,7 +15,7 @@ have to click through, and the structural contract assets/site.js relies on:
   seo        self-canonical, one h1, visible breadcrumb plus BreadcrumbList on
              every page below root
   links      every internal href resolves to a file that exists
-  compliance no em-dash, no emoji, amber confined to its three CSS rules
+  compliance no em-dash, no emoji, CTA red confined to its three CSS rules
 
     python3 tools/build.py && python3 tools/check.py
 """
@@ -276,9 +276,9 @@ def main():
 
     css = os.path.join(ROOT, "assets", "site.css")
     if os.path.exists(css):
-        n = open(css, encoding="utf-8").read().count("var(--color-gold")
+        n = open(css, encoding="utf-8").read().count("var(--color-cta")
         if n != 3:
-            problems.append("site.css: amber appears in %d rules, must be exactly 3" % n)
+            problems.append("site.css: CTA red appears in %d rules, must be exactly 3" % n)
 
     # --- logo: one source of truth --------------------------------------------
     # tools/logo.py owns the mark. Its polygons may appear in no other source

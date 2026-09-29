@@ -8,7 +8,7 @@ takes `aria-current` and every GA4 event from these pages is attributable withou
 to a product. This neutrality is what makes a compare page the one legal cross-silo route under spec
 section 07 rule 3, and it is a compliance property rather than a stylistic one.
 
-**Both two-path buttons are `.btn-cta`.** Giving one product the amber and the other a ghost outline
+**Both two-path buttons are `.btn-cta`.** Giving one product the red CTA and the other a ghost outline
 on a page titled "X vs Y" is a recommendation disguised as a layout decision, and readers can tell.
 If a future page genuinely needs to recommend one side, it is not a compare page.
 

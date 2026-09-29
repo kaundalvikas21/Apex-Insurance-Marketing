@@ -316,7 +316,7 @@ def body():
 </section>
 
 
-<!-- The soft CTA. No amber, no form: this reader is evaluating, not buying,
+<!-- The soft CTA. No red CTA, no form: this reader is evaluating, not buying,
      and the honest next step is a document rather than a call script. -->
 <section class="section-tight">
   <div class="container-ax">
