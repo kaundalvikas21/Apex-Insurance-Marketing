@@ -195,7 +195,7 @@
            column. Six columns, not five, so the panel clears the 26rem
            container query and date of birth pairs with state, as in the
            team's layout. -->
-      <div class="lg:col-span-6 lg:col-start-7">
+      <div class="max-lg:order-first lg:col-span-6 lg:col-start-7">
         <div class="sticky-col">
           <div class="panel reveal">
             
@@ -390,11 +390,12 @@
 
     <div>
       
-    <div data-panels="fe-rates">
+    <div data-panels="fe-rates" class="col-tabs">
 
       <div class="reveal mt-8 flex flex-wrap items-end gap-6">
         <fieldset><legend class="field-label">Show premiums for</legend><div class="choice-row"><label class="choice"><input type="radio" name="fe-rate-sex" value="female" checked><span>Female</span></label><label class="choice"><input type="radio" name="fe-rate-sex" value="male"><span>Male</span></label></div></fieldset><p class="text-sm text-muted">Non tobacco, level benefit. Tobacco rates are higher.</p>
       </div>
+      <fieldset class="reveal mt-6 sm:hidden"><legend class="field-label">Coverage amount</legend><div class="choice-row"><label class="choice"><input type="radio" name="fe-rates-cov" value="0" data-col-pick="0" checked><span>$10,000</span></label><label class="choice"><input type="radio" name="fe-rates-cov" value="1" data-col-pick="1"><span>$25,000</span></label></div></fieldset>
 
       <!-- INTEGRATION POINT: every cell below is a structural placeholder.
            Populate from the carrier rate cards keyed by (toggle state, age
@@ -413,17 +414,17 @@
           <thead>
             <tr>
               <th scope="col">Age at application</th>
-              <th scope="col" class="tnum">$10,000</th><th scope="col" class="tnum">$25,000</th><th scope="col"><span class="sr-only">Get a quote for this row</span></th>
+              <th scope="col" class="tnum" data-col="0">$10,000</th><th scope="col" class="tnum" data-col="1">$25,000</th><th scope="col"><span class="sr-only">Get a quote for this row</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">50 to 54</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">55 to 59</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">60 to 64</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">65 to 69</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">70 to 74</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">75 to 79</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
-            <tr><th scope="row">80 to 85</th><td class="tnum">$--</td><td class="tnum">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">50 to 54</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">55 to 59</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">60 to 64</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">65 to 69</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">70 to 74</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">75 to 79</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
+            <tr><th scope="row">80 to 85</th><td class="tnum" data-col="0">$--</td><td class="tnum" data-col="1">$--</td><td><a href="tel:+15550180199" data-cta-location="rate_table" class="btn-row"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="btn-row-label">Quote this</span></a></td></tr>
           </tbody>
         </table>
       </div>
@@ -575,42 +576,46 @@
       <p class="reveal mt-5 text-slate">Final expense is a whole life policy. It is smaller, easier to qualify for, and priced for a different job.</p>
     </div>
 
-    <!-- .reveal sits on the scroll container itself (see CLAUDE.md). -->
-    <div class="reveal mt-10 table-scroll pc-scroll">
+    <!-- On a phone the tabs pick one product column (col_tabs). .reveal sits
+         on the scroll container itself (see CLAUDE.md). -->
+    <div class="col-tabs">
+    <fieldset class="reveal mt-8 sm:hidden"><legend class="field-label">Show</legend><div class="choice-row"><label class="choice"><input type="radio" name="pc-fe" value="0" data-col-pick="0" checked><span>Final expense</span></label><label class="choice"><input type="radio" name="pc-fe" value="1" data-col-pick="1"><span>Term life</span></label><label class="choice"><input type="radio" name="pc-fe" value="2" data-col-pick="2"><span>Whole life</span></label></div></fieldset>
+    <div class="reveal mt-10 max-sm:mt-4 table-scroll pc-scroll">
       <table class="pc-table">
         <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>
         <caption class="sr-only">Final expense compared with term life and whole life insurance</caption>
         <thead>
           <tr>
             <td class="pc-corner"></td>
-            <th scope="col" class="pc-head pc-current">
+            <th scope="col" class="pc-head pc-current" data-col="0">
               <span class="pc-name">Final expense</span> <span class="pc-this">This page</span>
               <span class="pc-tag">A small policy, no exam, built for funeral and final bills.</span>
             </th>
-            <th scope="col" class="pc-head">
+            <th scope="col" class="pc-head" data-col="1">
               <span class="pc-name">Term life</span>
               <span class="pc-tag">The most coverage per dollar, for a fixed number of years.</span>
             </th>
-            <th scope="col" class="pc-head">
+            <th scope="col" class="pc-head" data-col="2">
               <span class="pc-name">Whole life</span>
               <span class="pc-tag">Lifelong coverage at a larger face amount, with cash value.</span>
             </th>
           </tr>
         </thead>
         <tbody>
-            <tr><th scope="row">Typical coverage</th><td class="pc-big pc-current">$2,000 to $50,000</td><td class="pc-big">$100,000 and up</td><td class="pc-big">$25,000 and up</td></tr>
-            <tr><th scope="row">Medical exam</th><td class=" pc-current"><span class="pc-pill">Never</span><span class="pc-note">A short set of health questions instead.</span></td><td class=""><span class="pc-pill">Often</span></td><td class=""><span class="pc-pill">Usually</span></td></tr>
-            <tr><th scope="row">Typical age</th><td class=" pc-current">50 to 85</td><td class="">30 to 55</td><td class="">40 to 65</td></tr>
-            <tr><th scope="row">How long it lasts</th><td class=" pc-current">For life</td><td class="">10 to 30 years</td><td class="">For life</td></tr>
-            <tr><th scope="row">What it is for</th><td class=" pc-current">A funeral and final bills</td><td class="">Replacing income</td><td class="">A lifelong need or an estate</td></tr>
-            <tr><th scope="row">Time to get covered</th><td class="pc-accent pc-current">Often the same day</td><td class="">Three to six weeks</td><td class="">Three to six weeks</td></tr>
+            <tr><th scope="row">Typical coverage</th><td class="pc-big pc-current" data-col="0">$2,000 to $50,000</td><td class="pc-big" data-col="1">$100,000 and up</td><td class="pc-big" data-col="2">$25,000 and up</td></tr>
+            <tr><th scope="row">Medical exam</th><td class=" pc-current" data-col="0"><span class="pc-pill">Never</span><span class="pc-note">A short set of health questions instead.</span></td><td class="" data-col="1"><span class="pc-pill">Often</span></td><td class="" data-col="2"><span class="pc-pill">Usually</span></td></tr>
+            <tr><th scope="row">Typical age</th><td class=" pc-current" data-col="0">50 to 85</td><td class="" data-col="1">30 to 55</td><td class="" data-col="2">40 to 65</td></tr>
+            <tr><th scope="row">How long it lasts</th><td class=" pc-current" data-col="0">For life</td><td class="" data-col="1">10 to 30 years</td><td class="" data-col="2">For life</td></tr>
+            <tr><th scope="row">What it is for</th><td class=" pc-current" data-col="0">A funeral and final bills</td><td class="" data-col="1">Replacing income</td><td class="" data-col="2">A lifelong need or an estate</td></tr>
+            <tr><th scope="row">Time to get covered</th><td class="pc-accent pc-current" data-col="0">Often the same day</td><td class="" data-col="1">Three to six weeks</td><td class="" data-col="2">Three to six weeks</td></tr>
         </tbody>
         <tfoot>
           <tr>
-            <td></td><td class="pc-current"><a href="tel:+15550180199" data-cta-location="fe_compare" class="btn btn-call btn-block whitespace-nowrap"><svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a><p class="mt-2 text-micro text-muted">Licensed agent, no hold queue &#183; <a class="link" href="#fe-quote">or get a quote online</a></p></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/term-life-insurance/">See term life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/whole-life-insurance/">See whole life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td>
+            <td></td><td class="pc-current" data-col="0"><a href="tel:+15550180199" data-cta-location="fe_compare" class="btn btn-call btn-block whitespace-nowrap"><svg class="shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">Call (555) 018-0199</span></a><p class="mt-2 text-micro text-muted">Licensed agent, no hold queue &#183; <a class="link" href="#fe-quote">or get a quote online</a></p></td><td data-col="1"><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/term-life-insurance/">See term life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td><td data-col="2"><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/whole-life-insurance/">See whole life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td>
           </tr>
         </tfoot>
       </table>
+    </div>
     </div>
     <p class="reveal mt-6 text-slate max-w-3xl">
       If you are under 60 and in good health and you want a larger amount, look at term life

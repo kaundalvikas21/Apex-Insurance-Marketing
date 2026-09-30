@@ -154,7 +154,7 @@
     }
 
     function open() {
-      var busy = document.activeElement && document.activeElement.closest('[data-triage], [data-nav-panel]');
+      var busy = document.activeElement && document.activeElement.closest('[data-triage], [data-nav-panel], form');
       if (dlg.open || busy || quizOnScreen()) return;
       clearTimeout(timer);
       window.removeEventListener('scroll', onScroll);
@@ -875,8 +875,8 @@
 
   /* ------------------------------------------------------------------------
      8. PANEL GROUPS
-     One radio group shows one panel. Used by the final-expense rate table
-     (male / female) and the term-length selector. Every panel is present in
+     One radio group shows one panel, and rate tables caption their toggles.
+     Used by the term-length selector and whole_worth_it. Every panel is present in
      the HTML, so the content is complete for crawlers and with JS off; this
      only hides the ones that are not selected.
      --------------------------------------------------------------------- */
@@ -884,7 +884,9 @@
     var panels = $$('[data-panel]', group);
 
     function apply() {
-      var chosen = $$('input[type="radio"]:checked', group).map(function (r) { return r.value; });
+      // Phone column tabs (chrome.col_tabs) are CSS only and never a dimension.
+      var checked = $$('input[type="radio"]:checked:not([data-col-pick])', group);
+      var chosen = checked.map(function (r) { return r.value; });
       panels.forEach(function (panel) {
         panel.hidden = chosen.indexOf(panel.getAttribute('data-panel')) === -1;
       });
@@ -893,7 +895,7 @@
       // screenshotted table is never ambiguous about what it is showing.
       var caption = $('[data-panel-caption]', group);
       if (!caption) return;
-      var labels = $$('input[type="radio"]:checked', group).map(function (r) {
+      var labels = checked.map(function (r) {
         var el = r.closest('label');
         return el ? el.textContent.trim().toLowerCase() : r.value;
       });
@@ -908,7 +910,8 @@
 
   /* ------------------------------------------------------------------------
      9. TRIAGE WIDGET (home)
-     Three questions, no email wall, routes to a hub. Scores are declared in
+     Three questions, a recommendation, then a last step: the quick quote
+     form, with the recommended product filled in. Scores are declared in
      markup as data-score="term:3,whole:1" so the copy and the logic stay in
      the same place.
      --------------------------------------------------------------------- */
@@ -922,6 +925,8 @@
     var head = $('[data-triage-head]', widget);
     var segs = $$('[data-triage-seg]', widget);
     var back = $('[data-triage-back]', widget);
+    var form = $('[data-triage-form]', widget);
+    var product = $('[data-triage-product]', widget);
     // One data-score string per answered question. Scores are summed from this
     // at the end, which is what makes Back a pop() rather than a subtraction.
     var picks = [];
@@ -930,11 +935,12 @@
     function show(step, moveFocus) {
       questions.forEach(function (q, i) { q.hidden = i !== step; });
       results.forEach(function (r) { r.hidden = true; });
+      if (form) form.hidden = true;
       $$('[aria-pressed]', questions[step]).forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
       if (head) head.hidden = false;
       if (back) back.hidden = step === 0;
       segs.forEach(function (seg, i) { seg.classList.toggle('is-done', i <= step); });
-      if (progress) progress.textContent = 'Question ' + (step + 1) + ' of ' + questions.length;
+      if (progress) progress.textContent = 'Question ' + (step + 1) + ' of ' + (questions.length + (form ? 1 : 0));
       // Focus follows the question so keyboard and screen reader users hear the
       // new one. Not on first paint, which would ring the heading on page load.
       if (!moveFocus) return;
@@ -962,9 +968,18 @@
       });
 
       questions.forEach(function (q) { q.hidden = true; });
-      if (head) head.hidden = true;
-      if (back) back.hidden = true;
       results.forEach(function (r) { r.hidden = r.getAttribute('data-triage-result') !== winner; });
+      // With the contact step the head stays up as step 4 of 4, and Back pops
+      // to the last question. Without it the result is the end.
+      if (head) head.hidden = !form;
+      if (back) back.hidden = !form;
+      if (form) {
+        segs.forEach(function (seg) { seg.classList.add('is-done'); });
+        if (progress) progress.textContent = 'Last step \u00b7 Your details';
+        form.hidden = false;
+        // Quiz keys to the form's product values.
+        if (product) product.value = winner === 'final' ? 'final-expense' : winner;
+      }
 
       var shown = results.filter(function (r) { return !r.hidden; })[0];
       if (shown) { shown.setAttribute('tabindex', '-1'); shown.focus({ preventScroll: true }); }

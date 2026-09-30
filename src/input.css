@@ -919,6 +919,14 @@
     padding-block: 0.5rem;
   }
   .compare-table tfoot td { padding-top: 1.5rem; }
+  /* A two-product table that fits a phone outright: labels wrap instead of the
+     table scrolling (whole life hub cost table). */
+  @media (max-width: 639px) {
+    .compare-fit { min-width: 0 !important; }
+    .compare-fit th, .compare-fit td { padding: 0.875rem 0.75rem; }
+    .compare-fit tbody th { white-space: normal; }
+    .compare-fit thead th { font-size: var(--text-sm); }
+  }
 
   /* Product comparison, chrome.product_compare(). The current page's column is
      a raised card: surface fill, side rules, a blue cap, rounded ends. */
@@ -990,6 +998,23 @@
   }
   @media (max-width: 379px) {
     .pc-table .btn { padding-inline: 0.5rem; font-size: 0.8125rem; }
+  }
+
+  /* Phone tabs for wide tables, chrome.col_tabs(). The picked radio's column
+     is the only one shown, so the table fits the screen without scrolling.
+     Rate tables and the product comparison both use it (client request,
+     2026-09-30). Without :has the table simply scrolls as before. */
+  @media (max-width: 639px) {
+    .col-tabs table { min-width: 0 !important; }
+    .col-tabs .pc-table { table-layout: auto; }
+    .col-tabs .pc-table col { width: auto; }
+    .col-tabs .pc-table .pc-current { border-left: 0; border-right: 0; }
+    .col-tabs .pc-table thead .pc-current, .col-tabs .pc-table tfoot .pc-current { border-top: 0; border-bottom: 0; box-shadow: none; }
+    .col-tabs .pc-table tbody th[scope="row"] { width: 7rem; }
+    .col-tabs:has([data-col-pick="0"]:checked) [data-col]:not([data-col="0"]),
+    .col-tabs:has([data-col-pick="1"]:checked) [data-col]:not([data-col="1"]),
+    .col-tabs:has([data-col-pick="2"]:checked) [data-col]:not([data-col="2"]),
+    .col-tabs:has([data-col-pick="3"]:checked) [data-col]:not([data-col="3"]) { display: none; }
   }
 
   /* --- Accordion (native details, keyboard for free) -------------------- */
@@ -1085,10 +1110,11 @@
   .nav-link[aria-current="page"] { color: var(--color-navy); }
   .nav-link[aria-current="page"]::after { width: 100%; }
 
-  /* Hub hero banner. Below 1024 the photograph is a block under the copy; from
-     1024 it is the section background, anchored right, and the copy sits over
-     the empty left of the frame. No scrim: the left of every frame is already
-     near white, which is why these three were shot that way. */
+  /* Hub hero banner. At every width the photograph is the section background.
+     From 1024 it is anchored right and the copy sits over the empty left of the
+     frame. No scrim: the left of every frame is already near white, which is
+     why these were shot that way. Below 1024 the copy covers the whole frame,
+     so the photograph fades back behind it (client request, 2026-09-30). */
   .hero-banner { position: relative; padding-block: 1.5rem 2.5rem; background-color: #EDF2F8; }
   .hero-bg { display: block; margin-top: 2rem; border-radius: var(--radius-ax); overflow: hidden; }
   .hero-bg img { display: block; width: 100%; height: auto; }
@@ -1100,6 +1126,16 @@
     .hero-banner-copy .text-lead { max-width: 36rem; }
     .hero-bg { position: absolute; inset: 0; margin: 0; border-radius: 0; }
     .hero-bg img { height: 100%; object-fit: cover; }   /* object-position is per image, inline */
+  }
+  @media (max-width: 1023px) {
+    .hero-banner { overflow: hidden; }
+    .hero-banner-copy { position: relative; z-index: 1; }
+    /* The whole 4:3 crop at full width, sat on the bottom edge: cover-filling a
+       tall phone hero cut the people at the sides (free policy review lost the
+       woman on the left). Every person in the crop stays in frame. */
+    .hero-bg { position: absolute; inset: auto 0 0; margin: 0; border-radius: 0; opacity: .18; pointer-events: none; }
+    .hero-bg img { width: 100%; height: auto; }
+    .hero-bg { -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%); mask-image: linear-gradient(to bottom, transparent, #000 30%); }
   }
 
   /* Hero photo settle: starts 10% in and drifts out to its framing once, on load,
@@ -1549,6 +1585,8 @@
   .quiz-back:hover { color: var(--color-navy); }
   .quiz-result { max-width: 38rem; margin-inline: auto; padding-block: 0.5rem; text-align: center; }
   .quiz-result:focus { outline: none; }
+  /* The quiz's last step: the quick quote form under the result. */
+  .quiz-form { max-width: 38rem; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid var(--color-rule); }
 
   .triage-opt {
     position: relative;
@@ -1775,6 +1813,21 @@
     }
     .acc[open]::details-content { block-size: auto; opacity: 1; }
   }
+}
+
+/* ============================================================================
+   FORM FIRST ON A PHONE (client request, 2026-09-30)
+   A `.form-first` grid is a content column then a form column. Below 1024 the
+   section's h2 and the paragraph after it stay on top, the form follows, and
+   the rest of the content column comes after the form. The content column
+   (and its .sticky-col) dissolve with display: contents so their children can
+   be ordered around the form. Unlayered so it beats the grid's gap utility.
+   ========================================================================= */
+@media (max-width: 1023px) {
+  .form-first { row-gap: 0; }
+  .form-first > :first-child, .form-first > :first-child > .sticky-col { display: contents; }
+  .form-first > :first-child h2:first-child, .form-first > :first-child h2:first-child + p { order: -2; }
+  .form-first > :last-child { order: -1; margin-block: 2rem 0.5rem; }
 }
 
 /* ============================================================================

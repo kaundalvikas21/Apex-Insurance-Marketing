@@ -369,7 +369,7 @@ def body():
      ================================================================== -->
 <section class="section" id="quote">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+    <div class="form-first grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
       <div class="lg:col-span-5">
         <h2 class="reveal text-h2">Get quotes for your coverage amount</h2>
         <p class="reveal mt-5 text-slate">

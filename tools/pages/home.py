@@ -2,12 +2,13 @@
 """HOME. Spec section 01, reframed to the client outline (see
 design-system/pages/home.md).
 
-Order: hero, USP strip, how it works, why us, coverage types, triage, FAQ,
+Order: hero, USP strip, quick quote form, how it works, why us, coverage types, triage, FAQ,
 closing pair. One idea per section, plain headings. It links to hubs, never
 to spokes.
 """
 from icons import icon
 import chrome as C
+import get_a_quote
 
 PATH = "/"
 OUT = "index.html"
@@ -99,7 +100,7 @@ HERO = C.page_hero(
     None,
     "Get your family covered.",
     "Life insurance from multiple carriers, compared for you by a licensed, independent agent.",
-    extra=C.hero_cta("/get-a-quote/", "Get a free quote"),
+    extra=C.hero_cta("#quote", "Get a free quote"),
     banner="home-banner") + f"""
 <!-- USP strip, directly beneath the hero CTA. -->{C.usp_strip([
     ("shield-check", "Licensed in " + C.STATES + " states", "Real licensed agents"),
@@ -107,6 +108,21 @@ HERO = C.page_hero(
     ("building", C.YEARS + " years", "Placing life insurance"),
     ("handshake", "Free, no obligation", "You never pay us a fee"),
 ])}
+<!-- QUICK QUOTE. The /get-a-quote/ form, on the page. The hero button jumps
+     here; on success it offers /get-a-quote/details/ like the original. -->
+<section id="quote" class="section band-surface">
+  <div class="container-ax">
+    <div class="max-w-2xl mx-auto">
+      <div class="panel reveal">
+        <div class="panel-head">
+          <h2 class="text-h3 !font-display !font-semibold">Start your free quote</h2>
+          <p class="mt-2 text-sm text-muted">Takes about a minute. Nothing is charged and nothing is binding.</p>
+        </div>
+        {get_a_quote.quote_form("home-quote-form", "home_quote", "h")}
+      </div>
+    </div>
+  </div>
+</section>
 """
 
 
@@ -174,18 +190,18 @@ def _fig(text):
 
 # The quiz. It is deliberately NOT the FAQ's shape: centred, one wide card, a
 # progress bar, and answers as tiles rather than rows. Scores live in the
-# markup next to the copy they belong to. Results link to a different section
-# of each hub, so no target on this page is linked twice (spec section 07).
+# markup next to the copy they belong to. The result is followed by a last
+# step, the quick quote form, so nobody leaves the page to start again.
 TRIAGE = f"""
 <!-- =====================================================================
-     TRIAGE. Three questions, no email wall.
+     TRIAGE. Three questions, then a last step for contact details.
      ================================================================== -->
 <section id="triage" class="section band">
   <div class="container-ax">
     <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Not sure which one you need?</h2>
       <p class="reveal mt-5 text-slate">
-        Three quick questions. No email, no phone number, and nothing is sent anywhere.
+        Three quick questions, then tell us where to send your quotes.
       </p>
     </div>
 
@@ -196,10 +212,11 @@ TRIAGE = f"""
           <span class="progress-seg" data-triage-seg></span>
           <span class="progress-seg" data-triage-seg></span>
           <span class="progress-seg" data-triage-seg></span>
+          <span class="progress-seg" data-triage-seg></span>
         </div>
         <div class="flex items-center justify-between gap-4 text-sm text-muted">
           <p data-triage-progress class="font-medium"></p>
-          <p>About 30 seconds</p>
+          <p>About a minute</p>
         </div>
       </div>
 
@@ -228,12 +245,12 @@ TRIAGE = f"""
     "You are describing a temporary obligation with a large price tag. Term buys the most coverage "
     "per dollar for exactly as long as that obligation lasts, then it ends. If the need turns out "
     "to be permanent, most term policies can be converted later without a new medical exam.",
-    '<a class="btn btn-cta" href="/term-life-insurance/#quote">Get my term life quote</a>')}
+    "")}
 {_result("whole", "shield-check", "Look at whole life insurance",
     "You want the policy to still be there whenever it is needed, which term cannot promise. Whole "
     "life costs considerably more per dollar of death benefit, so the next step is a written "
     "illustration you can read at your own pace.",
-    '<a class="btn btn-cta" href="/whole-life-insurance/#quote">Get my whole life quote</a>')}
+    "")}
 {_result("final", "heart", "Final expense insurance is probably the fit",
     "You need a smaller policy, issued on health questions rather than a medical exam, that pays "
     "quickly and covers a funeral and the bills around it. This is almost always faster to arrange "
@@ -244,6 +261,13 @@ TRIAGE = f"""
               Or read what
               <a class="link" href="/final-expense-insurance/#costs">final expense insurance costs by age</a>.
             </p>''')}
+
+      <!-- The last step. site.js shows it under the result and writes the
+           recommended product into the hidden field. -->
+      <div data-triage-form hidden class="quiz-form">
+        <h3 class="text-h4 text-center">Where should we send your quotes?</h3>
+        {get_a_quote.quote_form("triage-quote-form", "triage_quote", "t", product=False)}
+      </div>
     </div>
 
     <p class="reveal mt-6 text-center text-sm text-muted">

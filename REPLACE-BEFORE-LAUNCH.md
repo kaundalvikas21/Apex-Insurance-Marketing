@@ -316,7 +316,7 @@ section of the built page.
 
 Those anchors exist because spec section 07 allows one link per target per page: the spoke module
 owns the canonical page link, so contextual teasers deep-link to the relevant section instead.
-Same reason the home page triage results point at `#quote`, `#rates`, and `#costs`.
+Same reason the home page triage's final expense result points at `#costs`.
 
 ---
 

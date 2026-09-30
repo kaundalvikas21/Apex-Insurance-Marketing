@@ -319,7 +319,7 @@ def body():
            column. Six columns, not five, so the panel clears the 26rem
            container query and date of birth pairs with state, as in the
            team's layout. -->
-      <div class="lg:col-span-6 lg:col-start-7">
+      <div class="max-lg:order-first lg:col-span-6 lg:col-start-7">
         <div class="sticky-col">
           <div class="panel reveal">
             {hero_form}

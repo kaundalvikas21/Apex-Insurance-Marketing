@@ -589,7 +589,7 @@
     </div>
 
     <div class="reveal mt-8 table-scroll table-signature">
-      <table class="compare-table" style="min-width:44rem">
+      <table class="compare-table compare-fit" style="min-width:44rem">
         <caption class="sr-only">Whole life insurance compared with 20 year term life insurance</caption>
         <thead>
           <tr>
@@ -632,42 +632,46 @@
       <p class="reveal mt-5 text-slate">Whole life is permanent coverage at a size term buyers would recognize. Final expense is the same idea, made small and easy to qualify for.</p>
     </div>
 
-    <!-- .reveal sits on the scroll container itself (see CLAUDE.md). -->
-    <div class="reveal mt-10 table-scroll pc-scroll">
+    <!-- On a phone the tabs pick one product column (col_tabs). .reveal sits
+         on the scroll container itself (see CLAUDE.md). -->
+    <div class="col-tabs">
+    <fieldset class="reveal mt-8 sm:hidden"><legend class="field-label">Show</legend><div class="choice-row"><label class="choice"><input type="radio" name="pc-whole" value="0" data-col-pick="0" checked><span>Whole life</span></label><label class="choice"><input type="radio" name="pc-whole" value="1" data-col-pick="1"><span>Term life</span></label><label class="choice"><input type="radio" name="pc-whole" value="2" data-col-pick="2"><span>Final expense</span></label></div></fieldset>
+    <div class="reveal mt-10 max-sm:mt-4 table-scroll pc-scroll">
       <table class="pc-table">
         <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>
         <caption class="sr-only">Whole life compared with term life and final expense insurance</caption>
         <thead>
           <tr>
             <td class="pc-corner"></td>
-            <th scope="col" class="pc-head pc-current">
+            <th scope="col" class="pc-head pc-current" data-col="0">
               <span class="pc-name">Whole life</span> <span class="pc-this">This page</span>
               <span class="pc-tag">Lifelong coverage at a larger face amount, with cash value.</span>
             </th>
-            <th scope="col" class="pc-head">
+            <th scope="col" class="pc-head" data-col="1">
               <span class="pc-name">Term life</span>
               <span class="pc-tag">The most coverage per dollar, for a fixed number of years.</span>
             </th>
-            <th scope="col" class="pc-head">
+            <th scope="col" class="pc-head" data-col="2">
               <span class="pc-name">Final expense</span>
               <span class="pc-tag">A small policy, no exam, built for funeral and final bills.</span>
             </th>
           </tr>
         </thead>
         <tbody>
-            <tr><th scope="row">Typical coverage</th><td class="pc-big pc-current">$25,000 and up</td><td class="pc-big">$100,000 and up</td><td class="pc-big">$2,000 to $50,000</td></tr>
-            <tr><th scope="row">Medical exam</th><td class=" pc-current"><span class="pc-pill">Usually</span></td><td class=""><span class="pc-pill">Often</span></td><td class=""><span class="pc-pill">Never</span></td></tr>
-            <tr><th scope="row">Typical age</th><td class=" pc-current">40 to 65</td><td class="">30 to 55</td><td class="">50 to 85</td></tr>
-            <tr><th scope="row">How long it lasts</th><td class="pc-accent pc-current">For life</td><td class="">10 to 30 years</td><td class="">For life</td></tr>
-            <tr><th scope="row">What it is for</th><td class=" pc-current">A lifelong need or an estate</td><td class="">Replacing income</td><td class="">A funeral and final bills</td></tr>
-            <tr><th scope="row">Time to get covered</th><td class=" pc-current">Three to six weeks</td><td class="">Three to six weeks</td><td class="">Often the same day</td></tr>
+            <tr><th scope="row">Typical coverage</th><td class="pc-big pc-current" data-col="0">$25,000 and up</td><td class="pc-big" data-col="1">$100,000 and up</td><td class="pc-big" data-col="2">$2,000 to $50,000</td></tr>
+            <tr><th scope="row">Medical exam</th><td class=" pc-current" data-col="0"><span class="pc-pill">Usually</span></td><td class="" data-col="1"><span class="pc-pill">Often</span></td><td class="" data-col="2"><span class="pc-pill">Never</span></td></tr>
+            <tr><th scope="row">Typical age</th><td class=" pc-current" data-col="0">40 to 65</td><td class="" data-col="1">30 to 55</td><td class="" data-col="2">50 to 85</td></tr>
+            <tr><th scope="row">How long it lasts</th><td class="pc-accent pc-current" data-col="0">For life</td><td class="" data-col="1">10 to 30 years</td><td class="" data-col="2">For life</td></tr>
+            <tr><th scope="row">What it is for</th><td class=" pc-current" data-col="0">A lifelong need or an estate</td><td class="" data-col="1">Replacing income</td><td class="" data-col="2">A funeral and final bills</td></tr>
+            <tr><th scope="row">Time to get covered</th><td class=" pc-current" data-col="0">Three to six weeks</td><td class="" data-col="1">Three to six weeks</td><td class="" data-col="2">Often the same day</td></tr>
         </tbody>
         <tfoot>
           <tr>
-            <td></td><td class="pc-current"><a href="#quote" class="btn btn-cta btn-block">Get my whole life quote</a><p class="mt-2 text-micro text-muted">Free, no obligation &#183; or call <a href="tel:+15550180199" data-cta-location="whole_compare" class="link inline-flex items-center gap-1 whitespace-nowrap"><svg class="shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">(555) 018-0199</span></a></p></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/term-life-insurance/">See term life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td><td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/final-expense-insurance/">See final expense<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td>
+            <td></td><td class="pc-current" data-col="0"><a href="#quote" class="btn btn-cta btn-block">Get my whole life quote</a><p class="mt-2 text-micro text-muted">Free, no obligation &#183; or call <a href="tel:+15550180199" data-cta-location="whole_compare" class="link inline-flex items-center gap-1 whitespace-nowrap"><svg class="shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span class="tnum">(555) 018-0199</span></a></p></td><td data-col="1"><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/term-life-insurance/">See term life<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td><td data-col="2"><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="/final-expense-insurance/">See final expense<svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></td>
           </tr>
         </tfoot>
       </table>
+    </div>
     </div>
   </div>
 </section>

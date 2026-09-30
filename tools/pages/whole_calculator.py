@@ -291,7 +291,7 @@ def body():
      ================================================================== -->
 <section class="section band-surface" id="quote">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+    <div class="form-first grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">Get a quote and a full illustration</h2>

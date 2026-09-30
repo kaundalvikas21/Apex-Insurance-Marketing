@@ -282,15 +282,15 @@ meaning carried by adjacent text.
 See `design-system/pages/*.md` for the full per-page notes. In brief:
 
 **Home.** Plain outline, one idea per section (client reframe, September 2026). Hero: h1, one
-lead, one CTA, over the `home-banner` photograph. Then the USP strip, a three-step "how it works" with one CTA, a four-cell
+lead, one CTA, over the `home-banner` photograph. Then the USP strip, the quick quote form (`#quote`, the hero button's target), a three-step "how it works" with one CTA, a four-cell
 "why us" navy band, three one-sentence coverage cells followed by exactly two CTAs (call, quote),
-the triage widget, the FAQ, and the closing card pair. The comparison table lives on
+the triage widget (three questions, then the quick quote form as its last step), the FAQ, and the closing card pair. The comparison table lives on
 `/compare/term-vs-whole-life-insurance/`, not here. Home also carries the site's one timed
 `<dialog>` (free policy review): once per session, never in `.fe` mode, never holding a form.
 
 **The homepage, the contact page and all three hubs** open the same way (client reframe, September 2026): `page_hero(banner=)` with
 one sentence and one button over a full-bleed client-supplied photograph (`images.HERO_BANNERS`;
-behind the copy from 1024px, a 4:3 crop under it below that; no scrim, no glow), then `usp_strip()`, then the quote or contact section.
+behind the copy from 1024px; below that the whole 4:3 crop sits full width along the section's bottom edge behind the copy, 18% opacity, its top faded out, so nobody in the crop is cut off; no scrim, no glow), then `usp_strip()`, then the quote or contact section.
 The hero button points at that section, so the form is one click away rather than in the hero.
 Contact and the final expense hub carry two hero buttons: the call leads, and a second button ("Send a message", "Get coverage now")
 jumps to the form below (`#contact-form`, `#fe-quote`). Every other hero stays at one.

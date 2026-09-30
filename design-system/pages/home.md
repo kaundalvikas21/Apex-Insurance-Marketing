@@ -19,18 +19,22 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
   FAQ answer, not here. The hidden reviews slot stays.
 - **Coverage types:** three `.bento-2` cells (middle tinted), one sentence and one `.btn-row` hub
   link each, then exactly two buttons: call and quote.
-- **Primary CTA repetition:** `/get-a-quote/` sits on three buttons (hero, steps, coverage). Repeated
+- **Quick quote:** `get_a_quote.quote_form()` in its own `#quote` section under the strip (client
+  request, 2026-09-30). The hero button jumps to it.
+- **Primary CTA repetition:** `/get-a-quote/` sits on two buttons (steps, coverage). Repeated
   primary CTA buttons are the accepted exception to one link per target. Contextual text links are not.
 - **Triage quiz:** deliberately not the FAQ's shape, because the two were being read as one. Centred
   heading, one wide `.quiz.panel` (56rem), the form `.progress-track`, and answers as `.triage-opt`
   tiles: icon circle (or a figure for the age question), bold label, one hint line. Three across
   from 768px, icon-left rows below. A pick sets `aria-pressed`, shows a navy ring and a check badge
-  for 240ms (0 under reduced motion), then advances. Back link on questions 2 and 3. The result is
-  a centred "Your best fit" card. `<noscript>` explains itself instead of showing an empty card.
+  for 240ms (0 under reduced motion), then advances. Back link from question 2 on. The result is
+  a centred "Your best fit" card, then a fourth and last step under it: the quick quote form with
+  the recommended product in a hidden field (client request, 2026-09-30), so nobody is sent to a
+  hub to start over. `<noscript>` explains itself instead of showing an empty card.
   This is the page's one centred section.
 - **Dialog:** one native `<dialog data-dialog-timed>` for the free policy review, emitted by this
   page only. No form inside it. It never opens while the quiz is on screen or holds focus: the
   quiz sits at the dialog's own 50% scroll trigger.
 - **Final CTA:** two hover cards, not a divided row.
-- Layout families in order: hero, strip, stepper + CTA strip, navy bento, bento + button pair, form panel
+- Layout families in order: hero, strip, form panel, stepper + CTA strip, navy bento, bento + button pair, form panel
   (triage), accordion, card pair. Eyebrow budget 3, used 0.

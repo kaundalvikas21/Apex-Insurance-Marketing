@@ -310,7 +310,7 @@ def body():
      ================================================================== -->
 <section id="quote" class="section band">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+    <div class="form-first grid lg:grid-cols-12 gap-10 lg:gap-8">
 
       <div class="lg:col-span-5">
         <div class="sticky-col">

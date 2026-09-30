@@ -549,7 +549,7 @@ def body():
     </div>
 
     <div class="reveal mt-8 table-scroll table-signature">
-      <table class="compare-table" style="min-width:44rem">
+      <table class="compare-table compare-fit" style="min-width:44rem">
         <caption class="sr-only">Whole life insurance compared with 20 year term life insurance</caption>
         <thead>
           <tr>

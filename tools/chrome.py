@@ -765,6 +765,19 @@ COMPARE_NOTES = {("fe", "Medical exam"): "A short set of health questions instea
 COMPARE_ACCENT = {"fe": "Time to get covered", "term": "Typical coverage", "whole": "How long it lasts"}
 
 
+def col_tabs(name, labels, legend, cls="mt-6"):
+    """Phone-only tabs for a wide table: one radio per column. The wrapper
+    around the tabs and the table carries `.col-tabs`, and every cell of
+    column i carries data-col="i"; CSS (:has) then shows only the picked
+    column below 640px. No JS. Without :has the table scrolls as before."""
+    opts = "".join(
+        '<label class="choice"><input type="radio" name="%s" value="%d" data-col-pick="%d"%s>'
+        '<span>%s</span></label>' % (name, i, i, " checked" if i == 0 else "", label)
+        for i, label in enumerate(labels))
+    return ('<fieldset class="reveal %s sm:hidden"><legend class="field-label">%s</legend>'
+            '<div class="choice-row">%s</div></fieldset>' % (cls, legend, opts))
+
+
 def product_compare(current, heading, lead, cta, micro, cls="section band", after=""):
     """The three products side by side, the current page's column raised as a
     card. The "See ..." links are each hub's one body link to its siblings, so
@@ -776,29 +789,29 @@ def product_compare(current, heading, lead, cta, micro, cls="section band", afte
         return " pc-current" if k == current else ""
 
     heads = "".join(f"""
-            <th scope="col" class="pc-head{cur(k)}">
+            <th scope="col" class="pc-head{cur(k)}" data-col="{i}">
               <span class="pc-name">{PRODUCTS[k][0]}</span>{' <span class="pc-this">This page</span>' if k == current else ""}
               <span class="pc-tag">{PRODUCTS[k][2]}</span>
-            </th>""" for k in order)
+            </th>""" for i, k in enumerate(order))
 
-    def cell(label, k, value, kind):
+    def cell(label, i, k, value, kind):
         v = '<span class="pc-pill">%s</span>' % value if kind == "pill" else value
         classes = "pc-big" if kind == "big" else ""
         if k == current and COMPARE_ACCENT[k] == label:
             classes += " pc-accent"
         note = COMPARE_NOTES.get((k, label)) if k == current else None
         note = '<span class="pc-note">%s</span>' % note if note else ""
-        return '<td class="%s%s">%s%s</td>' % (classes.strip(), cur(k), v, note)
+        return '<td class="%s%s" data-col="%d">%s%s</td>' % (classes.strip(), cur(k), i, v, note)
 
     rows = "".join(
         '\n            <tr><th scope="row">%s</th>%s</tr>'
-        % (label, "".join(cell(label, k, vals[k], kind) for k in order))
+        % (label, "".join(cell(label, i, k, vals[k], kind) for i, k in enumerate(order)))
         for label, vals, kind in COMPARE_ROWS)
     foot = "".join(
-        f"""<td class="pc-current">{cta}<p class="mt-2 text-micro text-muted">{micro}</p></td>"""
+        f"""<td class="pc-current" data-col="{i}">{cta}<p class="mt-2 text-micro text-muted">{micro}</p></td>"""
         if k == current else
-        f"""<td><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="{PRODUCTS[k][1]}">See {PRODUCTS[k][0].lower()}{icon("arrow-right", 16, "shrink-0")}</a></td>"""
-        for k in order)
+        f"""<td data-col="{i}"><a class="link-static inline-flex items-center gap-1 font-semibold whitespace-nowrap" href="{PRODUCTS[k][1]}">See {PRODUCTS[k][0].lower()}{icon("arrow-right", 16, "shrink-0")}</a></td>"""
+        for i, k in enumerate(order))
     return f"""<section class="{cls}">
   <div class="container-ax">
     <div class="max-w-2xl">
@@ -806,8 +819,11 @@ def product_compare(current, heading, lead, cta, micro, cls="section band", afte
       <p class="reveal mt-5 text-slate">{lead}</p>
     </div>
 
-    <!-- .reveal sits on the scroll container itself (see CLAUDE.md). -->
-    <div class="reveal mt-10 table-scroll pc-scroll">
+    <!-- On a phone the tabs pick one product column (col_tabs). .reveal sits
+         on the scroll container itself (see CLAUDE.md). -->
+    <div class="col-tabs">
+    {col_tabs("pc-" + current, [PRODUCTS[k][0] for k in order], "Show", cls="mt-8")}
+    <div class="reveal mt-10 max-sm:mt-4 table-scroll pc-scroll">
       <table class="pc-table">
         <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>
         <caption class="sr-only">{PRODUCTS[current][0]} compared with {PRODUCTS[order[1]][0].lower()} and {PRODUCTS[order[2]][0].lower()} insurance</caption>
@@ -824,6 +840,7 @@ def product_compare(current, heading, lead, cta, micro, cls="section band", afte
           </tr>
         </tfoot>
       </table>
+    </div>
     </div>{after}
   </div>
 </section>"""
@@ -1112,7 +1129,7 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
     if aside:
         toggle_html += '<p class="text-sm text-muted">%s</p>' % aside
 
-    heads = "".join('<th scope="col" class="tnum">%s</th>' % c for c in cols)
+    heads = "".join('<th scope="col" class="tnum" data-col="%d">%s</th>' % (i, c) for i, c in enumerate(cols))
     if row_cta:
         heads += '<th scope="col"><span class="sr-only">Get a quote for this row</span></th>'
 
@@ -1121,7 +1138,7 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
     LABEL = '<span class="btn-row-label">Quote this</span>'
     body_rows = []
     for band, prefill in rows:
-        cells = "".join('<td class="tnum">$--</td>' for _ in cols)
+        cells = "".join('<td class="tnum" data-col="%d">$--</td>' % i for i in range(len(cols)))
         if row_cta == "call":
             body_rows.append('<tr><th scope="row">%s</th>%s<td>%s</td></tr>'
                              % (band, cells, phone_link(cta_location, "btn-row", LABEL, 16, wrap_num=False)))
@@ -1141,10 +1158,14 @@ def rate_chart(panels_id, cols, rows, toggles, caption, row_cta=None,
                     "state, health, and tobacco use. A rate table is an illustration of shape, "
                     "not an offer of coverage.")
 
+    # On a phone, more than one coverage column becomes tabs (col_tabs).
+    tabs = col_tabs(panels_id + "-cov", cols, "Coverage amount") if len(cols) > 1 else ""
+
     return f"""
-    <div data-panels="{panels_id}">
+    <div data-panels="{panels_id}"{' class="col-tabs"' if tabs else ""}>
 
       {toggle_row}
+      {tabs}
 
       <!-- INTEGRATION POINT: every cell below is a structural placeholder.
            Populate from the carrier rate cards keyed by (toggle state, age

@@ -107,7 +107,7 @@
         <h1 class="reveal text-h1">Get your family covered.</h1>
       <p class="reveal mt-5 text-lead text-slate">Life insurance from multiple carriers, compared for you by a licensed, independent agent.</p>
       <div class="reveal mt-8">
-        <a href="/get-a-quote/" class="btn btn-cta">Get a free quote</a>
+        <a href="#quote" class="btn btn-cta">Get a free quote</a>
         <p class="mt-3 text-micro text-muted">Free &#183; No obligation &#183; Licensed agents</p>
       </div>
       </div>
@@ -143,6 +143,98 @@
         <span><span class="block text-navy font-semibold">Free, no obligation</span><span class="block text-sm text-muted">You never pay us a fee</span></span>
       </li>
     </ul>
+  </div>
+</section>
+<!-- QUICK QUOTE. The /get-a-quote/ form, on the page. The hero button jumps
+     here; on success it offers /get-a-quote/details/ like the original. -->
+<section id="quote" class="section band-surface">
+  <div class="container-ax">
+    <div class="max-w-2xl mx-auto">
+      <div class="panel reveal">
+        <div class="panel-head">
+          <h2 class="text-h3 !font-display !font-semibold">Start your free quote</h2>
+          <p class="mt-2 text-sm text-muted">Takes about a minute. Nothing is charged and nothing is binding.</p>
+        </div>
+        
+        <form id="home-quote-form" class="mt-6" data-ax-form data-handoff data-silo="site"
+              data-form-name="home_quote" data-success-target="home-quote-form-success" novalidate>
+
+          <input type="hidden" name="source_url" value="">
+          <input type="hidden" name="silo" value="">
+          <input type="hidden" name="form_name" value="">
+          <div aria-hidden="true" style="position:absolute;left:-9999px">
+            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="field-row">
+<div class="field">
+              <label class="field-label" for="h-name">Your name</label>
+              <input class="input" id="h-name" name="name" type="text" placeholder="First and last name" autocomplete="name" required data-validate="name" data-error="Enter your name.">
+              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+<div class="field">
+              <label class="field-label" for="h-age">Your age</label>
+              <input class="input" id="h-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <div class="field-foot"><p class="field-hint">The biggest factor in the price.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+</div><div class="field-row">
+<div class="field">
+              <label class="field-label" for="h-email">Email</label>
+              <input class="input" id="h-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required data-validate="email" data-error="Enter a valid email address.">
+              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+<div class="field">
+              <label class="field-label" for="h-phone">Best number to reach you</label>
+              <input class="input" id="h-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <div class="field-foot"><p class="field-hint">One agent calls, once.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+</div><div class="field" data-error="Pick the one closest to what you are after.">
+              <span class="field-label" id="h-product-label">Type of insurance</span>
+              <div class="choice-row" role="group" aria-labelledby="h-product-label">
+                <label class="choice"><input type="radio" name="product" value="term" required><span>Term life</span></label>
+                <label class="choice"><input type="radio" name="product" value="whole" required><span>Whole life</span></label>
+                <label class="choice"><input type="radio" name="product" value="final-expense" required><span>Final expense</span></label>
+              </div>
+              <div class="field-foot"><p class="field-hint">Not sure? Pick the closest. The agent can change it.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div><!-- TCPA consent. Separate, unchecked, immediately above submit.
+               [PENDING LEGAL REVIEW] Wording must be approved by counsel and
+               matched to current TCPA one-to-one consent rules before launch. -->
+          <div class="consent">
+            <input type="checkbox" id="h-consent" name="tcpa_consent" value="yes" data-consent>
+            <label class="consent-text" for="h-consent">
+              I agree that Apex Insurance Marketing, LLC may call and text me at the number above about life
+              insurance, including with an automatic telephone dialing system or a prerecorded
+              voice. I understand this consent is not a condition of purchase and that message
+              and data rates may apply.
+            </label>
+            <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+          </div><button type="submit" class="btn btn-cta btn-block">Get my free quote</button>
+<p class="field-error" data-form-error role="alert"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+<p class="form-trust"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Goes to one licensed agent. Never sold to anyone else.</p>
+        </form>
+
+        <div id="home-quote-form-success" class="success">
+          <div class="flex items-start gap-3">
+            <svg class="shrink-0 text-green" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <div>
+              <h3 class="text-h3 !font-display !font-semibold">Got it</h3>
+              <p class="mt-3 text-slate">
+                               A licensed agent will call within [X business hours] with quotes from our appointed carriers,
+                               carrier names on them.
+                             </p>
+                             <p class="mt-3 text-slate">
+                               Want sharper numbers on that call? A few more questions about your health and
+                               the coverage you want takes about two minutes. Your answers so far are kept.
+                             </p>
+              <div class="mt-5">
+                <a class="btn btn-cta" href="/get-a-quote/details/">Answer a few more questions</a>
+                       <a class="link text-sm inline-block mt-4 sm:mt-0 sm:ml-5" href="/thank-you/">What happens next</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -287,14 +379,14 @@
 
 
 <!-- =====================================================================
-     TRIAGE. Three questions, no email wall.
+     TRIAGE. Three questions, then a last step for contact details.
      ================================================================== -->
 <section id="triage" class="section band">
   <div class="container-ax">
     <div class="max-w-2xl mx-auto text-center">
       <h2 class="reveal text-h2">Not sure which one you need?</h2>
       <p class="reveal mt-5 text-slate">
-        Three quick questions. No email, no phone number, and nothing is sent anywhere.
+        Three quick questions, then tell us where to send your quotes.
       </p>
     </div>
 
@@ -305,10 +397,11 @@
           <span class="progress-seg" data-triage-seg></span>
           <span class="progress-seg" data-triage-seg></span>
           <span class="progress-seg" data-triage-seg></span>
+          <span class="progress-seg" data-triage-seg></span>
         </div>
         <div class="flex items-center justify-between gap-4 text-sm text-muted">
           <p data-triage-progress class="font-medium"></p>
-          <p>About 30 seconds</p>
+          <p>About a minute</p>
         </div>
       </div>
 
@@ -388,7 +481,7 @@
             <h3 class="mt-3 text-h3 !font-display !font-semibold">Start with term life insurance</h3>
             <p class="mt-4 text-slate">You are describing a temporary obligation with a large price tag. Term buys the most coverage per dollar for exactly as long as that obligation lasts, then it ends. If the need turns out to be permanent, most term policies can be converted later without a new medical exam.</p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-5">
-              <a class="btn btn-cta" href="/term-life-insurance/#quote">Get my term life quote</a>
+              
               <button type="button" data-triage-restart class="link text-sm">Start over</button>
             </div>
           </div>
@@ -399,7 +492,7 @@
             <h3 class="mt-3 text-h3 !font-display !font-semibold">Look at whole life insurance</h3>
             <p class="mt-4 text-slate">You want the policy to still be there whenever it is needed, which term cannot promise. Whole life costs considerably more per dollar of death benefit, so the next step is a written illustration you can read at your own pace.</p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-5">
-              <a class="btn btn-cta" href="/whole-life-insurance/#quote">Get my whole life quote</a>
+              
               <button type="button" data-triage-restart class="link text-sm">Start over</button>
             </div>
           </div>
@@ -418,6 +511,83 @@
               <a class="link" href="/final-expense-insurance/#costs">final expense insurance costs by age</a>.
             </p>
           </div>
+
+      <!-- The last step. site.js shows it under the result and writes the
+           recommended product into the hidden field. -->
+      <div data-triage-form hidden class="quiz-form">
+        <h3 class="text-h4 text-center">Where should we send your quotes?</h3>
+        
+        <form id="triage-quote-form" class="mt-6" data-ax-form data-handoff data-silo="site"
+              data-form-name="triage_quote" data-success-target="triage-quote-form-success" novalidate>
+
+          <input type="hidden" name="source_url" value="">
+          <input type="hidden" name="silo" value="">
+          <input type="hidden" name="form_name" value="">
+          <input type="hidden" name="product" value="" data-triage-product>
+          <div aria-hidden="true" style="position:absolute;left:-9999px">
+            <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="field-row">
+<div class="field">
+              <label class="field-label" for="t-name">Your name</label>
+              <input class="input" id="t-name" name="name" type="text" placeholder="First and last name" autocomplete="name" required data-validate="name" data-error="Enter your name.">
+              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+<div class="field">
+              <label class="field-label" for="t-age">Your age</label>
+              <input class="input" id="t-age" name="age" type="text" placeholder="e.g. 42" inputmode="numeric" autocomplete="off" maxlength="2" required data-validate="age" data-error="Enter an age between 18 and 85.">
+              <div class="field-foot"><p class="field-hint">The biggest factor in the price.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+</div><div class="field-row">
+<div class="field">
+              <label class="field-label" for="t-email">Email</label>
+              <input class="input" id="t-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required data-validate="email" data-error="Enter a valid email address.">
+              <div class="field-foot"><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+<div class="field">
+              <label class="field-label" for="t-phone">Best number to reach you</label>
+              <input class="input" id="t-phone" name="phone" type="tel" placeholder="(555) 555-5555" inputmode="tel" autocomplete="tel" maxlength="14" required data-validate="phone" data-error="Enter a 10 digit phone number.">
+              <div class="field-foot"><p class="field-hint">One agent calls, once.</p><p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p></div>
+            </div>
+</div><!-- TCPA consent. Separate, unchecked, immediately above submit.
+               [PENDING LEGAL REVIEW] Wording must be approved by counsel and
+               matched to current TCPA one-to-one consent rules before launch. -->
+          <div class="consent">
+            <input type="checkbox" id="t-consent" name="tcpa_consent" value="yes" data-consent>
+            <label class="consent-text" for="t-consent">
+              I agree that Apex Insurance Marketing, LLC may call and text me at the number above about life
+              insurance, including with an automatic telephone dialing system or a prerecorded
+              voice. I understand this consent is not a condition of purchase and that message
+              and data rates may apply.
+            </label>
+            <p class="field-error"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+          </div><button type="submit" class="btn btn-cta btn-block">Get my free quote</button>
+<p class="field-error" data-form-error role="alert"><svg class="shrink-0 mt-px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span></span></p>
+<p class="form-trust"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Goes to one licensed agent. Never sold to anyone else.</p>
+        </form>
+
+        <div id="triage-quote-form-success" class="success">
+          <div class="flex items-start gap-3">
+            <svg class="shrink-0 text-green" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <div>
+              <h3 class="text-h3 !font-display !font-semibold">Got it</h3>
+              <p class="mt-3 text-slate">
+                               A licensed agent will call within [X business hours] with quotes from our appointed carriers,
+                               carrier names on them.
+                             </p>
+                             <p class="mt-3 text-slate">
+                               Want sharper numbers on that call? A few more questions about your health and
+                               the coverage you want takes about two minutes. Your answers so far are kept.
+                             </p>
+              <div class="mt-5">
+                <a class="btn btn-cta" href="/get-a-quote/details/">Answer a few more questions</a>
+                       <a class="link text-sm inline-block mt-4 sm:mt-0 sm:ml-5" href="/thank-you/">What happens next</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <p class="reveal mt-6 text-center text-sm text-muted">

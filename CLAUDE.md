@@ -121,8 +121,9 @@ new JS, check whether one of these contracts already covers what you need:
 | `[data-nav-toggle]` + `<dialog data-nav-panel>` | The mobile menu: a native dialog used as a right-hand drawer. `showModal()` supplies the focus trap, Escape and the dimmed backdrop; JS closes it on a backdrop tap, the close button, any link, and when the screen reaches 1024px |
 | `[data-to-top]` | Back to top. Emitted by `chrome.footer()` on every page, `hidden` until JS shows it past 1.25 screens; scrolls up (no smooth scroll under reduced motion) and moves focus to `#main` |
 | `[data-nav-dd]` | The header "Insurance" menu. A native `<details>`, so it opens without JS; JS only closes it on Escape, outside click, and link click |
-| `<dialog data-dialog-timed>` + `[data-dialog-cta]` | Opens once per session at 30s or 50% scroll, never under `html.fe`, never while `[data-triage]` is on screen or focused. Home only. Never put a form in it |
-| `[data-triage]` + `[data-triage-q]` / `[data-score]` / `[data-triage-seg]` / `[data-triage-back]` / `[data-triage-result]` | The home quiz. Scores are declared in markup (`data-score="term:3,whole:1"`); picks are a stack, so Back is a pop |
+| `<dialog data-dialog-timed>` + `[data-dialog-cta]` | Opens once per session at 30s or 50% scroll, never under `html.fe`, never while `[data-triage]` is on screen or focused, or while any form has focus. Home only. Never put a form in it |
+| `[data-triage]` + `[data-triage-q]` / `[data-score]` / `[data-triage-seg]` / `[data-triage-back]` / `[data-triage-result]` / `[data-triage-form]` | The home quiz. Scores are declared in markup (`data-score="term:3,whole:1"`); picks are a stack, so Back is a pop. After the result, `[data-triage-form]` (the quick quote form, `get_a_quote.quote_form(product=False)`) is the last step; `finish()` writes the winner into its hidden `[data-triage-product]` |
+| `.col-tabs` + `chrome.col_tabs()` + `[data-col]` | Phone-only column tabs for wide tables, CSS `:has()` only, no JS. `rate_chart` (2+ coverage columns) and `product_compare` emit them. `[data-panels]` ignores `[data-col-pick]` radios |
 
 `submitLead()` is the single CRM integration point, marked `>>> WIRE TO CRM ENDPOINT HERE <<<`.
 It currently `console.log`s and resolves. Validators available via `data-validate`: `email`,
@@ -205,6 +206,12 @@ and `/free-policy-review/` carry the call button plus one in-page jump to the fo
 
 ## Gotchas that cost real time
 
+- **Form before content on a phone.** A content-column-then-form grid gets `form-first` on the
+  grid: below 1024 the h2 and the paragraph after it stay on top, then the form, then the rest
+  (`src/input.css`, unlayered, via `display: contents`). The final expense hub's `#fe-quote` form
+  has its own heading, so it takes plain `max-lg:order-first` instead. Phone-first sections
+  (contact, the fe `#talk` spokes, `fe_quotes`) keep the call first on purpose.
+- **Banner hero photographs sit behind the copy at every width**; below 1024 the whole 4:3 crop sits full width on the hero's bottom edge at 18% opacity. Never `object-fit: cover` it there: a tall phone hero crops the people at the sides.
 - **f-string braces.** Page `body()` methods are one big f-string. Inside a `{...}` replacement
   field the content is plain Python, so a dict literal is written `{"age": mid}`, **not** `{{...}}`
   — the doubled form builds a `set` of `dict` and raises `unhashable type`.

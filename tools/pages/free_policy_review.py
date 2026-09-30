@@ -224,7 +224,7 @@ def body():
     form = f"""
 <section class="section band" id="review-form">
   <div class="container-ax">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8">
+    <div class="form-first grid lg:grid-cols-12 gap-10 lg:gap-8">
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">How we get paid, and why we will still tell you to keep what you have</h2>

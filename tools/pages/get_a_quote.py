@@ -90,30 +90,37 @@ def product_choices():
     return opts
 
 
-def quote_form():
+def quote_form(form_id="quote-form", form_name="master_quote", p="q", product=True):
+    """The quick quote. Also embedded on home (its own section, and the quiz's
+    last step), so ids derive from `form_id` and `p`. `product=False` swaps the
+    radio group for a hidden field the quiz fills with its recommendation."""
+    success = "quote-success" if form_id == "quote-form" else f"{form_id}-success"
+    choose = (F.radio_group(f"{p}-product", "product", "Type of insurance",
+                            [(v, l) for v, l, _ in PRODUCTS],
+                            hint="Not sure? Pick the closest. The agent can change it.",
+                            error="Pick the one closest to what you are after.")
+              if product else "")
+    extra = "" if product else '<input type="hidden" name="product" value="" data-triage-product>'
     fields = (
-        F.row(F.text_field("q-name", "name", "Your name", autocomplete="name", validate="name",
+        F.row(F.text_field(f"{p}-name", "name", "Your name", autocomplete="name", validate="name",
                            error="Enter your name."),
-              F.age_field("q-age", hint="The biggest factor in the price."))
-        + F.row(F.text_field("q-email", "email", "Email", type="email", autocomplete="email",
+              F.age_field(f"{p}-age", hint="The biggest factor in the price."))
+        + F.row(F.text_field(f"{p}-email", "email", "Email", type="email", autocomplete="email",
                              validate="email", error="Enter a valid email address."),
-                F.phone_field("q-phone", hint="One agent calls, once."))
-        + F.radio_group("q-product", "product", "Type of insurance",
-                        [(v, l) for v, l, _ in PRODUCTS],
-                        hint="Not sure? Pick the closest. The agent can change it.",
-                        error="Pick the one closest to what you are after.")
-        + F.consent_block("q", C.BRAND, 10)
+                F.phone_field(f"{p}-phone", hint="One agent calls, once."))
+        + choose
+        + F.consent_block(p, C.BRAND, 10)
         + F.submit_block("Get my free quote"))
     return f"""
-        <form id="quote-form" class="mt-6" data-ax-form data-handoff data-silo="site"
-              data-form-name="master_quote" data-success-target="quote-success" novalidate>
+        <form id="{form_id}" class="mt-6" data-ax-form data-handoff data-silo="site"
+              data-form-name="{form_name}" data-success-target="{success}" novalidate>
 
-          {F.scaffold(indent=10)}
+          {F.scaffold(extra, indent=10)}
 
           {fields}
         </form>
 
-        {F.success_panel("quote-success", "Got it",
+        {F.success_panel(success, "Got it",
             '''<p class="mt-3 text-slate">
                  A licensed agent will call within %s with quotes from our appointed carriers,
                  carrier names on them.
