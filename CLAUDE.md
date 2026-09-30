@@ -209,8 +209,10 @@ and `/free-policy-review/` carry the call button plus one in-page jump to the fo
 - **Form before content on a phone.** A content-column-then-form grid gets `form-first` on the
   grid: below 1024 the h2 and the paragraph after it stay on top, then the form, then the rest
   (`src/input.css`, unlayered, via `display: contents`). The final expense hub's `#fe-quote` form
-  has its own heading, so it takes plain `max-lg:order-first` instead. Phone-first sections
-  (contact, the fe `#talk` spokes, `fe_quotes`) keep the call first on purpose.
+  has its own heading, so it takes plain `max-lg:order-first` instead. The free policy review
+  keeps `form-first` but hides its intro line below 1024, so only the h2 sits above the form. Phone-first sections
+  (the fe `#talk` spokes, `fe_quotes`) keep the call first on purpose. `/contact/` hides its
+  "Call us" card below 1024 instead, because the hero already has the call button.
 - **Banner hero photographs sit behind the copy at every width**; below 1024 the whole 4:3 crop sits full width on the hero's bottom edge at 18% opacity. Never `object-fit: cover` it there: a tall phone hero crops the people at the sides.
 - **f-string braces.** Page `body()` methods are one big f-string. Inside a `{...}` replacement
   field the content is plain Python, so a dict literal is written `{"age": mid}`, **not** `{{...}}`

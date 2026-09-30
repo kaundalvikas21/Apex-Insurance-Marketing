@@ -13,3 +13,5 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
   SLA in the blue cell is `[SET HONEST SLA]`.
 - **Mini FAQ:** three card-row accordions.
 - Layout families in order: hero, strip, split + panel, strip, bento, accordion. Eyebrow budget 2, used 0.
+
+- **No "Call us" card below 1024** (client, 2026-09-30): the hero already carries the call button, so the card is `max-lg:hidden` and the column opens on "What to expect on the call".

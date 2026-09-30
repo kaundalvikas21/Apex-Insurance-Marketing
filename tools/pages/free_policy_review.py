@@ -228,7 +228,7 @@ def body():
       <div class="lg:col-span-5">
         <div class="sticky-col">
           <h2 class="reveal text-h2">How we get paid, and why we will still tell you to keep what you have</h2>
-          <p class="reveal mt-5 text-slate">We should say this before you fill anything in.</p>
+          <p class="reveal mt-5 text-slate max-lg:hidden">We should say this before you fill anything in.</p>
           {paid}
           <div class="reveal mt-6">{C.phone_link("policy_review_form", "btn btn-call", "Or call " + C.PHONE_DISPLAY)}</div>
           <p class="reveal mt-3 text-micro text-muted">{C.HOURS}</p>

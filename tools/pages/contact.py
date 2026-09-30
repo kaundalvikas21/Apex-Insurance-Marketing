@@ -70,7 +70,7 @@ def body():
       <div class="lg:col-span-5">
        <div class="sticky-col">
 
-        <div class="reveal card">
+        <div class="reveal card max-lg:hidden">
           <h2 class="text-h3 !font-display !font-semibold">Call us</h2>
           <div class="mt-5">
             {C.phone_link("contact_primary", "btn btn-call btn-block !min-h-[64px] !text-lead", C.PHONE_DISPLAY, 24)}
@@ -81,7 +81,7 @@ def body():
           </p>
         </div>
 
-        <div class="reveal mt-8">
+        <div class="reveal lg:mt-8">
           <h2 class="text-h3 !font-display !font-semibold">What to expect on the call</h2>
           <ul class="mt-6 grid gap-5">
             <li class="flex items-start gap-3">

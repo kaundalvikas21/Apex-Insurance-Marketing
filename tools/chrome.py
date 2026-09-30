@@ -729,8 +729,9 @@ def spoke_module(heading, intro, spokes):
     <div class="max-w-2xl">
       <h2 class="reveal text-h2">{heading}</h2>
       <p class="reveal mt-5 text-slate">{intro}</p>
+      <p class="mt-4 sm:hidden inline-flex items-center gap-1.5 text-sm font-semibold text-navy">Swipe to see all {len(spokes)} guides{icon("arrow-right", 16, "shrink-0")}</p>
     </div>
-    <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">{items}
+    <ul class="spoke-slider mt-10 max-sm:mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">{items}
     </ul>
   </div>
 </section>"""
@@ -822,7 +823,7 @@ def product_compare(current, heading, lead, cta, micro, cls="section band", afte
     <!-- On a phone the tabs pick one product column (col_tabs). .reveal sits
          on the scroll container itself (see CLAUDE.md). -->
     <div class="col-tabs">
-    {col_tabs("pc-" + current, [PRODUCTS[k][0] for k in order], "Show", cls="mt-8")}
+    {col_tabs("pc-" + current, [PRODUCTS[k][0] for k in order], "Show", cls="mt-8 pc-tabs")}
     <div class="reveal mt-10 max-sm:mt-4 table-scroll pc-scroll">
       <table class="pc-table">
         <colgroup><col class="pc-col-label"><col class="pc-col-current"><col><col></colgroup>

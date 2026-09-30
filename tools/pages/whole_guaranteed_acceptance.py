@@ -238,7 +238,7 @@ def body():
     </div>
 
     <div class="reveal mt-8 table-scroll table-signature">
-      <table class="rate-table" style="min-width:34rem">
+      <table class="rate-table table-stack" style="min-width:34rem">
         <caption class="sr-only">
           What a guaranteed acceptance whole life policy pays in each period.
         </caption>
