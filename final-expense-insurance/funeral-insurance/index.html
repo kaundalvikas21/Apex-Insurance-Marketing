@@ -444,6 +444,12 @@
           </a>
         </li>
     </ul>
+    <!-- Phone arrows for the slider. hidden until site.js wires them, so they
+         never show as dead buttons with JS blocked. -->
+    <div class="mt-2 flex justify-end gap-3 sm:hidden" data-slider-nav hidden>
+      <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous guide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+      <button type="button" class="slider-arrow" data-slider-next aria-label="Next guide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+    </div>
   </div>
 </section>
 

@@ -1874,6 +1874,19 @@
   .spoke-slider > li { flex: 0 0 85%; scroll-snap-align: start; }
   .js .spoke-slider > .reveal { opacity: 1; transform: none; }
 }
+/* Its prev/next arrows (site.js). Round icon buttons, not .btn: a lone .btn
+   goes full width on a phone. */
+.slider-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 999px;
+  background-color: var(--color-surface); color: var(--color-navy);
+  border: 1px solid var(--color-navy);
+  transition: background-color .15s ease-out, color .15s ease-out, opacity .15s ease-out;
+}
+.slider-arrow:active:not(:disabled) { background-color: var(--color-navy); color: #fff; }
+@media (hover: hover) { .slider-arrow:hover:not(:disabled) { background-color: var(--color-navy); color: #fff; } }
+.slider-arrow:focus-visible { outline: 2px solid var(--color-navy-700); outline-offset: 2px; }
+.slider-arrow:disabled { opacity: 0.35; cursor: default; }
 
 /* ============================================================================
    FORM FIRST ON A PHONE (client request, 2026-09-30)

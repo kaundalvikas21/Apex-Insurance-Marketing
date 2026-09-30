@@ -170,6 +170,41 @@
   })();
 
   /* ------------------------------------------------------------------------
+     3b-2. GUIDES SLIDER ARROWS
+     chrome.spoke_module() is a swipe row on a phone (CSS scroll snap). The
+     arrows step it one card at a time and grey out at either end. Swipe
+     still works; with this file blocked the arrows stay hidden.
+     --------------------------------------------------------------------- */
+  (function guideArrows() {
+    $$('[data-spoke-module]').forEach(function (list) {
+      var nav = list.parentNode.querySelector('[data-slider-nav]');
+      if (!nav) return;
+      var prev = $('[data-slider-prev]', nav);
+      var next = $('[data-slider-next]', nav);
+      var ticking = false;
+      nav.hidden = false;
+
+      function update() {
+        ticking = false;
+        prev.disabled = list.scrollLeft <= 1;
+        next.disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+      }
+      function step(dir) {
+        var card = list.firstElementChild;
+        var gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+        list.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+      prev.addEventListener('click', function () { step(-1); });
+      next.addEventListener('click', function () { step(1); });
+      list.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+  })();
+
+  /* ------------------------------------------------------------------------
      3c. BACK TO TOP
      Appears once the visitor is well past the first screen. Never while a
      dialog is open: the drawer and the review dialog own the screen then.

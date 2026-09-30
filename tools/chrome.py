@@ -733,6 +733,12 @@ def spoke_module(heading, intro, spokes):
     </div>
     <ul class="spoke-slider mt-10 max-sm:mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-spoke-module data-stagger="40">{items}
     </ul>
+    <!-- Phone arrows for the slider. hidden until site.js wires them, so they
+         never show as dead buttons with JS blocked. -->
+    <div class="mt-2 flex justify-end gap-3 sm:hidden" data-slider-nav hidden>
+      <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous guide">{icon("arrow-left", 20)}</button>
+      <button type="button" class="slider-arrow" data-slider-next aria-label="Next guide">{icon("arrow-right", 20)}</button>
+    </div>
   </div>
 </section>"""
 
