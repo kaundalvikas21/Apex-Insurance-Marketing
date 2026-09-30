@@ -90,6 +90,21 @@ def product_choices():
     return opts
 
 
+# What the quick quote promises. Also on the home page's quote section.
+PROMISES = [
+    "One licensed agent calls you once, not six agencies in ten minutes.",
+    "Quotes come back with the carrier names on them, so you can check the comparison happened.",
+    "We tell you which carriers are likely to decline you before you apply.",
+]
+
+
+def promises():
+    return """<ul class="reveal mt-8 grid gap-4">
+          %s
+        </ul>""" % "".join('<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
+                           % (icon("circle-check", 20, "shrink-0 mt-0.5 text-green"), t) for t in PROMISES)
+
+
 def quote_form(form_id="quote-form", form_name="master_quote", p="q", product=True):
     """The quick quote. Also embedded on home (its own section, and the quiz's
     last step), so ids derive from `form_id` and `p`. `product=False` swaps the
@@ -162,14 +177,7 @@ def body():
           No medical exam to get a quote, no Social Security number, and no obligation.
         </p>
 
-        <ul class="reveal mt-8 grid gap-4">
-          {"".join('<li class="flex items-start gap-3">%s<span class="text-slate">%s</span></li>'
-                   % (icon("circle-check", 20, "shrink-0 mt-0.5 text-green"), t) for t in [
-            "One licensed agent calls you once, not six agencies in ten minutes.",
-            "Quotes come back with the carrier names on them, so you can check the comparison happened.",
-            "We tell you which carriers are likely to decline you before you apply.",
-          ])}
-        </ul>
+        {promises()}
 
         <div class="reveal card mt-8">
           <h2 class="text-h4">Prefer to talk?</h2>

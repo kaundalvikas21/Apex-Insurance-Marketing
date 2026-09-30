@@ -108,17 +108,35 @@ HERO = C.page_hero(
     ("building", C.YEARS + " years", "Placing life insurance"),
     ("handshake", "Free, no obligation", "You never pay us a fee"),
 ])}
-<!-- QUICK QUOTE. The /get-a-quote/ form, on the page. The hero button jumps
-     here; on success it offers /get-a-quote/details/ like the original. -->
-<section id="quote" class="section band-surface">
+<!-- QUICK QUOTE. The /get-a-quote/ form and its promises, on the page. The
+     hero button jumps here; on success it offers /get-a-quote/details/. On a
+     phone (.form-first) the heading leads, then the form, then the rest. -->
+<section id="quote" class="section band glow overflow-clip">
   <div class="container-ax">
-    <div class="max-w-2xl mx-auto">
-      <div class="panel reveal">
-        <div class="panel-head">
-          <h2 class="text-h3 !font-display !font-semibold">Start your free quote</h2>
-          <p class="mt-2 text-sm text-muted">Takes about a minute. Nothing is charged and nothing is binding.</p>
+    <div class="form-first grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div class="lg:col-span-5">
+        <h2 class="reveal text-h2">Get your free quote in about a minute</h2>
+        <p class="reveal mt-5 text-lead text-slate">
+          One short form. A licensed agent compares our carriers and calls you once.
+        </p>
+        {get_a_quote.promises()}
+        <div class="reveal card mt-8">
+          <h3 class="text-h4">Prefer to talk?</h3>
+          <p class="mt-2 text-sm text-slate">Calling is faster than the form and gets you the same agent.</p>
+          <div class="mt-4">
+            {C.phone_link("home_quote_call", "btn btn-call btn-block", C.PHONE_DISPLAY, 22)}
+          </div>
+          <p class="mt-3 text-micro text-muted">{C.HOURS}</p>
         </div>
-        {get_a_quote.quote_form("home-quote-form", "home_quote", "h")}
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <div class="panel reveal">
+          <div class="panel-head">
+            <h3 class="text-h3 !font-display !font-semibold">Start your quote</h3>
+            <p class="mt-2 text-sm text-muted">Nothing is charged and nothing is binding.</p>
+          </div>
+          {get_a_quote.quote_form("home-quote-form", "home_quote", "h")}
+        </div>
       </div>
     </div>
   </div>

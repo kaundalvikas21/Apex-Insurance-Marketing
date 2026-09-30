@@ -19,8 +19,10 @@ Inherits `design-system/MASTER.md`. Only deviations are listed.
   FAQ answer, not here. The hidden reviews slot stays.
 - **Coverage types:** three `.bento-2` cells (middle tinted), one sentence and one `.btn-row` hub
   link each, then exactly two buttons: call and quote.
-- **Quick quote:** `get_a_quote.quote_form()` in its own `#quote` section under the strip (client
-  request, 2026-09-30). The hero button jumps to it.
+- **Quick quote:** its own `#quote` section under the strip (client request, 2026-09-30), a
+  `form-first` 5 / 6 split on `band` + `glow`: heading, lead, `get_a_quote.promises()` and a call
+  card on the left, `get_a_quote.quote_form()` in a panel on the right. The hero button jumps to it.
+  Home's banner hero has no glow, so this plus the closing pair keeps to hero-plus-one.
 - **Primary CTA repetition:** `/get-a-quote/` sits on two buttons (steps, coverage). Repeated
   primary CTA buttons are the accepted exception to one link per target. Contextual text links are not.
 - **Triage quiz:** deliberately not the FAQ's shape, because the two were being read as one. Centred
